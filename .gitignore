@@ -1,0 +1,10 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# macOS
+.DS_Store
+
+# Regenerable artifacts (scripts/01 rebuilds in <1s)
+outputs/elo_history.parquet
