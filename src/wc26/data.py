@@ -72,16 +72,36 @@ def wc2026_group_fixtures(results: pd.DataFrame) -> pd.DataFrame:
     return fx[fx["date"] <= GROUP_STAGE_END].copy()
 
 
+# One distinctive anchor team per official group, from the FIFA draw
+# (Washington DC, 2025-12-05). Group composition is still reconstructed
+# algorithmically; the anchors only pin the official letter to each
+# component. Kickoff order is NOT a reliable label: it would swap C and D.
+OFFICIAL_GROUP_ANCHORS = {
+    "A": "Mexico",
+    "B": "Canada",
+    "C": "Brazil",
+    "D": "United States",
+    "E": "Germany",
+    "F": "Netherlands",
+    "G": "Belgium",
+    "H": "Spain",
+    "I": "France",
+    "J": "Argentina",
+    "K": "Portugal",
+    "L": "England",
+}
+
+
 def reconstruct_groups(group_fixtures: pd.DataFrame) -> dict[str, list[str]]:
     """Recover the 12 groups as connected components of the fixture graph.
 
     Within the group stage, teams only play opponents from their own group,
     so the 'played-against' graph has exactly 12 components of 4 teams.
-    Groups are labelled A..L in order of each group's first kickoff (matches
-    FIFA's labelling, where Group A opens the tournament in Mexico City).
+    Each component gets its official FIFA letter via OFFICIAL_GROUP_ANCHORS.
 
-    Raises if the reconstruction does not yield 12 clean groups of 4 — a
-    canary against data problems.
+    Raises if the reconstruction does not yield 12 clean groups of 4, or if
+    the anchors do not map 1:1 onto components — canaries against data
+    problems.
     """
     parent: dict[str, str] = {}
 
@@ -104,17 +124,21 @@ def reconstruct_groups(group_fixtures: pd.DataFrame) -> dict[str, list[str]]:
     for team in parent:
         comps.setdefault(find(team), set()).add(team)
 
-    groups = sorted(
-        comps.values(),
-        key=lambda teams: group_fixtures[
-            group_fixtures["home_team"].isin(teams)
-        ]["date"].min(),
-    )
+    groups = list(comps.values())
     if len(groups) != 12 or any(len(g) != 4 for g in groups):
         raise ValueError(
             f"Group reconstruction failed: {[len(g) for g in groups]} — check raw data."
         )
-    return {chr(ord("A") + i): sorted(g) for i, g in enumerate(groups)}
+    labelled: dict[str, list[str]] = {}
+    for letter, anchor in OFFICIAL_GROUP_ANCHORS.items():
+        hits = [g for g in groups if anchor in g]
+        if len(hits) != 1:
+            raise ValueError(f"Anchor {anchor!r} (group {letter}) matched {len(hits)} components.")
+        labelled[letter] = sorted(hits.pop())
+    covered = {t for g in labelled.values() for t in g}
+    if len(covered) != 48:
+        raise ValueError("Anchors did not cover all 12 components — check raw data.")
+    return labelled
 
 
 # FIFA group-stage tiebreakers (Art. 13): points, goal difference, goals

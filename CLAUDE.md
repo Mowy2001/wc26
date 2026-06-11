@@ -14,10 +14,11 @@ docstring with the mathematical model, every design choice goes in docs/METHODOL
       (raw data correct). USA stays at 23% P1: the gap vs Kalshi's 51% is in the Elo
       (USA 1824, last in its group; eloratings.net agrees: USA #39). See METHODOLOGY.md.
       → residual block #5
+- [x] Official group labels: anchored to the FIFA draw via OFFICIAL_GROUP_ANCHORS
+      (kickoff order would swap C/D; USA is in group D, matching Kalshi)
 - [ ] Backlog below
 
-## Backlog (in order; numbering stable, #1 closed — see Status)
-2. **Official group labels**: reconcile A..L with FIFA (web). Composition already verified.
+## Backlog (in order; numbering stable, #1-2 closed — see Status)
 3. **R32 bracket**: transcribe the FIFA third-place allocation table (regulations,
    Annex C), implement KO in simulate.py (extra time ~Poisson·1/3, shootout calibrated
    on shootouts.csv).
