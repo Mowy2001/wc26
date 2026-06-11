@@ -49,6 +49,24 @@ FIFA Art. 13: points > goal difference > goals scored > head-to-head (points, GD
 (equivalent in expectation). Thirds: points > GD > GF > random; the best 8 advance;
 bracket allocation follows the official FIFA table (495 combinations — backlog #3).
 
+## Knockout bracket (implemented 2026-06-11)
+Official schedule, matches 73-104. Three modelling decisions:
+1. **Third-place allocation**: FIFA's regulations fix one assignment per combination
+   of qualified thirds (495-row annex). We could not transcribe the literal table;
+   instead we compute a deterministic perfect matching against the slot constraints
+   printed in the schedule (3rd A/B/C/D/F etc.), most-constrained slot first,
+   alphabetical tie-break. Every assignment satisfies the published constraints; it
+   may differ from FIFA's row in which *allowed* third lands on which slot. The
+   approximation only shuffles thirds among slots they could legally occupy.
+2. **Extra time**: independent Poisson at 1/3 of the 90' lambdas (30' at the same
+   scoring intensity, DC low-score correction not re-applied — tau is a 90'
+   phenomenon).
+3. **Shootouts**: logit fit on the 677 historical shootouts merged with point-in-time
+   Elo: P(A wins) = sigmoid(0.309·host_A + 0.677·Δelo/400). Log-likelihood -462.5 vs
+   -469.3 for a pure coin flip (both terms ≈2.5σ): shootouts are *almost* a coin
+   flip, with a small skill+host tilt. Knockout venues carry the host home effect
+   (e.g. Mexico plays R32/R16 in Mexico City if it wins group A).
+
 ## Three-way benchmark
 After the tournament: log-loss and calibration of our model vs bookmaker implied
 probabilities (margin removed, Shin's method) vs Klement's forecasts (GDP/population/

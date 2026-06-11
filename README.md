@@ -32,6 +32,7 @@ pip install -r requirements.txt
 python scripts/01_build_and_validate.py   # Elo + group reconstruction (sanity check)
 python scripts/02_fit_backtest.py         # DC fit + out-of-sample backtest on WC2022
 python scripts/03_simulate_groups.py      # 20k group-stage simulations
+python scripts/04_simulate_tournament.py  # 20k full-tournament simulations -> P(champion)
 ```
 
 ## Data
@@ -53,10 +54,7 @@ External benchmarks recorded on 2026-06-11 (tournament eve): BetMGM outright odd
 
 ## Known issues / roadmap
 
-See `CLAUDE.md` for the detailed operational backlog. Highlights:
-1. **Host home advantage**: verified active (raw data flags host home matches correctly; a defensive invariant now enforces it in `data.py`). The residual USA gap vs the market is a rating question, not a venue one — see `docs/METHODOLOGY.md`.
-2. **Group labels**: composition is verified, but letters (A..L) are assigned by kickoff order and must be reconciled with official FIFA labels.
-3. **Knockout bracket**: needs the FIFA third-place allocation table (Annex C of the regulations).
+See `CLAUDE.md` for the operational backlog. Done: host home advantage (verified, defensive invariant in `data.py`), official FIFA group labels (anchored to the draw), knockout bracket through the final (thirds via constraint matching, calibrated shootouts). Next: xi tuning, residual feature blocks (climate, football capital, diaspora, fatigue), player layer for the Golden Boot, parameter bootstrap.
 
 ## Repo layout
 
@@ -66,4 +64,5 @@ src/wc26/        modules (elo, dixon_coles, data, simulate) — every file has
 scripts/         numbered pipeline, run in order
 docs/            METHODOLOGY.md — design decisions and their rationale
 outputs/         elo_history.parquet, simulated probabilities (CSV)
+site/            static results site (open site/index.html)
 ```

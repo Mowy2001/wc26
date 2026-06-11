@@ -16,12 +16,13 @@ docstring with the mathematical model, every design choice goes in docs/METHODOL
       → residual block #5
 - [x] Official group labels: anchored to the FIFA draw via OFFICIAL_GROUP_ANCHORS
       (kickoff order would swap C/D; USA is in group D, matching Kalshi)
+- [x] Knockout bracket: official matches 73-104, thirds allocated by deterministic
+      matching on published slot constraints (literal 495-row Annex C not transcribed,
+      see METHODOLOGY.md), ET ~Poisson/3, shootout logit fitted on shootouts.csv.
+      v1: Spain 24.8% champion, Argentina 18.8%, France 10.1% (vs BetMGM 18/17/12 raw)
 - [ ] Backlog below
 
-## Backlog (in order; numbering stable, #1-2 closed — see Status)
-3. **R32 bracket**: transcribe the FIFA third-place allocation table (regulations,
-   Annex C), implement KO in simulate.py (extra time ~Poisson·1/3, shootout calibrated
-   on shootouts.csv).
+## Backlog (in order; numbering stable, #1-3 closed — see Status)
 4. **xi tuning** (time decay) via backtest on WC2014/2018/2022 + Euros, grid 0.0005–0.005.
 5. **Residual blocks** (scraping — needs full network access, hence Claude Code):
    - football capital: FBref top-5-league minutes, clubelo.com club Elo weighted by
