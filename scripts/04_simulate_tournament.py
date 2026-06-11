@@ -1,5 +1,13 @@
-"""Step 4: full-tournament Monte Carlo (model v1): groups + R32 bracket -> champion."""
-import sys, time
+"""Step 4: full-tournament Monte Carlo (model v2): groups + R32 bracket -> champion.
+
+v2 = v1.1 + parameter bootstrap (backlog #8): each simulated tournament uses
+one bootstrap draw of the DC parameters, so the headline probabilities
+integrate over epistemic parameter uncertainty. Falls back to the point
+estimate if outputs/dc_bootstrap.json is missing (run scripts/08 first).
+Also saves per-simulation tournament goals (outputs/goal_samples.parquet),
+the conditioning input of the player layer (scripts/09).
+"""
+import json, sys, time
 sys.path.insert(0, "src")
 import pandas as pd
 from wc26.data import load_results, wc2026_group_fixtures, reconstruct_groups
@@ -18,14 +26,23 @@ e = elo_hist.copy(); e["dup"] = e.groupby(key).cumcount()
 df = df.merge(e[key + ["dup", "elo_home_pre", "elo_away_pre"]], on=key + ["dup"], validate="1:1")
 model = DixonColes().fit(df[df["date"] >= "2005-01-01"], pd.Timestamp("2026-06-11"))
 
+try:
+    draws = json.load(open("outputs/dc_bootstrap.json"))
+    print(f"Using {len(draws)} bootstrap parameter draws")
+except FileNotFoundError:
+    draws = None
+    print("No bootstrap draws found (scripts/08) — using the point estimate")
+
 elo_now = ratings_asof(elo_hist, "2026-06-11")
 gfx = wc2026_group_fixtures(results)
 groups = reconstruct_groups(gfx)
 
 t0 = time.time()
-res = simulate_tournament(groups, gfx, model, elo_now, n_sims=20000)
+res = simulate_tournament(groups, gfx, model, elo_now, n_sims=20000,
+                          param_draws=draws, collect_goal_samples=True)
 tbl = res["teams"]
 tbl.round(4).to_csv("outputs/tournament_probs_v1.csv")
+res["goal_samples"].to_parquet("outputs/goal_samples.parquet")
 print(f"20k tournament simulations in {time.time() - t0:.0f}s\n")
 
 top = tbl.sort_values("P_champion", ascending=False).head(12)

@@ -142,6 +142,30 @@ class DixonColes:
         return self
 
     # ------------------------------------------------------------------ #
+    def bootstrap_params(
+        self, matches: pd.DataFrame, fit_date: pd.Timestamp, B: int = 100, seed: int = 26
+    ) -> list[dict]:
+        """Nonparametric bootstrap of the fitted parameters.
+
+        Resamples training matches with replacement (their time-decay
+        weights travel with them) and refits B times. The draws feed the
+        Monte Carlo (one draw per simulated tournament), so parameter
+        uncertainty — epistemic, not aleatoric — widens the forecast tails.
+        Non-converged refits are dropped.
+        """
+        rng = np.random.default_rng(seed)
+        df = matches[matches["date"] < fit_date].dropna(
+            subset=["home_score", "away_score", "elo_home_pre", "elo_away_pre"]
+        )
+        draws = []
+        for _ in range(B):
+            boot = df.sample(n=len(df), replace=True, random_state=rng.integers(2**31))
+            m = DixonColes(xi=self.xi, extra_cols=list(self.extra_cols)).fit(boot, fit_date)
+            if m.params_["converged"]:
+                draws.append({k: v for k, v in m.params_.items() if isinstance(v, float)})
+        return draws
+
+    # ------------------------------------------------------------------ #
     def predict_lambdas(
         self, elo_home: float, elo_away: float, neutral: bool = True, extras: dict | None = None
     ) -> tuple[float, float]:

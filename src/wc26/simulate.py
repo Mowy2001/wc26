@@ -234,32 +234,37 @@ def allocate_thirds(qualified: frozenset, _cache: dict = {}) -> dict[int, str]:
     return sol
 
 
-def _ko_match(a: str, b: str, venue: str, model, elo, rng, cache: dict) -> str:
-    """Play one knockout tie, return the winner.
+def _ko_match(a: str, b: str, venue: str, model, elo, rng, cache: dict | None):
+    """Play one knockout tie.
 
-    90' from the cached DC matrix (the venue's host nation, if playing,
-    takes the home side); extra time = independent Poisson at 1/3 of the
-    90' lambdas; then the calibrated shootout model.
+    Returns (winner, home, away, hg, ag) with goals including extra time
+    (shootout kicks excluded). 90' from the DC matrix (the venue's host
+    nation, if playing, takes the home side); extra time = independent
+    Poisson at 1/3 of the 90' lambdas; then the calibrated shootout model.
+    `cache` may be None (e.g. with bootstrap draws, where matrices are
+    parameter-dependent and caching would not pay off).
     """
     home, away = (b, a) if b == venue else (a, b)
     is_home = home == venue
     key = (home, away, is_home)
-    M = cache.get(key)
+    M = cache.get(key) if cache is not None else None
     if M is None:
         lh, la = model.predict_lambdas(elo[home], elo[away], neutral=not is_home)
         M = (model.score_matrix(lh, la), lh, la)
-        cache[key] = M
+        if cache is not None:
+            cache[key] = M
     Mat, lh, la = M
     G1 = Mat.shape[0]
     idx = rng.choice(Mat.size, p=Mat.ravel())
-    hg, ag = idx // G1, idx % G1
+    hg, ag = int(idx // G1), int(idx % G1)
+    if hg == ag:
+        hg += rng.poisson(lh / 3.0)
+        ag += rng.poisson(la / 3.0)
     if hg != ag:
-        return home if hg > ag else away
-    et_h, et_a = rng.poisson(lh / 3.0), rng.poisson(la / 3.0)
-    if et_h != et_a:
-        return home if et_h > et_a else away
+        return (home if hg > ag else away), home, away, hg, ag
     z = SHOOTOUT_B_HOME * float(is_home) + SHOOTOUT_B_ELO * (elo[home] - elo[away]) / 400.0
-    return home if rng.random() < 1.0 / (1.0 + np.exp(-z)) else away
+    w = home if rng.random() < 1.0 / (1.0 + np.exp(-z)) else away
+    return w, home, away, hg, ag
 
 
 def simulate_tournament(
@@ -271,6 +276,8 @@ def simulate_tournament(
     seed: int = 26,
     fixed_results: dict[tuple[str, str], tuple[int, int]] | None = None,
     host_advantage: bool = True,
+    param_draws: list[dict] | None = None,
+    collect_goal_samples: bool = False,
 ) -> dict[str, pd.DataFrame]:
     """Full-tournament Monte Carlo: groups + R32 bracket through the final.
 
@@ -280,21 +287,44 @@ def simulate_tournament(
 
     host_advantage=False is a counterfactual knob (ablation studies): every
     match, group or knockout, is played as if on neutral ground.
+
+    param_draws: bootstrap parameter dicts (backlog #8). Each simulated
+    tournament uses one draw, so the aggregated probabilities integrate
+    over parameter uncertainty (wider tails than the point estimate).
+
+    collect_goal_samples=True additionally returns "goal_samples", an
+    (n_sims x teams) DataFrame of tournament goals scored (group + KO incl.
+    extra time) — the conditioning input of the player layer.
     """
     rng = np.random.default_rng(seed)
     team_group = {t: g for g, ts in groups.items() for t in ts}
     teams = sorted(team_group)
     if not host_advantage:
         fixtures = fixtures.assign(neutral=True)
-    fx = _precompute_group_fixtures(fixtures, model, elo, fixed_results or {})
+    if param_draws:
+        models = []
+        for d in param_draws:
+            m = type(model)(xi=model.xi, extra_cols=list(model.extra_cols))
+            m.params_ = dict(d)
+            models.append(m)
+        fx_by_model = [
+            _precompute_group_fixtures(fixtures, m, elo, fixed_results or {}) for m in models
+        ]
+    else:
+        models = [model]
+        fx_by_model = [_precompute_group_fixtures(fixtures, model, elo, fixed_results or {})]
     G1 = len(model.score_matrix(1, 1))
-    ko_cache: dict = {}
+    ko_cache: dict | None = {} if not param_draws else None
+    goal_samples = np.zeros((n_sims, len(teams)), dtype=np.int16) if collect_goal_samples else None
+    team_idx = {t: i for i, t in enumerate(teams)}
 
     pos_counts = {t: np.zeros(4) for t in teams}
     round_counts = {t: np.zeros(6) for t in teams}  # R32, R16, QF, SF, F, champion
     topscoring_counts = {t: 0 for t in teams}
 
-    for _ in range(n_sims):
+    for si in range(n_sims):
+        mi = int(rng.integers(len(models)))
+        m, fx = models[mi], fx_by_model[mi]
         order_by_group, best_thirds, stats, goals = _play_group_stage(fx, groups, teams, G1, rng)
         for order in order_by_group.values():
             for pos, t in enumerate(order):
@@ -313,22 +343,29 @@ def simulate_tournament(
             return third_group[alloc[match]]
 
         winners: dict[int, str] = {}
-        for m, sa, sb, venue in R32_MATCHES:
+        for mn, sa, sb, venue in R32_MATCHES:
             if not host_advantage:
                 venue = ""
-            a, b = resolve(sa, m), resolve(sb, m)
+            a, b = resolve(sa, mn), resolve(sb, mn)
             round_counts[a][0] += 1
             round_counts[b][0] += 1
-            winners[m] = _ko_match(a, b, venue, model, elo, rng, ko_cache)
+            winners[mn], kh, ka, khg, kag = _ko_match(a, b, venue, m, elo, rng, ko_cache)
+            goals[kh] += khg
+            goals[ka] += kag
         for depth, matches in enumerate([R16_MATCHES, QF_MATCHES, SF_MATCHES, [FINAL_MATCH]], start=1):
-            for m, fa, fb, venue in matches:
+            for mn, fa, fb, venue in matches:
                 if not host_advantage:
                     venue = ""
                 a, b = winners[fa], winners[fb]
                 round_counts[a][depth] += 1
                 round_counts[b][depth] += 1
-                winners[m] = _ko_match(a, b, venue, model, elo, rng, ko_cache)
+                winners[mn], kh, ka, khg, kag = _ko_match(a, b, venue, m, elo, rng, ko_cache)
+                goals[kh] += khg
+                goals[ka] += kag
         round_counts[winners[FINAL_MATCH[0]]][5] += 1
+        if collect_goal_samples:
+            for t, g in goals.items():
+                goal_samples[si, team_idx[t]] = g
 
     out = pd.DataFrame(
         {t: pos_counts[t] / n_sims for t in teams}, index=["P1", "P2", "P3", "P4"]
@@ -341,4 +378,7 @@ def simulate_tournament(
     ).T
     out = out.join(rounds)
     out["P_top_scoring_team"] = pd.Series(topscoring_counts) / n_sims
-    return {"teams": out.sort_values(["group", "P1"], ascending=[True, False])}
+    res = {"teams": out.sort_values(["group", "P1"], ascending=[True, False])}
+    if collect_goal_samples:
+        res["goal_samples"] = pd.DataFrame(goal_samples, columns=teams)
+    return res

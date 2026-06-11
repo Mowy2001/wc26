@@ -1,9 +1,11 @@
 """Step 7: ablation studies — how much does each data choice move the forecast?
 
-Three counterfactual tournament runs (same 20k sims, same seed as v1):
-  - no_host_advantage : every match on neutral ground (groups + knockout)
-  - xi_short_memory   : xi = 0.005  (half-life ~4.6 months)
-  - xi_long_memory    : xi = 0.0005 (half-life ~3.8 years)
+Four counterfactual tournament runs (same 20k sims, same seed as the headline):
+  - no_host_advantage    : every match on neutral ground (groups + knockout);
+                           keeps bootstrap draws like the headline run
+  - xi_short_memory      : xi = 0.005  (half-life ~4.6 months), point estimate
+  - xi_long_memory       : xi = 0.0005 (half-life ~3.8 years), point estimate
+  - no_param_uncertainty : point estimate instead of bootstrap draws
 
 Output: outputs/ablations.json with full P_champion vectors per scenario
 plus host-nation group numbers, consumed by the site exporter (step 05).
@@ -31,17 +33,23 @@ gfx = wc2026_group_fixtures(results)
 groups = reconstruct_groups(gfx)
 
 base_model = DixonColes().fit(train, FIT)
+try:
+    draws = json.load(open("outputs/dc_bootstrap.json"))
+except FileNotFoundError:
+    draws = None
 scenarios = {
-    "no_host_advantage": dict(model=base_model, host_advantage=False),
-    "xi_short_memory": dict(model=DixonColes(xi=0.005).fit(train, FIT), host_advantage=True),
-    "xi_long_memory": dict(model=DixonColes(xi=0.0005).fit(train, FIT), host_advantage=True),
+    "no_host_advantage": dict(model=base_model, host_advantage=False, param_draws=draws),
+    "xi_short_memory": dict(model=DixonColes(xi=0.005).fit(train, FIT), host_advantage=True, param_draws=None),
+    "xi_long_memory": dict(model=DixonColes(xi=0.0005).fit(train, FIT), host_advantage=True, param_draws=None),
+    "no_param_uncertainty": dict(model=base_model, host_advantage=True, param_draws=None),
 }
 
 out = {}
 for name, cfg in scenarios.items():
     t0 = time.time()
     tbl = simulate_tournament(groups, gfx, cfg["model"], elo_now, n_sims=20000,
-                              host_advantage=cfg["host_advantage"])["teams"]
+                              host_advantage=cfg["host_advantage"],
+                              param_draws=cfg["param_draws"])["teams"]
     out[name] = {
         "P_champion": {t: round(float(r["P_champion"]), 4) for t, r in tbl.iterrows()},
         "hosts": {t: {"P1": round(float(tbl.loc[t, "P1"]), 4),
