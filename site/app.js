@@ -159,6 +159,47 @@ if (WC26.xi_tuning) {
     `</div><p class="mini-note" style="margin-top:8px">🇺🇸 USA win group D — three views of the same question.</p>`;
 }
 
+/* ---------- bootstrap card ---------- */
+if (WC26.bootstrap && WC26.ablations && WC26.ablations.no_param_uncertainty) {
+  document.getElementById("boot-b").textContent = WC26.bootstrap.B;
+  const sd = WC26.bootstrap.sd;
+  document.getElementById("boot-card").innerHTML = `<div class="boot-sd">` +
+    Object.entries(sd).map(([k, v]) => `<span>${k.replace("beta_", "β ")} <b>±${v}</b></span>`).join("") +
+    `</div>`;
+  const pe = WC26.ablations.no_param_uncertainty.P_champion;
+  const deltas = WC26.teams.map((t) => Math.abs(t.P_champion - (pe[t.team] || 0)));
+  const mean = deltas.reduce((a, b) => a + b, 0) / deltas.length;
+  document.getElementById("boot-delta").textContent = "±" + (100 * mean).toFixed(2) + " points";
+}
+
+/* ---------- golden boot ---------- */
+if (WC26.golden_boot) {
+  const top = WC26.golden_boot.slice(0, 10);
+  const max = top[0].P_golden_boot;
+  const implied = (odds) => 1 / (1 + odds / 100);
+  document.getElementById("boot-chart").innerHTML = top.map((p) => {
+    const mkt = WC26.golden_boot_market[p.player];
+    const chip = mkt ? `<span class="market-chip">market ${pct(implied(mkt))}</span>` : "";
+    return `<div class="bar-row">
+      <div class="who">${flag(p.team)}${p.player}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${(100 * p.P_golden_boot) / max}%"></div></div>
+      <div class="val">${pct(p.P_golden_boot)}</div>
+    </div><div style="margin:-4px 0 2px 192px; font-size:.74rem; color:var(--muted)">
+      E[goals] ${p.E_goals.toFixed(1)}${chip}</div>`;
+  }).join("");
+  const v = WC26.golden_boot[0];
+  document.getElementById("boot-note").innerHTML =
+    `On the four players the bookmakers price, the model lands strikingly close to the market
+     (Mbappé ${pct(WC26.golden_boot.find(p => p.player === "Kylian Mbappé").P_golden_boot)} vs
+     ${pct(implied(WC26.golden_boot_market["Kylian Mbappé"]))} implied). The interesting case is
+     <strong>${v.player}</strong> at the top: a genuine recent scoring record, a high-scoring team
+     in the simulations — and a model that cannot see age or club minutes. That blind spot is
+     precisely what the next data block (FBref minutes &amp; xG) is for; the market already prices it.
+     A further ${pct(WC26.debutant_share, 0)} of goals is reserved for debutant scorers ("new faces"),
+     the historical World Cup average. Most distinct scorers: ` +
+    Object.entries(WC26.distinct_scorers).slice(0, 3).map(([t, p]) => `${t} ${pct(p, 0)}`).join(", ") + `.`;
+}
+
 /* ---------- odds & ends ---------- */
 {
   document.getElementById("footer-meta").textContent =

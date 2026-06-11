@@ -195,3 +195,19 @@ footer a { color: var(--accent2); }
 #method details[open] summary::before { content: "▾ "; }
 #method details p { color: var(--muted); font-size: .92rem; padding-bottom: 18px; }
 #method details p strong, #method details p em { color: var(--text); }
+
+/* ---------- v3: lineage + golden boot ---------- */
+.lineage { display: flex; flex-direction: column; gap: 10px; margin-top: 20px;
+  background: var(--bg2); border: 1px solid var(--card-edge); border-radius: 16px; padding: 18px 20px; }
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.node { font-size: .8rem; font-weight: 600; padding: 5px 12px; border-radius: 999px;
+  background: var(--card); border: 1px solid var(--card-edge); color: var(--text); }
+.node.file { background: #0f2a1d; border-color: #1d5c3c; color: var(--accent); font-family: ui-monospace, Menlo, monospace; }
+.node.out { background: #112c44; border-color: #1d5d8a; color: var(--accent2); }
+.arr { color: var(--muted); font-size: .9rem; }
+.boot-sd { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+.boot-sd span { font-size: .74rem; font-variant-numeric: tabular-nums; color: var(--muted);
+  background: var(--bar-bg); border-radius: 6px; padding: 3px 9px; }
+.boot-sd b { color: var(--text); }
+.market-chip { font-size: .7rem; color: var(--gold); border: 1px solid rgba(251,191,36,.4);
+  border-radius: 999px; padding: 1px 8px; margin-left: 8px; font-weight: 600; vertical-align: 1px; white-space: nowrap; }

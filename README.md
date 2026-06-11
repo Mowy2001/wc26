@@ -35,7 +35,10 @@ python scripts/03_simulate_groups.py      # 20k group-stage simulations
 python scripts/04_simulate_tournament.py  # 20k full-tournament simulations -> P(champion)
 python scripts/05_export_site_data.py     # refresh site/data.js, then open site/index.html
 python scripts/06_tune_xi.py              # time-decay grid search on 6 past tournaments
-python scripts/07_ablations.py            # counterfactual runs (no host adv, xi extremes)
+python scripts/07_ablations.py            # counterfactual runs (no host adv, xi, bootstrap)
+python scripts/08_bootstrap_params.py     # 100 bootstrap refits of the DC parameters
+python scripts/09_player_layer.py         # Golden Boot from goalscorers.csv
+python scripts/10_live_update.py          # refresh forecasts as real results come in
 ```
 
 ## Data
@@ -57,7 +60,7 @@ External benchmarks recorded on 2026-06-11 (tournament eve): BetMGM outright odd
 
 ## Known issues / roadmap
 
-See `CLAUDE.md` for the operational backlog. Done: host home advantage (verified, defensive invariant in `data.py`), official FIFA group labels (anchored to the draw), knockout bracket through the final (thirds via constraint matching, calibrated shootouts). Next: residual feature blocks (climate, football capital, diaspora, fatigue), player layer for the Golden Boot, parameter bootstrap.
+See `CLAUDE.md` for the operational backlog. Done: host home advantage (verified, defensive invariant in `data.py`), official FIFA group labels (anchored to the draw), knockout bracket through the final (thirds via constraint matching, calibrated shootouts). Done since: xi tuning (flat — honest null), parameter bootstrap (negligible — honest null), player layer v1 (Golden Boot), live-update scaffold. Next: residual feature blocks (climate, football capital, diaspora, fatigue — scraping), player layer v2 (minutes/xG), cohesion graph.
 
 ## Repo layout
 

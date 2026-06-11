@@ -85,6 +85,33 @@ Counterfactual tournament re-runs quantify each data choice for the site's
 grid extremes) is statistical noise by comparison. Rule of thumb established: venue
 data >> recency weighting, and both << the rating itself.
 
+## Parameter bootstrap (backlog #8, 2026-06-11)
+B=100 nonparametric refits on resampled training history; each simulated tournament
+draws one parameter set. Measured spread: sd(beta_elo)=0.017, sd(beta_home)=0.031,
+sd(rho)=0.029. Effect on P(champion): mean |delta| = 0.07pp vs the point estimate —
+within Monte Carlo noise at 20k sims. Verdict: with ~17k matches behind 5 parameters,
+epistemic parameter uncertainty is negligible; the bootstrap stays on (it is the
+correct integral) but the honest reading is that model risk lives in WHICH data
+enters, not in the optimizer. Completes the luck-handling triad of the design.
+
+## Player layer v1 (backlog #6, 2026-06-11)
+Goals from the tournament Monte Carlo (groups + KO incl. extra time, same sims/seed)
+are split per team via Multinomial(G, p): p = exponentially decayed scorer shares from
+goalscorers.csv (half-life 900 days; squad membership proxied by >=1 goal in the last
+900 days), with a 17.3% "new faces" bucket — the measured share of WC2014/18/22 goals
+scored by players with no prior international goal; the bucket cannot win the Boot.
+Result vs market (raw implied): Mbappé 15.9% vs 14.8%, Kane 13.6% vs 12.9%, Messi
+10.7% vs 8.0%, Haaland 5.6% vs 6.9% — close on all four priced names. Declared
+artifact: Enner Valencia tops the table (17.7%) on a genuine recent record plus
+Ecuador's high simulated totals, with no age/minutes signal to discount him — the
+exact blind spot the FBref block (backlog #5) should fix; until then it stands as a
+documented limitation, not silently patched.
+
+## Live updating (during the tournament)
+scripts/10: played group matches (refreshed results.csv) enter as fixed_results;
+ratings and parameters stay frozen at tournament eve — live updates change what is
+KNOWN, never what the model believes. Knockout conditioning is a follow-up.
+
 ## Three-way benchmark
 After the tournament: log-loss and calibration of our model vs bookmaker implied
 probabilities (margin removed, Shin's method) vs Klement's forecasts (GDP/population/

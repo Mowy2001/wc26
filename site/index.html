@@ -10,7 +10,7 @@
 
 <header class="hero">
   <div class="wrap">
-    <p class="kicker">20,000 Monte Carlo simulations · fixed seed · model v1.1</p>
+    <p class="kicker">20,000 Monte Carlo simulations · fixed seed · model v2</p>
     <h1>The 2026 World Cup,<br>as a <em>probability distribution</em></h1>
     <p class="lede">This project is an experiment in radical data honesty: one small,
     public, 154-year-old dataset, every choice about what the model is allowed to know
@@ -27,6 +27,7 @@
   <a href="#champion">Champion race</a>
   <a href="#rounds">Round by round</a>
   <a href="#groups">Groups</a>
+  <a href="#boot">Golden Boot</a>
   <a href="#market">Model vs market</a>
   <a href="#method">Methodology</a>
 </nav>
@@ -46,9 +47,10 @@
     </div>
     <div class="card">
       <h3>⚽ 47,000 goals</h3>
-      <p>Scorer, minute, penalty flag for every goal since 1916. Currently idle —
-      it powers the upcoming player layer: who scores the goals each simulated team
-      is awarded, hence Golden Boot distributions.</p>
+      <p>Scorer, minute, penalty flag for every goal since 1916. Powers the player
+      layer: each team's simulated goals are split among its recent scorers
+      (time-decayed shares), producing the Golden Boot distribution below. A measured
+      17.3% of WC goals go to debutant scorers — that mass is reserved for "new faces".</p>
     </div>
     <div class="card">
       <h3>🥅 677 shootouts</h3>
@@ -66,15 +68,34 @@
       improve out-of-sample log-loss or get dropped.</p>
     </div>
   </div>
-  <p class="note">From those files the model derives exactly three things per match: each team's
-  <em>point-in-time Elo rating</em> (recomputed from scratch over all 49k matches, so we can ask
-  what it was on any historical date), <em>who is at home</em>, and <em>when it was played</em>
-  (older matches count less). That's the entire information diet.</p>
+  <div class="lineage">
+    <div class="flow">
+      <span class="node file">results.csv</span><span class="arr">→</span>
+      <span class="node">point-in-time Elo</span><span class="arr">→</span>
+      <span class="node">Dixon-Coles goal rates</span><span class="arr">→</span>
+      <span class="node">20,000 tournaments</span><span class="arr">→</span>
+      <span class="node out">every team probability</span>
+    </div>
+    <div class="flow">
+      <span class="node file">goalscorers.csv</span><span class="arr">→</span>
+      <span class="node">decayed scorer shares</span><span class="arr">→</span>
+      <span class="node">goal allocation per simulation</span><span class="arr">→</span>
+      <span class="node out">Golden Boot odds</span>
+    </div>
+    <div class="flow">
+      <span class="node file">shootouts.csv</span><span class="arr">→</span>
+      <span class="node">shootout logit (677 obs)</span><span class="arr">→</span>
+      <span class="node out">knockout ties</span>
+    </div>
+  </div>
+  <p class="note">From the match file the model derives exactly three things per fixture:
+  each team's <em>point-in-time Elo rating</em>, <em>who is at home</em>, and <em>when it
+  was played</em> (older matches count less). That's the entire information diet.</p>
 </section>
 
 <section id="influence">
   <h2>What moves the forecast <span class="sub">each data choice, measured by re-running the tournament without it</span></h2>
-  <div class="cards3">
+  <div class="cards2">
     <div class="card">
       <h3>Playing at home — worth double</h3>
       <p class="mini-intro">The schedule says who hosts. Switch that column off and replay
@@ -100,6 +121,18 @@
       advantage alone lifts it from last to second. The market prices squad value and host
       momentum; those signals only enter here if a future data block earns its backtest.</p>
     </div>
+    <div class="card">
+      <h3>Parameter doubt — pinned by 17k matches</h3>
+      <p class="mini-intro">The goal model has five parameters. We refit them
+      <span id="boot-b"></span> times on resampled history and gave each simulated
+      tournament its own draw:</p>
+      <div id="boot-card"></div>
+      <p class="mini-note">Integrating parameter uncertainty moves title probabilities by
+      <strong id="boot-delta"></strong> on average — within Monte Carlo noise. With this much
+      data behind five numbers, the doubt lives in <em>which data enters</em>, not in the fit.
+      (The waiting room: club minutes, climate, diaspora, fatigue — each will get its own
+      card here if it survives the backtest.)</p>
+    </div>
   </div>
 </section>
 
@@ -117,6 +150,12 @@
 <section id="groups">
   <h2>The twelve groups <span class="sub">advance = top two, or one of the 8 best thirds</span></h2>
   <div id="groups-grid" class="groups-grid"></div>
+</section>
+
+<section id="boot">
+  <h2>The Golden Boot <span class="sub">team goals from the simulations, split among scorers — point-in-time shares, no minutes data (yet)</span></h2>
+  <div id="boot-chart" class="chart"></div>
+  <p class="note" id="boot-note"></p>
 </section>
 
 <section id="market">

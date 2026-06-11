@@ -28,9 +28,18 @@ docstring with the mathematical model, every design choice goes in docs/METHODOL
 - [x] Ablations (scripts/07) + data-first site v2: host advantage doubles USA group
       odds (12.5%->23.7%), xi a rounding error; site leads with data choices,
       methodology demoted to collapsibles
+- [x] Parameter bootstrap (#8, scripts/08): B=100, effect on P(champion) ±0.07pp =
+      MC noise. Kept on (correct integral); honest reading: model risk is in the data,
+      not the fit
+- [x] Player layer v1 (#6, src/players.py + scripts/09): decayed scorer shares +
+      17.3% debutant bucket. Mbappé 15.9%/Kane 13.6% vs market 14.8%/12.9%. Declared
+      artifact: Valencia 17.7% top (no age/minutes data — waits for FBref block)
+- [x] Live-update scaffold (scripts/10): fixed_results from refreshed results.csv,
+      frozen ratings/params; KO conditioning TODO. Site v3: lineage diagram, bootstrap
+      card, Golden Boot section
 - [ ] Backlog below
 
-## Backlog (in order; numbering stable, #1-4 closed — see Status)
+## Backlog (in order; numbering stable, #1-4, 6, 8 closed — see Status)
 5. **Residual blocks** (scraping — needs full network access, hence Claude Code):
    - football capital: FBref top-5-league minutes, clubelo.com club Elo weighted by
      minutes, CIES academy ranking
@@ -40,14 +49,10 @@ docstring with the mathematical model, every design choice goes in docs/METHODOL
    - fatigue: club-season minutes per player (FBref)
    They enter as extra_cols in the DC (hierarchical-residual design: they predict
    Elo residuals). Rule: a feature that doesn't improve backtest log-loss is dropped.
-6. **Player layer**: historical per-player goal share + penalty takers from
-   goalscorers.csv; xG/90 and expected minutes from FBref. Multinomial allocation
-   conditioned on simulated team goals → Golden Boot and most-distinct-scorers
-   distributions.
+6b. **Player layer v2** (rest of #6): penalty-taker bonus, FBref xG/90 + expected
+   minutes to discount aging strikers (the Valencia artifact).
 7. **Cohesion graph** (most expensive feature, last): shared career minutes per pair
    (Transfermarkt), slow decay; feature = mean density over the expected XI.
-8. **Parameter uncertainty**: bootstrap DC parameters, sample them at the start of
-   each simulation.
 9. **Report**: three-way comparison (model vs BetMGM 11/06 odds vs Klement) + live
    calibration. Played matches enter via `fixed_results` in simulate_group_stage.
 

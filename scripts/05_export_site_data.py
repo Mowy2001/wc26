@@ -40,12 +40,24 @@ try:
     ablations = json.load(open("outputs/ablations.json"))
 except FileNotFoundError:
     ablations = None
+try:
+    gb = pd.read_csv("outputs/golden_boot.csv").head(12)
+    golden_boot = gb.round(4).to_dict("records")
+    distinct = pd.read_csv("outputs/distinct_scorers.csv", index_col=0)
+    distinct_top = distinct.head(6).iloc[:, 0].round(4).to_dict()
+except FileNotFoundError:
+    golden_boot, distinct_top = None, None
+try:
+    bd = pd.DataFrame(json.load(open("outputs/dc_bootstrap.json")))
+    bootstrap = {"B": int(len(bd)), "sd": bd.std().round(4).to_dict()}
+except FileNotFoundError:
+    bootstrap = None
 
 data = {
     "generated": str(date.today()),
     "n_sims": 20000,
     "seed": 26,
-    "model_version": "v1.1 (Elo-driven Dixon-Coles, xi=0.0027 tuned on 6 tournaments, official bracket, calibrated shootouts)",
+    "model_version": "v2 (Elo-driven Dixon-Coles, tuned xi, official bracket, calibrated shootouts, parameter bootstrap, player layer)",
     "backtest": {
         "tournament": "World Cup 2022 (64 matches, point-in-time fit)",
         "log_loss_model": 1.060, "log_loss_uniform": 1.099,
@@ -61,6 +73,12 @@ data = {
     "klement": "Netherlands champions (final vs Portugal); England and Spain out in the semis",
     "xi_tuning": xi_tuning,
     "ablations": ablations,
+    "bootstrap": bootstrap,
+    "golden_boot": golden_boot,
+    "golden_boot_market": {"Kylian Mbappé": 575, "Harry Kane": 675,
+                           "Lionel Messi": 1150, "Erling Haaland": 1350},
+    "debutant_share": 0.173,
+    "distinct_scorers": distinct_top,
     "teams": teams,
 }
 
