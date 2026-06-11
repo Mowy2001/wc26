@@ -29,9 +29,9 @@ Two Dixon-Coles refinements over naive double-Poisson:
 
 2. Exponential time-downweighting
    Match i played `d_i` days before the fit date receives weight
-   exp(-xi * d_i / 365). `xi` is a hyperparameter chosen on the backtest
-   (predictive log-loss), NOT by in-sample likelihood — in-sample always
-   prefers xi = 0.
+   exp(-xi * d_i), with xi in 1/days (xi = 0.0018 -> half-life ~385 days).
+   `xi` is a hyperparameter chosen on the backtest (predictive log-loss),
+   NOT by in-sample likelihood — in-sample always prefers xi = 0.
 
 Estimation: weighted maximum likelihood via scipy L-BFGS-B.
 
@@ -77,7 +77,11 @@ class DixonColes:
               beta per extra column.
     """
 
-    xi: float = 0.0018  # time-decay/day; ~half-life 13 months. Tuned in backtest.
+    # Time decay per day, half-life ~257 days. Tuned on the 6-tournament
+    # backtest (scripts/06): pooled-LL argmin, but the curve is flat — the
+    # data cannot distinguish xi in [0.0005, 0.005] (paired t=0.45 between
+    # the grid extremes). See METHODOLOGY.md.
+    xi: float = 0.0027
     extra_cols: list[str] = field(default_factory=list)
     params_: dict | None = None
 

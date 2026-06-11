@@ -16,7 +16,7 @@ key = ["date", "home_team", "away_team"]
 df["dup"] = df.groupby(key).cumcount()
 e = elo_hist.copy(); e["dup"] = e.groupby(key).cumcount()
 df = df.merge(e[key + ["dup", "elo_home_pre", "elo_away_pre"]], on=key + ["dup"], validate="1:1")
-model = DixonColes(xi=0.0018).fit(df[df["date"] >= "2005-01-01"], pd.Timestamp("2026-06-11"))
+model = DixonColes().fit(df[df["date"] >= "2005-01-01"], pd.Timestamp("2026-06-11"))
 
 elo_now = ratings_asof(elo_hist, "2026-06-11")
 gfx = wc2026_group_fixtures(results)

@@ -21,7 +21,7 @@ df = df.merge(elo[key+["dup","elo_home_pre","elo_away_pre"]], on=key+["dup"], va
 
 FIT_DATE = pd.Timestamp("2022-11-20")
 train = df[df["date"] >= "2005-01-01"]
-model = DixonColes(xi=0.0018).fit(train, FIT_DATE)
+model = DixonColes().fit(train, FIT_DATE)
 print("Estimated parameters:", {k: round(v,4) if isinstance(v,float) else v for k,v in model.params_.items()})
 
 wc22 = df[(df["tournament"]=="FIFA World Cup") & (df["date"]>=FIT_DATE) & (df["date"]<="2022-12-18")]

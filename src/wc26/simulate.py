@@ -270,16 +270,22 @@ def simulate_tournament(
     n_sims: int = 20_000,
     seed: int = 26,
     fixed_results: dict[tuple[str, str], tuple[int, int]] | None = None,
+    host_advantage: bool = True,
 ) -> dict[str, pd.DataFrame]:
     """Full-tournament Monte Carlo: groups + R32 bracket through the final.
 
     Returns {"teams": DataFrame} with group-position probabilities plus
     P_R32, P_R16, P_QF, P_SF, P_final, P_champion (and P_top_scoring_team
     over group-stage goals, kept for continuity with simulate_group_stage).
+
+    host_advantage=False is a counterfactual knob (ablation studies): every
+    match, group or knockout, is played as if on neutral ground.
     """
     rng = np.random.default_rng(seed)
     team_group = {t: g for g, ts in groups.items() for t in ts}
     teams = sorted(team_group)
+    if not host_advantage:
+        fixtures = fixtures.assign(neutral=True)
     fx = _precompute_group_fixtures(fixtures, model, elo, fixed_results or {})
     G1 = len(model.score_matrix(1, 1))
     ko_cache: dict = {}
@@ -308,12 +314,16 @@ def simulate_tournament(
 
         winners: dict[int, str] = {}
         for m, sa, sb, venue in R32_MATCHES:
+            if not host_advantage:
+                venue = ""
             a, b = resolve(sa, m), resolve(sb, m)
             round_counts[a][0] += 1
             round_counts[b][0] += 1
             winners[m] = _ko_match(a, b, venue, model, elo, rng, ko_cache)
         for depth, matches in enumerate([R16_MATCHES, QF_MATCHES, SF_MATCHES, [FINAL_MATCH]], start=1):
             for m, fa, fb, venue in matches:
+                if not host_advantage:
+                    venue = ""
                 a, b = winners[fa], winners[fb]
                 round_counts[a][depth] += 1
                 round_counts[b][depth] += 1

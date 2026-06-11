@@ -67,6 +67,24 @@ Official schedule, matches 73-104. Three modelling decisions:
    flip, with a small skill+host tilt. Knockout venues carry the host home effect
    (e.g. Mexico plays R32/R16 in Mexico City if it wins group A).
 
+## Time-decay tuning (xi) — and an honest null result (2026-06-11)
+Grid 0.0005-0.005/day backtested point-in-time on WC2014/2018/2022 + Euro
+2016/2021/2024 (345 matches, scripts/06). Pooled log-loss spans 0.9952-0.9965 across
+the whole grid; per-tournament optima sit at opposite edges; paired t between the
+extremes = 0.45. Conclusion: xi is NOT identified by this backtest — a 10x change in
+memory length moves Spain's title probability by ~1pp (scripts/07). We set xi=0.0027
+(pooled argmin, plateau centre) and report the flatness rather than claim an
+improvement. This is the project's evaluation philosophy working as intended: a
+hyperparameter that cannot hurt much cannot help much either.
+
+## Ablation studies (scripts/07)
+Counterfactual tournament re-runs quantify each data choice for the site's
+"what moves the forecast" section. Host advantage is the headline: switching every
+2026 match to neutral ground drops USA group-win from 23.7% to 12.5% (and title odds
+8x, 0.8%->0.1%), Mexico 67.7%->53.5%, Canada 51.6%->38.4%. Memory length (xi at the
+grid extremes) is statistical noise by comparison. Rule of thumb established: venue
+data >> recency weighting, and both << the rating itself.
+
 ## Three-way benchmark
 After the tournament: log-loss and calibration of our model vs bookmaker implied
 probabilities (margin removed, Shin's method) vs Klement's forecasts (GDP/population/
