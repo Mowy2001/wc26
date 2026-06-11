@@ -34,6 +34,8 @@ python scripts/02_fit_backtest.py         # DC fit + out-of-sample backtest on W
 python scripts/03_simulate_groups.py      # 20k group-stage simulations
 python scripts/04_simulate_tournament.py  # 20k full-tournament simulations -> P(champion)
 python scripts/05_export_site_data.py     # refresh site/data.js, then open site/index.html
+python scripts/06_tune_xi.py              # time-decay grid search on 6 past tournaments
+python scripts/07_ablations.py            # counterfactual runs (no host adv, xi extremes)
 ```
 
 ## Data
@@ -55,7 +57,7 @@ External benchmarks recorded on 2026-06-11 (tournament eve): BetMGM outright odd
 
 ## Known issues / roadmap
 
-See `CLAUDE.md` for the operational backlog. Done: host home advantage (verified, defensive invariant in `data.py`), official FIFA group labels (anchored to the draw), knockout bracket through the final (thirds via constraint matching, calibrated shootouts). Next: xi tuning, residual feature blocks (climate, football capital, diaspora, fatigue), player layer for the Golden Boot, parameter bootstrap.
+See `CLAUDE.md` for the operational backlog. Done: host home advantage (verified, defensive invariant in `data.py`), official FIFA group labels (anchored to the draw), knockout bracket through the final (thirds via constraint matching, calibrated shootouts). Next: residual feature blocks (climate, football capital, diaspora, fatigue), player layer for the Golden Boot, parameter bootstrap.
 
 ## Repo layout
 

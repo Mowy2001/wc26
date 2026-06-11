@@ -147,3 +147,51 @@ footer a { color: var(--accent2); }
   .bar-row { grid-template-columns: 120px 1fr 52px; }
   .pair-row { grid-template-columns: 120px 1fr; }
 }
+
+/* ---------- v2: data-first additions ---------- */
+.cards4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.card.off { border-style: dashed; border-color: #3a4a78; background: rgba(22, 33, 63, .45); }
+.card a { color: var(--accent2); }
+
+.mini-intro { margin-bottom: 12px; }
+.mini-note { margin-top: 12px; font-size: .85rem !important; }
+
+/* before/after ablation bars */
+.ab-row { margin: 8px 0; }
+.ab-row .who { font-size: .85rem; font-weight: 600; margin-bottom: 3px; }
+.ab-pair { display: grid; grid-template-columns: 1fr 86px; gap: 8px; align-items: center; margin-bottom: 2px; }
+.ab-track { height: 11px; background: var(--bar-bg); border-radius: 4px; position: relative; overflow: hidden; }
+.ab-fill { position: absolute; inset: 0 auto 0 0; border-radius: 4px; }
+.ab-fill.real { background: linear-gradient(90deg, var(--accent2), var(--accent)); }
+.ab-fill.counter { background: #51618f; }
+.ab-label { font-size: .72rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* xi plateau mini-chart */
+.xi-bars { display: flex; align-items: flex-end; gap: 4px; height: 74px; margin: 10px 0 4px; }
+.xi-bar { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 4px; height: 100%; }
+.xi-bar i { display: block; width: 100%; background: linear-gradient(180deg, var(--accent2), #1e3a5f); border-radius: 4px 4px 0 0; min-height: 4px; }
+.xi-bar.chosen i { background: linear-gradient(180deg, var(--accent), #14532d); }
+.xi-bar span { font-size: .6rem; color: var(--muted); transform: rotate(-30deg); white-space: nowrap; }
+.xi-axis { font-size: .72rem; color: var(--muted); display: flex; justify-content: space-between; }
+
+/* usa case mini-table */
+.usa-rows { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+.usa-row { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; font-size: .85rem; align-items: center; }
+.usa-row .src { color: var(--muted); }
+.usa-row .num { font-weight: 800; font-variant-numeric: tabular-nums; }
+.usa-track { height: 9px; background: var(--bar-bg); border-radius: 4px; position: relative; overflow: hidden; }
+.usa-track i { position: absolute; inset: 0 auto 0 0; border-radius: 4px; }
+
+/* methodology accordions */
+#method details {
+  background: var(--card); border: 1px solid var(--card-edge); border-radius: 14px;
+  padding: 0 20px; margin-bottom: 10px;
+}
+#method summary {
+  cursor: pointer; font-weight: 700; font-size: .98rem; padding: 15px 0;
+  list-style: none; position: relative;
+}
+#method summary::before { content: "▸ "; color: var(--accent); }
+#method details[open] summary::before { content: "▾ "; }
+#method details p { color: var(--muted); font-size: .92rem; padding-bottom: 18px; }
+#method details p strong, #method details p em { color: var(--text); }

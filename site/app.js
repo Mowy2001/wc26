@@ -102,10 +102,65 @@ const byChamp = [...WC26.teams].sort((a, b) => b.P_champion - a.P_champion);
   document.getElementById("klement-note").textContent = WC26.klement;
 }
 
-/* ---------- odds & ends ---------- */
+/* ---------- ablations: host advantage ---------- */
+if (WC26.ablations) {
+  const noHost = WC26.ablations.no_host_advantage.hosts;
+  document.getElementById("host-ablation").innerHTML =
+    ["United States", "Mexico", "Canada"].map((team) => {
+      const real = WC26.teams.find((t) => t.team === team).P1;
+      const cf = noHost[team].P1;
+      return `<div class="ab-row">
+        <div class="who">${flag(team)}${team} — win the group</div>
+        <div class="ab-pair"><div class="ab-track"><div class="ab-fill real" style="width:${100 * real}%"></div></div>
+          <div class="ab-label">with home ${pct(real, 0)}</div></div>
+        <div class="ab-pair"><div class="ab-track"><div class="ab-fill counter" style="width:${100 * cf}%"></div></div>
+          <div class="ab-label">neutral ${pct(cf, 0)}</div></div>
+      </div>`;
+    }).join("");
+}
+
+/* ---------- ablations: xi plateau ---------- */
+if (WC26.xi_tuning) {
+  const entries = Object.entries(WC26.xi_tuning.pooled)
+    .map(([k, v]) => [parseFloat(k), v]).sort((a, b) => a[0] - b[0]);
+  const lls = entries.map(([, v]) => v);
+  const min = Math.min(...lls), max = Math.max(...lls);
+  const pad = (max - min) * 4 || 1; // flatness is the message: weak amplification
+  document.getElementById("xi-chart").innerHTML =
+    `<div class="xi-bars">` + entries.map(([xi, ll]) => {
+      const h = 25 + 70 * (ll - min) / pad;
+      const chosen = xi === WC26.xi_tuning.chosen;
+      return `<div class="xi-bar${chosen ? " chosen" : ""}" title="xi=${xi}: pooled log-loss ${ll}">
+        <i style="height:${h}%"></i><span>${xi}</span></div>`;
+    }).join("") + `</div>
+    <div class="xi-axis"><span>← 3.8-year half-life (long memory)</span><span>4.6-month half-life (short) →</span></div>`;
+  document.getElementById("xi-n").textContent = WC26.xi_tuning.n_matches;
+  document.getElementById("xi-note").innerHTML =
+    `Pooled log-loss spans <strong>${min}–${max}</strong> across a 10× range of decay
+     (paired t=${WC26.xi_tuning.paired_t_extremes} between the extremes: statistically nothing).
+     We pin it at the plateau centre and move on — a data choice that, measurably,
+     <strong>does not matter</strong>. Swapping extremes moves Spain's title odds by ~1 point.`;
+}
+
+/* ---------- usa case ---------- */
 {
   const usa = WC26.teams.find((t) => t.team === "United States");
-  document.getElementById("usa-p1").textContent = pct(usa.P1, 0);
+  const rows = [
+    ["Model (Elo + home)", usa.P1, "linear-gradient(90deg, var(--accent2), var(--accent))"],
+    ["Market (Kalshi)", WC26.kalshi_usa_group, "var(--gold)"],
+  ];
+  const cfP1 = WC26.ablations ? WC26.ablations.no_host_advantage.hosts["United States"].P1 : null;
+  if (cfP1 !== null) rows.push(["Model, neutral world", cfP1, "#51618f"]);
+  document.getElementById("usa-case").innerHTML = `<div class="usa-rows">` +
+    rows.map(([src, p, bg]) => `<div class="usa-row">
+      <span class="src">${src}</span>
+      <div class="usa-track"><i style="width:${100 * p / 0.6}%; background:${bg}"></i></div>
+      <span class="num">${pct(p, 0)}</span></div>`).join("") +
+    `</div><p class="mini-note" style="margin-top:8px">🇺🇸 USA win group D — three views of the same question.</p>`;
+}
+
+/* ---------- odds & ends ---------- */
+{
   document.getElementById("footer-meta").textContent =
     `Generated ${WC26.generated} · ${WC26.model_version} · ${WC26.n_sims.toLocaleString("en-US")} simulations, seed ${WC26.seed} · ` +
     `WC2022 backtest log-loss ${WC26.backtest.log_loss_model} (uniform ${WC26.backtest.log_loss_uniform}).`;

@@ -22,10 +22,15 @@ docstring with the mathematical model, every design choice goes in docs/METHODOL
       v1: Spain 24.8% champion, Argentina 18.8%, France 10.1% (vs BetMGM 18/17/12 raw)
 - [x] Results site: site/index.html (static, self-contained; data via
       scripts/05_export_site_data.py — re-run it after every new simulation)
+- [x] xi tuned (scripts/06): 0.0027, but the curve is FLAT (pooled LL 0.9952-0.9965,
+      paired t=0.45 between grid extremes) — xi not identified, chosen at plateau
+      centre. Honest null result documented in METHODOLOGY.md. Backtest LL now 1.060.
+- [x] Ablations (scripts/07) + data-first site v2: host advantage doubles USA group
+      odds (12.5%->23.7%), xi a rounding error; site leads with data choices,
+      methodology demoted to collapsibles
 - [ ] Backlog below
 
-## Backlog (in order; numbering stable, #1-3 closed — see Status)
-4. **xi tuning** (time decay) via backtest on WC2014/2018/2022 + Euros, grid 0.0005–0.005.
+## Backlog (in order; numbering stable, #1-4 closed — see Status)
 5. **Residual blocks** (scraping — needs full network access, hence Claude Code):
    - football capital: FBref top-5-league minutes, clubelo.com club Elo weighted by
      minutes, CIES academy ranking

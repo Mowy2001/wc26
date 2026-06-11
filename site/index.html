@@ -10,61 +10,97 @@
 
 <header class="hero">
   <div class="wrap">
-    <p class="kicker">20,000 Monte Carlo simulations · fixed seed · model v1</p>
+    <p class="kicker">20,000 Monte Carlo simulations · fixed seed · model v1.1</p>
     <h1>The 2026 World Cup,<br>as a <em>probability distribution</em></h1>
-    <p class="lede">We don't predict who wins. We simulate the whole tournament twenty
-    thousand times — every scoreline sampled from a statistical model of how national
-    teams score goals — and count what happens. Every number on this page is an
-    empirical frequency, not an opinion.</p>
+    <p class="lede">This project is an experiment in radical data honesty: one small,
+    public, 154-year-old dataset, every choice about what the model is allowed to know
+    made explicit — and measured. We simulate the tournament twenty thousand times and
+    count what happens. Every number below is an empirical frequency, and every data
+    decision behind it has a price tag you can see.</p>
     <div class="hero-stats" id="hero-stats"></div>
   </div>
 </header>
 
 <nav class="toc wrap">
-  <a href="#how">How it works</a>
+  <a href="#data">The data</a>
+  <a href="#influence">What moves the forecast</a>
   <a href="#champion">Champion race</a>
   <a href="#rounds">Round by round</a>
   <a href="#groups">Groups</a>
   <a href="#market">Model vs market</a>
-  <a href="#honesty">Reading the gaps</a>
+  <a href="#method">Methodology</a>
 </nav>
 
 <main class="wrap">
 
-<section id="how">
-  <h2>How it works <span class="sub">three layers, each one auditable</span></h2>
-  <div class="cards3">
+<section id="data">
+  <h2>The data <span class="sub">three public files — and a list of things we refuse to know</span></h2>
+  <div class="cards4">
     <div class="card">
-      <div class="card-step">1</div>
-      <h3>Elo, rebuilt from scratch</h3>
-      <p>Every international match since <strong>1872</strong> — 49,000 of them — replayed
-      through the World Football Elo formula (importance-weighted K, margin multiplier,
-      +100 home advantage). Because we compute it ourselves, we can ask for any team's
-      rating <em>as it was on any date</em>: backtests never peek at the future.</p>
+      <h3>📜 49,000 matches, 1872→today</h3>
+      <p>Every official international ever played (<a href="https://github.com/martj42/international_results">martj42</a>, CC0):
+      date, teams, score, competition, venue, <strong>including the full 2026 schedule</strong>.
+      This single file builds the team ratings, fits the goal model, and even defines the
+      tournament structure — the 12 groups are reconstructed from the fixture graph, never
+      typed in by hand.</p>
     </div>
     <div class="card">
-      <div class="card-step">2</div>
-      <h3>Dixon-Coles goal model</h3>
-      <p>Goals follow Poisson distributions whose rates are driven by the Elo gap, with
-      the classic Dixon-Coles correction for 0-0 and 1-1 draws and exponential decay on
-      old matches. No free per-team parameters — international data is too sparse for
-      that. Backtested on World Cup 2022: <strong>log-loss 1.062</strong> vs 1.099 for
-      a know-nothing baseline, and well calibrated (favourites priced at 54% won 56%).</p>
+      <h3>⚽ 47,000 goals</h3>
+      <p>Scorer, minute, penalty flag for every goal since 1916. Currently idle —
+      it powers the upcoming player layer: who scores the goals each simulated team
+      is awarded, hence Golden Boot distributions.</p>
     </div>
     <div class="card">
-      <div class="card-step">3</div>
-      <h3>Tournament Monte Carlo</h3>
-      <p>Each simulation samples all 72 group scorelines, applies the full FIFA
-      tiebreaker ladder (including head-to-head), ranks the eight best third-placed
-      teams, fills the official 32-team bracket, and plays it to the final — extra time
-      at one-third intensity, shootouts from a model fitted on 677 historical shootouts
-      (they're <em>almost</em> a coin flip). Hosts keep their home advantage wherever
-      they genuinely play at home, knockout rounds included.</p>
+      <h3>🥅 677 shootouts</h3>
+      <p>Every international penalty shootout in history. Small file, precise job: it tells
+      us shootouts are <em>almost</em> — but not exactly — a coin flip. The better-rated
+      team wins slightly more often, the de-facto home side too. Both effects are in the
+      simulator.</p>
+    </div>
+    <div class="card off">
+      <h3>🚫 Deliberately excluded</h3>
+      <p>Squad market values, injuries, FIFA rankings, pundit priors, betting odds.
+      Not because they're worthless — because nothing enters this model until it
+      <strong>proves itself in a backtest</strong>. The roadmap (club minutes, climate,
+      diaspora, fatigue) will be admitted one block at a time, under the same rule:
+      improve out-of-sample log-loss or get dropped.</p>
     </div>
   </div>
-  <p class="note">Luck is not noise to remove — it's the object of study. The Poisson sampling
-  <em>is</em> football's variance: one-in-five upsets happen in one of five simulations.
-  The model is judged only on log-loss and calibration, never on getting a single match "right".</p>
+  <p class="note">From those files the model derives exactly three things per match: each team's
+  <em>point-in-time Elo rating</em> (recomputed from scratch over all 49k matches, so we can ask
+  what it was on any historical date), <em>who is at home</em>, and <em>when it was played</em>
+  (older matches count less). That's the entire information diet.</p>
+</section>
+
+<section id="influence">
+  <h2>What moves the forecast <span class="sub">each data choice, measured by re-running the tournament without it</span></h2>
+  <div class="cards3">
+    <div class="card">
+      <h3>Playing at home — worth double</h3>
+      <p class="mini-intro">The schedule says who hosts. Switch that column off and replay
+      all 20,000 tournaments on neutral ground:</p>
+      <div id="host-ablation"></div>
+      <p class="mini-note">Home advantage nearly <strong>doubles</strong> the USA's group-win
+      chances and is worth <strong>8×</strong> on its title odds. It's the single most
+      influential non-rating input in the model.</p>
+    </div>
+    <div class="card">
+      <h3>How long is memory? — barely matters</h3>
+      <p class="mini-intro">Old matches are down-weighted exponentially. We tuned the decay
+      on six past tournaments (<span id="xi-n"></span> matches) and found... a plateau:</p>
+      <div id="xi-chart"></div>
+      <p class="mini-note" id="xi-note"></p>
+    </div>
+    <div class="card">
+      <h3>The rating is the engine</h3>
+      <p class="mini-intro">Everything else is a correction: the Elo gap sets the baseline
+      for every scoreline. That's why the model and the market split on the USA:</p>
+      <div id="usa-case"></div>
+      <p class="mini-note">By Elo the USA is the <em>weakest</em> team in group D — home
+      advantage alone lifts it from last to second. The market prices squad value and host
+      momentum; those signals only enter here if a future data block earns its backtest.</p>
+    </div>
+  </div>
 </section>
 
 <section id="champion">
@@ -87,30 +123,67 @@
   <h2>Model vs market <span class="sub">BetMGM outright odds, June 11 (raw implied, includes vig)</span></h2>
   <div id="market-chart" class="chart"></div>
   <p class="note">Where the bars disagree, someone is wrong — that's the point. The model is
-  deliberately Elo-honest: it knows nothing about squad market values, injuries or narratives.
+  deliberately Elo-honest; the market knows things we've chosen not to feed it (yet).
   After the final we score model, bookmaker and the Klement forecast
-  (<span id="klement-note"></span>) on the same log-loss scale.</p>
+  (<span id="klement-note"></span>) on the same log-loss scale. Every prediction is frozen
+  with information available on June 11, 2026 — as real results come in, they enter the
+  simulator as fixed scorelines and the rest of the bracket re-randomises around them.</p>
 </section>
 
-<section id="honesty">
-  <h2>Reading the gaps <span class="sub">what the model doesn't know — on purpose</span></h2>
-  <div class="cards2">
-    <div class="card">
-      <h3>The USA case</h3>
-      <p>The market (Kalshi) gives the USA <strong>~51%</strong> to win group D; our model says
-      <strong id="usa-p1"></strong>. Not a bug: by Elo the USA is the <em>weakest</em> team in its
-      own group, and home advantage alone lifts it from last to second. The market is pricing
-      squad value, host momentum and diaspora support — signals the model will only accept when
-      they prove themselves in a backtest (they're the next items on the roadmap).</p>
-    </div>
-    <div class="card">
-      <h3>Point-in-time discipline</h3>
-      <p>Every prediction is made strictly with information available on June 11, 2026.
-      Ratings are frozen on the eve of the opening match; hyperparameters were tuned on
-      <em>past</em> World Cups, never on the data being predicted. As real 2026 results come in,
-      they enter the simulator as fixed scorelines and every probability on this page updates.</p>
-    </div>
-  </div>
+<section id="method">
+  <h2>Methodology <span class="sub">for the curious — the machinery behind the numbers</span></h2>
+
+  <details>
+    <summary>Layer 1 — Elo ratings, rebuilt from scratch</summary>
+    <p>We replicate the World Football Elo formula (importance-weighted K factor: World Cup 60,
+    continental finals 50, qualifiers 40, friendlies 20; goal-margin multiplier; +100 home
+    advantage) over all 49,000 matches. Computing it ourselves, instead of scraping the
+    published table, is what makes <em>point-in-time</em> queries possible: any team's rating
+    on any date, with no information from the future. Validation: Spain #1 at 2216 on
+    tournament eve, top-15 consistent with the reference rankings.</p>
+  </details>
+
+  <details>
+    <summary>Layer 2 — Dixon-Coles goal model on Elo covariates</summary>
+    <p>Each side's goals are Poisson with log-rates driven by the Elo gap, a home-advantage
+    term, and the classic Dixon-Coles low-score correction (0-0 and 1-1 are more common than
+    independence implies). No free per-team parameters — international teams play ~10 matches
+    a year, free parameters would overfit instantly. Old matches decay exponentially
+    (half-life ≈ 8.5 months, tuned out-of-sample). Backtest on World Cup 2022:
+    log-loss <strong>1.060</strong> vs 1.099 uniform; favourites priced at 54% won 56%.</p>
+  </details>
+
+  <details>
+    <summary>Layer 3 — Tournament Monte Carlo</summary>
+    <p>Each of the 20,000 simulations samples all 72 group scorelines from the model's score
+    matrices, applies the full FIFA tiebreaker ladder (points, goal difference, goals,
+    head-to-head; fair play is unobservable pre-match so surviving ties break at random —
+    equivalent to drawing lots in expectation), ranks the eight best thirds, fills the
+    official 32-team bracket (third-place slots assigned by constraint matching against the
+    published schedule), and plays to the final. Knockout draws go to extra time (Poisson at
+    one-third intensity), then to a shootout model fitted on the 677 historical shootouts:
+    P(win) = sigmoid(0.31·host + 0.68·Δelo/400). Hosts keep home advantage wherever they
+    genuinely play at home — knockout rounds included.</p>
+  </details>
+
+  <details>
+    <summary>Luck, and why we never grade single predictions</summary>
+    <p>The Poisson sampling <em>is</em> football's variance: a one-in-five upset happens in
+    one of five simulations, and that's the point. The model is evaluated exclusively on
+    log-loss and calibration over many matches — never on whether a single pick came true.
+    Three sources of uncertainty are treated separately: aleatoric (the sampling),
+    epistemic-in-data (prefer expected goals where available), epistemic-in-parameters
+    (bootstrap, on the roadmap).</p>
+  </details>
+
+  <details>
+    <summary>Point-in-time discipline</summary>
+    <p>No rating, parameter or hyperparameter ever sees data later than the prediction date.
+    Hyperparameters are tuned on <em>past</em> tournaments only; ratings freeze on the eve of
+    the opening match. This is also why the time-decay tuning result (the flat curve above) is
+    trustworthy: it was measured strictly out-of-sample, on 345 matches across six
+    tournaments the model had never seen.</p>
+  </details>
 </section>
 
 </main>
@@ -119,7 +192,7 @@
   <div class="wrap">
     <p id="footer-meta"></p>
     <p>Data: <a href="https://github.com/martj42/international_results">martj42/international_results</a> (CC0)
-    · Code: private repo <strong>Mowy2001/wc26</strong> · Built with an Elo → Dixon-Coles → Monte Carlo pipeline.</p>
+    · Code: private repo <strong>Mowy2001/wc26</strong> · Elo → Dixon-Coles → Monte Carlo.</p>
   </div>
 </footer>
 
