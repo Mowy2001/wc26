@@ -20,6 +20,8 @@ docstring with the mathematical model, every design choice goes in docs/METHODOL
       matching on published slot constraints (literal 495-row Annex C not transcribed,
       see METHODOLOGY.md), ET ~Poisson/3, shootout logit fitted on shootouts.csv.
       v1: Spain 24.8% champion, Argentina 18.8%, France 10.1% (vs BetMGM 18/17/12 raw)
+- [x] Results site: site/index.html (static, self-contained; data via
+      scripts/05_export_site_data.py — re-run it after every new simulation)
 - [ ] Backlog below
 
 ## Backlog (in order; numbering stable, #1-3 closed — see Status)

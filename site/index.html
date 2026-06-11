@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WC26 — Probabilistic World Cup 2026</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">20,000 Monte Carlo simulations · fixed seed · model v1</p>
+    <h1>The 2026 World Cup,<br>as a <em>probability distribution</em></h1>
+    <p class="lede">We don't predict who wins. We simulate the whole tournament twenty
+    thousand times — every scoreline sampled from a statistical model of how national
+    teams score goals — and count what happens. Every number on this page is an
+    empirical frequency, not an opinion.</p>
+    <div class="hero-stats" id="hero-stats"></div>
+  </div>
+</header>
+
+<nav class="toc wrap">
+  <a href="#how">How it works</a>
+  <a href="#champion">Champion race</a>
+  <a href="#rounds">Round by round</a>
+  <a href="#groups">Groups</a>
+  <a href="#market">Model vs market</a>
+  <a href="#honesty">Reading the gaps</a>
+</nav>
+
+<main class="wrap">
+
+<section id="how">
+  <h2>How it works <span class="sub">three layers, each one auditable</span></h2>
+  <div class="cards3">
+    <div class="card">
+      <div class="card-step">1</div>
+      <h3>Elo, rebuilt from scratch</h3>
+      <p>Every international match since <strong>1872</strong> — 49,000 of them — replayed
+      through the World Football Elo formula (importance-weighted K, margin multiplier,
+      +100 home advantage). Because we compute it ourselves, we can ask for any team's
+      rating <em>as it was on any date</em>: backtests never peek at the future.</p>
+    </div>
+    <div class="card">
+      <div class="card-step">2</div>
+      <h3>Dixon-Coles goal model</h3>
+      <p>Goals follow Poisson distributions whose rates are driven by the Elo gap, with
+      the classic Dixon-Coles correction for 0-0 and 1-1 draws and exponential decay on
+      old matches. No free per-team parameters — international data is too sparse for
+      that. Backtested on World Cup 2022: <strong>log-loss 1.062</strong> vs 1.099 for
+      a know-nothing baseline, and well calibrated (favourites priced at 54% won 56%).</p>
+    </div>
+    <div class="card">
+      <div class="card-step">3</div>
+      <h3>Tournament Monte Carlo</h3>
+      <p>Each simulation samples all 72 group scorelines, applies the full FIFA
+      tiebreaker ladder (including head-to-head), ranks the eight best third-placed
+      teams, fills the official 32-team bracket, and plays it to the final — extra time
+      at one-third intensity, shootouts from a model fitted on 677 historical shootouts
+      (they're <em>almost</em> a coin flip). Hosts keep their home advantage wherever
+      they genuinely play at home, knockout rounds included.</p>
+    </div>
+  </div>
+  <p class="note">Luck is not noise to remove — it's the object of study. The Poisson sampling
+  <em>is</em> football's variance: one-in-five upsets happen in one of five simulations.
+  The model is judged only on log-loss and calibration, never on getting a single match "right".</p>
+</section>
+
+<section id="champion">
+  <h2>Champion race <span class="sub">P(lift the trophy on July 19)</span></h2>
+  <div id="champ-chart" class="chart"></div>
+  <p class="note">Lighter bar: probability of reaching the final. Solid bar: winning it all.</p>
+</section>
+
+<section id="rounds">
+  <h2>Round by round <span class="sub">how far does each contender go?</span></h2>
+  <div class="table-scroll"><table id="rounds-table"></table></div>
+</section>
+
+<section id="groups">
+  <h2>The twelve groups <span class="sub">advance = top two, or one of the 8 best thirds</span></h2>
+  <div id="groups-grid" class="groups-grid"></div>
+</section>
+
+<section id="market">
+  <h2>Model vs market <span class="sub">BetMGM outright odds, June 11 (raw implied, includes vig)</span></h2>
+  <div id="market-chart" class="chart"></div>
+  <p class="note">Where the bars disagree, someone is wrong — that's the point. The model is
+  deliberately Elo-honest: it knows nothing about squad market values, injuries or narratives.
+  After the final we score model, bookmaker and the Klement forecast
+  (<span id="klement-note"></span>) on the same log-loss scale.</p>
+</section>
+
+<section id="honesty">
+  <h2>Reading the gaps <span class="sub">what the model doesn't know — on purpose</span></h2>
+  <div class="cards2">
+    <div class="card">
+      <h3>The USA case</h3>
+      <p>The market (Kalshi) gives the USA <strong>~51%</strong> to win group D; our model says
+      <strong id="usa-p1"></strong>. Not a bug: by Elo the USA is the <em>weakest</em> team in its
+      own group, and home advantage alone lifts it from last to second. The market is pricing
+      squad value, host momentum and diaspora support — signals the model will only accept when
+      they prove themselves in a backtest (they're the next items on the roadmap).</p>
+    </div>
+    <div class="card">
+      <h3>Point-in-time discipline</h3>
+      <p>Every prediction is made strictly with information available on June 11, 2026.
+      Ratings are frozen on the eve of the opening match; hyperparameters were tuned on
+      <em>past</em> World Cups, never on the data being predicted. As real 2026 results come in,
+      they enter the simulator as fixed scorelines and every probability on this page updates.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p id="footer-meta"></p>
+    <p>Data: <a href="https://github.com/martj42/international_results">martj42/international_results</a> (CC0)
+    · Code: private repo <strong>Mowy2001/wc26</strong> · Built with an Elo → Dixon-Coles → Monte Carlo pipeline.</p>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

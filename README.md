@@ -33,6 +33,7 @@ python scripts/01_build_and_validate.py   # Elo + group reconstruction (sanity c
 python scripts/02_fit_backtest.py         # DC fit + out-of-sample backtest on WC2022
 python scripts/03_simulate_groups.py      # 20k group-stage simulations
 python scripts/04_simulate_tournament.py  # 20k full-tournament simulations -> P(champion)
+python scripts/05_export_site_data.py     # refresh site/data.js, then open site/index.html
 ```
 
 ## Data
