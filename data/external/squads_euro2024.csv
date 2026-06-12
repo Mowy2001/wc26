@@ -1,623 +1,623 @@
-team,player,caps,club
-Germany,Manuel Neuer,119,Bayern Munich
-Germany,Antonio Rüdiger,69,Real Madrid
-Germany,David Raum,21,RB Leipzig
-Germany,Jonathan Tah,25,Bayer Leverkusen
-Germany,Pascal Groß,7,Brighton & Hove Albion
-Germany,Joshua Kimmich,86,Bayern Munich
-Germany,Kai Havertz,46,Arsenal
-Germany,Toni Kroos,109,Real Madrid
-Germany,Niclas Füllkrug,16,Borussia Dortmund
-Germany,Jamal Musiala,29,Bayern Munich
-Germany,Chris Führich,4,VfB Stuttgart
-Germany,Oliver Baumann,0,TSG Hoffenheim
-Germany,Thomas Müller,129,Bayern Munich
-Germany,Maximilian Beier,1,TSG Hoffenheim
-Germany,Nico Schlotterbeck,12,Borussia Dortmund
-Germany,Waldemar Anton,2,VfB Stuttgart
-Germany,Florian Wirtz,18,Bayer Leverkusen
-Germany,Maximilian Mittelstädt,4,VfB Stuttgart
-Germany,Leroy Sané,60,Bayern Munich
-Germany,Benjamin Henrichs,15,RB Leipzig
-Germany,İlkay Gündoğan ( captain ),77,Barcelona
-Germany,Marc-André ter Stegen,40,Barcelona
-Germany,Robert Andrich,5,Bayer Leverkusen
-Germany,Robin Koch,9,Eintracht Frankfurt
-Germany,Emre Can,43,Borussia Dortmund
-Germany,Deniz Undav,2,VfB Stuttgart
-Scotland,Angus Gunn,10,Norwich City
-Scotland,Anthony Ralston,9,Celtic
-Scotland,Andy Robertson ( captain ),71,Liverpool
-Scotland,Scott McTominay,49,Manchester United
-Scotland,Grant Hanley,50,Norwich City
-Scotland,Kieran Tierney,45,Real Sociedad
-Scotland,John McGinn,66,Aston Villa
-Scotland,Callum McGregor,60,Celtic
-Scotland,Lawrence Shankland,11,Heart of Midlothian
-Scotland,Ché Adams,30,Southampton
-Scotland,Ryan Christie,49,Bournemouth
-Scotland,Liam Kelly,1,Motherwell
-Scotland,Jack Hendry,31,Al-Ettifaq
-Scotland,Billy Gilmour,27,Brighton & Hove Albion
-Scotland,Ryan Porteous,11,Watford
-Scotland,Liam Cooper,19,Leeds United
-Scotland,Stuart Armstrong,50,Southampton
-Scotland,Lewis Morgan,3,New York Red Bulls
-Scotland,Tommy Conway,1,Bristol City
-Scotland,Ryan Jack,20,Rangers
-Scotland,Zander Clark,4,Heart of Midlothian
-Scotland,Ross McCrorie,1,Bristol City
-Scotland,Kenny McLean,39,Norwich City
-Scotland,Greg Taylor,14,Celtic
-Scotland,James Forrest,39,Celtic
-Scotland,Scott McKenna,35,Copenhagen
-Hungary,Péter Gulácsi,54,RB Leipzig
-Hungary,Ádám Lang,69,Omonia
-Hungary,Botond Balogh,4,Parma
-Hungary,Attila Szalai,44,SC Freiburg
-Hungary,Attila Fiola,57,Fehérvár
-Hungary,Willi Orbán,45,RB Leipzig
-Hungary,Loïc Négo,36,Le Havre
-Hungary,Ádám Nagy,81,Spezia
-Hungary,Martin Ádám,22,Ulsan HD
-Hungary,Dominik Szoboszlai ( captain ),42,Liverpool
-Hungary,Milos Kerkez,16,Bournemouth
-Hungary,Dénes Dibusz,36,Ferencváros
-Hungary,András Schäfer,25,Union Berlin
-Hungary,Bendegúz Bolla,17,Servette
-Hungary,László Kleinheisler,51,Hajduk Split
-Hungary,Dániel Gazdag,25,Philadelphia Union
-Hungary,Callum Styles,22,Sunderland
-Hungary,Zsolt Nagy,20,Puskás Akadémia
-Hungary,Barnabás Varga,11,Ferencváros
-Hungary,Roland Sallai,49,SC Freiburg
-Hungary,Endre Botka,26,Ferencváros
-Hungary,Péter Szappanos,1,Paks
-Hungary,Kevin Csoboth,8,Újpest
-Hungary,Márton Dárdai,3,Hertha BSC
-Hungary,Krisztofer Horváth,2,Kecskemét
-Hungary,Mihály Kata,3,MTK Budapest
-Switzerland,Yann Sommer,89,Inter Milan
-Switzerland,Leonidas Stergiou,3,VfB Stuttgart
-Switzerland,Silvan Widmer,43,Mainz 05
-Switzerland,Nico Elvedi,53,Borussia Mönchengladbach
-Switzerland,Manuel Akanji,60,Manchester City
-Switzerland,Denis Zakaria,54,[ a ]
-Switzerland,Breel Embolo,63,[ a ]
-Switzerland,Remo Freuler,67,Bologna
-Switzerland,Noah Okafor,22,Milan
-Switzerland,Granit Xhaka ( captain ),125,Bayer Leverkusen
-Switzerland,Renato Steffen,39,Lugano
-Switzerland,Yvon Mvogo,9,Lorient
-Switzerland,Ricardo Rodriguez,115,Torino
-Switzerland,Steven Zuber,54,AEK Athens
-Switzerland,Cédric Zesiger,4,VfL Wolfsburg
-Switzerland,Vincent Sierro,3,Toulouse
-Switzerland,Ruben Vargas,43,FC Augsburg
-Switzerland,Kwadwo Duah,1,Ludogorets Razgrad
-Switzerland,Dan Ndoye,11,Bologna
-Switzerland,Michel Aebischer,20,Bologna
-Switzerland,Gregor Kobel,5,Borussia Dortmund
-Switzerland,Fabian Schär,81,Newcastle United
-Switzerland,Xherdan Shaqiri,123,Chicago Fire
-Switzerland,Ardon Jashari,2,Luzern
-Switzerland,Zeki Amdouni,15,Burnley
-Switzerland,Fabian Rieder,5,Rennes
-Spain,David Raya,5,Arsenal
-Spain,Dani Carvajal,44,Real Madrid
-Spain,Robin Le Normand,11,Real Sociedad
-Spain,Nacho,25,Real Madrid
-Spain,Daniel Vivian,2,Athletic Bilbao
-Spain,Mikel Merino,21,Real Sociedad
-Spain,Álvaro Morata ( captain ),73,Atlético Madrid
-Spain,Fabián Ruiz,23,Paris Saint-Germain
-Spain,Joselu,11,Real Madrid
-Spain,Dani Olmo,33,RB Leipzig
-Spain,Ferran Torres,41,Barcelona
-Spain,Álex Grimaldo,4,Bayer Leverkusen
-Spain,Álex Remiro,1,Real Sociedad
-Spain,Aymeric Laporte,29,Al Nassr
-Spain,Álex Baena,3,Villarreal
-Spain,Rodri,50,Manchester City
-Spain,Nico Williams,14,Athletic Bilbao
-Spain,Martín Zubimendi,6,Real Sociedad
-Spain,Lamine Yamal,7,Barcelona
-Spain,Pedri,20,Barcelona
-Spain,Mikel Oyarzabal,30,Real Sociedad
-Spain,Jesús Navas,53,Sevilla
-Spain,Unai Simón,40,Athletic Bilbao
-Spain,Marc Cucurella,4,Chelsea
-Spain,Fermín López,1,Barcelona
-Spain,Ayoze Pérez,1,Real Betis
-Croatia,Dominik Livaković,54,Fenerbahçe
-Croatia,Josip Stanišić,18,Bayer Leverkusen
-Croatia,Marin Pongračić,8,Lecce
-Croatia,Joško Gvardiol,30,Manchester City
-Croatia,Martin Erlić,9,Sassuolo
-Croatia,Josip Šutalo,14,Ajax
-Croatia,Lovro Majer,31,VfL Wolfsburg
-Croatia,Mateo Kovačić,101,Manchester City
-Croatia,Andrej Kramarić,93,TSG Hoffenheim
-Croatia,Luka Modrić ( captain ),175,Real Madrid
-Croatia,Marcelo Brozović,96,Al Nassr
-Croatia,Nediljko Labrović,1,Rijeka
-Croatia,Nikola Vlašić,56,Torino
-Croatia,Ivan Perišić,131,Hajduk Split
-Croatia,Mario Pašalić,63,Atalanta
-Croatia,Ante Budimir,21,Osasuna
-Croatia,Bruno Petković,38,Dinamo Zagreb
-Croatia,Luka Ivanušec,21,Feyenoord
-Croatia,Borna Sosa,20,Ajax
-Croatia,Marko Pjaca,26,Rijeka
-Croatia,Domagoj Vida,105,AEK Athens
-Croatia,Josip Juranović,37,Union Berlin
-Croatia,Ivica Ivušić,6,Pafos
-Croatia,Marco Pašalić,5,Rijeka
-Croatia,Luka Sučić,7,Red Bull Salzburg
-Croatia,Martin Baturina,3,Dinamo Zagreb
-Italy,Gianluigi Donnarumma ( captain ),62,Paris Saint-Germain
-Italy,Giovanni Di Lorenzo,35,Napoli
-Italy,Federico Dimarco,19,Inter Milan
-Italy,Alessandro Buongiorno,4,Torino
-Italy,Riccardo Calafiori,2,Bologna
-Italy,Federico Gatti,3,Juventus
-Italy,Davide Frattesi,15,Inter Milan
-Italy,Jorginho,54,Arsenal
-Italy,Gianluca Scamacca,16,Atalanta
-Italy,Lorenzo Pellegrini,30,Roma
-Italy,Giacomo Raspadori,28,Napoli
-Italy,Guglielmo Vicario,2,Tottenham Hotspur
-Italy,Matteo Darmian,43,Inter Milan
-Italy,Federico Chiesa,47,Juventus
-Italy,Raoul Bellanova,2,Torino
-Italy,Bryan Cristante,40,Roma
-Italy,Gianluca Mancini,13,Roma
-Italy,Nicolò Barella,53,Inter Milan
-Italy,Mateo Retegui,8,Genoa
-Italy,Mattia Zaccagni,5,Lazio
-Italy,Nicolò Fagioli,3,Juventus
-Italy,Stephan El Shaarawy,31,Roma
-Italy,Alessandro Bastoni,23,Inter Milan
-Italy,Andrea Cambiaso,4,Juventus
-Italy,Michael Folorunsho,1,Hellas Verona
-Italy,Alex Meret,3,Napoli
-Albania,Etrit Berisha,81,Empoli
-Albania,Iván Balliu,13,Rayo Vallecano
-Albania,Mario Mitaj,14,Lokomotiv Moscow
-Albania,Elseid Hysaj,84,Lazio
-Albania,Arlind Ajeti,26,CFR Cluj
-Albania,Berat Djimsiti ( captain ),58,Atalanta
-Albania,Rey Manaj,34,Sivasspor
-Albania,Klaus Gjasula,28,Darmstadt 98
-Albania,Jasir Asani,13,Gwangju
-Albania,Nedim Bajrami,23,Sassuolo
-Albania,Armando Broja,21,Fulham
-Albania,Elhan Kastrati,2,Cittadella
-Albania,Enea Mihaj,19,Famalicão
-Albania,Qazim Laçi,27,Sparta Prague
-Albania,Taulant Seferi,19,Baniyas
-Albania,Medon Berisha,1,Lecce
-Albania,Ernest Muçi,10,Beşiktaş
-Albania,Ardian Ismajli,38,Empoli
-Albania,Mirlind Daku,5,Rubin Kazan
-Albania,Ylber Ramadani,35,Lecce
-Albania,Kristjan Asllani,20,Inter Milan
-Albania,Amir Abrashi,50,Grasshoppers
-Albania,Thomas Strakosha,28,Brentford
-Albania,Marash Kumbulla,19,Sassuolo
-Albania,Naser Aliji,14,Voluntari
-Albania,Arbër Hoxha,4,Dinamo Zagreb
-Slovenia,Jan Oblak ( captain ),65,Atlético Madrid
-Slovenia,Žan Karničnik,28,Celje
-Slovenia,Jure Balkovec,33,Alanyaspor
-Slovenia,Miha Blažič,32,Lech Poznań
-Slovenia,Jon Gorenc Stanković,24,Sturm Graz
-Slovenia,Jaka Bijol,49,Udinese
-Slovenia,Benjamin Verbič,58,Panathinaikos
-Slovenia,Sandi Lovrić,35,Udinese
-Slovenia,Andraž Šporar,53,Panathinaikos
-Slovenia,Timi Max Elšnik,15,Olimpija Ljubljana
-Slovenia,Benjamin Šeško,29,RB Leipzig
-Slovenia,Vid Belec,21,APOEL
-Slovenia,Erik Janža,10,Górnik Zabrze
-Slovenia,Jasmin Kurtić,91,Südtirol
-Slovenia,Tomi Horvat,7,Sturm Graz
-Slovenia,Igor Vekić,1,Vejle
-Slovenia,Jan Mlakar,17,Pisa
-Slovenia,Žan Vipotnik,9,Bordeaux
-Slovenia,Žan Celar,10,Lugano
-Slovenia,Petar Stojanović,53,Sampdoria
-Slovenia,Vanja Drkušić,7,Sochi
-Slovenia,Adam Gnezda Čerin,31,Panathinaikos
-Slovenia,David Brekalo,13,Orlando City
-Slovenia,Nino Žugelj,1,Bodø/Glimt
-Slovenia,Adrian Zeljković,1,Spartak Trnava
-Slovenia,Josip Iličić,81,Maribor
-Denmark,Kasper Schmeichel,101,Anderlecht
-Denmark,Joachim Andersen,32,Crystal Palace
-Denmark,Jannik Vestergaard,41,Leicester City
-Denmark,Simon Kjær ( captain ),132,Milan
-Denmark,Joakim Mæhle,45,VfL Wolfsburg
-Denmark,Andreas Christensen,69,Barcelona
-Denmark,Mathias Jensen,30,Brentford
-Denmark,Thomas Delaney,78,Anderlecht
-Denmark,Rasmus Højlund,14,Manchester United
-Denmark,Christian Eriksen,130,Manchester United
-Denmark,Andreas Skov Olsen,30,Club Brugge
-Denmark,Kasper Dolberg,47,Anderlecht
-Denmark,Mathias Jørgensen,37,Brentford
-Denmark,Mikkel Damsgaard,27,Brentford
-Denmark,Christian Nørgaard,25,Brentford
-Denmark,Mads Hermansen,0,Leicester City
-Denmark,Victor Kristiansen,8,Bologna
-Denmark,Alexander Bah,11,Benfica
-Denmark,Jonas Wind,27,VfL Wolfsburg
-Denmark,Yussuf Poulsen,79,RB Leipzig
-Denmark,Morten Hjulmand,7,Sporting CP
-Denmark,Frederik Rønnow,10,Union Berlin
-Denmark,Pierre-Emile Højbjerg,77,Tottenham Hotspur
-Denmark,Anders Dreyer,3,Anderlecht
-Denmark,Rasmus Kristensen,21,Roma
-Denmark,Jacob Bruun Larsen,6,Burnley
-Serbia,Predrag Rajković,32,Mallorca
-Serbia,Strahinja Pavlović,35,Red Bull Salzburg
-Serbia,Nemanja Stojić,2,TSC
-Serbia,Nikola Milenković,53,Fiorentina
-Serbia,Nemanja Maksimović,49,Getafe
-Serbia,Nemanja Gudelj,62,Sevilla
-Serbia,Dušan Vlahović,27,Juventus
-Serbia,Luka Jović,35,Milan
-Serbia,Aleksandar Mitrović,91,Al Hilal
-Serbia,Dušan Tadić ( captain ),108,Fenerbahçe
-Serbia,Filip Kostić,63,Juventus
-Serbia,Đorđe Petrović,3,Chelsea
-Serbia,Miloš Veljković,30,Werder Bremen
-Serbia,Andrija Živković,46,PAOK
-Serbia,Srđan Babić,8,Spartak Moscow
-Serbia,Srđan Mijailović,7,Red Star Belgrade
-Serbia,Ivan Ilić,16,Torino
-Serbia,Petar Ratkov,1,Red Bull Salzburg
-Serbia,Lazar Samardžić,9,Udinese
-Serbia,Sergej Milinković-Savić,51,Al Hilal
-Serbia,Mijat Gaćinović,27,AEK Athens
-Serbia,Saša Lukić,46,Fulham
-Serbia,Vanja Milinković-Savić,19,Torino
-Serbia,Uroš Spajić,21,Red Star Belgrade
-Serbia,Filip Mladenović,31,Panathinaikos
-Serbia,Veljko Birmančević,5,Sparta Prague
-England,Jordan Pickford,61,Everton
-England,Kyle Walker,83,Manchester City
-England,Luke Shaw,31,Manchester United
-England,Declan Rice,51,Arsenal
-England,John Stones,72,Manchester City
-England,Marc Guéhi,11,Crystal Palace
-England,Bukayo Saka,33,Arsenal
-England,Trent Alexander-Arnold,25,Liverpool
-England,Harry Kane ( captain ),91,Bayern Munich
-England,Jude Bellingham,29,Real Madrid
-England,Phil Foden,34,Manchester City
-England,Kieran Trippier,48,Newcastle United
-England,Aaron Ramsdale,5,Arsenal
-England,Ezri Konsa,4,Aston Villa
-England,Lewis Dunk,6,Brighton & Hove Albion
-England,Conor Gallagher,13,Chelsea
-England,Ivan Toney,3,Brentford
-England,Anthony Gordon,3,Newcastle United
-England,Ollie Watkins,12,Aston Villa
-England,Jarrod Bowen,8,West Ham United
-England,Eberechi Eze,4,Crystal Palace
-England,Joe Gomez,15,Liverpool
-England,Dean Henderson,1,Crystal Palace
-England,Cole Palmer,4,Chelsea
-England,Adam Wharton,1,Crystal Palace
-England,Kobbie Mainoo,3,Manchester United
-Poland,Wojciech Szczęsny,82,Juventus
-Poland,Bartosz Salamon,14,Lech Poznań
-Poland,Paweł Dawidowicz,11,Hellas Verona
-Poland,Sebastian Walukiewicz,4,Empoli
-Poland,Jan Bednarek,57,Southampton
-Poland,Jakub Piotrowski,6,Ludogorets Razgrad
-Poland,Karol Świderski,31,Hellas Verona
-Poland,Jakub Moder,23,Brighton & Hove Albion
-Poland,Robert Lewandowski ( captain ),150,Barcelona
-Poland,Piotr Zieliński,90,Napoli
-Poland,Kamil Grosicki,93,Pogoń Szczecin
-Poland,Łukasz Skorupski,10,Bologna
-Poland,Taras Romanczuk,3,Jagiellonia Białystok
-Poland,Jakub Kiwior,23,Arsenal
-Poland,Tymoteusz Puchacz,14,1. FC Kaiserslautern
-Poland,Adam Buksa,15,Antalyaspor
-Poland,Damian Szymański,18,AEK Athens
-Poland,Bartosz Bereszyński,55,Empoli
-Poland,Przemysław Frankowski,41,Lens
-Poland,Sebastian Szymański,34,Fenerbahçe
-Poland,Nicola Zalewski,18,Roma
-Poland,Marcin Bułka,1,Nice
-Poland,Krzysztof Piątek,29,İstanbul Başakşehir
-Poland,Bartosz Slisz,9,Atlanta United
-Poland,Michał Skóraś,8,Club Brugge
-Poland,Kacper Urbański,2,Bologna
-Netherlands,Bart Verbruggen,7,Brighton & Hove Albion
-Netherlands,Lutsharel Geertruida,9,Feyenoord
-Netherlands,Matthijs de Ligt,45,Bayern Munich
-Netherlands,Virgil van Dijk ( captain ),68,Liverpool
-Netherlands,Nathan Aké,45,Manchester City
-Netherlands,Stefan de Vrij,64,Inter Milan
-Netherlands,Xavi Simons,14,RB Leipzig
-Netherlands,Georginio Wijnaldum,93,Al-Ettifaq
-Netherlands,Wout Weghorst,33,TSG Hoffenheim
-Netherlands,Memphis Depay,92,Atlético Madrid
-Netherlands,Cody Gakpo,24,Liverpool
-Netherlands,Jeremie Frimpong,4,Bayer Leverkusen
-Netherlands,Justin Bijlow,8,Feyenoord
-Netherlands,Tijjani Reijnders,9,Milan
-Netherlands,Micky van de Ven,4,Tottenham Hotspur
-Netherlands,Joey Veerman,10,PSV Eindhoven
-Netherlands,Daley Blind,107,Girona
-Netherlands,Donyell Malen,32,Borussia Dortmund
-Netherlands,Brian Brobbey,2,Ajax
-Netherlands,Ian Maatsen,0,Borussia Dortmund
-Netherlands,Joshua Zirkzee,0,Bologna
-Netherlands,Denzel Dumfries,53,Inter Milan
-Netherlands,Mark Flekken,7,Brentford
-Netherlands,Jerdy Schouten,5,PSV Eindhoven
-Netherlands,Steven Bergwijn,33,Ajax
-Netherlands,Ryan Gravenberch,12,Liverpool
-Austria,Heinz Lindner,37,Union Saint-Gilloise
-Austria,Maximilian Wöber,25,Borussia Mönchengladbach
-Austria,Gernot Trauner,11,Feyenoord
-Austria,Kevin Danso,20,Lens
-Austria,Stefan Posch,32,Bologna
-Austria,Nicolas Seiwald,24,RB Leipzig
-Austria,Marko Arnautović ( captain ),112,Inter Milan
-Austria,Alexander Prass,5,Sturm Graz
-Austria,Marcel Sabitzer,78,Borussia Dortmund
-Austria,Florian Grillitsch,43,TSG Hoffenheim
-Austria,Michael Gregoritsch,55,SC Freiburg
-Austria,Niklas Hedl,1,Rapid Wien
-Austria,Patrick Pentz,6,Brøndby
-Austria,Leopold Querfeld,2,Rapid Wien
-Austria,Philipp Lienhart,21,SC Freiburg
-Austria,Phillipp Mwene,12,Mainz 05
-Austria,Florian Kainz,28,1. FC Köln
-Austria,Romano Schmid,11,Werder Bremen
-Austria,Christoph Baumgartner,38,RB Leipzig
-Austria,Konrad Laimer,36,Bayern Munich
-Austria,Flavius Daniliuc,3,Red Bull Salzburg
-Austria,Matthias Seidl,4,Rapid Wien
-Austria,Patrick Wimmer,12,VfL Wolfsburg
-Austria,Andreas Weimann,24,West Bromwich Albion
-Austria,Maximilian Entrup,3,TSV Hartberg
-Austria,Marco Grüll,5,Rapid Wien
-France,Brice Samba,3,Lens
-France,Benjamin Pavard,54,Inter Milan
-France,Ferland Mendy,10,Real Madrid
-France,Dayot Upamecano,20,Bayern Munich
-France,Jules Koundé,28,Barcelona
-France,Eduardo Camavinga,17,Real Madrid
-France,Antoine Griezmann,129,Atlético Madrid
-France,Aurélien Tchouaméni,31,Real Madrid
-France,Olivier Giroud,133,Milan
-France,Kylian Mbappé ( captain ),79,Paris Saint-Germain
-France,Ousmane Dembélé,44,Paris Saint-Germain
-France,Randal Kolo Muani,17,Paris Saint-Germain
-France,N'Golo Kanté,55,Al-Ittihad
-France,Adrien Rabiot,43,Juventus
-France,Marcus Thuram,20,Inter Milan
-France,Mike Maignan,16,Milan
-France,William Saliba,15,Arsenal
-France,Warren Zaïre-Emery,3,Paris Saint-Germain
-France,Youssouf Fofana,18,[ a ]
-France,Kingsley Coman,56,Bayern Munich
-France,Jonathan Clauss,13,Marseille
-France,Théo Hernandez,27,Milan
-France,Alphonse Areola,5,West Ham United
-France,Ibrahima Konaté,16,Liverpool
-France,Bradley Barcola,2,Paris Saint-Germain
-Belgium,Koen Casteels,10,VfL Wolfsburg
-Belgium,Zeno Debast,8,Anderlecht
-Belgium,Arthur Theate,15,Rennes
-Belgium,Wout Faes,15,Leicester City
-Belgium,Jan Vertonghen,154,Anderlecht
-Belgium,Axel Witsel,132,Atlético Madrid
-Belgium,Kevin De Bruyne ( captain ),101,Manchester City
-Belgium,Youri Tielemans,67,Aston Villa
-Belgium,Leandro Trossard,34,Arsenal
-Belgium,Romelu Lukaku,115,Roma
-Belgium,Yannick Carrasco,74,Al-Shabab
-Belgium,Thomas Kaminski,1,Luton Town
-Belgium,Matz Sels,8,Nottingham Forest
-Belgium,Dodi Lukebakio,15,Sevilla
-Belgium,Thomas Meunier,66,Trabzonspor
-Belgium,Aster Vranckx,7,VfL Wolfsburg
-Belgium,Charles De Ketelaere,15,Atalanta
-Belgium,Orel Mangala,15,Lyon
-Belgium,Johan Bakayoko,12,PSV Eindhoven
-Belgium,Loïs Openda,17,RB Leipzig
-Belgium,Timothy Castagne,43,Fulham
-Belgium,Jérémy Doku,22,Manchester City
-Belgium,Arthur Vermeeren,4,Atlético Madrid
-Belgium,Amadou Onana,13,Everton
-Belgium,Maxim De Cuyper,2,Club Brugge
-Slovakia,Martin Dúbravka,43,Newcastle United
-Slovakia,Peter Pekarík,127,Hertha BSC
-Slovakia,Denis Vavro,20,Copenhagen
-Slovakia,Adam Obert,5,Cagliari
-Slovakia,Tomáš Rigo,1,Baník Ostrava
-Slovakia,Norbert Gyömbér,39,Salernitana
-Slovakia,Tomáš Suslov,28,Hellas Verona
-Slovakia,Ondrej Duda,72,Hellas Verona
-Slovakia,Róbert Boženík,40,Boavista
-Slovakia,Ľubomír Tupta,6,Slovan Liberec
-Slovakia,László Bénes,22,Hamburger SV
-Slovakia,Marek Rodák,22,Fulham
-Slovakia,Patrik Hrošovský,55,Genk
-Slovakia,Milan Škriniar ( captain ),68,Paris Saint-Germain
-Slovakia,Vernon De Marco,10,Hatta
-Slovakia,Dávid Hancko,38,Feyenoord
-Slovakia,Lukáš Haraslín,36,Sparta Prague
-Slovakia,David Strelec,18,Slovan Bratislava
-Slovakia,Juraj Kucka,107,Slovan Bratislava
-Slovakia,Dávid Ďuriš,12,Ascoli
-Slovakia,Matúš Bero,30,VfL Bochum
-Slovakia,Stanislav Lobotka,55,Napoli
-Slovakia,Henrich Ravas,0,New England Revolution
-Slovakia,Leo Sauer,2,Feyenoord
-Slovakia,Sebastian Kóša,1,Spartak Trnava
-Slovakia,Ivan Schranz,22,Slavia Prague
-Romania,Florin Niță,21,Gaziantep
-Romania,Andrei Rațiu,17,Rayo Vallecano
-Romania,Radu Drăgușin,17,Tottenham Hotspur
-Romania,Adrian Rus,20,Pafos
-Romania,Ionuț Nedelcearu,27,Palermo
-Romania,Marius Marin,18,Pisa
-Romania,Denis Alibec,37,Muaither
-Romania,Alexandru Cicâldău,37,Konyaspor
-Romania,George Pușcaș,42,Bari
-Romania,Ianis Hagi,35,Alavés
-Romania,Nicușor Bancu,36,Universitatea Craiova
-Romania,Horațiu Moldovan,11,Atlético Madrid
-Romania,Valentin Mihăilă,21,Parma
-Romania,Darius Olaru,18,FCSB
-Romania,Andrei Burcă,27,Al-Okhdood
-Romania,Ștefan Târnovanu,1,FCSB
-Romania,Florinel Coman,15,FCSB
-Romania,Răzvan Marin,55,Empoli
-Romania,Denis Drăguș,11,Gaziantep
-Romania,Dennis Man,24,Parma
-Romania,Nicolae Stanciu ( captain ),70,Damac
-Romania,Vasile Mogoș,7,CFR Cluj
-Romania,Deian Sorescu,17,Gaziantep
-Romania,Bogdan Racovițan,2,Raków Częstochowa
-Romania,Daniel Bîrligea,2,CFR Cluj
-Romania,Adrian Șut,2,FCSB
-Ukraine,Heorhiy Bushchan,18,Dynamo Kyiv
-Ukraine,Yukhym Konoplya,14,Shakhtar Donetsk
-Ukraine,Oleksandr Svatok,6,Dnipro-1
-Ukraine,Maksym Talovyerov,3,LASK
-Ukraine,Serhiy Sydorchuk,61,Westerlo
-Ukraine,Taras Stepanenko,83,Shakhtar Donetsk
-Ukraine,Andriy Yarmolenko ( captain ),119,Dynamo Kyiv
-Ukraine,Ruslan Malinovskyi,61,Genoa
-Ukraine,Roman Yaremchuk,50,Valencia
-Ukraine,Mykhaylo Mudryk,21,Chelsea
-Ukraine,Artem Dovbyk,28,Girona
-Ukraine,Anatoliy Trubin,11,Benfica
-Ukraine,Illya Zabarnyi,36,Bournemouth
-Ukraine,Heorhiy Sudakov,17,Shakhtar Donetsk
-Ukraine,Viktor Tsyhankov,54,Girona
-Ukraine,Vitaliy Mykolenko,41,Everton
-Ukraine,Oleksandr Zinchenko,63,Arsenal
-Ukraine,Volodymyr Brazhko,4,Dynamo Kyiv
-Ukraine,Mykola Shaparenko,31,Dynamo Kyiv
-Ukraine,Oleksandr Zubkov,33,Shakhtar Donetsk
-Ukraine,Valeriy Bondar,4,Shakhtar Donetsk
-Ukraine,Mykola Matviyenko,65,Shakhtar Donetsk
-Ukraine,Andriy Lunin,12,Real Madrid
-Ukraine,Oleksandr Tymchyk,17,Dynamo Kyiv
-Ukraine,Vladyslav Vanat,6,Dynamo Kyiv
-Ukraine,Bohdan Mykhaylichenko,8,Polissya Zhytomyr
-Turkey,Mert Günok,29,Beşiktaş
-Turkey,Zeki Çelik,45,Roma
-Turkey,Merih Demiral,44,Al-Ahli
-Turkey,Samet Akaydin,6,Panathinaikos
-Turkey,Okay Yokuşlu,40,West Bromwich Albion
-Turkey,Orkun Kökçü,28,Benfica
-Turkey,Kerem Aktürkoğlu,29,Galatasaray
-Turkey,Arda Güler,7,Real Madrid
-Turkey,Cenk Tosun,51,Beşiktaş
-Turkey,Hakan Çalhanoğlu ( captain ),86,Inter Milan
-Turkey,Yusuf Yazıcı,43,Lille
-Turkey,Altay Bayındır,9,Manchester United
-Turkey,Ahmetcan Kaplan,0,Ajax
-Turkey,Abdülkerim Bardakcı,8,Galatasaray
-Turkey,Salih Özcan,18,Borussia Dortmund
-Turkey,İsmail Yüksek,14,Fenerbahçe
-Turkey,İrfan Kahveci,32,Fenerbahçe
-Turkey,Mert Müldür,24,Fenerbahçe
-Turkey,Kenan Yıldız,7,Juventus
-Turkey,Ferdi Kadıoğlu,15,Fenerbahçe
-Turkey,Barış Alper Yılmaz,15,Galatasaray
-Turkey,Kaan Ayhan,58,Galatasaray
-Turkey,Uğurcan Çakır,27,Trabzonspor
-Turkey,Semih Kılıçsoy,2,Beşiktaş
-Turkey,Yunus Akgün,9,Leicester City
-Turkey,Bertuğ Yıldırım,3,Rennes
-Georgia,Giorgi Loria,78,Dinamo Tbilisi
-Georgia,Otar Kakabadze,61,Cracovia
-Georgia,Lasha Dvali,32,APOEL
-Georgia,Guram Kashia ( captain ),113,Slovan Bratislava
-Georgia,Solomon Kvirkvelia,58,Al-Okhdood
-Georgia,Giorgi Kochorashvili,8,Levante
-Georgia,Khvicha Kvaratskhelia,30,Napoli
-Georgia,Budu Zivzivadze,26,Karlsruher SC
-Georgia,Zuriko Davitashvili,35,Bordeaux
-Georgia,Giorgi Chakvetadze,25,Watford
-Georgia,Giorgi Kvilitaia,37,APOEL
-Georgia,Luka Gugeshashvili,1,Qarabağ
-Georgia,Giorgi Gocholeishvili,8,Shakhtar Donetsk
-Georgia,Luka Lochoshvili,10,Cremonese
-Georgia,Giorgi Gvelesiani,1,Persepolis
-Georgia,Nika Kvekveskiri,60,Lech Poznań
-Georgia,Otar Kiteishvili,37,Sturm Graz
-Georgia,Sandro Altunashvili,5,Wolfsberger AC
-Georgia,Levan Shengelia,17,Panetolikos
-Georgia,Anzor Mekvabishvili,14,Universitatea Craiova
-Georgia,Giorgi Tsitaishvili,17,Dinamo Batumi
-Georgia,Georges Mikautadze,25,Metz
-Georgia,Saba Lobzhanidze,36,Atlanta United
-Georgia,Jemal Tabidze,15,Panetolikos
-Georgia,Giorgi Mamardashvili,17,Valencia
-Georgia,Gabriel Sigua,2,Basel
-Portugal,Rui Patrício,108,Roma
-Portugal,Nélson Semedo,30,Wolverhampton Wanderers
-Portugal,Pepe,137,Porto
-Portugal,Rúben Dias,56,Manchester City
-Portugal,Diogo Dalot,20,Manchester United
-Portugal,João Palhinha,27,Fulham
-Portugal,Cristiano Ronaldo ( captain ),207,Al Nassr
-Portugal,Bruno Fernandes,67,Manchester United
-Portugal,Gonçalo Ramos,13,Paris Saint-Germain
-Portugal,Bernardo Silva,89,Manchester City
-Portugal,João Félix,39,Barcelona
-Portugal,José Sá,2,Wolverhampton Wanderers
-Portugal,Danilo Pereira,73,Paris Saint-Germain
-Portugal,Gonçalo Inácio,9,Sporting CP
-Portugal,João Neves,7,Benfica
-Portugal,Matheus Nunes,14,Manchester City
-Portugal,Rafael Leão,27,Milan
-Portugal,Rúben Neves,47,Al Hilal
-Portugal,Nuno Mendes,23,Paris Saint-Germain
-Portugal,João Cancelo,54,Barcelona
-Portugal,Diogo Jota,39,Liverpool
-Portugal,Diogo Costa,22,Porto
-Portugal,Vitinha,17,Paris Saint-Germain
-Portugal,António Silva,11,Benfica
-Portugal,Pedro Neto,7,Wolverhampton Wanderers
-Portugal,Francisco Conceição,2,Porto
-Czech Republic,Jindřich Staněk,10,Slavia Prague
-Czech Republic,David Zima,21,Slavia Prague
-Czech Republic,Tomáš Holeš,28,Slavia Prague
-Czech Republic,Robin Hranáč,3,Viktoria Plzeň
-Czech Republic,Vladimír Coufal,42,West Ham United
-Czech Republic,Martin Vitík,2,Sparta Prague
-Czech Republic,Antonín Barák,41,Fiorentina
-Czech Republic,Petr Ševčík,15,Slavia Prague
-Czech Republic,Adam Hložek,32,Bayer Leverkusen
-Czech Republic,Patrik Schick,38,Bayer Leverkusen
-Czech Republic,Jan Kuchta,21,Sparta Prague
-Czech Republic,David Douděra,9,Slavia Prague
-Czech Republic,Mojmír Chytil,14,Slavia Prague
-Czech Republic,Lukáš Provod,19,Slavia Prague
-Czech Republic,David Jurásek,9,TSG Hoffenheim
-Czech Republic,Matěj Kovář,2,Bayer Leverkusen
-Czech Republic,Václav Černý,16,VfL Wolfsburg
-Czech Republic,Ladislav Krejčí,10,Sparta Prague
-Czech Republic,Tomáš Chorý,5,Viktoria Plzeň
-Czech Republic,Ondřej Lingr,15,Feyenoord
-Czech Republic,Lukáš Červ,1,Viktoria Plzeň
-Czech Republic,Tomáš Souček ( captain ),69,West Ham United
-Czech Republic,Vítězslav Jaroš,1,Sturm Graz
-Czech Republic,Tomáš Vlček,2,Slavia Prague
-Czech Republic,Pavel Šulc,3,Viktoria Plzeň
-Czech Republic,Matěj Jurásek,2,Slavia Prague
+team,player,caps,club,birth
+Germany,Manuel Neuer,119,Bayern Munich,1986-03-27
+Germany,Antonio Rüdiger,69,Real Madrid,1993-03-03
+Germany,David Raum,21,RB Leipzig,1998-04-22
+Germany,Jonathan Tah,25,Bayer Leverkusen,1996-02-11
+Germany,Pascal Groß,7,Brighton & Hove Albion,1991-06-15
+Germany,Joshua Kimmich,86,Bayern Munich,1995-02-08
+Germany,Kai Havertz,46,Arsenal,1999-06-11
+Germany,Toni Kroos,109,Real Madrid,1990-01-04
+Germany,Niclas Füllkrug,16,Borussia Dortmund,1993-02-09
+Germany,Jamal Musiala,29,Bayern Munich,2003-02-26
+Germany,Chris Führich,4,VfB Stuttgart,1998-01-09
+Germany,Oliver Baumann,0,TSG Hoffenheim,1990-06-02
+Germany,Thomas Müller,129,Bayern Munich,1989-09-13
+Germany,Maximilian Beier,1,TSG Hoffenheim,2002-10-17
+Germany,Nico Schlotterbeck,12,Borussia Dortmund,1999-12-01
+Germany,Waldemar Anton,2,VfB Stuttgart,1996-07-20
+Germany,Florian Wirtz,18,Bayer Leverkusen,2003-05-03
+Germany,Maximilian Mittelstädt,4,VfB Stuttgart,1997-03-18
+Germany,Leroy Sané,60,Bayern Munich,1996-01-11
+Germany,Benjamin Henrichs,15,RB Leipzig,1997-02-23
+Germany,İlkay Gündoğan,77,Barcelona,1990-10-24
+Germany,Marc-André ter Stegen,40,Barcelona,1992-04-30
+Germany,Robert Andrich,5,Bayer Leverkusen,1994-09-22
+Germany,Robin Koch,9,Eintracht Frankfurt,1996-07-17
+Germany,Emre Can,43,Borussia Dortmund,1994-01-12
+Germany,Deniz Undav,2,VfB Stuttgart,1996-07-19
+Scotland,Angus Gunn,10,Norwich City,1996-01-22
+Scotland,Anthony Ralston,9,Celtic,1998-11-16
+Scotland,Andy Robertson,71,Liverpool,1994-03-11
+Scotland,Scott McTominay,49,Manchester United,1996-12-08
+Scotland,Grant Hanley,50,Norwich City,1991-11-20
+Scotland,Kieran Tierney,45,Real Sociedad,1997-06-05
+Scotland,John McGinn,66,Aston Villa,1994-10-18
+Scotland,Callum McGregor,60,Celtic,1993-06-14
+Scotland,Lawrence Shankland,11,Heart of Midlothian,1995-08-10
+Scotland,Ché Adams,30,Southampton,1996-07-13
+Scotland,Ryan Christie,49,Bournemouth,1995-02-22
+Scotland,Liam Kelly,1,Motherwell,1996-01-23
+Scotland,Jack Hendry,31,Al-Ettifaq,1995-05-07
+Scotland,Billy Gilmour,27,Brighton & Hove Albion,2001-06-11
+Scotland,Ryan Porteous,11,Watford,1999-03-25
+Scotland,Liam Cooper,19,Leeds United,1991-08-30
+Scotland,Stuart Armstrong,50,Southampton,1992-03-30
+Scotland,Lewis Morgan,3,New York Red Bulls,1996-09-30
+Scotland,Tommy Conway,1,Bristol City,2002-08-06
+Scotland,Ryan Jack,20,Rangers,1992-02-27
+Scotland,Zander Clark,4,Heart of Midlothian,1992-06-26
+Scotland,Ross McCrorie,1,Bristol City,1998-03-18
+Scotland,Kenny McLean,39,Norwich City,1992-01-08
+Scotland,Greg Taylor,14,Celtic,1997-11-05
+Scotland,James Forrest,39,Celtic,1991-07-07
+Scotland,Scott McKenna,35,Copenhagen,1996-11-12
+Hungary,Péter Gulácsi,54,RB Leipzig,1990-05-06
+Hungary,Ádám Lang,69,Omonia,1993-01-17
+Hungary,Botond Balogh,4,Parma,2002-06-06
+Hungary,Attila Szalai,44,SC Freiburg,1998-01-20
+Hungary,Attila Fiola,57,Fehérvár,1990-02-17
+Hungary,Willi Orbán,45,RB Leipzig,1992-11-03
+Hungary,Loïc Négo,36,Le Havre,1991-01-15
+Hungary,Ádám Nagy,81,Spezia,1995-06-17
+Hungary,Martin Ádám,22,Ulsan HD,1994-11-06
+Hungary,Dominik Szoboszlai,42,Liverpool,2000-10-25
+Hungary,Milos Kerkez,16,Bournemouth,2003-11-07
+Hungary,Dénes Dibusz,36,Ferencváros,1990-11-16
+Hungary,András Schäfer,25,Union Berlin,1999-04-13
+Hungary,Bendegúz Bolla,17,Servette,1999-11-22
+Hungary,László Kleinheisler,51,Hajduk Split,1994-04-08
+Hungary,Dániel Gazdag,25,Philadelphia Union,1996-03-02
+Hungary,Callum Styles,22,Sunderland,2000-03-28
+Hungary,Zsolt Nagy,20,Puskás Akadémia,1993-05-25
+Hungary,Barnabás Varga,11,Ferencváros,1994-10-25
+Hungary,Roland Sallai,49,SC Freiburg,1997-05-22
+Hungary,Endre Botka,26,Ferencváros,1994-08-25
+Hungary,Péter Szappanos,1,Paks,1990-11-14
+Hungary,Kevin Csoboth,8,Újpest,2000-06-20
+Hungary,Márton Dárdai,3,Hertha BSC,2002-02-12
+Hungary,Krisztofer Horváth,2,Kecskemét,2002-01-08
+Hungary,Mihály Kata,3,MTK Budapest,2002-04-13
+Switzerland,Yann Sommer,89,Inter Milan,1988-12-17
+Switzerland,Leonidas Stergiou,3,VfB Stuttgart,2002-03-03
+Switzerland,Silvan Widmer,43,Mainz 05,1993-03-05
+Switzerland,Nico Elvedi,53,Borussia Mönchengladbach,1996-09-30
+Switzerland,Manuel Akanji,60,Manchester City,1995-07-19
+Switzerland,Denis Zakaria,54,[ a ],1996-11-20
+Switzerland,Breel Embolo,63,[ a ],1997-02-14
+Switzerland,Remo Freuler,67,Bologna,1992-04-15
+Switzerland,Noah Okafor,22,Milan,2000-05-24
+Switzerland,Granit Xhaka,125,Bayer Leverkusen,1992-09-27
+Switzerland,Renato Steffen,39,Lugano,1991-11-03
+Switzerland,Yvon Mvogo,9,Lorient,1994-06-06
+Switzerland,Ricardo Rodriguez,115,Torino,1992-08-25
+Switzerland,Steven Zuber,54,AEK Athens,1991-08-17
+Switzerland,Cédric Zesiger,4,VfL Wolfsburg,1998-06-24
+Switzerland,Vincent Sierro,3,Toulouse,1995-10-08
+Switzerland,Ruben Vargas,43,FC Augsburg,1998-08-05
+Switzerland,Kwadwo Duah,1,Ludogorets Razgrad,1997-02-24
+Switzerland,Dan Ndoye,11,Bologna,2000-10-25
+Switzerland,Michel Aebischer,20,Bologna,1997-01-06
+Switzerland,Gregor Kobel,5,Borussia Dortmund,1997-12-06
+Switzerland,Fabian Schär,81,Newcastle United,1991-12-20
+Switzerland,Xherdan Shaqiri,123,Chicago Fire,1991-10-10
+Switzerland,Ardon Jashari,2,Luzern,2002-07-30
+Switzerland,Zeki Amdouni,15,Burnley,2000-12-04
+Switzerland,Fabian Rieder,5,Rennes,2002-02-16
+Spain,David Raya,5,Arsenal,1995-09-15
+Spain,Dani Carvajal,44,Real Madrid,1992-01-11
+Spain,Robin Le Normand,11,Real Sociedad,1996-11-11
+Spain,Nacho,25,Real Madrid,1990-01-18
+Spain,Daniel Vivian,2,Athletic Bilbao,1999-07-05
+Spain,Mikel Merino,21,Real Sociedad,1996-06-22
+Spain,Álvaro Morata,73,Atlético Madrid,1992-10-23
+Spain,Fabián Ruiz,23,Paris Saint-Germain,1996-04-03
+Spain,Joselu,11,Real Madrid,1990-03-27
+Spain,Dani Olmo,33,RB Leipzig,1998-05-07
+Spain,Ferran Torres,41,Barcelona,2000-02-29
+Spain,Álex Grimaldo,4,Bayer Leverkusen,1995-09-20
+Spain,Álex Remiro,1,Real Sociedad,1995-03-24
+Spain,Aymeric Laporte,29,Al Nassr,1994-05-27
+Spain,Álex Baena,3,Villarreal,2001-07-20
+Spain,Rodri,50,Manchester City,1996-06-22
+Spain,Nico Williams,14,Athletic Bilbao,2002-07-12
+Spain,Martín Zubimendi,6,Real Sociedad,1999-02-02
+Spain,Lamine Yamal,7,Barcelona,2007-07-13
+Spain,Pedri,20,Barcelona,2002-11-25
+Spain,Mikel Oyarzabal,30,Real Sociedad,1997-04-21
+Spain,Jesús Navas,53,Sevilla,1985-11-21
+Spain,Unai Simón,40,Athletic Bilbao,1997-06-11
+Spain,Marc Cucurella,4,Chelsea,1998-07-22
+Spain,Fermín López,1,Barcelona,2003-05-11
+Spain,Ayoze Pérez,1,Real Betis,1993-07-29
+Croatia,Dominik Livaković,54,Fenerbahçe,1995-01-09
+Croatia,Josip Stanišić,18,Bayer Leverkusen,2000-04-02
+Croatia,Marin Pongračić,8,Lecce,1997-09-11
+Croatia,Joško Gvardiol,30,Manchester City,2002-01-23
+Croatia,Martin Erlić,9,Sassuolo,1998-01-24
+Croatia,Josip Šutalo,14,Ajax,2000-02-28
+Croatia,Lovro Majer,31,VfL Wolfsburg,1998-01-17
+Croatia,Mateo Kovačić,101,Manchester City,1994-05-06
+Croatia,Andrej Kramarić,93,TSG Hoffenheim,1991-06-19
+Croatia,Luka Modrić,175,Real Madrid,1985-09-09
+Croatia,Marcelo Brozović,96,Al Nassr,1992-11-16
+Croatia,Nediljko Labrović,1,Rijeka,1999-10-10
+Croatia,Nikola Vlašić,56,Torino,1997-10-04
+Croatia,Ivan Perišić,131,Hajduk Split,1989-02-02
+Croatia,Mario Pašalić,63,Atalanta,1995-02-09
+Croatia,Ante Budimir,21,Osasuna,1991-07-22
+Croatia,Bruno Petković,38,Dinamo Zagreb,1994-09-16
+Croatia,Luka Ivanušec,21,Feyenoord,1998-11-26
+Croatia,Borna Sosa,20,Ajax,1998-01-21
+Croatia,Marko Pjaca,26,Rijeka,1995-05-06
+Croatia,Domagoj Vida,105,AEK Athens,1989-04-29
+Croatia,Josip Juranović,37,Union Berlin,1995-08-16
+Croatia,Ivica Ivušić,6,Pafos,1995-02-01
+Croatia,Marco Pašalić,5,Rijeka,2000-09-14
+Croatia,Luka Sučić,7,Red Bull Salzburg,2002-09-08
+Croatia,Martin Baturina,3,Dinamo Zagreb,2003-02-16
+Italy,Gianluigi Donnarumma,62,Paris Saint-Germain,1999-02-25
+Italy,Giovanni Di Lorenzo,35,Napoli,1993-08-04
+Italy,Federico Dimarco,19,Inter Milan,1997-11-10
+Italy,Alessandro Buongiorno,4,Torino,1999-06-06
+Italy,Riccardo Calafiori,2,Bologna,2002-05-19
+Italy,Federico Gatti,3,Juventus,1998-06-24
+Italy,Davide Frattesi,15,Inter Milan,1999-09-22
+Italy,Jorginho,54,Arsenal,1991-12-20
+Italy,Gianluca Scamacca,16,Atalanta,1999-01-01
+Italy,Lorenzo Pellegrini,30,Roma,1996-06-19
+Italy,Giacomo Raspadori,28,Napoli,2000-02-18
+Italy,Guglielmo Vicario,2,Tottenham Hotspur,1996-10-07
+Italy,Matteo Darmian,43,Inter Milan,1989-12-02
+Italy,Federico Chiesa,47,Juventus,1997-10-25
+Italy,Raoul Bellanova,2,Torino,2000-05-17
+Italy,Bryan Cristante,40,Roma,1995-03-03
+Italy,Gianluca Mancini,13,Roma,1996-04-17
+Italy,Nicolò Barella,53,Inter Milan,1997-02-07
+Italy,Mateo Retegui,8,Genoa,1999-04-29
+Italy,Mattia Zaccagni,5,Lazio,1995-06-16
+Italy,Nicolò Fagioli,3,Juventus,2001-02-12
+Italy,Stephan El Shaarawy,31,Roma,1992-10-27
+Italy,Alessandro Bastoni,23,Inter Milan,1999-04-13
+Italy,Andrea Cambiaso,4,Juventus,2000-02-20
+Italy,Michael Folorunsho,1,Hellas Verona,1998-02-07
+Italy,Alex Meret,3,Napoli,1997-03-22
+Albania,Etrit Berisha,81,Empoli,1989-03-10
+Albania,Iván Balliu,13,Rayo Vallecano,1992-01-01
+Albania,Mario Mitaj,14,Lokomotiv Moscow,2003-08-06
+Albania,Elseid Hysaj,84,Lazio,1994-02-02
+Albania,Arlind Ajeti,26,CFR Cluj,1993-09-25
+Albania,Berat Djimsiti,58,Atalanta,1993-02-19
+Albania,Rey Manaj,34,Sivasspor,1997-02-24
+Albania,Klaus Gjasula,28,Darmstadt 98,1989-12-14
+Albania,Jasir Asani,13,Gwangju,1995-05-19
+Albania,Nedim Bajrami,23,Sassuolo,1999-02-28
+Albania,Armando Broja,21,Fulham,2001-09-10
+Albania,Elhan Kastrati,2,Cittadella,1997-02-02
+Albania,Enea Mihaj,19,Famalicão,1998-07-05
+Albania,Qazim Laçi,27,Sparta Prague,1996-01-19
+Albania,Taulant Seferi,19,Baniyas,1996-11-15
+Albania,Medon Berisha,1,Lecce,2003-10-21
+Albania,Ernest Muçi,10,Beşiktaş,2001-03-19
+Albania,Ardian Ismajli,38,Empoli,1996-09-30
+Albania,Mirlind Daku,5,Rubin Kazan,1998-01-01
+Albania,Ylber Ramadani,35,Lecce,1996-04-12
+Albania,Kristjan Asllani,20,Inter Milan,2002-03-09
+Albania,Amir Abrashi,50,Grasshoppers,1990-03-27
+Albania,Thomas Strakosha,28,Brentford,1995-03-19
+Albania,Marash Kumbulla,19,Sassuolo,2000-02-08
+Albania,Naser Aliji,14,Voluntari,1993-12-27
+Albania,Arbër Hoxha,4,Dinamo Zagreb,1998-10-06
+Slovenia,Jan Oblak,65,Atlético Madrid,1993-01-07
+Slovenia,Žan Karničnik,28,Celje,1994-09-18
+Slovenia,Jure Balkovec,33,Alanyaspor,1994-09-09
+Slovenia,Miha Blažič,32,Lech Poznań,1993-05-08
+Slovenia,Jon Gorenc Stanković,24,Sturm Graz,1996-01-14
+Slovenia,Jaka Bijol,49,Udinese,1999-02-05
+Slovenia,Benjamin Verbič,58,Panathinaikos,1993-11-27
+Slovenia,Sandi Lovrić,35,Udinese,1998-03-28
+Slovenia,Andraž Šporar,53,Panathinaikos,1994-02-27
+Slovenia,Timi Max Elšnik,15,Olimpija Ljubljana,1998-04-29
+Slovenia,Benjamin Šeško,29,RB Leipzig,2003-05-31
+Slovenia,Vid Belec,21,APOEL,1990-06-06
+Slovenia,Erik Janža,10,Górnik Zabrze,1993-06-21
+Slovenia,Jasmin Kurtić,91,Südtirol,1989-01-10
+Slovenia,Tomi Horvat,7,Sturm Graz,1999-03-24
+Slovenia,Igor Vekić,1,Vejle,1998-05-06
+Slovenia,Jan Mlakar,17,Pisa,1998-10-23
+Slovenia,Žan Vipotnik,9,Bordeaux,2002-03-18
+Slovenia,Žan Celar,10,Lugano,1999-03-14
+Slovenia,Petar Stojanović,53,Sampdoria,1995-10-07
+Slovenia,Vanja Drkušić,7,Sochi,1999-10-30
+Slovenia,Adam Gnezda Čerin,31,Panathinaikos,1999-07-16
+Slovenia,David Brekalo,13,Orlando City,1998-12-03
+Slovenia,Nino Žugelj,1,Bodø/Glimt,2000-05-23
+Slovenia,Adrian Zeljković,1,Spartak Trnava,2002-08-19
+Slovenia,Josip Iličić,81,Maribor,1988-01-29
+Denmark,Kasper Schmeichel,101,Anderlecht,1986-11-05
+Denmark,Joachim Andersen,32,Crystal Palace,1996-05-31
+Denmark,Jannik Vestergaard,41,Leicester City,1992-08-03
+Denmark,Simon Kjær,132,Milan,1989-03-26
+Denmark,Joakim Mæhle,45,VfL Wolfsburg,1997-05-20
+Denmark,Andreas Christensen,69,Barcelona,1996-04-10
+Denmark,Mathias Jensen,30,Brentford,1996-01-01
+Denmark,Thomas Delaney,78,Anderlecht,1991-09-03
+Denmark,Rasmus Højlund,14,Manchester United,2003-02-04
+Denmark,Christian Eriksen,130,Manchester United,1992-02-14
+Denmark,Andreas Skov Olsen,30,Club Brugge,1999-12-29
+Denmark,Kasper Dolberg,47,Anderlecht,1997-10-06
+Denmark,Mathias Jørgensen,37,Brentford,1990-04-23
+Denmark,Mikkel Damsgaard,27,Brentford,2000-07-03
+Denmark,Christian Nørgaard,25,Brentford,1994-03-10
+Denmark,Mads Hermansen,0,Leicester City,2000-07-11
+Denmark,Victor Kristiansen,8,Bologna,2002-12-16
+Denmark,Alexander Bah,11,Benfica,1997-12-09
+Denmark,Jonas Wind,27,VfL Wolfsburg,1999-02-07
+Denmark,Yussuf Poulsen,79,RB Leipzig,1994-06-15
+Denmark,Morten Hjulmand,7,Sporting CP,1999-06-25
+Denmark,Frederik Rønnow,10,Union Berlin,1992-08-04
+Denmark,Pierre-Emile Højbjerg,77,Tottenham Hotspur,1995-08-05
+Denmark,Anders Dreyer,3,Anderlecht,1998-05-02
+Denmark,Rasmus Kristensen,21,Roma,1997-07-11
+Denmark,Jacob Bruun Larsen,6,Burnley,1998-09-19
+Serbia,Predrag Rajković,32,Mallorca,1995-10-31
+Serbia,Strahinja Pavlović,35,Red Bull Salzburg,2001-05-24
+Serbia,Nemanja Stojić,2,TSC,1998-01-15
+Serbia,Nikola Milenković,53,Fiorentina,1997-10-12
+Serbia,Nemanja Maksimović,49,Getafe,1995-01-26
+Serbia,Nemanja Gudelj,62,Sevilla,1991-11-16
+Serbia,Dušan Vlahović,27,Juventus,2000-01-28
+Serbia,Luka Jović,35,Milan,1997-12-23
+Serbia,Aleksandar Mitrović,91,Al Hilal,1994-09-16
+Serbia,Dušan Tadić,108,Fenerbahçe,1988-11-20
+Serbia,Filip Kostić,63,Juventus,1992-11-01
+Serbia,Đorđe Petrović,3,Chelsea,1999-10-08
+Serbia,Miloš Veljković,30,Werder Bremen,1995-09-26
+Serbia,Andrija Živković,46,PAOK,1996-07-11
+Serbia,Srđan Babić,8,Spartak Moscow,1996-04-22
+Serbia,Srđan Mijailović,7,Red Star Belgrade,1993-11-10
+Serbia,Ivan Ilić,16,Torino,2001-03-17
+Serbia,Petar Ratkov,1,Red Bull Salzburg,2003-08-18
+Serbia,Lazar Samardžić,9,Udinese,2002-02-24
+Serbia,Sergej Milinković-Savić,51,Al Hilal,1995-02-27
+Serbia,Mijat Gaćinović,27,AEK Athens,1995-02-08
+Serbia,Saša Lukić,46,Fulham,1996-08-13
+Serbia,Vanja Milinković-Savić,19,Torino,1997-02-20
+Serbia,Uroš Spajić,21,Red Star Belgrade,1993-02-13
+Serbia,Filip Mladenović,31,Panathinaikos,1991-08-15
+Serbia,Veljko Birmančević,5,Sparta Prague,1998-03-05
+England,Jordan Pickford,61,Everton,1994-03-07
+England,Kyle Walker,83,Manchester City,1990-05-28
+England,Luke Shaw,31,Manchester United,1995-07-12
+England,Declan Rice,51,Arsenal,1999-01-14
+England,John Stones,72,Manchester City,1994-05-28
+England,Marc Guéhi,11,Crystal Palace,2000-07-13
+England,Bukayo Saka,33,Arsenal,2001-09-05
+England,Trent Alexander-Arnold,25,Liverpool,1998-10-07
+England,Harry Kane,91,Bayern Munich,1993-07-28
+England,Jude Bellingham,29,Real Madrid,2003-06-29
+England,Phil Foden,34,Manchester City,2000-05-28
+England,Kieran Trippier,48,Newcastle United,1990-09-19
+England,Aaron Ramsdale,5,Arsenal,1998-05-14
+England,Ezri Konsa,4,Aston Villa,1997-10-23
+England,Lewis Dunk,6,Brighton & Hove Albion,1991-11-21
+England,Conor Gallagher,13,Chelsea,2000-02-06
+England,Ivan Toney,3,Brentford,1996-03-16
+England,Anthony Gordon,3,Newcastle United,2001-02-24
+England,Ollie Watkins,12,Aston Villa,1995-12-30
+England,Jarrod Bowen,8,West Ham United,1996-12-20
+England,Eberechi Eze,4,Crystal Palace,1998-06-29
+England,Joe Gomez,15,Liverpool,1997-05-23
+England,Dean Henderson,1,Crystal Palace,1997-03-12
+England,Cole Palmer,4,Chelsea,2002-05-06
+England,Adam Wharton,1,Crystal Palace,2004-02-06
+England,Kobbie Mainoo,3,Manchester United,2005-04-19
+Poland,Wojciech Szczęsny,82,Juventus,1990-04-18
+Poland,Bartosz Salamon,14,Lech Poznań,1991-05-01
+Poland,Paweł Dawidowicz,11,Hellas Verona,1995-05-20
+Poland,Sebastian Walukiewicz,4,Empoli,2000-04-05
+Poland,Jan Bednarek,57,Southampton,1996-04-12
+Poland,Jakub Piotrowski,6,Ludogorets Razgrad,1997-10-04
+Poland,Karol Świderski,31,Hellas Verona,1997-01-23
+Poland,Jakub Moder,23,Brighton & Hove Albion,1999-04-07
+Poland,Robert Lewandowski,150,Barcelona,1988-08-21
+Poland,Piotr Zieliński,90,Napoli,1994-05-20
+Poland,Kamil Grosicki,93,Pogoń Szczecin,1988-06-08
+Poland,Łukasz Skorupski,10,Bologna,1991-05-05
+Poland,Taras Romanczuk,3,Jagiellonia Białystok,1991-11-14
+Poland,Jakub Kiwior,23,Arsenal,2000-02-15
+Poland,Tymoteusz Puchacz,14,1. FC Kaiserslautern,1999-01-23
+Poland,Adam Buksa,15,Antalyaspor,1996-07-12
+Poland,Damian Szymański,18,AEK Athens,1995-06-16
+Poland,Bartosz Bereszyński,55,Empoli,1992-07-12
+Poland,Przemysław Frankowski,41,Lens,1995-04-12
+Poland,Sebastian Szymański,34,Fenerbahçe,1999-05-10
+Poland,Nicola Zalewski,18,Roma,2002-01-23
+Poland,Marcin Bułka,1,Nice,1999-10-04
+Poland,Krzysztof Piątek,29,İstanbul Başakşehir,1995-07-01
+Poland,Bartosz Slisz,9,Atlanta United,1999-03-29
+Poland,Michał Skóraś,8,Club Brugge,2000-02-15
+Poland,Kacper Urbański,2,Bologna,2004-09-07
+Netherlands,Bart Verbruggen,7,Brighton & Hove Albion,2002-08-18
+Netherlands,Lutsharel Geertruida,9,Feyenoord,2000-07-18
+Netherlands,Matthijs de Ligt,45,Bayern Munich,1999-08-12
+Netherlands,Virgil van Dijk,68,Liverpool,1991-07-08
+Netherlands,Nathan Aké,45,Manchester City,1995-02-18
+Netherlands,Stefan de Vrij,64,Inter Milan,1992-02-05
+Netherlands,Xavi Simons,14,RB Leipzig,2003-04-21
+Netherlands,Georginio Wijnaldum,93,Al-Ettifaq,1990-11-11
+Netherlands,Wout Weghorst,33,TSG Hoffenheim,1992-08-07
+Netherlands,Memphis Depay,92,Atlético Madrid,1994-02-13
+Netherlands,Cody Gakpo,24,Liverpool,1999-05-07
+Netherlands,Jeremie Frimpong,4,Bayer Leverkusen,2000-12-10
+Netherlands,Justin Bijlow,8,Feyenoord,1998-01-22
+Netherlands,Tijjani Reijnders,9,Milan,1998-07-29
+Netherlands,Micky van de Ven,4,Tottenham Hotspur,2001-04-19
+Netherlands,Joey Veerman,10,PSV Eindhoven,1998-11-19
+Netherlands,Daley Blind,107,Girona,1990-03-09
+Netherlands,Donyell Malen,32,Borussia Dortmund,1999-01-19
+Netherlands,Brian Brobbey,2,Ajax,2002-02-01
+Netherlands,Ian Maatsen,0,Borussia Dortmund,2002-03-10
+Netherlands,Joshua Zirkzee,0,Bologna,2001-05-22
+Netherlands,Denzel Dumfries,53,Inter Milan,1996-04-18
+Netherlands,Mark Flekken,7,Brentford,1993-06-13
+Netherlands,Jerdy Schouten,5,PSV Eindhoven,1997-01-12
+Netherlands,Steven Bergwijn,33,Ajax,1997-10-08
+Netherlands,Ryan Gravenberch,12,Liverpool,2002-05-16
+Austria,Heinz Lindner,37,Union Saint-Gilloise,1990-07-17
+Austria,Maximilian Wöber,25,Borussia Mönchengladbach,1998-02-04
+Austria,Gernot Trauner,11,Feyenoord,1992-03-25
+Austria,Kevin Danso,20,Lens,1998-09-19
+Austria,Stefan Posch,32,Bologna,1997-05-14
+Austria,Nicolas Seiwald,24,RB Leipzig,2001-05-04
+Austria,Marko Arnautović,112,Inter Milan,1989-04-19
+Austria,Alexander Prass,5,Sturm Graz,2001-05-26
+Austria,Marcel Sabitzer,78,Borussia Dortmund,1994-03-17
+Austria,Florian Grillitsch,43,TSG Hoffenheim,1995-08-07
+Austria,Michael Gregoritsch,55,SC Freiburg,1994-04-18
+Austria,Niklas Hedl,1,Rapid Wien,2001-03-17
+Austria,Patrick Pentz,6,Brøndby,1997-01-02
+Austria,Leopold Querfeld,2,Rapid Wien,2003-12-20
+Austria,Philipp Lienhart,21,SC Freiburg,1996-07-11
+Austria,Phillipp Mwene,12,Mainz 05,1994-01-29
+Austria,Florian Kainz,28,1. FC Köln,1992-10-24
+Austria,Romano Schmid,11,Werder Bremen,2000-01-27
+Austria,Christoph Baumgartner,38,RB Leipzig,1999-08-01
+Austria,Konrad Laimer,36,Bayern Munich,1997-05-27
+Austria,Flavius Daniliuc,3,Red Bull Salzburg,2001-04-27
+Austria,Matthias Seidl,4,Rapid Wien,2001-01-24
+Austria,Patrick Wimmer,12,VfL Wolfsburg,2001-05-30
+Austria,Andreas Weimann,24,West Bromwich Albion,1991-08-05
+Austria,Maximilian Entrup,3,TSV Hartberg,1997-07-25
+Austria,Marco Grüll,5,Rapid Wien,1998-07-06
+France,Brice Samba,3,Lens,1994-04-25
+France,Benjamin Pavard,54,Inter Milan,1996-03-28
+France,Ferland Mendy,10,Real Madrid,1995-06-08
+France,Dayot Upamecano,20,Bayern Munich,1998-10-27
+France,Jules Koundé,28,Barcelona,1998-11-12
+France,Eduardo Camavinga,17,Real Madrid,2002-11-10
+France,Antoine Griezmann,129,Atlético Madrid,1991-03-21
+France,Aurélien Tchouaméni,31,Real Madrid,2000-01-27
+France,Olivier Giroud,133,Milan,1986-09-30
+France,Kylian Mbappé,79,Paris Saint-Germain,1998-12-20
+France,Ousmane Dembélé,44,Paris Saint-Germain,1997-05-15
+France,Randal Kolo Muani,17,Paris Saint-Germain,1998-12-05
+France,N'Golo Kanté,55,Al-Ittihad,1991-03-29
+France,Adrien Rabiot,43,Juventus,1995-04-03
+France,Marcus Thuram,20,Inter Milan,1997-08-06
+France,Mike Maignan,16,Milan,1995-07-03
+France,William Saliba,15,Arsenal,2001-03-24
+France,Warren Zaïre-Emery,3,Paris Saint-Germain,2006-03-08
+France,Youssouf Fofana,18,[ a ],1999-01-10
+France,Kingsley Coman,56,Bayern Munich,1996-06-13
+France,Jonathan Clauss,13,Marseille,1992-09-25
+France,Théo Hernandez,27,Milan,1997-10-06
+France,Alphonse Areola,5,West Ham United,1993-02-27
+France,Ibrahima Konaté,16,Liverpool,1999-05-25
+France,Bradley Barcola,2,Paris Saint-Germain,2002-09-02
+Belgium,Koen Casteels,10,VfL Wolfsburg,1992-06-25
+Belgium,Zeno Debast,8,Anderlecht,2003-10-24
+Belgium,Arthur Theate,15,Rennes,2000-05-25
+Belgium,Wout Faes,15,Leicester City,1998-04-03
+Belgium,Jan Vertonghen,154,Anderlecht,1987-04-24
+Belgium,Axel Witsel,132,Atlético Madrid,1989-01-12
+Belgium,Kevin De Bruyne,101,Manchester City,1991-06-28
+Belgium,Youri Tielemans,67,Aston Villa,1997-05-07
+Belgium,Leandro Trossard,34,Arsenal,1994-12-04
+Belgium,Romelu Lukaku,115,Roma,1993-05-13
+Belgium,Yannick Carrasco,74,Al-Shabab,1993-09-04
+Belgium,Thomas Kaminski,1,Luton Town,1992-10-23
+Belgium,Matz Sels,8,Nottingham Forest,1992-02-26
+Belgium,Dodi Lukebakio,15,Sevilla,1997-09-24
+Belgium,Thomas Meunier,66,Trabzonspor,1991-09-12
+Belgium,Aster Vranckx,7,VfL Wolfsburg,2002-10-04
+Belgium,Charles De Ketelaere,15,Atalanta,2001-03-10
+Belgium,Orel Mangala,15,Lyon,1998-03-18
+Belgium,Johan Bakayoko,12,PSV Eindhoven,2003-04-20
+Belgium,Loïs Openda,17,RB Leipzig,2000-02-16
+Belgium,Timothy Castagne,43,Fulham,1995-12-05
+Belgium,Jérémy Doku,22,Manchester City,2002-05-27
+Belgium,Arthur Vermeeren,4,Atlético Madrid,2005-02-07
+Belgium,Amadou Onana,13,Everton,2001-08-16
+Belgium,Maxim De Cuyper,2,Club Brugge,2000-12-22
+Slovakia,Martin Dúbravka,43,Newcastle United,1989-01-15
+Slovakia,Peter Pekarík,127,Hertha BSC,1986-10-30
+Slovakia,Denis Vavro,20,Copenhagen,1996-04-10
+Slovakia,Adam Obert,5,Cagliari,2002-08-23
+Slovakia,Tomáš Rigo,1,Baník Ostrava,2002-07-03
+Slovakia,Norbert Gyömbér,39,Salernitana,1992-07-03
+Slovakia,Tomáš Suslov,28,Hellas Verona,2002-06-07
+Slovakia,Ondrej Duda,72,Hellas Verona,1994-12-05
+Slovakia,Róbert Boženík,40,Boavista,1999-11-18
+Slovakia,Ľubomír Tupta,6,Slovan Liberec,1998-03-27
+Slovakia,László Bénes,22,Hamburger SV,1997-09-09
+Slovakia,Marek Rodák,22,Fulham,1996-12-13
+Slovakia,Patrik Hrošovský,55,Genk,1992-04-22
+Slovakia,Milan Škriniar,68,Paris Saint-Germain,1995-02-11
+Slovakia,Vernon De Marco,10,Hatta,1992-11-18
+Slovakia,Dávid Hancko,38,Feyenoord,1997-12-13
+Slovakia,Lukáš Haraslín,36,Sparta Prague,1996-05-26
+Slovakia,David Strelec,18,Slovan Bratislava,2001-04-04
+Slovakia,Juraj Kucka,107,Slovan Bratislava,1987-02-26
+Slovakia,Dávid Ďuriš,12,Ascoli,1999-03-22
+Slovakia,Matúš Bero,30,VfL Bochum,1995-09-06
+Slovakia,Stanislav Lobotka,55,Napoli,1994-11-25
+Slovakia,Henrich Ravas,0,New England Revolution,1997-08-16
+Slovakia,Leo Sauer,2,Feyenoord,2005-12-16
+Slovakia,Sebastian Kóša,1,Spartak Trnava,2003-09-13
+Slovakia,Ivan Schranz,22,Slavia Prague,1993-09-13
+Romania,Florin Niță,21,Gaziantep,1987-07-03
+Romania,Andrei Rațiu,17,Rayo Vallecano,1998-06-20
+Romania,Radu Drăgușin,17,Tottenham Hotspur,2002-02-03
+Romania,Adrian Rus,20,Pafos,1996-03-18
+Romania,Ionuț Nedelcearu,27,Palermo,1996-04-25
+Romania,Marius Marin,18,Pisa,1998-08-30
+Romania,Denis Alibec,37,Muaither,1991-01-05
+Romania,Alexandru Cicâldău,37,Konyaspor,1997-07-08
+Romania,George Pușcaș,42,Bari,1996-04-08
+Romania,Ianis Hagi,35,Alavés,1998-10-22
+Romania,Nicușor Bancu,36,Universitatea Craiova,1992-09-18
+Romania,Horațiu Moldovan,11,Atlético Madrid,1998-01-20
+Romania,Valentin Mihăilă,21,Parma,2000-02-02
+Romania,Darius Olaru,18,FCSB,1998-03-03
+Romania,Andrei Burcă,27,Al-Okhdood,1993-04-15
+Romania,Ștefan Târnovanu,1,FCSB,2000-05-09
+Romania,Florinel Coman,15,FCSB,1998-04-10
+Romania,Răzvan Marin,55,Empoli,1996-05-23
+Romania,Denis Drăguș,11,Gaziantep,1999-07-06
+Romania,Dennis Man,24,Parma,1998-08-26
+Romania,Nicolae Stanciu,70,Damac,1993-05-07
+Romania,Vasile Mogoș,7,CFR Cluj,1992-10-31
+Romania,Deian Sorescu,17,Gaziantep,1997-08-29
+Romania,Bogdan Racovițan,2,Raków Częstochowa,2000-06-06
+Romania,Daniel Bîrligea,2,CFR Cluj,2000-04-19
+Romania,Adrian Șut,2,FCSB,1999-04-30
+Ukraine,Heorhiy Bushchan,18,Dynamo Kyiv,1994-05-31
+Ukraine,Yukhym Konoplya,14,Shakhtar Donetsk,1999-08-26
+Ukraine,Oleksandr Svatok,6,Dnipro-1,1994-09-27
+Ukraine,Maksym Talovyerov,3,LASK,2000-06-28
+Ukraine,Serhiy Sydorchuk,61,Westerlo,1991-05-02
+Ukraine,Taras Stepanenko,83,Shakhtar Donetsk,1989-08-08
+Ukraine,Andriy Yarmolenko,119,Dynamo Kyiv,1989-10-23
+Ukraine,Ruslan Malinovskyi,61,Genoa,1993-05-04
+Ukraine,Roman Yaremchuk,50,Valencia,1995-11-27
+Ukraine,Mykhaylo Mudryk,21,Chelsea,2001-01-05
+Ukraine,Artem Dovbyk,28,Girona,1997-06-21
+Ukraine,Anatoliy Trubin,11,Benfica,2001-08-01
+Ukraine,Illya Zabarnyi,36,Bournemouth,2002-09-01
+Ukraine,Heorhiy Sudakov,17,Shakhtar Donetsk,2002-09-01
+Ukraine,Viktor Tsyhankov,54,Girona,1997-11-15
+Ukraine,Vitaliy Mykolenko,41,Everton,1999-05-29
+Ukraine,Oleksandr Zinchenko,63,Arsenal,1996-12-15
+Ukraine,Volodymyr Brazhko,4,Dynamo Kyiv,2002-01-23
+Ukraine,Mykola Shaparenko,31,Dynamo Kyiv,1998-10-04
+Ukraine,Oleksandr Zubkov,33,Shakhtar Donetsk,1996-08-03
+Ukraine,Valeriy Bondar,4,Shakhtar Donetsk,1999-02-27
+Ukraine,Mykola Matviyenko,65,Shakhtar Donetsk,1996-05-02
+Ukraine,Andriy Lunin,12,Real Madrid,1999-02-11
+Ukraine,Oleksandr Tymchyk,17,Dynamo Kyiv,1997-01-20
+Ukraine,Vladyslav Vanat,6,Dynamo Kyiv,2002-01-04
+Ukraine,Bohdan Mykhaylichenko,8,Polissya Zhytomyr,1997-03-21
+Turkey,Mert Günok,29,Beşiktaş,1989-03-01
+Turkey,Zeki Çelik,45,Roma,1997-02-17
+Turkey,Merih Demiral,44,Al-Ahli,1998-03-05
+Turkey,Samet Akaydin,6,Panathinaikos,1994-03-13
+Turkey,Okay Yokuşlu,40,West Bromwich Albion,1994-03-09
+Turkey,Orkun Kökçü,28,Benfica,2000-12-29
+Turkey,Kerem Aktürkoğlu,29,Galatasaray,1998-10-21
+Turkey,Arda Güler,7,Real Madrid,2005-02-25
+Turkey,Cenk Tosun,51,Beşiktaş,1991-06-07
+Turkey,Hakan Çalhanoğlu,86,Inter Milan,1994-02-08
+Turkey,Yusuf Yazıcı,43,Lille,1997-01-29
+Turkey,Altay Bayındır,9,Manchester United,1998-04-14
+Turkey,Ahmetcan Kaplan,0,Ajax,2003-01-16
+Turkey,Abdülkerim Bardakcı,8,Galatasaray,1994-09-07
+Turkey,Salih Özcan,18,Borussia Dortmund,1998-01-11
+Turkey,İsmail Yüksek,14,Fenerbahçe,1999-01-26
+Turkey,İrfan Kahveci,32,Fenerbahçe,1995-07-15
+Turkey,Mert Müldür,24,Fenerbahçe,1999-04-03
+Turkey,Kenan Yıldız,7,Juventus,2005-05-04
+Turkey,Ferdi Kadıoğlu,15,Fenerbahçe,1999-10-07
+Turkey,Barış Alper Yılmaz,15,Galatasaray,2000-05-23
+Turkey,Kaan Ayhan,58,Galatasaray,1994-11-10
+Turkey,Uğurcan Çakır,27,Trabzonspor,1996-04-05
+Turkey,Semih Kılıçsoy,2,Beşiktaş,2005-08-15
+Turkey,Yunus Akgün,9,Leicester City,2000-07-07
+Turkey,Bertuğ Yıldırım,3,Rennes,2002-01-12
+Georgia,Giorgi Loria,78,Dinamo Tbilisi,1986-01-27
+Georgia,Otar Kakabadze,61,Cracovia,1995-06-27
+Georgia,Lasha Dvali,32,APOEL,1995-05-14
+Georgia,Guram Kashia,113,Slovan Bratislava,1987-07-04
+Georgia,Solomon Kvirkvelia,58,Al-Okhdood,1992-02-06
+Georgia,Giorgi Kochorashvili,8,Levante,1999-06-29
+Georgia,Khvicha Kvaratskhelia,30,Napoli,2001-02-12
+Georgia,Budu Zivzivadze,26,Karlsruher SC,1994-03-10
+Georgia,Zuriko Davitashvili,35,Bordeaux,2001-02-15
+Georgia,Giorgi Chakvetadze,25,Watford,1999-08-29
+Georgia,Giorgi Kvilitaia,37,APOEL,1993-10-01
+Georgia,Luka Gugeshashvili,1,Qarabağ,1999-04-29
+Georgia,Giorgi Gocholeishvili,8,Shakhtar Donetsk,2001-02-14
+Georgia,Luka Lochoshvili,10,Cremonese,1998-05-29
+Georgia,Giorgi Gvelesiani,1,Persepolis,1991-05-05
+Georgia,Nika Kvekveskiri,60,Lech Poznań,1992-05-29
+Georgia,Otar Kiteishvili,37,Sturm Graz,1996-03-26
+Georgia,Sandro Altunashvili,5,Wolfsberger AC,1997-05-19
+Georgia,Levan Shengelia,17,Panetolikos,1995-10-27
+Georgia,Anzor Mekvabishvili,14,Universitatea Craiova,2001-06-05
+Georgia,Giorgi Tsitaishvili,17,Dinamo Batumi,2000-11-18
+Georgia,Georges Mikautadze,25,Metz,2000-10-31
+Georgia,Saba Lobzhanidze,36,Atlanta United,1994-12-18
+Georgia,Jemal Tabidze,15,Panetolikos,1996-03-18
+Georgia,Giorgi Mamardashvili,17,Valencia,2000-09-29
+Georgia,Gabriel Sigua,2,Basel,2005-06-30
+Portugal,Rui Patrício,108,Roma,1988-02-15
+Portugal,Nélson Semedo,30,Wolverhampton Wanderers,1993-11-16
+Portugal,Pepe,137,Porto,1983-02-26
+Portugal,Rúben Dias,56,Manchester City,1997-05-14
+Portugal,Diogo Dalot,20,Manchester United,1999-03-18
+Portugal,João Palhinha,27,Fulham,1995-07-09
+Portugal,Cristiano Ronaldo,207,Al Nassr,1985-02-05
+Portugal,Bruno Fernandes,67,Manchester United,1994-09-08
+Portugal,Gonçalo Ramos,13,Paris Saint-Germain,2001-06-20
+Portugal,Bernardo Silva,89,Manchester City,1994-08-10
+Portugal,João Félix,39,Barcelona,1999-11-10
+Portugal,José Sá,2,Wolverhampton Wanderers,1993-01-17
+Portugal,Danilo Pereira,73,Paris Saint-Germain,1991-09-09
+Portugal,Gonçalo Inácio,9,Sporting CP,2001-08-25
+Portugal,João Neves,7,Benfica,2004-09-27
+Portugal,Matheus Nunes,14,Manchester City,1998-08-27
+Portugal,Rafael Leão,27,Milan,1999-06-10
+Portugal,Rúben Neves,47,Al Hilal,1997-03-13
+Portugal,Nuno Mendes,23,Paris Saint-Germain,2002-06-19
+Portugal,João Cancelo,54,Barcelona,1994-05-27
+Portugal,Diogo Jota,39,Liverpool,1996-12-04
+Portugal,Diogo Costa,22,Porto,1999-09-19
+Portugal,Vitinha,17,Paris Saint-Germain,2000-02-13
+Portugal,António Silva,11,Benfica,2003-10-30
+Portugal,Pedro Neto,7,Wolverhampton Wanderers,2000-03-09
+Portugal,Francisco Conceição,2,Porto,2002-12-14
+Czech Republic,Jindřich Staněk,10,Slavia Prague,1996-04-27
+Czech Republic,David Zima,21,Slavia Prague,2000-11-08
+Czech Republic,Tomáš Holeš,28,Slavia Prague,1993-03-31
+Czech Republic,Robin Hranáč,3,Viktoria Plzeň,2000-01-29
+Czech Republic,Vladimír Coufal,42,West Ham United,1992-08-22
+Czech Republic,Martin Vitík,2,Sparta Prague,2003-01-21
+Czech Republic,Antonín Barák,41,Fiorentina,1994-12-03
+Czech Republic,Petr Ševčík,15,Slavia Prague,1994-05-04
+Czech Republic,Adam Hložek,32,Bayer Leverkusen,2002-07-25
+Czech Republic,Patrik Schick,38,Bayer Leverkusen,1996-01-24
+Czech Republic,Jan Kuchta,21,Sparta Prague,1997-01-08
+Czech Republic,David Douděra,9,Slavia Prague,1998-05-31
+Czech Republic,Mojmír Chytil,14,Slavia Prague,1999-04-29
+Czech Republic,Lukáš Provod,19,Slavia Prague,1996-10-23
+Czech Republic,David Jurásek,9,TSG Hoffenheim,2000-08-07
+Czech Republic,Matěj Kovář,2,Bayer Leverkusen,2000-05-17
+Czech Republic,Václav Černý,16,VfL Wolfsburg,1997-10-17
+Czech Republic,Ladislav Krejčí,10,Sparta Prague,1999-04-20
+Czech Republic,Tomáš Chorý,5,Viktoria Plzeň,1995-01-26
+Czech Republic,Ondřej Lingr,15,Feyenoord,1998-10-07
+Czech Republic,Lukáš Červ,1,Viktoria Plzeň,2001-04-10
+Czech Republic,Tomáš Souček,69,West Ham United,1995-02-27
+Czech Republic,Vítězslav Jaroš,1,Sturm Graz,2001-07-23
+Czech Republic,Tomáš Vlček,2,Slavia Prague,2001-02-28
+Czech Republic,Pavel Šulc,3,Viktoria Plzeň,2000-12-29
+Czech Republic,Matěj Jurásek,2,Slavia Prague,2003-08-30

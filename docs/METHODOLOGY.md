@@ -143,6 +143,24 @@ mechanism stays in simulate.py for any future venue-dependent block that passes
 (e.g. club-city-based acclimatization, v2). Altitude remains non-backtestable
 (no high-altitude venue since 1986) and is therefore also out.
 
+## Player layer v2 gate (REJECTED — v1 stands, 2026-06-12)
+A dedicated admission gate for allocation variants (scripts/16): score the REALISED
+within-team scorer splits of WC2014/18/22 with the per-goal multinomial
+log-likelihood, weights built strictly point-in-time, debutant share from the three
+prior WCs. Variants tested against v1 (decayed shares + activity window):
+(a) official-squad membership filter; (b) same, with dropped mass flowing to the
+new-faces bucket; (c) age discount exp(-alpha*max(0, age-30)), grid over alpha;
+(d) share tempering p^tau. ALL REJECTED: v1 2.2013 vs best challenger 2.2657
+(LOTO). The autopsy is the interesting part. Name matching was innocent (100% of
+realised scorers appear in the squad lists). The squad filter only removes players
+who were genuinely not selected (Mane 2022, Morata 2018) — yet removing them and
+renormalising made predictions WORSE, and routing their mass to the bucket worse
+still. Reading: the official rosters carry no allocation information that the goal
+flow didn't already have, and every reweighting of the same data only reshuffles
+noise. The Valencia concern stands as priced (he IS in the squad; the age discount
+was rejected by the data). A real v2 needs genuinely NEW information — club
+minutes/xG (FBref), penalty-taker identity — not transformations of the old.
+
 ## Three-way benchmark
 After the tournament: log-loss and calibration of our model vs bookmaker implied
 probabilities (margin removed, Shin's method) vs Klement's forecasts (GDP/population/

@@ -34,12 +34,19 @@ Each upgrade must earn its place like any other data block.
 
 from __future__ import annotations
 
+import unicodedata
+
 import numpy as np
 import pandas as pd
 
 HALF_LIFE_DAYS = 900
 ACTIVE_WINDOW_DAYS = 900
 DEBUTANT_KEY = "__new_faces__"
+
+
+def _norm_name(s: str) -> str:
+    s = unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode()
+    return " ".join(s.lower().split())
 
 
 def estimate_debutant_share(
@@ -79,6 +86,49 @@ def scorer_weights(
     w = w / w.sum() * (1.0 - debutant_share)
     out = w.to_dict()
     out[DEBUTANT_KEY] = debutant_share
+    return out
+
+
+def squad_weights(
+    goalscorers: pd.DataFrame,
+    squad: pd.DataFrame,
+    team: str,
+    asof: pd.Timestamp,
+    debutant_share: float,
+    age_alpha: float = 0.0,
+    drop_to_bucket: bool = True,
+) -> dict[str, float]:
+    """v2 allocation probabilities: official squad as the membership filter.
+
+    Versus v1 (`scorer_weights`): a scorer keeps his decayed goal share only
+    if he is on the official squad list (name-matched within team, accents
+    stripped). With drop_to_bucket=True (the backtest winner's setting) the
+    mass of non-selected scorers and of the age discount flows into the
+    "new faces" bucket — their goals go to replacements, NOT proportionally
+    to the surviving stars (renormalising concentrates the stars and scored
+    worse on realised splits). Optional age discount
+    exp(-age_alpha * max(0, age - 30)); age_alpha is chosen by the
+    admission backtest (scripts/16), like every other knob.
+    """
+    sq = squad[squad["team"] == team]
+    roster = {_norm_name(p): pd.Timestamp(b) for p, b in zip(sq["player"], sq["birth"])}
+    g = goalscorers[
+        (goalscorers["team"] == team)
+        & (goalscorers["date"] < asof)
+        & (~goalscorers["own_goal"].astype(bool))
+    ].dropna(subset=["scorer"])
+    age = (asof - g["date"]).dt.days.to_numpy(float)
+    w_all = pd.Series(np.exp(-np.log(2) * age / HALF_LIFE_DAYS), index=g["scorer"]).groupby(level=0).sum()
+    w = w_all[[_norm_name(p) in roster for p in w_all.index]]
+    if age_alpha and len(w):
+        yrs = np.array([(asof - roster[_norm_name(p)]).days / 365.25 for p in w.index])
+        w = w * np.exp(-age_alpha * np.maximum(0.0, yrs - 30.0))
+    if w.empty:
+        return {DEBUTANT_KEY: 1.0}
+    denom = float(w_all.sum()) if drop_to_bucket else float(w.sum())
+    w = w / denom * (1.0 - debutant_share)
+    out = w.to_dict()
+    out[DEBUTANT_KEY] = 1.0 - float(w.sum())
     return out
 
 

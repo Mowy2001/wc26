@@ -85,8 +85,11 @@ def parse_squads(html: str) -> pd.DataFrame:
             club = club_links[-1].get_text(" ", strip=True) if club_links else ""
             caps_txt = tds[-3].get_text(strip=True)
             caps = int(caps_txt) if caps_txt.isdigit() else 0
-            rows.append({"team": team, "player": th.get_text(" ", strip=True),
-                         "caps": caps, "club": club})
+            bday = tr.find("span", class_="bday")
+            name = re.sub(r"\s*\(.*?\)\s*", " ", th.get_text(" ", strip=True)).strip()
+            rows.append({"team": team, "player": name,
+                         "caps": caps, "club": club,
+                         "birth": bday.get_text(strip=True) if bday else ""})
     df = pd.DataFrame(rows)
     return df[df["club"] != ""].drop_duplicates(subset=["team", "player"])
 

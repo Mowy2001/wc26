@@ -237,7 +237,10 @@ if (WC26.golden_boot) {
      in the simulations — and a model that cannot see age or club minutes. That blind spot is
      precisely what the next data block (FBref minutes &amp; xG) is for; the market already prices it.
      A further ${pct(WC26.debutant_share, 0)} of goals is reserved for debutant scorers ("new faces"),
-     the historical World Cup average. Most distinct scorers: ` +
+     the historical World Cup average. We also tried the obvious fixes — official rosters as a
+     membership filter, an age discount for veterans: <strong>both scored worse</strong> than this
+     simple model on the realised 2014/18/22 scorer splits and were rejected by the same gate
+     that judges every data block. Most distinct scorers: ` +
     Object.entries(WC26.distinct_scorers).slice(0, 3).map(([t, p]) => `${t} ${pct(p, 0)}`).join(", ") + `.`;
 }
 
