@@ -8,3 +8,6 @@ __pycache__/
 
 # Regenerable artifacts (scripts/01 rebuilds in <1s)
 outputs/elo_history.parquet
+
+# Raw HTML caches (refetchable; parsed CSVs are committed)
+data/external/*.html

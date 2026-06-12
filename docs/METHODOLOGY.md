@@ -112,6 +112,24 @@ scripts/10: played group matches (refreshed results.csv) enter as fixed_results;
 ratings and parameters stay frozen at tournament eve — live updates change what is
 KNOWN, never what the model believes. Knockout conditioning is a follow-up.
 
+## Football-capital block (backlog #5a, admitted on probation, 2026-06-12)
+First external residual block. Feature: squad-mean club Elo (official squad lists
+from Wikipedia x api.clubelo.com snapshot at each tournament's opening day),
+unmatched/non-European clubs imputed at the snapshot's 10th percentile, z-scored
+within tournament. Enters as a multiplicative tilt on the DC lambdas:
+lh' = lh*exp(+b*capdiff), la' = la*exp(-b*capdiff). Admission test (scripts/12),
+leave-one-tournament-out on the same 6 tournaments as the xi tuning: pooled OOS
+log-loss 0.9952 -> 0.9939 (-0.0012 over 345 matches), b* stable and positive in all
+folds (0.023-0.041), b=0.0328 on all six. Paired t = -0.32: the gain is within
+noise. Verdict: ADMITTED by the letter of the rule (it improves), explicitly ON
+PROBATION — re-judged on WC2026 itself in the final report. Two declared caveats:
+(1) clubelo covers Europe only, so the feature taxes squads based elsewhere
+(Brazil, Mexico, USA move AWAY from the market while European squads move toward
+it — a structural source bias, not a football statement); (2) one global b, no
+within-squad weighting (caps/minutes) yet. Effect on the headline: Spain 24.5->26.8,
+France 10.2->12.1, England 6.6->8.0; Brazil 5.3->4.3, Mexico 2.6->1.5. Side effect:
+Ecuador's totals drop, Mbappe overtakes Valencia atop the Golden Boot table.
+
 ## Three-way benchmark
 After the tournament: log-loss and calibration of our model vs bookmaker implied
 probabilities (margin removed, Shin's method) vs Klement's forecasts (GDP/population/
