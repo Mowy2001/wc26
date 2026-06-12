@@ -40,15 +40,24 @@ const byChamp = [...WC26.teams].sort((a, b) => b.P_champion - a.P_champion);
 {
   const top = byChamp.slice(0, 15);
   const max = top[0].P_final;
-  document.getElementById("champ-chart").innerHTML = top.map((t) => `
-    <div class="bar-row">
+  const base = WC26.baseline_eve || {};
+  document.getElementById("champ-chart").innerHTML = top.map((t) => {
+    const b = base[t.team];
+    const tick = b ? `<div class="bar-tick" title="June 11 baseline: ${pct(b.P_champion)}"
+      style="left:${(100 * b.P_champion) / max}%"></div>` : "";
+    const d = b ? t.P_champion - b.P_champion : 0;
+    const delta = b && Math.abs(d) >= 0.0005
+      ? `<span class="delta ${d > 0 ? "up" : "down"}">${d > 0 ? "▲" : "▼"}${(100 * Math.abs(d)).toFixed(1)}</span>` : "";
+    return `<div class="bar-row">
       <div class="who">${flag(t.team)}${t.team}</div>
       <div class="bar-track">
         <div class="bar-ghost" style="width:${(100 * t.P_final) / max}%"></div>
         <div class="bar-fill" style="width:${(100 * t.P_champion) / max}%"></div>
+        ${tick}
       </div>
-      <div class="val">${pct(t.P_champion)}</div>
-    </div>`).join("");
+      <div class="val">${pct(t.P_champion)}${delta}</div>
+    </div>`;
+  }).join("");
 }
 
 /* ---------- round-by-round table ---------- */

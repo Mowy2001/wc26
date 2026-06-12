@@ -63,6 +63,12 @@ try:
 except FileNotFoundError:
     climate = None
 try:
+    _b = pd.read_csv("outputs/history/baseline_eve.csv", index_col=0)
+    baseline = {t: {"P_champion": round(float(r.P_champion), 4),
+                    "P_qualify": round(float(r.P_qualify), 4)} for t, r in _b.iterrows()}
+except FileNotFoundError:
+    baseline = None
+try:
     _fz = pd.read_csv("outputs/fatigue.csv", index_col=0)["fatigue_z"]
     fatigue = {"meta": json.load(open("outputs/fatigue_beta.json")),
                "z": {k: round(float(v), 2) for k, v in _fz.items()}}
@@ -99,6 +105,7 @@ data = {
     "capital": capital,
     "climate": climate,
     "fatigue": fatigue,
+    "baseline_eve": baseline,
     "golden_boot": golden_boot,
     "golden_boot_market": {"Kylian Mbappé": 575, "Harry Kane": 675,
                            "Lionel Messi": 1150, "Erling Haaland": 1350},

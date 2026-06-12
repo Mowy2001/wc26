@@ -63,6 +63,10 @@ docstring with the mathematical model, every design choice goes in docs/METHODOL
       pair level (wc2026_played_ko; shootout winners from shootouts.csv); R32 routine
       keeps working through the final. thirds_override ready for FIFA's real
       allocation after 06-27
+- [x] Baseline frozen + forecast timeline (2026-06-13): outputs/history/
+      baseline_eve.csv = final model (v3) on the June-11 information set, immutable;
+      every live refresh appends a snapshot to outputs/history/timeline.csv.
+      Site: white baseline notch + movement deltas on the champion race
 - [ ] Backlog below
 - [ ] NEXT (deadline 06-28): knockout live conditioning — fix real R32+ results in
       the bracket as they happen; group fixed_results stops being enough

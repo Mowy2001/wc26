@@ -58,6 +58,18 @@ res["teams"].round(4).to_csv("outputs/tournament_probs_v1.csv")
 res["goal_samples"].to_parquet("outputs/goal_samples.parquet")
 print("Tournament probabilities refreshed.")
 
+# Append an immutable snapshot to the forecast timeline (never overwritten;
+# the eve-of-tournament baseline lives in outputs/history/baseline_eve.csv).
+from datetime import datetime, timezone
+snap = res["teams"].round(4).reset_index(names="team")
+snap.insert(0, "snapshot_utc", datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%MZ"))
+snap.insert(1, "played_groups", len(fixed))
+snap.insert(2, "played_ko", len(fixed_ko))
+tl = "outputs/history/timeline.csv"
+import os
+snap.to_csv(tl, mode="a", header=not os.path.exists(tl), index=False)
+print(f"Timeline snapshot appended ({len(fixed)}+{len(fixed_ko)} played).")
+
 subprocess.run([sys.executable, "scripts/09_player_layer.py"], check=True)
 subprocess.run([sys.executable, "scripts/05_export_site_data.py"], check=True)
 print("Site refreshed — reload site/index.html.")

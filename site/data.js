@@ -591,6 +591,200 @@ const WC26 = {
    "Uzbekistan": -1.72
   }
  },
+ "baseline_eve": {
+  "Mexico": {
+   "P_champion": 0.0226,
+   "P_qualify": 0.9722
+  },
+  "South Korea": {
+   "P_champion": 0.0029,
+   "P_qualify": 0.8059
+  },
+  "Czech Republic": {
+   "P_champion": 0.0004,
+   "P_qualify": 0.6155
+  },
+  "South Africa": {
+   "P_champion": 0.0,
+   "P_qualify": 0.2764
+  },
+  "Canada": {
+   "P_champion": 0.0089,
+   "P_qualify": 0.9758
+  },
+  "Switzerland": {
+   "P_champion": 0.0117,
+   "P_qualify": 0.9562
+  },
+  "Bosnia and Herzegovina": {
+   "P_champion": 0.0,
+   "P_qualify": 0.4474
+  },
+  "Qatar": {
+   "P_champion": 0.0,
+   "P_qualify": 0.1942
+  },
+  "Brazil": {
+   "P_champion": 0.0435,
+   "P_qualify": 0.934
+  },
+  "Morocco": {
+   "P_champion": 0.0252,
+   "P_qualify": 0.8952
+  },
+  "Scotland": {
+   "P_champion": 0.0026,
+   "P_qualify": 0.6732
+  },
+  "Haiti": {
+   "P_champion": 0.0,
+   "P_qualify": 0.2078
+  },
+  "Turkey": {
+   "P_champion": 0.0156,
+   "P_qualify": 0.8201
+  },
+  "United States": {
+   "P_champion": 0.0058,
+   "P_qualify": 0.6765
+  },
+  "Australia": {
+   "P_champion": 0.0024,
+   "P_qualify": 0.6332
+  },
+  "Paraguay": {
+   "P_champion": 0.0024,
+   "P_qualify": 0.618
+  },
+  "Ecuador": {
+   "P_champion": 0.0334,
+   "P_qualify": 0.956
+  },
+  "Germany": {
+   "P_champion": 0.0242,
+   "P_qualify": 0.9375
+  },
+  "Ivory Coast": {
+   "P_champion": 0.001,
+   "P_qualify": 0.6857
+  },
+  "Cura\u00e7ao": {
+   "P_champion": 0.0,
+   "P_qualify": 0.1338
+  },
+  "Netherlands": {
+   "P_champion": 0.0286,
+   "P_qualify": 0.9269
+  },
+  "Japan": {
+   "P_champion": 0.0171,
+   "P_qualify": 0.9004
+  },
+  "Sweden": {
+   "P_champion": 0.0001,
+   "P_qualify": 0.4576
+  },
+  "Tunisia": {
+   "P_champion": 0.0001,
+   "P_qualify": 0.3903
+  },
+  "Belgium": {
+   "P_champion": 0.0131,
+   "P_qualify": 0.9026
+  },
+  "Iran": {
+   "P_champion": 0.0022,
+   "P_qualify": 0.7573
+  },
+  "Egypt": {
+   "P_champion": 0.0006,
+   "P_qualify": 0.5904
+  },
+  "New Zealand": {
+   "P_champion": 0.0,
+   "P_qualify": 0.4695
+  },
+  "Spain": {
+   "P_champion": 0.2517,
+   "P_qualify": 0.997
+  },
+  "Uruguay": {
+   "P_champion": 0.0105,
+   "P_qualify": 0.9057
+  },
+  "Saudi Arabia": {
+   "P_champion": 0.0,
+   "P_qualify": 0.3379
+  },
+  "Cape Verde": {
+   "P_champion": 0.0,
+   "P_qualify": 0.2264
+  },
+  "France": {
+   "P_champion": 0.0998,
+   "P_qualify": 0.9594
+  },
+  "Norway": {
+   "P_champion": 0.0147,
+   "P_qualify": 0.8176
+  },
+  "Senegal": {
+   "P_champion": 0.0069,
+   "P_qualify": 0.7339
+  },
+  "Iraq": {
+   "P_champion": 0.0,
+   "P_qualify": 0.204
+  },
+  "Argentina": {
+   "P_champion": 0.1937,
+   "P_qualify": 0.9858
+  },
+  "Austria": {
+   "P_champion": 0.0028,
+   "P_qualify": 0.7008
+  },
+  "Algeria": {
+   "P_champion": 0.0024,
+   "P_qualify": 0.6678
+  },
+  "Jordan": {
+   "P_champion": 0.0,
+   "P_qualify": 0.2789
+  },
+  "Portugal": {
+   "P_champion": 0.0362,
+   "P_qualify": 0.9016
+  },
+  "Colombia": {
+   "P_champion": 0.0363,
+   "P_qualify": 0.9067
+  },
+  "Uzbekistan": {
+   "P_champion": 0.0004,
+   "P_qualify": 0.4815
+  },
+  "DR Congo": {
+   "P_champion": 0.0001,
+   "P_qualify": 0.3966
+  },
+  "England": {
+   "P_champion": 0.0676,
+   "P_qualify": 0.9727
+  },
+  "Croatia": {
+   "P_champion": 0.0112,
+   "P_qualify": 0.8862
+  },
+  "Panama": {
+   "P_champion": 0.0012,
+   "P_qualify": 0.6716
+  },
+  "Ghana": {
+   "P_champion": 0.0,
+   "P_qualify": 0.1583
+  }
+ },
  "golden_boot": [
   {
    "player": "Kylian Mbapp\u00e9",
