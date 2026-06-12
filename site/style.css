@@ -211,3 +211,10 @@ footer a { color: var(--accent2); }
 .boot-sd b { color: var(--text); }
 .market-chip { font-size: .7rem; color: var(--gold); border: 1px solid rgba(251,191,36,.4);
   border-radius: 999px; padding: 1px 8px; margin-left: 8px; font-weight: 600; vertical-align: 1px; white-space: nowrap; }
+
+/* plain-first: technical chips folded behind a toggle */
+details.tech { margin: 6px 0; }
+details.tech summary { cursor: pointer; font-size: .75rem; color: var(--accent2);
+  list-style: none; font-weight: 600; }
+details.tech summary::before { content: "\25B8 "; }
+details.tech[open] summary::before { content: "\25BE "; }

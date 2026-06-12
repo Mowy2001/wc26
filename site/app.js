@@ -171,12 +171,12 @@ if (WC26.capital && WC26.ablations && WC26.ablations.no_capital) {
     .sort((a, b) => Math.abs(b.d) - Math.abs(a.d)).slice(0, 5)
     .sort((a, b) => b.d - a.d);
   document.getElementById("capital-card").innerHTML =
-    `<div class="boot-sd">
+    `<details class="tech"><summary>the numbers, for the curious</summary><div class="boot-sd">
       <span>OOS log-loss <b>${meta.oos_delta}</b></span>
       <span>paired t <b>${meta.t_paired}</b></span>
       <span>β <b>${meta.beta_capital}</b>/z</span>
       <span>coverage <b>${pct(WC26.capital.coverage, 0)}</b></span>
-    </div>` +
+    </div></details>` +
     movers.map((m) => `<div class="usa-row">
       <span class="src">${flag(m.team)}${m.team} title odds</span>
       <div class="usa-track"><i style="width:${100 * Math.min(1, Math.abs(m.d) / 0.025)}%;
@@ -198,11 +198,11 @@ if (WC26.fatigue && WC26.ablations && WC26.ablations.no_fatigue) {
     .map((t) => ({ team: t.team, d: t.P_champion - (nf[t.team] || 0), z: WC26.fatigue.z[t.team] }))
     .sort((a, b) => Math.abs(b.d) - Math.abs(a.d)).slice(0, 4).sort((a, b) => b.d - a.d);
   document.getElementById("fatigue-card").innerHTML =
-    `<div class="boot-sd">
+    `<details class="tech"><summary>the numbers, for the curious</summary><div class="boot-sd">
       <span>OOS log-loss <b>${m.oos_delta}</b></span>
       <span>β <b>${m.beta_fatigue}</b>/z</span>
       <span>folds <b>${m.n_folds}</b></span>
-    </div>` +
+    </div></details>` +
     movers.map((x) => `<div class="usa-row">
       <span class="src">${flag(x.team)}${x.team} (load ${x.z > 0 ? "+" : ""}${x.z}σ)</span>
       <div class="usa-track"><i style="width:${100 * Math.min(1, Math.abs(x.d) / 0.025)}%;
@@ -218,18 +218,18 @@ if (WC26.fatigue && WC26.ablations && WC26.ablations.no_fatigue) {
 /* ---------- climate (rejected) card ---------- */
 if (WC26.climate) {
   const c = WC26.climate;
-  document.getElementById("climate-card").innerHTML = `<div class="boot-sd">
+  document.getElementById("climate-card").innerHTML = `<details class="tech"><summary>the numbers, for the curious</summary><div class="boot-sd">
     <span>OOS log-loss <b>+${c.oos_delta}</b> (worse)</span>
     <span>paired t <b>+${c.t_paired}</b></span>
     <span>verdict <b style="color:#f87171">${c.verdict}</b></span>
-  </div>`;
+  </div></details>`;
 }
 
 /* ---------- bootstrap card ---------- */
 if (WC26.bootstrap && WC26.ablations && WC26.ablations.no_param_uncertainty) {
   document.getElementById("boot-b").textContent = WC26.bootstrap.B;
   const sd = WC26.bootstrap.sd;
-  document.getElementById("boot-card").innerHTML = `<div class="boot-sd">` +
+  document.getElementById("boot-card").innerHTML = `<details class="tech"><summary>the numbers, for the curious</summary><div class="boot-sd">` +
     Object.entries(sd).map(([k, v]) => `<span>${k.replace("beta_", "β ")} <b>±${v}</b></span>`).join("") +
     `</div>`;
   const pe = WC26.ablations.no_param_uncertainty.P_champion;
