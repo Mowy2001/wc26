@@ -132,6 +132,63 @@ def squad_weights(
     return out
 
 
+def xg_blend_weights(
+    goalscorers: pd.DataFrame,
+    squad: pd.DataFrame,
+    fbref: pd.DataFrame,
+    team: str,
+    asof: pd.Timestamp,
+    debutant_share: float,
+    lam: float,
+    stat: str = "npg",
+    age_alpha: float | None = None,
+) -> dict[str, float]:
+    """Blend v1 shares with club-season scoring-form shares (FBref).
+
+    Named share_i = (1-lam) * v1_i + lam * stat_i / sum(stat over matched
+    squad members); both components live inside the (1 - debutant) mass.
+    `stat` is non-penalty club goals by default — the column available for
+    every backtest fold (the 2017-18 Big5 page predates xG); npxG exists
+    from 2021-22 on but deploying it would mean deploying what was never
+    gated. Players outside the Big-5 leagues rely on the v1 component —
+    coverage bias declared, same as the capital block. lam is chosen by
+    the admission gate (scripts/18).
+    """
+    if age_alpha is None:
+        base = scorer_weights(goalscorers, team, asof, debutant_share)
+    else:  # admitted base: official-squad filter + age discount (scripts/16)
+        base = squad_weights(goalscorers, squad, team, asof, debutant_share,
+                             age_alpha=age_alpha, drop_to_bucket=False)
+    deb = base.get(DEBUTANT_KEY, debutant_share)
+    v1 = {k: v for k, v in base.items() if k != DEBUTANT_KEY}
+    sq_names = {_norm_name(p): p for p in squad[squad["team"] == team]["player"]}
+    fb = fbref[[_norm_name(p) in sq_names for p in fbref["player"]]]
+    xg = {}
+    for r in fb.itertuples(index=False):
+        canon = sq_names[_norm_name(r.player)]
+        v = getattr(r, stat)
+        if pd.notna(v) and v > 0:
+            xg[canon] = xg.get(canon, 0.0) + float(v)
+    zx = sum(xg.values())
+    zv = sum(v1.values())
+    named = {}
+    keys = set(v1) | set(xg)
+    for k in keys:
+        a = v1.get(k, 0.0) / zv if zv else 0.0
+        # v1 keys are goalscorers names, xg keys squad names: merge on norm
+        named[k] = (1 - lam) * a
+    if zx:
+        for k, v in xg.items():
+            hit = next((kk for kk in named if _norm_name(kk) == _norm_name(k)), k)
+            named[hit] = named.get(hit, 0.0) + lam * v / zx
+    z = sum(named.values())
+    if z == 0:
+        return {DEBUTANT_KEY: 1.0}
+    out = {k: v / z * (1.0 - deb) for k, v in named.items() if v > 0}
+    out[DEBUTANT_KEY] = deb
+    return out
+
+
 def allocate_goals(
     goal_samples: pd.DataFrame,
     weights: dict[str, dict[str, float]],

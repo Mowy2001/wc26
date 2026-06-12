@@ -44,10 +44,12 @@ docstring with the mathematical model, every design choice goes in docs/METHODOL
       Qatar 2022 fold explodes (AC + winter + passport-is-not-a-climate). Coefficient
       zero; city-aware tilt mechanism kept. Benchmark harness (#9 partial): Shin
       de-vig + live match scorer (scripts/15); site market section now margin-free
-- [x] Player-layer v2 gate (scripts/16): squad filter, age discount, drop-to-bucket
-      and tempering ALL REJECTED on realised 2014/18/22 scorer splits (v1 2.2013 vs
-      2.2657). Rosters add no allocation info; reweighting old data reshuffles noise.
-      Squads CSVs now carry DOB; captain-annotation parser bug fixed
+- [x] Player-layer gates (scripts/16, 18): REVERSED after fixing a metric bug (full
+      bucket mass per unknown scorer -> degenerate). Corrected: squad filter + age
+      alpha=0.1 ADMITTED (2.7266 vs 2.9122, 3/3 folds), DEPLOYED in 09. FBref club
+      np-goals blend helps vs v1 but is subsumed by squad+age (+0.004) -> not
+      deployed. Golden Boot now: Mbappe 30.4%, Kane 16.6%, Messi 1.2% (age 39) vs
+      market 8% — boldest disagreement on record
 - [ ] Backlog below
 
 ## Backlog (in order; numbering stable, #1-4, 5a, 6, 8 closed — see Status)
@@ -60,9 +62,9 @@ docstring with the mathematical model, every design choice goes in docs/METHODOL
    - fatigue: club-season minutes per player (FBref)
    They enter as extra_cols in the DC (hierarchical-residual design: they predict
    Elo residuals). Rule: a feature that doesn't improve backtest log-loss is dropped.
-6b. **Player layer v2** (rest of #6): needs genuinely new information — FBref
-   xG/90 + expected minutes, penalty-taker bonus. Squad-list/age reweightings of
-   goalscorers.csv are REJECTED (see Status 2026-06-12); don't retry them.
+6b. **Player layer v3** (rest of #6): penalty-taker bonus; npxG once a gateable
+   pre-2018 source exists (we deploy only what we gate). Fatigue block (#5d) can
+   now reuse the FBref minutes data (data/external/fbref_*.csv).
 7. **Cohesion graph** (most expensive feature, last): shared career minutes per pair
    (Transfermarkt), slow decay; feature = mean density over the expected XI.
 9. **Report**: three-way comparison (model vs BetMGM 11/06 odds vs Klement) + live

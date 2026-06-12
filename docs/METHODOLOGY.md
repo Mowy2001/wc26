@@ -143,23 +143,27 @@ mechanism stays in simulate.py for any future venue-dependent block that passes
 (e.g. club-city-based acclimatization, v2). Altitude remains non-backtestable
 (no high-altitude venue since 1986) and is therefore also out.
 
-## Player layer v2 gate (REJECTED — v1 stands, 2026-06-12)
-A dedicated admission gate for allocation variants (scripts/16): score the REALISED
-within-team scorer splits of WC2014/18/22 with the per-goal multinomial
-log-likelihood, weights built strictly point-in-time, debutant share from the three
-prior WCs. Variants tested against v1 (decayed shares + activity window):
-(a) official-squad membership filter; (b) same, with dropped mass flowing to the
-new-faces bucket; (c) age discount exp(-alpha*max(0, age-30)), grid over alpha;
-(d) share tempering p^tau. ALL REJECTED: v1 2.2013 vs best challenger 2.2657
-(LOTO). The autopsy is the interesting part. Name matching was innocent (100% of
-realised scorers appear in the squad lists). The squad filter only removes players
-who were genuinely not selected (Mane 2022, Morata 2018) — yet removing them and
-renormalising made predictions WORSE, and routing their mass to the bucket worse
-still. Reading: the official rosters carry no allocation information that the goal
-flow didn't already have, and every reweighting of the same data only reshuffles
-noise. The Valencia concern stands as priced (he IS in the squad; the age discount
-was rejected by the data). A real v2 needs genuinely NEW information — club
-minutes/xG (FBref), penalty-taker identity — not transformations of the old.
+## Player layer gate — a bug in the judge, and a reversed verdict (2026-06-12)
+The allocation gate (scripts/16) scores the REALISED within-team scorer splits of
+WC2014/18/22 with the per-goal multinomial log-likelihood, point-in-time weights,
+debutant share from the three prior WCs. FIRST RUN (buggy metric): goals by
+scorers without a named share were scored at the FULL new-faces bucket mass, as if
+the bucket were one pseudo-player — a metric that rewards diffuse named lists and,
+in the limit, scores an all-bucket model perfectly (LL = 0, caught when an empty
+variant "won"). Under that metric every challenger lost and we wrongly announced
+that rosters carry no information. CORRECTED METRIC: the bucket mass is split
+among the K squad members without a named share. The verdict FLIPS, decisively:
+official-squad filter + age discount exp(-0.1*max(0, age-30)) beats v1 in all
+three folds (pooled 2.7266 vs 2.9122, LOTO alpha stable at 0.1-0.15). DEPLOYED.
+Sequential test on top (scripts/18): FBref club-season non-penalty goals as a
+blended component — helps vs v1 alone (-0.056 OOS) but adds nothing on top of the
+squad+age base (+0.004): club form is subsumed; NOT deployed (npxG would be nicer
+but the 2017-18 archive page predates xG, and we deploy only what we gate).
+Consequences for 2026: Mbappe 30.4% Golden Boot (France's mass concentrates once
+non-selected past scorers leave), Kane 16.6%, Messi 1.2% vs market ~8% (age 39
+discount — our boldest market disagreement, on the record), Valencia 2.5%.
+Lesson, on the record: the gate protects you only if the metric is right; when a
+variant scores impossibly well, suspect the judge before the contestant.
 
 ## Three-way benchmark
 After the tournament: log-loss and calibration of our model vs bookmaker implied

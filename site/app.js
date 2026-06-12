@@ -237,10 +237,13 @@ if (WC26.golden_boot) {
      in the simulations — and a model that cannot see age or club minutes. That blind spot is
      precisely what the next data block (FBref minutes &amp; xG) is for; the market already prices it.
      A further ${pct(WC26.debutant_share, 0)} of goals is reserved for debutant scorers ("new faces"),
-     the historical World Cup average. We also tried the obvious fixes — official rosters as a
-     membership filter, an age discount for veterans: <strong>both scored worse</strong> than this
-     simple model on the realised 2014/18/22 scorer splits and were rejected by the same gate
-     that judges every data block. Most distinct scorers: ` +
+     the historical World Cup average. These weights are the survivors of a courtroom drama: our
+     first backtest "rejected" the official rosters and the age discount — then we found a bug in
+     the metric itself (it scored unknown scorers against the whole new-faces mass, so degenerate
+     models looked perfect). With the judge fixed, the verdict <strong>flipped</strong>: roster
+     filter + age discount beat the old model on all three past World Cups and now run the table
+     above. Boldest disagreement on record: Messi at ${pct((WC26.golden_boot.find(p => p.player === "Lionel Messi") || {P_golden_boot: 0}).P_golden_boot)}
+     vs the market's ~8% — the age-39 discount, validated out-of-sample, says what it says. Most distinct scorers: ` +
     Object.entries(WC26.distinct_scorers).slice(0, 3).map(([t, p]) => `${t} ${pct(p, 0)}`).join(", ") + `.`;
 }
 

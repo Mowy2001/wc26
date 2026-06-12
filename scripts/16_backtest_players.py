@@ -50,16 +50,21 @@ def realised(slug, start, end):
     return {t: g["scorer"].value_counts().to_dict() for t, g in wc.groupby("team")}
 
 
-def ll_per_goal(weights_fn, slug, start, end):
-    """Mean negative log-likelihood per realised goal under a weights builder."""
+def ll_per_goal(weights_fn, slug, start, end, squad):
+    """Mean NLL per realised goal. Bucket mass split among squad members
+    without a named share (one of K interchangeable new faces — giving an
+    unlisted scorer the whole bucket would reward degenerate weights)."""
     asof = pd.Timestamp(start)
     deb = estimate_debutant_share(gs, PRIOR[slug])
     out, n = 0.0, 0
     for team, scored in realised(slug, start, end).items():
         w = weights_fn(team, asof, deb)
-        norm_w = {_norm_name(k): v for k, v in w.items()}
+        norm_w = {_norm_name(k): v for k, v in w.items() if k != DEBUTANT_KEY}
+        roster = {_norm_name(p) for p in squad[squad["team"] == team]["player"]}
+        k_new = max(1, len(roster - set(norm_w)))
+        p_new = w.get(DEBUTANT_KEY, 1e-6) / k_new
         for scorer, goals in scored.items():
-            p = norm_w.get(_norm_name(scorer), w.get(DEBUTANT_KEY, 1e-6))
+            p = norm_w.get(_norm_name(scorer), p_new)
             out -= goals * np.log(max(p, 1e-9))
             n += goals
     return out / n
@@ -68,17 +73,17 @@ def ll_per_goal(weights_fn, slug, start, end):
 rows = []
 for slug, start, end in WCS:
     squad = pd.read_csv(f"data/external/squads_{slug}.csv", parse_dates=["birth"])
-    v1 = ll_per_goal(lambda t, a, d: scorer_weights(gs, t, a, d), slug, start, end)
+    v1 = ll_per_goal(lambda t, a, d: scorer_weights(gs, t, a, d), slug, start, end, squad)
     row = {"wc": slug, "v1": v1}
     for alpha in ALPHAS:
         row[f"v2_a{alpha}"] = ll_per_goal(
             lambda t, a, d, al=alpha: squad_weights(gs, squad, t, a, d, age_alpha=al,
-                                                    drop_to_bucket=False), slug, start, end)
+                                                    drop_to_bucket=False), slug, start, end, squad)
         row[f"v2b_a{alpha}"] = ll_per_goal(
-            lambda t, a, d, al=alpha: squad_weights(gs, squad, t, a, d, age_alpha=al), slug, start, end)
+            lambda t, a, d, al=alpha: squad_weights(gs, squad, t, a, d, age_alpha=al), slug, start, end, squad)
     for tau in TAUS:
         row[f"v3_t{tau}"] = ll_per_goal(
-            lambda t, a, d, tu=tau: temper(scorer_weights(gs, t, a, d), tu), slug, start, end)
+            lambda t, a, d, tu=tau: temper(scorer_weights(gs, t, a, d), tu), slug, start, end, squad)
     rows.append(row)
 
 df = pd.DataFrame(rows).set_index("wc")

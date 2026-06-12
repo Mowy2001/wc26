@@ -471,74 +471,74 @@ const WC26 = {
   {
    "player": "Kylian Mbapp\u00e9",
    "team": "France",
-   "E_goals": 4.2889,
-   "P_golden_boot": 0.1849
+   "E_goals": 4.9241,
+   "P_golden_boot": 0.3036
   },
   {
    "player": "Harry Kane",
    "team": "England",
-   "E_goals": 4.1713,
+   "E_goals": 4.0188,
    "P_golden_boot": 0.1664
-  },
-  {
-   "player": "Enner Valencia",
-   "team": "Ecuador",
-   "E_goals": 4.0142,
-   "P_golden_boot": 0.1448
-  },
-  {
-   "player": "Lionel Messi",
-   "team": "Argentina",
-   "E_goals": 3.6996,
-   "P_golden_boot": 0.1132
-  },
-  {
-   "player": "Ra\u00fal Jim\u00e9nez",
-   "team": "Mexico",
-   "E_goals": 3.171,
-   "P_golden_boot": 0.0625
-  },
-  {
-   "player": "Erling Haaland",
-   "team": "Norway",
-   "E_goals": 2.8117,
-   "P_golden_boot": 0.0575
-  },
-  {
-   "player": "Cristiano Ronaldo",
-   "team": "Portugal",
-   "E_goals": 2.8078,
-   "P_golden_boot": 0.0491
   },
   {
    "player": "Lautaro Mart\u00ednez",
    "team": "Argentina",
-   "E_goals": 2.6134,
-   "P_golden_boot": 0.0346
+   "E_goals": 3.2774,
+   "P_golden_boot": 0.094
+  },
+  {
+   "player": "Erling Haaland",
+   "team": "Norway",
+   "E_goals": 2.9181,
+   "P_golden_boot": 0.0744
   },
   {
    "player": "Mikel Oyarzabal",
    "team": "Spain",
-   "E_goals": 2.296,
-   "P_golden_boot": 0.0195
-  },
-  {
-   "player": "Romelu Lukaku",
-   "team": "Belgium",
-   "E_goals": 2.0168,
-   "P_golden_boot": 0.0138
-  },
-  {
-   "player": "Jonathan David",
-   "team": "Canada",
-   "E_goals": 2.1325,
-   "P_golden_boot": 0.0122
+   "E_goals": 2.7871,
+   "P_golden_boot": 0.0486
   },
   {
    "player": "Luis D\u00edaz",
    "team": "Colombia",
-   "E_goals": 1.7854,
-   "P_golden_boot": 0.0116
+   "E_goals": 2.407,
+   "P_golden_boot": 0.0358
+  },
+  {
+   "player": "Enner Valencia",
+   "team": "Ecuador",
+   "E_goals": 2.1855,
+   "P_golden_boot": 0.0246
+  },
+  {
+   "player": "Ferran Torres",
+   "team": "Spain",
+   "E_goals": 2.1766,
+   "P_golden_boot": 0.021
+  },
+  {
+   "player": "Mikel Merino",
+   "team": "Spain",
+   "E_goals": 2.0319,
+   "P_golden_boot": 0.0145
+  },
+  {
+   "player": "Lionel Messi",
+   "team": "Argentina",
+   "E_goals": 1.886,
+   "P_golden_boot": 0.0118
+  },
+  {
+   "player": "Romelu Lukaku",
+   "team": "Belgium",
+   "E_goals": 1.8215,
+   "P_golden_boot": 0.0118
+  },
+  {
+   "player": "Memphis Depay",
+   "team": "Netherlands",
+   "E_goals": 1.7447,
+   "P_golden_boot": 0.0104
   }
  ],
  "golden_boot_market": {
@@ -549,12 +549,12 @@ const WC26 = {
  },
  "debutant_share": 0.173,
  "distinct_scorers": {
-  "Spain": 0.4546,
-  "Germany": 0.0892,
-  "England": 0.0501,
-  "Japan": 0.0468,
-  "Argentina": 0.0466,
-  "Switzerland": 0.0434
+  "Spain": 0.3594,
+  "Argentina": 0.1218,
+  "Portugal": 0.0836,
+  "Switzerland": 0.0498,
+  "Germany": 0.0478,
+  "Croatia": 0.0318
  },
  "teams": [
   {

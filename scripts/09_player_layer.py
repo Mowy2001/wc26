@@ -1,13 +1,16 @@
 """Step 9: player layer — Golden Boot and most-distinct-scorers distributions.
 
 Conditions on the team-goal samples saved by step 04 (same simulations,
-same seed: the player layer never re-rolls the tournament).
+same seed: the player layer never re-rolls the tournament). Allocation
+weights are the gate-16 winner under the corrected bucket metric:
+official-squad filter + age discount (alpha=0.1); the club-form blend
+was tested on top and rejected (scripts/18).
 """
 import sys, time
 sys.path.insert(0, "src")
 import pandas as pd
 from wc26.data import load_goalscorers, load_results, wc2026_group_fixtures, reconstruct_groups
-from wc26.players import estimate_debutant_share, scorer_weights, allocate_goals
+from wc26.players import estimate_debutant_share, squad_weights, allocate_goals
 
 ASOF = pd.Timestamp("2026-06-11")
 gs = load_goalscorers()
@@ -17,7 +20,9 @@ teams = list(goal_samples.columns)
 deb = estimate_debutant_share(gs)
 print(f"Debutant share of WC goals (2014/18/22 average): {deb:.1%}")
 
-weights = {t: scorer_weights(gs, t, ASOF, deb) for t in teams}
+squads = pd.read_csv("data/external/squads_wc2026.csv", parse_dates=["birth"])
+weights = {t: squad_weights(gs, squads, t, ASOF, deb, age_alpha=0.1, drop_to_bucket=False)
+           for t in teams}
 t0 = time.time()
 res = allocate_goals(goal_samples, weights)
 print(f"Allocation done in {time.time() - t0:.0f}s\n")
