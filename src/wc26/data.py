@@ -72,6 +72,32 @@ def wc2026_group_fixtures(results: pd.DataFrame) -> pd.DataFrame:
     return fx[fx["date"] <= GROUP_STAGE_END].copy()
 
 
+def wc2026_played_ko(results: pd.DataFrame, shootouts: pd.DataFrame) -> dict:
+    """Played knockout matches -> {frozenset({a, b}): (winner, {team: goals})}.
+
+    The raw score is after extra time; a drawn score means a shootout, whose
+    winner comes from shootouts.csv (matched on date + teams). Used to
+    condition the simulated bracket at the pair level: whenever a simulated
+    tie features the same two teams, the real outcome is imposed.
+    """
+    fx = wc2026_fixtures(results)
+    ko = fx[(fx["date"] > GROUP_STAGE_END)].dropna(subset=["home_score", "away_score"])
+    out = {}
+    for r in ko.itertuples(index=False):
+        hg, ag = int(r.home_score), int(r.away_score)
+        if hg != ag:
+            winner = r.home_team if hg > ag else r.away_team
+        else:
+            so = shootouts[(shootouts["date"] == r.date)
+                           & (shootouts["home_team"] == r.home_team)
+                           & (shootouts["away_team"] == r.away_team)]
+            if so.empty:
+                raise ValueError(f"Drawn KO match without shootout record: {r.home_team} v {r.away_team}")
+            winner = so["winner"].iloc[0]
+        out[frozenset((r.home_team, r.away_team))] = (winner, {r.home_team: hg, r.away_team: ag})
+    return out
+
+
 # One distinctive anchor team per official group, from the FIFA draw
 # (Washington DC, 2025-12-05). Group composition is still reconstructed
 # algorithmically; the anchors only pin the official letter to each

@@ -258,7 +258,17 @@ def allocate_thirds(qualified: frozenset, _cache: dict = {}) -> dict[int, str]:
 
 
 def _ko_match(a: str, b: str, venue: str, model, elo, rng, cache: dict | None,
-              tilt=None, city=None, city_tilt=None):
+              tilt=None, city=None, city_tilt=None, fixed_ko=None):
+    if fixed_ko:
+        rec = fixed_ko.get(frozenset((a, b)))
+        if rec is not None:  # real result: impose winner and goals
+            winner, gmap = rec
+            return winner, a, b, gmap[a], gmap[b]
+    return _ko_match_sim(a, b, venue, model, elo, rng, cache, tilt, city, city_tilt)
+
+
+def _ko_match_sim(a: str, b: str, venue: str, model, elo, rng, cache: dict | None,
+                  tilt=None, city=None, city_tilt=None):
     """Play one knockout tie.
 
     Returns (winner, home, away, hg, ag) with goals including extra time
@@ -305,6 +315,8 @@ def simulate_tournament(
     collect_goal_samples: bool = False,
     team_log_tilt: dict[str, float] | None = None,
     city_log_tilt: dict[tuple[str, str], float] | None = None,
+    fixed_ko_results: dict | None = None,
+    thirds_override: dict[int, str] | None = None,
 ) -> dict[str, pd.DataFrame]:
     """Full-tournament Monte Carlo: groups + R32 bracket through the final.
 
@@ -331,6 +343,11 @@ def simulate_tournament(
     city_log_tilt: venue-dependent terms keyed (team, city) — e.g.
     beta_climate * suffering. Group fixtures use the schedule's city,
     knockout matches the official KO_CITY map.
+
+    fixed_ko_results: real knockout outcomes keyed frozenset({a, b}) (see
+    data.wc2026_played_ko) — imposed whenever a simulated tie features the
+    same pair. thirds_override: {R32 match -> group letter} once FIFA's
+    actual third-place allocation is known, overriding our matching.
     """
     rng = np.random.default_rng(seed)
     team_group = {t: g for g, ts in groups.items() for t in ts}
@@ -371,6 +388,8 @@ def simulate_tournament(
 
         third_group = {team_group[t]: t for t in best_thirds}
         alloc = allocate_thirds(frozenset(third_group))
+        if thirds_override:
+            alloc = {**alloc, **{m: g for m, g in thirds_override.items() if g in third_group}}
 
         def resolve(spec: tuple, match: int) -> str:
             kind, g = spec
@@ -388,7 +407,8 @@ def simulate_tournament(
             round_counts[a][0] += 1
             round_counts[b][0] += 1
             winners[mn], kh, ka, khg, kag = _ko_match(a, b, venue, m, elo, rng, ko_cache,
-                                                      team_log_tilt, KO_CITY.get(mn), city_log_tilt)
+                                                      team_log_tilt, KO_CITY.get(mn), city_log_tilt,
+                                                      fixed_ko_results)
             goals[kh] += khg
             goals[ka] += kag
         for depth, matches in enumerate([R16_MATCHES, QF_MATCHES, SF_MATCHES, [FINAL_MATCH]], start=1):
@@ -399,7 +419,8 @@ def simulate_tournament(
                 round_counts[a][depth] += 1
                 round_counts[b][depth] += 1
                 winners[mn], kh, ka, khg, kag = _ko_match(a, b, venue, m, elo, rng, ko_cache,
-                                                          team_log_tilt, KO_CITY.get(mn), city_log_tilt)
+                                                          team_log_tilt, KO_CITY.get(mn), city_log_tilt,
+                                                          fixed_ko_results)
                 goals[kh] += khg
                 goals[ka] += kag
         round_counts[winners[FINAL_MATCH[0]]][5] += 1

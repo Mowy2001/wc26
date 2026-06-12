@@ -6,13 +6,18 @@ Workflow during the tournament:
      remaining fixtures re-randomise around them (same seed discipline)
   3. it refreshes outputs + site/data.js — reload the site and you're live.
 
-Limitation (documented): conditioning covers the 72 group fixtures; knockout
-conditioning (bracket partially played) is a follow-up.
+Knockout conditioning: real KO outcomes are imposed at the pair level
+(winner + goals, shootout winners from shootouts.csv) whenever a simulated
+tie features the same two teams. In the rare simulation where a random
+tie-break sends a different qualifier to that slot, the tie is simulated —
+internally consistent, deviation declared. Once FIFA publishes the actual
+third-place allocation, pass thirds_override to pin it exactly.
 """
 import json, subprocess, sys
 sys.path.insert(0, "src")
 import pandas as pd
-from wc26.data import load_results, wc2026_group_fixtures, reconstruct_groups
+from wc26.data import (load_results, load_shootouts, wc2026_group_fixtures,
+                       wc2026_played_ko, reconstruct_groups)
 from wc26.elo import ratings_asof
 from wc26.dixon_coles import DixonColes
 from wc26.simulate import simulate_tournament
@@ -22,8 +27,9 @@ gfx = wc2026_group_fixtures(results)
 played = gfx.dropna(subset=["home_score", "away_score"])
 fixed = {(r.home_team, r.away_team): (int(r.home_score), int(r.away_score))
          for r in played.itertuples(index=False)}
-print(f"Played group matches found: {len(fixed)} / {len(gfx)}")
-if not fixed:
+fixed_ko = wc2026_played_ko(results, load_shootouts())
+print(f"Played: {len(fixed)}/{len(gfx)} group matches, {len(fixed_ko)}/31 knockout ties")
+if not fixed and not fixed_ko:
     print("Nothing played yet — the eve-of-tournament forecast stands.")
 
 elo_hist = pd.read_parquet("outputs/elo_history.parquet")
@@ -46,7 +52,8 @@ tilt = load_team_tilt()
 
 res = simulate_tournament(groups, gfx, model, elo_now, n_sims=20000,
                           fixed_results=fixed, param_draws=draws,
-                          collect_goal_samples=True, team_log_tilt=tilt)
+                          collect_goal_samples=True, team_log_tilt=tilt,
+                          fixed_ko_results=fixed_ko)
 res["teams"].round(4).to_csv("outputs/tournament_probs_v1.csv")
 res["goal_samples"].to_parquet("outputs/goal_samples.parquet")
 print("Tournament probabilities refreshed.")

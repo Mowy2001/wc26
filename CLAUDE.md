@@ -59,6 +59,10 @@ docstring with the mathematical model, every design choice goes in docs/METHODOL
 - [x] Penalty-taker bonus (scripts/20): REJECTED — double-counts penalties already
       in the goal shares (+0.0054 OOS). Live refresh AUTOMATED: cloud routine every
       4h through 07-19 (trig_01EtNmHHV3iS3iuvCFa1R6zp), pushes to main on new results
+- [x] KO live conditioning (deadline beaten): real knockout outcomes imposed at the
+      pair level (wc2026_played_ko; shootout winners from shootouts.csv); R32 routine
+      keeps working through the final. thirds_override ready for FIFA's real
+      allocation after 06-27
 - [ ] Backlog below
 - [ ] NEXT (deadline 06-28): knockout live conditioning — fix real R32+ results in
       the bracket as they happen; group fixed_results stops being enough
