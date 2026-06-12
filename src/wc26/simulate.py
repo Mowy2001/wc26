@@ -63,15 +63,20 @@ def _rank_group(teams: list[str], stats: dict, h2h: dict, rng: np.random.Generat
     return sort_block(list(teams))
 
 
-def _tilted(lh, la, home, away, tilt):
-    """Apply per-team residual log-tilts (e.g. football capital) to lambdas."""
+def _tilted(lh, la, home, away, tilt, city=None, city_tilt=None):
+    """Apply residual log-tilts to lambdas: per-team terms (e.g. football
+    capital) plus venue-dependent per-(team, city) terms (e.g. climate)."""
+    d = 0.0
     if tilt:
-        d = tilt.get(home, 0.0) - tilt.get(away, 0.0)
+        d += tilt.get(home, 0.0) - tilt.get(away, 0.0)
+    if city_tilt and city is not None:
+        d += city_tilt.get((home, city), 0.0) - city_tilt.get((away, city), 0.0)
+    if d:
         return lh * np.exp(d), la * np.exp(-d)
     return lh, la
 
 
-def _precompute_group_fixtures(fixtures, model, elo, fixed_results, tilt=None):
+def _precompute_group_fixtures(fixtures, model, elo, fixed_results, tilt=None, city_tilt=None):
     """Per fixture: (home, away, score_matrix or None, fixed score or None)."""
     fx = []
     for r in fixtures.itertuples(index=False):
@@ -81,7 +86,8 @@ def _precompute_group_fixtures(fixtures, model, elo, fixed_results, tilt=None):
             lh, la = model.predict_lambdas(
                 elo[r.home_team], elo[r.away_team], neutral=bool(r.neutral)
             )
-            lh, la = _tilted(lh, la, r.home_team, r.away_team, tilt)
+            lh, la = _tilted(lh, la, r.home_team, r.away_team, tilt,
+                             getattr(r, "city", None), city_tilt)
             M = model.score_matrix(lh, la)
         fx.append((r.home_team, r.away_team, M, pre))
     return fx
@@ -201,6 +207,14 @@ QF_MATCHES = [
 ]
 SF_MATCHES = [(101, 97, 98, "United States"), (102, 99, 100, "United States")]
 FINAL_MATCH = (104, 101, 102, "United States")  # 103 = third-place play-off
+KO_CITY = {73: "Inglewood", 74: "Foxborough", 75: "Guadalupe", 76: "Houston",
+           77: "East Rutherford", 78: "Arlington", 79: "Mexico City", 80: "Atlanta",
+           81: "Santa Clara", 82: "Seattle", 83: "Toronto", 84: "Inglewood",
+           85: "Vancouver", 86: "Miami Gardens", 87: "Kansas City", 88: "Arlington",
+           89: "Philadelphia", 90: "Houston", 91: "East Rutherford", 92: "Mexico City",
+           93: "Arlington", 94: "Seattle", 95: "Atlanta", 96: "Vancouver",
+           97: "Foxborough", 98: "Inglewood", 99: "Miami Gardens", 100: "Kansas City",
+           101: "Arlington", 102: "Atlanta", 104: "East Rutherford"}
 
 # Shootout model, fitted on the 677 shootouts in shootouts.csv merged with
 # point-in-time Elo: P(A wins) = sigmoid(B_HOME*host_A + B_ELO*(eloA-eloB)/400).
@@ -243,7 +257,8 @@ def allocate_thirds(qualified: frozenset, _cache: dict = {}) -> dict[int, str]:
     return sol
 
 
-def _ko_match(a: str, b: str, venue: str, model, elo, rng, cache: dict | None, tilt=None):
+def _ko_match(a: str, b: str, venue: str, model, elo, rng, cache: dict | None,
+              tilt=None, city=None, city_tilt=None):
     """Play one knockout tie.
 
     Returns (winner, home, away, hg, ag) with goals including extra time
@@ -255,11 +270,11 @@ def _ko_match(a: str, b: str, venue: str, model, elo, rng, cache: dict | None, t
     """
     home, away = (b, a) if b == venue else (a, b)
     is_home = home == venue
-    key = (home, away, is_home)
+    key = (home, away, is_home, city if city_tilt else None)
     M = cache.get(key) if cache is not None else None
     if M is None:
         lh, la = model.predict_lambdas(elo[home], elo[away], neutral=not is_home)
-        lh, la = _tilted(lh, la, home, away, tilt)
+        lh, la = _tilted(lh, la, home, away, tilt, city, city_tilt)
         M = (model.score_matrix(lh, la), lh, la)
         if cache is not None:
             cache[key] = M
@@ -289,6 +304,7 @@ def simulate_tournament(
     param_draws: list[dict] | None = None,
     collect_goal_samples: bool = False,
     team_log_tilt: dict[str, float] | None = None,
+    city_log_tilt: dict[tuple[str, str], float] | None = None,
 ) -> dict[str, pd.DataFrame]:
     """Full-tournament Monte Carlo: groups + R32 bracket through the final.
 
@@ -311,6 +327,10 @@ def simulate_tournament(
     residual blocks (currently beta_capital * capital_z; see METHODOLOGY).
     Applied symmetrically: a team's tilt boosts its rate and dampens its
     opponent's.
+
+    city_log_tilt: venue-dependent terms keyed (team, city) — e.g.
+    beta_climate * suffering. Group fixtures use the schedule's city,
+    knockout matches the official KO_CITY map.
     """
     rng = np.random.default_rng(seed)
     team_group = {t: g for g, ts in groups.items() for t in ts}
@@ -324,12 +344,13 @@ def simulate_tournament(
             m.params_ = dict(d)
             models.append(m)
         fx_by_model = [
-            _precompute_group_fixtures(fixtures, m, elo, fixed_results or {}, team_log_tilt)
+            _precompute_group_fixtures(fixtures, m, elo, fixed_results or {}, team_log_tilt, city_log_tilt)
             for m in models
         ]
     else:
         models = [model]
-        fx_by_model = [_precompute_group_fixtures(fixtures, model, elo, fixed_results or {}, team_log_tilt)]
+        fx_by_model = [_precompute_group_fixtures(fixtures, model, elo, fixed_results or {},
+                                                  team_log_tilt, city_log_tilt)]
     G1 = len(model.score_matrix(1, 1))
     ko_cache: dict | None = {} if not param_draws else None
     goal_samples = np.zeros((n_sims, len(teams)), dtype=np.int16) if collect_goal_samples else None
@@ -366,7 +387,8 @@ def simulate_tournament(
             a, b = resolve(sa, mn), resolve(sb, mn)
             round_counts[a][0] += 1
             round_counts[b][0] += 1
-            winners[mn], kh, ka, khg, kag = _ko_match(a, b, venue, m, elo, rng, ko_cache, team_log_tilt)
+            winners[mn], kh, ka, khg, kag = _ko_match(a, b, venue, m, elo, rng, ko_cache,
+                                                      team_log_tilt, KO_CITY.get(mn), city_log_tilt)
             goals[kh] += khg
             goals[ka] += kag
         for depth, matches in enumerate([R16_MATCHES, QF_MATCHES, SF_MATCHES, [FINAL_MATCH]], start=1):
@@ -376,7 +398,8 @@ def simulate_tournament(
                 a, b = winners[fa], winners[fb]
                 round_counts[a][depth] += 1
                 round_counts[b][depth] += 1
-                winners[mn], kh, ka, khg, kag = _ko_match(a, b, venue, m, elo, rng, ko_cache, team_log_tilt)
+                winners[mn], kh, ka, khg, kag = _ko_match(a, b, venue, m, elo, rng, ko_cache,
+                                                          team_log_tilt, KO_CITY.get(mn), city_log_tilt)
                 goals[kh] += khg
                 goals[ka] += kag
         round_counts[winners[FINAL_MATCH[0]]][5] += 1
