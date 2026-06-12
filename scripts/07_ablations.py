@@ -6,6 +6,7 @@ Four counterfactual tournament runs (same 20k sims, same seed as the headline):
   - xi_short_memory      : xi = 0.005  (half-life ~4.6 months), point estimate
   - xi_long_memory       : xi = 0.0005 (half-life ~3.8 years), point estimate
   - no_param_uncertainty : point estimate instead of bootstrap draws
+  - no_capital           : without the football-capital tilt (admitted block)
 
 Output: outputs/ablations.json with full P_champion vectors per scenario
 plus host-nation group numbers, consumed by the site exporter (step 05).
@@ -37,11 +38,18 @@ try:
     draws = json.load(open("outputs/dc_bootstrap.json"))
 except FileNotFoundError:
     draws = None
+try:
+    _cap = pd.read_csv("outputs/capital.csv").query("tournament == 'wc2026'")
+    _beta = json.load(open("outputs/capital_beta.json"))["beta_capital"]
+    tilt = {r.team: _beta * r.capital_z for r in _cap.itertuples(index=False)}
+except FileNotFoundError:
+    tilt = None
 scenarios = {
-    "no_host_advantage": dict(model=base_model, host_advantage=False, param_draws=draws),
-    "xi_short_memory": dict(model=DixonColes(xi=0.005).fit(train, FIT), host_advantage=True, param_draws=None),
-    "xi_long_memory": dict(model=DixonColes(xi=0.0005).fit(train, FIT), host_advantage=True, param_draws=None),
-    "no_param_uncertainty": dict(model=base_model, host_advantage=True, param_draws=None),
+    "no_host_advantage": dict(model=base_model, host_advantage=False, param_draws=draws, team_log_tilt=tilt),
+    "xi_short_memory": dict(model=DixonColes(xi=0.005).fit(train, FIT), host_advantage=True, param_draws=None, team_log_tilt=tilt),
+    "xi_long_memory": dict(model=DixonColes(xi=0.0005).fit(train, FIT), host_advantage=True, param_draws=None, team_log_tilt=tilt),
+    "no_param_uncertainty": dict(model=base_model, host_advantage=True, param_draws=None, team_log_tilt=tilt),
+    "no_capital": dict(model=base_model, host_advantage=True, param_draws=draws, team_log_tilt=None),
 }
 
 out = {}
@@ -49,7 +57,8 @@ for name, cfg in scenarios.items():
     t0 = time.time()
     tbl = simulate_tournament(groups, gfx, cfg["model"], elo_now, n_sims=20000,
                               host_advantage=cfg["host_advantage"],
-                              param_draws=cfg["param_draws"])["teams"]
+                              param_draws=cfg["param_draws"],
+                              team_log_tilt=cfg["team_log_tilt"])["teams"]
     out[name] = {
         "P_champion": {t: round(float(r["P_champion"]), 4) for t, r in tbl.iterrows()},
         "hosts": {t: {"P1": round(float(tbl.loc[t, "P1"]), 4),

@@ -41,10 +41,16 @@ try:
     draws = json.load(open("outputs/dc_bootstrap.json"))
 except FileNotFoundError:
     draws = None
+try:
+    _cap = pd.read_csv("outputs/capital.csv").query("tournament == 'wc2026'")
+    _beta = json.load(open("outputs/capital_beta.json"))["beta_capital"]
+    tilt = {r.team: _beta * r.capital_z for r in _cap.itertuples(index=False)}
+except FileNotFoundError:
+    tilt = None
 
 res = simulate_tournament(groups, gfx, model, elo_now, n_sims=20000,
                           fixed_results=fixed, param_draws=draws,
-                          collect_goal_samples=True)
+                          collect_goal_samples=True, team_log_tilt=tilt)
 res["teams"].round(4).to_csv("outputs/tournament_probs_v1.csv")
 res["goal_samples"].to_parquet("outputs/goal_samples.parquet")
 print("Tournament probabilities refreshed.")

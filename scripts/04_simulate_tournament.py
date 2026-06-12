@@ -37,9 +37,22 @@ elo_now = ratings_asof(elo_hist, "2026-06-11")
 gfx = wc2026_group_fixtures(results)
 groups = reconstruct_groups(gfx)
 
+try:
+    _cap = pd.read_csv("outputs/capital.csv").query("tournament == 'wc2026'")
+    _beta = json.load(open("outputs/capital_beta.json"))["beta_capital"]
+    tilt = {r.team: _beta * r.capital_z for r in _cap.itertuples(index=False)}
+    missing = set(groups[g][i] for g in groups for i in range(4)) - set(tilt)
+    if missing:
+        print(f"WARNING: no capital for {sorted(missing)} (tilt 0)")
+    print(f"Capital tilt active: beta={_beta}, {len(tilt)} teams")
+except FileNotFoundError:
+    tilt = None
+    print("No capital block found (scripts/11-12) — no tilt")
+
 t0 = time.time()
 res = simulate_tournament(groups, gfx, model, elo_now, n_sims=20000,
-                          param_draws=draws, collect_goal_samples=True)
+                          param_draws=draws, collect_goal_samples=True,
+                          team_log_tilt=tilt)
 tbl = res["teams"]
 tbl.round(4).to_csv("outputs/tournament_probs_v1.csv")
 res["goal_samples"].to_parquet("outputs/goal_samples.parquet")

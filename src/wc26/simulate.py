@@ -63,7 +63,15 @@ def _rank_group(teams: list[str], stats: dict, h2h: dict, rng: np.random.Generat
     return sort_block(list(teams))
 
 
-def _precompute_group_fixtures(fixtures, model, elo, fixed_results):
+def _tilted(lh, la, home, away, tilt):
+    """Apply per-team residual log-tilts (e.g. football capital) to lambdas."""
+    if tilt:
+        d = tilt.get(home, 0.0) - tilt.get(away, 0.0)
+        return lh * np.exp(d), la * np.exp(-d)
+    return lh, la
+
+
+def _precompute_group_fixtures(fixtures, model, elo, fixed_results, tilt=None):
     """Per fixture: (home, away, score_matrix or None, fixed score or None)."""
     fx = []
     for r in fixtures.itertuples(index=False):
@@ -73,6 +81,7 @@ def _precompute_group_fixtures(fixtures, model, elo, fixed_results):
             lh, la = model.predict_lambdas(
                 elo[r.home_team], elo[r.away_team], neutral=bool(r.neutral)
             )
+            lh, la = _tilted(lh, la, r.home_team, r.away_team, tilt)
             M = model.score_matrix(lh, la)
         fx.append((r.home_team, r.away_team, M, pre))
     return fx
@@ -234,7 +243,7 @@ def allocate_thirds(qualified: frozenset, _cache: dict = {}) -> dict[int, str]:
     return sol
 
 
-def _ko_match(a: str, b: str, venue: str, model, elo, rng, cache: dict | None):
+def _ko_match(a: str, b: str, venue: str, model, elo, rng, cache: dict | None, tilt=None):
     """Play one knockout tie.
 
     Returns (winner, home, away, hg, ag) with goals including extra time
@@ -250,6 +259,7 @@ def _ko_match(a: str, b: str, venue: str, model, elo, rng, cache: dict | None):
     M = cache.get(key) if cache is not None else None
     if M is None:
         lh, la = model.predict_lambdas(elo[home], elo[away], neutral=not is_home)
+        lh, la = _tilted(lh, la, home, away, tilt)
         M = (model.score_matrix(lh, la), lh, la)
         if cache is not None:
             cache[key] = M
@@ -278,6 +288,7 @@ def simulate_tournament(
     host_advantage: bool = True,
     param_draws: list[dict] | None = None,
     collect_goal_samples: bool = False,
+    team_log_tilt: dict[str, float] | None = None,
 ) -> dict[str, pd.DataFrame]:
     """Full-tournament Monte Carlo: groups + R32 bracket through the final.
 
@@ -295,6 +306,11 @@ def simulate_tournament(
     collect_goal_samples=True additionally returns "goal_samples", an
     (n_sims x teams) DataFrame of tournament goals scored (group + KO incl.
     extra time) — the conditioning input of the player layer.
+
+    team_log_tilt: per-team additive term on log-lambda from admitted
+    residual blocks (currently beta_capital * capital_z; see METHODOLOGY).
+    Applied symmetrically: a team's tilt boosts its rate and dampens its
+    opponent's.
     """
     rng = np.random.default_rng(seed)
     team_group = {t: g for g, ts in groups.items() for t in ts}
@@ -308,11 +324,12 @@ def simulate_tournament(
             m.params_ = dict(d)
             models.append(m)
         fx_by_model = [
-            _precompute_group_fixtures(fixtures, m, elo, fixed_results or {}) for m in models
+            _precompute_group_fixtures(fixtures, m, elo, fixed_results or {}, team_log_tilt)
+            for m in models
         ]
     else:
         models = [model]
-        fx_by_model = [_precompute_group_fixtures(fixtures, model, elo, fixed_results or {})]
+        fx_by_model = [_precompute_group_fixtures(fixtures, model, elo, fixed_results or {}, team_log_tilt)]
     G1 = len(model.score_matrix(1, 1))
     ko_cache: dict | None = {} if not param_draws else None
     goal_samples = np.zeros((n_sims, len(teams)), dtype=np.int16) if collect_goal_samples else None
@@ -349,7 +366,7 @@ def simulate_tournament(
             a, b = resolve(sa, mn), resolve(sb, mn)
             round_counts[a][0] += 1
             round_counts[b][0] += 1
-            winners[mn], kh, ka, khg, kag = _ko_match(a, b, venue, m, elo, rng, ko_cache)
+            winners[mn], kh, ka, khg, kag = _ko_match(a, b, venue, m, elo, rng, ko_cache, team_log_tilt)
             goals[kh] += khg
             goals[ka] += kag
         for depth, matches in enumerate([R16_MATCHES, QF_MATCHES, SF_MATCHES, [FINAL_MATCH]], start=1):
@@ -359,7 +376,7 @@ def simulate_tournament(
                 a, b = winners[fa], winners[fb]
                 round_counts[a][depth] += 1
                 round_counts[b][depth] += 1
-                winners[mn], kh, ka, khg, kag = _ko_match(a, b, venue, m, elo, rng, ko_cache)
+                winners[mn], kh, ka, khg, kag = _ko_match(a, b, venue, m, elo, rng, ko_cache, team_log_tilt)
                 goals[kh] += khg
                 goals[ka] += kag
         round_counts[winners[FINAL_MATCH[0]]][5] += 1

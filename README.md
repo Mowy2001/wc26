@@ -39,6 +39,8 @@ python scripts/07_ablations.py            # counterfactual runs (no host adv, xi
 python scripts/08_bootstrap_params.py     # 100 bootstrap refits of the DC parameters
 python scripts/09_player_layer.py         # Golden Boot from goalscorers.csv
 python scripts/10_live_update.py          # refresh forecasts as real results come in
+python scripts/11_build_capital.py        # squads x clubelo -> football-capital feature
+python scripts/12_backtest_capital.py     # admission backtest (LOTO on 6 tournaments)
 ```
 
 ## Data
@@ -48,6 +50,8 @@ python scripts/10_live_update.py          # refresh forecasts as real results co
 | `data/raw/results.csv` | 49k international matches 1872→today, **including the 2026 schedule** | Elo, DC fit, tournament structure |
 | `data/raw/goalscorers.csv` | 47k goals with scorer, minute, penalty flag | Player layer |
 | `data/raw/shootouts.csv` | Historical penalty shootouts | Knockout shootout calibration |
+| `data/external/squads_*.csv` | Official squad lists, 7 tournaments (Wikipedia) | Football-capital block |
+| `data/external/clubelo_*.csv` | Club Elo snapshots at each opening day (clubelo.com) | Football-capital block |
 
 Source: github.com/martj42/international_results (CC0). The 2026 groups are **reconstructed algorithmically** from the fixture graph (connected components) — the draw is never hardcoded.
 
@@ -60,7 +64,7 @@ External benchmarks recorded on 2026-06-11 (tournament eve): BetMGM outright odd
 
 ## Known issues / roadmap
 
-See `CLAUDE.md` for the operational backlog. Done: host home advantage (verified, defensive invariant in `data.py`), official FIFA group labels (anchored to the draw), knockout bracket through the final (thirds via constraint matching, calibrated shootouts). Done since: xi tuning (flat — honest null), parameter bootstrap (negligible — honest null), player layer v1 (Golden Boot), live-update scaffold. Next: residual feature blocks (climate, football capital, diaspora, fatigue — scraping), player layer v2 (minutes/xG), cohesion graph.
+See `CLAUDE.md` for the operational backlog. Done: host home advantage (verified, defensive invariant in `data.py`), official FIFA group labels (anchored to the draw), knockout bracket through the final (thirds via constraint matching, calibrated shootouts). Done since: xi tuning (flat — honest null), parameter bootstrap (negligible — honest null), player layer v1 (Golden Boot), live-update scaffold. First residual block (football capital) admitted on probation. Next: climate/diaspora/fatigue blocks, player layer v2 (minutes/xG), cohesion graph, final report.
 
 ## Repo layout
 

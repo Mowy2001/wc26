@@ -37,12 +37,15 @@ docstring with the mathematical model, every design choice goes in docs/METHODOL
 - [x] Live-update scaffold (scripts/10): fixed_results from refreshed results.csv,
       frozen ratings/params; KO conditioning TODO. Site v3: lineage diagram, bootstrap
       card, Golden Boot section
+- [x] Capital block #5a (scripts/11-12): squads (wiki) x clubelo, LOTO backtest
+      -0.0012 OOS LL (t=-0.32), ADMITTED ON PROBATION, beta=0.0328 tilt in all sims.
+      Europe-only source bias declared (taxes Brazil/Mexico/USA). Site v4 card.
 - [ ] Backlog below
 
-## Backlog (in order; numbering stable, #1-4, 6, 8 closed — see Status)
+## Backlog (in order; numbering stable, #1-4, 5a, 6, 8 closed — see Status)
 5. **Residual blocks** (scraping — needs full network access, hence Claude Code):
-   - football capital: FBref top-5-league minutes, clubelo.com club Elo weighted by
-     minutes, CIES academy ranking
+   - football capital v2: FBref top-5-league minutes to weight the clubelo tilt
+     within squads (v1 admitted on probation, see Status); CIES academy ranking
    - climate: open-meteo history for venue+kickoff vs players' club cities (mismatch
      score); venue altitude (CDMX 2240m, Guadalajara 1566m)
    - diaspora: US census ancestry per metro area → de-facto home support
