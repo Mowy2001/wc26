@@ -84,9 +84,10 @@ const byChamp = [...WC26.teams].sort((a, b) => b.P_champion - a.P_champion);
 
 /* ---------- model vs market ---------- */
 {
-  const rows = Object.entries(WC26.betmgm_outright).map(([team, odds]) => {
+  const rows = Object.entries(WC26.betmgm_shin || WC26.betmgm_outright).map(([team, p]) => {
     const t = WC26.teams.find((x) => x.team === team);
-    return { team, model: t.P_champion, market: 1 / (1 + odds / 100) };
+    const market = WC26.betmgm_shin ? p : 1 / (1 + p / 100);
+    return { team, model: t.P_champion, market };
   }).sort((a, b) => b.model - a.model);
   const max = Math.max(...rows.flatMap((r) => [r.model, r.market]));
   document.getElementById("market-chart").innerHTML = rows.map((r) => `

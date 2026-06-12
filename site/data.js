@@ -29,6 +29,17 @@ const WC26 = {
   "Netherlands": 2000,
   "United States": 5000
  },
+ "betmgm_shin": {
+  "Spain": 0.178,
+  "France": 0.1604,
+  "England": 0.1125,
+  "Brazil": 0.0968,
+  "Portugal": 0.0843,
+  "Argentina": 0.0843,
+  "Germany": 0.048,
+  "Netherlands": 0.0288,
+  "United States": 0.0061
+ },
  "kalshi_usa_group": 0.51,
  "klement": "Netherlands champions (final vs Portugal); England and Spain out in the semis",
  "xi_tuning": {

@@ -179,9 +179,12 @@
 </section>
 
 <section id="market">
-  <h2>Model vs market <span class="sub">BetMGM outright odds, June 11 (raw implied, includes vig)</span></h2>
+  <h2>Model vs market <span class="sub">BetMGM outright odds, June 11 — margin removed with Shin’s method</span></h2>
   <div id="market-chart" class="chart"></div>
-  <p class="note">Where the bars disagree, someone is wrong — that's the point. The model is
+  <p class="note">The bookmaker margin is stripped with Shin's insider-trading model, which
+  de-shades longshots more than favourites — after which model and market actually <em>agree</em>
+  on the Netherlands and the USA; the live disagreements are Argentina and Brazil.
+  Where the bars disagree, someone is wrong — that's the point. The model is
   deliberately Elo-honest; the market knows things we've chosen not to feed it (yet).
   After the final we score model, bookmaker and the Klement forecast
   (<span id="klement-note"></span>) on the same log-loss scale. Every prediction is frozen

@@ -8,8 +8,12 @@ import json, sys
 from datetime import date
 sys.path.insert(0, "src")
 import pandas as pd
+from wc26.benchmark import shin_probs
 from wc26.elo import ratings_asof
 
+BETMGM = {"Spain": 450, "France": 500, "England": 700, "Brazil": 800,
+          "Portugal": 900, "Argentina": 900, "Germany": 1400,
+          "Netherlands": 2000, "United States": 5000}
 tbl = pd.read_csv("outputs/tournament_probs_v1.csv", index_col=0)
 elo = ratings_asof(pd.read_parquet("outputs/elo_history.parquet"), "2026-06-11")
 
@@ -73,9 +77,10 @@ data = {
     "shootout": {"b_home": 0.309, "b_elo": 0.677, "n": 677,
                  "ll_model": -462.5, "ll_coin": -469.3},
     # External benchmarks recorded 2026-06-11 (tournament eve) — do not overwrite.
-    "betmgm_outright": {"Spain": 450, "France": 500, "England": 700, "Brazil": 800,
-                        "Portugal": 900, "Argentina": 900, "Germany": 1400,
-                        "Netherlands": 2000, "United States": 5000},
+    "betmgm_outright": BETMGM,
+    "betmgm_shin": {k: round(v, 4) for k, v in
+                    shin_probs(BETMGM, residual_mass=float(
+                        1.0 - tbl.loc[list(BETMGM), "P_champion"].sum())).items()},
     "kalshi_usa_group": 0.51,
     "klement": "Netherlands champions (final vs Portugal); England and Spain out in the semis",
     "xi_tuning": xi_tuning,
