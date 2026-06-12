@@ -50,6 +50,12 @@ docstring with the mathematical model, every design choice goes in docs/METHODOL
       np-goals blend helps vs v1 but is subsumed by squad+age (+0.004) -> not
       deployed. Golden Boot now: Mbappe 30.4%, Kane 16.6%, Messi 1.2% (age 39) vs
       market 8% — boldest disagreement on record
+- [x] Fatigue block #5d (scripts/19): squad-mean club minutes on top of capital;
+      b=-0.028 stable across both folds, OOS -0.0012 -> ADMITTED on probation.
+      France pays most (-2.4pp). Tilts centralised in src/wc26/tilts.py
+- [x] LIVE since 2026-06-13: results.csv refreshed from upstream; Mexico 2-0 RSA
+      (P=80%) and KOR 2-1 CZE (P=45%) conditioned; running LL 0.51 vs 1.10 uniform.
+      Canonical refresh = scripts/10
 - [ ] Backlog below
 
 ## Backlog (in order; numbering stable, #1-4, 5a, 6, 8 closed — see Status)
@@ -59,7 +65,6 @@ docstring with the mathematical model, every design choice goes in docs/METHODOL
    - climate v2 (v1 REJECTED, see Status): club-city acclimatization instead of
      home-country; needs the FBref/club-city block first
    - diaspora: US census ancestry per metro area → de-facto home support
-   - fatigue: club-season minutes per player (FBref)
    They enter as extra_cols in the DC (hierarchical-residual design: they predict
    Elo residuals). Rule: a feature that doesn't improve backtest log-loss is dropped.
 6b. **Player layer v3** (rest of #6): penalty-taker bonus; npxG once a gateable

@@ -1,0 +1,6 @@
+{
+ "beta_fatigue": -0.028,
+ "oos_delta": -0.00122,
+ "verdict": "ADMITTED",
+ "n_folds": 2
+}

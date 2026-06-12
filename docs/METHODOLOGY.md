@@ -165,6 +165,18 @@ discount — our boldest market disagreement, on the record), Valencia 2.5%.
 Lesson, on the record: the gate protects you only if the metric is right; when a
 variant scores impossibly well, suspect the judge before the contestant.
 
+## Fatigue block (backlog #5d, admitted on probation, 2026-06-13)
+Feature: squad-mean club-season minutes (FBref via Wayback, pre-tournament
+season; for the November 2022 fold the previous full season — declared), matched
+players only (coverage 38-48%, Big-5 bias as with capital), z-scored within
+tournament. Gated on top of the capital tilt so quality is already priced; what
+is left is load. Two folds only (minutes pages exist point-in-time for 2018 and
+2022): b* = -0.027/-0.029 (stable, theory-consistent sign: more minutes, fewer
+goals), mean OOS -0.0012. Admitted on probation; b = -0.0280 on both folds.
+Effect on 2026: France (load +1.79 sigma, heaviest squad) -2.4pp on the title,
+Spain -1.4, England -1.3; Morocco/Ecuador/Mexico gain. Residual tilts are now
+centralised in src/wc26/tilts.py (capital + fatigue).
+
 ## Three-way benchmark
 After the tournament: log-loss and calibration of our model vs bookmaker implied
 probabilities (margin removed, Shin's method) vs Klement's forecasts (GDP/population/

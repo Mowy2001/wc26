@@ -6,7 +6,8 @@ Four counterfactual tournament runs (same 20k sims, same seed as the headline):
   - xi_short_memory      : xi = 0.005  (half-life ~4.6 months), point estimate
   - xi_long_memory       : xi = 0.0005 (half-life ~3.8 years), point estimate
   - no_param_uncertainty : point estimate instead of bootstrap draws
-  - no_capital           : without the football-capital tilt (admitted block)
+  - no_capital           : without the football-capital tilt (fatigue kept)
+  - no_fatigue           : without the fatigue tilt (capital kept)
 
 Output: outputs/ablations.json with full P_champion vectors per scenario
 plus host-nation group numbers, consumed by the site exporter (step 05).
@@ -38,18 +39,21 @@ try:
     draws = json.load(open("outputs/dc_bootstrap.json"))
 except FileNotFoundError:
     draws = None
-try:
-    _cap = pd.read_csv("outputs/capital.csv").query("tournament == 'wc2026'")
-    _beta = json.load(open("outputs/capital_beta.json"))["beta_capital"]
-    tilt = {r.team: _beta * r.capital_z for r in _cap.itertuples(index=False)}
-except FileNotFoundError:
-    tilt = None
+from wc26.tilts import load_team_tilt
+tilt = load_team_tilt()  # capital + fatigue
+_cap = pd.read_csv("outputs/capital.csv").query("tournament == 'wc2026'")
+_bc = json.load(open("outputs/capital_beta.json"))["beta_capital"]
+cap_only = {r.team: _bc * r.capital_z for r in _cap.itertuples(index=False)}
+_fat = pd.read_csv("outputs/fatigue.csv", index_col=0)["fatigue_z"]
+_bf = json.load(open("outputs/fatigue_beta.json"))["beta_fatigue"]
+fat_only = {t: _bf * float(z) for t, z in _fat.items()}
 scenarios = {
     "no_host_advantage": dict(model=base_model, host_advantage=False, param_draws=draws, team_log_tilt=tilt),
     "xi_short_memory": dict(model=DixonColes(xi=0.005).fit(train, FIT), host_advantage=True, param_draws=None, team_log_tilt=tilt),
     "xi_long_memory": dict(model=DixonColes(xi=0.0005).fit(train, FIT), host_advantage=True, param_draws=None, team_log_tilt=tilt),
     "no_param_uncertainty": dict(model=base_model, host_advantage=True, param_draws=None, team_log_tilt=tilt),
-    "no_capital": dict(model=base_model, host_advantage=True, param_draws=draws, team_log_tilt=None),
+    "no_capital": dict(model=base_model, host_advantage=True, param_draws=draws, team_log_tilt=fat_only),
+    "no_fatigue": dict(model=base_model, host_advantage=True, param_draws=draws, team_log_tilt=cap_only),
 }
 
 out = {}

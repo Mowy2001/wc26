@@ -41,12 +41,8 @@ try:
     draws = json.load(open("outputs/dc_bootstrap.json"))
 except FileNotFoundError:
     draws = None
-try:
-    _cap = pd.read_csv("outputs/capital.csv").query("tournament == 'wc2026'")
-    _beta = json.load(open("outputs/capital_beta.json"))["beta_capital"]
-    tilt = {r.team: _beta * r.capital_z for r in _cap.itertuples(index=False)}
-except FileNotFoundError:
-    tilt = None
+from wc26.tilts import load_team_tilt
+tilt = load_team_tilt()
 
 res = simulate_tournament(groups, gfx, model, elo_now, n_sims=20000,
                           fixed_results=fixed, param_draws=draws,

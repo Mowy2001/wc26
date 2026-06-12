@@ -61,10 +61,11 @@
     </div>
     <div class="card">
       <h3>🏟️ 1,248 club careers <span class="market-chip">new</span></h3>
-      <p>The official squad lists (Wikipedia) joined to club Elo ratings
-      (clubelo.com): where does each player earn his living? First external block to
-      pass the admission backtest — see its card below. Known bias, declared:
-      clubelo covers Europe only, so squads based elsewhere lean on an imputed floor.</p>
+      <p>The official squad lists (Wikipedia) joined to club Elo ratings (clubelo.com)
+      and club-season minutes (FBref, via the Wayback Machine — the site itself blocks
+      robots). Where does each player earn his living, and how many minutes are in his
+      legs? Feeds three admitted pieces: the capital tilt, the fatigue tilt and the
+      Golden Boot squad filter. Known bias, declared: coverage is Europe/Big-5 only.</p>
     </div>
     <div class="card off">
       <h3>🚫 Deliberately excluded</h3>
@@ -94,6 +95,12 @@
       <span class="node file">clubelo.com</span><span class="arr">→</span>
       <span class="node">capital z-score</span><span class="arr">→</span>
       <span class="node">tilt on goal rates (β=0.033)</span>
+    </div>
+    <div class="flow">
+      <span class="node file">squads (wiki)</span><span class="arr">+</span>
+      <span class="node file">fbref minutes</span><span class="arr">→</span>
+      <span class="node">fatigue z-score</span><span class="arr">→</span>
+      <span class="node">tilt on goal rates (β=−0.028)</span>
     </div>
     <div class="flow">
       <span class="node file">shootouts.csv</span><span class="arr">→</span>
@@ -140,6 +147,13 @@
       past tournaments. It passed the admission rule — barely:</p>
       <div id="capital-card"></div>
       <p class="mini-note" id="capital-note"></p>
+    </div>
+    <div class="card">
+      <h3>Tired legs — admitted, thin file</h3>
+      <p class="mini-intro">Squad-mean club-season minutes, tested on top of the capital
+      tilt (so "quality" is already accounted for — what's left is load):</p>
+      <div id="fatigue-card"></div>
+      <p class="mini-note" id="fatigue-note"></p>
     </div>
     <div class="card off">
       <h3>Heat mismatch — tried, and thrown out</h3>

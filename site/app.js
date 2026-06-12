@@ -190,6 +190,31 @@ if (WC26.capital && WC26.ablations && WC26.ablations.no_capital) {
      run <em>toward</em> the market for European squads and <em>away</em> for the Americas.`;
 }
 
+/* ---------- fatigue card ---------- */
+if (WC26.fatigue && WC26.ablations && WC26.ablations.no_fatigue) {
+  const m = WC26.fatigue.meta;
+  const nf = WC26.ablations.no_fatigue.P_champion;
+  const movers = WC26.teams
+    .map((t) => ({ team: t.team, d: t.P_champion - (nf[t.team] || 0), z: WC26.fatigue.z[t.team] }))
+    .sort((a, b) => Math.abs(b.d) - Math.abs(a.d)).slice(0, 4).sort((a, b) => b.d - a.d);
+  document.getElementById("fatigue-card").innerHTML =
+    `<div class="boot-sd">
+      <span>OOS log-loss <b>${m.oos_delta}</b></span>
+      <span>β <b>${m.beta_fatigue}</b>/z</span>
+      <span>folds <b>${m.n_folds}</b></span>
+    </div>` +
+    movers.map((x) => `<div class="usa-row">
+      <span class="src">${flag(x.team)}${x.team} (load ${x.z > 0 ? "+" : ""}${x.z}σ)</span>
+      <div class="usa-track"><i style="width:${100 * Math.min(1, Math.abs(x.d) / 0.025)}%;
+        background:${x.d > 0 ? "linear-gradient(90deg, var(--accent2), var(--accent))" : "#8f5161"}"></i></div>
+      <span class="num">${x.d > 0 ? "+" : ""}${(100 * x.d).toFixed(1)}pp</span></div>`).join("");
+  document.getElementById("fatigue-note").innerHTML =
+    `More minutes in the legs, fewer goals on the pitch — once club quality is held fixed by the
+     capital tilt. The sign is theory-consistent and stable, but the file is thin (two World Cups,
+     coverage <50%): admitted <strong>on probation</strong>, like everything else here. France pays
+     the most: the heaviest squad in the tournament.`;
+}
+
 /* ---------- climate (rejected) card ---------- */
 if (WC26.climate) {
   const c = WC26.climate;
