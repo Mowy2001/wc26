@@ -48,6 +48,13 @@ try:
 except FileNotFoundError:
     golden_boot, distinct_top = None, None
 try:
+    _cz = pd.read_csv("outputs/capital.csv").query("tournament == 'wc2026'")
+    capital = {"meta": json.load(open("outputs/capital_beta.json")),
+               "coverage": round(float(_cz.coverage.mean()), 3),
+               "z": {r.team: round(float(r.capital_z), 2) for r in _cz.itertuples(index=False)}}
+except FileNotFoundError:
+    capital = None
+try:
     bd = pd.DataFrame(json.load(open("outputs/dc_bootstrap.json")))
     bootstrap = {"B": int(len(bd)), "sd": bd.std().round(4).to_dict()}
 except FileNotFoundError:
@@ -57,7 +64,7 @@ data = {
     "generated": str(date.today()),
     "n_sims": 20000,
     "seed": 26,
-    "model_version": "v2 (Elo-driven Dixon-Coles, tuned xi, official bracket, calibrated shootouts, parameter bootstrap, player layer)",
+    "model_version": "v3 (Elo-driven Dixon-Coles, tuned xi, official bracket, calibrated shootouts, parameter bootstrap, player layer, capital block on probation)",
     "backtest": {
         "tournament": "World Cup 2022 (64 matches, point-in-time fit)",
         "log_loss_model": 1.060, "log_loss_uniform": 1.099,
@@ -74,6 +81,7 @@ data = {
     "xi_tuning": xi_tuning,
     "ablations": ablations,
     "bootstrap": bootstrap,
+    "capital": capital,
     "golden_boot": golden_boot,
     "golden_boot_market": {"Kylian Mbappé": 575, "Harry Kane": 675,
                            "Lionel Messi": 1150, "Erling Haaland": 1350},

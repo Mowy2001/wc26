@@ -10,7 +10,7 @@
 
 <header class="hero">
   <div class="wrap">
-    <p class="kicker">20,000 Monte Carlo simulations · fixed seed · model v2</p>
+    <p class="kicker">20,000 Monte Carlo simulations · fixed seed · model v3</p>
     <h1>The 2026 World Cup,<br>as a <em>probability distribution</em></h1>
     <p class="lede">This project is an experiment in radical data honesty: one small,
     public, 154-year-old dataset, every choice about what the model is allowed to know
@@ -59,12 +59,19 @@
       team wins slightly more often, the de-facto home side too. Both effects are in the
       simulator.</p>
     </div>
+    <div class="card">
+      <h3>🏟️ 1,248 club careers <span class="market-chip">new</span></h3>
+      <p>The official squad lists (Wikipedia) joined to club Elo ratings
+      (clubelo.com): where does each player earn his living? First external block to
+      pass the admission backtest — see its card below. Known bias, declared:
+      clubelo covers Europe only, so squads based elsewhere lean on an imputed floor.</p>
+    </div>
     <div class="card off">
       <h3>🚫 Deliberately excluded</h3>
       <p>Squad market values, injuries, FIFA rankings, pundit priors, betting odds.
       Not because they're worthless — because nothing enters this model until it
-      <strong>proves itself in a backtest</strong>. The roadmap (club minutes, climate,
-      diaspora, fatigue) will be admitted one block at a time, under the same rule:
+      <strong>proves itself in a backtest</strong>. Still in the waiting room: climate,
+      diaspora, fatigue, cohesion — one block at a time, under the same rule:
       improve out-of-sample log-loss or get dropped.</p>
     </div>
   </div>
@@ -81,6 +88,12 @@
       <span class="node">decayed scorer shares</span><span class="arr">→</span>
       <span class="node">goal allocation per simulation</span><span class="arr">→</span>
       <span class="node out">Golden Boot odds</span>
+    </div>
+    <div class="flow">
+      <span class="node file">squads (wiki)</span><span class="arr">+</span>
+      <span class="node file">clubelo.com</span><span class="arr">→</span>
+      <span class="node">capital z-score</span><span class="arr">→</span>
+      <span class="node">tilt on goal rates (β=0.033)</span>
     </div>
     <div class="flow">
       <span class="node file">shootouts.csv</span><span class="arr">→</span>
@@ -120,6 +133,13 @@
       <p class="mini-note">By Elo the USA is the <em>weakest</em> team in group D — home
       advantage alone lifts it from last to second. The market prices squad value and host
       momentum; those signals only enter here if a future data block earns its backtest.</p>
+    </div>
+    <div class="card">
+      <h3>Club careers — admitted on probation</h3>
+      <p class="mini-intro">Squad-mean club Elo, tested leave-one-tournament-out on six
+      past tournaments. It passed the admission rule — barely:</p>
+      <div id="capital-card"></div>
+      <p class="mini-note" id="capital-note"></p>
     </div>
     <div class="card">
       <h3>Parameter doubt — pinned by 17k matches</h3>
