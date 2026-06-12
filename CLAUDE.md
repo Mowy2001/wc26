@@ -56,7 +56,14 @@ docstring with the mathematical model, every design choice goes in docs/METHODOL
 - [x] LIVE since 2026-06-13: results.csv refreshed from upstream; Mexico 2-0 RSA
       (P=80%) and KOR 2-1 CZE (P=45%) conditioned; running LL 0.51 vs 1.10 uniform.
       Canonical refresh = scripts/10
+- [x] Penalty-taker bonus (scripts/20): REJECTED — double-counts penalties already
+      in the goal shares (+0.0054 OOS). Live refresh AUTOMATED: cloud routine every
+      4h through 07-19 (trig_01EtNmHHV3iS3iuvCFa1R6zp), pushes to main on new results
 - [ ] Backlog below
+- [ ] NEXT (deadline 06-28): knockout live conditioning — fix real R32+ results in
+      the bracket as they happen; group fixed_results stops being enough
+- [ ] Capital v2: minutes-weighted club Elo (needs fbref 2023-24 page for the
+      Euro 2024 fold; Big5 snapshot exists on Wayback, ts 20260225002626)
 
 ## Backlog (in order; numbering stable, #1-4, 5a, 6, 8 closed — see Status)
 5. **Residual blocks** (scraping — needs full network access, hence Claude Code):

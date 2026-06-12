@@ -177,6 +177,19 @@ Effect on 2026: France (load +1.79 sigma, heaviest squad) -2.4pp on the title,
 Spain -1.4, England -1.3; Morocco/Ecuador/Mexico gain. Residual tilts are now
 centralised in src/wc26/tilts.py (capital + fatigue).
 
+## Penalty-taker bonus (player v3a, REJECTED, 2026-06-13)
+Multiplying the designated taker's weight by (1+k) — taker = most penalty goals in
+the 3 prior years — loses for every k > 0 on the corrected gate (mean OOS +0.0054).
+Reading: penalties already live inside the taker's historical goal share; an
+explicit bonus double-counts them. Rejected without regret.
+
+## Live automation (2026-06-13)
+Cloud routine `WC26 live refresh` (claude.ai/code/routines), every 4 hours through
+2026-07-19: pulls upstream results.csv, and only if new 2026 matches were played
+reruns 01 -> 10 -> 15 and pushes data/outputs/site. Beliefs stay frozen at June 11;
+the routine may not touch model code. Guard: self-disables instruction after the
+final; group-reconstruction canary aborts the commit on data corruption.
+
 ## Three-way benchmark
 After the tournament: log-loss and calibration of our model vs bookmaker implied
 probabilities (margin removed, Shin's method) vs Klement's forecasts (GDP/population/
