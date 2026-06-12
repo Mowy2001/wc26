@@ -11,3 +11,4 @@ outputs/elo_history.parquet
 
 # Raw HTML caches (refetchable; parsed CSVs are committed)
 data/external/*.html
+data/external/tmax_*.json

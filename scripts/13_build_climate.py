@@ -36,14 +36,15 @@ TOURNAMENTS = [
     ("wc2026",   "FIFA World Cup", "2026-06-11", "2026-07-19"),
 ]
 # geocoding queries that need disambiguation (else: query = name as-is)
-GEO_FIX = {"Guadalupe": "Guadalupe, Nuevo Leon", "Arlington": "Arlington, Texas",
-           "East Rutherford": "East Rutherford", "Foxborough": "Foxborough",
-           "England": "London", "Scotland": "Glasgow", "Wales": "Cardiff",
+GEO_FIX = {"England": "London", "Scotland": "Glasgow", "Wales": "Cardiff",
            "Northern Ireland": "Belfast", "United States": "Kansas City",
            "South Korea": "Seoul", "North Korea": "Pyongyang",
            "Ivory Coast": "Abidjan", "DR Congo": "Kinshasa", "Cape Verde": "Praia",
            "Bosnia and Herzegovina": "Sarajevo", "Czech Republic": "Prague",
            "Republic of Ireland": "Dublin", "New Zealand": "Wellington"}
+
+# names where the top hit is the wrong place: pin country (and state)
+GEO_PIN = {"Arlington": ("US", "Texas"), "Guadalupe": ("MX", "Nuevo")}
 
 GEO_CACHE = EXT / "geocode.json"
 geo = json.loads(GEO_CACHE.read_text()) if GEO_CACHE.exists() else {}
@@ -53,9 +54,15 @@ def locate(name: str) -> tuple[float, float]:
     if name not in geo:
         q = GEO_FIX.get(name, name)
         r = requests.get("https://geocoding-api.open-meteo.com/v1/search",
-                         params={"name": q, "count": 1}, timeout=30).json()
-        hit = r["results"][0]
-        geo[name] = [hit["latitude"], hit["longitude"]]
+                         params={"name": q, "count": 10}, timeout=30).json()
+        hits = r.get("results", [])
+        if name in GEO_PIN:
+            cc, admin = GEO_PIN[name]
+            hits = [h for h in hits
+                    if h.get("country_code") == cc and admin in h.get("admin1", "")]
+        if not hits:
+            raise RuntimeError(f"geocoding failed for {name!r} (query {q!r})")
+        geo[name] = [hits[0]["latitude"], hits[0]["longitude"]]
         GEO_CACHE.write_text(json.dumps(geo, indent=0))
         time.sleep(0.3)
     return tuple(geo[name])

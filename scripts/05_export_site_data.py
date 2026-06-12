@@ -59,6 +59,10 @@ try:
 except FileNotFoundError:
     capital = None
 try:
+    climate = json.load(open("outputs/climate_beta.json"))
+except FileNotFoundError:
+    climate = None
+try:
     bd = pd.DataFrame(json.load(open("outputs/dc_bootstrap.json")))
     bootstrap = {"B": int(len(bd)), "sd": bd.std().round(4).to_dict()}
 except FileNotFoundError:
@@ -87,6 +91,7 @@ data = {
     "ablations": ablations,
     "bootstrap": bootstrap,
     "capital": capital,
+    "climate": climate,
     "golden_boot": golden_boot,
     "golden_boot_market": {"Kylian Mbappé": 575, "Harry Kane": 675,
                            "Lionel Messi": 1150, "Erling Haaland": 1350},

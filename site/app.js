@@ -190,6 +190,16 @@ if (WC26.capital && WC26.ablations && WC26.ablations.no_capital) {
      run <em>toward</em> the market for European squads and <em>away</em> for the Americas.`;
 }
 
+/* ---------- climate (rejected) card ---------- */
+if (WC26.climate) {
+  const c = WC26.climate;
+  document.getElementById("climate-card").innerHTML = `<div class="boot-sd">
+    <span>OOS log-loss <b>+${c.oos_delta}</b> (worse)</span>
+    <span>paired t <b>+${c.t_paired}</b></span>
+    <span>verdict <b style="color:#f87171">${c.verdict}</b></span>
+  </div>`;
+}
+
 /* ---------- bootstrap card ---------- */
 if (WC26.bootstrap && WC26.ablations && WC26.ablations.no_param_uncertainty) {
   document.getElementById("boot-b").textContent = WC26.bootstrap.B;

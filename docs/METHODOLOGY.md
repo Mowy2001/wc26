@@ -130,6 +130,19 @@ within-squad weighting (caps/minutes) yet. Effect on the headline: Spain 24.5->2
 France 10.2->12.1, England 6.6->8.0; Brazil 5.3->4.3, Mexico 2.6->1.5. Side effect:
 Ecuador's totals drop, Mbappe overtakes Valencia atop the Golden Boot table.
 
+## Climate block (backlog #5b, REJECTED, 2026-06-12)
+Hypothesis: heat mismatch (venue climatology minus home-country climatology, same
+month-day window, 10 prior years, point-in-time) tilts goal rates. Same LOTO gate
+as the capital block, on top of it. Verdict: REJECTED, and not marginally — pooled
+OOS log-loss +0.0218 WORSE (paired t=+2.61), per-fold coefficients flip sign, and
+the Qatar 2022 fold explodes (+0.11): air-conditioned stadiums, winter scheduling,
+and the design flaw that a passport is not a climate (Canada "suffers" 38.8C in
+Doha while its players live in European club cities). The admission rule did its
+job on a plausible-sounding feature. Coefficient stays at zero; the city-aware tilt
+mechanism stays in simulate.py for any future venue-dependent block that passes
+(e.g. club-city-based acclimatization, v2). Altitude remains non-backtestable
+(no high-altitude venue since 1986) and is therefore also out.
+
 ## Three-way benchmark
 After the tournament: log-loss and calibration of our model vs bookmaker implied
 probabilities (margin removed, Shin's method) vs Klement's forecasts (GDP/population/

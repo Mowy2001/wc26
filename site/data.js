@@ -460,6 +460,13 @@ const WC26 = {
    "Uzbekistan": -1.36
   }
  },
+ "climate": {
+  "beta_climate": 0.0015,
+  "oos_delta": 0.02182,
+  "t_paired": 2.61,
+  "n": 345,
+  "verdict": "REJECTED"
+ },
  "golden_boot": [
   {
    "player": "Kylian Mbapp\u00e9",
