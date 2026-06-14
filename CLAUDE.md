@@ -67,6 +67,9 @@ docstring with the mathematical model, every design choice goes in docs/METHODOL
       baseline_eve.csv = final model (v3) on the June-11 information set, immutable;
       every live refresh appends a snapshot to outputs/history/timeline.csv.
       Site: white baseline notch + movement deltas on the champion race
+- [x] Capital v2 minutes-weighting (scripts/21): ADMITTED but near-null (corr v1/v2
+      0.997, OOS -0.0013 vs -0.0008). Deployed, beta 0.0328->0.0353; build logic
+      shared in src/wc26/capital.py. Squads are mostly regular starters -> ~no effect
 - [ ] Backlog below
 - [ ] NEXT (deadline 06-28): knockout live conditioning — fix real R32+ results in
       the bracket as they happen; group fixed_results stops being enough
@@ -82,9 +85,8 @@ docstring with the mathematical model, every design choice goes in docs/METHODOL
    - diaspora: US census ancestry per metro area → de-facto home support
    They enter as extra_cols in the DC (hierarchical-residual design: they predict
    Elo residuals). Rule: a feature that doesn't improve backtest log-loss is dropped.
-6b. **Player layer v3** (rest of #6): penalty-taker bonus; npxG once a gateable
-   pre-2018 source exists (we deploy only what we gate). Fatigue block (#5d) can
-   now reuse the FBref minutes data (data/external/fbref_*.csv).
+6b. **Player layer v3** (rest of #6): npxG once a gateable pre-2018 source exists
+   (penalty bonus already REJECTED). Capital v2 minutes-weighting done (near-null).
 7. **Cohesion graph** (most expensive feature, last): shared career minutes per pair
    (Transfermarkt), slow decay; feature = mean density over the expected XI.
 9. **Report**: three-way comparison (model vs BetMGM 11/06 odds vs Klement) + live

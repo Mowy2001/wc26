@@ -1,7 +1,7 @@
 {
- "beta_capital": 0.0328,
- "oos_delta": -0.00124,
- "t_paired": -0.32,
+ "beta_capital": 0.0353,
+ "oos_delta": -0.00154,
+ "t_paired": -0.37,
  "n": 345,
  "verdict": "ADMITTED"
 }

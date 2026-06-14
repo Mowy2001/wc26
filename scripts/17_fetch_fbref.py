@@ -19,6 +19,7 @@ UA = {"User-Agent": "wc26-research/0.1 (simone.moawad@gmail.com)"}
 PAGES = [
     ("fbref_2017_18", "20260306151902", "https://fbref.com/en/comps/Big5/2017-2018/stats/players/2017-2018-Big-5-European-Leagues-Stats"),
     ("fbref_2021_22", "20220821162035", "https://fbref.com/en/comps/Big5/2021-2022/stats/players/2021-2022-Big-5-European-Leagues-Stats"),
+    ("fbref_2023_24", "20260225002626", "https://fbref.com/en/comps/Big5/2023-2024/stats/players/2023-2024-Big-5-European-Leagues-Stats"),
     ("fbref_2024_25", "20251026074147", "https://fbref.com/en/comps/Big5/2024-2025/stats/players/2024-2025-Big-5-European-Leagues-Stats"),
     ("fbref_2025_26", "20260309231038", "https://fbref.com/en/comps/Big5/stats/players/Big-5-European-Leagues-Stats"),
 ]

@@ -196,7 +196,10 @@ if (WC26.capital && WC26.ablations && WC26.ablations.no_capital) {
      (${meta.oos_delta} log-loss over ${meta.n} matches, t=${meta.t_paired}) is within noise, so the
      block is in <strong>on probation</strong>: re-judged after this World Cup. Declared bias: clubelo
      sees only Europe, so Brazil, Mexico and the USA pay an imputation tax — the moves above
-     run <em>toward</em> the market for European squads and <em>away</em> for the Americas.`;
+     run <em>toward</em> the market for European squads and <em>away</em> for the Americas.
+     v2 now weights each club rating by minutes played (a benchwarmer counts less) — it
+     won the backtest, but by a hair: the weighted and unweighted features agree 99.7% of
+     the time, because national squads are made of regular starters.`;
 }
 
 /* ---------- fatigue card ---------- */

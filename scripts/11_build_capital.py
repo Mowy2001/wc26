@@ -16,6 +16,8 @@ import re, sys, unicodedata
 from pathlib import Path
 import pandas as pd, requests
 from bs4 import BeautifulSoup
+sys.path.insert(0, "src")
+from wc26.capital import norm, capital_table
 
 EXT = Path("data/external"); EXT.mkdir(parents=True, exist_ok=True)
 UA = {"User-Agent": "wc26-research/0.1 (simone.moawad@gmail.com)"}
@@ -29,33 +31,15 @@ TOURNAMENTS = [
     ("euro2020", "UEFA_Euro_2020_squads",      "2021-06-11"),
     ("euro2024", "UEFA_Euro_2024_squads",      "2024-06-14"),
 ]
+# Minutes-weighting (capital v2, admitted by scripts/21): use club-season
+# minutes where a point-in-time FBref page exists; equal-weight otherwise.
+FBREF_SEASON = {"wc2018": "fbref_2017_18", "wc2022": "fbref_2021_22",
+                "euro2024": "fbref_2023_24", "wc2026": "fbref_2025_26"}
 # Wikipedia section names -> results.csv team names
 TEAM_ALIASES = {"Türkiye": "Turkey", "Czechia": "Czech Republic",
                 "Korea Republic": "South Korea", "IR Iran": "Iran", "Cabo Verde": "Cape Verde"}
-# Wikipedia club names -> clubelo names (top offenders; the rest is fuzzy)
-CLUB_ALIASES = {
-    "manchester city": "man city", "manchester united": "man united",
-    "paris saint germain": "paris sg", "inter milan": "inter", "internazionale": "inter",
-    "bayern munich": "bayern", "atletico madrid": "atletico", "sporting cp": "sporting",
-    "sporting lisbon": "sporting", "tottenham hotspur": "tottenham",
-    "borussia dortmund": "dortmund", "borussia monchengladbach": "gladbach",
-    "bayer leverkusen": "leverkusen", "ac milan": "milan", "as roma": "roma",
-    "real betis": "betis", "athletic bilbao": "bilbao", "real sociedad": "sociedad",
-    "newcastle united": "newcastle", "west ham united": "west ham",
-    "wolverhampton wanderers": "wolves", "nottingham forest": "forest",
-    "brighton hove albion": "brighton", "psv eindhoven": "psv",
-    "rb leipzig": "leipzig", "red bull salzburg": "salzburg", "rangers": "rangers",
-    "celtic": "celtic", "olympique lyonnais": "lyon", "olympique de marseille": "marseille",
-    "as monaco": "monaco", "dinamo zagreb": "din zagreb", "red star belgrade": "crvena zvezda",
-}
 
 
-def norm(s: str) -> str:
-    s = unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode()
-    s = re.sub(r"[^a-z0-9 ]", " ", s.lower())
-    drop = {"fc", "cf", "sc", "ac", "afc", "cd", "sv", "bk", "fk", "sk", "if", "ks",
-            "club", "de", "futbol", "futebol", "calcio", "1", "04", "05", "09", "1899", "1900"}
-    return " ".join(w for w in s.split() if w not in drop)
 
 
 def fetch(path: Path, url: str) -> str:
@@ -94,30 +78,6 @@ def parse_squads(html: str) -> pd.DataFrame:
     return df[df["club"] != ""].drop_duplicates(subset=["team", "player"])
 
 
-def capital_table(squads: pd.DataFrame, clubelo: pd.DataFrame) -> pd.DataFrame:
-    elo_by_norm = {}
-    for r in clubelo.itertuples(index=False):
-        elo_by_norm.setdefault(norm(r.Club), float(r.Elo))
-    names = list(elo_by_norm)
-    floor = clubelo["Elo"].quantile(0.10)
-    from difflib import get_close_matches
-
-    def club_elo(club: str) -> float | None:
-        n = CLUB_ALIASES.get(norm(club), norm(club))
-        if n in elo_by_norm:
-            return elo_by_norm[n]
-        hit = get_close_matches(n, names, n=1, cutoff=0.88)
-        return elo_by_norm[hit[0]] if hit else None
-
-    out = []
-    for team, g in squads.groupby("team"):
-        elos = g["club"].map(club_elo)
-        matched = elos.notna()
-        out.append({"team": team, "capital_raw": float(elos.fillna(floor).mean()),
-                    "coverage": float(matched.mean()), "n_players": len(g)})
-    df = pd.DataFrame(out)
-    df["capital_z"] = (df.capital_raw - df.capital_raw.mean()) / df.capital_raw.std(ddof=0)
-    return df
 
 
 all_caps = []
@@ -127,7 +87,11 @@ for slug, page, date in TOURNAMENTS:
     clubelo = pd.read_csv(EXT / f"clubelo_{slug}.csv")
     squads = parse_squads(html)
     squads.to_csv(EXT / f"squads_{slug}.csv", index=False)
-    cap = capital_table(squads, clubelo)
+    minutes = None
+    if slug in FBREF_SEASON and (EXT / f"{FBREF_SEASON[slug]}.csv").exists():
+        fb = pd.read_csv(EXT / f"{FBREF_SEASON[slug]}.csv")
+        minutes = {norm(p): m for p, m in zip(fb.player, fb.minutes)}
+    cap = capital_table(squads, clubelo, minutes=minutes)
     cap.insert(0, "tournament", slug)
     all_caps.append(cap)
     lo, hi = cap.nsmallest(1, "capital_z"), cap.nlargest(1, "capital_z")

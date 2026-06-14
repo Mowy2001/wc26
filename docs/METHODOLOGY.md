@@ -130,6 +130,18 @@ within-squad weighting (caps/minutes) yet. Effect on the headline: Spain 24.5->2
 France 10.2->12.1, England 6.6->8.0; Brazil 5.3->4.3, Mexico 2.6->1.5. Side effect:
 Ecuador's totals drop, Mbappe overtakes Valencia atop the Golden Boot table.
 
+## Football-capital v2 — minutes-weighting (admitted, near-null, 2026-06-14)
+Refinement: weight each player's club Elo by his club-season minutes (FBref via
+Wayback, point-in-time), so a fringe player at a giant counts less than a regular.
+Gated v1-vs-v2 on the three folds with minutes data (WC2018/22, Euro2024,
+scripts/21): pooled OOS log-loss v1 -0.0008, v2 -0.0013 vs no-capital -> v2 wins,
+but the two features correlate at 0.997 and the 2026 z-scores shift by 0.05 on
+average (max 0.27, Ecuador). Deployed (it is the gate winner and the theoretically
+correct weighting; beta moves 0.0328 -> 0.0353), reported as a near-null: national
+squads are overwhelmingly regular starters, so who-plays-where barely changes once
+you know who's called up. Build code shared in src/wc26/capital.py so v1 and v2 use
+identical club matching.
+
 ## Climate block (backlog #5b, REJECTED, 2026-06-12)
 Hypothesis: heat mismatch (venue climatology minus home-country climatology, same
 month-day window, 10 prior years, point-in-time) tilts goal rates. Same LOTO gate
