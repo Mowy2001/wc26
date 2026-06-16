@@ -72,9 +72,12 @@ docstring with the mathematical model, every design choice goes in docs/METHODOL
       shared in src/wc26/capital.py. Squads are mostly regular starters -> ~no effect
 - [x] Predicted KO bracket on the site (collect_bracket in simulate): modal occupant
       + probability per slot, live-conditioned, converges to champion. 16/72 played
-- [ ] DECISION 2026-06-16 (revised same day): FINISH testing the selected variables
-      after all — diaspora and cohesion go through the gate (may be rejected; that's
-      fine). Then present data + their impact on the site.
+- [x] Altitude block (scripts/22-23): reframed by Simone as habitual-altitude
+      acclimatisation, tested on CONMEBOL qualifiers (where altitude varies). OOS
+      -0.0225, t=-2.42 (STRONGEST block), b=0.134/km, ADMITTED. Deployed as city tilt
+      at Mexico City/Zapopan: Mexico 2.1->3.2% champion. tilts.load_city_tilt.
+- [ ] FINISH remaining selected variables: diaspora next, cohesion last (gate may
+      reject; fine). Then present data + impact on the site.
 - [ ] WANT (Simone, 2026-06-16): a time SLIDER on groups + bracket showing the
       situation match by match (data already in outputs/history/timeline.csv +
       per-snapshot bracket — need to start saving bracket history too).

@@ -142,6 +142,23 @@ squads are overwhelmingly regular starters, so who-plays-where barely changes on
 you know who's called up. Build code shared in src/wc26/capital.py so v1 and v2 use
 identical club matching.
 
+## Altitude block (admitted, the strongest signal, 2026-06-17)
+Reframed from "non-backtestable" (Simone): test it where altitude actually varies —
+CONMEBOL World Cup qualifying, a home/away round robin from La Paz (3782 m) and Quito
+(2854 m) to sea level (611 matches 2000-2025, scripts/22). Feature: a team is
+acclimatised to its HABITUAL altitude (mean elevation of its home cities); a side is
+hurt by max(0, venue_alt - habitual)/1000 km; tilt lh*=exp(b*(suffer_away-suffer_home)).
+6 time-ordered folds: pooled OOS log-loss -0.0225, paired t=-2.42 (by far our most
+significant block — capital was t=-0.32), b=0.134/km stable in every fold (0.129-0.141).
+ADMITTED. Deployment (scripts/23): per-(team, 2026-venue) city tilt via the city_log_tilt
+mechanism (built originally for the rejected heat block — reused). Only Mexico City
+(2240 m) and Zapopan (1565 m) carry it. Effect: Mexico's title odds 2.1%->3.2% (it plays
+in the air it lives in), Ecuador/South Africa gain; lowland teams drawn to altitude
+(group A's Czech Republic, South Korea) drop. Declared simplification: habitual altitude
+from the national team's home cities, not players' club cities (a possible v2); oxygen-mask
+training is unmodellable and ignored. Altitude tilts are centralised via
+src/wc26/tilts.py:load_city_tilt.
+
 ## Climate block (backlog #5b, REJECTED, 2026-06-12)
 Hypothesis: heat mismatch (venue climatology minus home-country climatology, same
 month-day window, 10 prior years, point-in-time) tilts goal rates. Same LOTO gate

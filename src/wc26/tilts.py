@@ -28,3 +28,17 @@ def load_team_tilt(outputs: str = "outputs") -> dict[str, float] | None:
     except FileNotFoundError:
         pass
     return tilt or None
+
+
+def load_city_tilt(outputs: str = "outputs") -> dict | None:
+    """Venue-dependent tilts keyed (team, city) from admitted city blocks.
+
+    Currently the altitude block (scripts/22-23): lowland teams are damped at
+    the high-altitude 2026 venues (Mexico City, Zapopan). Returns None if the
+    artifact is absent, so callers degrade gracefully.
+    """
+    try:
+        a = pd.read_csv(f"{outputs}/altitude_tilt.csv")
+    except FileNotFoundError:
+        return None
+    return {(r.team, r.city): float(r.log_tilt) for r in a.itertuples(index=False)}

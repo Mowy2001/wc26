@@ -8,6 +8,7 @@ Four counterfactual tournament runs (same 20k sims, same seed as the headline):
   - no_param_uncertainty : point estimate instead of bootstrap draws
   - no_capital           : without the football-capital tilt (fatigue kept)
   - no_fatigue           : without the fatigue tilt (capital kept)
+  - no_altitude          : without the altitude tilt (Mexico City / Zapopan)
 
 Output: outputs/ablations.json with full P_champion vectors per scenario
 plus host-nation group numbers, consumed by the site exporter (step 05).
@@ -39,8 +40,9 @@ try:
     draws = json.load(open("outputs/dc_bootstrap.json"))
 except FileNotFoundError:
     draws = None
-from wc26.tilts import load_team_tilt
+from wc26.tilts import load_team_tilt, load_city_tilt
 tilt = load_team_tilt()  # capital + fatigue
+city_tilt = load_city_tilt()  # altitude
 _cap = pd.read_csv("outputs/capital.csv").query("tournament == 'wc2026'")
 _bc = json.load(open("outputs/capital_beta.json"))["beta_capital"]
 cap_only = {r.team: _bc * r.capital_z for r in _cap.itertuples(index=False)}
@@ -48,12 +50,13 @@ _fat = pd.read_csv("outputs/fatigue.csv", index_col=0)["fatigue_z"]
 _bf = json.load(open("outputs/fatigue_beta.json"))["beta_fatigue"]
 fat_only = {t: _bf * float(z) for t, z in _fat.items()}
 scenarios = {
-    "no_host_advantage": dict(model=base_model, host_advantage=False, param_draws=draws, team_log_tilt=tilt),
-    "xi_short_memory": dict(model=DixonColes(xi=0.005).fit(train, FIT), host_advantage=True, param_draws=None, team_log_tilt=tilt),
-    "xi_long_memory": dict(model=DixonColes(xi=0.0005).fit(train, FIT), host_advantage=True, param_draws=None, team_log_tilt=tilt),
-    "no_param_uncertainty": dict(model=base_model, host_advantage=True, param_draws=None, team_log_tilt=tilt),
-    "no_capital": dict(model=base_model, host_advantage=True, param_draws=draws, team_log_tilt=fat_only),
-    "no_fatigue": dict(model=base_model, host_advantage=True, param_draws=draws, team_log_tilt=cap_only),
+    "no_host_advantage": dict(model=base_model, host_advantage=False, param_draws=draws, team_log_tilt=tilt, city_log_tilt=city_tilt),
+    "xi_short_memory": dict(model=DixonColes(xi=0.005).fit(train, FIT), host_advantage=True, param_draws=None, team_log_tilt=tilt, city_log_tilt=city_tilt),
+    "xi_long_memory": dict(model=DixonColes(xi=0.0005).fit(train, FIT), host_advantage=True, param_draws=None, team_log_tilt=tilt, city_log_tilt=city_tilt),
+    "no_param_uncertainty": dict(model=base_model, host_advantage=True, param_draws=None, team_log_tilt=tilt, city_log_tilt=city_tilt),
+    "no_capital": dict(model=base_model, host_advantage=True, param_draws=draws, team_log_tilt=fat_only, city_log_tilt=city_tilt),
+    "no_fatigue": dict(model=base_model, host_advantage=True, param_draws=draws, team_log_tilt=cap_only, city_log_tilt=city_tilt),
+    "no_altitude": dict(model=base_model, host_advantage=True, param_draws=draws, team_log_tilt=tilt, city_log_tilt=None),
 }
 
 out = {}
@@ -62,7 +65,8 @@ for name, cfg in scenarios.items():
     tbl = simulate_tournament(groups, gfx, cfg["model"], elo_now, n_sims=20000,
                               host_advantage=cfg["host_advantage"],
                               param_draws=cfg["param_draws"],
-                              team_log_tilt=cfg["team_log_tilt"])["teams"]
+                              team_log_tilt=cfg["team_log_tilt"],
+                              city_log_tilt=cfg["city_log_tilt"])["teams"]
     out[name] = {
         "P_champion": {t: round(float(r["P_champion"]), 4) for t, r in tbl.iterrows()},
         "hosts": {t: {"P1": round(float(tbl.loc[t, "P1"]), 4),

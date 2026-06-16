@@ -63,6 +63,10 @@ try:
 except FileNotFoundError:
     climate = None
 try:
+    altitude = json.load(open("outputs/altitude_beta.json"))
+except FileNotFoundError:
+    altitude = None
+try:
     _bk = pd.read_csv("outputs/bracket.csv")
     bracket = {}
     for r in _bk.itertuples(index=False):
@@ -111,6 +115,7 @@ data = {
     "bootstrap": bootstrap,
     "capital": capital,
     "climate": climate,
+    "altitude": altitude,
     "fatigue": fatigue,
     "baseline_eve": baseline,
     "bracket": bracket,

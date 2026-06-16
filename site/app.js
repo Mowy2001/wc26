@@ -202,6 +202,33 @@ if (WC26.capital && WC26.ablations && WC26.ablations.no_capital) {
      the time, because national squads are made of regular starters.`;
 }
 
+/* ---------- altitude card ---------- */
+if (WC26.altitude && WC26.ablations && WC26.ablations.no_altitude) {
+  const m = WC26.altitude;
+  const na = WC26.ablations.no_altitude.P_champion;
+  const movers = WC26.teams
+    .map((t) => ({ team: t.team, d: t.P_champion - (na[t.team] || 0) }))
+    .filter((x) => Math.abs(x.d) >= 0.001)
+    .sort((a, b) => Math.abs(b.d) - Math.abs(a.d)).slice(0, 5).sort((a, b) => b.d - a.d);
+  document.getElementById("altitude-card").innerHTML =
+    `<details class="tech"><summary>the numbers, for the curious</summary><div class="boot-sd">
+      <span>OOS log-loss <b>${m.oos_delta}</b></span>
+      <span>paired t <b>${m.t_paired}</b></span>
+      <span>β <b>${m.beta_altitude_per_km}</b>/km</span>
+      <span>tested on <b>${m.n}</b> CONMEBOL qualifiers</span>
+    </div></details>` +
+    movers.map((x) => `<div class="usa-row">
+      <span class="src">${flag(x.team)}${x.team} title odds</span>
+      <div class="usa-track"><i style="width:${100 * Math.min(1, Math.abs(x.d) / 0.012)}%;
+        background:${x.d > 0 ? "linear-gradient(90deg, var(--accent2), var(--accent))" : "#8f5161"}"></i></div>
+      <span class="num">${x.d > 0 ? "+" : ""}${(100 * x.d).toFixed(1)}pp</span></div>`).join("");
+  document.getElementById("altitude-note").innerHTML =
+    `This was our most decisive trial (t=${m.t_paired}, where most signals barely register).
+     Mexico plays group games — and maybe a knockout — at 2,240 m, the air its players live in;
+     their lowland opponents arrive gasping. The model now hands Mexico a real edge in its own
+     thin air, and dings sea-level sides drawn to Mexico City and Zapopan.`;
+}
+
 /* ---------- fatigue card ---------- */
 if (WC26.fatigue && WC26.ablations && WC26.ablations.no_fatigue) {
   const m = WC26.fatigue.meta;

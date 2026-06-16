@@ -1,0 +1,7 @@
+{
+ "beta_altitude_per_km": 0.134,
+ "oos_delta": -0.02245,
+ "t_paired": -2.42,
+ "n": 611,
+ "verdict": "ADMITTED"
+}

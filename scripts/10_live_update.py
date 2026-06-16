@@ -47,12 +47,14 @@ try:
     draws = json.load(open("outputs/dc_bootstrap.json"))
 except FileNotFoundError:
     draws = None
-from wc26.tilts import load_team_tilt
+from wc26.tilts import load_team_tilt, load_city_tilt
 tilt = load_team_tilt()
+city_tilt = load_city_tilt()
 
 res = simulate_tournament(groups, gfx, model, elo_now, n_sims=20000,
                           fixed_results=fixed, param_draws=draws,
                           collect_goal_samples=True, team_log_tilt=tilt,
+                          city_log_tilt=city_tilt,
                           fixed_ko_results=fixed_ko, collect_bracket=True)
 res["teams"].round(4).to_csv("outputs/tournament_probs_v1.csv")
 res["goal_samples"].to_parquet("outputs/goal_samples.parquet")

@@ -109,9 +109,9 @@
       <h3>🚫 Deliberately excluded</h3>
       <p>Squad market values, injuries, FIFA rankings, pundit priors, betting odds.
       Not because they're worthless — because nothing enters this model until it
-      <strong>proves itself in a backtest</strong>. Still in the waiting room: climate,
-      diaspora, fatigue, cohesion — one block at a time, under the same rule:
-      improve out-of-sample log-loss or get dropped.</p>
+      <strong>proves itself in a backtest</strong>. Still on the bench: diaspora and
+      squad cohesion — each gets its trial under the same rule: improve out-of-sample
+      log-loss or get dropped (heat already failed it; altitude just earned its place).</p>
     </div>
   </div>
   <div class="lineage">
@@ -139,6 +139,12 @@
       <span class="node file">fbref minutes</span><span class="arr">→</span>
       <span class="node">fatigue z-score</span><span class="arr">→</span>
       <span class="node">tilt on goal rates (β=−0.028)</span>
+    </div>
+    <div class="flow">
+      <span class="node file">venue altitude</span><span class="arr">+</span>
+      <span class="node file">home altitude</span><span class="arr">→</span>
+      <span class="node">acclimatisation gap</span><span class="arr">→</span>
+      <span class="node">tilt at Mexico City / Zapopan (β=0.13/km)</span>
     </div>
     <div class="flow">
       <span class="node file">shootouts.csv</span><span class="arr">→</span>
@@ -187,6 +193,14 @@
       <p class="mini-note" id="capital-note"></p>
     </div>
     <div class="card">
+      <h3>Thin air — the strongest signal we found</h3>
+      <p class="mini-intro">World Cups dodge altitude, so we tried it where it bites:
+      South American qualifying, where La Paz sits at 3,782 m. A team is at home in the
+      air it trains in:</p>
+      <div id="altitude-card"></div>
+      <p class="mini-note" id="altitude-note"></p>
+    </div>
+    <div class="card">
       <h3>Tired legs — admitted, thin file</h3>
       <p class="mini-intro">Squad-mean club-season minutes, tested on top of the capital
       tilt (so "quality" is already accounted for — what's left is load):</p>
@@ -213,8 +227,8 @@
       <p class="mini-note">Integrating parameter uncertainty moves title probabilities by
       <strong id="boot-delta"></strong> on average — within Monte Carlo noise. With this much
       data behind five numbers, the doubt lives in <em>which data enters</em>, not in the fit.
-      (The waiting room: club minutes, climate, diaspora, fatigue — each will get its own
-      card here if it survives the backtest.)</p>
+      (Still to audition: diaspora and squad cohesion — each gets its own card here if it
+      survives the backtest.)</p>
     </div>
   </div>
 </section>

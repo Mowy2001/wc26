@@ -1,0 +1,415 @@
+team,city,habitual_m,venue_m,log_tilt
+Czech Republic,Mexico City,202,2240,-0.2731
+Czech Republic,Zapopan,202,1565,-0.1826
+Czech Republic,Guadalupe,202,497,-0.0395
+Czech Republic,Atlanta,202,320,-0.0158
+Czech Republic,Kansas City,202,274,-0.0096
+Mexico,Mexico City,2227,2240,-0.0018
+South Africa,Mexico City,1767,2240,-0.0634
+South Korea,Mexico City,38,2240,-0.2951
+South Korea,Zapopan,38,1565,-0.2046
+South Korea,Toronto,38,161,-0.0165
+South Korea,Inglewood,38,40,-0.0003
+South Korea,Santa Clara,38,132,-0.0126
+South Korea,Foxborough,38,88,-0.0067
+South Korea,Vancouver,38,70,-0.0043
+South Korea,Arlington,38,184,-0.0196
+South Korea,Guadalupe,38,497,-0.0615
+South Korea,Seattle,38,56,-0.0024
+South Korea,Atlanta,38,320,-0.0378
+South Korea,Kansas City,38,274,-0.0316
+Bosnia and Herzegovina,Mexico City,325,2240,-0.2566
+Bosnia and Herzegovina,Zapopan,325,1565,-0.1662
+Bosnia and Herzegovina,Guadalupe,325,497,-0.023
+Canada,Mexico City,143,2240,-0.281
+Canada,Zapopan,143,1565,-0.1905
+Canada,Toronto,143,161,-0.0024
+Canada,Arlington,143,184,-0.0055
+Canada,Guadalupe,143,497,-0.0474
+Canada,Atlanta,143,320,-0.0237
+Canada,Kansas City,143,274,-0.0176
+Qatar,Mexico City,11,2240,-0.2987
+Qatar,Zapopan,11,1565,-0.2082
+Qatar,Toronto,11,161,-0.0201
+Qatar,Inglewood,11,40,-0.0039
+Qatar,Santa Clara,11,132,-0.0162
+Qatar,East Rutherford,11,24,-0.0017
+Qatar,Foxborough,11,88,-0.0103
+Qatar,Vancouver,11,70,-0.0079
+Qatar,Houston,11,12,-0.0001
+Qatar,Philadelphia,11,12,-0.0001
+Qatar,Arlington,11,184,-0.0232
+Qatar,Guadalupe,11,497,-0.0651
+Qatar,Seattle,11,56,-0.006
+Qatar,Atlanta,11,320,-0.0414
+Qatar,Kansas City,11,274,-0.0352
+Switzerland,Mexico City,279,2240,-0.2628
+Switzerland,Zapopan,279,1565,-0.1723
+Switzerland,Guadalupe,279,497,-0.0292
+Switzerland,Atlanta,279,320,-0.0055
+Brazil,Mexico City,312,2240,-0.2584
+Brazil,Zapopan,312,1565,-0.168
+Brazil,Guadalupe,312,497,-0.0249
+Brazil,Atlanta,312,320,-0.0011
+Haiti,Mexico City,27,2240,-0.2965
+Haiti,Zapopan,27,1565,-0.2061
+Haiti,Toronto,27,161,-0.018
+Haiti,Inglewood,27,40,-0.0017
+Haiti,Santa Clara,27,132,-0.0141
+Haiti,Foxborough,27,88,-0.0082
+Haiti,Vancouver,27,70,-0.0058
+Haiti,Arlington,27,184,-0.021
+Haiti,Guadalupe,27,497,-0.063
+Haiti,Seattle,27,56,-0.0039
+Haiti,Atlanta,27,320,-0.0393
+Haiti,Kansas City,27,274,-0.0331
+Morocco,Mexico City,27,2240,-0.2965
+Morocco,Zapopan,27,1565,-0.2061
+Morocco,Toronto,27,161,-0.018
+Morocco,Inglewood,27,40,-0.0017
+Morocco,Santa Clara,27,132,-0.0141
+Morocco,Foxborough,27,88,-0.0082
+Morocco,Vancouver,27,70,-0.0058
+Morocco,Arlington,27,184,-0.021
+Morocco,Guadalupe,27,497,-0.063
+Morocco,Seattle,27,56,-0.0039
+Morocco,Atlanta,27,320,-0.0393
+Morocco,Kansas City,27,274,-0.0331
+Scotland,Mexico City,40,2240,-0.2948
+Scotland,Zapopan,40,1565,-0.2044
+Scotland,Toronto,40,161,-0.0162
+Scotland,Santa Clara,40,132,-0.0123
+Scotland,Foxborough,40,88,-0.0064
+Scotland,Vancouver,40,70,-0.004
+Scotland,Arlington,40,184,-0.0193
+Scotland,Guadalupe,40,497,-0.0612
+Scotland,Seattle,40,56,-0.0021
+Scotland,Atlanta,40,320,-0.0375
+Scotland,Kansas City,40,274,-0.0314
+Australia,Mexico City,58,2240,-0.2924
+Australia,Zapopan,58,1565,-0.2019
+Australia,Toronto,58,161,-0.0138
+Australia,Santa Clara,58,132,-0.0099
+Australia,Foxborough,58,88,-0.004
+Australia,Vancouver,58,70,-0.0016
+Australia,Arlington,58,184,-0.0169
+Australia,Guadalupe,58,497,-0.0588
+Australia,Atlanta,58,320,-0.0351
+Australia,Kansas City,58,274,-0.0289
+Paraguay,Mexico City,116,2240,-0.2846
+Paraguay,Zapopan,116,1565,-0.1942
+Paraguay,Toronto,116,161,-0.0061
+Paraguay,Santa Clara,116,132,-0.0022
+Paraguay,Arlington,116,184,-0.0091
+Paraguay,Guadalupe,116,497,-0.0511
+Paraguay,Atlanta,116,320,-0.0274
+Paraguay,Kansas City,116,274,-0.0212
+Turkey,Mexico City,39,2240,-0.2949
+Turkey,Zapopan,39,1565,-0.2045
+Turkey,Toronto,39,161,-0.0163
+Turkey,Inglewood,39,40,-0.0001
+Turkey,Santa Clara,39,132,-0.0125
+Turkey,Foxborough,39,88,-0.0066
+Turkey,Vancouver,39,70,-0.0042
+Turkey,Arlington,39,184,-0.0194
+Turkey,Guadalupe,39,497,-0.0614
+Turkey,Seattle,39,56,-0.0023
+Turkey,Atlanta,39,320,-0.0377
+Turkey,Kansas City,39,274,-0.0315
+United States,Mexico City,85,2240,-0.2888
+United States,Zapopan,85,1565,-0.1983
+United States,Toronto,85,161,-0.0102
+United States,Santa Clara,85,132,-0.0063
+United States,Foxborough,85,88,-0.0004
+United States,Arlington,85,184,-0.0133
+United States,Guadalupe,85,497,-0.0552
+United States,Atlanta,85,320,-0.0315
+United States,Kansas City,85,274,-0.0253
+Curaçao,Mexico City,1,2240,-0.3
+Curaçao,Zapopan,1,1565,-0.2096
+Curaçao,Toronto,1,161,-0.0214
+Curaçao,Inglewood,1,40,-0.0052
+Curaçao,Santa Clara,1,132,-0.0176
+Curaçao,East Rutherford,1,24,-0.0031
+Curaçao,Foxborough,1,88,-0.0117
+Curaçao,Vancouver,1,70,-0.0092
+Curaçao,Houston,1,12,-0.0015
+Curaçao,Philadelphia,1,12,-0.0015
+Curaçao,Arlington,1,184,-0.0245
+Curaçao,Guadalupe,1,497,-0.0665
+Curaçao,Seattle,1,56,-0.0074
+Curaçao,Atlanta,1,320,-0.0427
+Curaçao,Miami Gardens,1,2,-0.0001
+Curaçao,Kansas City,1,274,-0.0366
+Ecuador,Mexico City,1838,2240,-0.0538
+Germany,Mexico City,80,2240,-0.2894
+Germany,Zapopan,80,1565,-0.1989
+Germany,Toronto,80,161,-0.0108
+Germany,Santa Clara,80,132,-0.0069
+Germany,Foxborough,80,88,-0.001
+Germany,Arlington,80,184,-0.0139
+Germany,Guadalupe,80,497,-0.0558
+Germany,Atlanta,80,320,-0.0321
+Germany,Kansas City,80,274,-0.0259
+Ivory Coast,Mexico City,50,2240,-0.2935
+Ivory Coast,Zapopan,50,1565,-0.203
+Ivory Coast,Toronto,50,161,-0.0149
+Ivory Coast,Santa Clara,50,132,-0.011
+Ivory Coast,Foxborough,50,88,-0.0051
+Ivory Coast,Vancouver,50,70,-0.0027
+Ivory Coast,Arlington,50,184,-0.018
+Ivory Coast,Guadalupe,50,497,-0.0599
+Ivory Coast,Seattle,50,56,-0.0008
+Ivory Coast,Atlanta,50,320,-0.0362
+Ivory Coast,Kansas City,50,274,-0.03
+Japan,Mexico City,44,2240,-0.2943
+Japan,Zapopan,44,1565,-0.2038
+Japan,Toronto,44,161,-0.0157
+Japan,Santa Clara,44,132,-0.0118
+Japan,Foxborough,44,88,-0.0059
+Japan,Vancouver,44,70,-0.0035
+Japan,Arlington,44,184,-0.0188
+Japan,Guadalupe,44,497,-0.0607
+Japan,Seattle,44,56,-0.0016
+Japan,Atlanta,44,320,-0.037
+Japan,Kansas City,44,274,-0.0308
+Netherlands,Mexico City,13,2240,-0.2984
+Netherlands,Zapopan,13,1565,-0.208
+Netherlands,Toronto,13,161,-0.0198
+Netherlands,Inglewood,13,40,-0.0036
+Netherlands,Santa Clara,13,132,-0.0159
+Netherlands,East Rutherford,13,24,-0.0015
+Netherlands,Foxborough,13,88,-0.01
+Netherlands,Vancouver,13,70,-0.0076
+Netherlands,Arlington,13,184,-0.0229
+Netherlands,Guadalupe,13,497,-0.0649
+Netherlands,Seattle,13,56,-0.0058
+Netherlands,Atlanta,13,320,-0.0411
+Netherlands,Kansas City,13,274,-0.035
+Sweden,Mexico City,22,2240,-0.2972
+Sweden,Zapopan,22,1565,-0.2068
+Sweden,Toronto,22,161,-0.0186
+Sweden,Inglewood,22,40,-0.0024
+Sweden,Santa Clara,22,132,-0.0147
+Sweden,East Rutherford,22,24,-0.0003
+Sweden,Foxborough,22,88,-0.0088
+Sweden,Vancouver,22,70,-0.0064
+Sweden,Arlington,22,184,-0.0217
+Sweden,Guadalupe,22,497,-0.0636
+Sweden,Seattle,22,56,-0.0046
+Sweden,Atlanta,22,320,-0.0399
+Sweden,Kansas City,22,274,-0.0338
+Tunisia,Mexico City,23,2240,-0.2971
+Tunisia,Zapopan,23,1565,-0.2066
+Tunisia,Toronto,23,161,-0.0185
+Tunisia,Inglewood,23,40,-0.0023
+Tunisia,Santa Clara,23,132,-0.0146
+Tunisia,East Rutherford,23,24,-0.0001
+Tunisia,Foxborough,23,88,-0.0087
+Tunisia,Vancouver,23,70,-0.0063
+Tunisia,Arlington,23,184,-0.0216
+Tunisia,Guadalupe,23,497,-0.0635
+Tunisia,Seattle,23,56,-0.0044
+Tunisia,Atlanta,23,320,-0.0398
+Tunisia,Kansas City,23,274,-0.0336
+Belgium,Mexico City,28,2240,-0.2964
+Belgium,Zapopan,28,1565,-0.206
+Belgium,Toronto,28,161,-0.0178
+Belgium,Inglewood,28,40,-0.0016
+Belgium,Santa Clara,28,132,-0.0139
+Belgium,Foxborough,28,88,-0.008
+Belgium,Vancouver,28,70,-0.0056
+Belgium,Arlington,28,184,-0.0209
+Belgium,Guadalupe,28,497,-0.0628
+Belgium,Seattle,28,56,-0.0038
+Belgium,Atlanta,28,320,-0.0391
+Belgium,Kansas City,28,274,-0.033
+Egypt,Mexico City,23,2240,-0.2971
+Egypt,Zapopan,23,1565,-0.2066
+Egypt,Toronto,23,161,-0.0185
+Egypt,Inglewood,23,40,-0.0023
+Egypt,Santa Clara,23,132,-0.0146
+Egypt,East Rutherford,23,24,-0.0001
+Egypt,Foxborough,23,88,-0.0087
+Egypt,Vancouver,23,70,-0.0063
+Egypt,Arlington,23,184,-0.0216
+Egypt,Guadalupe,23,497,-0.0635
+Egypt,Seattle,23,56,-0.0044
+Egypt,Atlanta,23,320,-0.0398
+Egypt,Kansas City,23,274,-0.0336
+Iran,Mexico City,1178,2240,-0.1423
+Iran,Zapopan,1178,1565,-0.0519
+New Zealand,Mexico City,43,2240,-0.2944
+New Zealand,Zapopan,43,1565,-0.2039
+New Zealand,Toronto,43,161,-0.0158
+New Zealand,Santa Clara,43,132,-0.0119
+New Zealand,Foxborough,43,88,-0.006
+New Zealand,Vancouver,43,70,-0.0036
+New Zealand,Arlington,43,184,-0.0189
+New Zealand,Guadalupe,43,497,-0.0608
+New Zealand,Seattle,43,56,-0.0017
+New Zealand,Atlanta,43,320,-0.0371
+New Zealand,Kansas City,43,274,-0.031
+Cape Verde,Mexico City,30,2240,-0.2961
+Cape Verde,Zapopan,30,1565,-0.2057
+Cape Verde,Toronto,30,161,-0.0176
+Cape Verde,Inglewood,30,40,-0.0013
+Cape Verde,Santa Clara,30,132,-0.0137
+Cape Verde,Foxborough,30,88,-0.0078
+Cape Verde,Vancouver,30,70,-0.0054
+Cape Verde,Arlington,30,184,-0.0206
+Cape Verde,Guadalupe,30,497,-0.0626
+Cape Verde,Seattle,30,56,-0.0035
+Cape Verde,Atlanta,30,320,-0.0389
+Cape Verde,Kansas City,30,274,-0.0327
+Saudi Arabia,Mexico City,612,2240,-0.2182
+Saudi Arabia,Zapopan,612,1565,-0.1277
+Spain,Mexico City,667,2240,-0.2108
+Spain,Zapopan,667,1565,-0.1203
+Uruguay,Mexico City,34,2240,-0.2956
+Uruguay,Zapopan,34,1565,-0.2052
+Uruguay,Toronto,34,161,-0.017
+Uruguay,Inglewood,34,40,-0.0008
+Uruguay,Santa Clara,34,132,-0.0131
+Uruguay,Foxborough,34,88,-0.0072
+Uruguay,Vancouver,34,70,-0.0048
+Uruguay,Arlington,34,184,-0.0201
+Uruguay,Guadalupe,34,497,-0.062
+Uruguay,Seattle,34,56,-0.0029
+Uruguay,Atlanta,34,320,-0.0383
+Uruguay,Kansas City,34,274,-0.0322
+France,Mexico City,42,2240,-0.2945
+France,Zapopan,42,1565,-0.2041
+France,Toronto,42,161,-0.0159
+France,Santa Clara,42,132,-0.0121
+France,Foxborough,42,88,-0.0062
+France,Vancouver,42,70,-0.0038
+France,Arlington,42,184,-0.019
+France,Guadalupe,42,497,-0.061
+France,Seattle,42,56,-0.0019
+France,Atlanta,42,320,-0.0373
+France,Kansas City,42,274,-0.0311
+Iraq,Mexico City,41,2240,-0.2947
+Iraq,Zapopan,41,1565,-0.2042
+Iraq,Toronto,41,161,-0.0161
+Iraq,Santa Clara,41,132,-0.0122
+Iraq,Foxborough,41,88,-0.0063
+Iraq,Vancouver,41,70,-0.0039
+Iraq,Arlington,41,184,-0.0192
+Iraq,Guadalupe,41,497,-0.0611
+Iraq,Seattle,41,56,-0.002
+Iraq,Atlanta,41,320,-0.0374
+Iraq,Kansas City,41,274,-0.0312
+Norway,Mexico City,26,2240,-0.2967
+Norway,Zapopan,26,1565,-0.2062
+Norway,Toronto,26,161,-0.0181
+Norway,Inglewood,26,40,-0.0019
+Norway,Santa Clara,26,132,-0.0142
+Norway,Foxborough,26,88,-0.0083
+Norway,Vancouver,26,70,-0.0059
+Norway,Arlington,26,184,-0.0212
+Norway,Guadalupe,26,497,-0.0631
+Norway,Seattle,26,56,-0.004
+Norway,Atlanta,26,320,-0.0394
+Norway,Kansas City,26,274,-0.0332
+Senegal,Mexico City,12,2240,-0.2986
+Senegal,Zapopan,12,1565,-0.2081
+Senegal,Toronto,12,161,-0.02
+Senegal,Inglewood,12,40,-0.0038
+Senegal,Santa Clara,12,132,-0.0161
+Senegal,East Rutherford,12,24,-0.0016
+Senegal,Foxborough,12,88,-0.0102
+Senegal,Vancouver,12,70,-0.0078
+Senegal,Arlington,12,184,-0.023
+Senegal,Guadalupe,12,497,-0.065
+Senegal,Seattle,12,56,-0.0059
+Senegal,Atlanta,12,320,-0.0413
+Senegal,Kansas City,12,274,-0.0351
+Algeria,Mexico City,113,2240,-0.285
+Algeria,Zapopan,113,1565,-0.1946
+Algeria,Toronto,113,161,-0.0064
+Algeria,Santa Clara,113,132,-0.0025
+Algeria,Arlington,113,184,-0.0095
+Algeria,Guadalupe,113,497,-0.0515
+Algeria,Atlanta,113,320,-0.0277
+Algeria,Kansas City,113,274,-0.0216
+Argentina,Mexico City,78,2240,-0.2897
+Argentina,Zapopan,78,1565,-0.1993
+Argentina,Toronto,78,161,-0.0111
+Argentina,Santa Clara,78,132,-0.0072
+Argentina,Foxborough,78,88,-0.0013
+Argentina,Arlington,78,184,-0.0142
+Argentina,Guadalupe,78,497,-0.0561
+Argentina,Atlanta,78,320,-0.0324
+Argentina,Kansas City,78,274,-0.0263
+Austria,Mexico City,171,2240,-0.2772
+Austria,Zapopan,171,1565,-0.1868
+Austria,Arlington,171,184,-0.0017
+Austria,Guadalupe,171,497,-0.0437
+Austria,Atlanta,171,320,-0.02
+Austria,Kansas City,171,274,-0.0138
+Jordan,Mexico City,757,2240,-0.1987
+Jordan,Zapopan,757,1565,-0.1083
+Colombia,Mexico City,1380,2240,-0.1153
+Colombia,Zapopan,1380,1565,-0.0248
+DR Congo,Mexico City,281,2240,-0.2625
+DR Congo,Zapopan,281,1565,-0.1721
+DR Congo,Guadalupe,281,497,-0.0289
+DR Congo,Atlanta,281,320,-0.0052
+Portugal,Mexico City,68,2240,-0.291
+Portugal,Zapopan,68,1565,-0.2006
+Portugal,Toronto,68,161,-0.0125
+Portugal,Santa Clara,68,132,-0.0086
+Portugal,Foxborough,68,88,-0.0027
+Portugal,Vancouver,68,70,-0.0003
+Portugal,Arlington,68,184,-0.0155
+Portugal,Guadalupe,68,497,-0.0575
+Portugal,Atlanta,68,320,-0.0338
+Portugal,Kansas City,68,274,-0.0276
+Uzbekistan,Mexico City,424,2240,-0.2433
+Uzbekistan,Zapopan,424,1565,-0.1529
+Uzbekistan,Guadalupe,424,497,-0.0098
+Croatia,Mexico City,135,2240,-0.2821
+Croatia,Zapopan,135,1565,-0.1916
+Croatia,Toronto,135,161,-0.0035
+Croatia,Arlington,135,184,-0.0066
+Croatia,Guadalupe,135,497,-0.0485
+Croatia,Atlanta,135,320,-0.0248
+Croatia,Kansas City,135,274,-0.0186
+England,Mexico City,25,2240,-0.2968
+England,Zapopan,25,1565,-0.2064
+England,Toronto,25,161,-0.0182
+England,Inglewood,25,40,-0.002
+England,Santa Clara,25,132,-0.0143
+England,Foxborough,25,88,-0.0084
+England,Vancouver,25,70,-0.006
+England,Arlington,25,184,-0.0213
+England,Guadalupe,25,497,-0.0632
+England,Seattle,25,56,-0.0042
+England,Atlanta,25,320,-0.0395
+England,Kansas City,25,274,-0.0334
+Ghana,Mexico City,33,2240,-0.2957
+Ghana,Zapopan,33,1565,-0.2053
+Ghana,Toronto,33,161,-0.0172
+Ghana,Inglewood,33,40,-0.0009
+Ghana,Santa Clara,33,132,-0.0133
+Ghana,Foxborough,33,88,-0.0074
+Ghana,Vancouver,33,70,-0.005
+Ghana,Arlington,33,184,-0.0202
+Ghana,Guadalupe,33,497,-0.0622
+Ghana,Seattle,33,56,-0.0031
+Ghana,Atlanta,33,320,-0.0385
+Ghana,Kansas City,33,274,-0.0323
+Panama,Mexico City,17,2240,-0.2979
+Panama,Zapopan,17,1565,-0.2074
+Panama,Toronto,17,161,-0.0193
+Panama,Inglewood,17,40,-0.0031
+Panama,Santa Clara,17,132,-0.0154
+Panama,East Rutherford,17,24,-0.0009
+Panama,Foxborough,17,88,-0.0095
+Panama,Vancouver,17,70,-0.0071
+Panama,Arlington,17,184,-0.0224
+Panama,Guadalupe,17,497,-0.0643
+Panama,Seattle,17,56,-0.0052
+Panama,Atlanta,17,320,-0.0406
+Panama,Kansas City,17,274,-0.0344

@@ -37,14 +37,15 @@ elo_now = ratings_asof(elo_hist, "2026-06-11")
 gfx = wc2026_group_fixtures(results)
 groups = reconstruct_groups(gfx)
 
-from wc26.tilts import load_team_tilt
+from wc26.tilts import load_team_tilt, load_city_tilt
 tilt = load_team_tilt()
-print(f"Residual tilts active for {len(tilt or {})} teams (capital + fatigue)")
+city_tilt = load_city_tilt()
+print(f"Tilts active: {len(tilt or {})} team (capital+fatigue), {len(city_tilt or {})} (team,city) altitude")
 
 t0 = time.time()
 res = simulate_tournament(groups, gfx, model, elo_now, n_sims=20000,
                           param_draws=draws, collect_goal_samples=True,
-                          team_log_tilt=tilt, collect_bracket=True)
+                          team_log_tilt=tilt, city_log_tilt=city_tilt, collect_bracket=True)
 tbl = res["teams"]
 tbl.round(4).to_csv("outputs/tournament_probs_v1.csv")
 res["goal_samples"].to_parquet("outputs/goal_samples.parquet")
