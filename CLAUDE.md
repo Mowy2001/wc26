@@ -72,13 +72,15 @@ docstring with the mathematical model, every design choice goes in docs/METHODOL
       shared in src/wc26/capital.py. Squads are mostly regular starters -> ~no effect
 - [x] Predicted KO bracket on the site (collect_bracket in simulate): modal occupant
       + probability per slot, live-conditioned, converges to champion. 16/72 played
-- [ ] DECISION 2026-06-16: STOP variable-hunting — gateable signal harvested
-      (rating, home, capital+minutes, fatigue, Golden Boot allocation). Diaspora
-      (not gateable) and cohesion (costly, weak) SHELVED unless a strong idea appears.
-- [ ] DECISION 2026-06-16: comm problem = missing NARRATIVE THROUGHLINE (Simone).
-      Next major work = restructure the site as ONE story with the admission gate as
-      protagonist (auditions: admitted/rejected/null), not a catalogue of sections.
-      Plan agreed with Simone before rebuild. Keep plain-first + tech-behind-toggle.
+- [ ] DECISION 2026-06-16 (revised same day): FINISH testing the selected variables
+      after all — diaspora and cohesion go through the gate (may be rejected; that's
+      fine). Then present data + their impact on the site.
+- [ ] WANT (Simone, 2026-06-16): a time SLIDER on groups + bracket showing the
+      situation match by match (data already in outputs/history/timeline.csv +
+      per-snapshot bracket — need to start saving bracket history too).
+- [ ] COMM RULE (Simone, 2026-06-16): football metaphors ONLY. Replace the
+      weather-forecast / bouncer / courtroom analogies with football ones
+      (trials/scouting, earning a place in the squad, etc.).
 - [ ] Backlog below
 
 ## Backlog (in order; numbering stable, #1-4, 5a, 6, 8 closed — see Status)
