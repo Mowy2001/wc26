@@ -63,6 +63,13 @@ try:
 except FileNotFoundError:
     climate = None
 try:
+    _bk = pd.read_csv("outputs/bracket.csv")
+    bracket = {}
+    for r in _bk.itertuples(index=False):
+        bracket.setdefault(int(r.match), {})[r.slot] = {"team": r.team, "p": float(r.p)}
+except FileNotFoundError:
+    bracket = None
+try:
     _b = pd.read_csv("outputs/history/baseline_eve.csv", index_col=0)
     baseline = {t: {"P_champion": round(float(r.P_champion), 4),
                     "P_qualify": round(float(r.P_qualify), 4)} for t, r in _b.iterrows()}
@@ -106,6 +113,7 @@ data = {
     "climate": climate,
     "fatigue": fatigue,
     "baseline_eve": baseline,
+    "bracket": bracket,
     "golden_boot": golden_boot,
     "golden_boot_market": {"Kylian Mbappé": 575, "Harry Kane": 675,
                            "Lionel Messi": 1150, "Erling Haaland": 1350},

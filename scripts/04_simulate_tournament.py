@@ -44,10 +44,11 @@ print(f"Residual tilts active for {len(tilt or {})} teams (capital + fatigue)")
 t0 = time.time()
 res = simulate_tournament(groups, gfx, model, elo_now, n_sims=20000,
                           param_draws=draws, collect_goal_samples=True,
-                          team_log_tilt=tilt)
+                          team_log_tilt=tilt, collect_bracket=True)
 tbl = res["teams"]
 tbl.round(4).to_csv("outputs/tournament_probs_v1.csv")
 res["goal_samples"].to_parquet("outputs/goal_samples.parquet")
+res["bracket"].to_csv("outputs/bracket.csv", index=False)
 print(f"20k tournament simulations in {time.time() - t0:.0f}s\n")
 
 top = tbl.sort_values("P_champion", ascending=False).head(12)

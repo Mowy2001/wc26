@@ -53,9 +53,10 @@ tilt = load_team_tilt()
 res = simulate_tournament(groups, gfx, model, elo_now, n_sims=20000,
                           fixed_results=fixed, param_draws=draws,
                           collect_goal_samples=True, team_log_tilt=tilt,
-                          fixed_ko_results=fixed_ko)
+                          fixed_ko_results=fixed_ko, collect_bracket=True)
 res["teams"].round(4).to_csv("outputs/tournament_probs_v1.csv")
 res["goal_samples"].to_parquet("outputs/goal_samples.parquet")
+res["bracket"].to_csv("outputs/bracket.csv", index=False)
 print("Tournament probabilities refreshed.")
 
 # Append an immutable snapshot to the forecast timeline (never overwritten;

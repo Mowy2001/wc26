@@ -290,3 +290,40 @@ if (WC26.golden_boot) {
     `Generated ${WC26.generated} · ${WC26.model_version} · ${WC26.n_sims.toLocaleString("en-US")} simulations, seed ${WC26.seed} · ` +
     `WC2022 backtest log-loss ${WC26.backtest.log_loss_model} (uniform ${WC26.backtest.log_loss_uniform}).`;
 }
+
+/* ---------- predicted bracket ---------- */
+if (WC26.bracket) {
+  const TLA = (t) => ({
+    "United States": "USA", "South Korea": "KOR", "South Africa": "RSA", "Saudi Arabia": "KSA",
+    "Czech Republic": "CZE", "Bosnia and Herzegovina": "BIH", "Ivory Coast": "CIV",
+    "DR Congo": "COD", "Cape Verde": "CPV", "New Zealand": "NZL", "Netherlands": "NED",
+  }[t] || (t || "?").slice(0, 3).toUpperCase());
+  const COLS = [
+    ["Round of 32", [74, 77, 73, 75, 83, 84, 81, 82, 76, 78, 79, 80, 86, 88, 85, 87]],
+    ["Round of 16", [89, 90, 93, 94, 91, 92, 95, 96]],
+    ["Quarter-finals", [97, 98, 99, 100]],
+    ["Semi-finals", [101, 102]],
+    ["Final", [104]],
+  ];
+  const slotHTML = (s) => {
+    if (!s) return `<div class="bk-slot"><span class="bk-team">—</span></div>`;
+    const sure = s.p >= 0.6 ? "sure" : s.p < 0.3 ? "open" : "";
+    return `<div class="bk-slot ${sure}">
+      <span class="bk-team">${flag(s.team)}${TLA(s.team)}</span>
+      <span class="bk-p">${pct(s.p, 0)}</span></div>`;
+  };
+  const board = COLS.map(([label, matches]) => {
+    const boxes = matches.map((mn) => {
+      const m = WC26.bracket[mn] || {};
+      return `<div class="bk-match">${slotHTML(m.top)}${slotHTML(m.bot)}</div>`;
+    }).join("");
+    return `<div class="bk-col"><div class="bk-round">${label}</div>${boxes}</div>`;
+  }).join("");
+  // champion column
+  const champ = [...WC26.teams].sort((a, b) => b.P_champion - a.P_champion)[0];
+  const champCol = `<div class="bk-col"><div class="bk-round">Champion</div>
+    <div class="bk-match champ"><div class="bk-slot sure">
+      <span class="bk-team">${flag(champ.team)}${TLA(champ.team)}</span>
+      <span class="bk-p">${pct(champ.P_champion, 0)}</span></div></div></div>`;
+  document.getElementById("bracket-board").innerHTML = board + champCol;
+}

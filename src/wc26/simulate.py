@@ -313,6 +313,7 @@ def simulate_tournament(
     host_advantage: bool = True,
     param_draws: list[dict] | None = None,
     collect_goal_samples: bool = False,
+    collect_bracket: bool = False,
     team_log_tilt: dict[str, float] | None = None,
     city_log_tilt: dict[tuple[str, str], float] | None = None,
     fixed_ko_results: dict | None = None,
@@ -376,6 +377,11 @@ def simulate_tournament(
     pos_counts = {t: np.zeros(4) for t in teams}
     round_counts = {t: np.zeros(6) for t in teams}  # R32, R16, QF, SF, F, champion
     topscoring_counts = {t: 0 for t in teams}
+    # Per KO match: how often each team fills the top/bottom slot — the
+    # predicted bracket is the modal occupant of each slot (collect_bracket).
+    from collections import Counter
+    slot_top: dict[int, Counter] = {}
+    slot_bot: dict[int, Counter] = {}
 
     for si in range(n_sims):
         mi = int(rng.integers(len(models)))
@@ -406,6 +412,9 @@ def simulate_tournament(
             a, b = resolve(sa, mn), resolve(sb, mn)
             round_counts[a][0] += 1
             round_counts[b][0] += 1
+            if collect_bracket:
+                slot_top.setdefault(mn, Counter())[a] += 1
+                slot_bot.setdefault(mn, Counter())[b] += 1
             winners[mn], kh, ka, khg, kag = _ko_match(a, b, venue, m, elo, rng, ko_cache,
                                                       team_log_tilt, KO_CITY.get(mn), city_log_tilt,
                                                       fixed_ko_results)
@@ -418,6 +427,9 @@ def simulate_tournament(
                 a, b = winners[fa], winners[fb]
                 round_counts[a][depth] += 1
                 round_counts[b][depth] += 1
+                if collect_bracket:
+                    slot_top.setdefault(mn, Counter())[a] += 1
+                    slot_bot.setdefault(mn, Counter())[b] += 1
                 winners[mn], kh, ka, khg, kag = _ko_match(a, b, venue, m, elo, rng, ko_cache,
                                                           team_log_tilt, KO_CITY.get(mn), city_log_tilt,
                                                           fixed_ko_results)
@@ -442,4 +454,12 @@ def simulate_tournament(
     res = {"teams": out.sort_values(["group", "P1"], ascending=[True, False])}
     if collect_goal_samples:
         res["goal_samples"] = pd.DataFrame(goal_samples, columns=teams)
+    if collect_bracket:
+        rows = []
+        for mn in sorted(set(slot_top) | set(slot_bot)):
+            for slot, ctr in (("top", slot_top.get(mn, Counter())), ("bot", slot_bot.get(mn, Counter()))):
+                team, cnt = (ctr.most_common(1)[0] if ctr else ("?", 0))
+                rows.append({"match": mn, "slot": slot, "team": team,
+                             "p": round(cnt / n_sims, 4)})
+        res["bracket"] = pd.DataFrame(rows)
     return res

@@ -225,3 +225,22 @@ details.tech[open] summary::before { content: "\25BE "; }
 .val .delta { font-size: .72rem; font-weight: 700; margin-left: 5px; }
 .val .delta.up { color: var(--accent); }
 .val .delta.down { color: #f87171; }
+
+/* predicted bracket */
+.bracket-scroll { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 10px; }
+.bk-col { display: flex; flex-direction: column; justify-content: space-around;
+  gap: 8px; min-width: 116px; }
+.bk-round { font-size: .7rem; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--muted); text-align: center; margin-bottom: 4px; font-weight: 700; }
+.bk-match { background: var(--card); border: 1px solid var(--card-edge);
+  border-radius: 9px; overflow: hidden; }
+.bk-match.champ { border-color: var(--gold); }
+.bk-slot { display: flex; justify-content: space-between; align-items: center;
+  padding: 5px 9px; font-size: .8rem; }
+.bk-slot + .bk-slot { border-top: 1px solid var(--card-edge); }
+.bk-team { font-weight: 600; white-space: nowrap; }
+.bk-team .flag { margin-right: 5px; }
+.bk-p { font-variant-numeric: tabular-nums; font-size: .72rem; color: var(--muted); }
+.bk-slot.sure .bk-p { color: var(--accent); font-weight: 700; }
+.bk-slot.open .bk-p { color: #6b7a9c; }
+.bk-slot.sure { background: rgba(74, 222, 128, .07); }
