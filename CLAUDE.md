@@ -70,11 +70,16 @@ docstring with the mathematical model, every design choice goes in docs/METHODOL
 - [x] Capital v2 minutes-weighting (scripts/21): ADMITTED but near-null (corr v1/v2
       0.997, OOS -0.0013 vs -0.0008). Deployed, beta 0.0328->0.0353; build logic
       shared in src/wc26/capital.py. Squads are mostly regular starters -> ~no effect
+- [x] Predicted KO bracket on the site (collect_bracket in simulate): modal occupant
+      + probability per slot, live-conditioned, converges to champion. 16/72 played
+- [ ] DECISION 2026-06-16: STOP variable-hunting — gateable signal harvested
+      (rating, home, capital+minutes, fatigue, Golden Boot allocation). Diaspora
+      (not gateable) and cohesion (costly, weak) SHELVED unless a strong idea appears.
+- [ ] DECISION 2026-06-16: comm problem = missing NARRATIVE THROUGHLINE (Simone).
+      Next major work = restructure the site as ONE story with the admission gate as
+      protagonist (auditions: admitted/rejected/null), not a catalogue of sections.
+      Plan agreed with Simone before rebuild. Keep plain-first + tech-behind-toggle.
 - [ ] Backlog below
-- [ ] NEXT (deadline 06-28): knockout live conditioning — fix real R32+ results in
-      the bracket as they happen; group fixed_results stops being enough
-- [ ] Capital v2: minutes-weighted club Elo (needs fbref 2023-24 page for the
-      Euro 2024 fold; Big5 snapshot exists on Wayback, ts 20260225002626)
 
 ## Backlog (in order; numbering stable, #1-4, 5a, 6, 8 closed — see Status)
 5. **Residual blocks** (scraping — needs full network access, hence Claude Code):
