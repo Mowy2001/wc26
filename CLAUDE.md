@@ -84,6 +84,9 @@ docstring with the mathematical model, every design choice goes in docs/METHODOL
       but t=-0.60 AND deployment swings Spain -9.6pp (non-sig feature dominating the
       favourite) -> EXCLUDED from official model, kept as SHADOW (scripts/25) like
       diaspora. Lesson: OOS-improvement necessary not sufficient; needs proportionality.
+- [x] Climate club-country re-test (scripts/27): REJECTED again (+0.0165 OOS, t=+2.09);
+      Qatar-2022 AC fold poisons it, non-Qatar a wash. CIES academies dropped (fuzzy,
+      collinear). Heat closed: doesn't show even with the correct proxy.
 - [ ] All selected variables now have verdicts. NEXT: match-by-match SLIDER
       (groups+bracket) + football-metaphor site rewrite (see direction memo).
 - [ ] WANT (Simone, 2026-06-16): a time SLIDER on groups + bracket showing the

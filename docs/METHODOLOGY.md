@@ -159,6 +159,18 @@ from the national team's home cities, not players' club cities (a possible v2); 
 training is unmodellable and ignored. Altitude tilts are centralised via
 src/wc26/tilts.py:load_city_tilt.
 
+## Climate re-test with club-country acclimatisation (still REJECTED, 2026-06-18)
+Simone's approved cheap re-do of the heat block with the correct proxy: a team's
+climate = mean climate of its players' CLUB countries (clubelo; non-European clubs
+fall back to the national country), not the passport country. Same gate, on top of
+capital. Verdict: REJECTED again, pooled OOS +0.0165 (t=+2.09). Autopsy: the wc2022
+fold alone explodes (+0.089) — Qatar's air-conditioned stadiums actively invert the
+signal; the other five folds are a wash (mostly micro-improvements). So the proxy fix
+DID help (no more "Canada suffers in Doha"), but heat still can't be admitted: the only
+hot World Cup in the test era was air-conditioned, and outside it there is no
+exploitable heat variation in WC/Euro data. Honest closure: heat doesn't show even done
+right. (Contrast altitude, which had huge CONMEBOL variation and no "AC" equivalent.)
+
 ## Climate block (backlog #5b, REJECTED, 2026-06-12)
 Hypothesis: heat mismatch (venue climatology minus home-country climatology, same
 month-day window, 10 prior years, point-in-time) tilts goal rates. Same LOTO gate
