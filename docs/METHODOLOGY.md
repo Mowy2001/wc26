@@ -219,6 +219,25 @@ reruns 01 -> 10 -> 15 and pushes data/outputs/site. Beliefs stay frozen at June 
 the routine may not touch model code. Guard: self-disables instruction after the
 final; group-reconstruction canary aborts the commit on data corruption.
 
+## Diaspora — a declared shadow bet, never in the official model (2026-06-17)
+There is no past World Cup on US soil, so de-facto home support from US diaspora
+CANNOT be backtested — it can never pass the gate. Per Simone's call it lives ONLY as
+a registered shadow challenger (scripts/24-25), not in the official forecast. Feature
+(deliberately simple, declared): support_index = sqrt(US foreign-born population from
+the country), normalised to the max; city tilt = 0.06 * index at US venues only,
+excluding the USA. Mexico dominates (+0.060 log-lambda, huge US presence), then Korea
+/ Colombia / Haiti / England. DIA_SCALE=0.06 is a chosen, not fitted, number.
+
+## The model lab — shadow scoreboard (2026-06-17)
+scripts/25 scores every variant (Elo-only, full model, minus each admitted block,
+plus the diaspora shadow) on the played matches, beliefs frozen at June 11, accumulated
+live. After 20 matches all six sit within 0.019 log-loss of each other (Elo-only
+nominally ahead, full model mid-pack) — exactly as predicted: one tournament cannot
+separate tilts this small (our 345-match backtest reached |t|=2.4 only for altitude).
+The scoreboard's value is honesty + accrual over many tournaments, NOT today's leader;
+the site shows it with that caveat in bold. The diaspora bet is visible here and
+nowhere else.
+
 ## Three-way benchmark
 After the tournament: log-loss and calibration of our model vs bookmaker implied
 probabilities (margin removed, Shin's method) vs Klement's forecasts (GDP/population/

@@ -1,0 +1,452 @@
+team,city,log_tilt
+Mexico,Arlington,0.06
+Mexico,Atlanta,0.06
+Mexico,East Rutherford,0.06
+Mexico,Foxborough,0.06
+Mexico,Houston,0.06
+Mexico,Inglewood,0.06
+Mexico,Kansas City,0.06
+Mexico,Miami Gardens,0.06
+Mexico,Philadelphia,0.06
+Mexico,Santa Clara,0.06
+Mexico,Seattle,0.06
+South Africa,Arlington,0.0058
+South Africa,Atlanta,0.0058
+South Africa,East Rutherford,0.0058
+South Africa,Foxborough,0.0058
+South Africa,Houston,0.0058
+South Africa,Inglewood,0.0058
+South Africa,Kansas City,0.0058
+South Africa,Miami Gardens,0.0058
+South Africa,Philadelphia,0.0058
+South Africa,Santa Clara,0.0058
+South Africa,Seattle,0.0058
+South Korea,Arlington,0.0183
+South Korea,Atlanta,0.0183
+South Korea,East Rutherford,0.0183
+South Korea,Foxborough,0.0183
+South Korea,Houston,0.0183
+South Korea,Inglewood,0.0183
+South Korea,Kansas City,0.0183
+South Korea,Miami Gardens,0.0183
+South Korea,Philadelphia,0.0183
+South Korea,Santa Clara,0.0183
+South Korea,Seattle,0.0183
+Qatar,Arlington,0.0013
+Qatar,Atlanta,0.0013
+Qatar,East Rutherford,0.0013
+Qatar,Foxborough,0.0013
+Qatar,Houston,0.0013
+Qatar,Inglewood,0.0013
+Qatar,Kansas City,0.0013
+Qatar,Miami Gardens,0.0013
+Qatar,Philadelphia,0.0013
+Qatar,Santa Clara,0.0013
+Qatar,Seattle,0.0013
+Switzerland,Arlington,0.0037
+Switzerland,Atlanta,0.0037
+Switzerland,East Rutherford,0.0037
+Switzerland,Foxborough,0.0037
+Switzerland,Houston,0.0037
+Switzerland,Inglewood,0.0037
+Switzerland,Kansas City,0.0037
+Switzerland,Miami Gardens,0.0037
+Switzerland,Philadelphia,0.0037
+Switzerland,Santa Clara,0.0037
+Switzerland,Seattle,0.0037
+Brazil,Arlington,0.013
+Brazil,Atlanta,0.013
+Brazil,East Rutherford,0.013
+Brazil,Foxborough,0.013
+Brazil,Houston,0.013
+Brazil,Inglewood,0.013
+Brazil,Kansas City,0.013
+Brazil,Miami Gardens,0.013
+Brazil,Philadelphia,0.013
+Brazil,Santa Clara,0.013
+Brazil,Seattle,0.013
+Haiti,Arlington,0.0153
+Haiti,Atlanta,0.0153
+Haiti,East Rutherford,0.0153
+Haiti,Foxborough,0.0153
+Haiti,Houston,0.0153
+Haiti,Inglewood,0.0153
+Haiti,Kansas City,0.0153
+Haiti,Miami Gardens,0.0153
+Haiti,Philadelphia,0.0153
+Haiti,Santa Clara,0.0153
+Haiti,Seattle,0.0153
+Morocco,Arlington,0.0058
+Morocco,Atlanta,0.0058
+Morocco,East Rutherford,0.0058
+Morocco,Foxborough,0.0058
+Morocco,Houston,0.0058
+Morocco,Inglewood,0.0058
+Morocco,Kansas City,0.0058
+Morocco,Miami Gardens,0.0058
+Morocco,Philadelphia,0.0058
+Morocco,Santa Clara,0.0058
+Morocco,Seattle,0.0058
+Scotland,Arlington,0.0066
+Scotland,Atlanta,0.0066
+Scotland,East Rutherford,0.0066
+Scotland,Foxborough,0.0066
+Scotland,Houston,0.0066
+Scotland,Inglewood,0.0066
+Scotland,Kansas City,0.0066
+Scotland,Miami Gardens,0.0066
+Scotland,Philadelphia,0.0066
+Scotland,Santa Clara,0.0066
+Scotland,Seattle,0.0066
+Australia,Arlington,0.0057
+Australia,Atlanta,0.0057
+Australia,East Rutherford,0.0057
+Australia,Foxborough,0.0057
+Australia,Houston,0.0057
+Australia,Inglewood,0.0057
+Australia,Kansas City,0.0057
+Australia,Miami Gardens,0.0057
+Australia,Philadelphia,0.0057
+Australia,Santa Clara,0.0057
+Australia,Seattle,0.0057
+Paraguay,Arlington,0.0026
+Paraguay,Atlanta,0.0026
+Paraguay,East Rutherford,0.0026
+Paraguay,Foxborough,0.0026
+Paraguay,Houston,0.0026
+Paraguay,Inglewood,0.0026
+Paraguay,Kansas City,0.0026
+Paraguay,Miami Gardens,0.0026
+Paraguay,Philadelphia,0.0026
+Paraguay,Santa Clara,0.0026
+Paraguay,Seattle,0.0026
+Turkey,Arlington,0.0066
+Turkey,Atlanta,0.0066
+Turkey,East Rutherford,0.0066
+Turkey,Foxborough,0.0066
+Turkey,Houston,0.0066
+Turkey,Inglewood,0.0066
+Turkey,Kansas City,0.0066
+Turkey,Miami Gardens,0.0066
+Turkey,Philadelphia,0.0066
+Turkey,Santa Clara,0.0066
+Turkey,Seattle,0.0066
+Curaçao,Arlington,0.0018
+Curaçao,Atlanta,0.0018
+Curaçao,East Rutherford,0.0018
+Curaçao,Foxborough,0.0018
+Curaçao,Houston,0.0018
+Curaçao,Inglewood,0.0018
+Curaçao,Kansas City,0.0018
+Curaçao,Miami Gardens,0.0018
+Curaçao,Philadelphia,0.0018
+Curaçao,Santa Clara,0.0018
+Curaçao,Seattle,0.0018
+Ecuador,Arlington,0.012
+Ecuador,Atlanta,0.012
+Ecuador,East Rutherford,0.012
+Ecuador,Foxborough,0.012
+Ecuador,Houston,0.012
+Ecuador,Inglewood,0.012
+Ecuador,Kansas City,0.012
+Ecuador,Miami Gardens,0.012
+Ecuador,Philadelphia,0.012
+Ecuador,Santa Clara,0.012
+Ecuador,Seattle,0.012
+Germany,Arlington,0.012
+Germany,Atlanta,0.012
+Germany,East Rutherford,0.012
+Germany,Foxborough,0.012
+Germany,Houston,0.012
+Germany,Inglewood,0.012
+Germany,Kansas City,0.012
+Germany,Miami Gardens,0.012
+Germany,Philadelphia,0.012
+Germany,Santa Clara,0.012
+Germany,Seattle,0.012
+Ivory Coast,Arlington,0.0032
+Ivory Coast,Atlanta,0.0032
+Ivory Coast,East Rutherford,0.0032
+Ivory Coast,Foxborough,0.0032
+Ivory Coast,Houston,0.0032
+Ivory Coast,Inglewood,0.0032
+Ivory Coast,Kansas City,0.0032
+Ivory Coast,Miami Gardens,0.0032
+Ivory Coast,Philadelphia,0.0032
+Ivory Coast,Santa Clara,0.0032
+Ivory Coast,Seattle,0.0032
+Japan,Arlington,0.0105
+Japan,Atlanta,0.0105
+Japan,East Rutherford,0.0105
+Japan,Foxborough,0.0105
+Japan,Houston,0.0105
+Japan,Inglewood,0.0105
+Japan,Kansas City,0.0105
+Japan,Miami Gardens,0.0105
+Japan,Philadelphia,0.0105
+Japan,Santa Clara,0.0105
+Japan,Seattle,0.0105
+Netherlands,Arlington,0.0055
+Netherlands,Atlanta,0.0055
+Netherlands,East Rutherford,0.0055
+Netherlands,Foxborough,0.0055
+Netherlands,Houston,0.0055
+Netherlands,Inglewood,0.0055
+Netherlands,Kansas City,0.0055
+Netherlands,Miami Gardens,0.0055
+Netherlands,Philadelphia,0.0055
+Netherlands,Santa Clara,0.0055
+Netherlands,Seattle,0.0055
+Tunisia,Arlington,0.0029
+Tunisia,Atlanta,0.0029
+Tunisia,East Rutherford,0.0029
+Tunisia,Foxborough,0.0029
+Tunisia,Houston,0.0029
+Tunisia,Inglewood,0.0029
+Tunisia,Kansas City,0.0029
+Tunisia,Miami Gardens,0.0029
+Tunisia,Philadelphia,0.0029
+Tunisia,Santa Clara,0.0029
+Tunisia,Seattle,0.0029
+Belgium,Arlington,0.0026
+Belgium,Atlanta,0.0026
+Belgium,East Rutherford,0.0026
+Belgium,Foxborough,0.0026
+Belgium,Houston,0.0026
+Belgium,Inglewood,0.0026
+Belgium,Kansas City,0.0026
+Belgium,Miami Gardens,0.0026
+Belgium,Philadelphia,0.0026
+Belgium,Santa Clara,0.0026
+Belgium,Seattle,0.0026
+Egypt,Arlington,0.0092
+Egypt,Atlanta,0.0092
+Egypt,East Rutherford,0.0092
+Egypt,Foxborough,0.0092
+Egypt,Houston,0.0092
+Egypt,Inglewood,0.0092
+Egypt,Kansas City,0.0092
+Egypt,Miami Gardens,0.0092
+Egypt,Philadelphia,0.0092
+Egypt,Santa Clara,0.0092
+Egypt,Seattle,0.0092
+Iran,Arlington,0.0115
+Iran,Atlanta,0.0115
+Iran,East Rutherford,0.0115
+Iran,Foxborough,0.0115
+Iran,Houston,0.0115
+Iran,Inglewood,0.0115
+Iran,Kansas City,0.0115
+Iran,Miami Gardens,0.0115
+Iran,Philadelphia,0.0115
+Iran,Santa Clara,0.0115
+Iran,Seattle,0.0115
+New Zealand,Arlington,0.0029
+New Zealand,Atlanta,0.0029
+New Zealand,East Rutherford,0.0029
+New Zealand,Foxborough,0.0029
+New Zealand,Houston,0.0029
+New Zealand,Inglewood,0.0029
+New Zealand,Kansas City,0.0029
+New Zealand,Miami Gardens,0.0029
+New Zealand,Philadelphia,0.0029
+New Zealand,Santa Clara,0.0029
+New Zealand,Seattle,0.0029
+Cape Verde,Arlington,0.0032
+Cape Verde,Atlanta,0.0032
+Cape Verde,East Rutherford,0.0032
+Cape Verde,Foxborough,0.0032
+Cape Verde,Houston,0.0032
+Cape Verde,Inglewood,0.0032
+Cape Verde,Kansas City,0.0032
+Cape Verde,Miami Gardens,0.0032
+Cape Verde,Philadelphia,0.0032
+Cape Verde,Santa Clara,0.0032
+Cape Verde,Seattle,0.0032
+Saudi Arabia,Arlington,0.0052
+Saudi Arabia,Atlanta,0.0052
+Saudi Arabia,East Rutherford,0.0052
+Saudi Arabia,Foxborough,0.0052
+Saudi Arabia,Houston,0.0052
+Saudi Arabia,Inglewood,0.0052
+Saudi Arabia,Kansas City,0.0052
+Saudi Arabia,Miami Gardens,0.0052
+Saudi Arabia,Philadelphia,0.0052
+Saudi Arabia,Santa Clara,0.0052
+Saudi Arabia,Seattle,0.0052
+Uruguay,Arlington,0.0041
+Uruguay,Atlanta,0.0041
+Uruguay,East Rutherford,0.0041
+Uruguay,Foxborough,0.0041
+Uruguay,Houston,0.0041
+Uruguay,Inglewood,0.0041
+Uruguay,Kansas City,0.0041
+Uruguay,Miami Gardens,0.0041
+Uruguay,Philadelphia,0.0041
+Uruguay,Santa Clara,0.0041
+Uruguay,Seattle,0.0041
+Iraq,Arlington,0.0092
+Iraq,Atlanta,0.0092
+Iraq,East Rutherford,0.0092
+Iraq,Foxborough,0.0092
+Iraq,Houston,0.0092
+Iraq,Inglewood,0.0092
+Iraq,Kansas City,0.0092
+Iraq,Miami Gardens,0.0092
+Iraq,Philadelphia,0.0092
+Iraq,Santa Clara,0.0092
+Iraq,Seattle,0.0092
+Norway,Arlington,0.0022
+Norway,Atlanta,0.0022
+Norway,East Rutherford,0.0022
+Norway,Foxborough,0.0022
+Norway,Houston,0.0022
+Norway,Inglewood,0.0022
+Norway,Kansas City,0.0022
+Norway,Miami Gardens,0.0022
+Norway,Philadelphia,0.0022
+Norway,Santa Clara,0.0022
+Norway,Seattle,0.0022
+Senegal,Arlington,0.0029
+Senegal,Atlanta,0.0029
+Senegal,East Rutherford,0.0029
+Senegal,Foxborough,0.0029
+Senegal,Houston,0.0029
+Senegal,Inglewood,0.0029
+Senegal,Kansas City,0.0029
+Senegal,Miami Gardens,0.0029
+Senegal,Philadelphia,0.0029
+Senegal,Santa Clara,0.0029
+Senegal,Seattle,0.0029
+Algeria,Arlington,0.0032
+Algeria,Atlanta,0.0032
+Algeria,East Rutherford,0.0032
+Algeria,Foxborough,0.0032
+Algeria,Houston,0.0032
+Algeria,Inglewood,0.0032
+Algeria,Kansas City,0.0032
+Algeria,Miami Gardens,0.0032
+Algeria,Philadelphia,0.0032
+Algeria,Santa Clara,0.0032
+Algeria,Seattle,0.0032
+Argentina,Arlington,0.0076
+Argentina,Atlanta,0.0076
+Argentina,East Rutherford,0.0076
+Argentina,Foxborough,0.0076
+Argentina,Houston,0.0076
+Argentina,Inglewood,0.0076
+Argentina,Kansas City,0.0076
+Argentina,Miami Gardens,0.0076
+Argentina,Philadelphia,0.0076
+Argentina,Santa Clara,0.0076
+Argentina,Seattle,0.0076
+Austria,Arlington,0.0029
+Austria,Atlanta,0.0029
+Austria,East Rutherford,0.0029
+Austria,Foxborough,0.0029
+Austria,Houston,0.0029
+Austria,Inglewood,0.0029
+Austria,Kansas City,0.0029
+Austria,Miami Gardens,0.0029
+Austria,Philadelphia,0.0029
+Austria,Santa Clara,0.0029
+Austria,Seattle,0.0029
+Jordan,Arlington,0.0055
+Jordan,Atlanta,0.0055
+Jordan,East Rutherford,0.0055
+Jordan,Foxborough,0.0055
+Jordan,Houston,0.0055
+Jordan,Inglewood,0.0055
+Jordan,Kansas City,0.0055
+Jordan,Miami Gardens,0.0055
+Jordan,Philadelphia,0.0055
+Jordan,Santa Clara,0.0055
+Jordan,Seattle,0.0055
+Colombia,Arlington,0.0165
+Colombia,Atlanta,0.0165
+Colombia,East Rutherford,0.0165
+Colombia,Foxborough,0.0165
+Colombia,Houston,0.0165
+Colombia,Inglewood,0.0165
+Colombia,Kansas City,0.0165
+Colombia,Miami Gardens,0.0165
+Colombia,Philadelphia,0.0165
+Colombia,Santa Clara,0.0165
+Colombia,Seattle,0.0165
+DR Congo,Arlington,0.0032
+DR Congo,Atlanta,0.0032
+DR Congo,East Rutherford,0.0032
+DR Congo,Foxborough,0.0032
+DR Congo,Houston,0.0032
+DR Congo,Inglewood,0.0032
+DR Congo,Kansas City,0.0032
+DR Congo,Miami Gardens,0.0032
+DR Congo,Philadelphia,0.0032
+DR Congo,Santa Clara,0.0032
+DR Congo,Seattle,0.0032
+Portugal,Arlington,0.0071
+Portugal,Atlanta,0.0071
+Portugal,East Rutherford,0.0071
+Portugal,Foxborough,0.0071
+Portugal,Houston,0.0071
+Portugal,Inglewood,0.0071
+Portugal,Kansas City,0.0071
+Portugal,Miami Gardens,0.0071
+Portugal,Philadelphia,0.0071
+Portugal,Santa Clara,0.0071
+Portugal,Seattle,0.0071
+Uzbekistan,Arlington,0.0045
+Uzbekistan,Atlanta,0.0045
+Uzbekistan,East Rutherford,0.0045
+Uzbekistan,Foxborough,0.0045
+Uzbekistan,Houston,0.0045
+Uzbekistan,Inglewood,0.0045
+Uzbekistan,Kansas City,0.0045
+Uzbekistan,Miami Gardens,0.0045
+Uzbekistan,Philadelphia,0.0045
+Uzbekistan,Santa Clara,0.0045
+Uzbekistan,Seattle,0.0045
+Croatia,Arlington,0.0032
+Croatia,Atlanta,0.0032
+Croatia,East Rutherford,0.0032
+Croatia,Foxborough,0.0032
+Croatia,Houston,0.0032
+Croatia,Inglewood,0.0032
+Croatia,Kansas City,0.0032
+Croatia,Miami Gardens,0.0032
+Croatia,Philadelphia,0.0032
+Croatia,Santa Clara,0.0032
+Croatia,Seattle,0.0032
+England,Arlington,0.0153
+England,Atlanta,0.0153
+England,East Rutherford,0.0153
+England,Foxborough,0.0153
+England,Houston,0.0153
+England,Inglewood,0.0153
+England,Kansas City,0.0153
+England,Miami Gardens,0.0153
+England,Philadelphia,0.0153
+England,Santa Clara,0.0153
+England,Seattle,0.0153
+Ghana,Arlington,0.0078
+Ghana,Atlanta,0.0078
+Ghana,East Rutherford,0.0078
+Ghana,Foxborough,0.0078
+Ghana,Houston,0.0078
+Ghana,Inglewood,0.0078
+Ghana,Kansas City,0.0078
+Ghana,Miami Gardens,0.0078
+Ghana,Philadelphia,0.0078
+Ghana,Santa Clara,0.0078
+Ghana,Seattle,0.0078
+Panama,Arlington,0.0064
+Panama,Atlanta,0.0064
+Panama,East Rutherford,0.0064
+Panama,Foxborough,0.0064
+Panama,Houston,0.0064
+Panama,Inglewood,0.0064
+Panama,Kansas City,0.0064
+Panama,Miami Gardens,0.0064
+Panama,Philadelphia,0.0064
+Panama,Santa Clara,0.0064
+Panama,Seattle,0.0064

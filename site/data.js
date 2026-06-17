@@ -606,6 +606,39 @@ const WC26 = {
   "n": 611,
   "verdict": "ADMITTED"
  },
+ "shadow_scores": [
+  {
+   "variant": "Elo only",
+   "n": 20,
+   "log_loss": 1.1082
+  },
+  {
+   "variant": "no capital",
+   "n": 20,
+   "log_loss": 1.1083
+  },
+  {
+   "variant": "no altitude",
+   "n": 20,
+   "log_loss": 1.111
+  },
+  {
+   "variant": "Full model",
+   "n": 20,
+   "log_loss": 1.1187
+  },
+  {
+   "variant": "+ diaspora (shadow)",
+   "n": 20,
+   "log_loss": 1.1203
+  },
+  {
+   "variant": "no fatigue",
+   "n": 20,
+   "log_loss": 1.1275
+  }
+ ],
+ "uniform_logloss": 1.0986,
  "fatigue": {
   "meta": {
    "beta_fatigue": -0.028,

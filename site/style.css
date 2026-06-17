@@ -244,3 +244,5 @@ details.tech[open] summary::before { content: "\25BE "; }
 .bk-slot.sure .bk-p { color: var(--accent); font-weight: 700; }
 .bk-slot.open .bk-p { color: #6b7a9c; }
 .bk-slot.sure { background: rgba(74, 222, 128, .07); }
+
+/* model lab bars reuse .bar-row; nothing extra needed */

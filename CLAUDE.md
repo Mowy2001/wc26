@@ -76,8 +76,12 @@ docstring with the mathematical model, every design choice goes in docs/METHODOL
       acclimatisation, tested on CONMEBOL qualifiers (where altitude varies). OOS
       -0.0225, t=-2.42 (STRONGEST block), b=0.134/km, ADMITTED. Deployed as city tilt
       at Mexico City/Zapopan: Mexico 2.1->3.2% champion. tilts.load_city_tilt.
-- [ ] FINISH remaining selected variables: diaspora next, cohesion last (gate may
-      reject; fine). Then present data + impact on the site.
+- [x] Diaspora (scripts/24): DECLARED SHADOW BET, never in official model (can't be
+      gated — no past US World Cup). sqrt(US foreign-born) index, city tilt 0.06 at US
+      venues, Mexico strongest. Shadow scoreboard (scripts/25): all variants within
+      0.019 LL over 20 matches — honest "one tournament can't decide". Site: model lab.
+- [ ] Cohesion graph (LAST selected variable): gateable (shared career minutes,
+      Transfermarkt). Then present data + impact + the match-by-match slider.
 - [ ] WANT (Simone, 2026-06-16): a time SLIDER on groups + bracket showing the
       situation match by match (data already in outputs/history/timeline.csv +
       per-snapshot bracket — need to start saving bracket history too).

@@ -74,5 +74,6 @@ snap.to_csv(tl, mode="a", header=not os.path.exists(tl), index=False)
 print(f"Timeline snapshot appended ({len(fixed)}+{len(fixed_ko)} played).")
 
 subprocess.run([sys.executable, "scripts/09_player_layer.py"], check=True)
+subprocess.run([sys.executable, "scripts/25_shadow_scores.py"], check=True)
 subprocess.run([sys.executable, "scripts/05_export_site_data.py"], check=True)
 print("Site refreshed — reload site/index.html.")

@@ -67,6 +67,10 @@ try:
 except FileNotFoundError:
     altitude = None
 try:
+    shadow = pd.read_csv("outputs/shadow_scores.csv").to_dict("records")
+except FileNotFoundError:
+    shadow = None
+try:
     _bk = pd.read_csv("outputs/bracket.csv")
     bracket = {}
     for r in _bk.itertuples(index=False):
@@ -116,6 +120,8 @@ data = {
     "capital": capital,
     "climate": climate,
     "altitude": altitude,
+    "shadow_scores": shadow,
+    "uniform_logloss": 1.0986,
     "fatigue": fatigue,
     "baseline_eve": baseline,
     "bracket": bracket,

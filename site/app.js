@@ -354,3 +354,32 @@ if (WC26.bracket) {
       <span class="bk-p">${pct(champ.P_champion, 0)}</span></div></div></div>`;
   document.getElementById("bracket-board").innerHTML = board + champCol;
 }
+
+
+/* ---------- model lab (shadow scoreboard) ---------- */
+if (WC26.shadow_scores) {
+  const rows = [...WC26.shadow_scores].sort((x, y) => x.log_loss - y.log_loss);
+  const n = rows[0]?.n || 0;
+  const uni = WC26.uniform_logloss;
+  const lo = Math.min(...rows.map((r) => r.log_loss), uni) - 0.01;
+  const hi = Math.max(...rows.map((r) => r.log_loss), uni) + 0.01;
+  const w = (v) => (100 * (hi - v)) / (hi - lo); // lower log-loss = longer (better) bar
+  document.getElementById("lab-board").innerHTML = rows.map((r) => {
+    const main = r.variant === "Full model";
+    const shadow = r.variant.includes("diaspora");
+    const col = main ? "linear-gradient(90deg, var(--accent2), var(--accent))" : shadow ? "var(--gold)" : "#51618f";
+    return `<div class="bar-row">
+      <div class="who">${main ? "<b>" : ""}${r.variant}${main ? "</b>" : ""}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${w(r.log_loss)}%;background:${col}"></div></div>
+      <div class="val">${r.log_loss.toFixed(3)}</div>
+    </div>`;
+  }).join("");
+  document.getElementById("lab-note").innerHTML =
+    `Shorter bar = better (lower log-loss; the know-nothing baseline is ${uni.toFixed(3)}). Each line is
+     the <em>same</em> model with one ingredient added or removed, graded on the ${n} matches played so far.
+     Right now they sit within ${(1000 * (rows[rows.length-1].log_loss - rows[0].log_loss)).toFixed(0)}
+     thousandths of each other — these are pre-season friendlies, not a verdict: ${n} matches can't separate
+     tilts this small, and the order will shuffle. The point isn't today's leader; it's that the comparison
+     is registered in the open and settles over many tournaments. The diaspora bet (gold) lives here and
+     <strong>only</strong> here — it never touches the official forecast, because it can't pass a backtest.`;
+}
