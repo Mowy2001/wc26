@@ -1,4 +1,5 @@
 variant,n,log_loss
++ cohesion (shadow),20,1.1027
 Elo only,20,1.1082
 no capital,20,1.1083
 no altitude,20,1.111

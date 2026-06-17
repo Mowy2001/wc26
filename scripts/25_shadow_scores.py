@@ -32,7 +32,17 @@ fz = pd.read_csv("outputs/fatigue.csv", index_col=0)["fatigue_z"]
 bf = json.load(open("outputs/fatigue_beta.json"))["beta_fatigue"]
 cap_only = {t: bc * z for t, z in cap.items()}
 fat_only = {t: bf * float(z) for t, z in fz.items()}
-combined = load_team_tilt()
+kz = pd.read_csv("outputs/cohesion.csv", index_col=0)["cohesion_z"]
+bk = json.load(open("outputs/cohesion_beta.json"))["beta_cohesion"]
+coh_only = {t: bk * float(z) for t, z in kz.items()}
+combined = load_team_tilt()  # capital + fatigue + cohesion
+def _merge(*ds):
+    out = {}
+    for d in ds:
+        for k, v in (d or {}).items():
+            out[k] = out.get(k, 0.0) + v
+    return out
+cap_fat = _merge(cap_only, fat_only)
 alt = load_city_tilt() or {}
 dia = {(r.team, r.city): r.log_tilt for r in pd.read_csv("outputs/diaspora_tilt.csv").itertuples(index=False)}
 alt_dia = dict(alt)
@@ -45,6 +55,7 @@ VARIANTS = {
     "no altitude": (combined, None),
     "no capital": (fat_only, alt),
     "no fatigue": (cap_only, alt),
+    "+ cohesion (shadow)": (_merge(combined, coh_only), alt),
     "+ diaspora (shadow)": (combined, alt_dia),
 }
 

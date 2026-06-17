@@ -366,7 +366,7 @@ if (WC26.shadow_scores) {
   const w = (v) => (100 * (hi - v)) / (hi - lo); // lower log-loss = longer (better) bar
   document.getElementById("lab-board").innerHTML = rows.map((r) => {
     const main = r.variant === "Full model";
-    const shadow = r.variant.includes("diaspora");
+    const shadow = r.variant.includes("shadow");
     const col = main ? "linear-gradient(90deg, var(--accent2), var(--accent))" : shadow ? "var(--gold)" : "#51618f";
     return `<div class="bar-row">
       <div class="who">${main ? "<b>" : ""}${r.variant}${main ? "</b>" : ""}</div>
@@ -380,6 +380,9 @@ if (WC26.shadow_scores) {
      Right now they sit within ${(1000 * (rows[rows.length-1].log_loss - rows[0].log_loss)).toFixed(0)}
      thousandths of each other — these are pre-season friendlies, not a verdict: ${n} matches can't separate
      tilts this small, and the order will shuffle. The point isn't today's leader; it's that the comparison
-     is registered in the open and settles over many tournaments. The diaspora bet (gold) lives here and
-     <strong>only</strong> here — it never touches the official forecast, because it can't pass a backtest.`;
+     is registered in the open and settles over many tournaments. The two gold bars are shadow bets that live here and <strong>only</strong> here: diaspora
+     (can't be backtested — no past US World Cup) and squad cohesion (passes the backtest by a
+     hair but would swing the favourite ~10pp on a t=-0.6 signal — too much weight for too little
+     proof). Telling: cohesion tops the board today on 20 games — which is exactly why the live
+     board never decides what goes in the model; the 345-match backtest does.`;
 }

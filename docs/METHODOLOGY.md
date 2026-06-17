@@ -219,6 +219,23 @@ reruns 01 -> 10 -> 15 and pushes data/outputs/site. Beliefs stay frozen at June 
 the routine may not touch model code. Guard: self-disables instruction after the
 final; group-reconstruction canary aborts the commit on data corruption.
 
+## Cohesion — admitted by the letter, excluded on proportionality (2026-06-18)
+Last selected variable. Transfermarkt career-shared-minutes is unscrapeable; proxy =
+squad club-concentration (Herfindahl of club shares), gated ON TOP of capital so it
+tests squad STRUCTURE net of club LEVEL. LOTO on 6 tournaments: pooled OOS log-loss
+-0.0047 — it passes the bar — but paired t=-0.60 (not significant) and the coefficient
+is NEGATIVE (b=-0.067): net of club quality, more concentrated squads slightly
+UNDERperform (an "insular squad" signal, the opposite of the popular club-core story).
+The decisive problem is deployment: Spain (cohesion_z=1.70) would take a -0.114 log-rate
+hit EVERY match, compounding to -9.6pp on its title odds — a non-significant feature
+swinging the favourite by ten points. The backtest measures the AVERAGE effect over 345
+mostly-moderate-z matches; deployment is dominated by an extreme-z favourite on a deep
+run, exactly where the evidence is thinnest. So cohesion is NOT in the official model:
+it lives as a shadow (scripts/25), scored live alongside diaspora. (It nominally tops
+the 20-match live board — which is precisely why the live board never decides admission;
+the backtest does.) Lesson: "improves OOS log-loss" is necessary, not sufficient — the
+effect must also be proportionate to the evidence.
+
 ## Diaspora — a declared shadow bet, never in the official model (2026-06-17)
 There is no past World Cup on US soil, so de-facto home support from US diaspora
 CANNOT be backtested — it can never pass the gate. Per Simone's call it lives ONLY as

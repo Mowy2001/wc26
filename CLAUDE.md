@@ -80,8 +80,12 @@ docstring with the mathematical model, every design choice goes in docs/METHODOL
       gated — no past US World Cup). sqrt(US foreign-born) index, city tilt 0.06 at US
       venues, Mexico strongest. Shadow scoreboard (scripts/25): all variants within
       0.019 LL over 20 matches — honest "one tournament can't decide". Site: model lab.
-- [ ] Cohesion graph (LAST selected variable): gateable (shared career minutes,
-      Transfermarkt). Then present data + impact + the match-by-match slider.
+- [x] Cohesion (scripts/26): club-concentration proxy. Passes OOS by a hair (-0.0047)
+      but t=-0.60 AND deployment swings Spain -9.6pp (non-sig feature dominating the
+      favourite) -> EXCLUDED from official model, kept as SHADOW (scripts/25) like
+      diaspora. Lesson: OOS-improvement necessary not sufficient; needs proportionality.
+- [ ] All selected variables now have verdicts. NEXT: match-by-match SLIDER
+      (groups+bracket) + football-metaphor site rewrite (see direction memo).
 - [ ] WANT (Simone, 2026-06-16): a time SLIDER on groups + bracket showing the
       situation match by match (data already in outputs/history/timeline.csv +
       per-snapshot bracket — need to start saving bracket history too).

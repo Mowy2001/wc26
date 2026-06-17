@@ -1,0 +1,7 @@
+{
+ "beta_cohesion": -0.067,
+ "oos_delta": -0.00467,
+ "t_paired": -0.6,
+ "n": 345,
+ "verdict": "ADMITTED"
+}
