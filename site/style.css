@@ -246,3 +246,17 @@ details.tech[open] summary::before { content: "\25BE "; }
 .bk-slot.sure { background: rgba(74, 222, 128, .07); }
 
 /* model lab bars reuse .bar-row; nothing extra needed */
+
+/* match-by-match slider */
+.tl-control { margin: 0 0 18px; }
+#tl-slider { width: 100%; accent-color: var(--accent); height: 6px; cursor: pointer; }
+.tl-label { margin-top: 8px; font-size: .9rem; color: var(--text); font-weight: 600; }
+.tl-label #tl-date { color: var(--accent2); }
+.tl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.tl-h { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 700; margin-bottom: 10px; }
+.tl-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px; }
+.tlg { font-size: .8rem; }
+.tlg b { color: var(--accent2); font-size: .7rem; }
+.tlg .row { display: flex; justify-content: space-between; }
+.tlg .row span:last-child { font-variant-numeric: tabular-nums; color: var(--muted); }
+@media (max-width: 760px) { .tl-grid { grid-template-columns: 1fr; } .tl-groups { grid-template-columns: 1fr; } }

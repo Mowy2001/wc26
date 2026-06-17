@@ -71,6 +71,10 @@ try:
 except FileNotFoundError:
     shadow = None
 try:
+    replay = json.load(open("outputs/history/replay.json"))
+except FileNotFoundError:
+    replay = None
+try:
     _bk = pd.read_csv("outputs/bracket.csv")
     bracket = {}
     for r in _bk.itertuples(index=False):
@@ -121,6 +125,7 @@ data = {
     "climate": climate,
     "altitude": altitude,
     "shadow_scores": shadow,
+    "replay": replay,
     "uniform_logloss": 1.0986,
     "fatigue": fatigue,
     "baseline_eve": baseline,

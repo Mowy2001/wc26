@@ -386,3 +386,37 @@ if (WC26.shadow_scores) {
      proof). Telling: cohesion tops the board today on 20 games — which is exactly why the live
      board never decides what goes in the model; the 345-match backtest does.`;
 }
+
+/* ---------- match-by-match slider ---------- */
+if (WC26.replay && WC26.replay.snapshots) {
+  const snaps = WC26.replay.snapshots;
+  const tg = WC26.replay.teams_group;
+  const slider = document.getElementById("tl-slider");
+  slider.max = snaps.length - 1;
+  slider.value = snaps.length - 1;
+
+  const render = (k) => {
+    const s = snaps[k];
+    document.getElementById("tl-date").textContent = s.date;
+    document.getElementById("tl-match").textContent = k === 0 ? "before kickoff" : s.last_match;
+    // title odds: top 12 by champion at this snapshot
+    const top = Object.entries(s.champion).sort((a, b) => b[1] - a[1]).slice(0, 12);
+    const max = top[0][1] || 1;
+    document.getElementById("tl-champ").innerHTML = top.map(([t, p]) => `
+      <div class="bar-row">
+        <div class="who">${flag(t)}${t}</div>
+        <div class="bar-track"><div class="bar-fill" style="width:${(100 * p) / max}%"></div></div>
+        <div class="val">${pct(p)}</div>
+      </div>`).join("");
+    // qualification by group
+    const groups = {};
+    Object.entries(tg).forEach(([t, g]) => (groups[g] = groups[g] || []).push(t));
+    document.getElementById("tl-groups").innerHTML = Object.keys(groups).sort().map((g) => {
+      const rows = groups[g].map((t) => [t, s.qualify[t] ?? 0]).sort((a, b) => b[1] - a[1])
+        .map(([t, q]) => `<div class="row"><span>${flag(t)}${t}</span><span>${pct(q, 0)}</span></div>`).join("");
+      return `<div class="tlg"><b>GROUP ${g}</b>${rows}</div>`;
+    }).join("");
+  };
+  slider.addEventListener("input", (e) => render(+e.target.value));
+  render(snaps.length - 1);
+}
