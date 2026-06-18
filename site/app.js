@@ -408,6 +408,17 @@ if (WC26.replay && WC26.replay.snapshots) {
         <div class="bar-track"><div class="bar-fill" style="width:${(100 * p) / max}%"></div></div>
         <div class="val">${pct(p)}</div>
       </div>`).join("");
+    // golden boot
+    const gb = s.golden_boot || [];
+    if (gb.length) {
+      const gmax = gb[0].p || 1;
+      document.getElementById("tl-gb").innerHTML = gb.slice(0, 10).map((p) => `
+        <div class="bar-row">
+          <div class="who">${flag(p.team)}${p.player}</div>
+          <div class="bar-track"><div class="bar-fill" style="width:${(100 * p.p) / gmax}%"></div></div>
+          <div class="val">${pct(p.p)}</div>
+        </div>`).join("");
+    }
     // qualification by group
     const groups = {};
     Object.entries(tg).forEach(([t, g]) => (groups[g] = groups[g] || []).push(t));

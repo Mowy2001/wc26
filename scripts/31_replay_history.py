@@ -16,6 +16,8 @@ from wc26.elo import ratings_asof
 from wc26.dixon_coles import DixonColes
 from wc26.simulate import simulate_tournament
 from wc26.tilts import load_team_tilt, load_city_tilt
+from wc26.data import load_goalscorers
+from wc26.players import estimate_debutant_share, squad_weights, allocate_goals
 
 results = load_results()
 elo_hist = pd.read_parquet("outputs/elo_history.parquet")
@@ -30,6 +32,12 @@ elo = ratings_asof(elo_hist, "2026-06-11")
 gfx = wc2026_group_fixtures(results)
 groups = reconstruct_groups(gfx)
 tilt, city_tilt = load_team_tilt(), load_city_tilt()
+# player-layer weights (frozen at eve, reused every snapshot)
+gs = load_goalscorers()
+squads = pd.read_csv("data/external/squads_wc2026.csv", parse_dates=["birth"])
+deb = estimate_debutant_share(gs)
+gb_weights = {t: squad_weights(gs, squads, t, pd.Timestamp("2026-06-11"), deb, age_alpha=0.1, drop_to_bucket=False)
+              for g in groups.values() for t in g}
 
 played = wc2026_fixtures(results).dropna(subset=["home_score", "away_score"]).sort_values("date")
 print(f"replaying {len(played)} played matches -> {len(played)+1} snapshots")
@@ -41,8 +49,11 @@ for k in range(len(played) + 1):
     fixed = {(r.home_team, r.away_team): (int(r.home_score), int(r.away_score))
              for r in sub[sub.date <= GROUP_STAGE_END].itertuples(index=False)}
     res = simulate_tournament(groups, gfx, model, elo, n_sims=10000, fixed_results=fixed,
-                              team_log_tilt=tilt, city_log_tilt=city_tilt)
+                              team_log_tilt=tilt, city_log_tilt=city_tilt, collect_goal_samples=True)
     t = res["teams"]
+    gb = allocate_goals(res["goal_samples"], gb_weights)["players"].head(12)
+    gb_list = [{"player": r.player, "team": r.team, "p": round(float(r.P_golden_boot), 4)}
+               for r in gb.itertuples(index=False)]
     last = "(eve)" if k == 0 else f"{played.iloc[k-1].home_team} {int(played.iloc[k-1].home_score)}-{int(played.iloc[k-1].away_score)} {played.iloc[k-1].away_team}"
     snaps.append({
         "k": k,
@@ -50,6 +61,7 @@ for k in range(len(played) + 1):
         "last_match": last,
         "champion": {tm: round(float(t.loc[tm, "P_champion"]), 4) for tm in t.index},
         "qualify": {tm: round(float(t.loc[tm, "P_qualify"]), 4) for tm in t.index},
+        "golden_boot": gb_list,
     })
     print(f"  k={k:2d} {last[:42]:42s} {time.time()-t0:5.0f}s")
 

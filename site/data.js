@@ -748,7 +748,69 @@ const WC26 = {
      "Croatia": 0.8905,
      "Panama": 0.6604,
      "Ghana": 0.1668
-    }
+    },
+    "golden_boot": [
+     {
+      "player": "Kylian Mbapp\u00e9",
+      "team": "France",
+      "p": 0.2698
+     },
+     {
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.1228
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.1032
+     },
+     {
+      "player": "Erling Haaland",
+      "team": "Norway",
+      "p": 0.0753
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.0532
+     },
+     {
+      "player": "Luis D\u00edaz",
+      "team": "Colombia",
+      "p": 0.0485
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0324
+     },
+     {
+      "player": "Ferran Torres",
+      "team": "Spain",
+      "p": 0.0207
+     },
+     {
+      "player": "Mikel Merino",
+      "team": "Spain",
+      "p": 0.0175
+     },
+     {
+      "player": "Jonathan David",
+      "team": "Canada",
+      "p": 0.0136
+     },
+     {
+      "player": "Brahim D\u00edaz",
+      "team": "Morocco",
+      "p": 0.0128
+     },
+     {
+      "player": "Raphinha",
+      "team": "Brazil",
+      "p": 0.0126
+     }
+    ]
    },
    {
     "k": 1,
@@ -853,7 +915,69 @@ const WC26 = {
      "Croatia": 0.8909,
      "Panama": 0.6742,
      "Ghana": 0.168
-    }
+    },
+    "golden_boot": [
+     {
+      "player": "Kylian Mbapp\u00e9",
+      "team": "France",
+      "p": 0.264
+     },
+     {
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.1245
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.1046
+     },
+     {
+      "player": "Erling Haaland",
+      "team": "Norway",
+      "p": 0.075
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.0528
+     },
+     {
+      "player": "Luis D\u00edaz",
+      "team": "Colombia",
+      "p": 0.0463
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0373
+     },
+     {
+      "player": "Ferran Torres",
+      "team": "Spain",
+      "p": 0.0206
+     },
+     {
+      "player": "Mikel Merino",
+      "team": "Spain",
+      "p": 0.0153
+     },
+     {
+      "player": "Lionel Messi",
+      "team": "Argentina",
+      "p": 0.014
+     },
+     {
+      "player": "Jonathan David",
+      "team": "Canada",
+      "p": 0.0127
+     },
+     {
+      "player": "Romelu Lukaku",
+      "team": "Belgium",
+      "p": 0.0121
+     }
+    ]
    },
    {
     "k": 2,
@@ -958,7 +1082,69 @@ const WC26 = {
      "Croatia": 0.8914,
      "Panama": 0.6763,
      "Ghana": 0.1647
-    }
+    },
+    "golden_boot": [
+     {
+      "player": "Kylian Mbapp\u00e9",
+      "team": "France",
+      "p": 0.2663
+     },
+     {
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.1261
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.1035
+     },
+     {
+      "player": "Erling Haaland",
+      "team": "Norway",
+      "p": 0.0711
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.0522
+     },
+     {
+      "player": "Luis D\u00edaz",
+      "team": "Colombia",
+      "p": 0.0494
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0351
+     },
+     {
+      "player": "Ferran Torres",
+      "team": "Spain",
+      "p": 0.0206
+     },
+     {
+      "player": "Mikel Merino",
+      "team": "Spain",
+      "p": 0.0168
+     },
+     {
+      "player": "Jonathan David",
+      "team": "Canada",
+      "p": 0.014
+     },
+     {
+      "player": "Romelu Lukaku",
+      "team": "Belgium",
+      "p": 0.0133
+     },
+     {
+      "player": "Raphinha",
+      "team": "Brazil",
+      "p": 0.0117
+     }
+    ]
    },
    {
     "k": 3,
@@ -1063,7 +1249,69 @@ const WC26 = {
      "Croatia": 0.8767,
      "Panama": 0.6648,
      "Ghana": 0.1677
-    }
+    },
+    "golden_boot": [
+     {
+      "player": "Kylian Mbapp\u00e9",
+      "team": "France",
+      "p": 0.269
+     },
+     {
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.1295
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.1029
+     },
+     {
+      "player": "Erling Haaland",
+      "team": "Norway",
+      "p": 0.074
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.0529
+     },
+     {
+      "player": "Luis D\u00edaz",
+      "team": "Colombia",
+      "p": 0.0437
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0353
+     },
+     {
+      "player": "Ferran Torres",
+      "team": "Spain",
+      "p": 0.0206
+     },
+     {
+      "player": "Mikel Merino",
+      "team": "Spain",
+      "p": 0.0154
+     },
+     {
+      "player": "Romelu Lukaku",
+      "team": "Belgium",
+      "p": 0.0128
+     },
+     {
+      "player": "Lionel Messi",
+      "team": "Argentina",
+      "p": 0.0128
+     },
+     {
+      "player": "Brahim D\u00edaz",
+      "team": "Morocco",
+      "p": 0.0127
+     }
+    ]
    },
    {
     "k": 4,
@@ -1168,7 +1416,69 @@ const WC26 = {
      "Croatia": 0.8908,
      "Panama": 0.6556,
      "Ghana": 0.1717
-    }
+    },
+    "golden_boot": [
+     {
+      "player": "Kylian Mbapp\u00e9",
+      "team": "France",
+      "p": 0.2725
+     },
+     {
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.122
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.1016
+     },
+     {
+      "player": "Erling Haaland",
+      "team": "Norway",
+      "p": 0.0736
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.0512
+     },
+     {
+      "player": "Luis D\u00edaz",
+      "team": "Colombia",
+      "p": 0.0443
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0369
+     },
+     {
+      "player": "Ferran Torres",
+      "team": "Spain",
+      "p": 0.0217
+     },
+     {
+      "player": "Mikel Merino",
+      "team": "Spain",
+      "p": 0.0154
+     },
+     {
+      "player": "Lionel Messi",
+      "team": "Argentina",
+      "p": 0.014
+     },
+     {
+      "player": "Romelu Lukaku",
+      "team": "Belgium",
+      "p": 0.0121
+     },
+     {
+      "player": "Brahim D\u00edaz",
+      "team": "Morocco",
+      "p": 0.012
+     }
+    ]
    },
    {
     "k": 5,
@@ -1273,7 +1583,69 @@ const WC26 = {
      "Croatia": 0.8912,
      "Panama": 0.6612,
      "Ghana": 0.1613
-    }
+    },
+    "golden_boot": [
+     {
+      "player": "Kylian Mbapp\u00e9",
+      "team": "France",
+      "p": 0.2736
+     },
+     {
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.1257
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.101
+     },
+     {
+      "player": "Erling Haaland",
+      "team": "Norway",
+      "p": 0.0768
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.05
+     },
+     {
+      "player": "Luis D\u00edaz",
+      "team": "Colombia",
+      "p": 0.0454
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0363
+     },
+     {
+      "player": "Ferran Torres",
+      "team": "Spain",
+      "p": 0.0195
+     },
+     {
+      "player": "Mikel Merino",
+      "team": "Spain",
+      "p": 0.016
+     },
+     {
+      "player": "Lionel Messi",
+      "team": "Argentina",
+      "p": 0.0131
+     },
+     {
+      "player": "Brahim D\u00edaz",
+      "team": "Morocco",
+      "p": 0.0127
+     },
+     {
+      "player": "Romelu Lukaku",
+      "team": "Belgium",
+      "p": 0.0119
+     }
+    ]
    },
    {
     "k": 6,
@@ -1378,7 +1750,69 @@ const WC26 = {
      "Croatia": 0.8859,
      "Panama": 0.6673,
      "Ghana": 0.1613
-    }
+    },
+    "golden_boot": [
+     {
+      "player": "Kylian Mbapp\u00e9",
+      "team": "France",
+      "p": 0.2735
+     },
+     {
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.1257
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.1038
+     },
+     {
+      "player": "Erling Haaland",
+      "team": "Norway",
+      "p": 0.0816
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.0495
+     },
+     {
+      "player": "Luis D\u00edaz",
+      "team": "Colombia",
+      "p": 0.0453
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0372
+     },
+     {
+      "player": "Ferran Torres",
+      "team": "Spain",
+      "p": 0.0204
+     },
+     {
+      "player": "Mikel Merino",
+      "team": "Spain",
+      "p": 0.0153
+     },
+     {
+      "player": "Brahim D\u00edaz",
+      "team": "Morocco",
+      "p": 0.0141
+     },
+     {
+      "player": "Lionel Messi",
+      "team": "Argentina",
+      "p": 0.0129
+     },
+     {
+      "player": "Romelu Lukaku",
+      "team": "Belgium",
+      "p": 0.0127
+     }
+    ]
    },
    {
     "k": 7,
@@ -1483,7 +1917,69 @@ const WC26 = {
      "Croatia": 0.8902,
      "Panama": 0.6635,
      "Ghana": 0.1575
-    }
+    },
+    "golden_boot": [
+     {
+      "player": "Kylian Mbapp\u00e9",
+      "team": "France",
+      "p": 0.2624
+     },
+     {
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.1306
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.1083
+     },
+     {
+      "player": "Erling Haaland",
+      "team": "Norway",
+      "p": 0.0764
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.0544
+     },
+     {
+      "player": "Luis D\u00edaz",
+      "team": "Colombia",
+      "p": 0.0437
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.037
+     },
+     {
+      "player": "Ferran Torres",
+      "team": "Spain",
+      "p": 0.0217
+     },
+     {
+      "player": "Mikel Merino",
+      "team": "Spain",
+      "p": 0.0149
+     },
+     {
+      "player": "Mehdi Taremi",
+      "team": "Iran",
+      "p": 0.0145
+     },
+     {
+      "player": "Lionel Messi",
+      "team": "Argentina",
+      "p": 0.0145
+     },
+     {
+      "player": "Romelu Lukaku",
+      "team": "Belgium",
+      "p": 0.0119
+     }
+    ]
    },
    {
     "k": 8,
@@ -1588,7 +2084,69 @@ const WC26 = {
      "Croatia": 0.8863,
      "Panama": 0.6589,
      "Ghana": 0.1577
-    }
+    },
+    "golden_boot": [
+     {
+      "player": "Kylian Mbapp\u00e9",
+      "team": "France",
+      "p": 0.2654
+     },
+     {
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.1259
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.1092
+     },
+     {
+      "player": "Erling Haaland",
+      "team": "Norway",
+      "p": 0.0774
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.0518
+     },
+     {
+      "player": "Luis D\u00edaz",
+      "team": "Colombia",
+      "p": 0.0466
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0376
+     },
+     {
+      "player": "Ferran Torres",
+      "team": "Spain",
+      "p": 0.0207
+     },
+     {
+      "player": "Mikel Merino",
+      "team": "Spain",
+      "p": 0.0171
+     },
+     {
+      "player": "Lionel Messi",
+      "team": "Argentina",
+      "p": 0.0143
+     },
+     {
+      "player": "Romelu Lukaku",
+      "team": "Belgium",
+      "p": 0.0122
+     },
+     {
+      "player": "Brahim D\u00edaz",
+      "team": "Morocco",
+      "p": 0.0111
+     }
+    ]
    },
    {
     "k": 9,
@@ -1693,7 +2251,69 @@ const WC26 = {
      "Croatia": 0.8778,
      "Panama": 0.6614,
      "Ghana": 0.1573
-    }
+    },
+    "golden_boot": [
+     {
+      "player": "Kylian Mbapp\u00e9",
+      "team": "France",
+      "p": 0.2685
+     },
+     {
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.1141
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.0998
+     },
+     {
+      "player": "Erling Haaland",
+      "team": "Norway",
+      "p": 0.076
+     },
+     {
+      "player": "Viktor Gy\u00f6keres",
+      "team": "Sweden",
+      "p": 0.0525
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.0512
+     },
+     {
+      "player": "Luis D\u00edaz",
+      "team": "Colombia",
+      "p": 0.0446
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0346
+     },
+     {
+      "player": "Ferran Torres",
+      "team": "Spain",
+      "p": 0.0218
+     },
+     {
+      "player": "Mikel Merino",
+      "team": "Spain",
+      "p": 0.0162
+     },
+     {
+      "player": "Lionel Messi",
+      "team": "Argentina",
+      "p": 0.0136
+     },
+     {
+      "player": "Romelu Lukaku",
+      "team": "Belgium",
+      "p": 0.0112
+     }
+    ]
    },
    {
     "k": 10,
@@ -1798,7 +2418,69 @@ const WC26 = {
      "Croatia": 0.8791,
      "Panama": 0.6564,
      "Ghana": 0.1523
-    }
+    },
+    "golden_boot": [
+     {
+      "player": "Kylian Mbapp\u00e9",
+      "team": "France",
+      "p": 0.2673
+     },
+     {
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.1133
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.1037
+     },
+     {
+      "player": "Erling Haaland",
+      "team": "Norway",
+      "p": 0.0763
+     },
+     {
+      "player": "Viktor Gy\u00f6keres",
+      "team": "Sweden",
+      "p": 0.0547
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.0469
+     },
+     {
+      "player": "Luis D\u00edaz",
+      "team": "Colombia",
+      "p": 0.0447
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0355
+     },
+     {
+      "player": "Ferran Torres",
+      "team": "Spain",
+      "p": 0.0183
+     },
+     {
+      "player": "Mikel Merino",
+      "team": "Spain",
+      "p": 0.0152
+     },
+     {
+      "player": "Lionel Messi",
+      "team": "Argentina",
+      "p": 0.0141
+     },
+     {
+      "player": "Memphis Depay",
+      "team": "Netherlands",
+      "p": 0.0123
+     }
+    ]
    },
    {
     "k": 11,
@@ -1903,7 +2585,69 @@ const WC26 = {
      "Croatia": 0.878,
      "Panama": 0.6415,
      "Ghana": 0.1474
-    }
+    },
+    "golden_boot": [
+     {
+      "player": "Kylian Mbapp\u00e9",
+      "team": "France",
+      "p": 0.2794
+     },
+     {
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.1134
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.1026
+     },
+     {
+      "player": "Erling Haaland",
+      "team": "Norway",
+      "p": 0.0842
+     },
+     {
+      "player": "Viktor Gy\u00f6keres",
+      "team": "Sweden",
+      "p": 0.0526
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.05
+     },
+     {
+      "player": "Luis D\u00edaz",
+      "team": "Colombia",
+      "p": 0.0421
+     },
+     {
+      "player": "Ferran Torres",
+      "team": "Spain",
+      "p": 0.0192
+     },
+     {
+      "player": "Mikel Merino",
+      "team": "Spain",
+      "p": 0.0159
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0153
+     },
+     {
+      "player": "Brahim D\u00edaz",
+      "team": "Morocco",
+      "p": 0.0124
+     },
+     {
+      "player": "Memphis Depay",
+      "team": "Netherlands",
+      "p": 0.0116
+     }
+    ]
    },
    {
     "k": 12,
@@ -2008,7 +2752,69 @@ const WC26 = {
      "Croatia": 0.876,
      "Panama": 0.6359,
      "Ghana": 0.1578
-    }
+    },
+    "golden_boot": [
+     {
+      "player": "Kylian Mbapp\u00e9",
+      "team": "France",
+      "p": 0.2773
+     },
+     {
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.1132
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.1005
+     },
+     {
+      "player": "Erling Haaland",
+      "team": "Norway",
+      "p": 0.0729
+     },
+     {
+      "player": "Viktor Gy\u00f6keres",
+      "team": "Sweden",
+      "p": 0.0526
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.0487
+     },
+     {
+      "player": "Luis D\u00edaz",
+      "team": "Colombia",
+      "p": 0.0446
+     },
+     {
+      "player": "Ferran Torres",
+      "team": "Spain",
+      "p": 0.0194
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0157
+     },
+     {
+      "player": "Mikel Merino",
+      "team": "Spain",
+      "p": 0.0148
+     },
+     {
+      "player": "Lionel Messi",
+      "team": "Argentina",
+      "p": 0.0126
+     },
+     {
+      "player": "Memphis Depay",
+      "team": "Netherlands",
+      "p": 0.012
+     }
+    ]
    },
    {
     "k": 13,
@@ -2113,7 +2919,69 @@ const WC26 = {
      "Croatia": 0.8708,
      "Panama": 0.6435,
      "Ghana": 0.1495
-    }
+    },
+    "golden_boot": [
+     {
+      "player": "Kylian Mbapp\u00e9",
+      "team": "France",
+      "p": 0.2789
+     },
+     {
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.1121
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.104
+     },
+     {
+      "player": "Erling Haaland",
+      "team": "Norway",
+      "p": 0.0779
+     },
+     {
+      "player": "Viktor Gy\u00f6keres",
+      "team": "Sweden",
+      "p": 0.0548
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.0495
+     },
+     {
+      "player": "Luis D\u00edaz",
+      "team": "Colombia",
+      "p": 0.0469
+     },
+     {
+      "player": "Ferran Torres",
+      "team": "Spain",
+      "p": 0.0205
+     },
+     {
+      "player": "Mikel Merino",
+      "team": "Spain",
+      "p": 0.016
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.015
+     },
+     {
+      "player": "Brahim D\u00edaz",
+      "team": "Morocco",
+      "p": 0.0141
+     },
+     {
+      "player": "Lionel Messi",
+      "team": "Argentina",
+      "p": 0.0123
+     }
+    ]
    },
    {
     "k": 14,
@@ -2218,7 +3086,69 @@ const WC26 = {
      "Croatia": 0.8774,
      "Panama": 0.6423,
      "Ghana": 0.1518
-    }
+    },
+    "golden_boot": [
+     {
+      "player": "Kylian Mbapp\u00e9",
+      "team": "France",
+      "p": 0.28
+     },
+     {
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.1152
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.1032
+     },
+     {
+      "player": "Erling Haaland",
+      "team": "Norway",
+      "p": 0.0734
+     },
+     {
+      "player": "Viktor Gy\u00f6keres",
+      "team": "Sweden",
+      "p": 0.0502
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.0495
+     },
+     {
+      "player": "Luis D\u00edaz",
+      "team": "Colombia",
+      "p": 0.0443
+     },
+     {
+      "player": "Ferran Torres",
+      "team": "Spain",
+      "p": 0.0212
+     },
+     {
+      "player": "Mikel Merino",
+      "team": "Spain",
+      "p": 0.0159
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0139
+     },
+     {
+      "player": "Brahim D\u00edaz",
+      "team": "Morocco",
+      "p": 0.0115
+     },
+     {
+      "player": "Memphis Depay",
+      "team": "Netherlands",
+      "p": 0.0114
+     }
+    ]
    },
    {
     "k": 15,
@@ -2323,7 +3253,69 @@ const WC26 = {
      "Croatia": 0.8725,
      "Panama": 0.6389,
      "Ghana": 0.1516
-    }
+    },
+    "golden_boot": [
+     {
+      "player": "Kylian Mbapp\u00e9",
+      "team": "France",
+      "p": 0.2844
+     },
+     {
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.1235
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.1004
+     },
+     {
+      "player": "Erling Haaland",
+      "team": "Norway",
+      "p": 0.0777
+     },
+     {
+      "player": "Viktor Gy\u00f6keres",
+      "team": "Sweden",
+      "p": 0.0582
+     },
+     {
+      "player": "Luis D\u00edaz",
+      "team": "Colombia",
+      "p": 0.0483
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.0252
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0186
+     },
+     {
+      "player": "Brahim D\u00edaz",
+      "team": "Morocco",
+      "p": 0.0129
+     },
+     {
+      "player": "Memphis Depay",
+      "team": "Netherlands",
+      "p": 0.0127
+     },
+     {
+      "player": "Lionel Messi",
+      "team": "Argentina",
+      "p": 0.0125
+     },
+     {
+      "player": "Raphinha",
+      "team": "Brazil",
+      "p": 0.0107
+     }
+    ]
    },
    {
     "k": 16,
@@ -2428,7 +3420,69 @@ const WC26 = {
      "Croatia": 0.8719,
      "Panama": 0.631,
      "Ghana": 0.1536
-    }
+    },
+    "golden_boot": [
+     {
+      "player": "Kylian Mbapp\u00e9",
+      "team": "France",
+      "p": 0.2816
+     },
+     {
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.1184
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.1108
+     },
+     {
+      "player": "Erling Haaland",
+      "team": "Norway",
+      "p": 0.0773
+     },
+     {
+      "player": "Viktor Gy\u00f6keres",
+      "team": "Sweden",
+      "p": 0.0564
+     },
+     {
+      "player": "Luis D\u00edaz",
+      "team": "Colombia",
+      "p": 0.0471
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.0264
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0175
+     },
+     {
+      "player": "Lionel Messi",
+      "team": "Argentina",
+      "p": 0.0139
+     },
+     {
+      "player": "Brahim D\u00edaz",
+      "team": "Morocco",
+      "p": 0.0117
+     },
+     {
+      "player": "Mehdi Taremi",
+      "team": "Iran",
+      "p": 0.0116
+     },
+     {
+      "player": "Memphis Depay",
+      "team": "Netherlands",
+      "p": 0.0115
+     }
+    ]
    },
    {
     "k": 17,
@@ -2533,7 +3587,69 @@ const WC26 = {
      "Croatia": 0.8716,
      "Panama": 0.6348,
      "Ghana": 0.145
-    }
+    },
+    "golden_boot": [
+     {
+      "player": "Kylian Mbapp\u00e9",
+      "team": "France",
+      "p": 0.3566
+     },
+     {
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.1091
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.1046
+     },
+     {
+      "player": "Erling Haaland",
+      "team": "Norway",
+      "p": 0.0746
+     },
+     {
+      "player": "Viktor Gy\u00f6keres",
+      "team": "Sweden",
+      "p": 0.0473
+     },
+     {
+      "player": "Luis D\u00edaz",
+      "team": "Colombia",
+      "p": 0.0402
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.0207
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0154
+     },
+     {
+      "player": "Lionel Messi",
+      "team": "Argentina",
+      "p": 0.0129
+     },
+     {
+      "player": "Memphis Depay",
+      "team": "Netherlands",
+      "p": 0.0113
+     },
+     {
+      "player": "Brahim D\u00edaz",
+      "team": "Morocco",
+      "p": 0.0101
+     },
+     {
+      "player": "Romelu Lukaku",
+      "team": "Belgium",
+      "p": 0.0088
+     }
+    ]
    },
    {
     "k": 18,
@@ -2638,7 +3754,69 @@ const WC26 = {
      "Croatia": 0.8765,
      "Panama": 0.6357,
      "Ghana": 0.1492
-    }
+    },
+    "golden_boot": [
+     {
+      "player": "Kylian Mbapp\u00e9",
+      "team": "France",
+      "p": 0.3342
+     },
+     {
+      "player": "Erling Haaland",
+      "team": "Norway",
+      "p": 0.1266
+     },
+     {
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.104
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.0977
+     },
+     {
+      "player": "Viktor Gy\u00f6keres",
+      "team": "Sweden",
+      "p": 0.0448
+     },
+     {
+      "player": "Luis D\u00edaz",
+      "team": "Colombia",
+      "p": 0.0395
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.021
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0155
+     },
+     {
+      "player": "Lionel Messi",
+      "team": "Argentina",
+      "p": 0.013
+     },
+     {
+      "player": "Memphis Depay",
+      "team": "Netherlands",
+      "p": 0.0126
+     },
+     {
+      "player": "Brahim D\u00edaz",
+      "team": "Morocco",
+      "p": 0.0106
+     },
+     {
+      "player": "Ferran Torres",
+      "team": "Spain",
+      "p": 0.0089
+     }
+    ]
    },
    {
     "k": 19,
@@ -2743,7 +3921,69 @@ const WC26 = {
      "Croatia": 0.8861,
      "Panama": 0.6379,
      "Ghana": 0.1446
-    }
+    },
+    "golden_boot": [
+     {
+      "player": "Kylian Mbapp\u00e9",
+      "team": "France",
+      "p": 0.3348
+     },
+     {
+      "player": "Erling Haaland",
+      "team": "Norway",
+      "p": 0.1235
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.1122
+     },
+     {
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.1046
+     },
+     {
+      "player": "Viktor Gy\u00f6keres",
+      "team": "Sweden",
+      "p": 0.0424
+     },
+     {
+      "player": "Luis D\u00edaz",
+      "team": "Colombia",
+      "p": 0.039
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.0211
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0155
+     },
+     {
+      "player": "Lionel Messi",
+      "team": "Argentina",
+      "p": 0.0121
+     },
+     {
+      "player": "Brahim D\u00edaz",
+      "team": "Morocco",
+      "p": 0.0095
+     },
+     {
+      "player": "Mehdi Taremi",
+      "team": "Iran",
+      "p": 0.0088
+     },
+     {
+      "player": "Memphis Depay",
+      "team": "Netherlands",
+      "p": 0.0086
+     }
+    ]
    },
    {
     "k": 20,
@@ -2848,7 +4088,69 @@ const WC26 = {
      "Croatia": 0.8766,
      "Panama": 0.632,
      "Ghana": 0.1475
-    }
+    },
+    "golden_boot": [
+     {
+      "player": "Kylian Mbapp\u00e9",
+      "team": "France",
+      "p": 0.3368
+     },
+     {
+      "player": "Erling Haaland",
+      "team": "Norway",
+      "p": 0.1292
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.1108
+     },
+     {
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.1031
+     },
+     {
+      "player": "Viktor Gy\u00f6keres",
+      "team": "Sweden",
+      "p": 0.0424
+     },
+     {
+      "player": "Luis D\u00edaz",
+      "team": "Colombia",
+      "p": 0.0363
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.0213
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0147
+     },
+     {
+      "player": "Lionel Messi",
+      "team": "Argentina",
+      "p": 0.0132
+     },
+     {
+      "player": "Memphis Depay",
+      "team": "Netherlands",
+      "p": 0.0102
+     },
+     {
+      "player": "Ayoub El Kaabi",
+      "team": "Morocco",
+      "p": 0.0095
+     },
+     {
+      "player": "Brahim D\u00edaz",
+      "team": "Morocco",
+      "p": 0.0094
+     }
+    ]
    }
   ],
   "teams_group": {
