@@ -18,6 +18,7 @@ TOURN = [("wc2014","FIFA World Cup","2014-06-12","2014-07-13"),("wc2018","FIFA W
          ("euro2020","UEFA Euro","2021-06-11","2021-07-11"),("euro2024","UEFA Euro","2024-06-14","2024-07-14")]
 clubelo = pd.read_csv("outputs/capital.csv")
 fdb = pd.read_csv("outputs/capital_fdb.csv")
+hybrid = pd.read_csv("outputs/capital_hybrid.csv")
 results = load_results(); elo = pd.read_parquet("outputs/elo_history.parquet")
 df = results.dropna(subset=["home_score","away_score"]).copy()
 key=["date","home_team","away_team"]; df["dup"]=df.groupby(key).cumcount(); elo["dup"]=elo.groupby(key).cumcount()
@@ -49,6 +50,6 @@ def gate(P):
         nn=len(P[held][1]); pool0+=llv(held,0).mean()*nn; pool1+=llv(held,b).mean()*nn; n+=nn
     return pool0/n, pool1/n
 
-for name,capdf in [("clubelo+floor (deployed)",clubelo),("footballdatabase (global)",fdb)]:
+for name,capdf in [("clubelo+floor (deployed)",clubelo),("footballdatabase (global)",fdb),("hybrid clubelo+fdb",hybrid)]:
     base,cap=gate(packs(capdf))
     print(f"{name:28s}: base {base:.4f} -> +capital {cap:.4f}  ({cap-base:+.5f})")
