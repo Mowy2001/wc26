@@ -2,7 +2,7 @@ team,player,caps,club,birth
 Brazil,Jefferson,0,Botafogo,1983-01-02
 Brazil,Dani Alves,0,Barcelona,1983-05-06
 Brazil,Thiago Silva,0,Paris Saint-Germain,1984-09-22
-Brazil,David Luiz,0,[ 7 ],1987-04-22
+Brazil,David Luiz,0,Chelsea,1987-04-22
 Brazil,Fernandinho,0,Manchester City,1985-05-04
 Brazil,Marcelo,0,Real Madrid,1988-05-12
 Brazil,Hulk,0,Zenit Saint Petersburg,1986-07-25
@@ -10,7 +10,7 @@ Brazil,Paulinho,0,Tottenham Hotspur,1988-07-25
 Brazil,Fred,0,Fluminense,1983-10-03
 Brazil,Neymar,0,Barcelona,1992-02-05
 Brazil,Oscar,0,Chelsea,1991-09-09
-Brazil,Júlio César,0,[ 8 ],1979-09-03
+Brazil,Júlio César,0,Toronto FC,1979-09-03
 Brazil,Dante,0,Bayern Munich,1983-10-18
 Brazil,Maxwell,0,Paris Saint-Germain,1981-08-27
 Brazil,Henrique,0,Napoli,1986-10-14
@@ -23,45 +23,45 @@ Brazil,Jô,0,Atlético Mineiro,1987-03-20
 Brazil,Victor,0,Atlético Mineiro,1983-01-21
 Brazil,Maicon,0,Roma,1981-07-26
 Cameroon,Loïc Feudjou,0,Coton Sport,1992-04-14
-Cameroon,Benoît Assou-Ekotto,0,[ 10 ],1984-03-24
+Cameroon,Benoît Assou-Ekotto,0,Queens Park Rangers,1984-03-24
 Cameroon,Nicolas Nkoulou,0,Marseille,1990-03-27
 Cameroon,Cédric Djeugoué,0,Coton Sport,1992-08-28
-Cameroon,Dany Nounkeu,0,[ 11 ],1986-04-11
+Cameroon,Dany Nounkeu,0,Beşiktaş,1986-04-11
 Cameroon,Alex Song,0,Barcelona,1987-09-09
 Cameroon,Landry N'Guémo,0,Bordeaux,1985-11-28
 Cameroon,Benjamin Moukandjo,0,Nancy,1988-11-12
-Cameroon,Samuel Eto'o,0,[ 12 ],1981-03-10
+Cameroon,Samuel Eto'o,0,Chelsea,1981-03-10
 Cameroon,Vincent Aboubakar,0,Lorient,1992-01-22
 Cameroon,Jean Makoun,0,Rennes,1983-05-29
 Cameroon,Henri Bedimo,0,Lyon,1984-06-04
 Cameroon,Eric Maxim Choupo-Moting,0,Mainz 05,1989-03-23
 Cameroon,Aurélien Chedjou,0,Galatasaray,1985-06-20
 Cameroon,Pierre Webó,0,Fenerbahçe,1982-01-20
-Cameroon,Charles Itandje,0,[ 13 ],1982-11-02
-Cameroon,Stéphane Mbia,0,[ 14 ],1986-05-20
+Cameroon,Charles Itandje,0,Konyaspor,1982-11-02
+Cameroon,Stéphane Mbia,0,Sevilla,1986-05-20
 Cameroon,Eyong Enoh,0,Antalyaspor,1986-03-23
-Cameroon,Fabrice Olinga,0,[ 15 ],1996-05-12
-Cameroon,Edgar Salli,0,[ 16 ],1992-08-17
+Cameroon,Fabrice Olinga,0,Zulte Waregem,1996-05-12
+Cameroon,Edgar Salli,0,Lens,1992-08-17
 Cameroon,Joël Matip,0,Schalke 04,1991-08-08
-Cameroon,Allan Nyom,0,[ 17 ],1988-05-10
-Cameroon,Sammy Ndjock,0,[ 18 ],1990-02-25
+Cameroon,Allan Nyom,0,Granada,1988-05-10
+Cameroon,Sammy Ndjock,0,Fethiyespor,1990-02-25
 Croatia,Stipe Pletikosa,0,Rostov,1979-01-08
 Croatia,Šime Vrsaljko,0,Genoa,1992-01-10
 Croatia,Danijel Pranjić,0,Panathinaikos,1981-12-02
 Croatia,Ivan Perišić,0,VfL Wolfsburg,1989-02-02
 Croatia,Vedran Ćorluka,0,Lokomotiv Moscow,1986-02-05
 Croatia,Dejan Lovren,0,Southampton,1989-07-05
-Croatia,Ivan Rakitić,0,[ 21 ],1988-03-10
+Croatia,Ivan Rakitić,0,Sevilla,1988-03-10
 Croatia,Ognjen Vukojević,0,Dynamo Kyiv,1983-12-20
 Croatia,Nikica Jelavić,0,Hull City,1985-08-27
 Croatia,Luka Modrić,0,Real Madrid,1985-09-09
 Croatia,Darijo Srna,0,Shakhtar Donetsk,1982-05-01
-Croatia,Oliver Zelenika,0,[ 22 ],1993-05-14
-Croatia,Gordon Schildenfeld,0,[ 23 ],1985-03-18
+Croatia,Oliver Zelenika,0,Lokomotiva,1993-05-14
+Croatia,Gordon Schildenfeld,0,Panathinaikos,1985-03-18
 Croatia,Marcelo Brozović,0,Dinamo Zagreb,1992-11-16
 Croatia,Milan Badelj,0,Hamburger SV,1989-02-25
 Croatia,Ante Rebić,0,Fiorentina,1993-09-21
-Croatia,Mario Mandžukić,0,[ 24 ],1986-05-21
+Croatia,Mario Mandžukić,0,Bayern Munich,1986-05-21
 Croatia,Ivica Olić,0,VfL Wolfsburg,1979-09-14
 Croatia,Sammir,0,Getafe,1987-04-23
 Croatia,Mateo Kovačić,0,Inter Milan,1994-05-06
@@ -69,24 +69,24 @@ Croatia,Domagoj Vida,0,Dynamo Kyiv,1989-04-29
 Croatia,Eduardo,0,Shakhtar Donetsk,1983-02-25
 Croatia,Danijel Subašić,0,Monaco,1984-10-27
 Mexico,Jesús Corona,0,Cruz Azul,1981-01-26
-Mexico,Francisco Javier Rodríguez,0,[ 28 ],1981-10-20
-Mexico,Carlos Salcido,0,[ 29 ],1980-04-02
+Mexico,Francisco Javier Rodríguez,0,América,1981-10-20
+Mexico,Carlos Salcido,0,Tigres UANL,1980-04-02
 Mexico,Rafael Márquez,0,León,1979-02-13
 Mexico,Diego Reyes,0,Porto,1992-09-19
 Mexico,Héctor Herrera,0,Porto,1990-04-19
 Mexico,Miguel Layún,0,América,1988-06-25
-Mexico,Marco Fabián,0,[ 30 ],1989-07-21
+Mexico,Marco Fabián,0,Cruz Azul,1989-07-21
 Mexico,Raúl Jiménez,0,América,1991-05-05
 Mexico,Giovani dos Santos,0,Villarreal,1989-05-11
 Mexico,Alan Pulido,0,Tigres UANL,1991-03-08
 Mexico,Alfredo Talavera,0,Toluca,1982-09-18
-Mexico,Guillermo Ochoa,0,[ 31 ],1985-07-13
+Mexico,Guillermo Ochoa,0,Ajaccio,1985-07-13
 Mexico,Javier Hernández,0,Manchester United,1988-06-01
 Mexico,Héctor Moreno,0,Espanyol,1988-01-17
-Mexico,Miguel Ángel Ponce,0,[ 32 ],1989-04-12
+Mexico,Miguel Ángel Ponce,0,Toluca,1989-04-12
 Mexico,Isaác Brizuela,0,Toluca,1990-08-28
-Mexico,Andrés Guardado,0,[ 33 ],1986-09-28
-Mexico,Oribe Peralta,0,[ 34 ],1984-01-12
+Mexico,Andrés Guardado,0,Bayer Leverkusen,1986-09-28
+Mexico,Oribe Peralta,0,Santos Laguna,1984-01-12
 Mexico,Javier Aquino,0,Villarreal,1990-02-11
 Mexico,Carlos Peña,0,León,1990-03-29
 Mexico,Paul Aguilar,0,América,1986-03-06
@@ -97,14 +97,14 @@ Australia,Jason Davidson,0,Heracles Almelo,1991-06-29
 Australia,Tim Cahill,0,New York Red Bulls,1979-12-06
 Australia,Mark Milligan,0,Melbourne Victory,1985-08-04
 Australia,Matthew Spiranovic,0,Western Sydney Wanderers,1988-06-27
-Australia,Mathew Leckie,0,[ 36 ],1991-02-04
+Australia,Mathew Leckie,0,FSV Frankfurt,1991-02-04
 Australia,Bailey Wright,0,Preston North End,1992-07-28
-Australia,Adam Taggart,0,[ 37 ],1993-06-02
+Australia,Adam Taggart,0,Newcastle Jets,1993-06-02
 Australia,Ben Halloran,0,Fortuna Düsseldorf,1992-06-14
 Australia,Tommy Oar,0,Utrecht,1991-12-10
 Australia,Mitchell Langerak,0,Borussia Dortmund,1988-08-22
 Australia,Oliver Bozanic,0,Luzern,1989-01-08
-Australia,James Troisi,0,[ 38 ],1988-07-03
+Australia,James Troisi,0,Melbourne Victory,1988-07-03
 Australia,Mile Jedinak,0,Crystal Palace,1984-08-03
 Australia,James Holland,0,Austria Wien,1989-05-15
 Australia,Matt McKay,0,Brisbane Roar,1983-01-11
@@ -114,24 +114,24 @@ Australia,Dario Vidošić,0,Sion,1987-04-08
 Australia,Massimo Luongo,0,Swindon Town,1992-09-25
 Australia,Alex Wilkinson,0,Jeonbuk Hyundai Motors,1984-08-13
 Australia,Mark Bresciano,0,Al-Gharafa,1980-02-11
-Chile,Claudio Bravo,0,[ 40 ],1983-04-13
+Chile,Claudio Bravo,0,Real Sociedad,1983-04-13
 Chile,Eugenio Mena,0,Santos,1988-07-18
-Chile,Miiko Albornoz,0,[ 41 ],1990-11-30
+Chile,Miiko Albornoz,0,Malmö FF,1990-11-30
 Chile,Mauricio Isla,0,Juventus,1988-06-12
 Chile,Francisco Silva,0,Osasuna,1986-02-11
 Chile,Carlos Carmona,0,Atalanta,1987-02-21
-Chile,Alexis Sánchez,0,[ 42 ],1988-12-19
+Chile,Alexis Sánchez,0,Barcelona,1988-12-19
 Chile,Arturo Vidal,0,Juventus,1987-05-22
 Chile,Mauricio Pinilla,0,Cagliari,1984-02-04
 Chile,Jorge Valdivia,0,Palmeiras,1983-10-19
-Chile,Eduardo Vargas,0,[ 43 ],1989-11-20
+Chile,Eduardo Vargas,0,Valencia,1989-11-20
 Chile,Cristopher Toselli,0,Universidad Católica,1988-06-22
 Chile,José Manuel Rojas,0,Universidad de Chile,1983-06-23
 Chile,Fabián Orellana,0,Celta Vigo,1986-01-27
 Chile,Jean Beausejour,0,Wigan Athletic,1984-06-01
 Chile,Felipe Gutiérrez,0,Twente,1990-10-08
 Chile,Gary Medel,0,Cardiff City,1987-08-03
-Chile,Gonzalo Jara,0,[ 44 ],1985-08-29
+Chile,Gonzalo Jara,0,Nottingham Forest,1985-08-29
 Chile,José Pedro Fuenzalida,0,Colo-Colo,1985-02-22
 Chile,Charles Aránguiz,0,Internacional,1989-04-17
 Chile,Marcelo Díaz,0,Basel,1986-12-30
@@ -166,10 +166,10 @@ Spain,Gerard Piqué,0,Barcelona,1987-02-02
 Spain,Javi Martínez,0,Bayern Munich,1988-09-02
 Spain,Juanfran,0,Atlético Madrid,1985-01-09
 Spain,Andrés Iniesta,0,Barcelona,1984-05-11
-Spain,David Villa,0,[ 48 ],1981-12-03
+Spain,David Villa,0,Atlético Madrid,1981-12-03
 Spain,Xavi,0,Barcelona,1980-01-25
 Spain,Fernando Torres,0,Chelsea,1984-03-20
-Spain,Cesc Fàbregas,0,[ 49 ],1987-05-04
+Spain,Cesc Fàbregas,0,Barcelona,1987-05-04
 Spain,Pedro,0,Barcelona,1987-07-28
 Spain,David de Gea,0,Manchester United,1990-11-07
 Spain,Juan Mata,0,Manchester United,1988-04-28
@@ -182,14 +182,14 @@ Spain,Diego Costa,0,Atlético Madrid,1988-10-07
 Spain,Santi Cazorla,0,Arsenal,1984-12-13
 Spain,David Silva,0,Manchester City,1986-01-08
 Spain,César Azpilicueta,0,Chelsea,1989-08-28
-Spain,Pepe Reina,0,[ 50 ],1982-08-31
+Spain,Pepe Reina,0,Napoli,1982-08-31
 Colombia,David Ospina,0,Nice,1988-08-31
 Colombia,Cristián Zapata,0,Milan,1986-09-30
 Colombia,Mario Yepes,0,Atalanta,1976-01-13
 Colombia,Santiago Arias,0,PSV Eindhoven,1992-01-13
 Colombia,Carlos Carbonero,0,River Plate,1990-07-25
 Colombia,Carlos Sánchez,0,Elche,1986-02-06
-Colombia,Pablo Armero,0,[ 53 ],1986-11-02
+Colombia,Pablo Armero,0,West Ham United,1986-11-02
 Colombia,Abel Aguilar,0,Toulouse,1985-01-06
 Colombia,Teófilo Gutiérrez,0,River Plate,1985-05-17
 Colombia,James Rodríguez,0,Monaco,1991-07-12
@@ -205,14 +205,14 @@ Colombia,Adrián Ramos,0,Hertha BSC,1986-01-22
 Colombia,Juan Fernando Quintero,0,Porto,1993-01-18
 Colombia,Jackson Martínez,0,Porto,1986-10-03
 Colombia,Faryd Mondragón,0,Deportivo Cali,1971-06-21
-Colombia,Carlos Valdés,0,[ 54 ],1985-05-22
-Greece,Orestis Karnezis,0,[ 56 ],1985-07-11
+Colombia,Carlos Valdés,0,San Lorenzo,1985-05-22
+Greece,Orestis Karnezis,0,Granada,1985-07-11
 Greece,Giannis Maniatis,0,Olympiacos,1986-10-12
 Greece,Giorgos Tzavellas,0,PAOK,1987-11-26
 Greece,Kostas Manolas,0,Olympiacos,1991-06-14
 Greece,Vangelis Moras,0,Hellas Verona,1981-08-26
-Greece,Alexandros Tziolis,0,[ 57 ],1985-02-13
-Greece,Georgios Samaras,0,[ 58 ],1985-02-21
+Greece,Alexandros Tziolis,0,Kayserispor,1985-02-13
+Greece,Georgios Samaras,0,Celtic,1985-02-21
 Greece,Panagiotis Kone,0,Bologna,1987-07-26
 Greece,Kostas Mitroglou,0,Fulham,1988-03-12
 Greece,Giorgos Karagounis,0,Fulham,1977-03-06
@@ -233,7 +233,7 @@ Ivory Coast,Boubacar Barry,0,Lokeren,1979-12-30
 Ivory Coast,Ousmane Viera,0,Çaykur Rizespor,1986-12-21
 Ivory Coast,Arthur Boka,0,VfB Stuttgart,1983-04-02
 Ivory Coast,Kolo Touré,0,Liverpool,1981-03-19
-Ivory Coast,Didier Zokora,0,[ 60 ],1980-12-14
+Ivory Coast,Didier Zokora,0,Trabzonspor,1980-12-14
 Ivory Coast,Mathis Bolly,0,Fortuna Düsseldorf,1990-11-14
 Ivory Coast,Jean-Daniel Akpa Akpro,0,Toulouse,1992-10-11
 Ivory Coast,Salomon Kalou,0,Lille,1985-08-05
@@ -283,8 +283,8 @@ Costa Rica,Celso Borges,0,AIK,1988-05-27
 Costa Rica,Óscar Duarte,0,Club Brugge,1989-06-03
 Costa Rica,Christian Bolaños,0,Copenhagen,1984-05-17
 Costa Rica,David Myrie [ 64 ],0,Herediano,1988-06-01
-Costa Rica,Joel Campbell,0,[ 65 ],1992-06-26
-Costa Rica,Bryan Ruiz,0,[ 66 ],1985-08-18
+Costa Rica,Joel Campbell,0,Olympiacos,1992-06-26
+Costa Rica,Bryan Ruiz,0,PSV Eindhoven,1985-08-18
 Costa Rica,Michael Barrantes,0,Aalesund,1983-10-04
 Costa Rica,Waylon Francis,0,Columbus Crew,1990-09-20
 Costa Rica,Óscar Granados,0,Herediano,1985-10-25
@@ -305,7 +305,7 @@ England,Steven Gerrard,0,Liverpool,1980-05-30
 England,Gary Cahill,0,Chelsea,1985-12-19
 England,Phil Jagielka,0,Everton,1982-08-17
 England,Jack Wilshere,0,Arsenal,1992-01-01
-England,Frank Lampard,0,[ 71 ],1978-06-20
+England,Frank Lampard,0,Chelsea,1978-06-20
 England,Daniel Sturridge,0,Liverpool,1989-09-01
 England,Wayne Rooney,0,Manchester United,1985-10-24
 England,Danny Welbeck,0,Manchester United,1990-11-26
@@ -315,12 +315,12 @@ England,Jordan Henderson,0,Liverpool,1990-06-17
 England,Alex Oxlade-Chamberlain,0,Arsenal,1993-08-15
 England,Phil Jones,0,Manchester United,1992-02-21
 England,James Milner,0,Manchester City,1986-01-04
-England,Rickie Lambert,0,[ 72 ],1982-02-16
+England,Rickie Lambert,0,Southampton,1982-02-16
 England,Raheem Sterling,0,Liverpool,1994-12-08
-England,Adam Lallana,0,[ 73 ],1988-05-10
+England,Adam Lallana,0,Southampton,1988-05-10
 England,Ross Barkley,0,Everton,1993-12-05
 England,Fraser Forster,0,Celtic,1988-03-17
-England,Luke Shaw,0,[ 74 ],1995-07-12
+England,Luke Shaw,0,Southampton,1995-07-12
 Italy,Gianluigi Buffon,0,Juventus,1978-01-28
 Italy,Mattia De Sciglio,0,Milan,1992-10-20
 Italy,Giorgio Chiellini,0,Juventus,1984-08-14
@@ -337,8 +337,8 @@ Italy,Mattia Perin,0,Genoa,1992-11-10
 Italy,Alberto Aquilani,0,Fiorentina,1984-07-07
 Italy,Andrea Barzagli,0,Juventus,1981-05-08
 Italy,Daniele De Rossi,0,Roma,1983-07-24
-Italy,Ciro Immobile,0,[ 77 ],1990-02-20
-Italy,Marco Parolo,0,[ 78 ],1985-01-25
+Italy,Ciro Immobile,0,Torino,1990-02-20
+Italy,Marco Parolo,0,Parma,1985-01-25
 Italy,Leonardo Bonucci,0,Juventus,1987-05-01
 Italy,Gabriel Paletta,0,Parma,1986-02-15
 Italy,Andrea Pirlo,0,Juventus,1979-05-19
@@ -347,7 +347,7 @@ Italy,Marco Verratti,0,Paris Saint-Germain,1992-11-05
 Uruguay,Fernando Muslera,0,Galatasaray,1986-06-16
 Uruguay,Diego Lugano,0,West Bromwich Albion,1980-11-02
 Uruguay,Diego Godín,0,Atlético Madrid,1986-02-16
-Uruguay,Jorge Fucile,0,[ 80 ],1984-11-19
+Uruguay,Jorge Fucile,0,Porto,1984-11-19
 Uruguay,Walter Gargano,0,Parma,1984-07-23
 Uruguay,Álvaro Pereira,0,São Paulo,1985-11-28
 Uruguay,Cristian Rodríguez,0,Atlético Madrid,1985-09-30
@@ -360,9 +360,9 @@ Uruguay,José Giménez,0,Atlético Madrid,1995-01-20
 Uruguay,Nicolás Lodeiro,0,Botafogo,1989-03-21
 Uruguay,Diego Pérez,0,Bologna,1980-05-18
 Uruguay,Maxi Pereira,0,Benfica,1984-06-08
-Uruguay,Egidio Arévalo Ríos,0,[ 81 ],1982-01-01
+Uruguay,Egidio Arévalo Ríos,0,Morelia,1982-01-01
 Uruguay,Gastón Ramírez,0,Southampton,1990-12-02
-Uruguay,Sebastián Coates,0,[ 82 ],1990-10-07
+Uruguay,Sebastián Coates,0,Nacional,1990-10-07
 Uruguay,Álvaro González,0,Lazio,1984-10-29
 Uruguay,Edinson Cavani,0,Paris Saint-Germain,1987-02-14
 Uruguay,Martín Cáceres,0,Juventus,1987-04-07
@@ -386,7 +386,7 @@ Ecuador,Antonio Valencia,0,Manchester United,1985-08-04
 Ecuador,Jaime Ayoví,0,Tijuana,1988-02-21
 Ecuador,Óscar Bagüí,0,Emelec,1982-12-10
 Ecuador,Luis Saritama,0,Barcelona SC,1983-10-20
-Ecuador,Fidel Martínez,0,[ 86 ],1990-02-15
+Ecuador,Fidel Martínez,0,Tijuana,1990-02-15
 Ecuador,Gabriel Achilier,0,Emelec,1985-03-24
 Ecuador,Alexander Domínguez,0,LDU Quito,1987-06-05
 Ecuador,Carlos Gruezo,0,VfB Stuttgart,1995-04-19
@@ -404,17 +404,17 @@ France,Antoine Griezmann,0,Real Sociedad,1991-03-21
 France,Rio Mavuba,0,Lille,1984-03-08
 France,Eliaquim Mangala,0,Porto,1991-02-13
 France,Blaise Matuidi,0,Paris Saint-Germain,1987-04-09
-France,Bacary Sagna,0,[ 91 ],1983-02-14
+France,Bacary Sagna,0,Arsenal,1983-02-14
 France,Stéphane Ruffier [ 92 ],0,Saint-Étienne,1986-09-27
 France,Lucas Digne,0,Paris Saint-Germain,1993-07-20
 France,Moussa Sissoko,0,Newcastle United,1989-08-16
 France,Paul Pogba,0,Juventus,1993-03-15
-France,Loïc Rémy,0,[ 93 ],1987-01-02
+France,Loïc Rémy,0,Newcastle United,1987-01-02
 France,Laurent Koscielny,0,Arsenal,1985-09-10
 France,Morgan Schneiderlin [ 94 ],0,Southampton,1989-11-08
 France,Mickaël Landreau,0,Bastia,1979-05-14
 Honduras,Luis López,0,Real España,1993-09-13
-Honduras,Osman Chávez,0,[ 96 ],1984-07-29
+Honduras,Osman Chávez,0,Qingdao Jonoon,1984-07-29
 Honduras,Maynor Figueroa,0,Hull City,1983-05-02
 Honduras,Juan Pablo Montes,0,Motagua,1985-10-26
 Honduras,Víctor Bernárdez,0,San Jose Earthquakes,1982-05-24
@@ -438,8 +438,8 @@ Honduras,Donis Escober,0,Olimpia,1980-02-03
 Honduras,Marvin Chávez,0,Chivas USA,1983-11-03
 Switzerland,Diego Benaglio,0,VfL Wolfsburg,1983-09-08
 Switzerland,Stephan Lichtsteiner,0,Juventus,1984-01-16
-Switzerland,Reto Ziegler,0,[ 100 ],1986-01-16
-Switzerland,Philippe Senderos,0,[ 101 ],1985-02-14
+Switzerland,Reto Ziegler,0,Sassuolo,1986-01-16
+Switzerland,Philippe Senderos,0,Valencia,1985-02-14
 Switzerland,Steve von Bergen,0,Young Boys,1983-06-10
 Switzerland,Michael Lang,0,Grasshopper,1991-02-08
 Switzerland,Tranquillo Barnetta,0,Eintracht Frankfurt,1985-05-22
@@ -447,20 +447,20 @@ Switzerland,Gökhan Inler,0,Napoli,1984-06-27
 Switzerland,Haris Seferovic,0,Real Sociedad,1992-02-22
 Switzerland,Granit Xhaka,0,Borussia Mönchengladbach,1992-09-27
 Switzerland,Valon Behrami,0,Napoli,1985-04-19
-Switzerland,Yann Sommer,0,[ 102 ],1988-12-17
+Switzerland,Yann Sommer,0,Basel,1988-12-17
 Switzerland,Ricardo Rodríguez,0,VfL Wolfsburg,1992-08-25
-Switzerland,Valentin Stocker,0,[ 103 ],1989-04-12
+Switzerland,Valentin Stocker,0,Basel,1989-04-12
 Switzerland,Blerim Džemaili,0,Napoli,1986-04-12
 Switzerland,Gelson Fernandes,0,SC Freiburg,1986-09-02
 Switzerland,Mario Gavranović,0,Zürich,1989-11-24
-Switzerland,Admir Mehmedi,0,[ 104 ],1991-03-16
-Switzerland,Josip Drmić,0,[ 105 ],1992-08-08
-Switzerland,Johan Djourou,0,[ 106 ],1987-01-18
-Switzerland,Roman Bürki,0,[ 107 ],1990-11-14
+Switzerland,Admir Mehmedi,0,SC Freiburg,1991-03-16
+Switzerland,Josip Drmić,0,1. FC Nürnberg,1992-08-08
+Switzerland,Johan Djourou,0,Hamburger SV,1987-01-18
+Switzerland,Roman Bürki,0,Grasshopper,1990-11-14
 Switzerland,Fabian Schär,0,Basel,1991-12-20
 Switzerland,Xherdan Shaqiri,0,Bayern Munich,1991-10-10
 Argentina,Sergio Romero,0,Monaco,1987-02-22
-Argentina,Ezequiel Garay,0,[ 110 ],1986-10-10
+Argentina,Ezequiel Garay,0,Benfica,1986-10-10
 Argentina,Hugo Campagnaro,0,Inter Milan,1980-06-27
 Argentina,Pablo Zabaleta,0,Manchester City,1985-01-16
 Argentina,Fernando Gago,0,Boca Juniors,1986-04-10
@@ -479,12 +479,12 @@ Argentina,Federico Fernández,0,Napoli,1989-02-21
 Argentina,Rodrigo Palacio,0,Inter Milan,1982-02-05
 Argentina,Ricky Álvarez,0,Inter Milan,1988-04-12
 Argentina,Sergio Agüero,0,Manchester City,1988-06-02
-Argentina,Mariano Andújar,0,[ 111 ],1983-07-30
+Argentina,Mariano Andújar,0,Catania,1983-07-30
 Argentina,Ezequiel Lavezzi,0,Paris Saint-Germain,1985-05-03
 Argentina,José María Basanta,0,Monterrey,1984-04-03
 Bosnia and Herzegovina,Asmir Begović,0,Stoke City,1987-06-20
 Bosnia and Herzegovina,Avdija Vršajević,0,Hajduk Split,1986-03-06
-Bosnia and Herzegovina,Ermin Bičakčić,0,[ 113 ],1990-01-24
+Bosnia and Herzegovina,Ermin Bičakčić,0,Eintracht Braunschweig,1990-01-24
 Bosnia and Herzegovina,Emir Spahić,0,Bayer Leverkusen,1980-08-18
 Bosnia and Herzegovina,Sead Kolašinac,0,Schalke 04,1993-06-20
 Bosnia and Herzegovina,Ognjen Vranješ,0,Elazığspor,1989-10-24
@@ -496,12 +496,12 @@ Bosnia and Herzegovina,Edin Džeko,0,Manchester City,1986-03-17
 Bosnia and Herzegovina,Jasmin Fejzić,0,VfR Aalen,1986-05-15
 Bosnia and Herzegovina,Mensur Mujdža,0,SC Freiburg,1984-03-28
 Bosnia and Herzegovina,Tino-Sven Sušić,0,Hajduk Split,1992-02-13
-Bosnia and Herzegovina,Toni Šunjić,0,[ 114 ],1988-12-15
+Bosnia and Herzegovina,Toni Šunjić,0,Zorya Luhansk,1988-12-15
 Bosnia and Herzegovina,Senad Lulić,0,Lazio,1986-01-18
 Bosnia and Herzegovina,Senijad Ibričić,0,Kayseri Erciyesspor,1985-09-26
 Bosnia and Herzegovina,Haris Medunjanin,0,Gaziantepspor,1985-03-08
 Bosnia and Herzegovina,Edin Višća,0,İstanbul Başakşehir,1990-02-17
-Bosnia and Herzegovina,Izet Hajrović,0,[ 115 ],1991-08-04
+Bosnia and Herzegovina,Izet Hajrović,0,Galatasaray,1991-08-04
 Bosnia and Herzegovina,Anel Hadžić,0,Sturm Graz,1989-08-16
 Bosnia and Herzegovina,Asmir Avdukić,0,Borac Banja Luka,1981-05-13
 Bosnia and Herzegovina,Sejad Salihović,0,1899 Hoffenheim,1984-10-08
@@ -516,7 +516,7 @@ Iran,Reza Haghighi,0,Persepolis,1989-02-01
 Iran,Alireza Jahanbakhsh,0,NEC,1993-08-11
 Iran,Karim Ansarifard,0,Tractor Sazi,1990-04-03
 Iran,Ghasem Haddadifar,0,Zob Ahan,1983-07-12
-Iran,Alireza Haghighi,0,[ 117 ],1988-05-02
+Iran,Alireza Haghighi,0,Sporting Covilhã,1988-05-02
 Iran,Hossein Mahini,0,Persepolis,1986-09-16
 Iran,Andranik Teymourian,0,Esteghlal,1983-03-06
 Iran,Pejman Montazeri,0,Umm Salal,1983-09-06
@@ -526,11 +526,11 @@ Iran,Bakhtiar Rahmani,0,Foolad,1991-09-23
 Iran,Hashem Beikzadeh,0,Esteghlal,1984-01-22
 Iran,Steven Beitashour,0,Vancouver Whitecaps FC,1987-02-01
 Iran,Ashkan Dejagah,0,Fulham,1986-07-05
-Iran,Daniel Davari,0,[ 118 ],1988-01-06
+Iran,Daniel Davari,0,Eintracht Braunschweig,1988-01-06
 Iran,Mehrdad Pooladi,0,Persepolis,1987-02-26
 Nigeria,Vincent Enyeama,0,Lille,1982-08-29
-Nigeria,Joseph Yobo,0,[ 121 ],1980-09-06
-Nigeria,Ejike Uzoenyi,0,[ 122 ],1992-03-23
+Nigeria,Joseph Yobo,0,Norwich City,1980-09-06
+Nigeria,Ejike Uzoenyi,0,Enugu Rangers,1992-03-23
 Nigeria,Reuben Gabriel,0,Waasland-Beveren,1990-09-25
 Nigeria,Efe Ambrose,0,Celtic,1988-10-18
 Nigeria,Azubuike Egwuekwe,0,Warri Wolves,1989-07-16
@@ -538,7 +538,7 @@ Nigeria,Ahmed Musa,0,CSKA Moscow,1992-10-14
 Nigeria,Peter Odemwingie,0,Stoke City,1981-07-15
 Nigeria,Emmanuel Emenike,0,Fenerbahçe,1987-05-10
 Nigeria,John Obi Mikel,0,Chelsea,1987-04-22
-Nigeria,Victor Moses,0,[ 123 ],1990-12-12
+Nigeria,Victor Moses,0,Liverpool,1990-12-12
 Nigeria,Kunle Odunlami,0,Sunshine Stars,1991-04-30
 Nigeria,Juwon Oshaniwa,0,Ashdod,1990-09-14
 Nigeria,Godfrey Oboabona,0,Çaykur Rizespor,1990-08-16
@@ -546,10 +546,10 @@ Nigeria,Ramon Azeez,0,Almería,1992-12-12
 Nigeria,Austin Ejide,0,Hapoel Be'er Sheva,1984-04-08
 Nigeria,Ogenyi Onazi,0,Lazio,1992-12-25
 Nigeria,Michael Babatunde,0,Volyn Lutsk,1992-12-24
-Nigeria,Uche Nwofor,0,[ 124 ],1991-09-17
+Nigeria,Uche Nwofor,0,Heerenveen,1991-09-17
 Nigeria,Michael Uchebo,0,Cercle Brugge,1990-02-02
 Nigeria,Chigozie Agbim,0,Gombe United,1984-11-28
-Nigeria,Kenneth Omeruo,0,[ 125 ],1993-10-17
+Nigeria,Kenneth Omeruo,0,Middlesbrough,1993-10-17
 Nigeria,Shola Ameobi,0,Newcastle United,1981-10-12
 Germany,Manuel Neuer,0,Bayern Munich,1986-03-27
 Germany,Kevin Großkreutz,0,Borussia Dortmund,1988-07-19
@@ -575,29 +575,29 @@ Germany,Shkodran Mustafi,0,Sampdoria,1992-04-17
 Germany,Roman Weidenfeller,0,Borussia Dortmund,1980-08-06
 Germany,Christoph Kramer,0,Borussia Mönchengladbach,1991-02-19
 Ghana,Stephen Adams,0,Aduana Stars,1989-09-28
-Ghana,Samuel Inkoom,0,[ 131 ],1989-06-01
+Ghana,Samuel Inkoom,0,Platanias,1989-06-01
 Ghana,Asamoah Gyan,0,Al Ain,1985-11-22
-Ghana,Daniel Opare,0,[ 132 ],1990-10-18
+Ghana,Daniel Opare,0,Standard Liège,1990-10-18
 Ghana,Michael Essien,0,Milan,1982-12-03
 Ghana,Afriyie Acquah,0,Parma,1992-01-05
-Ghana,Christian Atsu,0,[ 133 ],1992-01-10
+Ghana,Christian Atsu,0,Vitesse,1992-01-10
 Ghana,Emmanuel Agyemang-Badu,0,Udinese,1990-12-02
 Ghana,Kevin-Prince Boateng,0,Schalke 04,1987-03-06
 Ghana,André Ayew,0,Marseille,1989-12-17
 Ghana,Sulley Muntari,0,Milan,1984-08-27
 Ghana,Adam Larsen Kwarasey,0,Strømsgodset,1987-12-12
-Ghana,Jordan Ayew,0,[ 134 ],1991-09-11
+Ghana,Jordan Ayew,0,Sochaux,1991-09-11
 Ghana,Albert Adomah,0,Middlesbrough,1987-12-13
 Ghana,Rashid Sumaila,0,Mamelodi Sundowns,1992-12-18
 Ghana,Fatau Dauda,0,Orlando Pirates,1985-04-06
 Ghana,Mohammed Rabiu,0,Kuban Krasnodar,1989-12-31
-Ghana,Abdul Majeed Waris,0,[ 135 ],1991-09-19
+Ghana,Abdul Majeed Waris,0,Valenciennes,1991-09-19
 Ghana,Jonathan Mensah,0,Evian,1990-07-13
 Ghana,Kwadwo Asamoah,0,Juventus,1988-12-09
 Ghana,John Boye,0,Rennes,1987-04-23
 Ghana,Mubarak Wakaso,0,Rubin Kazan,1990-07-25
 Ghana,Harrison Afful,0,Espérance de Tunis,1986-06-24
-Portugal,Eduardo,0,[ 138 ],1982-09-19
+Portugal,Eduardo,0,Braga,1982-09-19
 Portugal,Bruno Alves,0,Fenerbahçe,1981-11-27
 Portugal,Pepe,0,Real Madrid,1983-02-26
 Portugal,Miguel Veloso,0,Dynamo Kyiv,1986-05-11
@@ -619,7 +619,7 @@ Portugal,André Almeida,0,Benfica,1990-09-10
 Portugal,Ruben Amorim,0,Benfica,1985-01-27
 Portugal,João Pereira,0,Valencia,1984-02-25
 Portugal,Beto,0,Sevilla,1982-05-01
-Portugal,Hélder Postiga,0,[ 139 ],1982-08-02
+Portugal,Hélder Postiga,0,Lazio,1982-08-02
 United States,Tim Howard,0,Everton,1979-03-06
 United States,DeAndre Yedlin,0,Seattle Sounders FC,1993-07-09
 United States,Omar Gonzalez,0,LA Galaxy,1988-10-11
@@ -642,9 +642,9 @@ United States,Graham Zusi,0,Sporting Kansas City,1986-08-18
 United States,Geoff Cameron,0,Stoke City,1985-07-11
 United States,Timothy Chandler,0,1. FC Nürnberg,1990-03-29
 United States,Nick Rimando,0,Real Salt Lake,1979-06-17
-United States,Fabian Johnson,0,[ 141 ],1987-12-11
+United States,Fabian Johnson,0,1899 Hoffenheim,1987-12-11
 Algeria,Cédric Si Mohamed,0,CS Constantine,1985-01-09
-Algeria,Madjid Bougherra,0,[ 143 ],1982-10-07
+Algeria,Madjid Bougherra,0,Lekhwiya,1982-10-07
 Algeria,Faouzi Ghoulam,0,Napoli,1991-02-01
 Algeria,Essaïd Belkalem,0,Watford,1989-01-01
 Algeria,Rafik Halliche,0,Académica de Coimbra,1986-09-02
@@ -666,7 +666,7 @@ Algeria,Aïssa Mandi,0,Reims,1991-10-22
 Algeria,Riyad Mahrez,0,Leicester City,1991-02-21
 Algeria,Mehdi Mostefa,0,Ajaccio,1983-08-30
 Algeria,Raïs M'Bolhi,0,CSKA Sofia,1986-04-25
-Belgium,Thibaut Courtois,0,[ 146 ],1992-05-11
+Belgium,Thibaut Courtois,0,Atlético Madrid,1992-05-11
 Belgium,Toby Alderweireld,0,Atlético Madrid,1989-03-02
 Belgium,Thomas Vermaelen,0,Arsenal,1985-11-14
 Belgium,Vincent Kompany,0,Manchester City,1986-04-10
@@ -674,7 +674,7 @@ Belgium,Jan Vertonghen,0,Tottenham Hotspur,1987-04-24
 Belgium,Axel Witsel,0,Zenit Saint Petersburg,1989-01-12
 Belgium,Kevin De Bruyne,0,VfL Wolfsburg,1991-06-28
 Belgium,Marouane Fellaini,0,Manchester United,1987-11-22
-Belgium,Romelu Lukaku,0,[ 147 ],1993-05-13
+Belgium,Romelu Lukaku,0,Everton,1993-05-13
 Belgium,Eden Hazard,0,Chelsea,1991-01-07
 Belgium,Kevin Mirallas,0,Everton,1987-10-05
 Belgium,Simon Mignolet,0,Liverpool,1988-08-06
@@ -694,7 +694,7 @@ Russia,Aleksei Kozlov,0,Dynamo Moscow,1986-11-16
 Russia,Georgi Shchennikov,0,CSKA Moscow,1991-04-27
 Russia,Sergei Ignashevich,0,CSKA Moscow,1979-07-14
 Russia,Andrei Semyonov,0,Terek Grozny,1989-03-24
-Russia,Maksim Kanunnikov,0,[ 150 ],1991-07-14
+Russia,Maksim Kanunnikov,0,Amkar Perm,1991-07-14
 Russia,Igor Denisov,0,Dynamo Moscow,1984-05-17
 Russia,Denis Glushakov,0,Spartak Moscow,1987-01-27
 Russia,Aleksandr Kokorin,0,Dynamo Moscow,1991-03-19
@@ -703,14 +703,14 @@ Russia,Aleksandr Kerzhakov,0,Zenit Saint Petersburg,1982-11-27
 Russia,Yuri Lodygin,0,Zenit Saint Petersburg,1990-05-26
 Russia,Vladimir Granat,0,Dynamo Moscow,1987-05-22
 Russia,Vasili Berezutski,0,CSKA Moscow,1982-06-20
-Russia,Pavel Mogilevets,0,[ 151 ],1993-01-25
+Russia,Pavel Mogilevets,0,Rubin Kazan,1993-01-25
 Russia,Sergey Ryzhikov,0,Rubin Kazan,1980-09-19
 Russia,Oleg Shatov,0,Zenit Saint Petersburg,1990-07-29
 Russia,Yuri Zhirkov,0,Dynamo Moscow,1983-08-20
 Russia,Aleksandr Samedov,0,Lokomotiv Moscow,1984-07-19
 Russia,Viktor Fayzulin,0,Zenit Saint Petersburg,1986-04-22
 Russia,Aleksei Ionov,0,Dynamo Moscow,1989-02-18
-Russia,Andrey Yeshchenko,0,[ 152 ],1984-02-09
+Russia,Andrey Yeshchenko,0,Anzhi Makhachkala,1984-02-09
 Russia,Dmitri Kombarov,0,Spartak Moscow,1987-01-22
 South Korea,Jung Sung-ryong,0,Suwon Samsung Bluewings,1985-01-04
 South Korea,Kim Chang-soo,0,Kashiwa Reysol,1985-09-12
@@ -721,16 +721,16 @@ South Korea,Hwang Seok-ho,0,Sanfrecce Hiroshima,1989-06-27
 South Korea,Kim Bo-kyung,0,Cardiff City,1989-10-06
 South Korea,Ha Dae-sung,0,Beijing Guoan,1985-03-02
 South Korea,Son Heung-min,0,Bayer Leverkusen,1992-07-08
-South Korea,Park Chu-young,0,[ 156 ],1985-07-10
+South Korea,Park Chu-young,0,Watford,1985-07-10
 South Korea,Lee Keun-ho,0,Sangju Sangmu,1985-04-11
 South Korea,Lee Yong,0,Ulsan Hyundai,1986-12-24
 South Korea,Koo Ja-cheol,0,Mainz 05,1989-02-27
 South Korea,Han Kook-young,0,Kashiwa Reysol,1990-04-19
 South Korea,Park Jong-woo,0,Guangzhou R&F,1989-03-10
-South Korea,Ki Sung-yueng,0,[ 157 ],1989-01-24
+South Korea,Ki Sung-yueng,0,Sunderland,1989-01-24
 South Korea,Lee Chung-yong,0,Bolton Wanderers,1988-07-02
 South Korea,Kim Shin-wook,0,Ulsan Hyundai,1988-04-14
-South Korea,Ji Dong-won,0,[ 158 ],1991-05-28
+South Korea,Ji Dong-won,0,FC Augsburg,1991-05-28
 South Korea,Hong Jeong-ho,0,FC Augsburg,1989-08-12
 South Korea,Kim Seung-gyu,0,Ulsan Hyundai,1990-09-30
 South Korea,Park Joo-ho [ 159 ],0,Mainz 05,1987-01-16

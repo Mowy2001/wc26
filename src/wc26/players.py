@@ -272,3 +272,72 @@ def allocate_goals(
         name="P_most_distinct_scorers",
     ).sort_values(ascending=False)
     return {"players": players_tbl, "distinct": distinct_tbl.to_frame()}
+
+
+def allocate_goals_live(goal_samples, weights, real_by_team, seed=26):
+    """Live Golden Boot: real goals already scored + simulated remaining.
+
+    real_by_team: {team: {player_display: goals_scored_so_far}} from the live
+    goalscorers feed (2026 WC, own goals excluded). Per simulation a team's
+    REMAINING goals = goal_samples - (real so far) are allocated among its
+    weighted scorers (frozen pre-tournament shares); each player's tally is
+    his real goals + his simulated remaining. Real scorers absent from the
+    weights (e.g. tournament debutants) are still credited their real goals,
+    with no projected future (no track record -> the model doesn't extrapolate).
+    Consistent with frozen beliefs: we condition on what happened, we don't
+    re-estimate form.
+    """
+    rng = np.random.default_rng(seed)
+    n = len(goal_samples)
+    win = np.zeros(n, dtype=np.int32)
+    best_g = np.zeros(n, dtype=np.int32)
+    best_id = np.full(n, -1, dtype=np.int32)
+    ties = np.ones(n, dtype=np.int32)
+    ids = {}  # (player, team) -> column id
+    names = []
+    egoals = []
+    win_counts = {}
+    for team in goal_samples.columns:
+        wmap = weights.get(team, {DEBUTANT_KEY: 1.0})
+        players = [p for p in wmap if p != DEBUTANT_KEY]
+        probs = np.array([wmap[p] for p in players] + [wmap.get(DEBUTANT_KEY, 0.0)])
+        probs = probs / probs.sum() if probs.sum() else probs
+        real = {k: v for k, v in (real_by_team.get(team) or {}).items()}
+        real_norm = {_norm_name(k): v for k, v in real.items()}
+        team_real = sum(real.values())
+        G = goal_samples[team].to_numpy()
+        rem = np.clip(G - team_real, 0, None)
+        counts = np.zeros((n, len(probs)), dtype=np.int16)
+        for g in np.unique(rem):
+            if g == 0:
+                continue
+            idx = np.where(rem == g)[0]
+            counts[idx] = rng.multinomial(int(g), probs, size=len(idx))
+        known = counts[:, :-1]
+        # union of weighted players + real scorers
+        roster = list(players)
+        for rp in real:
+            if not any(_norm_name(rp) == _norm_name(p) for p in players):
+                roster.append(rp)
+        for j, p in enumerate(roster):
+            col = ids.setdefault((p, team), len(names))
+            if col == len(names):
+                names.append((p, team)); egoals.append(0.0)
+            sim = known[:, j] if j < known.shape[1] else 0
+            real_credit = real_norm.get(_norm_name(p), 0)
+            total = sim + real_credit
+            egoals[col] = float(np.mean(total))
+            better = total > best_g
+            tied = (total == best_g) & (total > 0)
+            ties = np.where(better, 1, ties + tied)
+            take = better | (tied & (rng.random(n) < 1.0 / ties))
+            best_g = np.where(take, total, best_g)
+            best_id = np.where(take, col, best_id)
+    for pid in best_id:
+        win_counts[int(pid)] = win_counts.get(int(pid), 0) + 1
+    out = pd.DataFrame({
+        "player": [p for p, _ in names], "team": [t for _, t in names],
+        "E_goals": egoals,
+        "P_golden_boot": [win_counts.get(i, 0) / n for i in range(len(names))],
+    }).sort_values("P_golden_boot", ascending=False)
+    return {"players": out}

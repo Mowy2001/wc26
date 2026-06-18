@@ -4707,74 +4707,74 @@ const WC26 = {
   {
    "player": "Kylian Mbapp\u00e9",
    "team": "France",
-   "E_goals": 4.8829,
-   "P_golden_boot": 0.294
+   "E_goals": 5.6372,
+   "P_golden_boot": 0.3628
   },
   {
    "player": "Erling Haaland",
    "team": "Norway",
-   "E_goals": 3.9031,
-   "P_golden_boot": 0.1402
-  },
-  {
-   "player": "Lautaro Mart\u00ednez",
-   "team": "Argentina",
-   "E_goals": 3.4064,
-   "P_golden_boot": 0.1072
-  },
-  {
-   "player": "Harry Kane",
-   "team": "England",
-   "E_goals": 3.1992,
-   "P_golden_boot": 0.0825
-  },
-  {
-   "player": "Viktor Gy\u00f6keres",
-   "team": "Sweden",
-   "E_goals": 3.2118,
-   "P_golden_boot": 0.0532
-  },
-  {
-   "player": "Luis D\u00edaz",
-   "team": "Colombia",
-   "E_goals": 2.5859,
-   "P_golden_boot": 0.0476
-  },
-  {
-   "player": "Mikel Oyarzabal",
-   "team": "Spain",
-   "E_goals": 1.8868,
-   "P_golden_boot": 0.0164
-  },
-  {
-   "player": "Enner Valencia",
-   "team": "Ecuador",
-   "E_goals": 1.7649,
-   "P_golden_boot": 0.0164
+   "E_goals": 4.5904,
+   "P_golden_boot": 0.1676
   },
   {
    "player": "Lionel Messi",
    "team": "Argentina",
-   "E_goals": 1.9462,
-   "P_golden_boot": 0.0124
+   "E_goals": 4.5396,
+   "P_golden_boot": 0.1214
   },
   {
-   "player": "Mehdi Taremi",
-   "team": "Iran",
-   "E_goals": 1.8242,
-   "P_golden_boot": 0.0116
+   "player": "Harry Kane",
+   "team": "England",
+   "E_goals": 3.1848,
+   "P_golden_boot": 0.0776
   },
   {
-   "player": "Raphinha",
-   "team": "Brazil",
-   "E_goals": 1.6292,
-   "P_golden_boot": 0.0107
+   "player": "Lautaro Mart\u00ednez",
+   "team": "Argentina",
+   "E_goals": 2.6656,
+   "P_golden_boot": 0.0418
   },
   {
-   "player": "Brahim D\u00edaz",
-   "team": "Morocco",
-   "E_goals": 1.6766,
-   "P_golden_boot": 0.0105
+   "player": "Luis D\u00edaz",
+   "team": "Colombia",
+   "E_goals": 2.564,
+   "P_golden_boot": 0.0372
+  },
+  {
+   "player": "Ra\u00fal Jim\u00e9nez",
+   "team": "Mexico",
+   "E_goals": 2.5355,
+   "P_golden_boot": 0.0143
+  },
+  {
+   "player": "Enner Valencia",
+   "team": "Ecuador",
+   "E_goals": 1.7742,
+   "P_golden_boot": 0.014
+  },
+  {
+   "player": "Mikel Oyarzabal",
+   "team": "Spain",
+   "E_goals": 1.8813,
+   "P_golden_boot": 0.0138
+  },
+  {
+   "player": "Kai Havertz",
+   "team": "Germany",
+   "E_goals": 2.8154,
+   "P_golden_boot": 0.0109
+  },
+  {
+   "player": "Viktor Gy\u00f6keres",
+   "team": "Sweden",
+   "E_goals": 2.15,
+   "P_golden_boot": 0.0083
+  },
+  {
+   "player": "Breel Embolo",
+   "team": "Switzerland",
+   "E_goals": 2.0851,
+   "P_golden_boot": 0.0069
   }
  ],
  "golden_boot_market": {

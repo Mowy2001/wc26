@@ -65,7 +65,13 @@ def parse_squads(html: str) -> pd.DataFrame:
             tds = tr.find_all("td")
             if th is None or len(tds) < 5:
                 continue
-            club_links = tds[-1].find_all("a")
+            # last cell = club; skip the flag link (first) and any citation
+            # footnote (e.g. "Chelsea [ 7 ]" -> link to #cite_note-7) — those
+            # were being captured as the club name.
+            club_links = [a for a in tds[-1].find_all("a")
+                          if "cite" not in (a.get("href") or "")
+                          and not (a.get("href") or "").startswith("#")
+                          and not re.match(r"^\[", a.get_text(strip=True))]
             club = club_links[-1].get_text(" ", strip=True) if club_links else ""
             caps_txt = tds[-3].get_text(strip=True)
             caps = int(caps_txt) if caps_txt.isdigit() else 0
