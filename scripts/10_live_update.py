@@ -59,6 +59,23 @@ res = simulate_tournament(groups, gfx, model, elo_now, n_sims=20000,
 res["teams"].round(4).to_csv("outputs/tournament_probs_v1.csv")
 res["goal_samples"].to_parquet("outputs/goal_samples.parquet")
 res["bracket"].to_csv("outputs/bracket.csv", index=False)
+
+# Extend the match-by-match slider history: append/replace this snapshot by k
+# (k = matches played). Keeps outputs/history/replay.json current without a
+# full per-match replay each cycle.
+import json as _json, os as _os
+_t = res["teams"]; _k = len(fixed) + len(fixed_ko)
+_snap = {"k": _k, "date": str(pd.Timestamp.utcnow().date()),
+         "last_match": f"{_k} matches played",
+         "champion": {tm: round(float(_t.loc[tm, "P_champion"]), 4) for tm in _t.index},
+         "qualify": {tm: round(float(_t.loc[tm, "P_qualify"]), 4) for tm in _t.index}}
+_rp = "outputs/history/replay.json"
+if _os.path.exists(_rp):
+    _data = _json.load(open(_rp))
+    _data["snapshots"] = [x for x in _data["snapshots"] if x["k"] != _k] + [_snap]
+    _data["snapshots"].sort(key=lambda x: x["k"])
+    _json.dump(_data, open(_rp, "w"))
+    print(f"replay snapshot appended (k={_k}, {len(_data['snapshots'])} total)")
 print("Tournament probabilities refreshed.")
 
 # Append an immutable snapshot to the forecast timeline (never overwritten;

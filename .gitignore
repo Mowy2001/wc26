@@ -12,3 +12,8 @@ outputs/elo_history.parquet
 # Raw HTML caches (refetchable; parsed CSVs are committed)
 data/external/*.html
 data/external/tmax_*.json
+
+# footballdatabase raw caches (consolidated into fdb_history.json)
+data/external/fdb_hist/*.json
+data/external/fdb_rank/*.html
+data/external/fdb_country/*.html

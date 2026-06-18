@@ -1,0 +1,6002 @@
+{
+"fc-barcelona": {
+"name": "FC Barcelona",
+"points": null
+},
+"real-madrid": {
+"name": "Real Madrid",
+"points": null
+},
+"arsenal-london": {
+"name": "Arsenal",
+"points": null
+},
+"chelsea-london": {
+"name": "Chelsea",
+"points": null
+},
+"manchester-united": {
+"name": "Manchester United",
+"points": null
+},
+"bayern-munchen": {
+"name": "FC Bayern München",
+"points": null
+},
+"ac-milan": {
+"name": "AC Milan",
+"points": null
+},
+"paris-saint-germain": {
+"name": "Paris Saint-Germain",
+"points": 2018
+},
+"manchester-city": {
+"name": "Manchester City",
+"points": 1923
+},
+"inter-milan": {
+"name": "Inter Milan",
+"points": 1916
+},
+"aston-villa": {
+"name": "Aston Villa",
+"points": 1891
+},
+"borussia-dortmund": {
+"name": "Borussia Dortmund",
+"points": 1859
+},
+"sporting": {
+"name": "Sporting",
+"points": 1849
+},
+"afc-bournemouth": {
+"name": "AFC Bournemouth",
+"points": 1833
+},
+"roma": {
+"name": "AS Roma",
+"points": 1832
+},
+"como-1907": {
+"name": "Como 1907",
+"points": 1907
+},
+"benfica": {
+"name": "Benfica",
+"points": 1818
+},
+"liverpool-fc-liverpool": {
+"name": "Liverpool FC",
+"points": 1817
+},
+"flamengo": {
+"name": "Flamengo",
+"points": 1816
+},
+"psv-eindhoven": {
+"name": "PSV Eindhoven",
+"points": 1813
+},
+"palmeiras": {
+"name": "Palmeiras",
+"points": 1805
+},
+"bayer-leverkusen": {
+"name": "Bayer Leverkusen",
+"points": 1804
+},
+"atletico-madrid": {
+"name": "Atlético Madrid",
+"points": 1800
+},
+"juventus-turin": {
+"name": "Juventus",
+"points": 1791
+},
+"fc-porto": {
+"name": "FC Porto",
+"points": 1790
+},
+"ssc-napoli": {
+"name": "SSC Napoli",
+"points": 1788
+},
+"vfb-stuttgart": {
+"name": "VfB Stuttgart",
+"points": 1784
+},
+"nottingham-forest": {
+"name": "Nottingham Forest",
+"points": 1781
+},
+"newcastle-united": {
+"name": "Newcastle United",
+"points": 1777
+},
+"brighton-hove-albion": {
+"name": "Brighton & Hove Albion",
+"points": 1766
+},
+"rasenballsport-leipzig": {
+"name": "RB Leipzig",
+"points": 1763
+},
+"club-brugge": {
+"name": "Club Brugge",
+"points": 1762
+},
+"brentford-fc": {
+"name": "Brentford FC",
+"points": 1761
+},
+"atalanta": {
+"name": "Atalanta",
+"points": 1751
+},
+"villarreal": {
+"name": "Villarreal",
+"points": 1748
+},
+"lens": {
+"name": "Lens",
+"points": 1745
+},
+"al-hilal": {
+"name": "Al Hilal",
+"points": 1743
+},
+"real-betis": {
+"name": "Real Betis",
+"points": 1742
+},
+"galatasaray": {
+"name": "Galatasaray",
+"points": 1741
+},
+"bodo-glimt": {
+"name": "Bodø / Glimt",
+"points": 1739
+},
+"fulham": {
+"name": "Fulham",
+"points": 1738
+},
+"olympiakos-piraeus": {
+"name": "Olympiakos",
+"points": 1724
+},
+"crystal-palace": {
+"name": "Crystal Palace",
+"points": 1724
+},
+"union-st-gilloise": {
+"name": "Union St.Gilloise",
+"points": 1718
+},
+"fenerbahce": {
+"name": "Fenerbahçe",
+"points": 1711
+},
+"lille": {
+"name": "Lille",
+"points": 1711
+},
+"hoffenheim": {
+"name": "Hoffenheim",
+"points": 1710
+},
+"leeds-united-afc": {
+"name": "Leeds United",
+"points": 1708
+},
+"everton-fc-liverpool": {
+"name": "Everton FC",
+"points": 1708
+},
+"valencia": {
+"name": "Valencia",
+"points": 1706
+},
+"rayo-vallecano": {
+"name": "Rayo Vallecano",
+"points": 1704
+},
+"tottenham-hotspur": {
+"name": "Tottenham Hotspur",
+"points": 1702
+},
+"crvena-zvezda": {
+"name": "FK Red Star Belgrade",
+"points": 1699
+},
+"lyon": {
+"name": "Lyon",
+"points": 1697
+},
+"slavia-prague": {
+"name": "Slavia Prague",
+"points": 1697
+},
+"lazio": {
+"name": "Lazio",
+"points": 1696
+},
+"rennes": {
+"name": "Rennes",
+"points": 1691
+},
+"monaco": {
+"name": "AS Monaco",
+"points": 1685
+},
+"zenit-petersburg": {
+"name": "Zenit St. Petersburg",
+"points": 1685
+},
+"west-ham-united": {
+"name": "West Ham United",
+"points": 1684
+},
+"bologna": {
+"name": "Bologna",
+"points": 1684
+},
+"celta-vigo": {
+"name": "Celta Vigo",
+"points": 1683
+},
+"freiburg": {
+"name": "Freiburg",
+"points": 1682
+},
+"the-new-saints": {
+"name": "The New Saints",
+"points": 1681
+},
+"braga": {
+"name": "Braga",
+"points": 1680
+},
+"sunderland": {
+"name": "Sunderland",
+"points": 1680
+},
+"fiorentina": {
+"name": "Fiorentina",
+"points": 1679
+},
+"mamelodi-sundowns-fc": {
+"name": "Mamelodi Sundowns FC",
+"points": 1676
+},
+"aek": {
+"name": "AEK",
+"points": 1673
+},
+"independiente-rivadavia": {
+"name": "Independiente Rivadavia",
+"points": 1673
+},
+"mainz-05": {
+"name": "Mainz 05",
+"points": 1672
+},
+"al-nassr-fc-riyadh": {
+"name": "Al Nassr",
+"points": 1671
+},
+"levadia-tallinn": {
+"name": "FCI Levadia Tallinn",
+"points": 1671
+},
+"fluminense-rio-de-janeiro": {
+"name": "Fluminense FC",
+"points": 1671
+},
+"ldu-de-quito": {
+"name": "LDU de Quito",
+"points": 1670
+},
+"cruz-azul": {
+"name": "Cruz Azul",
+"points": 1670
+},
+"botafogo-futebol-regatas": {
+"name": "Botafogo FR",
+"points": 1669
+},
+"shakhtar-donetsk": {
+"name": "Shakhtar Donetsk",
+"points": 1668
+},
+"pyramids-fc": {
+"name": "Pyramids FC",
+"points": 1666
+},
+"dinamo-zagreb": {
+"name": "Dinamo Zagreb",
+"points": 1665
+},
+"cruzeiro": {
+"name": "Cruzeiro",
+"points": 1665
+},
+"olympique-marseille": {
+"name": "Marseille",
+"points": 1662
+},
+"flora-tallinn": {
+"name": "Flora Tallinn",
+"points": 1661
+},
+"al-ahli-sc-jeddah": {
+"name": "Al-Ahli",
+"points": 1661
+},
+"udinese": {
+"name": "Udinese",
+"points": 1659
+},
+"rc-strasbourg": {
+"name": "RC Strasbourg",
+"points": 1658
+},
+"feyenoord": {
+"name": "Feyenoord",
+"points": 1657
+},
+"boca-juniors": {
+"name": "Boca Juniors",
+"points": 1655
+},
+"celtic": {
+"name": "Celtic",
+"points": 1652
+},
+"getafe": {
+"name": "Getafe",
+"points": 1651
+},
+"omonia-nicosia": {
+"name": "Omonia Nicosia",
+"points": 1650
+},
+"paok-thessaloniki-fc": {
+"name": "PAOK FC",
+"points": 1650
+},
+"independiente-del-valle-sangolqui": {
+"name": "Independiente",
+"points": 1650
+},
+"rosario-central": {
+"name": "Rosario Central",
+"points": 1649
+},
+"estudiantes": {
+"name": "Estudiantes de la Plata",
+"points": 1647
+},
+"al-ahly": {
+"name": "Al Ahly",
+"points": 1639
+},
+"real-sociedad-san-sebastian": {
+"name": "Real Sociedad",
+"points": 1639
+},
+"viktoria-plzen": {
+"name": "Viktoria Plzeň",
+"points": 1636
+},
+"toluca": {
+"name": "Toluca FC",
+"points": 1635
+},
+"levante": {
+"name": "Levante",
+"points": 1634
+},
+"river-plate-buenos-aires": {
+"name": "River Plate",
+"points": 1634
+},
+"argentinos-juniors": {
+"name": "Argentinos Juniors",
+"points": 1632
+},
+"fc-midtjylland": {
+"name": "FC Midtjylland",
+"points": 1631
+},
+"racing-club-avellaneda": {
+"name": "Racing Club",
+"points": 1630
+},
+"sparta-prague": {
+"name": "Sparta Prague",
+"points": 1628
+},
+"augsburg": {
+"name": "Augsburg",
+"points": 1624
+},
+"athletic-bilbao": {
+"name": "Athletic Bilbao",
+"points": 1624
+},
+"atletico-nacional": {
+"name": "Atlético Nacional",
+"points": 1624
+},
+"ferencvaros": {
+"name": "Ferencváros",
+"points": 1624
+},
+"red-bull-bragantino": {
+"name": "Red Bull Bragantino SP",
+"points": 1622
+},
+"borussia-monchengladbach": {
+"name": "Borussia Mönchengladbach",
+"points": 1622
+},
+"fc-twente": {
+"name": "FC Twente",
+"points": 1620
+},
+"levski-sofia": {
+"name": "Levski Sofia",
+"points": 1618
+},
+"ajax-amsterdam": {
+"name": "Ajax Amsterdam",
+"points": 1618
+},
+"mallorca": {
+"name": "Mallorca",
+"points": 1618
+},
+"pfc-ludogorets-razgrad": {
+"name": "PFC Ludogorets 1945 Razgrad",
+"points": 1945
+},
+"corinthians": {
+"name": "Corinthians",
+"points": 1615
+},
+"dynamo-kyiv": {
+"name": "Dynamo Kyiv",
+"points": 1613
+},
+"eintracht-frankfurt": {
+"name": "Eintracht Frankfurt",
+"points": 1612
+},
+"mirassol-futebol-clube": {
+"name": "Mirassol Futebol Clube",
+"points": 1612
+},
+"tigres-uanl": {
+"name": "Tigres UANL",
+"points": 1611
+},
+"pafos-fc": {
+"name": "Pafos FC",
+"points": 1611
+},
+"atletico-pr": {
+"name": "Atlético PR",
+"points": 1609
+},
+"esperance-de-tunis": {
+"name": "Esperance de Tunis",
+"points": 1609
+},
+"bahia": {
+"name": "Bahia",
+"points": 1608
+},
+"panathinaikos": {
+"name": "Panathinaikos",
+"points": 1607
+},
+"alaves": {
+"name": "Deportivo Alaves",
+"points": 1606
+},
+"torino": {
+"name": "Torino",
+"points": 1606
+},
+"sassuolo": {
+"name": "Sassuolo",
+"points": 1605
+},
+"atletico-mineiro": {
+"name": "Atlético Mineiro",
+"points": 1605
+},
+"osasuna": {
+"name": "Osasuna",
+"points": 1605
+},
+"hapoel-beer-sheva": {
+"name": "Hapoel Be'er Sheva",
+"points": 1600
+},
+"girona": {
+"name": "Girona",
+"points": 1599
+},
+"toulouse": {
+"name": "Toulouse",
+"points": 1598
+},
+"cerro-porteno": {
+"name": "Cerro Porteño",
+"points": 1597
+},
+"sao-paulo": {
+"name": "São Paulo",
+"points": 1597
+},
+"elche": {
+"name": "Elche",
+"points": 1596
+},
+"fc-sheriff": {
+"name": "FC Sheriff",
+"points": 1596
+},
+"america-aguilas": {
+"name": "América",
+"points": 1596
+},
+"genoa": {
+"name": "Genoa",
+"points": 1594
+},
+"dinamo-minsk": {
+"name": "Dinamo Minsk",
+"points": 1592
+},
+"espanyol": {
+"name": "RCD Espanyol",
+"points": 1592
+},
+"zrinjski-mostar": {
+"name": "Zrinjski Mostar",
+"points": 1591
+},
+"genk": {
+"name": "KRC Genk",
+"points": 1591
+},
+"aek-larnaca": {
+"name": "AEK Larnaca",
+"points": 1591
+},
+"belgrano": {
+"name": "Belgrano",
+"points": 1591
+},
+"hamburger-sv": {
+"name": "Hamburger SV",
+"points": 1590
+},
+"leganes": {
+"name": "Leganes",
+"points": 1590
+},
+"rangers-glasgow": {
+"name": "Rangers",
+"points": 1588
+},
+"lanus": {
+"name": "Lanús",
+"points": 1587
+},
+"far-rabat": {
+"name": "FAR Rabat",
+"points": 1586
+},
+"paris-fc": {
+"name": "Paris FC",
+"points": 1585
+},
+"universidad-catolica-santiago": {
+"name": "Universidad Católica",
+"points": 1584
+},
+"1-fc-union-berlin": {
+"name": "1. FC Union Berlin",
+"points": 1584
+},
+"parma": {
+"name": "Parma Calcio 1913",
+"points": 1913
+},
+"sevilla": {
+"name": "Sevilla",
+"points": 1583
+},
+"alianza-lima": {
+"name": "Alianza Lima",
+"points": 1583
+},
+"guadalajara-chivas": {
+"name": "Guadalajara",
+"points": 1581
+},
+"nec-nijmegen": {
+"name": "NEC Nijmegen",
+"points": 1580
+},
+"viking": {
+"name": "Viking FK",
+"points": 1579
+},
+"bolivar": {
+"name": "Bolívar",
+"points": 1578
+},
+"ca-independiente-avellaneda": {
+"name": "Independiente",
+"points": 1578
+},
+"gremio": {
+"name": "Grêmio",
+"points": 1577
+},
+"az-alkmaar": {
+"name": "AZ Alkmaar",
+"points": 1576
+},
+"kashima-antlers": {
+"name": "Kashima Antlers",
+"points": 1576
+},
+"coquimbo-unido": {
+"name": "Coquimbo Unido",
+"points": 1575
+},
+"partizan-beograd": {
+"name": "Partizan Beograd",
+"points": 1574
+},
+"lorient": {
+"name": "Lorient",
+"points": 1574
+},
+"pfc-cska-sofia": {
+"name": "PFC CSKA Sofia",
+"points": 1574
+},
+"cagliari": {
+"name": "Cagliari",
+"points": 1573
+},
+"litex-lovech": {
+"name": "Litex Lovech",
+"points": 1573
+},
+"cska-moskva": {
+"name": "CSKA Moskva",
+"points": 1572
+},
+"trabzonspor": {
+"name": "Trabzonspor",
+"points": 1572
+},
+"vitoria-salvador": {
+"name": "Vitória",
+"points": 1572
+},
+"auxerre": {
+"name": "Auxerre",
+"points": 1569
+},
+"velez-sarsfield": {
+"name": "Vélez Sarsfield",
+"points": 1569
+},
+"fc-famalicao": {
+"name": "FC Famalicão",
+"points": 1569
+},
+"nk-celje": {
+"name": "NK Celje",
+"points": 1568
+},
+"huracan": {
+"name": "Huracán",
+"points": 1568
+},
+"fortaleza-esporte-clube": {
+"name": "Fortaleza Esporte Clube",
+"points": 1568
+},
+"orlando-pirates": {
+"name": "Orlando Pirates",
+"points": 1568
+},
+"kobenhavn": {
+"name": "København",
+"points": 1568
+},
+"pachuca": {
+"name": "CF Pachuca",
+"points": 1567
+},
+"dinamo-moskva": {
+"name": "Dinamo Moskva",
+"points": 1567
+},
+"dacia-chisinau": {
+"name": "Dacia Chisinau",
+"points": 1567
+},
+"fc-utrecht": {
+"name": "FC Utrecht",
+"points": 1566
+},
+"besiktas": {
+"name": "Beşiktaş",
+"points": 1566
+},
+"sc-internacional-porto-alegre": {
+"name": "SC Internacional",
+"points": 1565
+},
+"the-strongest": {
+"name": "The Strongest",
+"points": 1563
+},
+"santos-fc-sao-paulo": {
+"name": "Santos FC",
+"points": 1562
+},
+"qarabag": {
+"name": "Qarabağ",
+"points": 1561
+},
+"colo-colo": {
+"name": "Colo Colo",
+"points": 1561
+},
+"tolima": {
+"name": "Tolima",
+"points": 1560
+},
+"nacional-montevideo": {
+"name": "Nacional",
+"points": 1560
+},
+"tigre": {
+"name": "Tigre",
+"points": 1559
+},
+"pumas-unam": {
+"name": "Pumas UNAM",
+"points": 1557
+},
+"universidad-catolica-quito": {
+"name": "Universidad Católica",
+"points": 1556
+},
+"olimpia-tegucigalpa": {
+"name": "Olimpia",
+"points": 1556
+},
+"universitario-de-deportes": {
+"name": "Universitario de Deportes",
+"points": 1555
+},
+"sc-dnipro-1": {
+"name": "SC Dnipro-1",
+"points": 1554
+},
+"el-zamalek": {
+"name": "El Zamalek",
+"points": 1554
+},
+"portuguesa-sao-paulo": {
+"name": "Portuguesa",
+"points": 1554
+},
+"sd-huesca": {
+"name": "SD Huesca",
+"points": 1553
+},
+"lecce": {
+"name": "Lecce",
+"points": 1552
+},
+"penarol": {
+"name": "Peñarol",
+"points": 1551
+},
+"wolverhampton-wanderers": {
+"name": "Wolverhampton Wanderers",
+"points": 1551
+},
+"auckland-city-fc": {
+"name": "Auckland City",
+"points": 1551
+},
+"independiente-medellin": {
+"name": "Independiente Medellín",
+"points": 1551
+},
+"wolfsburg": {
+"name": "Wolfsburg",
+"points": 1551
+},
+"slovan-bratislava": {
+"name": "Slovan Bratislava",
+"points": 1550
+},
+"sepahan": {
+"name": "Sepahan",
+"points": 1550
+},
+"istanbul-basaksehir": {
+"name": "İstanbul Başakşehir",
+"points": 1550
+},
+"brest": {
+"name": "Brest",
+"points": 1549
+},
+"al-sadd": {
+"name": "Al-Sadd",
+"points": 1548
+},
+"tp-mazembe": {
+"name": "TP Mazembe",
+"points": 1548
+},
+"hajduk-split": {
+"name": "Hajduk Split",
+"points": 1548
+},
+"sturm-graz": {
+"name": "Sturm Graz",
+"points": 1547
+},
+"gimnasia-la-plata": {
+"name": "Gimnasia y Esgrima La Plata",
+"points": 1547
+},
+"coritiba": {
+"name": "Coritiba",
+"points": 1547
+},
+"maccabi-tel-aviv": {
+"name": "Maccabi Tel Aviv",
+"points": 1546
+},
+"werder-bremen": {
+"name": "Werder Bremen",
+"points": 1546
+},
+"al-ahli-club-dubai": {
+"name": "Al Ahli",
+"points": 1546
+},
+"san-lorenzo": {
+"name": "San Lorenzo de Almagro",
+"points": 1546
+},
+"talleres-cordoba": {
+"name": "Talleres de Cordoba",
+"points": 1545
+},
+"lokomotiv-moskva": {
+"name": "Lokomotiv Moskva",
+"points": 1544
+},
+"monterrey-rayados": {
+"name": "Monterrey",
+"points": 1544
+},
+"salzburg": {
+"name": "Red Bull Salzburg",
+"points": 1542
+},
+"fc-krasnodar": {
+"name": "FC Krasnodar",
+"points": 1541
+},
+"nomme-jk-kalju": {
+"name": "Nomme Kalju FC (EST)",
+"points": 1541
+},
+"vissel-kobe": {
+"name": "Vissel Kobe",
+"points": 1541
+},
+"fortuna-dusseldorf": {
+"name": "Fortuna Düsseldorf",
+"points": 1541
+},
+"santa-fe": {
+"name": "Santa Fe",
+"points": 1541
+},
+"persepolis": {
+"name": "Persepolis",
+"points": 1539
+},
+"cs-universitatea-craiova": {
+"name": "CS Universitatea Craiova",
+"points": 1538
+},
+"aris-limassol": {
+"name": "Aris Limassol",
+"points": 1538
+},
+"rsb-berkane": {
+"name": "RS Berkane",
+"points": 1537
+},
+"jeonbuk-fc": {
+"name": "Jeonbuk FC",
+"points": 1536
+},
+"dnipro-dnipropetrovsk": {
+"name": "Dnipro Dnipropetrovsk",
+"points": 1536
+},
+"mc-alger": {
+"name": "MC Alger",
+"points": 1536
+},
+"raja-casablanca": {
+"name": "RCA Raja Casablanca Athletic",
+"points": 1535
+},
+"cr-belouizdad": {
+"name": "CR Belouizdad",
+"points": 1535
+},
+"tractor-sazi": {
+"name": "Tractor Sazi",
+"points": 1534
+},
+"kups": {
+"name": "KuPS",
+"points": 1534
+},
+"gyori-eto": {
+"name": "Györi ETO",
+"points": 1534
+},
+"hammarby": {
+"name": "Hammarby IF",
+"points": 1534
+},
+"olimpia-asuncion": {
+"name": "Olimpia",
+"points": 1533
+},
+"cfr-cluj": {
+"name": "CFR Cluj",
+"points": 1532
+},
+"shamrock-rovers": {
+"name": "Shamrock Rovers",
+"points": 1532
+},
+"ingolstadt": {
+"name": "Ingolstadt",
+"points": 1532
+},
+"polissya-zhytomyr": {
+"name": "Polissya Zhytomyr",
+"points": 1531
+},
+"petro-atletico": {
+"name": "Atletico Petro Luanda",
+"points": 1530
+},
+"spartak-moskva": {
+"name": "Spartak Moskva",
+"points": 1530
+},
+"pfc-sochi": {
+"name": "PFC Sochi",
+"points": 1530
+},
+"al-ittihad-jeddah": {
+"name": "Al Ittihad",
+"points": 1530
+},
+"los-angeles-fc": {
+"name": "Los Angeles FC",
+"points": 1528
+},
+"atletico-junior": {
+"name": "Junior FC",
+"points": 1528
+},
+"anderlecht": {
+"name": "RSC Anderlecht",
+"points": 1528
+},
+"inter-miami": {
+"name": "Inter Miami CF",
+"points": 1528
+},
+"carpi": {
+"name": "Carpi",
+"points": 1528
+},
+"union-santa-fe": {
+"name": "Unión Santa Fe",
+"points": 1528
+},
+"csd-municipal": {
+"name": "CSD Municipal",
+"points": 1528
+},
+"ceara": {
+"name": "Ceará SC",
+"points": 1528
+},
+"cadiz-club-de-futbol": {
+"name": "Cádiz CF",
+"points": 1527
+},
+"lokomotiv-astana": {
+"name": "Lokomotiv Astana",
+"points": 1527
+},
+"sc-heerenveen": {
+"name": "SC Heerenveen",
+"points": 1526
+},
+"zorya": {
+"name": "Zorya Luhansk",
+"points": 1526
+},
+"stoke-city": {
+"name": "Stoke City",
+"points": 1526
+},
+"america-de-cali": {
+"name": "América de Cali",
+"points": 1525
+},
+"universidad-de-chile": {
+"name": "Universidad de Chile",
+"points": 1525
+},
+"nice": {
+"name": "Nice",
+"points": 1525
+},
+"mjallby": {
+"name": "Mjällby AIF",
+"points": 1524
+},
+"sanfrecce-hiroshima": {
+"name": "Sanfrecce Hiroshima",
+"points": 1524
+},
+"vasco-da-gama-rio-de-janeiro": {
+"name": "Vasco da Gama",
+"points": 1524
+},
+"stade-malien-bamako": {
+"name": "Stade Malien Bamako",
+"points": 1523
+},
+"koln": {
+"name": "1. FC Köln",
+"points": 1521
+},
+"apollon-limassol": {
+"name": "Apollon Limassol",
+"points": 1521
+},
+"buriram-united": {
+"name": "Buriram United",
+"points": 1521
+},
+"heart-of-midlothian": {
+"name": "Heart of Midlothian",
+"points": 1521
+},
+"lech-poznan": {
+"name": "Lech Poznań",
+"points": 1519
+},
+"sd-eibar": {
+"name": "Eibar",
+"points": 1517
+},
+"apoel-nicosia": {
+"name": "APOEL Nicosia",
+"points": 1517
+},
+"al-hilal-omdurman": {
+"name": "Al Hilal Omdurman",
+"points": 1516
+},
+"maccabi-haifa": {
+"name": "Maccabi Haifa FC",
+"points": 1516
+},
+"le-havre-ac": {
+"name": "Le Havre AC",
+"points": 1516
+},
+"swansea-city": {
+"name": "Swansea City",
+"points": 1515
+},
+"tokyo-verdy": {
+"name": "FC Machida Zelvia",
+"points": 1515
+},
+"always-ready": {
+"name": "Always Ready",
+"points": 1515
+},
+"millonarios": {
+"name": "Millonarios",
+"points": 1515
+},
+"wigan-athletic": {
+"name": "Wigan Athletic",
+"points": 1515
+},
+"deportivo-saprissa": {
+"name": "Deportivo Saprissa",
+"points": 1515
+},
+"lask-linz": {
+"name": "LASK Linz",
+"points": 1514
+},
+"schalke-04": {
+"name": "Schalke 04",
+"points": 1514
+},
+"once-caldas": {
+"name": "Once Caldas",
+"points": 1514
+},
+"steaua-bucuresti": {
+"name": "Steaua Bucureşti",
+"points": 1513
+},
+"koper": {
+"name": "Koper",
+"points": 1513
+},
+"tijuana-xolos": {
+"name": "Club Tijuana",
+"points": 1511
+},
+"rijeka": {
+"name": "Rijeka",
+"points": 1510
+},
+"maribor": {
+"name": "Maribor",
+"points": 1509
+},
+"riga-fc": {
+"name": "Riga FC",
+"points": 1509
+},
+"1-fc-heidenheim-1846": {
+"name": "1. FC Heidenheim",
+"points": 1508
+},
+"dsc-arminia-bielefeld": {
+"name": "DSC Arminia Bielefeld",
+"points": 1508
+},
+"al-ain-abu-dhabi": {
+"name": "Al-Ain FC",
+"points": 1507
+},
+"borac-banja-luka": {
+"name": "Borac Banja Luka",
+"points": 1507
+},
+"chengdu-rongcheng-fc": {
+"name": "Chengdu Rongcheng F.C.",
+"points": 1507
+},
+"al-qadsiah-fc-khobar": {
+"name": "Al Qadsiah FC",
+"points": 1507
+},
+"ld-alajuelense": {
+"name": "LD Alajuelense",
+"points": 1506
+},
+"vita-club": {
+"name": "Vita Club",
+"points": 1506
+},
+"cs-sfaxien": {
+"name": "CS Sfaxien",
+"points": 1506
+},
+"cs-petrocub": {
+"name": "CS Petrocub",
+"points": 1506
+},
+"club-africain": {
+"name": "Club Africain",
+"points": 1506
+},
+"sporting-gijon": {
+"name": "Sporting Gijón",
+"points": 1504
+},
+"dunajska-streda": {
+"name": "Dunajska Streda",
+"points": 1504
+},
+"hradec-kralove": {
+"name": "Hradec Králové",
+"points": 1503
+},
+"vojvodina": {
+"name": "Vojvodina",
+"points": 1503
+},
+"timisoara": {
+"name": "Timişoara",
+"points": 1502
+},
+"wydad-casablanca": {
+"name": "Wydad Casablanca",
+"points": 1502
+},
+"barcelona-sc-guayaquil": {
+"name": "Barcelona SC",
+"points": 1501
+},
+"esteghlal": {
+"name": "Esteghlal",
+"points": 1501
+},
+"neath-athletic": {
+"name": "Neath Athletic",
+"points": 1501
+},
+"sint-truiden": {
+"name": "Sint-Truiden",
+"points": 1500
+},
+"lekhwiya": {
+"name": "Al-Duhail SC",
+"points": 1500
+},
+"young-boys": {
+"name": "Young Boys",
+"points": 1500
+},
+"1o-de-agosto": {
+"name": "1º de Agosto",
+"points": 1499
+},
+"djurgarden": {
+"name": "Djurgården",
+"points": 1499
+},
+"beitar-jerusalem": {
+"name": "Beitar Jerusalem FC",
+"points": 1499
+},
+"empoli-fc": {
+"name": "Empoli FC",
+"points": 1498
+},
+"birmingham-city": {
+"name": "Birmingham City",
+"points": 1498
+},
+"team-wellington": {
+"name": "Team Wellington",
+"points": 1498
+},
+"real-oviedo": {
+"name": "Real Oviedo",
+"points": 1498
+},
+"olimpija-ljubljana": {
+"name": "Olimpija Ljubljana",
+"points": 1497
+},
+"paide-linnameeskond": {
+"name": "Paide Linnameeskond",
+"points": 1497
+},
+"club-atletico-central-cordoba-de-santiago": {
+"name": "CA Central Cordoba",
+"points": 1497
+},
+"cherno-more-varna": {
+"name": "Cherno More Varna",
+"points": 1497
+},
+"us-cremonese": {
+"name": "US Cremonese",
+"points": 1497
+},
+"sociedad-deportiva-aucas": {
+"name": "Aucas",
+"points": 1496
+},
+"frosinone": {
+"name": "Frosinone",
+"points": 1496
+},
+"macara": {
+"name": "Macará",
+"points": 1495
+},
+"instituto-atletico-central-cordoba": {
+"name": "Instituto Atlético Central Córdoba",
+"points": 1495
+},
+"colombe-du-dja-et-lobo": {
+"name": "Colombe du Dja et Lobo",
+"points": 1495
+},
+"cuiaba": {
+"name": "Cuiaba",
+"points": 1495
+},
+"las-palmas": {
+"name": "Las Palmas",
+"points": 1495
+},
+"agf": {
+"name": "AGF",
+"points": 1494
+},
+"club-atletico-platense": {
+"name": "Club Atlético Platense",
+"points": 1494
+},
+"catania": {
+"name": "Catania",
+"points": 1494
+},
+"samsunspor": {
+"name": "Samsunspor",
+"points": 1494
+},
+"club-sport-herediano": {
+"name": "Club Sport Herediano",
+"points": 1494
+},
+"club-atletico-bucaramanga": {
+"name": "Club Atlético Bucaramanga",
+"points": 1494
+},
+"orense-sc": {
+"name": "Orense SC",
+"points": 1493
+},
+"goias": {
+"name": "Goiás",
+"points": 1493
+},
+"deportivo-xerez": {
+"name": "Deportivo Xerez",
+"points": 1491
+},
+"ks-rakow-czestochowa": {
+"name": "KS Raków Częstochowa",
+"points": 1491
+},
+"barracas-central": {
+"name": "Barracas Central",
+"points": 1491
+},
+"hertha-berlin": {
+"name": "Hertha BSC",
+"points": 1491
+},
+"fk-daugava-riga": {
+"name": "Rigas Futbola skola",
+"points": 1490
+},
+"sochaux": {
+"name": "Sochaux",
+"points": 1490
+},
+"esporte-clube-juventude": {
+"name": "EC Juventude",
+"points": 1489
+},
+"morelia-monarcas": {
+"name": "Monarcas Morelia",
+"points": 1488
+},
+"jablonec": {
+"name": "Jablonec",
+"points": 1488
+},
+"fbc-melgar": {
+"name": "FBC Melgar",
+"points": 1488
+},
+"asec-mimosas": {
+"name": "ASEC Mimosas",
+"points": 1488
+},
+"burnley": {
+"name": "Burnley",
+"points": 1488
+},
+"holstein-kiel": {
+"name": "Holstein Kiel",
+"points": 1487
+},
+"kawasaki-frontale": {
+"name": "Kawasaki Frontale",
+"points": 1487
+},
+"us-monastir": {
+"name": "US Monastir",
+"points": 1487
+},
+"seattle-sounders-fc": {
+"name": "Seattle Sounders FC",
+"points": 1486
+},
+"reims": {
+"name": "Reims",
+"points": 1486
+},
+"aris-thessaloniki": {
+"name": "Aris Thessaloniki FC",
+"points": 1486
+},
+"deportivo-la-coruna": {
+"name": "Deportivo La Coruña",
+"points": 1486
+},
+"guarani-asuncion": {
+"name": "Guaraní",
+"points": 1485
+},
+"vfl-bochum": {
+"name": "VfL Bochum",
+"points": 1485
+},
+"clube-do-remo": {
+"name": "Clube do Remo",
+"points": 1484
+},
+"hjk-helsinki": {
+"name": "HJK Helsinki",
+"points": 1484
+},
+"patronato-de-parana": {
+"name": "Patronato de Parana",
+"points": 1484
+},
+"vancouver-whitecaps": {
+"name": "Vancouver Whitecaps",
+"points": 1483
+},
+"fc-inter": {
+"name": "FC Inter Turku (FIN)",
+"points": 1483
+},
+"al-merreikh": {
+"name": "Al-Merreikh",
+"points": 1483
+},
+"lugano": {
+"name": "Lugano",
+"points": 1483
+},
+"brann": {
+"name": "SK Brann",
+"points": 1482
+},
+"cska-1948-sofia": {
+"name": "FC CSKA 1948 Sofia",
+"points": 1948
+},
+"almeria": {
+"name": "Almería",
+"points": 1482
+},
+"nacional-asuncion": {
+"name": "Nacional Asunción",
+"points": 1481
+},
+"jiangsu-sainty": {
+"name": "Jiangsu Suning FC",
+"points": 1481
+},
+"malmo-ff": {
+"name": "Malmö FF",
+"points": 1480
+},
+"molde": {
+"name": "Molde FK",
+"points": 1480
+},
+"kairat-almaty": {
+"name": "Kairat Almaty",
+"points": 1480
+},
+"venezia-fc": {
+"name": "Venezia FC",
+"points": 1479
+},
+"bangkok-united": {
+"name": "Bangkok United",
+"points": 1479
+},
+"st-patricks": {
+"name": "St Patrick's",
+"points": 1478
+},
+"sta-gallen": {
+"name": "FC St. Gallen 1879",
+"points": 1879
+},
+"west-brom": {
+"name": "West Brom",
+"points": 1478
+},
+"connahs-quay": {
+"name": "Connah's Quay",
+"points": 1477
+},
+"vitoria-guimaraes": {
+"name": "Vitória Guimarães",
+"points": 1477
+},
+"neman-grodno": {
+"name": "Neman Grodno",
+"points": 1476
+},
+"fc-infonet-tallinn": {
+"name": "FC Infonet Tallinn",
+"points": 1476
+},
+"torpedo-zhodino": {
+"name": "Torpedo Zhodino",
+"points": 1476
+},
+"asd-spezia-calcio-2008": {
+"name": "ASD Spezia Calcio 2008",
+"points": 2008
+},
+"liverpool-fc-montevideo": {
+"name": "Liverpool",
+"points": 1475
+},
+"club-atletico-torque": {
+"name": "Club Atletico Torque",
+"points": 1475
+},
+"bolton-wanderers": {
+"name": "Bolton Wanderers",
+"points": 1475
+},
+"deportivo-cuenca": {
+"name": "Deportivo Cuenca",
+"points": 1474
+},
+"deportivo-riestra": {
+"name": "Deportivo Riestra",
+"points": 1474
+},
+"al-wahda-abu-dhabi": {
+"name": "Al Wahda",
+"points": 1474
+},
+"gil-vicente": {
+"name": "Gil Vicente FC",
+"points": 1474
+},
+"servette": {
+"name": "Servette",
+"points": 1473
+},
+"csd-defensa-y-justicia": {
+"name": "Defensa y Justicia",
+"points": 1473
+},
+"shandong-taishan": {
+"name": "Shandong Taishan F.C.",
+"points": 1473
+},
+"leicester-city": {
+"name": "Leicester City",
+"points": 1473
+},
+"cardiff-city": {
+"name": "Cardiff City",
+"points": 1472
+},
+"universitatea-cluj": {
+"name": "Universitatea Cluj",
+"points": 1472
+},
+"lnz-cherkasy": {
+"name": "LNZ Cherkasy",
+"points": 1472
+},
+"zalgiris-vilnius": {
+"name": "Zalgiris Vilnius",
+"points": 1472
+},
+"fc-seoul": {
+"name": "FC Seoul",
+"points": 1471
+},
+"rubin-kazan": {
+"name": "Rubin Kazan",
+"points": 1471
+},
+"arouca": {
+"name": "Arouca",
+"points": 1471
+},
+"atletico-goianiense": {
+"name": "Atlético Goianiense",
+"points": 1471
+},
+"al-ahed": {
+"name": "AL Ahed",
+"points": 1471
+},
+"real-zaragoza": {
+"name": "Real Zaragoza",
+"points": 1470
+},
+"banfield": {
+"name": "Banfield",
+"points": 1470
+},
+"hull-city": {
+"name": "Hull City",
+"points": 1470
+},
+"spartak-trnava": {
+"name": "Spartak Trnava",
+"points": 1470
+},
+"shanghai-shenhua": {
+"name": "Shanghai Shenhua",
+"points": 1469
+},
+"nordsjaelland": {
+"name": "Nordsjælland",
+"points": 1469
+},
+"blackpool": {
+"name": "Blackpool",
+"points": 1469
+},
+"shkendija-79": {
+"name": "KF Shkendija",
+"points": 1469
+},
+"kryvbas": {
+"name": "Kryvbas",
+"points": 1467
+},
+"fc-groningen": {
+"name": "FC Groningen",
+"points": 1466
+},
+"luton-town-fc": {
+"name": "Luton Town F.C.",
+"points": 1466
+},
+"goztepe-as": {
+"name": "Göztepe AŞ",
+"points": 1466
+},
+"tenerife": {
+"name": "Tenerife",
+"points": 1465
+},
+"jagiellonia-bialystok": {
+"name": "Jagiellonia Białystok",
+"points": 1465
+},
+"shanghai-port-fc": {
+"name": "Shanghai Port F.C.",
+"points": 1465
+},
+"basel": {
+"name": "FC Basel",
+"points": 1465
+},
+"gimnasia-y-esgrima-de-mendoza": {
+"name": "Gimnasia y Esgrima de Mendoza",
+"points": 1464
+},
+"sc-bastia": {
+"name": "SC Bastia",
+"points": 1464
+},
+"motagua": {
+"name": "Motagua",
+"points": 1464
+},
+"sporting-fingal": {
+"name": "Sporting Fingal",
+"points": 1463
+},
+"terek-grozny": {
+"name": "FK Akhmat Grozny",
+"points": 1463
+},
+"beijing-guoan": {
+"name": "Beijing Guoan",
+"points": 1463
+},
+"gent": {
+"name": "Gent",
+"points": 1463
+},
+"sillamae-kalev": {
+"name": "Sillamäe Kalev",
+"points": 1462
+},
+"newells-old-boys": {
+"name": "Newell's Old Boys",
+"points": 1462
+},
+"cusco-fc": {
+"name": "Cusco FC",
+"points": 1462
+},
+"derry-city": {
+"name": "Derry City",
+"points": 1462
+},
+"estoril": {
+"name": "Estoril",
+"points": 1462
+},
+"angers": {
+"name": "Angers",
+"points": 1462
+},
+"sporting-cristal": {
+"name": "Sporting Cristal",
+"points": 1461
+},
+"paksi-se": {
+"name": "Paksi SE",
+"points": 1461
+},
+"criciuma": {
+"name": "Criciúma",
+"points": 1460
+},
+"al-wehdat-sc": {
+"name": "Al-Wehdat SC",
+"points": 1460
+},
+"legia-warszawa": {
+"name": "Legia Warszawa",
+"points": 1460
+},
+"djoliba-ac": {
+"name": "Djoliba AC",
+"points": 1460
+},
+"brasilia": {
+"name": "Brasilia",
+"points": 1459
+},
+"godoy-cruz-antonio-tomba": {
+"name": "Godoy Cruz Antonio Tomba",
+"points": 1459
+},
+"fk-arda-kardzhali": {
+"name": "FC Arda Kardzhali",
+"points": 1459
+},
+"blackburn-rovers": {
+"name": "Blackburn Rovers F.C.",
+"points": 1459
+},
+"puskas-fc": {
+"name": "Puskás FC",
+"points": 1458
+},
+"etoile-du-sahel": {
+"name": "Etoile du Sahel",
+"points": 1458
+},
+"standard-liege": {
+"name": "Standard Liège",
+"points": 1458
+},
+"pakhtakor-tashkent": {
+"name": "Pakhtakor Tashkent",
+"points": 1457
+},
+"sporting-charleroi": {
+"name": "Sporting Charleroi",
+"points": 1457
+},
+"olympiakos-volos": {
+"name": "Olympiakos Volos",
+"points": 1457
+},
+"brondby": {
+"name": "Brøndby",
+"points": 1456
+},
+"tampereen-ilves": {
+"name": "Ilves",
+"points": 1456
+},
+"novara": {
+"name": "Novara",
+"points": 1456
+},
+"racing-club-montevideo": {
+"name": "Racing Club",
+"points": 1456
+},
+"alianza-fc-san-salvador": {
+"name": "Alianza FC",
+"points": 1456
+},
+"fc-vaslui": {
+"name": "FC Vaslui",
+"points": 1456
+},
+"royal-antwerp": {
+"name": "Royal Antwerp FC",
+"points": 1456
+},
+"js-kabylie": {
+"name": "JS Kabylie",
+"points": 1456
+},
+"siena": {
+"name": "Siena",
+"points": 1455
+},
+"js-saoura": {
+"name": "JS Saoura",
+"points": 1455
+},
+"sirius": {
+"name": "Sirius",
+"points": 1455
+},
+"persib-bandung": {
+"name": "Persib Bandung",
+"points": 1455
+},
+"eintracht-braunschweig": {
+"name": "Eintracht Braunschweig",
+"points": 1454
+},
+"nantes": {
+"name": "Nantes",
+"points": 1454
+},
+"yokohama-fa-marinos": {
+"name": "Yokohama F. Marinos",
+"points": 1453
+},
+"shelbourne": {
+"name": "Shelbourne",
+"points": 1453
+},
+"sportivo-trinidense": {
+"name": "Sportivo Trinidense",
+"points": 1452
+},
+"maxline-vitebsk": {
+"name": "Maxline Vitebsk",
+"points": 1452
+},
+"tiraspol": {
+"name": "Tiraspol",
+"points": 1452
+},
+"slovan-liberec": {
+"name": "Slovan Liberec",
+"points": 1452
+},
+"cienciano": {
+"name": "Cienciano",
+"points": 1452
+},
+"go-ahead-eagles": {
+"name": "Go Ahead Eagles",
+"points": 1452
+},
+"coton-sport-garoua": {
+"name": "Coton Sport",
+"points": 1452
+},
+"defensor-sporting": {
+"name": "Defensor Sporting",
+"points": 1451
+},
+"club-atletico-sarmiento": {
+"name": "Sarmiento",
+"points": 1451
+},
+"ponte-preta": {
+"name": "Ponte Preta",
+"points": 1451
+},
+"bidvest-wits": {
+"name": "Bidvest Wits",
+"points": 1451
+},
+"nashville-sc": {
+"name": "Nashville SC",
+"points": 1451
+},
+"paderborn": {
+"name": "SC Paderborn 07",
+"points": 1451
+},
+"hibernian": {
+"name": "Hibernian",
+"points": 1450
+},
+"granada": {
+"name": "Granada",
+"points": 1450
+},
+"fk-sarajevo": {
+"name": "FK Sarajevo",
+"points": 1450
+},
+"ohiggins": {
+"name": "O'Higgins",
+"points": 1449
+},
+"fc-desna-chernihiv": {
+"name": "FK Desna Chernihiv",
+"points": 1449
+},
+"kv-mechelen": {
+"name": "KV Mechelen",
+"points": 1449
+},
+"austria-wien": {
+"name": "Austria Wien",
+"points": 1449
+},
+"enugu-rangers": {
+"name": "Enugu Rangers",
+"points": 1448
+},
+"thun": {
+"name": "Thun",
+"points": 1448
+},
+"atletico-tucuman": {
+"name": "Atlético Tucumán",
+"points": 1448
+},
+"queens-park-rangers": {
+"name": "Queens Park Rangers",
+"points": 1448
+},
+"marathon": {
+"name": "Marathón",
+"points": 1448
+},
+"nimes-olympique": {
+"name": "Nîmes Olympique",
+"points": 1447
+},
+"palestino": {
+"name": "Palestino",
+"points": 1447
+},
+"emelec": {
+"name": "Emelec",
+"points": 1447
+},
+"zilina": {
+"name": "Žilina",
+"points": 1447
+},
+"st-pauli": {
+"name": "St. Pauli",
+"points": 1447
+},
+"ca-nueva-chicago": {
+"name": "Nueva Chicago",
+"points": 1447
+},
+"al-masry": {
+"name": "Al Masry",
+"points": 1447
+},
+"cd-santa-clara": {
+"name": "CD Santa Clara",
+"points": 1447
+},
+"linfield": {
+"name": "Linfield",
+"points": 1446
+},
+"real-esteli": {
+"name": "Real Estelí",
+"points": 1446
+},
+"ordabasy-shymkent": {
+"name": "Ordabasy Shymkent",
+"points": 1446
+},
+"clermont-foot-auvergne": {
+"name": "Clermont Foot",
+"points": 1446
+},
+"elfsborg": {
+"name": "Elfsborg",
+"points": 1446
+},
+"malaga": {
+"name": "Málaga",
+"points": 1446
+},
+"moreirense": {
+"name": "Moreirense",
+"points": 1445
+},
+"fus-rabat": {
+"name": "FUS Rabat",
+"points": 1445
+},
+"sigma-olomouc": {
+"name": "SK Sigma Olomouc",
+"points": 1445
+},
+"anorthosis": {
+"name": "Anorthosis",
+"points": 1445
+},
+"bk-hacken": {
+"name": "BK Häcken",
+"points": 1444
+},
+"nk-bravo": {
+"name": "NK Bravo",
+"points": 1444
+},
+"larne-fc": {
+"name": "Larne FC",
+"points": 1444
+},
+"al-ansar-sc-beirut": {
+"name": "AL Ansar SC",
+"points": 1444
+},
+"antigua-guatemala": {
+"name": "Antigua Guatemala",
+"points": 1444
+},
+"maghreb-fes": {
+"name": "Maghreb Fès",
+"points": 1443
+},
+"fc-cincinnati": {
+"name": "FC Cincinnati",
+"points": 1443
+},
+"sc-telstar": {
+"name": "SC Telstar",
+"points": 1443
+},
+"ipswich-town-fc": {
+"name": "Ipswich Town F.C.",
+"points": 1443
+},
+"middlesbrough": {
+"name": "Middlesbrough",
+"points": 1443
+},
+"isloch": {
+"name": "Isloch",
+"points": 1443
+},
+"tromsoe-il": {
+"name": "Tromsø IL",
+"points": 1442
+},
+"deportivo-pasto": {
+"name": "Deportivo Pasto",
+"points": 1442
+},
+"gangwon-fc": {
+"name": "Gangwon FC",
+"points": 1442
+},
+"columbus-crew": {
+"name": "Columbus Crew",
+"points": 1442
+},
+"iskra-stal": {
+"name": "Iskra-Stal",
+"points": 1441
+},
+"ca-san-martin-de-tucuman": {
+"name": "San Martín de Tucumán",
+"points": 1441
+},
+"fc-milsami-orhei": {
+"name": "FC Milsami Orhei",
+"points": 1441
+},
+"mohun-bagan": {
+"name": "Mohun Bagan Super Giant",
+"points": 1441
+},
+"honka": {
+"name": "Honka",
+"points": 1440
+},
+"westerlo": {
+"name": "Westerlo",
+"points": 1440
+},
+"urawa-red-diamonds": {
+"name": "Urawa Red Diamonds",
+"points": 1440
+},
+"fk-rostov": {
+"name": "FK Rostov",
+"points": 1440
+},
+"singhtarua-fc-thai-port": {
+"name": "Port F.C.",
+"points": 1439
+},
+"bohemian-fc": {
+"name": "Bohemian FC",
+"points": 1439
+},
+"nancy": {
+"name": "Nancy",
+"points": 1439
+},
+"evian-tg": {
+"name": "Evian TG",
+"points": 1439
+},
+"necaxa-rayos": {
+"name": "Necaxa",
+"points": 1438
+},
+"gfc-ajaccio": {
+"name": "GFC Ajaccio",
+"points": 1438
+},
+"fc-tokyo": {
+"name": "FC Tokyo",
+"points": 1438
+},
+"cs-constantine": {
+"name": "CS Constantine",
+"points": 1438
+},
+"diriangen-fc-los-caciques": {
+"name": "Diriangén FC",
+"points": 1438
+},
+"santo-andre": {
+"name": "Santo André",
+"points": 1437
+},
+"stade-tunisien": {
+"name": "Stade Tunisien",
+"points": 1437
+},
+"america-mineiro": {
+"name": "América Mineiro",
+"points": 1436
+},
+"aik": {
+"name": "AIK",
+"points": 1436
+},
+"buducnost-podgorica": {
+"name": "Budućnost",
+"points": 1436
+},
+"rapid-bucuresti": {
+"name": "Rapid Bucureşti",
+"points": 1436
+},
+"pohang-steelers": {
+"name": "Pohang Steelers",
+"points": 1435
+},
+"sion": {
+"name": "Sion",
+"points": 1434
+},
+"kashiwa-reysol": {
+"name": "Kashiwa Reysol",
+"points": 1434
+},
+"sparta-rotterdam": {
+"name": "Sparta Rotterdam",
+"points": 1434
+},
+"zimbru": {
+"name": "Zimbru",
+"points": 1434
+},
+"figueirense": {
+"name": "Figueirense",
+"points": 1434
+},
+"al-taawon": {
+"name": "Al Taawon",
+"points": 1433
+},
+"hellas-verona": {
+"name": "Hellas Verona",
+"points": 1433
+},
+"tobol-kostanay": {
+"name": "Tobol Kostanay",
+"points": 1433
+},
+"metalurh-donetsk": {
+"name": "Metalurh Donetsk",
+"points": 1432
+},
+"bangor-city": {
+"name": "Bangor City",
+"points": 1432
+},
+"saint-eloi-lupopo": {
+"name": "Saint-Eloi Lupopo",
+"points": 1432
+},
+"deportivo-recoleta": {
+"name": "Deportivo Recoleta",
+"points": 1432
+},
+"reading": {
+"name": "Reading",
+"points": 1431
+},
+"hercules": {
+"name": "Hércules",
+"points": 1431
+},
+"levadiakos": {
+"name": "Levadiakos",
+"points": 1430
+},
+"dempo-sc": {
+"name": "Dempo SC",
+"points": 1430
+},
+"atlas": {
+"name": "Atlas",
+"points": 1430
+},
+"gol-gohar-football-club": {
+"name": "GOL Gohar Sirjan FC",
+"points": 1430
+},
+"cerezo-osaka": {
+"name": "Cerezo Osaka",
+"points": 1429
+},
+"gimcheon-sangmu-fc": {
+"name": "Gimcheon Sangmu FC",
+"points": 1429
+},
+"aguilas-doradas-pereira": {
+"name": "Águilas Doradas",
+"points": 1429
+},
+"motherwell": {
+"name": "Motherwell",
+"points": 1429
+},
+"hannover-96": {
+"name": "Hannover 96",
+"points": 1429
+},
+"gamba-osaka": {
+"name": "Gamba Osaka",
+"points": 1429
+},
+"saint-etienne": {
+"name": "Saint-Étienne",
+"points": 1429
+},
+"fc-kolos-kovalivka": {
+"name": "FC Kolos Kovalivka",
+"points": 1428
+},
+"atletico-san-luis-mexico": {
+"name": "Atlético San Luis",
+"points": 1428
+},
+"al-faisaly-sc-amman": {
+"name": "Al-Faisaly SC Amman",
+"points": 1428
+},
+"portsmouth": {
+"name": "Portsmouth",
+"points": 1428
+},
+"fc-juarez": {
+"name": "FC Juárez",
+"points": 1428
+},
+"neftci": {
+"name": "Neftçi",
+"points": 1428
+},
+"queretaro-gallos": {
+"name": "Querétaro",
+"points": 1427
+},
+"huachipato": {
+"name": "Huachipato",
+"points": 1427
+},
+"los-chankas-cyc": {
+"name": "Los Chankas CYC",
+"points": 1427
+},
+"ulsan-hyundai": {
+"name": "Ulsan Hyundai",
+"points": 1427
+},
+"al-jaish": {
+"name": "El Jaish (Doha)",
+"points": 1427
+},
+"nasaf-qarshi": {
+"name": "Nasaf Qarshi",
+"points": 1426
+},
+"motema-pembe": {
+"name": "Motema Pembe",
+"points": 1426
+},
+"foolad-khuzestan": {
+"name": "Foolad Khuzestan",
+"points": 1426
+},
+"amiens-sc": {
+"name": "Amiens SC",
+"points": 1426
+},
+"ceramica-cleopatra": {
+"name": "Ceramica Cleopatra",
+"points": 1425
+},
+"melbourne-city-fc": {
+"name": "Melbourne City FC",
+"points": 1425
+},
+"luzern": {
+"name": "Luzern",
+"points": 1425
+},
+"leon": {
+"name": "León",
+"points": 1425
+},
+"krylya-sovetov-samara": {
+"name": "Krylya Sovetov Samara",
+"points": 1425
+},
+"fc-ural": {
+"name": "FC Ural",
+"points": 1425
+},
+"san-martin-san-juan": {
+"name": "San Martín San Juan",
+"points": 1425
+},
+"philadelphia-union": {
+"name": "Philadelphia Union",
+"points": 1424
+},
+"mushuc-runa": {
+"name": "Mushuc Runa SC",
+"points": 1423
+},
+"deportivo-garcilaso": {
+"name": "Club Deportivo Garcilaso",
+"points": 1423
+},
+"lokomotiv-plovdiv": {
+"name": "Lokomotiv Plovdiv",
+"points": 1423
+},
+"sabah-fk-azerbaijan": {
+"name": "Sabah FK",
+"points": 1423
+},
+"rapid-wien": {
+"name": "Rapid Wien",
+"points": 1423
+},
+"fc-alverca": {
+"name": "F.C. Alverca",
+"points": 1423
+},
+"wolfsberger-ac": {
+"name": "Wolfsberger AC",
+"points": 1423
+},
+"guarani-fc-campinas": {
+"name": "Guarani FC",
+"points": 1422
+},
+"rizespor": {
+"name": "Rizespor",
+"points": 1422
+},
+"konyaspor": {
+"name": "Konyaspor",
+"points": 1422
+},
+"all-boys": {
+"name": "All Boys",
+"points": 1422
+},
+"al-wasl": {
+"name": "Al Wasl",
+"points": 1421
+},
+"alanyaspor": {
+"name": "Alanyaspor",
+"points": 1421
+},
+"deportivo-heredia": {
+"name": "Deportivo Heredia",
+"points": 1421
+},
+"xelaju": {
+"name": "Xelajú",
+"points": 1421
+},
+"real-espana": {
+"name": "Real España",
+"points": 1421
+},
+"nacional-potosi": {
+"name": "Nacional Potosí",
+"points": 1420
+},
+"atletico-rafaela": {
+"name": "Atlético Rafaela",
+"points": 1420
+},
+"bordeaux": {
+"name": "Bordeaux",
+"points": 1420
+},
+"daejeon-citizen": {
+"name": "Daejeon Citizen",
+"points": 1420
+},
+"kaiserslautern": {
+"name": "Kaiserslautern",
+"points": 1419
+},
+"cerro-largo": {
+"name": "Cerro Largo",
+"points": 1419
+},
+"kyoto-sanga": {
+"name": "Kyoto Sanga FC",
+"points": 1418
+},
+"karpaty-lviv": {
+"name": "Karpaty Lviv",
+"points": 1418
+},
+"seinaejoen-jk": {
+"name": "Seinaejoen JK",
+"points": 1418
+},
+"pogon-szczecin": {
+"name": "Pogoń Szczecin",
+"points": 1418
+},
+"aguila": {
+"name": "Águila",
+"points": 1418
+},
+"al-nejmeh": {
+"name": "Nejmeh SC",
+"points": 1417
+},
+"moskva": {
+"name": "Moskva",
+"points": 1416
+},
+"fc-ruh-brest": {
+"name": "FC Ruh Brest",
+"points": 1416
+},
+"debrecen": {
+"name": "Debrecen",
+"points": 1416
+},
+"usm-alger": {
+"name": "USM Alger",
+"points": 1416
+},
+"crotone": {
+"name": "Crotone",
+"points": 1416
+},
+"guingamp": {
+"name": "Guingamp",
+"points": 1415
+},
+"fc-brest": {
+"name": "FC Brest",
+"points": 1415
+},
+"incheon-united": {
+"name": "Incheon United",
+"points": 1415
+},
+"fc-iberia-1999": {
+"name": "FC Iberia 1999",
+"points": 1999
+},
+"audax-italiano": {
+"name": "Audax Italiano La Florida",
+"points": 1414
+},
+"avai-fc": {
+"name": "Avaí FC",
+"points": 1414
+},
+"johor-darul-takzim": {
+"name": "Johor Darul Ta'zim FC",
+"points": 1414
+},
+"power-dynamos": {
+"name": "Power Dynamos",
+"points": 1414
+},
+"gais": {
+"name": "GAIS",
+"points": 1414
+},
+"as-real-bamako": {
+"name": "AS Réal Bamako",
+"points": 1413
+},
+"pusamania-borneo-fc": {
+"name": "Pusamania Borneo FC",
+"points": 1413
+},
+"watford": {
+"name": "Watford",
+"points": 1413
+},
+"santa-cruz": {
+"name": "Santa Cruz",
+"points": 1412
+},
+"aktobe": {
+"name": "Aktobe",
+"points": 1412
+},
+"viitorul-constanta": {
+"name": "Viitorul Constanţa",
+"points": 1412
+},
+"metalist-1925-kharkiv": {
+"name": "Metalist 1925 Kharkiv",
+"points": 1925
+},
+"new-york-city-fc": {
+"name": "New York City FC",
+"points": 1412
+},
+"mc-oran": {
+"name": "MC Oran",
+"points": 1411
+},
+"gunners": {
+"name": "Gunners",
+"points": 1411
+},
+"rio-ave": {
+"name": "Rio Ave",
+"points": 1411
+},
+"el-nacional-ecuador": {
+"name": "El Nacional",
+"points": 1411
+},
+"amkar-perm": {
+"name": "Amkar Perm'",
+"points": 1411
+},
+"sagrada-esperanca": {
+"name": "Sagrada Esperança",
+"points": 1410
+},
+"gornik-zabrze": {
+"name": "Gornik Zabrze",
+"points": 1410
+},
+"cukaricki": {
+"name": "Čukarički",
+"points": 1409
+},
+"san-diego-fc": {
+"name": "San Diego FC",
+"points": 1409
+},
+"boston-river": {
+"name": "Boston River",
+"points": 1409
+},
+"bangkok-glass": {
+"name": "BG Pathum United",
+"points": 1409
+},
+"shakhtyor-soligorsk": {
+"name": "Shakhtyor Soligorsk",
+"points": 1408
+},
+"nk-varteks-varazdin": {
+"name": "NK Varaždin",
+"points": 1408
+},
+"pec-zwolle": {
+"name": "PEC Zwolle",
+"points": 1408
+},
+"dynamos-harare": {
+"name": "Dynamos",
+"points": 1408
+},
+"benevento": {
+"name": "Benevento",
+"points": 1408
+},
+"teplice": {
+"name": "Teplice",
+"points": 1408
+},
+"dolphins-fc": {
+"name": "Dolphins FC",
+"points": 1408
+},
+"mahindra-united": {
+"name": "Mahindra United",
+"points": 1408
+},
+"es-setif": {
+"name": "ES Sétif",
+"points": 1407
+},
+"al-shabab-riyadh": {
+"name": "Al Shabab",
+"points": 1407
+},
+"sutjeska": {
+"name": "Sutjeska",
+"points": 1407
+},
+"banik-ostrava": {
+"name": "Baník Ostrava",
+"points": 1407
+},
+"sportivo-ameliano": {
+"name": "Sportivo Ameliano",
+"points": 1407
+},
+"sampdoria": {
+"name": "Sampdoria",
+"points": 1407
+},
+"kuban-krasnodar": {
+"name": "Kuban' Krasnodar",
+"points": 1406
+},
+"al-hussein-sc-irbid": {
+"name": "Al-Hussein SC Irbid",
+"points": 1406
+},
+"al-rayyan": {
+"name": "Al-Rayyan",
+"points": 1406
+},
+"le-mans": {
+"name": "Le Mans",
+"points": 1406
+},
+"rosenborg": {
+"name": "Rosenborg BK",
+"points": 1406
+},
+"nublense": {
+"name": "Ñublense",
+"points": 1406
+},
+"kasimpasa": {
+"name": "Kasımpaşa",
+"points": 1405
+},
+"gomel": {
+"name": "Gomel",
+"points": 1405
+},
+"dinamo-bucuresti": {
+"name": "Dinamo Bucureşti",
+"points": 1405
+},
+"colon-santa-fe": {
+"name": "Colón Santa Fe",
+"points": 1405
+},
+"dinamo-tbilisi": {
+"name": "Dinamo Tbilisi",
+"points": 1405
+},
+"tsv-hartberg": {
+"name": "TSV Hartberg",
+"points": 1405
+},
+"river-plate-puerto-rico": {
+"name": "River Plate PR",
+"points": 1405
+},
+"atromitos": {
+"name": "Atromitos",
+"points": 1405
+},
+"unisport-de-bafang": {
+"name": "Unisport FC de Bafang",
+"points": 1405
+},
+"ns-mura": {
+"name": "NŠ Mura",
+"points": 1405
+},
+"joinville-esporte-clube": {
+"name": "Joinville EC",
+"points": 1404
+},
+"deportivo-cali": {
+"name": "Deportivo Cali",
+"points": 1404
+},
+"firpo": {
+"name": "L.A. Firpo",
+"points": 1404
+},
+"fc-zirka-kirovohrad": {
+"name": "FK Zirka Kirovohrad",
+"points": 1404
+},
+"fortaleza-ceif": {
+"name": "Fortaleza CEIF FC",
+"points": 1404
+},
+"minnesota-united": {
+"name": "Minnesota United",
+"points": 1403
+},
+"glentoran": {
+"name": "Glentoran",
+"points": 1403
+},
+"danubio": {
+"name": "Danubio",
+"points": 1402
+},
+"mount-pleasant-academy": {
+"name": "Mount Pleasant FC",
+"points": 1402
+},
+"cartagines": {
+"name": "Cartaginés",
+"points": 1402
+},
+"hapoel-tel-aviv": {
+"name": "Hapoel Tel Aviv",
+"points": 1401
+},
+"spyris-kaunas": {
+"name": "FK Kauno Zalgiris",
+"points": 1401
+},
+"bate-borisov": {
+"name": "BATE Borisov",
+"points": 1401
+},
+"fc-platinum": {
+"name": "FC Platinum",
+"points": 1401
+},
+"asociacion-deportiva-tarma": {
+"name": "Asociación Deportiva Tarma (ADT)",
+"points": 1401
+},
+"cd-plaza-amador": {
+"name": "CD Plaza Amador",
+"points": 1401
+},
+"botev-plovdiv": {
+"name": "Botev Plovdiv",
+"points": 1401
+},
+"ifk-goteborg": {
+"name": "IFK Göteborg",
+"points": 1400
+},
+"saturn": {
+"name": "Saturn",
+"points": 1399
+},
+"mlada-boleslav": {
+"name": "Mladá Boleslav",
+"points": 1399
+},
+"al-ettifaq": {
+"name": "AL Ettifaq FC",
+"points": 1399
+},
+"viborg": {
+"name": "Viborg",
+"points": 1399
+},
+"zhejiang-professional": {
+"name": "Zhejiang Professional",
+"points": 1399
+},
+"club-atletico-temperley": {
+"name": "Temperley",
+"points": 1399
+},
+"club-deportivo-maldonado": {
+"name": "Club Deportivo Maldonado",
+"points": 1399
+},
+"arsenal-de-sarandi": {
+"name": "Arsenal de Sarandí",
+"points": 1399
+},
+"grenoble": {
+"name": "Grenoble",
+"points": 1399
+},
+"everton-vina-del-mar": {
+"name": "Everton CD",
+"points": 1398
+},
+"remo-stars": {
+"name": "Remo Stars",
+"points": 1398
+},
+"us-salernitana-1919": {
+"name": "U.S. Salernitana 1919",
+"points": 1919
+},
+"bari": {
+"name": "Bari",
+"points": 1398
+},
+"enyimba": {
+"name": "Enyimba",
+"points": 1397
+},
+"tecnico-universitario": {
+"name": "Técnico Universitario",
+"points": 1397
+},
+"excelsior": {
+"name": "Excelsior",
+"points": 1397
+},
+"palermo": {
+"name": "Palermo",
+"points": 1397
+},
+"simba": {
+"name": "Simba SC",
+"points": 1397
+},
+"fortuna-sittard": {
+"name": "Fortuna Sittard",
+"points": 1396
+},
+"greuther-furth": {
+"name": "Greuther Fürth",
+"points": 1396
+},
+"fk-tsc-backa-topola": {
+"name": "Topolski Sportski Club",
+"points": 1396
+},
+"zesco-united": {
+"name": "ZESCO United",
+"points": 1396
+},
+"ac-monza": {
+"name": "AC Monza",
+"points": 1396
+},
+"astra-ploiesti": {
+"name": "Astra Ploieşti",
+"points": 1395
+},
+"plateau-united": {
+"name": "Plateau United",
+"points": 1395
+},
+"zeleznicar-pancevo": {
+"name": "Železničar Pančevo",
+"points": 1395
+},
+"motor-action": {
+"name": "Motor Action",
+"points": 1394
+},
+"boulogne": {
+"name": "Boulogne",
+"points": 1394
+},
+"centro-sportivo-alagoano": {
+"name": "CS Alagoano AL",
+"points": 1394
+},
+"defence-force": {
+"name": "Defence Force FC",
+"points": 1394
+},
+"caen": {
+"name": "Caen",
+"points": 1394
+},
+"lokomotiva": {
+"name": "Lokomotiva",
+"points": 1394
+},
+"persija-jakarta": {
+"name": "Persija Jakarta",
+"points": 1393
+},
+"independiente-fbc-asuncion": {
+"name": "Independiente FBC (Campo Grande)",
+"points": 1393
+},
+"gremio-prudente": {
+"name": "Grêmio Prudente",
+"points": 1393
+},
+"kaizer-chiefs": {
+"name": "Kaizer Chiefs",
+"points": 1393
+},
+"stellenbosch-vasco-da-gama-cape-town": {
+"name": "Stellenbosch FC",
+"points": 1392
+},
+"los-angeles-galaxy": {
+"name": "LA Galaxy",
+"points": 1392
+},
+"pune-fc": {
+"name": "Pune FC",
+"points": 1392
+},
+"bohemians-1905": {
+"name": "Bohemians 1905",
+"points": 1905
+},
+"cd-fas": {
+"name": "CD FAS",
+"points": 1391
+},
+"nurnberg": {
+"name": "Nürnberg",
+"points": 1391
+},
+"slavia-mozyr": {
+"name": "Slavia-Mozyr",
+"points": 1391
+},
+"alianza-fc-valledupar-colombia": {
+"name": "Alianza FC",
+"points": 1391
+},
+"gazovik-orenburg": {
+"name": "FC Orenburg",
+"points": 1390
+},
+"osijek": {
+"name": "Osijek",
+"points": 1390
+},
+"canon-sportif": {
+"name": "Canon Sportif",
+"points": 1390
+},
+"carabobo-fc": {
+"name": "Carabobo FC",
+"points": 1390
+},
+"nagoya-grampus-eight": {
+"name": "Nagoya Grampus Eight",
+"points": 1390
+},
+"polonia-warszawa": {
+"name": "Polonia Warszawa",
+"points": 1390
+},
+"fc-ufa": {
+"name": "FC Ufa",
+"points": 1389
+},
+"dila-gori": {
+"name": "Dila Gori",
+"points": 1389
+},
+"deportivo-tachira": {
+"name": "Deportivo Táchira",
+"points": 1388
+},
+"gazelle-garoua": {
+"name": "Gazelle FC de Garoua",
+"points": 1388
+},
+"al-jazira": {
+"name": "Al-Jazira",
+"points": 1388
+},
+"orlando-city": {
+"name": "Orlando City",
+"points": 1388
+},
+"pisa-sc": {
+"name": "Pisa SC",
+"points": 1388
+},
+"national-bank-of-egypt": {
+"name": "National Bank",
+"points": 1387
+},
+"dynamo-de-douala": {
+"name": "Dynamo de Douala",
+"points": 1387
+},
+"valenciennes": {
+"name": "Valenciennes",
+"points": 1387
+},
+"red-arrows": {
+"name": "Red Arrows",
+"points": 1386
+},
+"sivasspor": {
+"name": "Sivasspor",
+"points": 1386
+},
+"gaziantep-bbk": {
+"name": "Gazişehir Gaziantep FK",
+"points": 1386
+},
+"darmstadt": {
+"name": "Darmstadt",
+"points": 1386
+},
+"dundalk": {
+"name": "Dundalk FC",
+"points": 1386
+},
+"al-sharjah": {
+"name": "Sharjah Cultural Club",
+"points": 1386
+},
+"casa-pia": {
+"name": "Casa Pia",
+"points": 1386
+},
+"chernomorets-burgas": {
+"name": "Chernomorets Burgas",
+"points": 1386
+},
+"albion-fc": {
+"name": "Albion F.C.",
+"points": 1385
+},
+"eyupspor": {
+"name": "Eyüpspor",
+"points": 1385
+},
+"as-nika": {
+"name": "AS Nika",
+"points": 1385
+},
+"racing-santander": {
+"name": "Racing Santander",
+"points": 1385
+},
+"fc-dallas": {
+"name": "FC Dallas",
+"points": 1385
+},
+"kavala": {
+"name": "Kavala",
+"points": 1384
+},
+"union-sportive-douala": {
+"name": "Union Sportive de Douala",
+"points": 1384
+},
+"central-espanol": {
+"name": "Central Español",
+"points": 1384
+},
+"club-aurora": {
+"name": "Club Aurora",
+"points": 1384
+},
+"enppi": {
+"name": "ENPPI",
+"points": 1384
+},
+"fk-vardar-skopje": {
+"name": "Vardar Skopje",
+"points": 1384
+},
+"otelul-galati": {
+"name": "Oţelul Galaţi",
+"points": 1383
+},
+"novi-pazar": {
+"name": "Novi Pazar",
+"points": 1383
+},
+"cercle-bruges": {
+"name": "Cercle Brugge",
+"points": 1383
+},
+"nacional-funchal": {
+"name": "Nacional",
+"points": 1383
+},
+"club-atletico-aldosivi": {
+"name": "Aldosivi",
+"points": 1383
+},
+"norwich-city": {
+"name": "Norwich City",
+"points": 1382
+},
+"deportivo-la-guaira-real-esppor": {
+"name": "Deportivo La Guaira FC",
+"points": 1382
+},
+"olympique-de-bamako": {
+"name": "Olympique de Bamako",
+"points": 1382
+},
+"club-de-deportes-limache": {
+"name": "Club de Deportes Limache",
+"points": 1382
+},
+"gyeongnam-fc": {
+"name": "Gyeongnam FC",
+"points": 1382
+},
+"charlotte-fc": {
+"name": "Charlotte FC",
+"points": 1382
+},
+"sewe": {
+"name": "Séwé",
+"points": 1381
+},
+"lobos-de-la-buap": {
+"name": "Lobos B.U.A.P.",
+"points": 1381
+},
+"shooting-stars-ibadan": {
+"name": "Shooting Stars",
+"points": 1381
+},
+"oud-heverlee": {
+"name": "Oud-Heverlee Leuven",
+"points": 1381
+},
+"sekhukhune-united": {
+"name": "sekhukhune united fc",
+"points": 1380
+},
+"fc-struga-trim-lum": {
+"name": "FC Struga Trim-Lum",
+"points": 1380
+},
+"libertad": {
+"name": "Libertad",
+"points": 1380
+},
+"avispa-fukuoka": {
+"name": "Avispa Fukuoka",
+"points": 1380
+},
+"real-salt-lake": {
+"name": "Real Salt Lake",
+"points": 1379
+},
+"torpedo-kutaisi": {
+"name": "Torpedo Kutaisi",
+"points": 1379
+},
+"ratchaburi-fc": {
+"name": "Ratchaburi FC",
+"points": 1378
+},
+"asante-kotoko-sc": {
+"name": "Asante Kotoko",
+"points": 1377
+},
+"antofagasta": {
+"name": "CD Antofagasta",
+"points": 1377
+},
+"ikorodu-city": {
+"name": "Ikorodu City",
+"points": 1377
+},
+"deportivo-mixco": {
+"name": "Deportivo Mixco",
+"points": 1377
+},
+"chievo-verona": {
+"name": "Chievo Verona",
+"points": 1377
+},
+"llaneros-fc": {
+"name": "Llaneros F.C.",
+"points": 1377
+},
+"coleraine": {
+"name": "Coleraine",
+"points": 1377
+},
+"bala-town": {
+"name": "Bala Town FC",
+"points": 1377
+},
+"coban-imperial": {
+"name": "Coban Imperial",
+"points": 1376
+},
+"nk-istra-1961": {
+"name": "NK Istra 1961",
+"points": 1961
+},
+"bursaspor": {
+"name": "Bursaspor",
+"points": 1376
+},
+"persipura-jayapura": {
+"name": "Persipura Jayapura",
+"points": 1376
+},
+"gks-katowice": {
+"name": "GKS Katowice",
+"points": 1376
+},
+"parana-clube": {
+"name": "Paraná Clube",
+"points": 1376
+},
+"fredrikstad": {
+"name": "Fredrikstad",
+"points": 1375
+},
+"sevilla-fc-puerto-rico": {
+"name": "Sevilla FC Puerto Rico",
+"points": 1375
+},
+"brescia": {
+"name": "Brescia",
+"points": 1375
+},
+"sarpsborg-08": {
+"name": "Sarpsborg 08",
+"points": 1375
+},
+"usm-khenchela": {
+"name": "USM Khenchela",
+"points": 1375
+},
+"fc-arsenal-tula": {
+"name": "Arsenal Tula",
+"points": 1374
+},
+"olancho-fc": {
+"name": "Olancho FC",
+"points": 1374
+},
+"union-de-loum": {
+"name": "UMS de Loum",
+"points": 1374
+},
+"fc-anyang": {
+"name": "FC Anyang",
+"points": 1373
+},
+"sepsi-osk": {
+"name": "Sepsi OSK",
+"points": 1373
+},
+"osmanlispor-ankaraspor": {
+"name": "Osmanlıspor FK",
+"points": 1373
+},
+"zalaegerszegi-te": {
+"name": "Zalaegerszegi TE",
+"points": 1372
+},
+"uta-btrana-doamn": {
+"name": "AFC UTA Arad",
+"points": 1372
+},
+"universidad-central-de-venezuela-fc": {
+"name": "Universidad Central de Venezuela FC",
+"points": 1372
+},
+"zeljeznicar": {
+"name": "Željezničar",
+"points": 1372
+},
+"salgaocar": {
+"name": "Salgaocar",
+"points": 1372
+},
+"alianza-atletico": {
+"name": "Alianza Atlético",
+"points": 1372
+},
+"hekari-united": {
+"name": "Hekari United",
+"points": 1372
+},
+"san-pedro-fc-civ": {
+"name": "San Pedro",
+"points": 1372
+},
+"bamboutos": {
+"name": "Bamboutos",
+"points": 1372
+},
+"chicago-fire": {
+"name": "Chicago Fire",
+"points": 1372
+},
+"vitoria-setubal": {
+"name": "Vitória Setúbal",
+"points": 1371
+},
+"sheffield-united-fc": {
+"name": "Sheffield United FC",
+"points": 1371
+},
+"farul-constanta": {
+"name": "Farul Constanța",
+"points": 1371
+},
+"fk-pardubice": {
+"name": "FK Pardubice",
+"points": 1371
+},
+"cracovia-krakow": {
+"name": "Cracovia Kraków",
+"points": 1371
+},
+"leones-negros-udeg": {
+"name": "Leones Negros U. de G.",
+"points": 1371
+},
+"piast-gliwice": {
+"name": "Piast Gliwice",
+"points": 1371
+},
+"akwa-united": {
+"name": "Akwa United",
+"points": 1370
+},
+"fc-torpedo-moscow": {
+"name": "FC Torpedo Moscow",
+"points": 1370
+},
+"stade-renard-melong": {
+"name": "Stade Renard de Melong",
+"points": 1370
+},
+"zob-ahan": {
+"name": "Zob Ahan Isfahan FC",
+"points": 1370
+},
+"pandurii-targu-jiu": {
+"name": "Pandurii Târgu Jiu",
+"points": 1370
+},
+"eding-sport-fc": {
+"name": "Eding Sport FC",
+"points": 1370
+},
+"aso-chlef": {
+"name": "ASO Chlef",
+"points": 1370
+},
+"ankaragucu": {
+"name": "Ankaragücü",
+"points": 1370
+},
+"zarzis": {
+"name": "Zarzis",
+"points": 1369
+},
+"lokomotiv-sofia": {
+"name": "PFC Lokomotiv Sofia 1929",
+"points": 1929
+},
+"csd-comunicaciones": {
+"name": "CSD Comunicaciones",
+"points": 1369
+},
+"zulte-waregem": {
+"name": "Zulte Waregem",
+"points": 1369
+},
+"southampton": {
+"name": "Southampton",
+"points": 1369
+},
+"ael-limassol": {
+"name": "AEL Limassol",
+"points": 1369
+},
+"radnicki-1923-kragujevac": {
+"name": "Radnički 1923 Kragujevac",
+"points": 1923
+},
+"universidad-concepcion": {
+"name": "Universidad Concepción",
+"points": 1369
+},
+"al-khartoum-al-watani": {
+"name": "Al Khartoum SC",
+"points": 1369
+},
+"kwara-united": {
+"name": "Kwara United",
+"points": 1369
+},
+"deportes-temuco": {
+"name": "Deportes Temuco",
+"points": 1369
+},
+"nasarawa-united": {
+"name": "Nasarawa United",
+"points": 1369
+},
+"new-york-red-bulls": {
+"name": "New York Red Bulls",
+"points": 1369
+},
+"penybont-fc": {
+"name": "Penybont FC",
+"points": 1369
+},
+"arnett-gardens-fc": {
+"name": "Arnett Gardens",
+"points": 1369
+},
+"juventud-de-las-piedras": {
+"name": "Juventud de Las Piedras",
+"points": 1369
+},
+"al-garrafa": {
+"name": "AL Gharafa",
+"points": 1368
+},
+"highlanders": {
+"name": "Highlanders",
+"points": 1368
+},
+"interclube": {
+"name": "Interclube de Angola",
+"points": 1368
+},
+"daegu-fc": {
+"name": "Daegu FC",
+"points": 1368
+},
+"leones-fc-atuntaqui": {
+"name": "Leones F.C.",
+"points": 1368
+},
+"bendel-insurance": {
+"name": "Bendel Insurance",
+"points": 1368
+},
+"maccabi-netanya": {
+"name": "Maccabi Netanya",
+"points": 1368
+},
+"fatih-karagumruk-istanbul": {
+"name": "Fatih Karagümrük",
+"points": 1367
+},
+"vps": {
+"name": "VPS",
+"points": 1367
+},
+"jeanne-darc-de-bamako": {
+"name": "Jeanne d'Arc de Bamako",
+"points": 1367
+},
+"al-ittihad-club-tripoli": {
+"name": "Al-Ittihad",
+"points": 1367
+},
+"iraklis": {
+"name": "Iraklis",
+"points": 1367
+},
+"chongqing-tonglianglong-fc": {
+"name": "Chongqing Tonglianglong FC (CHN)",
+"points": 1367
+},
+"sc-farense": {
+"name": "SC Farense",
+"points": 1367
+},
+"malavan": {
+"name": "Malavan",
+"points": 1367
+},
+"zed-fc": {
+"name": "ZED FC",
+"points": 1367
+},
+"delfin-sc": {
+"name": "Delfin SC",
+"points": 1367
+},
+"fc-veris": {
+"name": "FC Veris",
+"points": 1366
+},
+"mazatlan-fc": {
+"name": "Mazatlán FC",
+"points": 1366
+},
+"montpellier": {
+"name": "Montpellier",
+"points": 1366
+},
+"slavia-sofia": {
+"name": "Slavia Sofia",
+"points": 1366
+},
+"ashanti-gold": {
+"name": "Ashanti Gold FC",
+"points": 1366
+},
+"waitakere-united": {
+"name": "Waitakere United",
+"points": 1366
+},
+"valerenga": {
+"name": "Vålerenga",
+"points": 1366
+},
+"navbahor-namangan": {
+"name": "Navbahor Namangan",
+"points": 1366
+},
+"sydney-fc": {
+"name": "Sydney FC",
+"points": 1366
+},
+"henan-songshan-longmen": {
+"name": "Henan Songshan Longmen F.C.",
+"points": 1365
+},
+"muangthong-united": {
+"name": "Muangthong United",
+"points": 1365
+},
+"caracas": {
+"name": "Caracas",
+"points": 1365
+},
+"ofk-beograd": {
+"name": "OFK Beograd",
+"points": 1365
+},
+"ngezi-platinum-fc": {
+"name": "Ngezi Platinum FC",
+"points": 1365
+},
+"fc-minsk": {
+"name": "FC Minsk",
+"points": 1365
+},
+"jeju-united": {
+"name": "Jeju United",
+"points": 1365
+},
+"olympique-akbou": {
+"name": "Olympique Akbou",
+"points": 1365
+},
+"pwd-bamenda": {
+"name": "Pwd Bamenda",
+"points": 1364
+},
+"panthere": {
+"name": "Panthère",
+"points": 1364
+},
+"2-de-mayo": {
+"name": "2 de Mayo",
+"points": 1364
+},
+"amazulu": {
+"name": "AmaZulu FC",
+"points": 1364
+},
+"wiliete-sc": {
+"name": "Wiliete SC",
+"points": 1363
+},
+"kabuscorp-palanca": {
+"name": "Kabuscorp SCP",
+"points": 1363
+},
+"chicken-inn-fc": {
+"name": "Chicken Inn FC",
+"points": 1363
+},
+"olympic-club-de-safi": {
+"name": "Olympic Club de Safi",
+"points": 1363
+},
+"cordoba-cf": {
+"name": "Córdoba CF",
+"points": 1363
+},
+"young-africans-dar-es-salaam": {
+"name": "Young Africans",
+"points": 1362
+},
+"neftchi": {
+"name": "Neftchi",
+"points": 1362
+},
+"independiente-de-la-chorrera": {
+"name": "Independiente de La Chorrera",
+"points": 1362
+},
+"ofi-crete": {
+"name": "OFI Crete",
+"points": 1362
+},
+"fc_epitsentr_kamianets-podilskyi": {
+"name": "FC Epitsentr Kamianets-Podilskyi",
+"points": 1361
+},
+"portimonense": {
+"name": "Portimonense",
+"points": 1361
+},
+"mouscron-peruwelz": {
+"name": "Mouscron-Péruwelz",
+"points": 1361
+},
+"al-faisaly-fc-harmah": {
+"name": "Al-Faisaly FC Harmah",
+"points": 1361
+},
+"abia-warriors": {
+"name": "Abia Warriors",
+"points": 1360
+},
+"gwangju-fc": {
+"name": "Gwangju FC",
+"points": 1360
+},
+"maritimo": {
+"name": "CS Marítimo Madeira",
+"points": 1360
+},
+"suwon-city": {
+"name": "Suwon FC",
+"points": 1360
+},
+"managua-fc": {
+"name": "Managua FC",
+"points": 1360
+},
+"mol-vidi-fc": {
+"name": "MOL Fehérvár FC",
+"points": 1360
+},
+"kocaelispor": {
+"name": "Kocaelispor",
+"points": 1360
+},
+"tianjin-jinmen-tiger-fc": {
+"name": "Tianjin Jinmen Tiger F.C.",
+"points": 1360
+},
+"valladolid": {
+"name": "Real Valladolid",
+"points": 1359
+},
+"metz": {
+"name": "Metz",
+"points": 1359
+},
+"xanthi": {
+"name": "Xanthi FC",
+"points": 1359
+},
+"cesena": {
+"name": "Cesena",
+"points": 1359
+},
+"portmore-united": {
+"name": "Portmore United FC",
+"points": 1359
+},
+"fc-bravos-do-maquis": {
+"name": "FC Bravos DO Maquis",
+"points": 1359
+},
+"cr-khemis-zemamra": {
+"name": "Renaissance Club Zemamra",
+"points": 1359
+},
+"eastern-suburbs": {
+"name": "Eastern Suburbs",
+"points": 1359
+},
+"suduva": {
+"name": "Suduva Marijampole",
+"points": 1358
+},
+"randers-fc": {
+"name": "Randers FC",
+"points": 1358
+},
+"huddersfield-town": {
+"name": "Huddersfield Town",
+"points": 1358
+},
+"quilmes": {
+"name": "Quilmes",
+"points": 1358
+},
+"cf-estrela-da-amadora": {
+"name": "C.F. Estrela da Amadora",
+"points": 1358
+},
+"bodrum-fk": {
+"name": "Bodrum F.K.",
+"points": 1358
+},
+"houston-dynamo": {
+"name": "Houston Dynamo",
+"points": 1358
+},
+"consadole-sapporo": {
+"name": "Consadole Sapporo",
+"points": 1358
+},
+"jaguares-chiapas": {
+"name": "Jaguares Chiapas",
+"points": 1358
+},
+"zurich": {
+"name": "FC Zürich",
+"points": 1358
+},
+"medeama-sc": {
+"name": "Medeama SC",
+"points": 1358
+},
+"podbrezova": {
+"name": "Podbrezová",
+"points": 1358
+},
+"fc-nizhny-novgorod": {
+"name": "FC Nizhny Novgorod",
+"points": 1357
+},
+"fc-skonto-riga": {
+"name": "FC Skonto Riga",
+"points": 1357
+},
+"wadi-degla-fc": {
+"name": "Wadi Degla FC",
+"points": 1357
+},
+"siwelele-fc": {
+"name": "Siwelele F.C.",
+"points": 1357
+},
+"sanga-balende": {
+"name": "Sanga Balende",
+"points": 1356
+},
+"gostaresh-foolad": {
+"name": "Gostaresh Foolad",
+"points": 1356
+},
+"eastern-stars": {
+"name": "Eastern Stars",
+"points": 1356
+},
+"troyes": {
+"name": "Troyes",
+"points": 1356
+},
+"belenenses": {
+"name": "Belenenses",
+"points": 1356
+},
+"elazigspor": {
+"name": "Elazığspor",
+"points": 1356
+},
+"rkc-waalwijk": {
+"name": "RKC Waalwijk",
+"points": 1356
+},
+"chadormalu-sc": {
+"name": "Chadormalu Sports Club",
+"points": 1356
+},
+"fc-vizela": {
+"name": "FC Vizela",
+"points": 1355
+},
+"silkeborg": {
+"name": "Silkeborg",
+"points": 1355
+},
+"lausanne": {
+"name": "Lausanne",
+"points": 1355
+},
+"ad-municipal-liberia": {
+"name": "AD Municipal Liberia",
+"points": 1355
+},
+"deportes-melipilla": {
+"name": "Melipilla",
+"points": 1355
+},
+"liga-de-loja": {
+"name": "Liga de Loja",
+"points": 1355
+},
+"academia-amadou-diallo": {
+"name": "Academia F. Amadou Diallo",
+"points": 1355
+},
+"bali-united-pusam": {
+"name": "Bali United",
+"points": 1355
+},
+"hegelmann-litauen-kaunas": {
+"name": "Hegelmann Litauen Kaunas",
+"points": 1354
+},
+"naft-tehran": {
+"name": "Naft Tehran",
+"points": 1354
+},
+"san-jose-earthquakes": {
+"name": "San Jose Earthquakes",
+"points": 1354
+},
+"velez-mostar": {
+"name": "Velež Mostar",
+"points": 1354
+},
+"zaglebie-lubin": {
+"name": "Zagłębie Lubin",
+"points": 1354
+},
+"al-shabab-al-arabi-dubai": {
+"name": "Al Shabab",
+"points": 1354
+},
+"churchill-brothers": {
+"name": "Churchill Brothers SC",
+"points": 1354
+},
+"valmieras-fk": {
+"name": "Valmiera FK",
+"points": 1354
+},
+"fc-oleksandria": {
+"name": "Oleksandriya",
+"points": 1354
+},
+"fc-dinamo-batumi": {
+"name": "FC Dinamo Batumi",
+"points": 1354
+},
+"hapoel-haifa": {
+"name": "Hapoel Haifa",
+"points": 1354
+},
+"smouha-sc": {
+"name": "Smouha SC",
+"points": 1354
+},
+"monomatapa-united": {
+"name": "Monomatapa United",
+"points": 1353
+},
+"fc-arges-pitesti": {
+"name": "Argeș Pitești",
+"points": 1353
+},
+"port-talbot": {
+"name": "Port Talbot",
+"points": 1353
+},
+"sandefjord": {
+"name": "Sandefjord Football",
+"points": 1353
+},
+"irtysh-pavlodar": {
+"name": "Irtysh Pavlodar",
+"points": 1353
+},
+"leon-de-huanuco": {
+"name": "León de Huánuco",
+"points": 1000
+},
+"mfk-karvina": {
+"name": "MFK Karviná",
+"points": 1001
+},
+"sport-recife": {
+"name": "Sport Recife",
+"points": 1002
+},
+"ajax-de-ouenze": {
+"name": "Ajax",
+"points": 1003
+},
+"tukoko-university": {
+"name": "Tukoko University",
+"points": 1004
+},
+"feutcheu-fc-bandjoun": {
+"name": "Feutcheu FC",
+"points": 1005
+},
+"gold-coast-united": {
+"name": "Gold Coast United",
+"points": 1006
+},
+"slaven": {
+"name": "Slaven",
+"points": 1007
+},
+"vitesse": {
+"name": "Vitesse",
+"points": 1008
+},
+"cd-river-plate-ecuador": {
+"name": "River Plate Ecuador",
+"points": 1009
+},
+"modern-sport-fc": {
+"name": "Modern Sport FC",
+"points": 1010
+},
+"hearts-of-oak": {
+"name": "Hearts of Oak",
+"points": 1011
+},
+"al-nasr-sc-dubai": {
+"name": "Al Nasr",
+"points": 1012
+},
+"fc-energetik-bgu-minsk": {
+"name": "FC Energetik-BGU Minsk",
+"points": 1013
+},
+"el-tanque-sisley": {
+"name": "El Tanque Sisley",
+"points": 1014
+},
+"kayserispor": {
+"name": "Kayserispor",
+"points": 1015
+},
+"difaa-el-jadida": {
+"name": "Difaâ El Jadida",
+"points": 1016
+},
+"uniao-da-madeira": {
+"name": "Uniao da Madeira",
+"points": 1017
+},
+"niger-tornadoes": {
+"name": "Niger Tornadoes",
+"points": 1018
+},
+"fc-machida-zelvia": {
+"name": "Tokyo Verdy",
+"points": 1019
+},
+"masvingo-united": {
+"name": "Masvingo United",
+"points": 1020
+},
+"kano-pillars": {
+"name": "Kano Pillars",
+"points": 1021
+},
+"bayelsa-united": {
+"name": "Bayelsa United",
+"points": 1022
+},
+"bunyodkor-tashkent": {
+"name": "Bunyodkor Tashkent",
+"points": 1023
+},
+"chorrillo-fc": {
+"name": "Chorrillo",
+"points": 1024
+},
+"aluminium-arak": {
+"name": "Aluminium Arak",
+"points": 1025
+},
+"giresunspor": {
+"name": "Giresunspor",
+"points": 1026
+},
+"cliftonville": {
+"name": "Cliftonville",
+"points": 1027
+},
+"internacional-de-bogota": {
+"name": "Internacional de Bogotá",
+"points": 1028
+},
+"mc-el-eulma": {
+"name": "MC El Eulma",
+"points": 1029
+},
+"qingdao-west-coast-fc": {
+"name": "Qingdao West Coast F.C.",
+"points": 1030
+},
+"liaoning-tieren-fc": {
+"name": "Liaoning Tieren F.C.",
+"points": 1031
+},
+"fc-cajamarca": {
+"name": "FC Cajamarca",
+"points": 1032
+},
+"benfica-luanda": {
+"name": "Benfica Luanda",
+"points": 1033
+},
+"ben-aknoun": {
+"name": "Ben Aknoun",
+"points": 1034
+},
+"deportivo-lara": {
+"name": "Deportivo Lara",
+"points": 1035
+},
+"al-ahly-shendi": {
+"name": "Al Ahly Shendi",
+"points": 1036
+},
+"kalmar-ff": {
+"name": "Kalmar FF",
+"points": 1037
+},
+"roda-jc-kerkrade": {
+"name": "Roda JC Kerkrade",
+"points": 1038
+},
+"korona-kielce": {
+"name": "Korona Kielce",
+"points": 1039
+},
+"academia-puerto-cabello": {
+"name": "Academia Puerto Cabello",
+"points": 1040
+},
+"cobresal": {
+"name": "Cobresal",
+"points": 1041
+},
+"ujpest": {
+"name": "Újpest",
+"points": 1042
+},
+"mpumalanga-black-aces": {
+"name": "Cape Town City FC",
+"points": 1043
+},
+"slask-wroclaw": {
+"name": "Śląsk Wrocław",
+"points": 1044
+},
+"olimpo": {
+"name": "Olimpo",
+"points": 1045
+},
+"estudiantes-de-rio-cuarto": {
+"name": "Estudiantes de Rio Cuarto",
+"points": 1046
+},
+"etoile-metlaoui": {
+"name": "Etoile Metlaoui",
+"points": 1047
+},
+"al-arabi": {
+"name": "Al-Arabi Doha",
+"points": 1048
+},
+"radomiak-radom": {
+"name": "Radomiak Radom",
+"points": 1049
+},
+"persebaya-surabaya": {
+"name": "Persebaya Surabaya",
+"points": 1050
+},
+"giwa-fc": {
+"name": "Giwa FC",
+"points": 1051
+},
+"sol-de-america": {
+"name": "Sol de América",
+"points": 1052
+},
+"general-caballero-jlm": {
+"name": "General Caballero JLM",
+"points": 1053
+},
+"ittihad-tanger": {
+"name": "Ittihad Tanger",
+"points": 1054
+},
+"rubio-nu": {
+"name": "Rubio Ñú",
+"points": 1055
+},
+"eskisehirspor": {
+"name": "Eskişehirspor",
+"points": 1056
+},
+"tauro-fc": {
+"name": "Tauro FC",
+"points": 1057
+},
+"tiko-united": {
+"name": "Tiko United",
+"points": 1058
+},
+"saba-qom": {
+"name": "Saba Qom",
+"points": 1059
+},
+"spartak-myjava": {
+"name": "Spartak Myjava",
+"points": 1060
+},
+"akhisar-belediye": {
+"name": "Akhisar Belediye",
+"points": 1061
+},
+"melbourne-victory": {
+"name": "Melbourne Victory",
+"points": 1062
+},
+"sharks": {
+"name": "Sharks",
+"points": 1063
+},
+"mtk-budapest": {
+"name": "MTK Budapest",
+"points": 1064
+},
+"bnei-yehuda-tel-aviv": {
+"name": "Bnei Yehuda Tel Aviv FC",
+"points": 1065
+},
+"pacos-de-ferreira": {
+"name": "Paços de Ferreira",
+"points": 1066
+},
+"mp-antalyaspor": {
+"name": "MP Antalyaspor",
+"points": 1067
+},
+"arles": {
+"name": "Arles",
+"points": 1068
+},
+"genclerbirligi": {
+"name": "Gençlerbirligi",
+"points": 1069
+},
+"katsina-united": {
+"name": "Katsina United",
+"points": 1070
+},
+"tondela": {
+"name": "Tondela",
+"points": 1071
+},
+"club-atletico-grau": {
+"name": "Club Atlético Grau",
+"points": 1072
+},
+"hnk-gorica": {
+"name": "HNK Gorica",
+"points": 1073
+},
+"beira-mar": {
+"name": "Beira-Mar",
+"points": 1074
+},
+"yunnan-yukun-fc": {
+"name": "Yunnan Yukun F.C.",
+"points": 1075
+},
+"new-england-revolution": {
+"name": "New England Revolution",
+"points": 1076
+},
+"recreativo-da-caala": {
+"name": "Recreativo da Caála",
+"points": 1077
+},
+"sport-ancash": {
+"name": "Sport Áncash",
+"points": 1078
+},
+"deportivo-pereira": {
+"name": "CS Deportivo Pereira",
+"points": 1079
+},
+"union-la-calera": {
+"name": "Unión La Calera",
+"points": 1080
+},
+"east-bengal-club": {
+"name": "East Bengal Club",
+"points": 1081
+},
+"san-luis-fc-san-luis": {
+"name": "San Luis FC",
+"points": 1082
+},
+"fk-mladost-lucani": {
+"name": "FK Mladost Lučani",
+"points": 1083
+},
+"suwon-bluewings": {
+"name": "Suwon Bluewings",
+"points": 1084
+},
+"rangers-talca": {
+"name": "Rangers",
+"points": 1085
+},
+"fagiano-okayama": {
+"name": "Fagiano Okayama",
+"points": 1086
+},
+"kun-khalifat-fc": {
+"name": "Kun Khalifat FC",
+"points": 1087
+},
+"erzurum-buyukehir-belediyespor": {
+"name": "Erzurum BB",
+"points": 1088
+},
+"la-luz-football-club": {
+"name": "La Luz FC",
+"points": 1089
+},
+"dorados-sinaloa": {
+"name": "Dorados Sinaloa",
+"points": 1090
+},
+"fk-imt-novi-beograd": {
+"name": "FK IMT",
+"points": 1091
+},
+"new-soger": {
+"name": "New Soger",
+"points": 1092
+},
+"fc-emmen": {
+"name": "FC Emmen",
+"points": 1093
+},
+"botev-vratsa": {
+"name": "Botev Vratsa",
+"points": 1094
+},
+"asteras-tripolis": {
+"name": "Asteras Tripolis",
+"points": 1095
+},
+"vysocina-jihlava": {
+"name": "Vysočina Jihlava",
+"points": 1096
+},
+"guastatoya": {
+"name": "Guastatoya",
+"points": 1097
+},
+"lillestrom": {
+"name": "Lillestrøm",
+"points": 1098
+},
+"botosani": {
+"name": "Botoşani",
+"points": 1099
+},
+"deportivo-quevedo": {
+"name": "Deportivo Quevedo",
+"points": 1100
+},
+"independiente-petrolero": {
+"name": "Independiente Petrolero",
+"points": 1101
+},
+"nueve-de-octubre": {
+"name": "Nueve de Octubre",
+"points": 1102
+},
+"sporting-san-miguelito": {
+"name": "Sporting San Miguelito",
+"points": 1103
+},
+"caernarfon-town-fc": {
+"name": "Caernarfon",
+"points": 1104
+},
+"cavalier-sc": {
+"name": "Cavaliers FC",
+"points": 1105
+},
+"santiago-morning": {
+"name": "Santiago Morning",
+"points": 1106
+},
+"so-armee": {
+"name": "SO Armée",
+"points": 1107
+},
+"odense-bk": {
+"name": "Odense Boldklub",
+"points": 1108
+},
+"fk-sileks-kratovo": {
+"name": "FK Sileks",
+"points": 1109
+},
+"khazar-lankaran-fk": {
+"name": "Khazar Lankaran FK",
+"points": 1110
+},
+"magenta": {
+"name": "AS Magenta",
+"points": 1111
+},
+"chaves": {
+"name": "Chaves",
+"points": 1112
+},
+"sloboda-uzice": {
+"name": "Sloboda Užice",
+"points": 1113
+},
+"hamarkameratene-hamkam": {
+"name": "HamKam",
+"points": 1114
+},
+"livorno": {
+"name": "Livorno",
+"points": 1115
+},
+"mordovia-saransk": {
+"name": "Mordovia Saransk",
+"points": 1116
+},
+"de-graafschap": {
+"name": "De Graafschap",
+"points": 1117
+},
+"chacarita-juniors": {
+"name": "Chacarita Juniors",
+"points": 1118
+},
+"sport-huancayo": {
+"name": "Sport Huancayo",
+"points": 1119
+},
+"zira": {
+"name": "Zirə",
+"points": 1120
+},
+"portland-timbers": {
+"name": "Portland Timbers",
+"points": 1121
+},
+"jsm-bejaia": {
+"name": "JSM Béjaïa",
+"points": 1122
+},
+"el-gounah": {
+"name": "El Gounah",
+"points": 1123
+},
+"bengaluru-fc": {
+"name": "Bengaluru FC",
+"points": 1124
+},
+"nc-magra": {
+"name": "NC Magra",
+"points": 1125
+},
+"dijon": {
+"name": "Dijon",
+"points": 1126
+},
+"zpc-kariba": {
+"name": "ZPC Kariba",
+"points": 1127
+},
+"lamontville-golden-arrows": {
+"name": "Lamontville Golden Arrows",
+"points": 1128
+},
+"san-antonio-bulo-bulo": {
+"name": "San Antonio Bulo Bulo",
+"points": 1129
+},
+"guairena-fc": {
+"name": "Guaireña FC",
+"points": 1130
+},
+"galway-united": {
+"name": "Galway United FC",
+"points": 1131
+},
+"tigres-fc-expreso-rojo": {
+"name": "Tigres FC",
+"points": 1132
+},
+"manta": {
+"name": "Manta",
+"points": 1133
+},
+"motor-lublin": {
+"name": "Motor Lublin",
+"points": 1134
+},
+"warri-wolves-fc": {
+"name": "Warri Wolves FC",
+"points": 1135
+},
+"al-ramtha-sc": {
+"name": "Al-Ramtha SC",
+"points": 1136
+},
+"kacm-marrakech": {
+"name": "KACM Marrakech",
+"points": 1137
+},
+"aduana-stars": {
+"name": "Aduana Stars",
+"points": 1138
+},
+"ca-bizertin": {
+"name": "CA Bizertin",
+"points": 1139
+},
+"naval-1o-de-maio": {
+"name": "Naval 1º de Maio",
+"points": 1140
+},
+"union-san-felipe": {
+"name": "Unión San Felipe",
+"points": 1141
+},
+"khimki": {
+"name": "Khimki",
+"points": 1142
+},
+"bloemfontein-celtic": {
+"name": "Bloemfontein Celtic",
+"points": 1143
+},
+"canterbury-united": {
+"name": "Canterbury United",
+"points": 1144
+},
+"san-marcos": {
+"name": "San Marcos",
+"points": 1145
+},
+"sonderjyske": {
+"name": "SønderjyskE",
+"points": 1146
+},
+"sagan-tosu": {
+"name": "Sagan Tosu",
+"points": 1147
+},
+"spal-2013": {
+"name": "SPAL 2013",
+"points": 1148
+},
+"victoria-united-fc": {
+"name": "Victoria United FC",
+"points": 1149
+},
+"al-fateh-fc": {
+"name": "Al Fateh FC",
+"points": 1150
+},
+"honved": {
+"name": "Honvéd",
+"points": 1151
+},
+"kilmarnock": {
+"name": "Kilmarnock",
+"points": 1152
+},
+"heart-of-lions": {
+"name": "Heart of Lions",
+"points": 1153
+},
+"drogheda-united": {
+"name": "Drogheda United",
+"points": 1154
+},
+"sud-america": {
+"name": "Sud América",
+"points": 1155
+},
+"avs-futebol-sad": {
+"name": "AVS Futebol SAD",
+"points": 1156
+},
+"ma-pau": {
+"name": "Ma Pau",
+"points": 1157
+},
+"club-deportivo-magallanes": {
+"name": "CD Magallanes",
+"points": 1158
+},
+"deportivo-malacateco": {
+"name": "Deportivo Malacateco",
+"points": 1159
+},
+"santos-laguna": {
+"name": "Santos Laguna",
+"points": 1160
+},
+"kecskemeti-te": {
+"name": "Kecskeméti TE",
+"points": 1161
+},
+"heartland-fc": {
+"name": "Heartland FC",
+"points": 1162
+},
+"otmk-olmaliq": {
+"name": "FK AGMK",
+"points": 1163
+},
+"lokomotiv-tashkent": {
+"name": "Lokomotiv Tashkent",
+"points": 1164
+},
+"adelaide-united": {
+"name": "Adelaide United",
+"points": 1165
+},
+"omiya-ardija": {
+"name": "Omiya Ardija",
+"points": 1166
+},
+"pendikspor": {
+"name": "Pendikspor",
+"points": 1167
+},
+"kisvarda-fc": {
+"name": "Kisvárda Master Good",
+"points": 1168
+},
+"ts-galaxy": {
+"name": "TS Galaxy",
+"points": 1169
+},
+"afc-hermannstadt-sibiu": {
+"name": "AFC Herrmannstadt Sibiu",
+"points": 1170
+},
+"ben-guerdane": {
+"name": "Ben Guerdane",
+"points": 1171
+},
+"deportes-concepcion-chile": {
+"name": "Deportes Concepción",
+"points": 1172
+},
+"vinotinto-fc-ecuador": {
+"name": "Vinotinto F.C. Ecuador",
+"points": 1173
+},
+"kosice": {
+"name": "Košice",
+"points": 1174
+},
+"zavrc": {
+"name": "Zavrč",
+"points": 1175
+},
+"guabira": {
+"name": "Guabirá",
+"points": 1176
+},
+"polokwane-city": {
+"name": "Polokwane City",
+"points": 1177
+},
+"deportivo-capiata": {
+"name": "Deportivo Capiatá",
+"points": 1178
+},
+"paradou-ac": {
+"name": "Paradou AC",
+"points": 1179
+},
+"hilal-al-obayed": {
+"name": "Hilal Al-Obayed",
+"points": 1180
+},
+"waterhouse-fc-kingston": {
+"name": "Waterhouse FC",
+"points": 1181
+},
+"ks-warta-poznan": {
+"name": "KS Warta Poznań",
+"points": 1182
+},
+"widzew-lodz": {
+"name": "Widzew Łódz",
+"points": 1183
+},
+"chonburi-fc": {
+"name": "Chonburi FC",
+"points": 1184
+},
+"haverfordwest-county": {
+"name": "Haverfordwest County",
+"points": 1185
+},
+"petrojet": {
+"name": "Petrojet",
+"points": 1186
+},
+"cobreloa": {
+"name": "Cobreloa",
+"points": 1187
+},
+"stal-dneprodzhezhinsk": {
+"name": "Stal Kamianske",
+"points": 1188
+},
+"znojmo": {
+"name": "Znojmo",
+"points": 1189
+},
+"norrkoping": {
+"name": "IFK Norrköping",
+"points": 1190
+},
+"cardiff-met-university": {
+"name": "Cardiff Met University",
+"points": 1191
+},
+"bella-vista": {
+"name": "Bella Vista",
+"points": 1192
+},
+"apejes-fc": {
+"name": "Apejes de Mfou",
+"points": 1193
+},
+"mypa": {
+"name": "MyPa",
+"points": 1194
+},
+"gv-san-jose-oruro": {
+"name": "GV San Jose",
+"points": 1195
+},
+"sport-colombia": {
+"name": "Sport Colombia",
+"points": 1196
+},
+"annaba": {
+"name": "Annaba",
+"points": 1197
+},
+"ventspils": {
+"name": "Ventspils",
+"points": 1198
+},
+"baki": {
+"name": "Bakı",
+"points": 1199
+},
+"hassania-agadir": {
+"name": "Hassania Agadir",
+"points": 1200
+},
+"stade-dabidjan": {
+"name": "Stade d'Abidjan",
+"points": 1201
+},
+"general-caballero": {
+"name": "General Caballero",
+"points": 1202
+},
+"river-plate-montevideo": {
+"name": "River Plate",
+"points": 1203
+},
+"chapecoense-af": {
+"name": "Chapecoense AF",
+"points": 1204
+},
+"chiangrai-united": {
+"name": "Chiangrai United",
+"points": 1205
+},
+"w-connection-fc": {
+"name": "W Connection FC",
+"points": 1206
+},
+"oulu": {
+"name": "AC Oulu",
+"points": 1207
+},
+"fc-voluntari": {
+"name": "FC Voluntari",
+"points": 1208
+},
+"stella-club": {
+"name": "Stella Club",
+"points": 1209
+},
+"athletic-club-port-of-spain": {
+"name": "Atheltic Club Port of Spain",
+"points": 1210
+},
+"ventforet-kofu": {
+"name": "Ventforet Kofu",
+"points": 1211
+},
+"siroki-brijeg": {
+"name": "Široki Brijeg",
+"points": 1212
+},
+"kfum-kameratene-oslo": {
+"name": "KFUM-Kameratene Oslo",
+"points": 1213
+},
+"brasov": {
+"name": "Braşov",
+"points": 1214
+},
+"barau-fc": {
+"name": "Barau FC",
+"points": 1215
+},
+"fk-panevezys": {
+"name": "FK Panevėžys",
+"points": 1216
+},
+"olhanense": {
+"name": "Olhanense",
+"points": 1217
+},
+"inverness-ct": {
+"name": "Inverness CT",
+"points": 1218
+},
+"dreams-fc": {
+"name": "Dreams FC",
+"points": 1219
+},
+"lechia-gdansk": {
+"name": "Lechia Gdańsk",
+"points": 1220
+},
+"arsenal-kyiv": {
+"name": "FC Arsenal Kiev",
+"points": 1221
+},
+"olimpia-balti-zaria": {
+"name": "Zaria Bălți",
+"points": 1222
+},
+"sunshine-stars": {
+"name": "Sunshine Stars",
+"points": 1223
+},
+"club-river-plate-asuncion": {
+"name": "Club River Plate",
+"points": 1224
+},
+"stade-gabesien": {
+"name": "Stade Gabésien",
+"points": 1225
+},
+"vorskla": {
+"name": "Vorskla Poltava",
+"points": 1226
+},
+"barry-town": {
+"name": "Barry Town United FC",
+"points": 1227
+},
+"sevastopol": {
+"name": "Sevastopol",
+"points": 1228
+},
+"leopards-de-dolisie": {
+"name": "Léopards de Dolisié",
+"points": 1229
+},
+"radnicki-nis": {
+"name": "Radnički Niš",
+"points": 1230
+},
+"raal-la-louviere": {
+"name": "RAAL La Louvière",
+"points": 1231
+},
+"slovacko": {
+"name": "Slovácko",
+"points": 1232
+},
+"rhyl": {
+"name": "Rhyl",
+"points": 1233
+},
+"highlands-park": {
+"name": "Highlands Park",
+"points": 1234
+},
+"royal-excel-mouscron-peruwelz": {
+"name": "Royal Excel Mouscron Péruwelz",
+"points": 1235
+},
+"club-petrolero": {
+"name": "Club Petrolero",
+"points": 1236
+},
+"union-espanola": {
+"name": "Unión Española",
+"points": 1237
+},
+"krasava-eny-ypsonas-fc": {
+"name": "Krasava ENY Ypsonas FC",
+"points": 1238
+},
+"patriotas-boyaca": {
+"name": "Patriotas Boyacá",
+"points": 1239
+},
+"union-touarga-sport": {
+"name": "Union de Touarga",
+"points": 1240
+},
+"simba-bhora-fc": {
+"name": "Simba Bhora FC",
+"points": 1241
+},
+"botafogo-fc-de-douala": {
+"name": "Botafogo FC",
+"points": 1242
+},
+"caps-united": {
+"name": "CAPS United",
+"points": 1243
+},
+"veres-rivne": {
+"name": "Veres Rivne",
+"points": 1244
+},
+"uniautonoma": {
+"name": "Uniautónoma FC",
+"points": 1245
+},
+"sligo-rovers": {
+"name": "Sligo Rovers",
+"points": 1246
+},
+"ironi-tiberias-fc": {
+"name": "Ironi Tiberias F.C.",
+"points": 1247
+},
+"blooming": {
+"name": "Blooming",
+"points": 1248
+},
+"hatayspor-kulubu": {
+"name": "Hatayspor Kulübü",
+"points": 1249
+},
+"sfintul-gheorghe": {
+"name": "Sfîntul Gheorghe",
+"points": 1250
+},
+"tianjin-quanjian": {
+"name": "Tianjin Tianhai",
+"points": 1251
+},
+"panionios": {
+"name": "Panionios",
+"points": 1252
+},
+"ittihad-el-shorta": {
+"name": "Ittihad El-Shorta",
+"points": 1253
+},
+"pae-ionikos-nikaias": {
+"name": "Ionikos",
+"points": 1254
+},
+"atlante": {
+"name": "Atlante",
+"points": 1255
+},
+"roeselare": {
+"name": "Roeselare",
+"points": 1256
+},
+"orduspor": {
+"name": "Orduspor",
+"points": 1257
+},
+"balikesirspor": {
+"name": "Balıkesirspor",
+"points": 1258
+},
+"kheybar-khorramabad": {
+"name": "Kheybar Khorramabad",
+"points": 1259
+},
+"bukola-babes": {
+"name": "Bukola Babes",
+"points": 1260
+},
+"al-wakra": {
+"name": "Al-Wakra",
+"points": 1261
+},
+"maniema-union": {
+"name": "Maniema Union",
+"points": 1262
+},
+"pars-jonoubi-jam-bushehr": {
+"name": "Pars Jonoubi Jam",
+"points": 1263
+},
+"ruzomberok": {
+"name": "Ružomberok",
+"points": 1264
+},
+"3-de-febrero": {
+"name": "3 de Febrero",
+"points": 1265
+},
+"cerro": {
+"name": "C.A. Cerro",
+"points": 1266
+},
+"fk-gorodeya": {
+"name": "FK Gorodeya",
+"points": 1267
+},
+"fc-kudrivka": {
+"name": "FC Kudrivka",
+"points": 1268
+},
+"wikki-tourist": {
+"name": "Wikki Tourist",
+"points": 1269
+},
+"sporting-san-jose": {
+"name": "Sporting San José FC",
+"points": 1270
+},
+"usm-el-harrach": {
+"name": "USM El Harrach",
+"points": 1271
+},
+"wisla-plock-sa": {
+"name": "Wisła Płock",
+"points": 1272
+},
+"shimizu-s-pulse": {
+"name": "Shimizu S-Pulse",
+"points": 1273
+},
+"fovu-club": {
+"name": "Fovu de Baham",
+"points": 1274
+},
+"ironi-kiryat-schmona": {
+"name": "Ironi Kiryat Schmona",
+"points": 1275
+},
+"hapoel-jerusalem": {
+"name": "Hapoel Jerusalem",
+"points": 1276
+},
+"auckland-fc": {
+"name": "Auckland FC",
+"points": 1277
+},
+"deportivo-los-caimanes": {
+"name": "Deportivo Los Caimanes",
+"points": 1278
+},
+"rc-arbaa": {
+"name": "RC Arbaâ",
+"points": 1279
+},
+"hajduk-kula": {
+"name": "Hajduk Kula",
+"points": 1280
+},
+"hwange": {
+"name": "Hwange",
+"points": 1281
+},
+"pecsi-mfc": {
+"name": "Pécsi MFC",
+"points": 1282
+},
+"sport-loreto": {
+"name": "Sport Loreto",
+"points": 1283
+},
+"neom-sc": {
+"name": "Neom SC",
+"points": 1284
+},
+"ad-guanacasteca": {
+"name": "AD Guanacasteca",
+"points": 1285
+},
+"simurq": {
+"name": "Simurq",
+"points": 1286
+},
+"juan-aurich": {
+"name": "Juan Aurich",
+"points": 1287
+},
+"defensor-la-bocana": {
+"name": "Defensor La Bocana",
+"points": 1288
+},
+"deportes-iquique": {
+"name": "Deportes Iquique",
+"points": 1289
+},
+"recreativo-do-libolo": {
+"name": "Recreativo do Libolo",
+"points": 1290
+},
+"dewa-united-fc": {
+"name": "Dewa United F.C.",
+"points": 1291
+},
+"fc-volendam": {
+"name": "FC Volendam",
+"points": 1292
+},
+"academica-coimbra": {
+"name": "Académica",
+"points": 1293
+},
+"colorado-rapids": {
+"name": "Colorado Rapids",
+"points": 1294
+},
+"ad-union-magdalena": {
+"name": "AD Unión Magdalena",
+"points": 1295
+},
+"curico-unido": {
+"name": "Curicó Unido",
+"points": 1296
+},
+"spartak-nalchik": {
+"name": "Spartak Nal'chik",
+"points": 1297
+},
+"fc-yelimay-semey": {
+"name": "FC Yelimay",
+"points": 1298
+},
+"olympiakos-nicosia": {
+"name": "Olympiakos Nicosia",
+"points": 1299
+},
+"beroe": {
+"name": "Beroe",
+"points": 1300
+},
+"radomlje": {
+"name": "Radomlje",
+"points": 1301
+},
+"fk-rotor-volgograd": {
+"name": "FK Rotor Volgograd",
+"points": 1302
+},
+"zlin": {
+"name": "FC Zlin",
+"points": 1303
+},
+"dundee-united": {
+"name": "Dundee United",
+"points": 1304
+},
+"falkirk": {
+"name": "Falkirk",
+"points": 1305
+},
+"fc-goa": {
+"name": "FC Goa",
+"points": 1306
+},
+"bibiani-gold-stars": {
+"name": "Bibiani Gold Stars F.C.",
+"points": 1307
+},
+"desportivo-huila": {
+"name": "Desportivo Da Huíla",
+"points": 1308
+},
+"if-gnistan": {
+"name": "IF Gnistan",
+"points": 1309
+},
+"panaitolikos": {
+"name": "Panetolikos",
+"points": 1310
+},
+"imbabura": {
+"name": "Imbabura S.C.",
+"points": 1311
+},
+"petrolul-ploiesti": {
+"name": "Petrolul Ploieşti",
+"points": 1312
+},
+"kazseri-erciyesspor": {
+"name": "Kayseri Erciyesspor",
+"points": 1313
+},
+"club-deportivo-moquegua": {
+"name": "Club Deportivo Moquegua",
+"points": 1314
+},
+"almere-city-fc": {
+"name": "Almere City FC",
+"points": 1315
+},
+"vitebsk": {
+"name": "FK Vitebsk",
+"points": 1316
+},
+"metalist-kharkiv": {
+"name": "Metalist Kharkiv",
+"points": 1317
+},
+"bakaridjan-de-baroueli": {
+"name": "Bakaridjan de Barouéli",
+"points": 1318
+},
+"saipa": {
+"name": "Saipa FC",
+"points": 1319
+},
+"cumbaya-fc": {
+"name": "Cumbayá FC",
+"points": 1320
+},
+"fk-yenisey-krasnoyarsk": {
+"name": "Yenisey Krasnoyarsk",
+"points": 1321
+},
+"as-tanda": {
+"name": "AS Tanda",
+"points": 1322
+},
+"platinum-stars": {
+"name": "Platinum Stars",
+"points": 1323
+},
+"deportivo-carapegua": {
+"name": "Deportivo Carapeguá",
+"points": 1324
+},
+"envigado": {
+"name": "Envigado",
+"points": 1325
+},
+"vozdovac": {
+"name": "Voždovac",
+"points": 1326
+},
+"st-louis-city": {
+"name": "St. Louis City",
+"points": 1327
+},
+"prachuap-fc": {
+"name": "Prachuap FC",
+"points": 1328
+},
+"leixoes": {
+"name": "Leixões",
+"points": 1329
+},
+"real-tomayapo": {
+"name": "Real Tomayapo",
+"points": 1330
+},
+"universite-ngaoundere": {
+"name": "Université Ngaoundéré",
+"points": 1331
+},
+"universidad-de-san-carlos": {
+"name": "Universidad de San Carlos",
+"points": 1332
+},
+"manisaspor": {
+"name": "Manisaspor",
+"points": 1333
+},
+"deportivo-sanarate": {
+"name": "Deportivo Sanarate",
+"points": 1334
+},
+"mb-rouissat": {
+"name": "MB Rouissat",
+"points": 1335
+},
+"kortrijk": {
+"name": "Kortrijk",
+"points": 1336
+},
+"damash": {
+"name": "Damash",
+"points": 1337
+},
+"psm-makassar": {
+"name": "PSM Makassar",
+"points": 1338
+},
+"bhayangkara-surabaya-united": {
+"name": "Bhayangkara FC",
+"points": 1339
+},
+"la-serena": {
+"name": "Deportes La Serena",
+"points": 1340
+},
+"montego-bay-united-fc": {
+"name": "Montego Bay United",
+"points": 1341
+},
+"fk-csikszereda": {
+"name": "FK Csíkszereda",
+"points": 1342
+},
+"altay-sk-izmir": {
+"name": "Altay S.K.",
+"points": 1343
+},
+"cucuta-deportivo": {
+"name": "Cúcuta Deportivo",
+"points": 1344
+},
+"bechem-united": {
+"name": "Bechem United",
+"points": 1345
+},
+"bayamon-fc": {
+"name": "Bayamón FC",
+"points": 1346
+},
+"decic": {
+"name": "Dečić",
+"points": 1347
+},
+"fk-tosno": {
+"name": "FK Tosno",
+"points": 1348
+},
+"grodig": {
+"name": "Grödig",
+"points": 1349
+},
+"binacional-peru": {
+"name": "Deportivo Binacional",
+"points": 1350
+},
+"mura-05": {
+"name": "Mura 05",
+"points": 1351
+},
+"balmazujvaros": {
+"name": "Balmazújváros",
+"points": 1352
+},
+"boavista": {
+"name": "Boavista",
+"points": 1353
+},
+"drb-tadjenanet": {
+"name": "DRB Tadjenanet",
+"points": 1354
+},
+"don-bosco-lubumbashi": {
+"name": "Don Bosco SC",
+"points": 1355
+},
+"tacuarembo": {
+"name": "Tacuarembó",
+"points": 1356
+},
+"arabe-unido": {
+"name": "Árabe Unido",
+"points": 1357
+},
+"comerciantes-unidos": {
+"name": "Comerciantes Unidos",
+"points": 1358
+},
+"horoya": {
+"name": "Horoya AC",
+"points": 1359
+},
+"turan-tovuz": {
+"name": "Turan Tovuz",
+"points": 1360
+},
+"ajaccio": {
+"name": "AC Ajaccio (FRA)",
+"points": 1361
+},
+"asgnn": {
+"name": "ASGNN",
+"points": 1362
+},
+"grazer-ak": {
+"name": "Grazer AK",
+"points": 1363
+},
+"sportivo-luqueno": {
+"name": "Sportivo Luqueño",
+"points": 1364
+},
+"sfk-sered": {
+"name": "ŠKF Sereď",
+"points": 1365
+},
+"isidro-metapan": {
+"name": "Isidro Metapán",
+"points": 1366
+},
+"mumbai-city-fc": {
+"name": "Mumbai City FC",
+"points": 1367
+},
+"grasshopper-club-zuerich": {
+"name": "Grasshopper Club Zürich",
+"points": 1368
+},
+"ae-kifisia-fc": {
+"name": "A.E. Kifisia F.C.",
+"points": 1369
+},
+"nyiregyhaza-spartacus": {
+"name": "Nyíregyháza Spartacus",
+"points": 1370
+},
+"fc-krumovgrad": {
+"name": "FC Krumovgrad",
+"points": 1371
+},
+"monaghan-united": {
+"name": "Monaghan United",
+"points": 1372
+},
+"athens-kallithea-fc": {
+"name": "Athens Kallithea F.C.",
+"points": 1373
+},
+"unirea-urziceni": {
+"name": "Unirea Urziceni",
+"points": 1374
+},
+"wws-rangers": {
+"name": "WWS Rangers",
+"points": 1375
+},
+"nautico": {
+"name": "Náutico",
+"points": 1376
+},
+"moroka-swallows": {
+"name": "Moroka Swallows",
+"points": 1377
+},
+"ock-khouribga": {
+"name": "OCK Khouribga",
+"points": 1378
+},
+"ethnikos-achnas": {
+"name": "Ethnikos Achnas",
+"points": 1379
+},
+"deportivo-quito": {
+"name": "Deportivo Quito",
+"points": 1380
+},
+"zanaco": {
+"name": "Zanaco",
+"points": 1381
+},
+"al-mokawloon-al-arab": {
+"name": "Al Mokawloon Al Arab",
+"points": 1382
+},
+"dalian-yingbo-fc": {
+"name": "Dalian Yingbo F.C.",
+"points": 1383
+},
+"nac-breda": {
+"name": "NAC Breda",
+"points": 1384
+},
+"manica-diamonds": {
+"name": "Manica Diamonds",
+"points": 1385
+},
+"fenix": {
+"name": "Fénix",
+"points": 1386
+},
+"omonia-aradippou": {
+"name": "Omonia Aradippou",
+"points": 1387
+},
+"sporting-gagnoa": {
+"name": "Sporting Gagnoa",
+"points": 1388
+},
+"cd-jaguares-de-cordoba": {
+"name": "CD Jaguares",
+"points": 1389
+},
+"royal-pari": {
+"name": "Royal Pari",
+"points": 1390
+},
+"cd-america-de-quito": {
+"name": "CD America de Quito",
+"points": 1391
+},
+"sporting-lagos": {
+"name": "Sporting Lagos",
+"points": 1392
+},
+"mes-rafsanjan": {
+"name": "Mes Rafsanjan",
+"points": 1393
+},
+"newtown": {
+"name": "Newtown",
+"points": 1394
+},
+"padideh-fc": {
+"name": "Padideh F.C.",
+"points": 1395
+},
+"arema": {
+"name": "Arema",
+"points": 1396
+},
+"el-geish": {
+"name": "El Geish",
+"points": 1397
+},
+"aigle-royal-du-moungo": {
+"name": "Aigle Royal du Moungo",
+"points": 1398
+},
+"gabros-international": {
+"name": "Ifeanyi Ubah United",
+"points": 1399
+},
+"u-craiova-1948": {
+"name": "FC U Craiova 1948",
+"points": 1400
+},
+"estudiantes-tecos": {
+"name": "Estudiantes Tecos",
+"points": 1401
+},
+"sport-boys": {
+"name": "Sport Boys",
+"points": 1402
+},
+"bucheon-fc-1995": {
+"name": "Bucheon FC 1995",
+"points": 1403
+},
+"tampere-united": {
+"name": "Tampere United",
+"points": 1404
+},
+"trencin": {
+"name": "Trenčín",
+"points": 1405
+},
+"puebla": {
+"name": "Club Puebla",
+"points": 1406
+},
+"sibir-novosibirsk": {
+"name": "Sibir Novosibirsk",
+"points": 1407
+},
+"usfas-bamako": {
+"name": "USFAS Bamako",
+"points": 1408
+},
+"berekum-chelsea": {
+"name": "Berekum Chelsea FC",
+"points": 1409
+},
+"plaza-colonia": {
+"name": "Plaza Colonia",
+"points": 1410
+},
+"kristiansund-bk": {
+"name": "Kristiansund BK",
+"points": 1411
+},
+"seongnam-ilhwa": {
+"name": "Seongnam FC",
+"points": 1412
+},
+"zemplin-michalovce": {
+"name": "Zemplin Michalovce",
+"points": 1413
+},
+"carlos-a-mannucci": {
+"name": "Carlos A. Mannucci",
+"points": 1414
+},
+"shams-azar-fc": {
+"name": "Shams Azar F.C.",
+"points": 1415
+},
+"gualaceo": {
+"name": "Gualaceo SC",
+"points": 1416
+},
+"shonan-bellmare": {
+"name": "Shonan Bellmare",
+"points": 1417
+},
+"mons": {
+"name": "Mons",
+"points": 1418
+},
+"les-astres": {
+"name": "Astres FC de Douala",
+"points": 1419
+},
+"telephonaat-beni-suef": {
+"name": "Telephonaat Beni Suef",
+"points": 1420
+},
+"brujas": {
+"name": "Brujas",
+"points": 1421
+},
+"montevideo-wanderers": {
+"name": "Montevideo Wanderers",
+"points": 1422
+},
+"municipal-limeno": {
+"name": "Municipal Limeño",
+"points": 1423
+},
+"villa-teresa": {
+"name": "Villa Teresa",
+"points": 1424
+},
+"boyaca-chico-fc": {
+"name": "Boyacá Chicó FC",
+"points": 1425
+},
+"fk-radnik-surdulica": {
+"name": "FK Radnik Surdulica",
+"points": 1426
+},
+"as-ain-mlila": {
+"name": "AS Aïn M'lila",
+"points": 1427
+},
+"wisla-krakow": {
+"name": "Wisła Kraków",
+"points": 1428
+},
+"mattersburg": {
+"name": "Mattersburg",
+"points": 1429
+},
+"busan-ipark": {
+"name": "Busan I'Park",
+"points": 1430
+},
+"ldu-portoviejo": {
+"name": "LDU Portoviejo",
+"points": 1431
+},
+"samartex": {
+"name": "Samartex",
+"points": 1432
+},
+"turku-ps": {
+"name": "Turku PS",
+"points": 1433
+},
+"codm-meknes": {
+"name": "CODM Meknès",
+"points": 1434
+},
+"kabwe-warriors": {
+"name": "Kabwe Warriors",
+"points": 1435
+},
+"v-varen-nagasaki": {
+"name": "V-Varen Nagasaki",
+"points": 1436
+},
+"jubilo-iwata": {
+"name": "Júbilo Iwata",
+"points": 1437
+},
+"amicale": {
+"name": "Amicale FC",
+"points": 1438
+},
+"santos-cape-town": {
+"name": "Santos",
+"points": 1439
+},
+"austin-fc": {
+"name": "Austin FC",
+"points": 1440
+},
+"tsarsko-selo": {
+"name": "FC Tsarsko Selo Sofia 2015",
+"points": 1441
+},
+"willem-ii": {
+"name": "Willem II",
+"points": 1442
+},
+"Waterford FC": {
+"name": "Waterford FC",
+"points": 1443
+},
+"mes-kerman": {
+"name": "Mes Kerman",
+"points": 1444
+},
+"cni": {
+"name": "CNI",
+"points": 1445
+},
+"umraniyespor": {
+"name": "Ümraniyespor",
+"points": 1446
+},
+"fc-arsenal-dzerzhinsk": {
+"name": "FC Arsenal Dzerzhinsk",
+"points": 1447
+},
+"illichivets": {
+"name": "FK Mariupol Illichivets'",
+"points": 1448
+},
+"altach-sc-rheindorf": {
+"name": "SCR Altach",
+"points": 1449
+},
+"racing-club-abidjan": {
+"name": "Racing Club d'Abidjan",
+"points": 1450
+},
+"yverdon-sport-fc": {
+"name": "Yverdon-Sport FC",
+"points": 1451
+},
+"total-chalaco": {
+"name": "Total Chalaco",
+"points": 1452
+},
+"aigle-royal-de-la-menoua": {
+"name": "Aigle Royal de La Menoua",
+"points": 1453
+},
+"durban-city-fc": {
+"name": "Durban City F.C.",
+"points": 1454
+},
+"sporting-clube-de-goa": {
+"name": "Sporting Clube de Goa",
+"points": 1455
+},
+"oita-trinita": {
+"name": "Oita Trinita",
+"points": 1456
+},
+"malut-united-fc": {
+"name": "Malut United FC",
+"points": 1457
+},
+"neuchatel-xamax": {
+"name": "Neuchâtel Xamax",
+"points": 1458
+},
+"adr-jicaral-sercoba": {
+"name": "Asoc. Dep. y Rec. Jicaral Sercoba",
+"points": 1459
+},
+"san-carlos": {
+"name": "Deportiva San Carlos",
+"points": 1460
+},
+"alianza-fc-panama-city": {
+"name": "Alianza",
+"points": 1461
+},
+"esteghlal-khuzestan": {
+"name": "Esteghlal Khuzestan",
+"points": 1462
+},
+"puntarenas-fc": {
+"name": "Puntarenas FC",
+"points": 1463
+},
+"brommapojkarna": {
+"name": "Brommapojkarna",
+"points": 1464
+},
+"shahrdari-tabriz": {
+"name": "Shahrdari Tabriz",
+"points": 1465
+},
+"genesis-comayagua": {
+"name": "CD Génesis de Comayagua",
+"points": 1466
+},
+"aberdeen": {
+"name": "Aberdeen",
+"points": 1467
+},
+"khroub": {
+"name": "Khroub",
+"points": 1468
+},
+"fajr-sepasi": {
+"name": "Fajr Sepasi",
+"points": 1469
+},
+"united-sports-club-prayang": {
+"name": "United Sports Club",
+"points": 1470
+},
+"shabanie-mine": {
+"name": "Shabanie Mine",
+"points": 1471
+},
+"gokulam-fc": {
+"name": "Gokulam Kerala Fc",
+"points": 1472
+},
+"fc-olimpik-donetsk": {
+"name": "Olimpik Donetsk",
+"points": 1473
+},
+"aurora-fc": {
+"name": "Aurora F.C.",
+"points": 1474
+},
+"vista-hermosa": {
+"name": "Vista Hermosa",
+"points": 1475
+},
+"san-francisco-fc": {
+"name": "San Francisco FC",
+"points": 1476
+},
+"al-ittihad-al-sakandary": {
+"name": "Al-Ittihad Alexandria",
+"points": 1477
+},
+"san-luis-de-quillota": {
+"name": "San Luis",
+"points": 1478
+},
+"qatar-sc": {
+"name": "Qatar SC",
+"points": 1479
+},
+"rapide-club-oued-zem": {
+"name": "Rapide Club Oued Zem",
+"points": 1480
+},
+"richards-bay": {
+"name": "Richards Bay",
+"points": 1481
+},
+"kada-city": {
+"name": "Delta Force FC",
+"points": 1482
+},
+"oriente-petrolero": {
+"name": "Oriente Petrolero",
+"points": 1483
+},
+"szombathelyi-haladas": {
+"name": "Szombathelyi Haladás",
+"points": 1484
+},
+"lautoka": {
+"name": "Lautoka",
+"points": 1485
+},
+"ergotelis": {
+"name": "Ergotelis",
+"points": 1486
+},
+"persidafon": {
+"name": "Persidafon",
+"points": 1487
+},
+"us-biskra": {
+"name": "US Biskra",
+"points": 1488
+},
+"lucko": {
+"name": "Lučko",
+"points": 1489
+},
+"western-sydney": {
+"name": "Western Sydney",
+"points": 1490
+},
+"new-edubiase-fc": {
+"name": "New Edubiase FC",
+"points": 1491
+},
+"mc-el-bayadh": {
+"name": "MC El Bayadh",
+"points": 1492
+},
+"minyor-pernik": {
+"name": "Minyor Pernik",
+"points": 1493
+},
+"scottland-football-club": {
+"name": "Scottland Football Club",
+"points": 1494
+},
+"puerto-rico-islanders": {
+"name": "Puerto Rico Islanders",
+"points": 1495
+},
+"sofapaka": {
+"name": "Sofapaka",
+"points": 1496
+},
+"zawisza-bydgoszcz": {
+"name": "Zawisza Bydgoszcz",
+"points": 1497
+},
+"fc-daugava": {
+"name": "FC Daugava",
+"points": 1498
+},
+"gefle": {
+"name": "Gefle",
+"points": 1499
+},
+"iztapa": {
+"name": "Iztapa",
+"points": 1500
+}
+}
