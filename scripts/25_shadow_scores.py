@@ -35,7 +35,7 @@ fat_only = {t: bf * float(z) for t, z in fz.items()}
 kz = pd.read_csv("outputs/cohesion.csv", index_col=0)["cohesion_z"]
 bk = json.load(open("outputs/cohesion_beta.json"))["beta_cohesion"]
 coh_only = {t: bk * float(z) for t, z in kz.items()}
-combined = load_team_tilt()  # capital + fatigue + cohesion
+combined = load_team_tilt()  # fatigue only (capital removed from official model)
 def _merge(*ds):
     out = {}
     for d in ds:
@@ -53,8 +53,8 @@ VARIANTS = {
     "Elo only": (None, None),
     "Full model": (combined, alt),
     "no altitude": (combined, None),
-    "no capital": (fat_only, alt),
-    "no fatigue": (cap_only, alt),
+    "no fatigue": (None, alt),
+    "+ capital (shadow)": (_merge(combined, cap_only), alt),
     "+ cohesion (shadow)": (_merge(combined, coh_only), alt),
     "+ diaspora (shadow)": (combined, alt_dia),
 }

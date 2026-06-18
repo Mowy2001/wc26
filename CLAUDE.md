@@ -113,6 +113,12 @@ docstring with the mathematical model, every design choice goes in docs/METHODOL
 9. **Report**: three-way comparison (model vs BetMGM 11/06 odds vs Klement) + live
    calibration. Played matches enter via `fixed_results` in simulate_group_stage.
 
+- [x] Capital REMOVED from the model (2026-06-18, Simone): its signal was clubelo's
+      Europe bias (floor = signal); fair global source (footballdatabase, 54->89% cover)
+      fails the gate; 'no capital' is better AND unbiased. Deployed tilts = fatigue +
+      altitude only. fdb pipeline kept for the model lab (capital now a shadow).
+      Routine -> twice daily. Golden Boot subtitle de-staled.
+
 ## Conventions
 - Point-in-time ALWAYS: never use ratings/data later than the prediction date.
 - Hyperparameters (xi, ...) chosen on predictive backtest log-loss, never in-sample.

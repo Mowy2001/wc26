@@ -104,8 +104,7 @@
       <p>The official squad lists (Wikipedia) joined to club Elo ratings (clubelo.com)
       and club-season minutes (FBref, via the Wayback Machine — the site itself blocks
       robots). Where does each player earn his living, and how many minutes are in his
-      legs? Feeds three admitted pieces: the capital tilt, the fatigue tilt and the
-      Golden Boot squad filter. Known bias, declared: coverage is Europe/Big-5 only.</p>
+      legs? Feeds the fatigue tilt and the Golden Boot squad filter. Known bias, declared: coverage is Europe/Big-5 only.</p>
     </div>
     <div class="card off">
       <h3>🚫 Deliberately excluded</h3>
@@ -129,12 +128,6 @@
       <span class="node">decayed scorer shares</span><span class="arr">→</span>
       <span class="node">goal allocation per simulation</span><span class="arr">→</span>
       <span class="node out">Golden Boot odds</span>
-    </div>
-    <div class="flow">
-      <span class="node file">squads (wiki)</span><span class="arr">+</span>
-      <span class="node file">clubelo.com</span><span class="arr">→</span>
-      <span class="node">capital z-score</span><span class="arr">→</span>
-      <span class="node">tilt on goal rates (β=0.033)</span>
     </div>
     <div class="flow">
       <span class="node file">squads (wiki)</span><span class="arr">+</span>
@@ -186,21 +179,6 @@
       <p class="mini-note">By Elo the USA is the <em>weakest</em> team in group D — home
       advantage alone lifts it from last to second. The market prices squad value and host
       momentum; those signals only enter here if a future data block earns its backtest.</p>
-    </div>
-    <div class="card">
-      <h3>Club careers — admitted on probation</h3>
-      <p class="mini-intro">Squad-mean club Elo, tested leave-one-tournament-out on six
-      past tournaments. It passed the admission rule — barely:</p>
-      <div id="capital-card"></div>
-      <p class="mini-note" id="capital-note"></p>
-    </div>
-    <div class="card">
-      <h3>Thin air — the strongest signal we found</h3>
-      <p class="mini-intro">World Cups dodge altitude, so we tried it where it bites:
-      South American qualifying, where La Paz sits at 3,782 m. A team is at home in the
-      air it trains in:</p>
-      <div id="altitude-card"></div>
-      <p class="mini-note" id="altitude-note"></p>
     </div>
     <div class="card">
       <h3>Tired legs — admitted, thin file</h3>
@@ -282,7 +260,7 @@
 </section>
 
 <section id="boot">
-  <h2>The Golden Boot <span class="sub">team goals from the simulations, split among scorers — point-in-time shares, no minutes data (yet)</span></h2>
+  <h2>The Golden Boot <span class="sub">each team's simulated goals shared among its squad by recent scoring form (age-discounted), plus a 17% "new faces" bucket — and teams that go deeper get more chances</span></h2>
   <div id="boot-chart" class="chart"></div>
   <p class="note" id="boot-note"></p>
 </section>

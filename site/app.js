@@ -169,38 +169,6 @@ if (WC26.xi_tuning) {
     `</div><p class="mini-note" style="margin-top:8px">🇺🇸 USA win group D — three views of the same question.</p>`;
 }
 
-/* ---------- capital card ---------- */
-if (WC26.capital && WC26.ablations && WC26.ablations.no_capital) {
-  const meta = WC26.capital.meta;
-  const noC = WC26.ablations.no_capital.P_champion;
-  const movers = WC26.teams
-    .map((t) => ({ team: t.team, w: t.P_champion, wo: noC[t.team] || 0 }))
-    .filter((m) => m.w > 0.004 || m.wo > 0.004)
-    .map((m) => ({ ...m, d: m.w - m.wo }))
-    .sort((a, b) => Math.abs(b.d) - Math.abs(a.d)).slice(0, 5)
-    .sort((a, b) => b.d - a.d);
-  document.getElementById("capital-card").innerHTML =
-    `<details class="tech"><summary>the numbers, for the curious</summary><div class="boot-sd">
-      <span>OOS log-loss <b>${meta.oos_delta}</b></span>
-      <span>paired t <b>${meta.t_paired}</b></span>
-      <span>β <b>${meta.beta_capital}</b>/z</span>
-      <span>coverage <b>${pct(WC26.capital.coverage, 0)}</b></span>
-    </div></details>` +
-    movers.map((m) => `<div class="usa-row">
-      <span class="src">${flag(m.team)}${m.team} title odds</span>
-      <div class="usa-track"><i style="width:${100 * Math.min(1, Math.abs(m.d) / 0.025)}%;
-        background:${m.d > 0 ? "linear-gradient(90deg, var(--accent2), var(--accent))" : "#8f5161"}"></i></div>
-      <span class="num">${m.d > 0 ? "+" : ""}${(100 * m.d).toFixed(1)}pp</span></div>`).join("");
-  document.getElementById("capital-note").innerHTML =
-    `Where your players earn their living carries signal beyond Elo — but the gain
-     (${meta.oos_delta} log-loss over ${meta.n} matches, t=${meta.t_paired}) is within noise, so the
-     block is in <strong>on probation</strong>: re-judged after this World Cup. Declared bias: clubelo
-     sees only Europe, so Brazil, Mexico and the USA pay an imputation tax — the moves above
-     run <em>toward</em> the market for European squads and <em>away</em> for the Americas.
-     v2 now weights each club rating by minutes played (a benchwarmer counts less) — it
-     won the backtest, but by a hair: the weighted and unweighted features agree 99.7% of
-     the time, because national squads are made of regular starters.`;
-}
 
 /* ---------- altitude card ---------- */
 if (WC26.altitude && WC26.ablations && WC26.ablations.no_altitude) {

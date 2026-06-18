@@ -6,7 +6,6 @@ Four counterfactual tournament runs (same 20k sims, same seed as the headline):
   - xi_short_memory      : xi = 0.005  (half-life ~4.6 months), point estimate
   - xi_long_memory       : xi = 0.0005 (half-life ~3.8 years), point estimate
   - no_param_uncertainty : point estimate instead of bootstrap draws
-  - no_capital           : without the football-capital tilt (fatigue kept)
   - no_fatigue           : without the fatigue tilt (capital kept)
   - no_altitude          : without the altitude tilt (Mexico City / Zapopan)
 
@@ -63,8 +62,7 @@ scenarios = {
     "xi_short_memory": dict(model=DixonColes(xi=0.005).fit(train, FIT), host_advantage=True, param_draws=None, team_log_tilt=tilt, city_log_tilt=city_tilt),
     "xi_long_memory": dict(model=DixonColes(xi=0.0005).fit(train, FIT), host_advantage=True, param_draws=None, team_log_tilt=tilt, city_log_tilt=city_tilt),
     "no_param_uncertainty": dict(model=base_model, host_advantage=True, param_draws=None, team_log_tilt=tilt, city_log_tilt=city_tilt),
-    "no_capital": dict(model=base_model, host_advantage=True, param_draws=draws, team_log_tilt=fat_only, city_log_tilt=city_tilt),
-    "no_fatigue": dict(model=base_model, host_advantage=True, param_draws=draws, team_log_tilt=cap_only, city_log_tilt=city_tilt),
+    "no_fatigue": dict(model=base_model, host_advantage=True, param_draws=draws, team_log_tilt=None, city_log_tilt=city_tilt),
     "no_altitude": dict(model=base_model, host_advantage=True, param_draws=draws, team_log_tilt=tilt, city_log_tilt=None),
 }
 

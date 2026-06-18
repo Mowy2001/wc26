@@ -159,21 +159,22 @@ from the national team's home cities, not players' club cities (a possible v2); 
 training is unmodellable and ignored. Altitude tilts are centralised via
 src/wc26/tilts.py:load_city_tilt.
 
-## Capital source switched to worldelo / footballdatabase (2026-06-18, declared override)
-The capital block was originally built on clubelo (Europe-only), which — we later found —
-made it predictive ONLY through a geographic bias: the floor penalising non-European-league
-players carried the signal (scripts/33 head-to-head: clubelo+floor -0.0015 OOS; global
-footballdatabase +0.0016; hybrid +0.0017). On Simone's call we switched the deployed source
-to the global footballdatabase Elo (a proper cross-confederation Elo via the Club World Cup;
-point-in-time per-club monthly history, scripts/28-32; coverage 54%->89%). This is a DECLARED
-OVERRIDE of the admission rule: footballdatabase capital fails the OOS gate (REJECTED, b=0.0115
-in-sample), but it is the unbiased measure we would have built from the start — and starting
-there we would simply have rejected the block, never silently shipped a worse model (the gate
-compares to no-capital). We keep it in, with a small weight, as a forward-looking choice: club
-strength should matter, and the clubelo edge was an artefact of an era when non-European leagues
-were weaker. Effect: European powers down (Spain -2.7pp, France -1.5pp), the Americas up (Mexico
-+1.2pp, Brazil/Colombia/Ecuador up). Honest caveat on record: 'no capital' actually predicts
-slightly better than worldelo-capital and is equally unbiased.
+## Football capital REMOVED from the model (2026-06-18)
+Full arc: capital was admitted on clubelo (Europe-only). Investigation (scripts/28-34)
+showed its predictive value came ENTIRELY from clubelo's geographic bias — the floor
+penalising non-European-league players WAS the signal. Head-to-head gate: clubelo+floor
+-0.0015 OOS, global footballdatabase +0.0016, hybrid +0.0017. So a fair, unbiased club
+rating (footballdatabase, cross-confederation Elo, coverage 54%->89%) makes capital fail
+the admission gate — and 'no capital' both predicts better than the fair version AND is
+unbiased. We briefly deployed worldelo on principle, then REMOVED the block entirely:
+it cannot earn its place without a bias we won't endorse, and dropping it costs only
++0.0015 log-loss (noise, like xi/bootstrap). Completing club coverage would NOT help —
+the floor is the signal, so more fair ratings = less signal; the unmatched ~11% are
+genuinely weak clubs where the floor is ~correct anyway. The footballdatabase pipeline
+and capital_fdb/hybrid CSVs are kept for the record and the model lab (capital is now a
+shadow). Deployed team tilts = fatigue only. Lesson: a feature can pass the gate for the
+wrong reason; interrogate WHY it predicts, not just THAT it does.
+
 
 ## Climate re-test with club-country acclimatisation (still REJECTED, 2026-06-18)
 Simone's approved cheap re-do of the heat block with the correct proxy: a team's
