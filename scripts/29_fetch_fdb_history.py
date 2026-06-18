@@ -73,7 +73,13 @@ def fetch_hist(slug):
     return series
 
 
-hist = {}
+import os as _os
+hist = json.load(open("data/external/fdb_history.json")) if _os.path.exists("data/external/fdb_history.json") else {}  # merge existing (don't clobber manual slugs)
+try:
+    _man = pd.read_csv("data/external/fdb_manual_slugs.csv", comment="#")
+    slugs = sorted(set(slugs) | {x for x in _man.slug.dropna() if x})
+except FileNotFoundError:
+    pass
 for i, slug in enumerate(slugs, 1):
     hist[slug] = fetch_hist(slug)
     if i % 50 == 0:

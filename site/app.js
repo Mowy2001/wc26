@@ -363,36 +363,44 @@ if (WC26.replay && WC26.replay.snapshots) {
   slider.max = snaps.length - 1;
   slider.value = snaps.length - 1;
 
+  // +/- change vs the previous match (the diff Simone asked for)
+  const delta = (now, was, dp = 1) => {
+    if (was === undefined) return "";
+    const d = now - was;
+    if (Math.abs(d) < 0.005) return "";
+    return `<span class="delta ${d > 0 ? "up" : "down"}">${d > 0 ? "▲" : "▼"}${(100 * Math.abs(d)).toFixed(dp)}</span>`;
+  };
   const render = (k) => {
-    const s = snaps[k];
+    const s = snaps[k], prev = k > 0 ? snaps[k - 1] : null;
     document.getElementById("tl-date").textContent = s.date;
     document.getElementById("tl-match").textContent = k === 0 ? "before kickoff" : s.last_match;
-    // title odds: top 12 by champion at this snapshot
+    // title odds: top 12 by champion, with the move since the previous match
     const top = Object.entries(s.champion).sort((a, b) => b[1] - a[1]).slice(0, 12);
     const max = top[0][1] || 1;
     document.getElementById("tl-champ").innerHTML = top.map(([t, p]) => `
       <div class="bar-row">
         <div class="who">${flag(t)}${t}</div>
         <div class="bar-track"><div class="bar-fill" style="width:${(100 * p) / max}%"></div></div>
-        <div class="val">${pct(p)}</div>
+        <div class="val">${pct(p)}${delta(p, prev && prev.champion[t])}</div>
       </div>`).join("");
     // golden boot
     const gb = s.golden_boot || [];
     if (gb.length) {
       const gmax = gb[0].p || 1;
+      const pgb = {}; (prev && prev.golden_boot || []).forEach((x) => (pgb[x.player] = x.p));
       document.getElementById("tl-gb").innerHTML = gb.slice(0, 10).map((p) => `
         <div class="bar-row">
           <div class="who">${flag(p.team)}${p.player}</div>
           <div class="bar-track"><div class="bar-fill" style="width:${(100 * p.p) / gmax}%"></div></div>
-          <div class="val">${pct(p.p)}</div>
+          <div class="val">${pct(p.p)}${delta(p.p, prev && pgb[p.player])}</div>
         </div>`).join("");
     }
-    // qualification by group
+    // qualification by group, with the move since the previous match
     const groups = {};
     Object.entries(tg).forEach(([t, g]) => (groups[g] = groups[g] || []).push(t));
     document.getElementById("tl-groups").innerHTML = Object.keys(groups).sort().map((g) => {
       const rows = groups[g].map((t) => [t, s.qualify[t] ?? 0]).sort((a, b) => b[1] - a[1])
-        .map(([t, q]) => `<div class="row"><span>${flag(t)}${t}</span><span>${pct(q, 0)}</span></div>`).join("");
+        .map(([t, q]) => `<div class="row"><span>${flag(t)}${t}</span><span>${pct(q, 0)}${delta(q, prev && prev.qualify[t], 0)}</span></div>`).join("");
       return `<div class="tlg"><b>GROUP ${g}</b>${rows}</div>`;
     }).join("");
   };
