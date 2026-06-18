@@ -1,0 +1,79 @@
+club,slug,national_teams,name_sim
+Machida Zelvia,tokyo-verdy,Australia,0.08
+Fehérvár,mol-vidi-fc,"Hungary,North Macedonia",0.11
+Al-Duhail,lekhwiya,"Algeria,Qatar,Tunisia",0.12
+AGMK,otmk-olmaliq,Uzbekistan,0.25
+Red Star Belgrade,crvena-zvezda,"Austria,Canada,Ghana,Serbia,South Korea",0.27
+PAOK,paok-thessaloniki-fc,"Albania,Czech Republic,Ghana,Greece,Mexico,Poland,Serbia,Slovakia",0.33
+Aucas,sociedad-deportiva-aucas,Ecuador,0.34
+Abha,abha-club-mahalah,"Cameroon,Curaçao,Saudi Arabia",0.38
+NEC,necaxa-rayos,"Curaçao,Iran,Japan",0.4
+Cádiz,cadiz-club-de-futbol,Australia,0.4
+Ajax,ajax-de-ouenze,"Argentina,Croatia,Denmark,Ghana,Japan,Mexico,Morocco,Netherlands,Poland,Serbia,Turkey",0.44
+Santos,santos-fc-sao-paulo,"Brazil,Chile",0.48
+CD Olimpia,olimpia-tegucigalpa,Panama,0.48
+OB,aktobe,"Australia,Iceland,Tunisia",0.5
+Everton,everton-fc-liverpool,"Belgium,England,France,Iceland,Republic of Ireland,Scotland,Senegal,Sweden,Ukraine,United States",0.52
+Olimpia,olimpia-tegucigalpa,"Colombia,Honduras,Paraguay",0.54
+Al Ain,al-ain-abu-dhabi,"Egypt,Ghana,Morocco,Paraguay,Sweden",0.55
+1. FC Köln,koln,"Albania,Austria,Germany,Japan,Slovakia,Tunisia",0.57
+Independiente,independiente-del-valle-sangolqui,"Argentina,Colombia,Paraguay,Uruguay",0.57
+Nacional,nacional-montevideo,"Panama,Uruguay",0.59
+CD Real Sociedad,real-sociedad-san-sebastian,Honduras,0.6
+Internazionale,sc-internacional-porto-alegre,"Belgium,Croatia,Denmark,Italy,Netherlands,Slovakia",0.6
+Osmanlıspor,osmanlispor-ankaraspor,Romania,0.62
+RB Leipzig,rasenballsport-leipzig,"Austria,Belgium,Croatia,Denmark,Germany,Hungary,Ivory Coast,Netherlands,Norway,Portugal,Senegal,Slovenia,Spain,Sweden,Switzerland",0.62
+CF Montréal,montreal-impact,"Canada,Finland",0.62
+Internacional,sc-internacional-porto-alegre,"Chile,Ecuador,Uruguay",0.62
+Copenhagen,kobenhavn,"Australia,Costa Rica,Croatia,Denmark,Japan,Poland,Scotland,Slovakia,Sweden,Tunisia",0.63
+River Plate,river-plate-buenos-aires,"Argentina,Colombia,Ecuador,Uruguay",0.63
+Akhmat Grozny,terek-grozny,"Iran,Russia",0.64
+Olympiacos,olympiakos-piraeus,"Cameroon,Costa Rica,Greece,Iran,Morocco,Senegal,South Korea,Sweden",0.64
+América,america-aguilas,"Colombia,Mexico,United States,Uruguay",0.64
+Red Bull Salzburg,salzburg,"Austria,Bosnia and Herzegovina,Croatia,Serbia,South Korea,Switzerland",0.64
+Rangers,rangers-glasgow,"Belgium,Canada,Croatia,Finland,Norway,Portugal,Scotland,Sweden",0.64
+El Nacional,el-nacional-ecuador,Ecuador,0.73
+1. FC Nürnberg,nurnberg,"Hungary,Japan,Switzerland,United States",0.73
+FC St. Pauli,st-pauli,"Australia,Bosnia and Herzegovina,Morocco,Sweden",0.8
+1899 Hoffenheim,hoffenheim,"Austria,Bosnia and Herzegovina,Croatia,Czech Republic,Denmark,Switzerland,United States",0.8
+1. FC Kaiserslautern,kaiserslautern,"Iceland,Poland",0.82
+VfL Wolfsburg,wolfsburg,"Algeria,Austria,Belgium,Brazil,Croatia,Czech Republic,Denmark,Germany,Ghana,Japan,Netherlands,Poland,Portugal,Sweden,Switzerland",0.82
+Universidad Católica,universidad-catolica-santiago,"Chile,Panama",0.82
+CSKA Sofia,pfc-cska-sofia,Algeria,0.83
+IFK Norrköping,norrkoping,"Iceland,Sweden,Tunisia",0.83
+Djurgårdens IF,djurgarden,Finland,0.83
+TSG Hoffenheim,hoffenheim,"Austria,Croatia,Czech Republic,Germany,Ivory Coast,Netherlands,Turkey",0.83
+Union Berlin,1-fc-union-berlin,"Austria,Croatia,Denmark,Finland,Hungary,Tunisia",0.83
+FC Augsburg,augsburg,"Austria,Croatia,Czech Republic,Ecuador,Finland,Iceland,Netherlands,Poland,Slovakia,South Korea,Switzerland,Tunisia",0.84
+IF Elfsborg,elfsborg,Finland,0.84
+SC Freiburg,freiburg,"Albania,Austria,Bosnia and Herzegovina,Croatia,Germany,Ghana,Hungary,Japan,South Korea,Switzerland",0.84
+Sporting CP,sporting,"Algeria,Argentina,Belgium,Colombia,Costa Rica,Denmark,Ghana,Ivory Coast,Japan,Portugal,Uruguay",0.84
+Helsingborgs IF,helsingborg,Sweden,0.85
+Panetolikos,panaitolikos,"Canada,Georgia",0.87
+Atlético Bucaramanga,club-atletico-bucaramanga,Panama,0.89
+Dinamo Batumi,fc-dinamo-batumi,Georgia,0.9
+Houston Dynamo FC,houston-dynamo,Mexico,0.9
+Union Saint-Gilloise,union-st-gilloise,"Austria,Canada,Ecuador,Sweden",0.92
+Nordsjælland,nordsjaelland,"Egypt,Ghana,Iceland,Turkey",0.92
+Brøndby,brondby,"Austria,Bosnia and Herzegovina,Denmark,Tunisia",0.92
+Kasımpaşa,kasimpasa,"Czech Republic,Egypt,Hungary,Nigeria,Sweden,Switzerland,Tunisia,Turkey",0.94
+Universidad de Concepción,universidad-concepcion,Panama,0.94
+Dinamo Samarqand,dinamo-samarkand,Uzbekistan,0.94
+Elazığspor,elazigspor,Bosnia and Herzegovina,0.95
+Kayseri Erciyesspor,kazseri-erciyesspor,Bosnia and Herzegovina,0.95
+Zagłębie Lubin,zaglebie-lubin,Poland,0.96
+Wisła Kraków,wisla-krakow,"Hungary,Poland",0.96
+Queens Park Rangers,queens-park-rangers,"Australia,Cameroon,Finland,Morocco,Northern Ireland,Scotland,Senegal,South Korea",1.0
+Philadelphia Union,philadelphia-union,"Cameroon,Haiti,Hungary,South Africa",1.0
+Independiente Rivadavia,independiente-rivadavia,Paraguay,1.0
+Enugu Rangers,enugu-rangers,Nigeria,1.0
+Dynamo Kyiv,dynamo-kyiv,"Austria,Croatia,Netherlands,Poland,Portugal,Ukraine",1.0
+Dinamo Zagreb,dinamo-zagreb,"Albania,Algeria,Croatia,Iran,North Macedonia,Portugal,Romania,Scotland,Switzerland",1.0
+Dinamo Tbilisi,dinamo-tbilisi,Georgia,1.0
+Dinamo București,dinamo-bucuresti,"Panama,Romania",1.0
+Atlético Nacional,atletico-nacional,Colombia,1.0
+Universidad de Chile,universidad-de-chile,"Chile,Panama",1.0
+Atlético Mineiro,atletico-mineiro,"Brazil,Ecuador,Paraguay",1.0
+Atlético Madrid,atletico-madrid,"Argentina,Belgium,Brazil,Croatia,England,France,Mexico,Netherlands,Norway,Portugal,Romania,Slovenia,Spain,Uruguay",1.0
+Racing Santander,racing-santander,Colombia,1.0
+Houston Dynamo,houston-dynamo,"Honduras,Panama,United States",1.0
