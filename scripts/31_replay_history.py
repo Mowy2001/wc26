@@ -17,7 +17,7 @@ from wc26.dixon_coles import DixonColes
 from wc26.simulate import simulate_tournament
 from wc26.tilts import load_team_tilt, load_city_tilt
 from wc26.data import load_goalscorers
-from wc26.players import estimate_debutant_share, squad_weights, allocate_goals
+from wc26.players import estimate_debutant_share, squad_weights, allocate_goals, allocate_goals_live
 
 results = load_results()
 elo_hist = pd.read_parquet("outputs/elo_history.parquet")
@@ -36,8 +36,9 @@ tilt, city_tilt = load_team_tilt(), load_city_tilt()
 gs = load_goalscorers()
 squads = pd.read_csv("data/external/squads_wc2026.csv", parse_dates=["birth"])
 deb = estimate_debutant_share(gs)
+teams = [t for g in groups.values() for t in g]
 gb_weights = {t: squad_weights(gs, squads, t, pd.Timestamp("2026-06-11"), deb, age_alpha=0.1, drop_to_bucket=False)
-              for g in groups.values() for t in g}
+              for t in teams}
 
 played = wc2026_fixtures(results).dropna(subset=["home_score", "away_score"]).sort_values("date")
 print(f"replaying {len(played)} played matches -> {len(played)+1} snapshots")
@@ -51,7 +52,14 @@ for k in range(len(played) + 1):
     res = simulate_tournament(groups, gfx, model, elo, n_sims=10000, fixed_results=fixed,
                               team_log_tilt=tilt, city_log_tilt=city_tilt, collect_goal_samples=True)
     t = res["teams"]
-    gb = allocate_goals(res["goal_samples"], gb_weights)["players"].head(12)
+    asof_date = played.iloc[k-1].date if k > 0 else pd.Timestamp("2026-06-10")
+    rg = gs[(gs["date"] >= "2026-06-11") & (gs["date"] <= asof_date)
+            & (~gs["own_goal"].astype(bool)) & (gs["team"].isin(teams))].dropna(subset=["scorer"])
+    real_by_team = {t: g["scorer"].value_counts().to_dict() for t, g in rg.groupby("team")}
+    if real_by_team:
+        gb = allocate_goals_live(res["goal_samples"], gb_weights, real_by_team)["players"].head(12)
+    else:
+        gb = allocate_goals(res["goal_samples"], gb_weights)["players"].head(12)
     gb_list = [{"player": r.player, "team": r.team, "p": round(float(r.P_golden_boot), 4)}
                for r in gb.itertuples(index=False)]
     last = "(eve)" if k == 0 else f"{played.iloc[k-1].home_team} {int(played.iloc[k-1].home_score)}-{int(played.iloc[k-1].away_score)} {played.iloc[k-1].away_team}"

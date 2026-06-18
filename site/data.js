@@ -474,56 +474,56 @@ const WC26 = {
    "n": 345,
    "verdict": "REJECTED"
   },
-  "coverage": 0.911,
+  "coverage": 0.892,
   "z": {
-   "Algeria": -0.28,
-   "Argentina": 1.06,
-   "Australia": -1.28,
-   "Austria": 0.39,
-   "Belgium": 1.21,
-   "Bosnia and Herzegovina": -0.55,
-   "Brazil": 1.26,
-   "Canada": -0.68,
-   "Cape Verde": -1.0,
-   "Colombia": 0.28,
-   "Croatia": 0.41,
-   "Cura\u00e7ao": -1.59,
-   "Czech Republic": 0.48,
-   "DR Congo": -0.69,
-   "Ecuador": 0.21,
+   "Algeria": -0.27,
+   "Argentina": 0.96,
+   "Australia": -1.34,
+   "Austria": 0.41,
+   "Belgium": 1.23,
+   "Bosnia and Herzegovina": -0.53,
+   "Brazil": 1.28,
+   "Canada": -0.66,
+   "Cape Verde": -1.11,
+   "Colombia": 0.24,
+   "Croatia": 0.31,
+   "Cura\u00e7ao": -1.56,
+   "Czech Republic": 0.5,
+   "DR Congo": -0.7,
+   "Ecuador": 0.23,
    "Egypt": -0.22,
-   "England": 1.97,
-   "France": 2.0,
-   "Germany": 1.91,
+   "England": 1.99,
+   "France": 2.02,
+   "Germany": 1.93,
    "Ghana": -0.37,
-   "Haiti": -1.28,
-   "Iran": -0.99,
-   "Iraq": -1.45,
-   "Ivory Coast": 0.29,
-   "Japan": -0.23,
-   "Jordan": -1.45,
-   "Mexico": -0.09,
-   "Morocco": 0.52,
-   "Netherlands": 1.13,
-   "New Zealand": -1.27,
-   "Norway": 0.56,
-   "Panama": -1.39,
-   "Paraguay": -0.34,
-   "Portugal": 1.59,
-   "Qatar": -1.45,
-   "Saudi Arabia": 0.04,
-   "Scotland": -0.02,
-   "Senegal": 0.71,
-   "South Africa": -0.62,
-   "South Korea": -0.41,
-   "Spain": 1.78,
-   "Sweden": 0.24,
-   "Switzerland": 0.27,
-   "Tunisia": -0.74,
-   "Turkey": 0.84,
-   "United States": -0.03,
-   "Uruguay": 0.61,
-   "Uzbekistan": -1.35
+   "Haiti": -1.25,
+   "Iran": -0.97,
+   "Iraq": -1.43,
+   "Ivory Coast": 0.28,
+   "Japan": -0.26,
+   "Jordan": -1.47,
+   "Mexico": -0.24,
+   "Morocco": 0.49,
+   "Netherlands": 1.15,
+   "New Zealand": -1.25,
+   "Norway": 0.58,
+   "Panama": -1.37,
+   "Paraguay": -0.3,
+   "Portugal": 1.61,
+   "Qatar": -1.42,
+   "Saudi Arabia": 0.07,
+   "Scotland": 0.01,
+   "Senegal": 0.61,
+   "South Africa": -0.59,
+   "South Korea": -0.38,
+   "Spain": 1.8,
+   "Sweden": 0.26,
+   "Switzerland": 0.3,
+   "Tunisia": -0.72,
+   "Turkey": 0.86,
+   "United States": -0.01,
+   "Uruguay": 0.6,
+   "Uzbekistan": -1.32
   }
  },
  "climate": {
@@ -854,27 +854,27 @@ const WC26 = {
      {
       "player": "Kylian Mbapp\u00e9",
       "team": "France",
-      "p": 0.2419
+      "p": 0.2422
      },
      {
       "player": "Harry Kane",
       "team": "England",
-      "p": 0.1056
+      "p": 0.1034
      },
      {
       "player": "Lautaro Mart\u00ednez",
       "team": "Argentina",
-      "p": 0.0948
+      "p": 0.0929
      },
      {
       "player": "Erling Haaland",
       "team": "Norway",
-      "p": 0.0768
+      "p": 0.0796
      },
      {
       "player": "Luis D\u00edaz",
       "team": "Colombia",
-      "p": 0.0543
+      "p": 0.0561
      },
      {
       "player": "Enner Valencia",
@@ -884,32 +884,32 @@ const WC26 = {
      {
       "player": "Mikel Oyarzabal",
       "team": "Spain",
-      "p": 0.0415
+      "p": 0.0445
+     },
+     {
+      "player": "Ra\u00fal Jim\u00e9nez",
+      "team": "Mexico",
+      "p": 0.0236
      },
      {
       "player": "Ferran Torres",
       "team": "Spain",
-      "p": 0.0196
-     },
-     {
-      "player": "Mehdi Taremi",
-      "team": "Iran",
-      "p": 0.0164
-     },
-     {
-      "player": "Brahim D\u00edaz",
-      "team": "Morocco",
-      "p": 0.0156
+      "p": 0.017
      },
      {
       "player": "Jonathan David",
       "team": "Canada",
-      "p": 0.0155
+      "p": 0.0156
      },
      {
-      "player": "Raphinha",
-      "team": "Brazil",
-      "p": 0.0134
+      "player": "Brahim D\u00edaz",
+      "team": "Morocco",
+      "p": 0.0154
+     },
+     {
+      "player": "Mehdi Taremi",
+      "team": "Iran",
+      "p": 0.0148
      }
     ]
    },
@@ -1021,47 +1021,52 @@ const WC26 = {
      {
       "player": "Kylian Mbapp\u00e9",
       "team": "France",
-      "p": 0.2356
-     },
-     {
-      "player": "Lautaro Mart\u00ednez",
-      "team": "Argentina",
-      "p": 0.1018
+      "p": 0.2379
      },
      {
       "player": "Harry Kane",
       "team": "England",
-      "p": 0.0959
+      "p": 0.0989
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.0961
      },
      {
       "player": "Erling Haaland",
       "team": "Norway",
-      "p": 0.0769
+      "p": 0.0754
      },
      {
       "player": "Luis D\u00edaz",
       "team": "Colombia",
-      "p": 0.0562
+      "p": 0.0596
      },
      {
       "player": "Enner Valencia",
       "team": "Ecuador",
-      "p": 0.0478
+      "p": 0.0489
      },
      {
       "player": "Mikel Oyarzabal",
       "team": "Spain",
-      "p": 0.0418
+      "p": 0.0448
+     },
+     {
+      "player": "Ra\u00fal Jim\u00e9nez",
+      "team": "Mexico",
+      "p": 0.0218
      },
      {
       "player": "Ferran Torres",
       "team": "Spain",
-      "p": 0.018
+      "p": 0.0178
      },
      {
       "player": "Mehdi Taremi",
       "team": "Iran",
-      "p": 0.0171
+      "p": 0.0164
      },
      {
       "player": "Jonathan David",
@@ -1069,14 +1074,9 @@ const WC26 = {
       "p": 0.0164
      },
      {
-      "player": "Brahim D\u00edaz",
-      "team": "Morocco",
-      "p": 0.0151
-     },
-     {
-      "player": "Ra\u00fal Jim\u00e9nez",
-      "team": "Mexico",
-      "p": 0.0136
+      "player": "Mikel Merino",
+      "team": "Spain",
+      "p": 0.0159
      }
     ]
    },
@@ -1188,62 +1188,62 @@ const WC26 = {
      {
       "player": "Kylian Mbapp\u00e9",
       "team": "France",
-      "p": 0.2345
+      "p": 0.2423
      },
      {
       "player": "Harry Kane",
       "team": "England",
-      "p": 0.1026
+      "p": 0.101
      },
      {
       "player": "Lautaro Mart\u00ednez",
       "team": "Argentina",
-      "p": 0.0988
+      "p": 0.096
      },
      {
       "player": "Erling Haaland",
       "team": "Norway",
-      "p": 0.0783
+      "p": 0.0785
      },
      {
       "player": "Luis D\u00edaz",
       "team": "Colombia",
-      "p": 0.055
-     },
-     {
-      "player": "Mikel Oyarzabal",
-      "team": "Spain",
-      "p": 0.0434
+      "p": 0.0576
      },
      {
       "player": "Enner Valencia",
       "team": "Ecuador",
-      "p": 0.0426
+      "p": 0.0469
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.0409
+     },
+     {
+      "player": "Ra\u00fal Jim\u00e9nez",
+      "team": "Mexico",
+      "p": 0.0242
      },
      {
       "player": "Ferran Torres",
       "team": "Spain",
-      "p": 0.0182
+      "p": 0.0169
+     },
+     {
+      "player": "Brahim D\u00edaz",
+      "team": "Morocco",
+      "p": 0.0164
      },
      {
       "player": "Mehdi Taremi",
       "team": "Iran",
-      "p": 0.0163
-     },
-     {
-      "player": "Ayoub El Kaabi",
-      "team": "Morocco",
       "p": 0.0157
-     },
-     {
-      "player": "Raphinha",
-      "team": "Brazil",
-      "p": 0.015
      },
      {
       "player": "Mikel Merino",
       "team": "Spain",
-      "p": 0.0146
+      "p": 0.0148
      }
     ]
    },
@@ -1355,62 +1355,62 @@ const WC26 = {
      {
       "player": "Kylian Mbapp\u00e9",
       "team": "France",
-      "p": 0.2409
+      "p": 0.2377
      },
      {
       "player": "Harry Kane",
       "team": "England",
-      "p": 0.1026
+      "p": 0.1042
      },
      {
       "player": "Lautaro Mart\u00ednez",
       "team": "Argentina",
-      "p": 0.1004
+      "p": 0.0947
      },
      {
       "player": "Erling Haaland",
       "team": "Norway",
-      "p": 0.0748
+      "p": 0.0772
      },
      {
       "player": "Luis D\u00edaz",
       "team": "Colombia",
-      "p": 0.0541
+      "p": 0.0574
      },
      {
       "player": "Enner Valencia",
       "team": "Ecuador",
-      "p": 0.0464
+      "p": 0.0448
      },
      {
       "player": "Mikel Oyarzabal",
       "team": "Spain",
-      "p": 0.0451
+      "p": 0.0444
+     },
+     {
+      "player": "Ra\u00fal Jim\u00e9nez",
+      "team": "Mexico",
+      "p": 0.0248
      },
      {
       "player": "Ferran Torres",
       "team": "Spain",
-      "p": 0.0191
+      "p": 0.0164
      },
      {
       "player": "Mehdi Taremi",
       "team": "Iran",
-      "p": 0.0183
-     },
-     {
-      "player": "Brahim D\u00edaz",
-      "team": "Morocco",
-      "p": 0.0146
-     },
-     {
-      "player": "Lionel Messi",
-      "team": "Argentina",
-      "p": 0.0145
+      "p": 0.0155
      },
      {
       "player": "Raphinha",
       "team": "Brazil",
-      "p": 0.0138
+      "p": 0.0153
+     },
+     {
+      "player": "Brahim D\u00edaz",
+      "team": "Morocco",
+      "p": 0.0151
      }
     ]
    },
@@ -1522,62 +1522,62 @@ const WC26 = {
      {
       "player": "Kylian Mbapp\u00e9",
       "team": "France",
-      "p": 0.2386
+      "p": 0.2379
      },
      {
       "player": "Harry Kane",
       "team": "England",
-      "p": 0.1002
+      "p": 0.0985
      },
      {
       "player": "Lautaro Mart\u00ednez",
       "team": "Argentina",
-      "p": 0.0957
+      "p": 0.0922
      },
      {
       "player": "Erling Haaland",
       "team": "Norway",
-      "p": 0.0794
+      "p": 0.0763
      },
      {
       "player": "Luis D\u00edaz",
       "team": "Colombia",
-      "p": 0.0562
+      "p": 0.0571
      },
      {
       "player": "Enner Valencia",
       "team": "Ecuador",
-      "p": 0.0458
+      "p": 0.0501
      },
      {
       "player": "Mikel Oyarzabal",
       "team": "Spain",
-      "p": 0.043
+      "p": 0.0457
      },
      {
-      "player": "Mehdi Taremi",
-      "team": "Iran",
-      "p": 0.0186
+      "player": "Ra\u00fal Jim\u00e9nez",
+      "team": "Mexico",
+      "p": 0.0261
      },
      {
       "player": "Ferran Torres",
       "team": "Spain",
-      "p": 0.0166
+      "p": 0.0173
      },
      {
-      "player": "Brahim D\u00edaz",
-      "team": "Morocco",
-      "p": 0.0155
+      "player": "Mehdi Taremi",
+      "team": "Iran",
+      "p": 0.0172
      },
      {
       "player": "Mikel Merino",
       "team": "Spain",
-      "p": 0.0147
+      "p": 0.0146
      },
      {
-      "player": "Raphinha",
-      "team": "Brazil",
-      "p": 0.0132
+      "player": "Lionel Messi",
+      "team": "Argentina",
+      "p": 0.0124
      }
     ]
    },
@@ -1689,62 +1689,62 @@ const WC26 = {
      {
       "player": "Kylian Mbapp\u00e9",
       "team": "France",
-      "p": 0.2404
+      "p": 0.2407
      },
      {
       "player": "Harry Kane",
       "team": "England",
-      "p": 0.1041
+      "p": 0.0974
      },
      {
       "player": "Lautaro Mart\u00ednez",
       "team": "Argentina",
-      "p": 0.0986
+      "p": 0.0941
      },
      {
       "player": "Erling Haaland",
       "team": "Norway",
-      "p": 0.0806
+      "p": 0.0792
      },
      {
       "player": "Luis D\u00edaz",
       "team": "Colombia",
-      "p": 0.0562
-     },
-     {
-      "player": "Mikel Oyarzabal",
-      "team": "Spain",
-      "p": 0.0448
+      "p": 0.0586
      },
      {
       "player": "Enner Valencia",
       "team": "Ecuador",
-      "p": 0.0442
+      "p": 0.0491
      },
      {
-      "player": "Mehdi Taremi",
-      "team": "Iran",
-      "p": 0.0175
-     },
-     {
-      "player": "Ferran Torres",
+      "player": "Mikel Oyarzabal",
       "team": "Spain",
-      "p": 0.0173
-     },
-     {
-      "player": "Mikel Merino",
-      "team": "Spain",
-      "p": 0.014
-     },
-     {
-      "player": "Brahim D\u00edaz",
-      "team": "Morocco",
-      "p": 0.0139
+      "p": 0.0436
      },
      {
       "player": "Ra\u00fal Jim\u00e9nez",
       "team": "Mexico",
-      "p": 0.0138
+      "p": 0.0251
+     },
+     {
+      "player": "Mehdi Taremi",
+      "team": "Iran",
+      "p": 0.0183
+     },
+     {
+      "player": "Ferran Torres",
+      "team": "Spain",
+      "p": 0.0155
+     },
+     {
+      "player": "Mikel Merino",
+      "team": "Spain",
+      "p": 0.0145
+     },
+     {
+      "player": "Lionel Messi",
+      "team": "Argentina",
+      "p": 0.0126
      }
     ]
    },
@@ -1856,62 +1856,62 @@ const WC26 = {
      {
       "player": "Kylian Mbapp\u00e9",
       "team": "France",
-      "p": 0.2448
+      "p": 0.2457
      },
      {
       "player": "Harry Kane",
       "team": "England",
-      "p": 0.0973
+      "p": 0.0975
      },
      {
       "player": "Lautaro Mart\u00ednez",
       "team": "Argentina",
-      "p": 0.0946
+      "p": 0.0936
      },
      {
       "player": "Erling Haaland",
       "team": "Norway",
-      "p": 0.082
+      "p": 0.0797
      },
      {
       "player": "Luis D\u00edaz",
       "team": "Colombia",
-      "p": 0.0614
+      "p": 0.0615
      },
      {
       "player": "Enner Valencia",
       "team": "Ecuador",
-      "p": 0.0459
+      "p": 0.0498
      },
      {
       "player": "Mikel Oyarzabal",
       "team": "Spain",
-      "p": 0.0454
-     },
-     {
-      "player": "Mehdi Taremi",
-      "team": "Iran",
-      "p": 0.0197
-     },
-     {
-      "player": "Ferran Torres",
-      "team": "Spain",
-      "p": 0.0189
-     },
-     {
-      "player": "Mikel Merino",
-      "team": "Spain",
-      "p": 0.0142
+      "p": 0.0486
      },
      {
       "player": "Ra\u00fal Jim\u00e9nez",
       "team": "Mexico",
-      "p": 0.014
+      "p": 0.0237
      },
      {
-      "player": "Brahim D\u00edaz",
-      "team": "Morocco",
-      "p": 0.0135
+      "player": "Mehdi Taremi",
+      "team": "Iran",
+      "p": 0.0183
+     },
+     {
+      "player": "Ferran Torres",
+      "team": "Spain",
+      "p": 0.0161
+     },
+     {
+      "player": "Mikel Merino",
+      "team": "Spain",
+      "p": 0.0145
+     },
+     {
+      "player": "Mohamed Salah",
+      "team": "Egypt",
+      "p": 0.0129
      }
     ]
    },
@@ -2023,62 +2023,62 @@ const WC26 = {
      {
       "player": "Kylian Mbapp\u00e9",
       "team": "France",
-      "p": 0.2398
-     },
-     {
-      "player": "Lautaro Mart\u00ednez",
-      "team": "Argentina",
-      "p": 0.1007
+      "p": 0.2364
      },
      {
       "player": "Harry Kane",
       "team": "England",
-      "p": 0.099
+      "p": 0.1022
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.0961
      },
      {
       "player": "Erling Haaland",
       "team": "Norway",
-      "p": 0.0725
+      "p": 0.0723
      },
      {
       "player": "Luis D\u00edaz",
       "team": "Colombia",
-      "p": 0.056
+      "p": 0.0608
      },
      {
       "player": "Enner Valencia",
       "team": "Ecuador",
-      "p": 0.0488
+      "p": 0.0514
      },
      {
       "player": "Mikel Oyarzabal",
       "team": "Spain",
-      "p": 0.0434
-     },
-     {
-      "player": "Mehdi Taremi",
-      "team": "Iran",
-      "p": 0.0193
-     },
-     {
-      "player": "Ferran Torres",
-      "team": "Spain",
-      "p": 0.0171
-     },
-     {
-      "player": "Mikel Merino",
-      "team": "Spain",
-      "p": 0.0162
+      "p": 0.0473
      },
      {
       "player": "Ra\u00fal Jim\u00e9nez",
       "team": "Mexico",
-      "p": 0.014
+      "p": 0.0271
      },
      {
-      "player": "Mohamed Salah",
-      "team": "Egypt",
-      "p": 0.0135
+      "player": "Ferran Torres",
+      "team": "Spain",
+      "p": 0.0169
+     },
+     {
+      "player": "Mehdi Taremi",
+      "team": "Iran",
+      "p": 0.0168
+     },
+     {
+      "player": "Mikel Merino",
+      "team": "Spain",
+      "p": 0.0142
+     },
+     {
+      "player": "Romelu Lukaku",
+      "team": "Belgium",
+      "p": 0.0138
      }
     ]
    },
@@ -2190,62 +2190,62 @@ const WC26 = {
      {
       "player": "Kylian Mbapp\u00e9",
       "team": "France",
-      "p": 0.2356
+      "p": 0.238
      },
      {
       "player": "Harry Kane",
       "team": "England",
-      "p": 0.0964
+      "p": 0.104
      },
      {
       "player": "Lautaro Mart\u00ednez",
       "team": "Argentina",
-      "p": 0.0942
+      "p": 0.0981
      },
      {
       "player": "Erling Haaland",
       "team": "Norway",
-      "p": 0.0685
-     },
-     {
-      "player": "Viktor Gy\u00f6keres",
-      "team": "Sweden",
-      "p": 0.0622
+      "p": 0.0794
      },
      {
       "player": "Luis D\u00edaz",
       "team": "Colombia",
-      "p": 0.051
-     },
-     {
-      "player": "Enner Valencia",
-      "team": "Ecuador",
-      "p": 0.046
+      "p": 0.0568
      },
      {
       "player": "Mikel Oyarzabal",
       "team": "Spain",
-      "p": 0.0424
+      "p": 0.0492
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0473
+     },
+     {
+      "player": "Ra\u00fal Jim\u00e9nez",
+      "team": "Mexico",
+      "p": 0.0263
      },
      {
       "player": "Ferran Torres",
       "team": "Spain",
-      "p": 0.0167
+      "p": 0.0192
      },
      {
-      "player": "Mehdi Taremi",
-      "team": "Iran",
-      "p": 0.0155
+      "player": "Mohamed Salah",
+      "team": "Egypt",
+      "p": 0.0142
      },
      {
       "player": "Mikel Merino",
       "team": "Spain",
-      "p": 0.0141
+      "p": 0.0134
      },
      {
-      "player": "Brahim D\u00edaz",
-      "team": "Morocco",
-      "p": 0.0137
+      "player": "Lionel Messi",
+      "team": "Argentina",
+      "p": 0.0131
      }
     ]
    },
@@ -2357,62 +2357,62 @@ const WC26 = {
      {
       "player": "Kylian Mbapp\u00e9",
       "team": "France",
-      "p": 0.2339
-     },
-     {
-      "player": "Lautaro Mart\u00ednez",
-      "team": "Argentina",
-      "p": 0.0927
+      "p": 0.2405
      },
      {
       "player": "Harry Kane",
       "team": "England",
-      "p": 0.0908
+      "p": 0.1051
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.0978
      },
      {
       "player": "Erling Haaland",
       "team": "Norway",
-      "p": 0.0767
-     },
-     {
-      "player": "Viktor Gy\u00f6keres",
-      "team": "Sweden",
-      "p": 0.0614
+      "p": 0.074
      },
      {
       "player": "Luis D\u00edaz",
       "team": "Colombia",
-      "p": 0.0502
-     },
-     {
-      "player": "Enner Valencia",
-      "team": "Ecuador",
-      "p": 0.0484
+      "p": 0.0567
      },
      {
       "player": "Mikel Oyarzabal",
       "team": "Spain",
-      "p": 0.0432
+      "p": 0.0498
      },
      {
-      "player": "Mehdi Taremi",
-      "team": "Iran",
-      "p": 0.0174
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0474
+     },
+     {
+      "player": "Ra\u00fal Jim\u00e9nez",
+      "team": "Mexico",
+      "p": 0.0275
      },
      {
       "player": "Ferran Torres",
       "team": "Spain",
-      "p": 0.0168
+      "p": 0.0193
      },
      {
-      "player": "Brahim D\u00edaz",
-      "team": "Morocco",
-      "p": 0.0143
+      "player": "Mehdi Taremi",
+      "team": "Iran",
+      "p": 0.0182
      },
      {
       "player": "Mikel Merino",
       "team": "Spain",
-      "p": 0.0135
+      "p": 0.0145
+     },
+     {
+      "player": "Mohamed Salah",
+      "team": "Egypt",
+      "p": 0.0137
      }
     ]
    },
@@ -2524,62 +2524,62 @@ const WC26 = {
      {
       "player": "Kylian Mbapp\u00e9",
       "team": "France",
-      "p": 0.2476
-     },
-     {
-      "player": "Harry Kane",
-      "team": "England",
-      "p": 0.0987
+      "p": 0.2556
      },
      {
       "player": "Lautaro Mart\u00ednez",
       "team": "Argentina",
-      "p": 0.0973
+      "p": 0.1035
+     },
+     {
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.0986
      },
      {
       "player": "Erling Haaland",
       "team": "Norway",
-      "p": 0.0763
-     },
-     {
-      "player": "Viktor Gy\u00f6keres",
-      "team": "Sweden",
-      "p": 0.0594
+      "p": 0.0775
      },
      {
       "player": "Luis D\u00edaz",
       "team": "Colombia",
-      "p": 0.051
+      "p": 0.059
      },
      {
       "player": "Mikel Oyarzabal",
       "team": "Spain",
-      "p": 0.0423
+      "p": 0.0479
+     },
+     {
+      "player": "Ra\u00fal Jim\u00e9nez",
+      "team": "Mexico",
+      "p": 0.0264
      },
      {
       "player": "Enner Valencia",
       "team": "Ecuador",
-      "p": 0.0205
+      "p": 0.0233
      },
      {
       "player": "Ferran Torres",
       "team": "Spain",
-      "p": 0.0182
+      "p": 0.0193
      },
      {
       "player": "Mehdi Taremi",
       "team": "Iran",
-      "p": 0.0178
+      "p": 0.0148
      },
      {
-      "player": "Lionel Messi",
-      "team": "Argentina",
-      "p": 0.0136
+      "player": "Mohamed Salah",
+      "team": "Egypt",
+      "p": 0.0142
      },
      {
-      "player": "Brahim D\u00edaz",
-      "team": "Morocco",
-      "p": 0.0131
+      "player": "Mikel Merino",
+      "team": "Spain",
+      "p": 0.0132
      }
     ]
    },
@@ -2691,62 +2691,62 @@ const WC26 = {
      {
       "player": "Kylian Mbapp\u00e9",
       "team": "France",
-      "p": 0.2412
+      "p": 0.2474
      },
      {
       "player": "Lautaro Mart\u00ednez",
       "team": "Argentina",
-      "p": 0.096
+      "p": 0.0974
      },
      {
       "player": "Harry Kane",
       "team": "England",
-      "p": 0.0925
+      "p": 0.0942
      },
      {
       "player": "Erling Haaland",
       "team": "Norway",
-      "p": 0.0718
-     },
-     {
-      "player": "Viktor Gy\u00f6keres",
-      "team": "Sweden",
-      "p": 0.0666
+      "p": 0.0805
      },
      {
       "player": "Luis D\u00edaz",
       "team": "Colombia",
-      "p": 0.0521
+      "p": 0.0593
      },
      {
       "player": "Mikel Oyarzabal",
       "team": "Spain",
-      "p": 0.0417
-     },
-     {
-      "player": "Enner Valencia",
-      "team": "Ecuador",
-      "p": 0.0207
-     },
-     {
-      "player": "Ferran Torres",
-      "team": "Spain",
-      "p": 0.0185
-     },
-     {
-      "player": "Mehdi Taremi",
-      "team": "Iran",
-      "p": 0.0171
-     },
-     {
-      "player": "Brahim D\u00edaz",
-      "team": "Morocco",
-      "p": 0.0151
+      "p": 0.0488
      },
      {
       "player": "Ra\u00fal Jim\u00e9nez",
       "team": "Mexico",
-      "p": 0.0125
+      "p": 0.0258
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0221
+     },
+     {
+      "player": "Kai Havertz",
+      "team": "Germany",
+      "p": 0.0192
+     },
+     {
+      "player": "Mehdi Taremi",
+      "team": "Iran",
+      "p": 0.0183
+     },
+     {
+      "player": "Ferran Torres",
+      "team": "Spain",
+      "p": 0.0176
+     },
+     {
+      "player": "Mikel Merino",
+      "team": "Spain",
+      "p": 0.0142
      }
     ]
    },
@@ -2858,62 +2858,62 @@ const WC26 = {
      {
       "player": "Kylian Mbapp\u00e9",
       "team": "France",
-      "p": 0.244
-     },
-     {
-      "player": "Lautaro Mart\u00ednez",
-      "team": "Argentina",
-      "p": 0.0931
+      "p": 0.2502
      },
      {
       "player": "Harry Kane",
       "team": "England",
-      "p": 0.093
+      "p": 0.1018
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.097
      },
      {
       "player": "Erling Haaland",
       "team": "Norway",
-      "p": 0.0794
-     },
-     {
-      "player": "Viktor Gy\u00f6keres",
-      "team": "Sweden",
-      "p": 0.0633
+      "p": 0.0827
      },
      {
       "player": "Luis D\u00edaz",
       "team": "Colombia",
-      "p": 0.0527
+      "p": 0.0572
      },
      {
       "player": "Mikel Oyarzabal",
       "team": "Spain",
-      "p": 0.0442
+      "p": 0.0527
+     },
+     {
+      "player": "Ra\u00fal Jim\u00e9nez",
+      "team": "Mexico",
+      "p": 0.0234
      },
      {
       "player": "Enner Valencia",
       "team": "Ecuador",
-      "p": 0.0205
+      "p": 0.022
      },
      {
       "player": "Ferran Torres",
       "team": "Spain",
-      "p": 0.0188
+      "p": 0.0206
      },
      {
-      "player": "Mehdi Taremi",
-      "team": "Iran",
-      "p": 0.0164
+      "player": "Kai Havertz",
+      "team": "Germany",
+      "p": 0.0197
+     },
+     {
+      "player": "Viktor Gy\u00f6keres",
+      "team": "Sweden",
+      "p": 0.0143
      },
      {
       "player": "Mikel Merino",
       "team": "Spain",
-      "p": 0.0135
-     },
-     {
-      "player": "Lionel Messi",
-      "team": "Argentina",
-      "p": 0.0134
+      "p": 0.0143
      }
     ]
    },
@@ -3025,62 +3025,62 @@ const WC26 = {
      {
       "player": "Kylian Mbapp\u00e9",
       "team": "France",
-      "p": 0.243
+      "p": 0.2518
      },
      {
       "player": "Harry Kane",
       "team": "England",
-      "p": 0.0923
+      "p": 0.1026
      },
      {
       "player": "Lautaro Mart\u00ednez",
       "team": "Argentina",
-      "p": 0.0912
+      "p": 0.0997
      },
      {
       "player": "Erling Haaland",
       "team": "Norway",
-      "p": 0.0785
-     },
-     {
-      "player": "Viktor Gy\u00f6keres",
-      "team": "Sweden",
-      "p": 0.064
+      "p": 0.0808
      },
      {
       "player": "Luis D\u00edaz",
       "team": "Colombia",
-      "p": 0.0526
+      "p": 0.0606
      },
      {
       "player": "Mikel Oyarzabal",
       "team": "Spain",
-      "p": 0.0432
+      "p": 0.0478
+     },
+     {
+      "player": "Ra\u00fal Jim\u00e9nez",
+      "team": "Mexico",
+      "p": 0.0287
      },
      {
       "player": "Enner Valencia",
       "team": "Ecuador",
-      "p": 0.0204
+      "p": 0.0219
      },
      {
       "player": "Ferran Torres",
       "team": "Spain",
-      "p": 0.0172
+      "p": 0.0189
      },
      {
-      "player": "Mehdi Taremi",
-      "team": "Iran",
-      "p": 0.016
+      "player": "Kai Havertz",
+      "team": "Germany",
+      "p": 0.0183
      },
      {
       "player": "Mikel Merino",
       "team": "Spain",
-      "p": 0.014
+      "p": 0.0152
      },
      {
-      "player": "Brahim D\u00edaz",
-      "team": "Morocco",
-      "p": 0.0139
+      "player": "Viktor Gy\u00f6keres",
+      "team": "Sweden",
+      "p": 0.0145
      }
     ]
    },
@@ -3192,62 +3192,62 @@ const WC26 = {
      {
       "player": "Kylian Mbapp\u00e9",
       "team": "France",
-      "p": 0.2503
+      "p": 0.2625
      },
      {
       "player": "Harry Kane",
       "team": "England",
-      "p": 0.1047
+      "p": 0.1117
      },
      {
       "player": "Lautaro Mart\u00ednez",
       "team": "Argentina",
-      "p": 0.0946
+      "p": 0.1028
      },
      {
       "player": "Erling Haaland",
       "team": "Norway",
-      "p": 0.0776
-     },
-     {
-      "player": "Viktor Gy\u00f6keres",
-      "team": "Sweden",
-      "p": 0.0642
+      "p": 0.0843
      },
      {
       "player": "Luis D\u00edaz",
       "team": "Colombia",
-      "p": 0.0566
-     },
-     {
-      "player": "Mikel Oyarzabal",
-      "team": "Spain",
-      "p": 0.0235
-     },
-     {
-      "player": "Enner Valencia",
-      "team": "Ecuador",
-      "p": 0.0211
-     },
-     {
-      "player": "Mehdi Taremi",
-      "team": "Iran",
-      "p": 0.0174
-     },
-     {
-      "player": "Brahim D\u00edaz",
-      "team": "Morocco",
-      "p": 0.0151
-     },
-     {
-      "player": "Lionel Messi",
-      "team": "Argentina",
-      "p": 0.012
+      "p": 0.0579
      },
      {
       "player": "Ra\u00fal Jim\u00e9nez",
       "team": "Mexico",
-      "p": 0.0118
+      "p": 0.0268
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0256
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.0227
+     },
+     {
+      "player": "Kai Havertz",
+      "team": "Germany",
+      "p": 0.0198
+     },
+     {
+      "player": "Breel Embolo",
+      "team": "Switzerland",
+      "p": 0.0131
+     },
+     {
+      "player": "Viktor Gy\u00f6keres",
+      "team": "Sweden",
+      "p": 0.0129
+     },
+     {
+      "player": "Lionel Messi",
+      "team": "Argentina",
+      "p": 0.0127
      }
     ]
    },
@@ -3359,62 +3359,62 @@ const WC26 = {
      {
       "player": "Kylian Mbapp\u00e9",
       "team": "France",
-      "p": 0.2469
+      "p": 0.2586
      },
      {
       "player": "Lautaro Mart\u00ednez",
       "team": "Argentina",
-      "p": 0.1006
+      "p": 0.1109
      },
      {
       "player": "Harry Kane",
       "team": "England",
-      "p": 0.1001
+      "p": 0.1052
      },
      {
       "player": "Erling Haaland",
       "team": "Norway",
-      "p": 0.0718
-     },
-     {
-      "player": "Viktor Gy\u00f6keres",
-      "team": "Sweden",
-      "p": 0.0652
+      "p": 0.0802
      },
      {
       "player": "Luis D\u00edaz",
       "team": "Colombia",
-      "p": 0.0552
+      "p": 0.0604
      },
      {
       "player": "Mikel Oyarzabal",
       "team": "Spain",
-      "p": 0.0212
-     },
-     {
-      "player": "Enner Valencia",
-      "team": "Ecuador",
-      "p": 0.0209
-     },
-     {
-      "player": "Mehdi Taremi",
-      "team": "Iran",
-      "p": 0.0178
-     },
-     {
-      "player": "Lionel Messi",
-      "team": "Argentina",
-      "p": 0.015
-     },
-     {
-      "player": "Brahim D\u00edaz",
-      "team": "Morocco",
-      "p": 0.0132
+      "p": 0.027
      },
      {
       "player": "Ra\u00fal Jim\u00e9nez",
       "team": "Mexico",
-      "p": 0.013
+      "p": 0.0253
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0241
+     },
+     {
+      "player": "Kai Havertz",
+      "team": "Germany",
+      "p": 0.0202
+     },
+     {
+      "player": "Viktor Gy\u00f6keres",
+      "team": "Sweden",
+      "p": 0.0169
+     },
+     {
+      "player": "Lionel Messi",
+      "team": "Argentina",
+      "p": 0.0149
+     },
+     {
+      "player": "Breel Embolo",
+      "team": "Switzerland",
+      "p": 0.012
      }
     ]
    },
@@ -3526,62 +3526,62 @@ const WC26 = {
      {
       "player": "Kylian Mbapp\u00e9",
       "team": "France",
-      "p": 0.3168
-     },
-     {
-      "player": "Lautaro Mart\u00ednez",
-      "team": "Argentina",
-      "p": 0.0945
-     },
-     {
-      "player": "Harry Kane",
-      "team": "England",
-      "p": 0.0913
-     },
-     {
-      "player": "Erling Haaland",
-      "team": "Norway",
-      "p": 0.0716
-     },
-     {
-      "player": "Viktor Gy\u00f6keres",
-      "team": "Sweden",
-      "p": 0.0553
-     },
-     {
-      "player": "Luis D\u00edaz",
-      "team": "Colombia",
-      "p": 0.0522
-     },
-     {
-      "player": "Mikel Oyarzabal",
-      "team": "Spain",
-      "p": 0.0205
-     },
-     {
-      "player": "Enner Valencia",
-      "team": "Ecuador",
-      "p": 0.0205
-     },
-     {
-      "player": "Mehdi Taremi",
-      "team": "Iran",
-      "p": 0.0152
-     },
-     {
-      "player": "Brahim D\u00edaz",
-      "team": "Morocco",
-      "p": 0.0142
+      "p": 0.3906
      },
      {
       "player": "Lionel Messi",
       "team": "Argentina",
-      "p": 0.0126
+      "p": 0.118
      },
      {
-      "player": "Ayoub El Kaabi",
-      "team": "Morocco",
-      "p": 0.0117
+      "player": "Erling Haaland",
+      "team": "Norway",
+      "p": 0.0934
+     },
+     {
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.0827
+     },
+     {
+      "player": "Luis D\u00edaz",
+      "team": "Colombia",
+      "p": 0.0427
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.039
+     },
+     {
+      "player": "Ra\u00fal Jim\u00e9nez",
+      "team": "Mexico",
+      "p": 0.0178
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0171
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.016
+     },
+     {
+      "player": "Kai Havertz",
+      "team": "Germany",
+      "p": 0.0129
+     },
+     {
+      "player": "Viktor Gy\u00f6keres",
+      "team": "Sweden",
+      "p": 0.0112
+     },
+     {
+      "player": "Breel Embolo",
+      "team": "Switzerland",
+      "p": 0.0082
      }
     ]
    },
@@ -3693,62 +3693,62 @@ const WC26 = {
      {
       "player": "Kylian Mbapp\u00e9",
       "team": "France",
-      "p": 0.3
+      "p": 0.3653
      },
      {
       "player": "Erling Haaland",
       "team": "Norway",
-      "p": 0.1327
-     },
-     {
-      "player": "Harry Kane",
-      "team": "England",
-      "p": 0.0896
-     },
-     {
-      "player": "Lautaro Mart\u00ednez",
-      "team": "Argentina",
-      "p": 0.0875
-     },
-     {
-      "player": "Viktor Gy\u00f6keres",
-      "team": "Sweden",
-      "p": 0.0541
-     },
-     {
-      "player": "Luis D\u00edaz",
-      "team": "Colombia",
-      "p": 0.0474
-     },
-     {
-      "player": "Mikel Oyarzabal",
-      "team": "Spain",
-      "p": 0.0189
-     },
-     {
-      "player": "Enner Valencia",
-      "team": "Ecuador",
-      "p": 0.0175
-     },
-     {
-      "player": "Mehdi Taremi",
-      "team": "Iran",
-      "p": 0.0135
+      "p": 0.1768
      },
      {
       "player": "Lionel Messi",
       "team": "Argentina",
-      "p": 0.0117
+      "p": 0.1093
      },
      {
-      "player": "Brahim D\u00edaz",
-      "team": "Morocco",
-      "p": 0.0109
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.0762
      },
      {
-      "player": "Ayoub El Kaabi",
-      "team": "Morocco",
+      "player": "Luis D\u00edaz",
+      "team": "Colombia",
+      "p": 0.0379
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.0375
+     },
+     {
+      "player": "Ra\u00fal Jim\u00e9nez",
+      "team": "Mexico",
+      "p": 0.0144
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0137
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.0137
+     },
+     {
+      "player": "Kai Havertz",
+      "team": "Germany",
       "p": 0.0106
+     },
+     {
+      "player": "Viktor Gy\u00f6keres",
+      "team": "Sweden",
+      "p": 0.009
+     },
+     {
+      "player": "Raphinha",
+      "team": "Brazil",
+      "p": 0.0072
      }
     ]
    },
@@ -3860,62 +3860,62 @@ const WC26 = {
      {
       "player": "Kylian Mbapp\u00e9",
       "team": "France",
-      "p": 0.2912
+      "p": 0.3574
      },
      {
       "player": "Erling Haaland",
       "team": "Norway",
-      "p": 0.1341
-     },
-     {
-      "player": "Lautaro Mart\u00ednez",
-      "team": "Argentina",
-      "p": 0.1119
-     },
-     {
-      "player": "Harry Kane",
-      "team": "England",
-      "p": 0.0819
-     },
-     {
-      "player": "Viktor Gy\u00f6keres",
-      "team": "Sweden",
-      "p": 0.0524
-     },
-     {
-      "player": "Luis D\u00edaz",
-      "team": "Colombia",
-      "p": 0.045
-     },
-     {
-      "player": "Enner Valencia",
-      "team": "Ecuador",
-      "p": 0.0174
-     },
-     {
-      "player": "Mikel Oyarzabal",
-      "team": "Spain",
-      "p": 0.0171
+      "p": 0.1743
      },
      {
       "player": "Lionel Messi",
       "team": "Argentina",
-      "p": 0.0145
+      "p": 0.1205
      },
      {
-      "player": "Mehdi Taremi",
-      "team": "Iran",
-      "p": 0.0138
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.0763
      },
      {
-      "player": "Mohamed Salah",
-      "team": "Egypt",
-      "p": 0.0119
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.0452
+     },
+     {
+      "player": "Luis D\u00edaz",
+      "team": "Colombia",
+      "p": 0.0404
      },
      {
       "player": "Ra\u00fal Jim\u00e9nez",
       "team": "Mexico",
+      "p": 0.016
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.0152
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0128
+     },
+     {
+      "player": "Kai Havertz",
+      "team": "Germany",
       "p": 0.0118
+     },
+     {
+      "player": "Viktor Gy\u00f6keres",
+      "team": "Sweden",
+      "p": 0.0074
+     },
+     {
+      "player": "Ferran Torres",
+      "team": "Spain",
+      "p": 0.0062
      }
     ]
    },
@@ -4027,62 +4027,62 @@ const WC26 = {
      {
       "player": "Kylian Mbapp\u00e9",
       "team": "France",
-      "p": 0.2954
+      "p": 0.3575
      },
      {
       "player": "Erling Haaland",
       "team": "Norway",
-      "p": 0.1366
-     },
-     {
-      "player": "Lautaro Mart\u00ednez",
-      "team": "Argentina",
-      "p": 0.1061
-     },
-     {
-      "player": "Harry Kane",
-      "team": "England",
-      "p": 0.088
-     },
-     {
-      "player": "Viktor Gy\u00f6keres",
-      "team": "Sweden",
-      "p": 0.0509
-     },
-     {
-      "player": "Luis D\u00edaz",
-      "team": "Colombia",
-      "p": 0.0444
-     },
-     {
-      "player": "Mikel Oyarzabal",
-      "team": "Spain",
-      "p": 0.018
-     },
-     {
-      "player": "Enner Valencia",
-      "team": "Ecuador",
-      "p": 0.0175
-     },
-     {
-      "player": "Mehdi Taremi",
-      "team": "Iran",
-      "p": 0.0138
-     },
-     {
-      "player": "Brahim D\u00edaz",
-      "team": "Morocco",
-      "p": 0.012
+      "p": 0.1636
      },
      {
       "player": "Lionel Messi",
       "team": "Argentina",
-      "p": 0.0117
+      "p": 0.1224
      },
      {
-      "player": "Ayoub El Kaabi",
+      "player": "Harry Kane",
+      "team": "England",
+      "p": 0.0778
+     },
+     {
+      "player": "Lautaro Mart\u00ednez",
+      "team": "Argentina",
+      "p": 0.0415
+     },
+     {
+      "player": "Luis D\u00edaz",
+      "team": "Colombia",
+      "p": 0.0378
+     },
+     {
+      "player": "Mikel Oyarzabal",
+      "team": "Spain",
+      "p": 0.0149
+     },
+     {
+      "player": "Enner Valencia",
+      "team": "Ecuador",
+      "p": 0.0143
+     },
+     {
+      "player": "Ra\u00fal Jim\u00e9nez",
+      "team": "Mexico",
+      "p": 0.0138
+     },
+     {
+      "player": "Kai Havertz",
+      "team": "Germany",
+      "p": 0.0104
+     },
+     {
+      "player": "Brahim D\u00edaz",
       "team": "Morocco",
-      "p": 0.0108
+      "p": 0.0081
+     },
+     {
+      "player": "Viktor Gy\u00f6keres",
+      "team": "Sweden",
+      "p": 0.008
      }
     ]
    }
