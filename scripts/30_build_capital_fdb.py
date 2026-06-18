@@ -14,6 +14,10 @@ import numpy as np, pandas as pd
 from wc26.capital import norm
 
 clubmap = json.load(open("data/external/fdb_clubmap.json"))
+import os as _os
+if _os.path.exists("data/external/fdb_manual_slugs.csv"):
+    _m = pd.read_csv("data/external/fdb_manual_slugs.csv", comment="#")
+    clubmap.update({r.club: r.slug for r in _m.itertuples(index=False) if isinstance(r.slug, str) and r.slug})
 hist = json.load(open("data/external/fdb_history.json"))
 FBREF_SEASON = {"wc2018": "fbref_2017_18", "wc2022": "fbref_2021_22",
                 "euro2024": "fbref_2023_24", "wc2026": "fbref_2025_26"}
@@ -54,5 +58,7 @@ for slug, ym in TOURN_MONTH.items():
     hi = d.nlargest(1, "capital_z"); lo = d.nsmallest(1, "capital_z")
     print(f"{slug} ({ym}): cov {d.coverage.mean():.0%} | top {hi.team.iloc[0]} {hi.capital_z.iloc[0]:+.2f} "
           f"| bottom {lo.team.iloc[0]} {lo.capital_z.iloc[0]:+.2f}")
-pd.concat(allc).round(4).to_csv("outputs/capital_fdb.csv", index=False)
-print("outputs/capital_fdb.csv written")
+_out = pd.concat(allc).round(4)
+_out.to_csv("outputs/capital_fdb.csv", index=False)
+_out.to_csv("outputs/capital.csv", index=False)  # DEPLOYED capital source = worldelo (Simone, 2026-06-18)
+print("outputs/capital_fdb.csv + capital.csv (deployed) written")

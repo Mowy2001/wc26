@@ -99,5 +99,5 @@ for slug, page, date in TOURNAMENTS:
           f"coverage {cap.coverage.mean():.0%} | top {hi.team.iloc[0]} {hi.capital_z.iloc[0]:+.2f} "
           f"| bottom {lo.team.iloc[0]} {lo.capital_z.iloc[0]:+.2f}")
 
-pd.concat(all_caps).round(4).to_csv("outputs/capital.csv", index=False)
+pd.concat(all_caps).round(4).to_csv("outputs/capital_clubelo.csv", index=False)  # legacy; deployed capital = worldelo via scripts/30
 print("outputs/capital.csv written")
