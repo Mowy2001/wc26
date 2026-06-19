@@ -1,63 +1,63 @@
 match,slot,team,p
-73,top,South Korea,0.6778
-73,bot,Switzerland,0.3591
-74,top,Germany,0.6376
-74,bot,Czech Republic,0.1855
-75,top,Netherlands,0.3888
-75,bot,Morocco,0.3707
-76,top,Brazil,0.4357
-76,bot,Japan,0.3752
-77,top,France,0.6715
-77,bot,Turkey,0.1421
-78,top,Ivory Coast,0.419
-78,bot,Norway,0.496
-79,top,Mexico,0.8548
-79,bot,Ecuador,0.1489
-80,top,England,0.9129
-80,bot,DR Congo,0.197
-81,top,United States,0.5037
-81,bot,Sweden,0.1776
-82,top,Belgium,0.3821
-82,bot,Senegal,0.1312
-83,top,Portugal,0.4333
-83,bot,Croatia,0.5927
-84,top,Spain,0.7413
-84,bot,Austria,0.5968
-85,top,Canada,0.5474
-85,bot,Egypt,0.1807
-86,top,Argentina,0.8702
-86,bot,Uruguay,0.4363
-87,top,Colombia,0.7302
-87,bot,Ghana,0.2801
-88,top,Australia,0.3786
-88,bot,Belgium,0.2662
-89,top,Germany,0.4465
-89,bot,France,0.4885
-90,top,South Korea,0.3762
-90,bot,Brazil,0.2302
-91,top,Brazil,0.2828
-91,bot,Norway,0.2616
-92,top,Mexico,0.6987
-92,bot,England,0.6287
-93,top,Croatia,0.2994
-93,bot,Spain,0.5958
-94,top,United States,0.3004
-94,bot,Belgium,0.2364
-95,top,Argentina,0.6751
-95,bot,Australia,0.2115
-96,top,Canada,0.3784
-96,bot,Colombia,0.5412
-97,top,France,0.3412
-97,bot,Brazil,0.1609
-98,top,Spain,0.4602
-98,bot,United States,0.1585
-99,top,Brazil,0.1643
-99,bot,Mexico,0.5208
-100,top,Argentina,0.543
-100,bot,Colombia,0.3423
+73,top,South Korea,0.7886
+73,bot,Switzerland,0.7097
+74,top,Germany,0.6414
+74,bot,Bosnia and Herzegovina,0.2794
+75,top,Netherlands,0.3901
+75,bot,Morocco,0.3706
+76,top,Brazil,0.4335
+76,bot,Japan,0.3751
+77,top,France,0.675
+77,bot,Turkey,0.1514
+78,top,Ivory Coast,0.4264
+78,bot,Norway,0.49
+79,top,Mexico,0.9869
+79,bot,Ecuador,0.1615
+80,top,England,0.9082
+80,bot,Uzbekistan,0.2109
+81,top,United States,0.499
+81,bot,Sweden,0.186
+82,top,Belgium,0.3819
+82,bot,Senegal,0.132
+83,top,Portugal,0.4377
+83,bot,Croatia,0.5847
+84,top,Spain,0.7425
+84,bot,Austria,0.6012
+85,top,Canada,0.7191
+85,bot,Egypt,0.1883
+86,top,Argentina,0.8722
+86,bot,Uruguay,0.4323
+87,top,Colombia,0.7308
+87,bot,Ghana,0.3191
+88,top,Australia,0.3701
+88,bot,Belgium,0.2717
+89,top,Germany,0.4668
+89,bot,France,0.493
+90,top,Switzerland,0.4476
+90,bot,Brazil,0.2231
+91,top,Brazil,0.2747
+91,bot,Norway,0.2563
+92,top,Mexico,0.8084
+92,bot,England,0.6309
+93,top,Croatia,0.2948
+93,bot,Spain,0.5971
+94,top,United States,0.3028
+94,bot,Belgium,0.2256
+95,top,Argentina,0.6767
+95,bot,Australia,0.2039
+96,top,Canada,0.5004
+96,bot,Colombia,0.5535
+97,top,France,0.3438
+97,bot,Switzerland,0.2039
+98,top,Spain,0.4614
+98,bot,United States,0.153
+99,top,Brazil,0.159
+99,bot,Mexico,0.6009
+100,top,Argentina,0.5497
+100,bot,Colombia,0.3368
 101,top,France,0.2276
-101,bot,Spain,0.3854
-102,top,Mexico,0.2452
-102,bot,Argentina,0.4003
-104,top,Spain,0.2872
-104,bot,Argentina,0.2794
+101,bot,Spain,0.3882
+102,top,Mexico,0.2919
+102,bot,Argentina,0.4052
+104,top,Spain,0.2894
+104,bot,Argentina,0.2808

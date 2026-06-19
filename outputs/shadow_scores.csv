@@ -1,8 +1,8 @@
 variant,n,log_loss
-+ cohesion (shadow),24,1.1019
-no altitude,24,1.1142
-Full model,24,1.1151
-+ capital (shadow),24,1.116
-+ diaspora (shadow),24,1.1161
-Elo only,24,1.1162
-no fatigue,24,1.1179
++ cohesion (shadow),28,1.0221
+Full model,28,1.035
++ capital (shadow),28,1.0355
++ diaspora (shadow),28,1.0357
+no fatigue,28,1.0392
+no altitude,28,1.0415
+Elo only,28,1.0453
