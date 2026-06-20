@@ -97,5 +97,6 @@ if _os.path.exists(_rp):
     print(f"replay snapshot appended (k={_k}, {len(_data['snapshots'])} total)")
 
 subprocess.run([sys.executable, "scripts/25_shadow_scores.py"], check=True)
+subprocess.run([sys.executable, "scripts/15_benchmark_report.py"], check=True)
 subprocess.run([sys.executable, "scripts/05_export_site_data.py"], check=True)
 print("Site refreshed — reload site/index.html.")

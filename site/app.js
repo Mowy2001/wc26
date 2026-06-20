@@ -336,3 +336,30 @@ if ($("footer-meta")) {
     `Generated ${WC26.generated} · ${WC26.model_version} · ${WC26.n_sims.toLocaleString("en-US")} simulations, seed ${WC26.seed} · ` +
     `WC2022 backtest log-loss ${WC26.backtest.log_loss_model} (uniform ${WC26.backtest.log_loss_uniform}).`;
 }
+
+/* ---------- how it's doing: live track record + real standings ---------- */
+if (WC26.scoring && WC26.scoring.n && $("track-head")) {
+  const s = WC26.scoring;
+  $("track-head").innerHTML = `
+    <div class="stat"><div class="v">${s.log_loss}</div><div class="k">live log-loss (uniform ${s.uniform})</div></div>
+    <div class="stat"><div class="v">${s.n}</div><div class="k">real matches scored</div></div>
+    <div class="stat"><div class="v">${pct(s.fav_predicted,0)} → ${pct(s.fav_observed,0)}</div><div class="k">favourites: predicted vs won</div></div>`;
+  const M = { H: "home win", D: "draw", A: "away win" };
+  $("track-matches").innerHTML = [...s.matches].reverse().map((m) => {
+    const good = m.p_realised >= 0.45;
+    return `<div class="bar-row">
+      <div class="who">${flag(m.home)} ${m.score} ${flag(m.away)}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${100 * m.p_realised}%;
+        background:${good ? "linear-gradient(90deg, var(--accent2), var(--accent))" : "#8f5161"}"></div></div>
+      <div class="val">${pct(m.p_realised, 0)}</div>
+    </div>`;
+  }).join("");
+  if (WC26.standings && $("track-standings")) {
+    $("track-standings").innerHTML = Object.keys(WC26.standings).sort().map((g) => {
+      const rows = WC26.standings[g].map((r, i) => `
+        <div class="row"><span>${i < 2 ? "<b>" : ""}${flag(r.team)}${r.team}${i < 2 ? "</b>" : ""}</span>
+          <span>${r.Pts}p · ${r.GD > 0 ? "+" : ""}${r.GD}</span></div>`).join("");
+      return `<div class="tlg"><b>GROUP ${g}</b>${rows}</div>`;
+    }).join("");
+  }
+}

@@ -62,7 +62,7 @@
 </section>
 
 <section id="idea">
-  <h2>The whole thing, in sixty seconds <span class="sub">no maths required — the maths is one click away, everywhere</span></h2>
+  <h2>How it predicts <span class="sub">grade → expected goals → 20,000 simulated tournaments. No maths required.</span></h2>
   <div class="cards3">
     <div class="card">
       <div class="card-step">1</div>
@@ -243,6 +243,18 @@
       official forecast; see below.)</p>
     </div>
   </div>
+</section>
+
+<section id="track">
+  <h2>How it's doing <span class="sub">the forecast frozen on June 11, graded against real results</span></h2>
+  <div id="track-head" class="hero-stats"></div>
+  <div class="tl-grid" style="margin-top:18px">
+    <div><div class="tl-h">Recent matches — P(what actually happened)</div><div id="track-matches" class="chart"></div></div>
+    <div><div class="tl-h">Real group tables so far</div><div id="track-standings" class="tl-groups"></div></div>
+  </div>
+  <p class="note">These are the probabilities the model gave each real match <em>before</em> it was
+  played (beliefs frozen June 11). Log-loss below the uniform baseline (1.099) means it beats a
+  know-nothing coin-three; calibration shows how often its favourites actually won.</p>
 </section>
 
 <section id="lab">

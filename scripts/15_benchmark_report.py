@@ -1,44 +1,63 @@
-"""Step 15: three-way benchmark report (backlog #9).
+"""Step 15: live track record + real standings + three-way benchmark.
 
-Eve-of-tournament: model champion distribution vs BetMGM de-vigged with
-Shin's method vs Klement's point forecast. Live: as played 2026 matches
-appear in results.csv, score the model's frozen pre-match probabilities
-(log-loss + favourite calibration) — the high-n test that actually ranks
-forecasters; the champion market is scored once, after the final.
+Writes two artifacts for the site:
+  outputs/history/scoring.json  — how the frozen eve-of-tournament model is
+      doing against real results (running log-loss vs the uniform baseline,
+      favourite calibration, per-match list). Uses the DEPLOYED tilts
+      (fatigue + altitude); capital was removed from the model.
+  outputs/history/standings.json — the REAL group tables so far (played,
+      points, GD, GF, rank), the factual record alongside the forecast.
 
-Assumption, declared: BetMGM quotes 9 teams; the unquoted field's true
-mass is taken from the model (printed). Klement is a point forecast and
-cannot be log-scored pre-emptively; he is tracked on his three calls
-(Netherlands champions, final vs Portugal, England & Spain out in semis).
+Also prints the champion-market three-way comparison (model vs BetMGM
+de-vigged with Shin vs Klement).
 """
-import json, sys
+import json, os, sys
 sys.path.insert(0, "src")
 import numpy as np, pandas as pd
 from wc26.data import load_results, wc2026_group_fixtures, reconstruct_groups
 from wc26.elo import ratings_asof
 from wc26.dixon_coles import DixonColes
 from wc26.benchmark import shin_probs, implied_raw, log_score
+from wc26.tilts import load_team_tilt, load_city_tilt
 
+os.makedirs("outputs/history", exist_ok=True)
 BETMGM = {"Spain": 450, "France": 500, "England": 700, "Brazil": 800,
           "Portugal": 900, "Argentina": 900, "Germany": 1400,
           "Netherlands": 2000, "United States": 5000}
 
+results = load_results()
+gfx = wc2026_group_fixtures(results)
+groups = reconstruct_groups(gfx)
+team_group = {t: g for g, ts in groups.items() for t in ts}
+
+# ---- champion-market benchmark ----
 tbl = pd.read_csv("outputs/tournament_probs_v1.csv", index_col=0)
 field_mass = 1.0 - tbl.loc[list(BETMGM), "P_champion"].sum()
 shin = shin_probs(BETMGM, residual_mass=float(field_mass))
-raw = implied_raw(BETMGM)
-print(f"Champion market (field mass from model: {field_mass:.1%}; "
-      f"raw quoted sum {sum(raw.values()):.3f} -> Shin de-vig):")
-print(f"{'team':14s} {'model':>7s} {'Shin':>7s} {'raw':>7s}")
+print("Champion market vs model (Shin de-vig):")
 for t in BETMGM:
-    print(f"{t:14s} {tbl.loc[t, 'P_champion']:7.1%} {shin[t]:7.1%} {raw[t]:7.1%}")
+    print(f"  {t:14s} model {tbl.loc[t,'P_champion']:5.1%}  Shin {shin[t]:5.1%}")
 
-# ---- live match-level scoring (frozen eve-of-tournament beliefs) ----
-results = load_results()
-gfx = wc2026_group_fixtures(results)
+# ---- real group standings (the factual record) ----
 played = gfx.dropna(subset=["home_score", "away_score"])
+st = {t: {"P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0} for t in team_group}
+for r in played.itertuples(index=False):
+    hg, ag = int(r.home_score), int(r.away_score)
+    for t, gf, ga in ((r.home_team, hg, ag), (r.away_team, ag, hg)):
+        s = st[t]; s["P"] += 1; s["GF"] += gf; s["GA"] += ga
+        s["W"] += gf > ga; s["D"] += gf == ga; s["L"] += gf < ga
+        s["Pts"] += 3 if gf > ga else (1 if gf == ga else 0)
+standings = {}
+for g, ts in groups.items():
+    rows = sorted(ts, key=lambda t: (st[t]["Pts"], st[t]["GF"] - st[t]["GA"], st[t]["GF"]), reverse=True)
+    standings[g] = [{"team": t, **st[t], "GD": st[t]["GF"] - st[t]["GA"]} for t in rows]
+json.dump(standings, open("outputs/history/standings.json", "w"))
+print(f"\nReal standings written ({len(played)} group matches played).")
+
+# ---- live match-level scoring (frozen beliefs, DEPLOYED tilts) ----
 if played.empty:
-    print("\nNo 2026 matches played yet — match-level scoring starts with the data refresh.")
+    json.dump({"n": 0}, open("outputs/history/scoring.json", "w"))
+    print("No matches played yet.")
     sys.exit(0)
 
 elo_hist = pd.read_parquet("outputs/elo_history.parquet")
@@ -49,20 +68,29 @@ df["dup"] = df.groupby(key).cumcount()
 e = elo_hist.copy(); e["dup"] = e.groupby(key).cumcount()
 df = df.merge(e[key + ["dup", "elo_home_pre", "elo_away_pre"]], on=key + ["dup"], validate="1:1")
 model = DixonColes().fit(df, pd.Timestamp("2026-06-11"))
-elo_now = ratings_asof(elo_hist, "2026-06-11")
-cap = pd.read_csv("outputs/capital.csv").query("tournament == 'wc2026'").set_index("team")["capital_z"]
-b_cap = json.load(open("outputs/capital_beta.json"))["beta_capital"]
+elo = ratings_asof(elo_hist, "2026-06-11")
+tilt, city_tilt = load_team_tilt() or {}, load_city_tilt() or {}
 
-lls, fav_p, fav_w = [], [], []
-print(f"\nMatch-level scoring ({len(played)} played):")
-for r in played.itertuples(index=False):
-    lh, la = model.predict_lambdas(elo_now[r.home_team], elo_now[r.away_team], neutral=bool(r.neutral))
-    d = b_cap * float(cap.get(r.home_team, 0.0) - cap.get(r.away_team, 0.0))
+lls, fav_p, fav_w, matches = [], [], [], []
+for r in played.sort_values("date").itertuples(index=False):
+    lh, la = model.predict_lambdas(elo[r.home_team], elo[r.away_team], neutral=bool(r.neutral))
+    d = tilt.get(r.home_team, 0.0) - tilt.get(r.away_team, 0.0)
+    d += city_tilt.get((r.home_team, r.city), 0.0) - city_tilt.get((r.away_team, r.city), 0.0)
     p = model.outcome_probs(lh * np.exp(d), la * np.exp(-d))
     actual = 0 if r.home_score > r.away_score else (1 if r.home_score == r.away_score else 2)
     lls.append(log_score(p[actual]))
     k = int(np.argmax(p)); fav_p.append(p[k]); fav_w.append(int(k == actual))
-    res = f"{int(r.home_score)}-{int(r.away_score)}"
-    print(f"  {r.home_team} {res} {r.away_team}: P(realised) {p[actual]:.0%}, LL {lls[-1]:.3f}")
-print(f"\nRunning log-loss: {np.mean(lls):.4f} (uniform 1.0986) | "
-      f"favourite calibration: {np.mean(fav_p):.0%} predicted vs {np.mean(fav_w):.0%} observed")
+    matches.append({"home": r.home_team, "away": r.away_team,
+                    "score": f"{int(r.home_score)}-{int(r.away_score)}",
+                    "p_realised": round(float(p[actual]), 3),
+                    "outcome": ["H", "D", "A"][actual]})
+json.dump({
+    "n": len(lls),
+    "log_loss": round(float(np.mean(lls)), 4),
+    "uniform": round(float(np.log(3)), 4),
+    "fav_predicted": round(float(np.mean(fav_p)), 3),
+    "fav_observed": round(float(np.mean(fav_w)), 3),
+    "matches": matches[-12:],
+}, open("outputs/history/scoring.json", "w"))
+print(f"Running log-loss {np.mean(lls):.4f} vs uniform {np.log(3):.4f} | "
+      f"favourite {np.mean(fav_p):.0%} predicted vs {np.mean(fav_w):.0%} observed")
