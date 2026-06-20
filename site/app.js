@@ -24,17 +24,21 @@ const $ = (id) => document.getElementById(id);
 /* ---------- hero stats ---------- */
 {
   const fav = byChamp[0];
-  const usa = WC26.teams.find((t) => t.team === "United States");
   const bt = WC26.backtest;
+  const sc = WC26.scoring;
+  const live = sc && sc.n
+    ? `<div class="stat"><div class="v">${sc.log_loss} <span style="color:var(--muted);font-size:.95rem">vs ${sc.uniform}</span></div>
+        <div class="k">live log-loss vs naive (${sc.n} matches)</div></div>`
+    : `<div class="stat"><div class="v">${bt.log_loss_model} <span style="color:var(--muted);font-size:.95rem">vs ${bt.log_loss_uniform}</span></div>
+        <div class="k">backtest log-loss vs naive</div></div>`;
   $("hero-stats").innerHTML = `
     <div class="stat"><div class="v">${flag(fav.team)}${pct(fav.P_champion)}</div>
       <div class="k">favourite: ${fav.team}</div></div>
     <div class="stat"><div class="v">${WC26.n_sims.toLocaleString("en-US")}</div>
       <div class="k">simulated tournaments</div></div>
+    ${live}
     <div class="stat"><div class="v">${bt.log_loss_model} <span style="color:var(--muted);font-size:.95rem">vs ${bt.log_loss_uniform}</span></div>
-      <div class="k">backtest log-loss vs naive</div></div>
-    <div class="stat"><div class="v">${flag(usa.team)}${pct(usa.P1, 0)}</div>
-      <div class="k">USA win group D (market: ${pct(WC26.kalshi_usa_group, 0)})</div></div>`;
+      <div class="k">backtest log-loss (WC2022)</div></div>`;
 }
 
 /* ---------- THE FORECAST: one slider drives champion + bracket + thirds + Golden Boot + groups ---------- */
