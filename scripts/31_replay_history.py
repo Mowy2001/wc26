@@ -50,8 +50,12 @@ for k in range(len(played) + 1):
     fixed = {(r.home_team, r.away_team): (int(r.home_score), int(r.away_score))
              for r in sub[sub.date <= GROUP_STAGE_END].itertuples(index=False)}
     res = simulate_tournament(groups, gfx, model, elo, n_sims=10000, fixed_results=fixed,
-                              team_log_tilt=tilt, city_log_tilt=city_tilt, collect_goal_samples=True)
+                              team_log_tilt=tilt, city_log_tilt=city_tilt,
+                              collect_goal_samples=True, collect_bracket=True)
     t = res["teams"]
+    bracket = {}
+    for br in res["bracket"].itertuples(index=False):
+        bracket.setdefault(int(br.match), {})[br.slot] = {"team": br.team, "p": round(float(br.p), 4)}
     asof_date = played.iloc[k-1].date if k > 0 else pd.Timestamp("2026-06-10")
     rg = gs[(gs["date"] >= "2026-06-11") & (gs["date"] <= asof_date)
             & (~gs["own_goal"].astype(bool)) & (gs["team"].isin(teams))].dropna(subset=["scorer"])
@@ -69,7 +73,9 @@ for k in range(len(played) + 1):
         "last_match": last,
         "champion": {tm: round(float(t.loc[tm, "P_champion"]), 4) for tm in t.index},
         "qualify": {tm: round(float(t.loc[tm, "P_qualify"]), 4) for tm in t.index},
+        "best_third": {tm: round(float(t.loc[tm, "P_best_third"]), 4) for tm in t.index},
         "golden_boot": gb_list,
+        "bracket": bracket,
     })
     print(f"  k={k:2d} {last[:42]:42s} {time.time()-t0:5.0f}s")
 

@@ -22,21 +22,44 @@
 </header>
 
 <nav class="toc wrap">
-  <a href="#idea">The idea</a>
-  <a href="#data">The data</a>
-  <a href="#influence">What moves the forecast</a>
-  <a href="#champion">Champion race</a>
-  <a href="#timeline">Match by match</a>
+  <a href="#forecast">The forecast</a>
   <a href="#rounds">Round by round</a>
-  <a href="#bracket">Bracket</a>
-  <a href="#groups">Groups</a>
-  <a href="#boot">Golden Boot</a>
+  <a href="#idea">How it predicts</a>
+  <a href="#data">The data</a>
+  <a href="#influence">What moves it</a>
   <a href="#lab">Model lab</a>
   <a href="#market">Model vs market</a>
   <a href="#method">Methodology</a>
 </nav>
 
 <main class="wrap">
+
+<section id="forecast">
+  <h2>The forecast <span class="sub">one slider through the whole tournament — bracket, groups, thirds, title and Golden Boot all move together as results land</span></h2>
+  <div class="tl-control">
+    <input type="range" id="fc-slider" min="0" value="0" step="1">
+    <div class="tl-label"><span id="fc-date"></span> · <span id="fc-match"></span></div>
+  </div>
+  <p class="note" style="margin-top:-4px">Every frame is a full re-simulation conditioned on the
+  results up to that point (beliefs frozen at June 11). Drag to the end for today's live picture;
+  drag back to watch one result ripple through everything. <strong>▲/▼ = change since the previous
+  match.</strong></p>
+
+  <div class="fc-block"><div class="tl-h">Champion</div><div id="fc-champ" class="chart"></div></div>
+  <div class="fc-block"><div class="tl-h">Predicted bracket — most likely team in each slot</div>
+    <div id="fc-bracket" class="bracket-scroll"></div></div>
+  <div class="fc-grid">
+    <div><div class="tl-h">Best thirds — 8 of 12 advance</div><div id="fc-thirds" class="chart"></div></div>
+    <div><div class="tl-h">Golden Boot</div><div id="fc-gb" class="chart"></div></div>
+  </div>
+  <div class="fc-block"><div class="tl-h">Groups — probability of advancing</div>
+    <div id="fc-groups" class="groups-grid"></div></div>
+</section>
+
+<section id="rounds">
+  <h2>Round by round <span class="sub">how far each contender goes — today's picture</span></h2>
+  <div class="table-scroll"><table id="rounds-table"></table></div>
+</section>
 
 <section id="idea">
   <h2>The whole thing, in sixty seconds <span class="sub">no maths required — the maths is one click away, everywhere</span></h2>
@@ -220,57 +243,6 @@
       official forecast; see below.)</p>
     </div>
   </div>
-</section>
-
-<section id="champion">
-  <h2>Champion race <span class="sub">P(lift the trophy on July 19)</span></h2>
-  <div id="champ-chart" class="chart"></div>
-  <p class="note">Lighter bar: reaching the final; solid bar: winning it all. The thin white
-  notch is where each team stood on <strong>June 11, before a ball was kicked</strong> — the
-  frozen baseline. Arrows show how real results have moved the needle since; the full
-  snapshot-by-snapshot history lives in the repo (outputs/history/).</p>
-</section>
-
-<section id="timeline">
-  <h2>Match by match <span class="sub">drag through the tournament — watch the odds move with every result</span></h2>
-  <div class="tl-control">
-    <input type="range" id="tl-slider" min="0" value="0" step="1">
-    <div class="tl-label"><span id="tl-date"></span> · <span id="tl-match"></span></div>
-  </div>
-  <div class="tl-grid">
-    <div><div class="tl-h">Title odds</div><div id="tl-champ" class="chart"></div></div>
-    <div><div class="tl-h">Golden Boot</div><div id="tl-gb" class="chart"></div></div>
-  </div>
-  <div class="tl-h" style="margin-top:18px">Qualification by group</div>
-  <div id="tl-groups" class="tl-groups"></div>
-  <p class="note">Every frame is a full 10,000-tournament re-simulation conditioned on the results
-  up to that point, beliefs still frozen at June 11. Slide to the end for the live picture; slide
-  back to watch a single result ripple through a group and the title race.</p>
-</section>
-
-<section id="rounds">
-  <h2>Round by round <span class="sub">how far does each contender go?</span></h2>
-  <div class="table-scroll"><table id="rounds-table"></table></div>
-</section>
-
-<section id="bracket">
-  <h2>The predicted bracket <span class="sub">most likely team in each slot — and how sure we are. Firms up as results land.</span></h2>
-  <p class="note" style="margin-bottom:18px;margin-top:-6px">Each box is the team most often sent
-  to that slot across 20,000 simulations, with the probability it actually lands there. Low
-  percentages early mean the group is still wide open; once a match is played the relevant slots
-  snap toward 100%. Read it left to right — winners flow into the next column.</p>
-  <div id="bracket-board" class="bracket-scroll"></div>
-</section>
-
-<section id="groups">
-  <h2>The twelve groups <span class="sub">advance = top two, or one of the 8 best thirds</span></h2>
-  <div id="groups-grid" class="groups-grid"></div>
-</section>
-
-<section id="boot">
-  <h2>The Golden Boot <span class="sub">each team's simulated goals shared among its squad by recent scoring form (age-discounted), plus a 17% "new faces" bucket — and teams that go deeper get more chances</span></h2>
-  <div id="boot-chart" class="chart"></div>
-  <p class="note" id="boot-note"></p>
 </section>
 
 <section id="lab">

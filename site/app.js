@@ -19,13 +19,14 @@ const FLAGS = {
 const pct = (x, d = 1) => (100 * x).toFixed(d) + "%";
 const flag = (t) => `<span class="flag">${FLAGS[t] || "🏳️"}</span>`;
 const byChamp = [...WC26.teams].sort((a, b) => b.P_champion - a.P_champion);
+const $ = (id) => document.getElementById(id);
 
 /* ---------- hero stats ---------- */
 {
   const fav = byChamp[0];
   const usa = WC26.teams.find((t) => t.team === "United States");
   const bt = WC26.backtest;
-  document.getElementById("hero-stats").innerHTML = `
+  $("hero-stats").innerHTML = `
     <div class="stat"><div class="v">${flag(fav.team)}${pct(fav.P_champion)}</div>
       <div class="k">favourite: ${fav.team}</div></div>
     <div class="stat"><div class="v">${WC26.n_sims.toLocaleString("en-US")}</div>
@@ -36,258 +37,20 @@ const byChamp = [...WC26.teams].sort((a, b) => b.P_champion - a.P_champion);
       <div class="k">USA win group D (market: ${pct(WC26.kalshi_usa_group, 0)})</div></div>`;
 }
 
-/* ---------- champion race ---------- */
-{
-  const top = byChamp.slice(0, 15);
-  const max = top[0].P_final;
-  const base = WC26.baseline_eve || {};
-  document.getElementById("champ-chart").innerHTML = top.map((t) => {
-    const b = base[t.team];
-    const tick = b ? `<div class="bar-tick" title="June 11 baseline: ${pct(b.P_champion)}"
-      style="left:${(100 * b.P_champion) / max}%"></div>` : "";
-    const d = b ? t.P_champion - b.P_champion : 0;
-    const delta = b && Math.abs(d) >= 0.0005
-      ? `<span class="delta ${d > 0 ? "up" : "down"}">${d > 0 ? "▲" : "▼"}${(100 * Math.abs(d)).toFixed(1)}</span>` : "";
-    return `<div class="bar-row">
-      <div class="who">${flag(t.team)}${t.team}</div>
-      <div class="bar-track">
-        <div class="bar-ghost" style="width:${(100 * t.P_final) / max}%"></div>
-        <div class="bar-fill" style="width:${(100 * t.P_champion) / max}%"></div>
-        ${tick}
-      </div>
-      <div class="val">${pct(t.P_champion)}${delta}</div>
-    </div>`;
-  }).join("");
-}
+/* ---------- THE FORECAST: one slider drives champion + bracket + thirds + Golden Boot + groups ---------- */
+if (WC26.replay && WC26.replay.snapshots && $("fc-slider")) {
+  const snaps = WC26.replay.snapshots;
+  const tg = WC26.replay.teams_group;
+  const slider = $("fc-slider");
+  slider.max = snaps.length - 1;
+  slider.value = snaps.length - 1;
 
-/* ---------- round-by-round table ---------- */
-{
-  const cols = [["P_R32", "R32"], ["P_R16", "R16"], ["P_QF", "QF"], ["P_SF", "SF"], ["P_final", "Final"], ["P_champion", "Champion"]];
-  const heat = (p) => {
-    const a = Math.min(0.85, p * 1.15);
-    return `background: rgba(74, 222, 128, ${a.toFixed(3)}); color: ${a > 0.45 ? "#07101f" : "var(--text)"}`;
+  const delta = (now, was, dp = 1) => {
+    if (was === undefined || was === null) return "";
+    const d = now - was;
+    if (Math.abs(d) < 0.005) return "";
+    return `<span class="delta ${d > 0 ? "up" : "down"}">${d > 0 ? "▲" : "▼"}${(100 * Math.abs(d)).toFixed(dp)}</span>`;
   };
-  document.getElementById("rounds-table").innerHTML =
-    `<thead><tr><th>Team</th><th>Group</th><th>Elo</th>${cols.map(([, h]) => `<th>${h}</th>`).join("")}</tr></thead>` +
-    "<tbody>" + byChamp.slice(0, 16).map((t) => `
-      <tr><td>${flag(t.team)}${t.team}</td><td>${t.group}</td><td>${t.elo}</td>
-      ${cols.map(([c]) => `<td class="heat" style="${heat(t[c])}">${pct(t[c])}</td>`).join("")}</tr>`).join("") + "</tbody>";
-}
-
-/* ---------- groups ---------- */
-{
-  const groups = {};
-  WC26.teams.forEach((t) => (groups[t.group] = groups[t.group] || []).push(t));
-  document.getElementById("groups-grid").innerHTML = Object.keys(groups).sort().map((g) => {
-    const rows = groups[g].sort((a, b) => b.P_qualify - a.P_qualify).map((t) => `
-      <div class="team-row">
-        <div>
-          <div class="who">${flag(t.team)}${t.team}<span class="elo">${t.elo}</span></div>
-          <div class="qbar"><i style="width:${100 * t.P_qualify}%"></i></div>
-        </div>
-        <div class="val"><b>${pct(t.P_qualify, 0)}</b><br>win ${pct(t.P1, 0)}</div>
-      </div>`).join("");
-    return `<div class="group-card"><h3>GROUP ${g}</h3>${rows}</div>`;
-  }).join("");
-}
-
-/* ---------- model vs market ---------- */
-{
-  const rows = Object.entries(WC26.betmgm_shin || WC26.betmgm_outright).map(([team, p]) => {
-    const t = WC26.teams.find((x) => x.team === team);
-    const market = WC26.betmgm_shin ? p : 1 / (1 + p / 100);
-    return { team, model: t.P_champion, market };
-  }).sort((a, b) => b.model - a.model);
-  const max = Math.max(...rows.flatMap((r) => [r.model, r.market]));
-  document.getElementById("market-chart").innerHTML = rows.map((r) => `
-    <div class="pair-row">
-      <div class="who">${flag(r.team)}${r.team}</div>
-      <div class="pair-bars">
-        <div class="pair-bar"><div class="pair-track"><div class="pair-fill model" style="width:${(100 * r.model) / max}%"></div></div>
-          <div class="pair-label">model ${pct(r.model)}</div></div>
-        <div class="pair-bar"><div class="pair-track"><div class="pair-fill market" style="width:${(100 * r.market) / max}%"></div></div>
-          <div class="pair-label">market ${pct(r.market)}</div></div>
-      </div>
-    </div>`).join("");
-  document.getElementById("klement-note").textContent = WC26.klement;
-}
-
-/* ---------- ablations: host advantage ---------- */
-if (WC26.ablations) {
-  const noHost = WC26.ablations.no_host_advantage.hosts;
-  document.getElementById("host-ablation").innerHTML =
-    ["United States", "Mexico", "Canada"].map((team) => {
-      const real = WC26.teams.find((t) => t.team === team).P1;
-      const cf = noHost[team].P1;
-      return `<div class="ab-row">
-        <div class="who">${flag(team)}${team} — win the group</div>
-        <div class="ab-pair"><div class="ab-track"><div class="ab-fill real" style="width:${100 * real}%"></div></div>
-          <div class="ab-label">with home ${pct(real, 0)}</div></div>
-        <div class="ab-pair"><div class="ab-track"><div class="ab-fill counter" style="width:${100 * cf}%"></div></div>
-          <div class="ab-label">neutral ${pct(cf, 0)}</div></div>
-      </div>`;
-    }).join("");
-}
-
-/* ---------- ablations: xi plateau ---------- */
-if (WC26.xi_tuning) {
-  const entries = Object.entries(WC26.xi_tuning.pooled)
-    .map(([k, v]) => [parseFloat(k), v]).sort((a, b) => a[0] - b[0]);
-  const lls = entries.map(([, v]) => v);
-  const min = Math.min(...lls), max = Math.max(...lls);
-  const pad = (max - min) * 4 || 1; // flatness is the message: weak amplification
-  document.getElementById("xi-chart").innerHTML =
-    `<div class="xi-bars">` + entries.map(([xi, ll]) => {
-      const h = 25 + 70 * (ll - min) / pad;
-      const chosen = xi === WC26.xi_tuning.chosen;
-      return `<div class="xi-bar${chosen ? " chosen" : ""}" title="xi=${xi}: pooled log-loss ${ll}">
-        <i style="height:${h}%"></i><span>${xi}</span></div>`;
-    }).join("") + `</div>
-    <div class="xi-axis"><span>← 3.8-year half-life (long memory)</span><span>4.6-month half-life (short) →</span></div>`;
-  document.getElementById("xi-n").textContent = WC26.xi_tuning.n_matches;
-  document.getElementById("xi-note").innerHTML =
-    `Pooled log-loss spans <strong>${min}–${max}</strong> across a 10× range of decay
-     (paired t=${WC26.xi_tuning.paired_t_extremes} between the extremes: statistically nothing).
-     We pin it at the plateau centre and move on — a data choice that, measurably,
-     <strong>does not matter</strong>. Swapping extremes moves Spain's title odds by ~1 point.`;
-}
-
-/* ---------- usa case ---------- */
-{
-  const usa = WC26.teams.find((t) => t.team === "United States");
-  const rows = [
-    ["Model (Elo + home)", usa.P1, "linear-gradient(90deg, var(--accent2), var(--accent))"],
-    ["Market (Kalshi)", WC26.kalshi_usa_group, "var(--gold)"],
-  ];
-  const cfP1 = WC26.ablations ? WC26.ablations.no_host_advantage.hosts["United States"].P1 : null;
-  if (cfP1 !== null) rows.push(["Model, neutral world", cfP1, "#51618f"]);
-  document.getElementById("usa-case").innerHTML = `<div class="usa-rows">` +
-    rows.map(([src, p, bg]) => `<div class="usa-row">
-      <span class="src">${src}</span>
-      <div class="usa-track"><i style="width:${100 * p / 0.6}%; background:${bg}"></i></div>
-      <span class="num">${pct(p, 0)}</span></div>`).join("") +
-    `</div><p class="mini-note" style="margin-top:8px">🇺🇸 USA win group D — three views of the same question.</p>`;
-}
-
-
-/* ---------- altitude card ---------- */
-if (WC26.altitude && WC26.ablations && WC26.ablations.no_altitude) {
-  const m = WC26.altitude;
-  const na = WC26.ablations.no_altitude.P_champion;
-  const movers = WC26.teams
-    .map((t) => ({ team: t.team, d: t.P_champion - (na[t.team] || 0) }))
-    .filter((x) => Math.abs(x.d) >= 0.001)
-    .sort((a, b) => Math.abs(b.d) - Math.abs(a.d)).slice(0, 5).sort((a, b) => b.d - a.d);
-  document.getElementById("altitude-card").innerHTML =
-    `<details class="tech"><summary>the numbers, for the curious</summary><div class="boot-sd">
-      <span>OOS log-loss <b>${m.oos_delta}</b></span>
-      <span>paired t <b>${m.t_paired}</b></span>
-      <span>β <b>${m.beta_altitude_per_km}</b>/km</span>
-      <span>tested on <b>${m.n}</b> CONMEBOL qualifiers</span>
-    </div></details>` +
-    movers.map((x) => `<div class="usa-row">
-      <span class="src">${flag(x.team)}${x.team} title odds</span>
-      <div class="usa-track"><i style="width:${100 * Math.min(1, Math.abs(x.d) / 0.012)}%;
-        background:${x.d > 0 ? "linear-gradient(90deg, var(--accent2), var(--accent))" : "#8f5161"}"></i></div>
-      <span class="num">${x.d > 0 ? "+" : ""}${(100 * x.d).toFixed(1)}pp</span></div>`).join("");
-  document.getElementById("altitude-note").innerHTML =
-    `This was our most decisive trial (t=${m.t_paired}, where most signals barely register).
-     Mexico plays group games — and maybe a knockout — at 2,240 m, the air its players live in;
-     their lowland opponents arrive gasping. The model now hands Mexico a real edge in its own
-     thin air, and dings sea-level sides drawn to Mexico City and Zapopan.`;
-}
-
-/* ---------- fatigue card ---------- */
-if (WC26.fatigue && WC26.ablations && WC26.ablations.no_fatigue) {
-  const m = WC26.fatigue.meta;
-  const nf = WC26.ablations.no_fatigue.P_champion;
-  const movers = WC26.teams
-    .map((t) => ({ team: t.team, d: t.P_champion - (nf[t.team] || 0), z: WC26.fatigue.z[t.team] }))
-    .sort((a, b) => Math.abs(b.d) - Math.abs(a.d)).slice(0, 4).sort((a, b) => b.d - a.d);
-  document.getElementById("fatigue-card").innerHTML =
-    `<details class="tech"><summary>the numbers, for the curious</summary><div class="boot-sd">
-      <span>OOS log-loss <b>${m.oos_delta}</b></span>
-      <span>β <b>${m.beta_fatigue}</b>/z</span>
-      <span>folds <b>${m.n_folds}</b></span>
-    </div></details>` +
-    movers.map((x) => `<div class="usa-row">
-      <span class="src">${flag(x.team)}${x.team} (load ${x.z > 0 ? "+" : ""}${x.z}σ)</span>
-      <div class="usa-track"><i style="width:${100 * Math.min(1, Math.abs(x.d) / 0.025)}%;
-        background:${x.d > 0 ? "linear-gradient(90deg, var(--accent2), var(--accent))" : "#8f5161"}"></i></div>
-      <span class="num">${x.d > 0 ? "+" : ""}${(100 * x.d).toFixed(1)}pp</span></div>`).join("");
-  document.getElementById("fatigue-note").innerHTML =
-    `More minutes in the legs, fewer goals on the pitch — once club quality is held fixed by the
-     capital tilt. The sign is theory-consistent and stable, but the file is thin (two World Cups,
-     coverage <50%): admitted <strong>on probation</strong>, like everything else here. France pays
-     the most: the heaviest squad in the tournament.`;
-}
-
-/* ---------- climate (rejected) card ---------- */
-if (WC26.climate) {
-  const c = WC26.climate;
-  document.getElementById("climate-card").innerHTML = `<details class="tech"><summary>the numbers, for the curious</summary><div class="boot-sd">
-    <span>OOS log-loss <b>+${c.oos_delta}</b> (worse)</span>
-    <span>paired t <b>+${c.t_paired}</b></span>
-    <span>verdict <b style="color:#f87171">${c.verdict}</b></span>
-  </div></details>`;
-}
-
-/* ---------- bootstrap card ---------- */
-if (WC26.bootstrap && WC26.ablations && WC26.ablations.no_param_uncertainty) {
-  document.getElementById("boot-b").textContent = WC26.bootstrap.B;
-  const sd = WC26.bootstrap.sd;
-  document.getElementById("boot-card").innerHTML = `<details class="tech"><summary>the numbers, for the curious</summary><div class="boot-sd">` +
-    Object.entries(sd).map(([k, v]) => `<span>${k.replace("beta_", "β ")} <b>±${v}</b></span>`).join("") +
-    `</div>`;
-  const pe = WC26.ablations.no_param_uncertainty.P_champion;
-  const deltas = WC26.teams.map((t) => Math.abs(t.P_champion - (pe[t.team] || 0)));
-  const mean = deltas.reduce((a, b) => a + b, 0) / deltas.length;
-  document.getElementById("boot-delta").textContent = "±" + (100 * mean).toFixed(2) + " points";
-}
-
-/* ---------- golden boot ---------- */
-if (WC26.golden_boot) {
-  const top = WC26.golden_boot.slice(0, 10);
-  const max = top[0].P_golden_boot;
-  const implied = (odds) => 1 / (1 + odds / 100);
-  document.getElementById("boot-chart").innerHTML = top.map((p) => {
-    const mkt = WC26.golden_boot_market[p.player];
-    const chip = mkt ? `<span class="market-chip">market ${pct(implied(mkt))}</span>` : "";
-    return `<div class="bar-row">
-      <div class="who">${flag(p.team)}${p.player}</div>
-      <div class="bar-track"><div class="bar-fill" style="width:${(100 * p.P_golden_boot) / max}%"></div></div>
-      <div class="val">${pct(p.P_golden_boot)}</div>
-    </div><div style="margin:-4px 0 2px 192px; font-size:.74rem; color:var(--muted)">
-      E[goals] ${p.E_goals.toFixed(1)}${chip}</div>`;
-  }).join("");
-  const v = WC26.golden_boot[0];
-  document.getElementById("boot-note").innerHTML =
-    `On the four players the bookmakers price, the model lands strikingly close to the market
-     (Mbappé ${pct(WC26.golden_boot.find(p => p.player === "Kylian Mbappé").P_golden_boot)} vs
-     ${pct(implied(WC26.golden_boot_market["Kylian Mbappé"]))} implied). The interesting case is
-     <strong>${v.player}</strong> at the top: a genuine recent scoring record, a high-scoring team
-     in the simulations — and a model that cannot see age or club minutes. That blind spot is
-     precisely what the next data block (FBref minutes &amp; xG) is for; the market already prices it.
-     A further ${pct(WC26.debutant_share, 0)} of goals is reserved for debutant scorers ("new faces"),
-     the historical World Cup average. These weights are the survivors of a courtroom drama: our
-     first backtest "rejected" the official rosters and the age discount — then we found a bug in
-     the metric itself (it scored unknown scorers against the whole new-faces mass, so degenerate
-     models looked perfect). With the judge fixed, the verdict <strong>flipped</strong>: roster
-     filter + age discount beat the old model on all three past World Cups and now run the table
-     above. Boldest disagreement on record: Messi at ${pct((WC26.golden_boot.find(p => p.player === "Lionel Messi") || {P_golden_boot: 0}).P_golden_boot)}
-     vs the market's ~8% — the age-39 discount, validated out-of-sample, says what it says. Most distinct scorers: ` +
-    Object.entries(WC26.distinct_scorers).slice(0, 3).map(([t, p]) => `${t} ${pct(p, 0)}`).join(", ") + `.`;
-}
-
-/* ---------- odds & ends ---------- */
-{
-  document.getElementById("footer-meta").textContent =
-    `Generated ${WC26.generated} · ${WC26.model_version} · ${WC26.n_sims.toLocaleString("en-US")} simulations, seed ${WC26.seed} · ` +
-    `WC2022 backtest log-loss ${WC26.backtest.log_loss_model} (uniform ${WC26.backtest.log_loss_uniform}).`;
-}
-
-/* ---------- predicted bracket ---------- */
-if (WC26.bracket) {
   const TLA = (t) => ({
     "United States": "USA", "South Korea": "KOR", "South Africa": "RSA", "Saudi Arabia": "KSA",
     "Czech Republic": "CZE", "Bosnia and Herzegovina": "BIH", "Ivory Coast": "CIV",
@@ -302,37 +65,253 @@ if (WC26.bracket) {
   ];
   const slotHTML = (s) => {
     if (!s) return `<div class="bk-slot"><span class="bk-team">—</span></div>`;
-    const sure = s.p >= 0.6 ? "sure" : s.p < 0.3 ? "open" : "";
-    return `<div class="bk-slot ${sure}">
-      <span class="bk-team">${flag(s.team)}${TLA(s.team)}</span>
-      <span class="bk-p">${pct(s.p, 0)}</span></div>`;
+    const cls = s.p >= 0.6 ? "sure" : s.p < 0.3 ? "open" : "";
+    return `<div class="bk-slot ${cls}"><span class="bk-team">${flag(s.team)}${TLA(s.team)}</span><span class="bk-p">${pct(s.p, 0)}</span></div>`;
   };
-  const board = COLS.map(([label, matches]) => {
-    const boxes = matches.map((mn) => {
-      const m = WC26.bracket[mn] || {};
-      return `<div class="bk-match">${slotHTML(m.top)}${slotHTML(m.bot)}</div>`;
+
+  const render = (k) => {
+    const s = snaps[k], prev = k > 0 ? snaps[k - 1] : null;
+    $("fc-date").textContent = s.date;
+    $("fc-match").textContent = k === 0 ? "before kickoff" : s.last_match;
+
+    // champion (top 12)
+    const top = Object.entries(s.champion).sort((a, b) => b[1] - a[1]).slice(0, 12);
+    const cmax = top[0][1] || 1;
+    $("fc-champ").innerHTML = top.map(([t, p]) => `
+      <div class="bar-row">
+        <div class="who">${flag(t)}${t}</div>
+        <div class="bar-track"><div class="bar-fill" style="width:${(100 * p) / cmax}%"></div></div>
+        <div class="val">${pct(p)}${delta(p, prev && prev.champion[t])}</div>
+      </div>`).join("");
+
+    // predicted bracket (modal occupant per slot)
+    const board = COLS.map(([label, matches]) => {
+      const boxes = matches.map((mn) => {
+        const m = (s.bracket && s.bracket[mn]) || {};
+        return `<div class="bk-match">${slotHTML(m.top)}${slotHTML(m.bot)}</div>`;
+      }).join("");
+      return `<div class="bk-col"><div class="bk-round">${label}</div>${boxes}</div>`;
     }).join("");
-    return `<div class="bk-col"><div class="bk-round">${label}</div>${boxes}</div>`;
-  }).join("");
-  // champion column
-  const champ = [...WC26.teams].sort((a, b) => b.P_champion - a.P_champion)[0];
-  const champCol = `<div class="bk-col"><div class="bk-round">Champion</div>
-    <div class="bk-match champ"><div class="bk-slot sure">
-      <span class="bk-team">${flag(champ.team)}${TLA(champ.team)}</span>
-      <span class="bk-p">${pct(champ.P_champion, 0)}</span></div></div></div>`;
-  document.getElementById("bracket-board").innerHTML = board + champCol;
+    const champCol = `<div class="bk-col"><div class="bk-round">Champion</div>
+      <div class="bk-match champ"><div class="bk-slot sure">
+        <span class="bk-team">${flag(top[0][0])}${TLA(top[0][0])}</span>
+        <span class="bk-p">${pct(top[0][1], 0)}</span></div></div></div>`;
+    $("fc-bracket").innerHTML = board + champCol;
+
+    // best thirds (8 of 12 advance) — ranked by P(advance as a best third)
+    const th = Object.entries(s.best_third).filter(([, p]) => p > 0.01)
+      .sort((a, b) => b[1] - a[1]).slice(0, 12);
+    const tmax = th[0] ? th[0][1] : 1;
+    $("fc-thirds").innerHTML = th.map(([t, p], i) => `
+      ${i === 8 ? '<div class="cutoff">— 8 advance —</div>' : ""}
+      <div class="bar-row">
+        <div class="who">${flag(t)}${t}</div>
+        <div class="bar-track"><div class="bar-fill" style="width:${(100 * p) / tmax}%;${i < 8 ? "" : "opacity:.5"}"></div></div>
+        <div class="val">${pct(p, 0)}${delta(p, prev && prev.best_third[t], 0)}</div>
+      </div>`).join("");
+
+    // golden boot
+    const gb = s.golden_boot || [];
+    const pgb = {}; (prev && prev.golden_boot || []).forEach((x) => (pgb[x.player] = x.p));
+    const gmax = gb[0] ? gb[0].p : 1;
+    $("fc-gb").innerHTML = gb.slice(0, 10).map((p) => `
+      <div class="bar-row">
+        <div class="who">${flag(p.team)}${p.player}</div>
+        <div class="bar-track"><div class="bar-fill" style="width:${(100 * p.p) / gmax}%"></div></div>
+        <div class="val">${pct(p.p)}${delta(p.p, prev && pgb[p.player])}</div>
+      </div>`).join("");
+
+    // groups — probability of advancing
+    const groups = {};
+    Object.entries(tg).forEach(([t, g]) => (groups[g] = groups[g] || []).push(t));
+    $("fc-groups").innerHTML = Object.keys(groups).sort().map((g) => {
+      const rows = groups[g].map((t) => [t, s.qualify[t] ?? 0]).sort((a, b) => b[1] - a[1]).map(([t, q]) => `
+        <div class="team-row">
+          <div><div class="who">${flag(t)}${t}</div>
+            <div class="qbar"><i style="width:${100 * q}%"></i></div></div>
+          <div class="val"><b>${pct(q, 0)}</b>${delta(q, prev && prev.qualify[t], 0)}</div>
+        </div>`).join("");
+      return `<div class="group-card"><h3>GROUP ${g}</h3>${rows}</div>`;
+    }).join("");
+  };
+  slider.addEventListener("input", (e) => render(+e.target.value));
+  render(snaps.length - 1);
 }
 
+/* ---------- round-by-round table ---------- */
+if ($("rounds-table")) {
+  const cols = [["P_R32", "R32"], ["P_R16", "R16"], ["P_QF", "QF"], ["P_SF", "SF"], ["P_final", "Final"], ["P_champion", "Champion"]];
+  const heat = (p) => {
+    const a = Math.min(0.85, p * 1.15);
+    return `background: rgba(74, 222, 128, ${a.toFixed(3)}); color: ${a > 0.45 ? "#07101f" : "var(--text)"}`;
+  };
+  $("rounds-table").innerHTML =
+    `<thead><tr><th>Team</th><th>Group</th><th>Elo</th>${cols.map(([, h]) => `<th>${h}</th>`).join("")}</tr></thead>` +
+    "<tbody>" + byChamp.slice(0, 16).map((t) => `
+      <tr><td>${flag(t.team)}${t.team}</td><td>${t.group}</td><td>${t.elo}</td>
+      ${cols.map(([c]) => `<td class="heat" style="${heat(t[c])}">${pct(t[c])}</td>`).join("")}</tr>`).join("") + "</tbody>";
+}
+
+/* ---------- model vs market ---------- */
+if ($("market-chart")) {
+  const rows = Object.entries(WC26.betmgm_shin || WC26.betmgm_outright).map(([team, p]) => {
+    const t = WC26.teams.find((x) => x.team === team);
+    const market = WC26.betmgm_shin ? p : 1 / (1 + p / 100);
+    return { team, model: t.P_champion, market };
+  }).sort((a, b) => b.model - a.model);
+  const max = Math.max(...rows.flatMap((r) => [r.model, r.market]));
+  $("market-chart").innerHTML = rows.map((r) => `
+    <div class="pair-row">
+      <div class="who">${flag(r.team)}${r.team}</div>
+      <div class="pair-bars">
+        <div class="pair-bar"><div class="pair-track"><div class="pair-fill model" style="width:${(100 * r.model) / max}%"></div></div>
+          <div class="pair-label">model ${pct(r.model)}</div></div>
+        <div class="pair-bar"><div class="pair-track"><div class="pair-fill market" style="width:${(100 * r.market) / max}%"></div></div>
+          <div class="pair-label">market ${pct(r.market)}</div></div>
+      </div>
+    </div>`).join("");
+  if ($("klement-note")) $("klement-note").textContent = WC26.klement;
+}
+
+/* ---------- ablations: host advantage ---------- */
+if (WC26.ablations && $("host-ablation")) {
+  const noHost = WC26.ablations.no_host_advantage.hosts;
+  $("host-ablation").innerHTML =
+    ["United States", "Mexico", "Canada"].map((team) => {
+      const real = WC26.teams.find((t) => t.team === team).P1;
+      const cf = noHost[team].P1;
+      return `<div class="ab-row">
+        <div class="who">${flag(team)}${team} — win the group</div>
+        <div class="ab-pair"><div class="ab-track"><div class="ab-fill real" style="width:${100 * real}%"></div></div>
+          <div class="ab-label">with home ${pct(real, 0)}</div></div>
+        <div class="ab-pair"><div class="ab-track"><div class="ab-fill counter" style="width:${100 * cf}%"></div></div>
+          <div class="ab-label">neutral ${pct(cf, 0)}</div></div>
+      </div>`;
+    }).join("");
+}
+
+/* ---------- ablations: xi plateau ---------- */
+if (WC26.xi_tuning && $("xi-chart")) {
+  const entries = Object.entries(WC26.xi_tuning.pooled)
+    .map(([k, v]) => [parseFloat(k), v]).sort((a, b) => a[0] - b[0]);
+  const lls = entries.map(([, v]) => v);
+  const min = Math.min(...lls), max = Math.max(...lls);
+  const pad = (max - min) * 4 || 1;
+  $("xi-chart").innerHTML =
+    `<div class="xi-bars">` + entries.map(([xi, ll]) => {
+      const h = 25 + 70 * (ll - min) / pad;
+      const chosen = xi === WC26.xi_tuning.chosen;
+      return `<div class="xi-bar${chosen ? " chosen" : ""}" title="xi=${xi}: pooled log-loss ${ll}">
+        <i style="height:${h}%"></i><span>${xi}</span></div>`;
+    }).join("") + `</div>
+    <div class="xi-axis"><span>← 3.8-year half-life (long memory)</span><span>4.6-month half-life (short) →</span></div>`;
+  $("xi-n").textContent = WC26.xi_tuning.n_matches;
+  $("xi-note").innerHTML =
+    `Pooled log-loss spans <strong>${min}–${max}</strong> across a 10× range of decay
+     (paired t=${WC26.xi_tuning.paired_t_extremes} between the extremes: statistically nothing).
+     We pin it at the plateau centre and move on — a data choice that, measurably,
+     <strong>does not matter</strong>.`;
+}
+
+/* ---------- usa case ---------- */
+if ($("usa-case")) {
+  const usa = WC26.teams.find((t) => t.team === "United States");
+  const rows = [
+    ["Model (Elo + home)", usa.P1, "linear-gradient(90deg, var(--accent2), var(--accent))"],
+    ["Market (Kalshi)", WC26.kalshi_usa_group, "var(--gold)"],
+  ];
+  const cfP1 = WC26.ablations ? WC26.ablations.no_host_advantage.hosts["United States"].P1 : null;
+  if (cfP1 !== null) rows.push(["Model, neutral world", cfP1, "#51618f"]);
+  $("usa-case").innerHTML = `<div class="usa-rows">` +
+    rows.map(([src, p, bg]) => `<div class="usa-row">
+      <span class="src">${src}</span>
+      <div class="usa-track"><i style="width:${100 * p / 0.6}%; background:${bg}"></i></div>
+      <span class="num">${pct(p, 0)}</span></div>`).join("") +
+    `</div><p class="mini-note" style="margin-top:8px">🇺🇸 USA win group D — three views of the same question.</p>`;
+}
+
+/* ---------- altitude card ---------- */
+if (WC26.altitude && WC26.ablations && WC26.ablations.no_altitude && $("altitude-card")) {
+  const m = WC26.altitude;
+  const na = WC26.ablations.no_altitude.P_champion;
+  const movers = WC26.teams
+    .map((t) => ({ team: t.team, d: t.P_champion - (na[t.team] || 0) }))
+    .filter((x) => Math.abs(x.d) >= 0.001)
+    .sort((a, b) => Math.abs(b.d) - Math.abs(a.d)).slice(0, 5).sort((a, b) => b.d - a.d);
+  $("altitude-card").innerHTML =
+    `<details class="tech"><summary>the numbers, for the curious</summary><div class="boot-sd">
+      <span>OOS log-loss <b>${m.oos_delta}</b></span>
+      <span>paired t <b>${m.t_paired}</b></span>
+      <span>β <b>${m.beta_altitude_per_km}</b>/km</span>
+      <span>tested on <b>${m.n}</b> CONMEBOL qualifiers</span>
+    </div></details>` +
+    movers.map((x) => `<div class="usa-row">
+      <span class="src">${flag(x.team)}${x.team} title odds</span>
+      <div class="usa-track"><i style="width:${100 * Math.min(1, Math.abs(x.d) / 0.012)}%;
+        background:${x.d > 0 ? "linear-gradient(90deg, var(--accent2), var(--accent))" : "#8f5161"}"></i></div>
+      <span class="num">${x.d > 0 ? "+" : ""}${(100 * x.d).toFixed(1)}pp</span></div>`).join("");
+  $("altitude-note").innerHTML =
+    `Our most decisive trial (t=${m.t_paired}). Mexico plays at 2,240 m, the air its players live in;
+     lowland opponents arrive gasping. The model hands Mexico a real edge in its thin air and dings
+     sea-level sides drawn to Mexico City and Zapopan.`;
+}
+
+/* ---------- fatigue card ---------- */
+if (WC26.fatigue && WC26.ablations && WC26.ablations.no_fatigue && $("fatigue-card")) {
+  const m = WC26.fatigue.meta;
+  const nf = WC26.ablations.no_fatigue.P_champion;
+  const movers = WC26.teams
+    .map((t) => ({ team: t.team, d: t.P_champion - (nf[t.team] || 0), z: WC26.fatigue.z[t.team] }))
+    .sort((a, b) => Math.abs(b.d) - Math.abs(a.d)).slice(0, 4).sort((a, b) => b.d - a.d);
+  $("fatigue-card").innerHTML =
+    `<details class="tech"><summary>the numbers, for the curious</summary><div class="boot-sd">
+      <span>OOS log-loss <b>${m.oos_delta}</b></span>
+      <span>β <b>${m.beta_fatigue}</b>/z</span>
+      <span>folds <b>${m.n_folds}</b></span>
+    </div></details>` +
+    movers.map((x) => `<div class="usa-row">
+      <span class="src">${flag(x.team)}${x.team} (load ${x.z > 0 ? "+" : ""}${x.z}σ)</span>
+      <div class="usa-track"><i style="width:${100 * Math.min(1, Math.abs(x.d) / 0.025)}%;
+        background:${x.d > 0 ? "linear-gradient(90deg, var(--accent2), var(--accent))" : "#8f5161"}"></i></div>
+      <span class="num">${x.d > 0 ? "+" : ""}${(100 * x.d).toFixed(1)}pp</span></div>`).join("");
+  $("fatigue-note").innerHTML =
+    `More minutes in the legs, fewer goals on the pitch. The sign is stable but the file is thin
+     (two World Cups): admitted <strong>on probation</strong>. France pays the most — the heaviest
+     squad in the tournament.`;
+}
+
+/* ---------- climate (rejected) card ---------- */
+if (WC26.climate && $("climate-card")) {
+  const c = WC26.climate;
+  $("climate-card").innerHTML = `<details class="tech"><summary>the numbers, for the curious</summary><div class="boot-sd">
+    <span>OOS log-loss <b>+${c.oos_delta}</b> (worse)</span>
+    <span>paired t <b>+${c.t_paired}</b></span>
+    <span>verdict <b style="color:#f87171">${c.verdict}</b></span>
+  </div></details>`;
+}
+
+/* ---------- bootstrap card ---------- */
+if (WC26.bootstrap && WC26.ablations && WC26.ablations.no_param_uncertainty && $("boot-card")) {
+  $("boot-b").textContent = WC26.bootstrap.B;
+  const sd = WC26.bootstrap.sd;
+  $("boot-card").innerHTML = `<details class="tech"><summary>the numbers, for the curious</summary><div class="boot-sd">` +
+    Object.entries(sd).map(([k, v]) => `<span>${k.replace("beta_", "β ")} <b>±${v}</b></span>`).join("") +
+    `</div></details>`;
+  const pe = WC26.ablations.no_param_uncertainty.P_champion;
+  const deltas = WC26.teams.map((t) => Math.abs(t.P_champion - (pe[t.team] || 0)));
+  const mean = deltas.reduce((a, b) => a + b, 0) / deltas.length;
+  $("boot-delta").textContent = "±" + (100 * mean).toFixed(2) + " points";
+}
 
 /* ---------- model lab (shadow scoreboard) ---------- */
-if (WC26.shadow_scores) {
+if (WC26.shadow_scores && $("lab-board")) {
   const rows = [...WC26.shadow_scores].sort((x, y) => x.log_loss - y.log_loss);
   const n = rows[0]?.n || 0;
   const uni = WC26.uniform_logloss;
   const lo = Math.min(...rows.map((r) => r.log_loss), uni) - 0.01;
   const hi = Math.max(...rows.map((r) => r.log_loss), uni) + 0.01;
-  const w = (v) => (100 * (hi - v)) / (hi - lo); // lower log-loss = longer (better) bar
-  document.getElementById("lab-board").innerHTML = rows.map((r) => {
+  const w = (v) => (100 * (hi - v)) / (hi - lo);
+  $("lab-board").innerHTML = rows.map((r) => {
     const main = r.variant === "Full model";
     const shadow = r.variant.includes("shadow");
     const col = main ? "linear-gradient(90deg, var(--accent2), var(--accent))" : shadow ? "var(--gold)" : "#51618f";
@@ -342,68 +321,18 @@ if (WC26.shadow_scores) {
       <div class="val">${r.log_loss.toFixed(3)}</div>
     </div>`;
   }).join("");
-  document.getElementById("lab-note").innerHTML =
-    `Shorter bar = better (lower log-loss; the know-nothing baseline is ${uni.toFixed(3)}). Each line is
-     the <em>same</em> model with one ingredient added or removed, graded on the ${n} matches played so far.
-     Right now they sit within ${(1000 * (rows[rows.length-1].log_loss - rows[0].log_loss)).toFixed(0)}
-     thousandths of each other — these are pre-season friendlies, not a verdict: ${n} matches can't separate
-     tilts this small, and the order will shuffle. The point isn't today's leader; it's that the comparison
-     is registered in the open and settles over many tournaments. The two gold bars are shadow bets that live here and <strong>only</strong> here: diaspora
-     (can't be backtested — no past US World Cup) and squad cohesion (passes the backtest by a
-     hair but would swing the favourite ~10pp on a t=-0.6 signal — too much weight for too little
-     proof). Telling: cohesion tops the board today on 20 games — which is exactly why the live
-     board never decides what goes in the model; the 345-match backtest does.`;
+  $("lab-note").innerHTML =
+    `Shorter bar = better (lower log-loss; know-nothing baseline ${uni.toFixed(3)}). Each line is the
+     <em>same</em> model with one ingredient added or removed, graded on the ${n} matches played so far —
+     they sit within a few thousandths of each other, far too few to separate. The two gold bars are
+     shadow bets that live here and <strong>only</strong> here: diaspora (can't be backtested) and squad
+     cohesion (passes by a hair but would swing the favourite ~10pp on noise). The live board never
+     decides what goes in the model; the 345-match backtest does.`;
 }
 
-/* ---------- match-by-match slider ---------- */
-if (WC26.replay && WC26.replay.snapshots) {
-  const snaps = WC26.replay.snapshots;
-  const tg = WC26.replay.teams_group;
-  const slider = document.getElementById("tl-slider");
-  slider.max = snaps.length - 1;
-  slider.value = snaps.length - 1;
-
-  // +/- change vs the previous match (the diff Simone asked for)
-  const delta = (now, was, dp = 1) => {
-    if (was === undefined) return "";
-    const d = now - was;
-    if (Math.abs(d) < 0.005) return "";
-    return `<span class="delta ${d > 0 ? "up" : "down"}">${d > 0 ? "▲" : "▼"}${(100 * Math.abs(d)).toFixed(dp)}</span>`;
-  };
-  const render = (k) => {
-    const s = snaps[k], prev = k > 0 ? snaps[k - 1] : null;
-    document.getElementById("tl-date").textContent = s.date;
-    document.getElementById("tl-match").textContent = k === 0 ? "before kickoff" : s.last_match;
-    // title odds: top 12 by champion, with the move since the previous match
-    const top = Object.entries(s.champion).sort((a, b) => b[1] - a[1]).slice(0, 12);
-    const max = top[0][1] || 1;
-    document.getElementById("tl-champ").innerHTML = top.map(([t, p]) => `
-      <div class="bar-row">
-        <div class="who">${flag(t)}${t}</div>
-        <div class="bar-track"><div class="bar-fill" style="width:${(100 * p) / max}%"></div></div>
-        <div class="val">${pct(p)}${delta(p, prev && prev.champion[t])}</div>
-      </div>`).join("");
-    // golden boot
-    const gb = s.golden_boot || [];
-    if (gb.length) {
-      const gmax = gb[0].p || 1;
-      const pgb = {}; (prev && prev.golden_boot || []).forEach((x) => (pgb[x.player] = x.p));
-      document.getElementById("tl-gb").innerHTML = gb.slice(0, 10).map((p) => `
-        <div class="bar-row">
-          <div class="who">${flag(p.team)}${p.player}</div>
-          <div class="bar-track"><div class="bar-fill" style="width:${(100 * p.p) / gmax}%"></div></div>
-          <div class="val">${pct(p.p)}${delta(p.p, prev && pgb[p.player])}</div>
-        </div>`).join("");
-    }
-    // qualification by group, with the move since the previous match
-    const groups = {};
-    Object.entries(tg).forEach(([t, g]) => (groups[g] = groups[g] || []).push(t));
-    document.getElementById("tl-groups").innerHTML = Object.keys(groups).sort().map((g) => {
-      const rows = groups[g].map((t) => [t, s.qualify[t] ?? 0]).sort((a, b) => b[1] - a[1])
-        .map(([t, q]) => `<div class="row"><span>${flag(t)}${t}</span><span>${pct(q, 0)}${delta(q, prev && prev.qualify[t], 0)}</span></div>`).join("");
-      return `<div class="tlg"><b>GROUP ${g}</b>${rows}</div>`;
-    }).join("");
-  };
-  slider.addEventListener("input", (e) => render(+e.target.value));
-  render(snaps.length - 1);
+/* ---------- footer ---------- */
+if ($("footer-meta")) {
+  $("footer-meta").textContent =
+    `Generated ${WC26.generated} · ${WC26.model_version} · ${WC26.n_sims.toLocaleString("en-US")} simulations, seed ${WC26.seed} · ` +
+    `WC2022 backtest log-loss ${WC26.backtest.log_loss_model} (uniform ${WC26.backtest.log_loss_uniform}).`;
 }

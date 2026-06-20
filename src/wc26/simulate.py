@@ -377,6 +377,7 @@ def simulate_tournament(
     pos_counts = {t: np.zeros(4) for t in teams}
     round_counts = {t: np.zeros(6) for t in teams}  # R32, R16, QF, SF, F, champion
     topscoring_counts = {t: 0 for t in teams}
+    best_third_counts = {t: 0 for t in teams}  # P(advance via the best-thirds path)
     # Per KO match: how often each team fills the top/bottom slot — the
     # predicted bracket is the modal occupant of each slot (collect_bracket).
     from collections import Counter
@@ -392,6 +393,8 @@ def simulate_tournament(
                 pos_counts[t][pos] += 1
         topscoring_counts[max(teams, key=lambda t: (goals[t], rng.random()))] += 1
 
+        for t in best_thirds:
+            best_third_counts[t] += 1
         third_group = {team_group[t]: t for t in best_thirds}
         alloc = allocate_thirds(frozenset(third_group))
         if thirds_override:
@@ -451,6 +454,7 @@ def simulate_tournament(
     ).T
     out = out.join(rounds)
     out["P_top_scoring_team"] = pd.Series(topscoring_counts) / n_sims
+    out["P_best_third"] = pd.Series({t: best_third_counts[t] / n_sims for t in teams})
     res = {"teams": out.sort_values(["group", "P1"], ascending=[True, False])}
     if collect_goal_samples:
         res["goal_samples"] = pd.DataFrame(goal_samples, columns=teams)
