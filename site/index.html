@@ -27,6 +27,8 @@
   <a href="#idea">How it predicts</a>
   <a href="#data">The data</a>
   <a href="#influence">What moves it</a>
+  <a href="#rejected">Tested &amp; discarded</a>
+  <a href="#rule">The rule</a>
   <a href="#lab">Model lab</a>
   <a href="#market">Model vs market</a>
   <a href="#method">Methodology</a>
@@ -35,24 +37,25 @@
 <main class="wrap">
 
 <section id="forecast">
-  <h2>The forecast <span class="sub">one slider through the whole tournament — bracket, groups, thirds, title and Golden Boot all move together as results land</span></h2>
-  <div class="tl-control">
-    <input type="range" id="fc-slider" min="0" value="0" step="1">
-    <div class="tl-label"><span id="fc-date"></span> · <span id="fc-match"></span></div>
-  </div>
-  <p class="note" style="margin-top:-4px">Every frame is a full re-simulation conditioned on the
-  results up to that point (beliefs frozen at June 11). Drag to the end for today's live picture;
-  drag back to watch one result ripple through everything. <strong>▲/▼ = change since the previous
-  match.</strong></p>
+  <h2>The forecast <span class="sub">one tournament-clock — bracket, groups, thirds, title and Golden Boot all move together as results land</span></h2>
+  <p class="note" style="margin-top:-4px;margin-bottom:14px">Every frame is a full re-simulation
+  conditioned on the results up to that point (beliefs frozen at June 11). Drag any slider to the
+  end for today's live picture, or back to watch one result ripple through everything. The slider
+  repeats above each view so you never have to scroll back up. <strong>▲/▼ = change since the
+  previous match.</strong></p>
 
-  <div class="fc-block"><div class="tl-h">Champion</div><div id="fc-champ" class="chart"></div></div>
-  <div class="fc-block"><div class="tl-h">Predicted bracket — most likely team in each slot</div>
+  <div class="fc-block"><div class="fc-bar"><input type="range" class="fc-slider"><span class="fc-lab"></span></div>
+    <div class="tl-h">Champion</div><div id="fc-champ" class="chart"></div></div>
+  <div class="fc-block"><div class="fc-bar"><input type="range" class="fc-slider"><span class="fc-lab"></span></div>
+    <div class="tl-h">Predicted bracket — most likely team in each slot</div>
     <div id="fc-bracket" class="bracket-scroll"></div></div>
-  <div class="fc-grid">
-    <div><div class="tl-h">Best thirds — 8 of 12 advance</div><div id="fc-thirds" class="chart"></div></div>
-    <div><div class="tl-h">Golden Boot</div><div id="fc-gb" class="chart"></div></div>
-  </div>
-  <div class="fc-block"><div class="tl-h">Groups — probability of advancing</div>
+  <div class="fc-block"><div class="fc-bar"><input type="range" class="fc-slider"><span class="fc-lab"></span></div>
+    <div class="fc-grid">
+      <div><div class="tl-h">Best thirds — 8 of 12 advance</div><div id="fc-thirds" class="chart"></div></div>
+      <div><div class="tl-h">Golden Boot</div><div id="fc-gb" class="chart"></div></div>
+    </div></div>
+  <div class="fc-block"><div class="fc-bar"><input type="range" class="fc-slider"><span class="fc-lab"></span></div>
+    <div class="tl-h">Groups — probability of advancing</div>
     <div id="fc-groups" class="groups-grid"></div></div>
 </section>
 
@@ -176,24 +179,8 @@
 </section>
 
 <section id="influence">
-  <h2>What moves the forecast <span class="sub">each data choice, measured by re-running the tournament without it</span></h2>
+  <h2>What moves the forecast <span class="sub">the data that made the cut — measured by re-running the tournament without each one</span></h2>
   <div class="cards2">
-    <div class="card">
-      <h3>Playing at home — worth double</h3>
-      <p class="mini-intro">The schedule says who hosts. Switch that column off and replay
-      all 20,000 tournaments on neutral ground:</p>
-      <div id="host-ablation"></div>
-      <p class="mini-note">Home advantage nearly <strong>doubles</strong> the USA's group-win
-      chances and is worth <strong>8×</strong> on its title odds. It's the single most
-      influential non-rating input in the model.</p>
-    </div>
-    <div class="card">
-      <h3>How long is memory? — barely matters</h3>
-      <p class="mini-intro">Old matches are down-weighted exponentially. We tuned the decay
-      on six past tournaments (<span id="xi-n"></span> matches) and found... a plateau:</p>
-      <div id="xi-chart"></div>
-      <p class="mini-note" id="xi-note"></p>
-    </div>
     <div class="card">
       <h3>The rating is the engine</h3>
       <p class="mini-intro">Everything else is a correction: the Elo gap sets the baseline
@@ -202,6 +189,15 @@
       <p class="mini-note">By Elo the USA is the <em>weakest</em> team in group D — home
       advantage alone lifts it from last to second. The market prices squad value and host
       momentum; those signals only enter here if a future data block earns its backtest.</p>
+    </div>
+    <div class="card">
+      <h3>Playing at home — worth double</h3>
+      <p class="mini-intro">The schedule says who hosts. Switch that column off and replay
+      all 20,000 tournaments on neutral ground:</p>
+      <div id="host-ablation"></div>
+      <p class="mini-note">Home advantage nearly <strong>doubles</strong> the USA's group-win
+      chances and is worth <strong>8×</strong> on its title odds. It's the single most
+      influential non-rating input in the model.</p>
     </div>
     <div class="card">
       <h3>Thin air — the strongest signal we found</h3>
@@ -218,31 +214,60 @@
       <div id="fatigue-card"></div>
       <p class="mini-note" id="fatigue-note"></p>
     </div>
+  </div>
+</section>
+
+<section id="rejected">
+  <h2>What we tested and discarded <span class="sub">tried, measured, left out — rejected experiments are results too</span></h2>
+  <div class="cards2">
     <div class="card off">
       <h3>Heat mismatch — tried, and thrown out</h3>
       <p class="mini-intro">Does June heat punish cold-country teams? We built the
-      feature (venue climatology vs home-country climatology, strictly point-in-time)
-      and put it through the same gate:</p>
+      feature (venue vs home climatology, strictly point-in-time) and put it through the gate:</p>
       <div id="climate-card"></div>
-      <p class="mini-note">The gate said no, twice. First with a crude proxy (passport
-      climate); then re-done properly with each player's club-country climate — still no.
-      The culprit is the data, not the idea: the one hot World Cup in the test era (Qatar
-      2022) was air-conditioned, which inverts the signal, and nothing else is hot enough
-      to show. The coefficient stays at zero. Rejected experiments are results too.</p>
+      <p class="mini-note">The gate said no, twice — crude passport proxy, then each player's
+      club-country climate. The culprit is the data: the one hot World Cup in the test era (Qatar
+      2022) was air-conditioned, inverting the signal, and nothing else is hot enough to show.
+      Coefficient stays at zero.</p>
     </div>
-    <div class="card">
+    <div class="card off">
+      <h3>How long is memory? — no effect</h3>
+      <p class="mini-intro">Old matches are down-weighted exponentially. We tuned the decay on
+      six past tournaments (<span id="xi-n"></span> matches) and found... a plateau:</p>
+      <div id="xi-chart"></div>
+      <p class="mini-note" id="xi-note"></p>
+    </div>
+    <div class="card off">
       <h3>Parameter doubt — pinned by 17k matches</h3>
       <p class="mini-intro">The goal model has five parameters. We refit them
-      <span id="boot-b"></span> times on resampled history and gave each simulated
-      tournament its own draw:</p>
+      <span id="boot-b"></span> times on resampled history and gave each simulated tournament
+      its own draw:</p>
       <div id="boot-card"></div>
-      <p class="mini-note">Integrating parameter uncertainty moves title probabilities by
-      <strong id="boot-delta"></strong> on average — within Monte Carlo noise. With this much
-      data behind five numbers, the doubt lives in <em>which data enters</em>, not in the fit.
-      (Diaspora and cohesion finished as shadow bets — admitted to the model lab, not the
-      official forecast; see below.)</p>
+      <p class="mini-note">It moves title odds by <strong id="boot-delta"></strong> on average —
+      Monte Carlo noise. The doubt lives in <em>which data enters</em>, not in the fit.</p>
+    </div>
+    <div class="card off">
+      <h3>Also off the pitch</h3>
+      <p class="mini-note" style="margin-top:0"><strong>Penalty-taker bonus</strong> — rejected: it
+      double-counts penalties already inside each scorer's history. <strong>Football capital</strong>
+      (where players' clubs rank) — its predictive power turned out to be a Europe-only geographic
+      bias, so it was removed even though that cost a sliver of accuracy. <strong>Diaspora</strong>
+      and <strong>squad cohesion</strong> can't (or barely) be backtested — they live as shadow
+      bets in the model lab, never in the official forecast.</p>
     </div>
   </div>
+</section>
+
+<section id="rule">
+  <h2>The rule <span class="sub">how every data choice above was decided</span></h2>
+  <p class="note" style="max-width:780px;font-size:.96rem">One referee governs the whole model:
+  <strong>nothing enters unless it would have predicted past tournaments better.</strong> Every
+  candidate is tested point-in-time — using only what was known before each match — on six past
+  World Cups and Euros, and kept only if it lowers out-of-sample log-loss. No data later than the
+  prediction date; no tuning on the tournament being predicted; nothing kept because it "feels
+  right". It's why the list of what's <em>in</em> is short, why the rejects above are on the page
+  at all — and why, when a fair version of football capital stopped helping, it came out. The
+  discipline is the product.</p>
 </section>
 
 <section id="track">

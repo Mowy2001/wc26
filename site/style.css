@@ -268,3 +268,10 @@ details.tech[open] summary::before { content: "\25BE "; }
   text-align: center; margin: 4px 0; opacity: .8; }
 #fc-groups.groups-grid .team-row .val .delta { margin-left: 5px; }
 @media (max-width: 760px) { .fc-grid { grid-template-columns: 1fr; } }
+
+/* repeated synced sliders in the forecast */
+.fc-bar { display: flex; align-items: center; gap: 12px; margin: 4px 0 12px;
+  padding: 8px 12px; background: var(--bg2); border: 1px solid var(--card-edge); border-radius: 10px; }
+.fc-bar .fc-slider { flex: 1; accent-color: var(--accent); height: 5px; cursor: pointer; }
+.fc-bar .fc-lab { font-size: .8rem; color: var(--accent2); font-weight: 600; white-space: nowrap; }
+@media (max-width: 600px) { .fc-bar .fc-lab { font-size: .7rem; } }

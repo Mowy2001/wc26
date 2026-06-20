@@ -38,12 +38,12 @@ const $ = (id) => document.getElementById(id);
 }
 
 /* ---------- THE FORECAST: one slider drives champion + bracket + thirds + Golden Boot + groups ---------- */
-if (WC26.replay && WC26.replay.snapshots && $("fc-slider")) {
+if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-slider")) {
   const snaps = WC26.replay.snapshots;
   const tg = WC26.replay.teams_group;
-  const slider = $("fc-slider");
-  slider.max = snaps.length - 1;
-  slider.value = snaps.length - 1;
+  const sliders = [...document.querySelectorAll(".fc-slider")];
+  const labs = [...document.querySelectorAll(".fc-lab")];
+  sliders.forEach((sl) => { sl.min = 0; sl.max = snaps.length - 1; sl.step = 1; sl.value = snaps.length - 1; });
 
   const delta = (now, was, dp = 1) => {
     if (was === undefined || was === null) return "";
@@ -71,8 +71,8 @@ if (WC26.replay && WC26.replay.snapshots && $("fc-slider")) {
 
   const render = (k) => {
     const s = snaps[k], prev = k > 0 ? snaps[k - 1] : null;
-    $("fc-date").textContent = s.date;
-    $("fc-match").textContent = k === 0 ? "before kickoff" : s.last_match;
+    sliders.forEach((sl) => { if (+sl.value !== k) sl.value = k; });
+    labs.forEach((l) => { l.textContent = `${s.date} · ${k === 0 ? "before kickoff" : s.last_match}`; });
 
     // champion (top 12)
     const top = Object.entries(s.champion).sort((a, b) => b[1] - a[1]).slice(0, 12);
@@ -134,7 +134,7 @@ if (WC26.replay && WC26.replay.snapshots && $("fc-slider")) {
       return `<div class="group-card"><h3>GROUP ${g}</h3>${rows}</div>`;
     }).join("");
   };
-  slider.addEventListener("input", (e) => render(+e.target.value));
+  sliders.forEach((sl) => sl.addEventListener("input", (e) => render(+e.target.value)));
   render(snaps.length - 1);
 }
 
