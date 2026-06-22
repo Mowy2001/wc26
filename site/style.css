@@ -53,7 +53,15 @@ body {
 }
 .stat .v { font-size: 1.5rem; font-weight: 800; color: var(--text); }
 .stat .v .flag { font-size: 1.3rem; margin-right: 6px; }
+.stat .v .vs { color: var(--muted); font-size: .95rem; font-weight: 600; }
 .stat .k { font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+/* the live-record headline stat — visually first and emphasised */
+.stat.headline {
+  background: linear-gradient(135deg, rgba(56,189,248,.16), rgba(74,222,128,.14));
+  border-color: var(--accent);
+}
+.stat.headline .v { color: var(--accent); font-size: 1.8rem; }
+.stat.headline .v .vs { color: var(--text); }
 
 /* ---------- nav ---------- */
 .toc {
@@ -69,6 +77,31 @@ body {
   transition: color .15s, border-color .15s;
 }
 .toc a:hover { color: var(--accent); border-color: var(--accent); }
+.toc-group {
+  align-self: center;
+  font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--accent); opacity: .8;
+  padding: 0 4px 0 8px;
+}
+.toc-group:not(:first-child) { margin-left: 10px; border-left: 1px solid var(--card-edge); }
+
+/* ---------- act dividers (the two-part spine) ---------- */
+.act-divider {
+  display: flex; align-items: center; gap: 14px;
+  margin: 72px 0 8px;
+  font-size: 1.9rem; font-weight: 800; color: var(--text);
+  letter-spacing: -.01em;
+}
+.act-divider .act-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; flex: 0 0 40px;
+  border-radius: 50%; background: linear-gradient(135deg, var(--accent2), var(--accent));
+  color: #07101f; font-size: 1.2rem; font-weight: 800;
+}
+.act-divider .act-sub {
+  font-size: .95rem; font-weight: 500; color: var(--muted); letter-spacing: 0;
+}
+.act-divider + section { margin-top: 26px; }
 
 /* ---------- sections ---------- */
 section { margin: 64px 0; }
@@ -146,6 +179,12 @@ footer a { color: var(--accent2); }
 @media (max-width: 640px) {
   .bar-row { grid-template-columns: 120px 1fr 52px; }
   .pair-row { grid-template-columns: 120px 1fr; }
+  /* let hero stat cards shrink instead of overflowing the viewport */
+  .hero-stats { gap: 10px; }
+  .hero-stats .stat { min-width: 0; flex: 1 1 140px; }
+  .hero-stats .stat.headline { flex-basis: 100%; }
+  .act-divider { font-size: 1.5rem; gap: 10px; }
+  .act-divider .act-sub { flex-basis: 100%; }
 }
 
 /* ---------- v2: data-first additions ---------- */

@@ -10,20 +10,23 @@
 
 <header class="hero">
   <div class="wrap">
-    <p class="kicker">A probabilistic forecast of the 2026 World Cup · updated as results come in</p>
-    <h1>The 2026 World Cup,<br>as a <em>probability distribution</em></h1>
-    <p class="lede">A working forecast built from public data alone. Every team's chances
-    come from simulating the whole tournament 20,000 times; every ingredient in the model
-    had to earn its place by predicting past tournaments better than the model without it.
-    Step through the forecast below to see where things stand, match by match — then read on for
-    how it works and which data made the cut.</p>
+    <p class="kicker">A probabilistic forecast of the 2026 World Cup<span id="hero-fresh"></span></p>
+    <h1>A World Cup forecast,<br>graded <em>in public</em></h1>
+    <p class="lede">The whole tournament as a probability distribution: every team's chances come
+    from simulating all 104 matches 20,000 times. The forecast was frozen on June 11 and is now
+    scored, match by match, against real results — and every ingredient had to earn its place by
+    predicting past tournaments better than the model without it. Step through it below; then read on
+    for how it works and which data made the cut.</p>
     <div class="hero-stats" id="hero-stats"></div>
   </div>
 </header>
 
 <nav class="toc wrap">
-  <a href="#forecast">The forecast</a>
+  <span class="toc-group">Forecast</span>
+  <a href="#forecast">Live forecast</a>
+  <a href="#track">How it's doing</a>
   <a href="#rounds">Round by round</a>
+  <span class="toc-group">Model</span>
   <a href="#idea">How it predicts</a>
   <a href="#data">The data</a>
   <a href="#influence">What moves it</a>
@@ -35,6 +38,8 @@
 </nav>
 
 <main class="wrap">
+
+<div class="act-divider"><span class="act-num">1</span> The forecast <span class="act-sub">live, and graded against reality</span></div>
 
 <section id="forecast">
   <h2>The forecast <span class="sub">one tournament-clock — bracket, groups, thirds, title and Golden Boot all move together as results land</span></h2>
@@ -67,10 +72,28 @@
     <div id="fc-groups" class="groups-grid"></div></div>
 </section>
 
+<section id="track">
+  <h2>How it's doing <span class="sub">the forecast frozen on June 11, graded against real results</span></h2>
+  <p class="note" style="margin-top:-4px;margin-bottom:14px">This is the heart of it: a forecast is
+  only worth as much as its record. Below is how the <em>frozen</em> June-11 model is scoring against
+  every result since kick-off — no retro-fitting, no second guesses.</p>
+  <div id="track-head" class="hero-stats"></div>
+  <div class="tl-grid" style="margin-top:18px">
+    <div><div class="tl-h">Recent matches — P(what actually happened)</div><div id="track-matches" class="chart"></div></div>
+    <div><div class="tl-h">Real group tables so far</div><div id="track-standings" class="tl-groups"></div></div>
+  </div>
+  <p class="note">These are the probabilities the model gave each real match <em>before</em> it was
+  played (beliefs frozen June 11). The score is <strong>log-loss</strong> — lower is better, and a
+  know-nothing coin-three scores 1.099; coming in under that line means the model beats pure
+  guessing. Calibration shows how often its favourites actually won.</p>
+</section>
+
 <section id="rounds">
   <h2>Round by round <span class="sub">how far each contender goes — today's picture</span></h2>
   <div class="table-scroll"><table id="rounds-table"></table></div>
 </section>
+
+<div class="act-divider"><span class="act-num">2</span> The model <span class="act-sub">how it's built, and why you can trust what's in it</span></div>
 
 <section id="idea">
   <h2>How it predicts <span class="sub">grade → expected goals → 20,000 simulated tournaments. No maths required.</span></h2>
@@ -277,18 +300,6 @@
   right". It's why the list of what's <em>in</em> is short, why the rejects above are on the page
   at all — and why, when a fair version of football capital stopped helping, it came out. The
   discipline is the product.</p>
-</section>
-
-<section id="track">
-  <h2>How it's doing <span class="sub">the forecast frozen on June 11, graded against real results</span></h2>
-  <div id="track-head" class="hero-stats"></div>
-  <div class="tl-grid" style="margin-top:18px">
-    <div><div class="tl-h">Recent matches — P(what actually happened)</div><div id="track-matches" class="chart"></div></div>
-    <div><div class="tl-h">Real group tables so far</div><div id="track-standings" class="tl-groups"></div></div>
-  </div>
-  <p class="note">These are the probabilities the model gave each real match <em>before</em> it was
-  played (beliefs frozen June 11). Log-loss below the uniform baseline (1.099) means it beats a
-  know-nothing coin-three; calibration shows how often its favourites actually won.</p>
 </section>
 
 <section id="lab">

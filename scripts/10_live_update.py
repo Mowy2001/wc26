@@ -82,12 +82,18 @@ subprocess.run([sys.executable, "scripts/09_player_layer.py"], check=True)
 import json as _json, os as _os
 _t = res["teams"]; _k = len(fixed) + len(fixed_ko)
 _gb = pd.read_csv("outputs/golden_boot.csv").head(12)
+# bracket: modal occupant + probability per knockout slot (same shape as scripts/31)
+_bracket = {}
+for _br in res["bracket"].itertuples(index=False):
+    _bracket.setdefault(int(_br.match), {})[_br.slot] = {"team": _br.team, "p": round(float(_br.p), 4)}
 _snap = {"k": _k, "date": str(pd.Timestamp.utcnow().date()),
          "last_match": f"{_k} matches played",
          "champion": {tm: round(float(_t.loc[tm, "P_champion"]), 4) for tm in _t.index},
          "qualify": {tm: round(float(_t.loc[tm, "P_qualify"]), 4) for tm in _t.index},
+         "best_third": {tm: round(float(_t.loc[tm, "P_best_third"]), 4) for tm in _t.index},
          "golden_boot": [{"player": r.player, "team": r.team, "p": round(float(r.P_golden_boot), 4)}
-                         for r in _gb.itertuples(index=False)]}
+                         for r in _gb.itertuples(index=False)],
+         "bracket": _bracket}
 _rp = "outputs/history/replay.json"
 if _os.path.exists(_rp):
     _data = _json.load(open(_rp))

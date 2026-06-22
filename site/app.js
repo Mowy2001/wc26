@@ -21,24 +21,30 @@ const flag = (t) => `<span class="flag">${FLAGS[t] || "🏳️"}</span>`;
 const byChamp = [...WC26.teams].sort((a, b) => b.P_champion - a.P_champion);
 const $ = (id) => document.getElementById(id);
 
-/* ---------- hero stats ---------- */
+/* ---------- freshness signal in the hero kicker ---------- */
+if ($("hero-fresh") && WC26.generated) {
+  $("hero-fresh").textContent = ` · updated ${WC26.generated} · refreshes twice daily`;
+}
+
+/* ---------- hero stats: lead with the live record (the credibility headline) ---------- */
 {
   const fav = byChamp[0];
   const bt = WC26.backtest;
   const sc = WC26.scoring;
-  const live = sc && sc.n
-    ? `<div class="stat"><div class="v">${sc.log_loss} <span style="color:var(--muted);font-size:.95rem">vs ${sc.uniform}</span></div>
-        <div class="k">live log-loss vs naive (${sc.n} matches)</div></div>`
-    : `<div class="stat"><div class="v">${bt.log_loss_model} <span style="color:var(--muted);font-size:.95rem">vs ${bt.log_loss_uniform}</span></div>
-        <div class="k">backtest log-loss vs naive</div></div>`;
+  // headline = how the frozen forecast is scoring against reality, if live
+  const headline = sc && sc.n
+    ? `<div class="stat headline"><div class="v">${sc.log_loss} <span class="vs">vs ${sc.uniform}</span></div>
+        <div class="k">live score vs guessing — log-loss, lower is better (${sc.n} matches)</div></div>`
+    : "";
+  const backtestStat = `<div class="stat"><div class="v">${bt.log_loss_model} <span class="vs">vs ${bt.log_loss_uniform}</span></div>
+      <div class="k">backtest log-loss (WC2022)</div></div>`;
   $("hero-stats").innerHTML = `
+    ${headline}
     <div class="stat"><div class="v">${flag(fav.team)}${pct(fav.P_champion)}</div>
       <div class="k">favourite: ${fav.team}</div></div>
     <div class="stat"><div class="v">${WC26.n_sims.toLocaleString("en-US")}</div>
       <div class="k">simulated tournaments</div></div>
-    ${live}
-    <div class="stat"><div class="v">${bt.log_loss_model} <span style="color:var(--muted);font-size:.95rem">vs ${bt.log_loss_uniform}</span></div>
-      <div class="k">backtest log-loss (WC2022)</div></div>`;
+    ${backtestStat}`;
 }
 
 /* ---------- THE FORECAST: one slider drives champion + bracket + thirds + Golden Boot + groups ---------- */
@@ -138,7 +144,7 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     $("fc-bracket").innerHTML = board + champCol;
 
     // best thirds (8 of 12 advance) — ranked by P(advance as a best third)
-    const th = Object.entries(s.best_third).filter(([, p]) => p > 0.01)
+    const th = Object.entries(s.best_third || {}).filter(([, p]) => p > 0.01)
       .sort((a, b) => b[1] - a[1]).slice(0, 12);
     const tmax = th[0] ? th[0][1] : 1;
     $("fc-thirds").innerHTML = th.map(([t, p], i) => `
@@ -146,7 +152,7 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
       <div class="bar-row">
         <div class="who">${flag(t)}${t}</div>
         <div class="bar-track"><div class="bar-fill" style="width:${(100 * p) / tmax}%;${i < 8 ? "" : "opacity:.5"}"></div></div>
-        <div class="val">${pct(p, 0)}${delta(p, prev && prev.best_third[t], 0)}</div>
+        <div class="val">${pct(p, 0)}${delta(p, prev && prev.best_third && prev.best_third[t], 0)}</div>
       </div>`).join("");
 
     // golden boot
@@ -185,6 +191,23 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     else if (e.key === "End") { e.preventDefault(); go(N); }
   }));
   render(N);
+
+  // One-time demo on load: briefly replay the last few matches so the page
+  // visibly *moves* (demonstrating it's live), then settle on today. Skipped
+  // for prefers-reduced-motion, and cancelled the moment the user takes over.
+  (function autoplay() {
+    if (N < 3) return;
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let k = Math.max(0, N - 6), timer = null;
+    const stop = () => { if (timer) { clearTimeout(timer); timer = null; } };
+    const tick = () => {
+      if (k > N) { stop(); return; }
+      go(k++); timer = setTimeout(tick, 430);
+    };
+    ["pointerdown", "keydown"].forEach((ev) =>
+      document.addEventListener(ev, stop, { once: true, capture: true }));
+    timer = setTimeout(tick, 800);
+  })();
 }
 
 /* ---------- round-by-round table ---------- */
