@@ -111,7 +111,7 @@ data = {
     "generated": str(date.today()),
     "n_sims": 20000,
     "seed": 26,
-    "model_version": "v3 (Elo-driven Dixon-Coles, tuned xi, official bracket, calibrated shootouts, parameter bootstrap, player layer, capital block on probation)",
+    "model_version": "v3 (Elo-driven Dixon-Coles, tuned xi, official bracket, calibrated shootouts, parameter bootstrap, player layer, deployed tilts: fatigue + altitude)",
     "backtest": {
         "tournament": "World Cup 2022 (64 matches, point-in-time fit)",
         "log_loss_model": 1.060, "log_loss_uniform": 1.099,

@@ -42,12 +42,31 @@ const $ = (id) => document.getElementById(id);
 }
 
 /* ---------- THE FORECAST: one slider drives champion + bracket + thirds + Golden Boot + groups ---------- */
-if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-slider")) {
+if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
   const snaps = WC26.replay.snapshots;
   const tg = WC26.replay.teams_group;
+  const N = snaps.length - 1;        // last index; index 0 = before kickoff
+  let cur = N;
+
+  // Build a rich, synced control inside every .fc-bar:
+  //   ◀  [============o====]  ▶   "match 18 / 28 · 2026-06-18 · Canada 6-0 Qatar"
+  const bars = [...document.querySelectorAll(".fc-bar")];
+  bars.forEach((bar) => {
+    bar.innerHTML =
+      `<button type="button" class="fc-step fc-prev" aria-label="previous match">◀</button>` +
+      `<div class="fc-track-wrap">` +
+        `<input type="range" class="fc-slider" min="0" max="${N}" step="1" value="${N}" aria-label="match number">` +
+        `<div class="fc-ticks"></div>` +
+      `</div>` +
+      `<button type="button" class="fc-step fc-next" aria-label="next match">▶</button>` +
+      `<span class="fc-lab"></span>`;
+    // tick notches, one per snapshot
+    const ticks = bar.querySelector(".fc-ticks");
+    ticks.innerHTML = snaps.map((_, i) =>
+      `<i style="left:${N ? (100 * i) / N : 0}%"></i>`).join("");
+  });
   const sliders = [...document.querySelectorAll(".fc-slider")];
   const labs = [...document.querySelectorAll(".fc-lab")];
-  sliders.forEach((sl) => { sl.min = 0; sl.max = snaps.length - 1; sl.step = 1; sl.value = snaps.length - 1; });
 
   const delta = (now, was, dp = 1) => {
     if (was === undefined || was === null) return "";
@@ -70,13 +89,29 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-slider")
   const slotHTML = (s) => {
     if (!s) return `<div class="bk-slot"><span class="bk-team">—</span></div>`;
     const cls = s.p >= 0.6 ? "sure" : s.p < 0.3 ? "open" : "";
-    return `<div class="bk-slot ${cls}"><span class="bk-team">${flag(s.team)}${TLA(s.team)}</span><span class="bk-p">${pct(s.p, 0)}</span></div>`;
+    const title = `${s.team}: ${pct(s.p, 0)} chance of filling this slot`;
+    return `<div class="bk-slot ${cls}" title="${title}"><span class="bk-team">${flag(s.team)}${TLA(s.team)}</span><span class="bk-p">${pct(s.p, 0)}</span></div>`;
   };
 
+  if ($("bracket-legend")) {
+    $("bracket-legend").innerHTML =
+      `Each box shows the <strong>single most likely team</strong> to reach that slot, and the % is
+       the <strong>chance that exact team gets there</strong> across the 20,000 simulations — not the
+       odds of winning that particular tie. So "ESP 34%" means Spain stands here in 34% of simulated
+       tournaments (and some other team in the other 66%). <span class="bk-key sure">Green ≥60%</span>
+       a near-locked slot · <span class="bk-key open">grey &lt;30%</span> a wide-open one where many
+       teams are plausible.`;
+  }
+
   const render = (k) => {
+    cur = k;
     const s = snaps[k], prev = k > 0 ? snaps[k - 1] : null;
     sliders.forEach((sl) => { if (+sl.value !== k) sl.value = k; });
-    labs.forEach((l) => { l.textContent = `${s.date} · ${k === 0 ? "before kickoff" : s.last_match}`; });
+    const counter = k === 0 ? "before kickoff" : `match ${k} / ${N}`;
+    const detail = k === 0 ? `${s.date} · before any result` : `${s.date} · ${s.last_match}`;
+    labs.forEach((l) => { l.innerHTML = `<b>${counter}</b><span class="fc-lab-detail">${detail}</span>`; });
+    document.querySelectorAll(".fc-prev").forEach((b) => (b.disabled = k <= 0));
+    document.querySelectorAll(".fc-next").forEach((b) => (b.disabled = k >= N));
 
     // champion (top 12)
     const top = Object.entries(s.champion).sort((a, b) => b[1] - a[1]).slice(0, 12);
@@ -138,8 +173,18 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-slider")
       return `<div class="group-card"><h3>GROUP ${g}</h3>${rows}</div>`;
     }).join("");
   };
-  sliders.forEach((sl) => sl.addEventListener("input", (e) => render(+e.target.value)));
-  render(snaps.length - 1);
+  const go = (k) => render(Math.max(0, Math.min(N, k)));
+  sliders.forEach((sl) => sl.addEventListener("input", (e) => go(+e.target.value)));
+  document.querySelectorAll(".fc-prev").forEach((b) => b.addEventListener("click", () => go(cur - 1)));
+  document.querySelectorAll(".fc-next").forEach((b) => b.addEventListener("click", () => go(cur + 1)));
+  // arrow-key stepping when a slider is focused
+  sliders.forEach((sl) => sl.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft" || e.key === "ArrowDown") { e.preventDefault(); go(cur - 1); }
+    else if (e.key === "ArrowRight" || e.key === "ArrowUp") { e.preventDefault(); go(cur + 1); }
+    else if (e.key === "Home") { e.preventDefault(); go(0); }
+    else if (e.key === "End") { e.preventDefault(); go(N); }
+  }));
+  render(N);
 }
 
 /* ---------- round-by-round table ---------- */

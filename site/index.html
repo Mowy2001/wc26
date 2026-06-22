@@ -15,8 +15,8 @@
     <p class="lede">A working forecast built from public data alone. Every team's chances
     come from simulating the whole tournament 20,000 times; every ingredient in the model
     had to earn its place by predicting past tournaments better than the model without it.
-    Drag the slider below to see where things stand, match by match — then read on for how
-    it works and which data made the cut.</p>
+    Step through the forecast below to see where things stand, match by match — then read on for
+    how it works and which data made the cut.</p>
     <div class="hero-stats" id="hero-stats"></div>
   </div>
 </header>
@@ -39,23 +39,31 @@
 <section id="forecast">
   <h2>The forecast <span class="sub">one tournament-clock — bracket, groups, thirds, title and Golden Boot all move together as results land</span></h2>
   <p class="note" style="margin-top:-4px;margin-bottom:14px">Every frame is a full re-simulation
-  conditioned on the results up to that point (beliefs frozen at June 11). Drag any slider to the
-  end for today's live picture, or back to watch one result ripple through everything. The slider
-  repeats above each view so you never have to scroll back up. <strong>▲/▼ = change since the
-  previous match.</strong></p>
+  conditioned on the results up to that point (beliefs frozen at June 11). Step to the
+  end for today's live picture, or back to watch one result ripple through everything. The control
+  repeats above each view so you never have to scroll back up — use the ◀ ▶ buttons or arrow keys
+  to move one match at a time. <strong>▲/▼ = change since the previous match.</strong></p>
 
-  <div class="fc-block"><div class="fc-bar"><input type="range" class="fc-slider"><span class="fc-lab"></span></div>
-    <div class="tl-h">Champion</div><div id="fc-champ" class="chart"></div></div>
-  <div class="fc-block"><div class="fc-bar"><input type="range" class="fc-slider"><span class="fc-lab"></span></div>
+  <div class="fc-block"><div class="fc-bar"></div>
+    <div class="tl-h">Champion</div>
+    <p class="chart-cap">% = share of the 20,000 simulations in which this team lifts the trophy.</p>
+    <div id="fc-champ" class="chart"></div></div>
+  <div class="fc-block"><div class="fc-bar"></div>
     <div class="tl-h">Predicted bracket — most likely team in each slot</div>
+    <p class="bracket-legend" id="bracket-legend"></p>
     <div id="fc-bracket" class="bracket-scroll"></div></div>
-  <div class="fc-block"><div class="fc-bar"><input type="range" class="fc-slider"><span class="fc-lab"></span></div>
+  <div class="fc-block"><div class="fc-bar"></div>
     <div class="fc-grid">
-      <div><div class="tl-h">Best thirds — 8 of 12 advance</div><div id="fc-thirds" class="chart"></div></div>
-      <div><div class="tl-h">Golden Boot</div><div id="fc-gb" class="chart"></div></div>
+      <div><div class="tl-h">Best thirds — 8 of 12 advance</div>
+        <p class="chart-cap">% = chance of finishing among the eight best third-placed teams that go through.</p>
+        <div id="fc-thirds" class="chart"></div></div>
+      <div><div class="tl-h">Golden Boot</div>
+        <p class="chart-cap">% = chance of being the tournament's top scorer.</p>
+        <div id="fc-gb" class="chart"></div></div>
     </div></div>
-  <div class="fc-block"><div class="fc-bar"><input type="range" class="fc-slider"><span class="fc-lab"></span></div>
+  <div class="fc-block"><div class="fc-bar"></div>
     <div class="tl-h">Groups — probability of advancing</div>
+    <p class="chart-cap">% = chance of reaching the knockout round (top two, or as a best third).</p>
     <div id="fc-groups" class="groups-grid"></div></div>
 </section>
 
@@ -93,11 +101,12 @@
       "Spain 25%" just means: Spain lifted the trophy in 5,000 of them.</p>
     </div>
   </div>
-  <p class="note">Like a weather forecast: 70% rain doesn't mean it will rain — it means
-  bring an umbrella and don't be shocked by sunshine. And one house rule keeps it honest:
-  any new ingredient must prove it would have predicted <em>past</em> World Cups better,
-  or it stays out. Most candidates fail that exam. The rejects are documented below —
-  they're the reason you can trust what's left in.</p>
+  <p class="note">A 25% favourite is not a prediction that they win — it means that if this
+  same tournament were played 20,000 times, they would lift the trophy in a quarter of them and
+  fall short in the other three quarters. And one house rule keeps it honest: any new ingredient
+  must prove it would have predicted <em>past</em> World Cups better, or it stays out. Most
+  candidates don't make the cut. The rejects are documented below — they're the reason you can
+  trust what's left in.</p>
 </section>
 
 <section id="data">
