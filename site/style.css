@@ -441,3 +441,40 @@ details.tech[open] summary::before { content: "\25BE "; }
 .dr-seg.drag { background: repeating-linear-gradient(45deg, #8f5161, #8f5161 3px, transparent 3px, transparent 6px); }
 .dr-row .val { text-align: right; font-variant-numeric: tabular-nums; }
 .dr-row .who { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ---------- live record: broadcast scoreboard rows (Direction B / B2) ---------- */
+.sb-row {
+  display: grid; grid-template-columns: 1fr 64px; align-items: center; gap: 12px;
+  background: var(--card); border: 1px solid var(--card-edge); border-radius: 10px;
+  padding: 9px 14px; margin: 6px 0;
+}
+.sb-row.clickable { cursor: pointer; transition: border-color .15s, background .15s; }
+.sb-row.clickable:hover { border-color: var(--accent2); background: #101a2e; }
+.sb-match { display: flex; align-items: center; gap: 10px; min-width: 0; font-weight: 700; }
+.sb-team { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sb-team.away { justify-content: flex-end; color: var(--muted); font-weight: 600; }
+.sb-team:first-child { flex: 1; }
+.sb-team.away { flex: 1; }
+.sb-score {
+  font-variant-numeric: tabular-nums; font-weight: 900; font-size: 1.05rem;
+  background: #0a1322; border: 1px solid var(--card-edge); border-radius: 7px;
+  padding: 2px 10px; letter-spacing: .04em;
+}
+.sb-score i { color: var(--muted); font-style: normal; margin: 0 3px; }
+.sb-p { text-align: right; font-weight: 900; font-size: 1.05rem; }
+.sb-p.win { color: var(--accent); }
+.sb-p.miss { color: var(--hot); }
+.sb-row .mh-hint { color: var(--accent2); font-size: .7rem; opacity: 0; }
+.sb-row.clickable:hover .mh-hint { opacity: .9; }
+
+/* ---------- collapsible (B2: full table + appendix demoted) ---------- */
+.collapse { border: 1px solid var(--card-edge); border-radius: 12px; background: var(--card); }
+.collapse > summary {
+  cursor: pointer; padding: 14px 18px; font-weight: 700; color: var(--text);
+  list-style: none; display: flex; align-items: center; gap: 10px;
+}
+.collapse > summary::before { content: "▸"; color: var(--accent); transition: transform .15s; }
+.collapse[open] > summary::before { transform: rotate(90deg); }
+.collapse > summary::-webkit-details-marker { display: none; }
+.collapse[open] > summary { border-bottom: 1px solid var(--card-edge); }
+.collapse > .table-scroll { padding: 8px 14px 16px; }

@@ -25,24 +25,37 @@
 </header>
 
 <nav class="toc wrap">
-  <span class="toc-group">Forecast</span>
-  <a href="#forecast">Live forecast</a>
+  <span class="toc-group">The race</span>
   <a href="#track">How it's doing</a>
-  <a href="#rounds">Round by round</a>
-  <span class="toc-group">Model</span>
-  <a href="#idea">How it predicts</a>
-  <a href="#data">The data</a>
-  <a href="#influence">What moves it</a>
-  <a href="#rejected">Tested &amp; discarded</a>
-  <a href="#rule">The rule</a>
-  <a href="#lab">Model lab</a>
+  <a href="#forecast">Live forecast</a>
+  <a href="#drivers">What earns each place</a>
+  <span class="toc-group">Under the hood</span>
+  <a href="#idea">How it works</a>
+  <a href="#influence">What earned its place</a>
   <a href="#market">Model vs market</a>
-  <a href="#method">Methodology</a>
+  <a href="#lab">Model lab</a>
+  <a href="#method">Appendix</a>
 </nav>
 
 <main class="wrap">
 
-<div class="act-divider"><span class="act-num">1</span> The forecast <span class="act-sub">live, and graded against reality</span></div>
+<div class="act-divider"><span class="act-num">1</span> Tonight's race <span class="act-sub">the live record first — then the forecast, match by match</span></div>
+
+<section id="track">
+  <h2>How it's doing <span class="sub">the forecast frozen on June 11, graded against real results</span></h2>
+  <p class="note" style="margin-top:-4px;margin-bottom:14px">This is the heart of it: a forecast is
+  only worth as much as its record. Below is how the <em>frozen</em> June-11 model is scoring against
+  every result since kick-off — no retro-fitting, no second guesses.</p>
+  <div id="track-head" class="hero-stats"></div>
+  <div class="tl-grid" style="margin-top:18px">
+    <div><div class="tl-h">Recent matches — P(what actually happened)</div><div id="track-matches" class="chart"></div></div>
+    <div><div class="tl-h">Real group tables so far</div><div id="track-standings" class="tl-groups"></div></div>
+  </div>
+  <p class="note">These are the probabilities the model gave each real match <em>before</em> it was
+  played (beliefs frozen June 11). The score is <strong>log-loss</strong> — lower is better, and a
+  know-nothing coin-three scores 1.099; coming in under that line means the model beats pure
+  guessing. Calibration shows how often its favourites actually won.</p>
+</section>
 
 <section id="forecast">
   <h2>The forecast <span class="sub">one tournament-clock — bracket, groups, thirds, title and Golden Boot all move together as results land</span></h2>
@@ -91,31 +104,17 @@
   <div id="drivers-board" class="chart"></div>
 </section>
 
-<section id="track">
-  <h2>How it's doing <span class="sub">the forecast frozen on June 11, graded against real results</span></h2>
-  <p class="note" style="margin-top:-4px;margin-bottom:14px">This is the heart of it: a forecast is
-  only worth as much as its record. Below is how the <em>frozen</em> June-11 model is scoring against
-  every result since kick-off — no retro-fitting, no second guesses.</p>
-  <div id="track-head" class="hero-stats"></div>
-  <div class="tl-grid" style="margin-top:18px">
-    <div><div class="tl-h">Recent matches — P(what actually happened)</div><div id="track-matches" class="chart"></div></div>
-    <div><div class="tl-h">Real group tables so far</div><div id="track-standings" class="tl-groups"></div></div>
-  </div>
-  <p class="note">These are the probabilities the model gave each real match <em>before</em> it was
-  played (beliefs frozen June 11). The score is <strong>log-loss</strong> — lower is better, and a
-  know-nothing coin-three scores 1.099; coming in under that line means the model beats pure
-  guessing. Calibration shows how often its favourites actually won.</p>
-</section>
-
 <section id="rounds">
-  <h2>Round by round <span class="sub">how far each contender goes — today's picture</span></h2>
-  <div class="table-scroll"><table id="rounds-table"></table></div>
+  <details class="collapse">
+    <summary>Round by round — the full probability table</summary>
+    <div class="table-scroll"><table id="rounds-table"></table></div>
+  </details>
 </section>
 
-<div class="act-divider"><span class="act-num">2</span> The model <span class="act-sub">how it's built, and why you can trust what's in it</span></div>
+<div class="act-divider"><span class="act-num">2</span> Under the hood <span class="act-sub">how it's built — and how every variable earned its place</span></div>
 
 <section id="idea">
-  <h2>How it predicts <span class="sub">grade → expected goals → 20,000 simulated tournaments. No maths required.</span></h2>
+  <h2>How it works <span class="sub">grade → expected goals → 20,000 simulated tournaments. No maths required.</span></h2>
   <div class="cards3">
     <div class="card">
       <div class="card-step">1</div>
@@ -230,7 +229,7 @@
 </section>
 
 <section id="influence">
-  <h2>What moves the forecast <span class="sub">the data that made the cut — measured by re-running the tournament without each one</span></h2>
+  <h2>What earned its place <span class="sub">the trials — every variable admitted or cut, measured by re-running the tournament without it</span></h2>
   <div class="cards2">
     <div class="card">
       <h3>The rating is the engine</h3>
@@ -343,7 +342,7 @@
 </section>
 
 <section id="method">
-  <h2>Methodology <span class="sub">for the curious — the machinery behind the numbers</span></h2>
+  <h2>Appendix — the full machinery <span class="sub">for the rigorous reader: every formula and choice, in detail</span></h2>
 
   <details>
     <summary>Layer 1 — Elo ratings, rebuilt from scratch</summary>

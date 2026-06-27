@@ -166,29 +166,36 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     ["Semi-finals", [101, 102]],
     ["Final", [104]],
   ];
-  let bracketMode = "reach";  // "reach" = P(team fills this slot) | "adv" = P(win the tie | here)
-  const slotHTML = (s) => {
+  let bracketMode = "reach";  // "reach" = P(team fills this slot) | "adv" = win-the-tie share
+  // "Win the tie" = the head-to-head SHARE between the two named teams: each side's
+  // conditional win-if-here (adv/p) normalised so the two slots of a match sum to 100%.
+  // Reads as "who wins this match" — two strong finalists land ~50/50, a favourite high.
+  const slotHTML = (s, disp) => {
     if (!s) return `<div class="bk-slot"><span class="bk-team">—</span></div>`;
-    // "Win the tie" = CONDITIONAL: given this team reaches the slot, how often it wins
-    // its match (adv/p). That reads as a natural "chance of winning this match" — a
-    // favourite stays ~70% even in a slot it only reaches sometimes.
-    const cond = s.p > 0 ? (s.adv ?? 0) / s.p : 0;
-    const v = bracketMode === "adv" ? cond : s.p;
+    const v = bracketMode === "adv" ? (disp ?? 0) : s.p;
     const cls = v >= 0.6 ? "sure" : v < 0.3 ? "open" : "";
     const title = bracketMode === "adv"
-      ? `${s.team}: if it reaches this slot, it wins the tie ${pct(cond, 0)} of the time (it reaches the slot ${pct(s.p, 0)})`
+      ? `${s.team}: wins this tie ${pct(v, 0)} of the time when it meets the team in the other slot (reaches the slot ${pct(s.p, 0)})`
       : `${s.team}: ${pct(s.p, 0)} chance of filling this slot`;
     return `<div class="bk-slot ${cls}" title="${title}"><span class="bk-team">${flag(s.team)}${TLA(s.team)}</span><span class="bk-p">${pct(v, 0)}</span></div>`;
+  };
+  // per-match win-the-tie shares (normalised conditional), or [null,null] in reach mode
+  const tieShares = (m) => {
+    if (bracketMode !== "adv" || !m.top || !m.bot) return [null, null];
+    const cT = m.top.p > 0 ? (m.top.adv ?? 0) / m.top.p : 0;
+    const cB = m.bot.p > 0 ? (m.bot.adv ?? 0) / m.bot.p : 0;
+    const s = cT + cB;
+    return s > 0 ? [cT / s, cB / s] : [0, 0];
   };
 
   const setLegend = () => {
     if (!$("bracket-legend")) return;
     $("bracket-legend").innerHTML = bracketMode === "adv"
-      ? `Each box still names the <strong>most likely team to reach that slot</strong>, but the % now
-         answers: <strong>if that team gets here, how often does it win the tie</strong> and go through?
-         It's a clean "chance of winning this match", so a strong favourite reads ~70% even in a slot it
-         only reaches sometimes. <span class="bk-key sure">Green ≥60%</span> likely to advance ·
-         <span class="bk-key open">grey &lt;30%</span> likely out.`
+      ? `Each box names the <strong>most likely team in each slot</strong>; the two %s are the
+         <strong>head-to-head — who wins the tie</strong> if those two meet, so they
+         <strong>add up to 100%</strong>. Two strong sides land near 50/50; a clear favourite reads high.
+         <span class="bk-key sure">Green ≥60%</span> favourite to go through ·
+         <span class="bk-key open">grey &lt;30%</span> the underdog.`
       : `Each box shows the <strong>single most likely team</strong> to reach that slot, and the % is
          the <strong>chance that exact team gets there</strong> across the 20,000 simulations — not the
          odds of winning that particular tie (switch to <em>Win the tie</em> for that). So "ESP 34%"
@@ -221,7 +228,8 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     const board = COLS.map(([label, matches]) => {
       const boxes = matches.map((mn) => {
         const m = (s.bracket && s.bracket[mn]) || {};
-        return `<div class="bk-match">${slotHTML(m.top)}${slotHTML(m.bot)}</div>`;
+        const [dT, dB] = tieShares(m);
+        return `<div class="bk-match">${slotHTML(m.top, dT)}${slotHTML(m.bot, dB)}</div>`;
       }).join("");
       return `<div class="bk-col"><div class="bk-round">${label}</div>${boxes}</div>`;
     }).join("");
@@ -577,11 +585,15 @@ if (WC26.scoring && WC26.scoring.n && $("track-head")) {
     const good = m.p_realised >= 0.45;
     const has = MD[m.home + "|" + m.away] ? "clickable" : "";
     const hint = has ? `<span class="mh-hint">distribution ▸</span>` : "";
-    return `<div class="bar-row ${has}" data-home="${m.home}" data-away="${m.away}">
-      <div class="who">${flag(m.home)} ${m.score} ${flag(m.away)}${coinFlipBadge(m.home, m.away)}${hint}</div>
-      <div class="bar-track"><div class="bar-fill" style="width:${100 * m.p_realised}%;
-        background:${good ? "linear-gradient(90deg, var(--accent2), var(--accent))" : "#8f5161"}"></div></div>
-      <div class="val">${pct(m.p_realised, 0)}</div>
+    const [hg, ag] = (m.score || "–").split(/[–-]/);
+    return `<div class="sb-row ${has}" data-home="${m.home}" data-away="${m.away}">
+      <div class="sb-match">
+        <span class="sb-team">${flag(m.home)}${m.home}</span>
+        <span class="sb-score">${hg ?? ""}<i>–</i>${ag ?? ""}</span>
+        <span class="sb-team away">${m.away}${flag(m.away)}</span>
+        ${coinFlipBadge(m.home, m.away)}${hint}
+      </div>
+      <div class="sb-p ${good ? "win" : "miss"} tnum" title="probability the model gave to what actually happened">${pct(m.p_realised, 0)}</div>
     </div>`;
   }).join("");
   $("track-matches").querySelectorAll(".bar-row.clickable").forEach((row) =>
