@@ -40,23 +40,8 @@ try:
 except FileNotFoundError:
     draws = None
 from wc26.tilts import load_team_tilt, load_city_tilt
-tilt = load_team_tilt()  # capital + fatigue
+tilt = load_team_tilt()  # fatigue (capital removed 2026-06-18)
 city_tilt = load_city_tilt()  # altitude
-_cap = pd.read_csv("outputs/capital.csv").query("tournament == 'wc2026'")
-_bc = json.load(open("outputs/capital_beta.json"))["beta_capital"]
-cap_only = {r.team: _bc * r.capital_z for r in _cap.itertuples(index=False)}
-_fat = pd.read_csv("outputs/fatigue.csv", index_col=0)["fatigue_z"]
-_bf = json.load(open("outputs/fatigue_beta.json"))["beta_fatigue"]
-fat_only = {t: _bf * float(z) for t, z in _fat.items()}
-_coh = pd.read_csv("outputs/cohesion.csv", index_col=0)["cohesion_z"]
-_bk = json.load(open("outputs/cohesion_beta.json"))["beta_cohesion"]
-def _merge(*ds):
-    out = {}
-    for d in ds:
-        for k, v in d.items():
-            out[k] = out.get(k, 0.0) + v
-    return out
-cap_fat = _merge(cap_only, fat_only)  # everything except cohesion
 scenarios = {
     "no_host_advantage": dict(model=base_model, host_advantage=False, param_draws=draws, team_log_tilt=tilt, city_log_tilt=city_tilt),
     "xi_short_memory": dict(model=DixonColes(xi=0.005).fit(train, FIT), host_advantage=True, param_draws=None, team_log_tilt=tilt, city_log_tilt=city_tilt),

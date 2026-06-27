@@ -35,6 +35,29 @@ import pandas as pd
 HOME_ADV = 100.0
 INITIAL_RATING = 1500.0
 
+# Altitude-aware home advantage (scripts/35, deployed 2026-06-25). A home win
+# at a venue well above the VISITOR's habitual altitude earns fewer rating
+# points, because the expected score is lifted by the acclimatisation gap.
+# This stops altitude fortresses (La Paz, Quito, Bogotá) from inflating a
+# side's rating in a way that does not survive the move to a sea-level neutral
+# tournament. gamma is in Elo points per km of altitude gap; 0 recovers the
+# classic flat home advantage. Gated on CONMEBOL sea-level matches (OOS
+# -0.0042, paired t=-1.91, interior optimum). See docs/METHODOLOGY.md.
+ALT_GAMMA = 75.0
+
+
+def habitual_altitudes(results: pd.DataFrame, city_alt: dict[str, float]) -> dict[str, float]:
+    """Each team's frequency-weighted mean home-venue elevation (metres).
+
+    Computed over non-neutral matches whose city has a known elevation; a
+    structural geography property of the team, not a result, so using the
+    full history introduces no look-ahead leak.
+    """
+    home = results[~results["neutral"].astype(bool)].dropna(subset=["city"])
+    home = home[home["city"].isin(city_alt)]
+    alt = home.assign(_a=home["city"].map(city_alt)).groupby("home_team")["_a"].mean()
+    return alt.to_dict()
+
 # Match importance -> K factor. Keys are matched as substrings of the
 # `tournament` column (lowercased), first hit wins, ordered by specificity.
 K_RULES: list[tuple[str, float]] = [
@@ -85,15 +108,25 @@ def expected_score(r_home: float, r_away: float, neutral: bool) -> float:
     return 1.0 / (1.0 + 10.0 ** (-dr / 400.0))
 
 
-def compute_elo_history(results: pd.DataFrame) -> pd.DataFrame:
+def compute_elo_history(
+    results: pd.DataFrame,
+    alt_gamma: float = 0.0,
+    habitual: dict[str, float] | None = None,
+    city_alt: dict[str, float] | None = None,
+) -> pd.DataFrame:
     """Run Elo over the full match history.
 
     Parameters
     ----------
     results : DataFrame with columns
         date (datetime), home_team, away_team, home_score, away_score,
-        tournament, neutral (bool). Matches with missing scores (future
+        tournament, city, neutral (bool). Matches with missing scores (future
         fixtures) are skipped.
+    alt_gamma : Elo points per km of altitude gap for the altitude-aware home
+        advantage (scripts/35). 0 (default) recovers the classic flat home
+        advantage; the canonical build (scripts/01) passes ALT_GAMMA. Requires
+        `habitual` (per-team mean home elevation, see habitual_altitudes) and
+        `city_alt` (city -> metres) to take effect.
 
     Returns
     -------
@@ -103,12 +136,20 @@ def compute_elo_history(results: pd.DataFrame) -> pd.DataFrame:
         using post-match ratings would leak the result.
     """
     df = results.dropna(subset=["home_score", "away_score"]).sort_values("date")
+    use_alt = bool(alt_gamma) and habitual is not None and city_alt is not None
     ratings: dict[str, float] = {}
     rows = []
     for row in df.itertuples(index=False):
         rh = ratings.get(row.home_team, INITIAL_RATING)
         ra = ratings.get(row.away_team, INITIAL_RATING)
-        we = expected_score(rh, ra, bool(row.neutral))
+        d_alt = 0.0
+        if use_alt:
+            va = city_alt.get(getattr(row, "city", None))
+            if va is not None:
+                sh = max(0.0, va - habitual.get(row.home_team, 0.0)) / 1000.0
+                sa = max(0.0, va - habitual.get(row.away_team, 0.0)) / 1000.0
+                d_alt = alt_gamma * (sa - sh)
+        we = expected_score(rh + d_alt, ra, bool(row.neutral))
         margin = int(row.home_score) - int(row.away_score)
         w = 1.0 if margin > 0 else (0.5 if margin == 0 else 0.0)
         delta = k_factor(row.tournament) * goal_multiplier(margin) * (w - we)

@@ -85,7 +85,8 @@ _gb = pd.read_csv("outputs/golden_boot.csv").head(12)
 # bracket: modal occupant + probability per knockout slot (same shape as scripts/31)
 _bracket = {}
 for _br in res["bracket"].itertuples(index=False):
-    _bracket.setdefault(int(_br.match), {})[_br.slot] = {"team": _br.team, "p": round(float(_br.p), 4)}
+    _bracket.setdefault(int(_br.match), {})[_br.slot] = {
+        "team": _br.team, "p": round(float(_br.p), 4), "adv": round(float(_br.adv), 4)}
 _snap = {"k": _k, "date": str(pd.Timestamp.utcnow().date()),
          "last_match": f"{_k} matches played",
          "champion": {tm: round(float(_t.loc[tm, "P_champion"]), 4) for tm in _t.index},

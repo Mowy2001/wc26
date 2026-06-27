@@ -383,6 +383,7 @@ def simulate_tournament(
     from collections import Counter
     slot_top: dict[int, Counter] = {}
     slot_bot: dict[int, Counter] = {}
+    slot_win: dict[int, Counter] = {}  # per match: who WON it (advanced past this round)
 
     for si in range(n_sims):
         mi = int(rng.integers(len(models)))
@@ -421,6 +422,8 @@ def simulate_tournament(
             winners[mn], kh, ka, khg, kag = _ko_match(a, b, venue, m, elo, rng, ko_cache,
                                                       team_log_tilt, KO_CITY.get(mn), city_log_tilt,
                                                       fixed_ko_results)
+            if collect_bracket:
+                slot_win.setdefault(mn, Counter())[winners[mn]] += 1
             goals[kh] += khg
             goals[ka] += kag
         for depth, matches in enumerate([R16_MATCHES, QF_MATCHES, SF_MATCHES, [FINAL_MATCH]], start=1):
@@ -436,6 +439,8 @@ def simulate_tournament(
                 winners[mn], kh, ka, khg, kag = _ko_match(a, b, venue, m, elo, rng, ko_cache,
                                                           team_log_tilt, KO_CITY.get(mn), city_log_tilt,
                                                           fixed_ko_results)
+                if collect_bracket:
+                    slot_win.setdefault(mn, Counter())[winners[mn]] += 1
                 goals[kh] += khg
                 goals[ka] += kag
         round_counts[winners[FINAL_MATCH[0]]][5] += 1
@@ -461,9 +466,13 @@ def simulate_tournament(
     if collect_bracket:
         rows = []
         for mn in sorted(set(slot_top) | set(slot_bot)):
+            won = slot_win.get(mn, Counter())
             for slot, ctr in (("top", slot_top.get(mn, Counter())), ("bot", slot_bot.get(mn, Counter()))):
                 team, cnt = (ctr.most_common(1)[0] if ctr else ("?", 0))
+                # adv = P(this exact team WINS this tie) = reaches the next round.
+                # Unconditional (comparable to reach p); adv <= p always.
                 rows.append({"match": mn, "slot": slot, "team": team,
-                             "p": round(cnt / n_sims, 4)})
+                             "p": round(cnt / n_sims, 4),
+                             "adv": round(won.get(team, 0) / n_sims, 4)})
         res["bracket"] = pd.DataFrame(rows)
     return res

@@ -10,13 +10,16 @@
 
 <header class="hero">
   <div class="wrap">
-    <p class="kicker">A probabilistic forecast of the 2026 World Cup<span id="hero-fresh"></span></p>
-    <h1>A World Cup forecast,<br>graded <em>in public</em></h1>
-    <p class="lede">The whole tournament as a probability distribution: every team's chances come
-    from simulating all 104 matches 20,000 times. The forecast was frozen on June 11 and is now
-    scored, match by match, against real results — and every ingredient had to earn its place by
-    predicting past tournaments better than the model without it. Step through it below; then read on
-    for how it works and which data made the cut.</p>
+    <div class="live-strip" id="live-strip"><span class="dot"></span> Live · 2026 World Cup · graded in public</div>
+    <div class="hero-grid">
+      <div>
+        <h1>The race,<br>match by <em>match</em></h1>
+        <p class="lede">The whole tournament as a probability distribution — all 104 matches simulated
+        20,000 times. Frozen on June 11, and now scored against reality every single game. Drag through
+        it below; every team's odds breathe, and the model has nowhere to hide.</p>
+      </div>
+      <div class="hero-leader" id="hero-leader"></div>
+    </div>
     <div class="hero-stats" id="hero-stats"></div>
   </div>
 </header>
@@ -54,7 +57,10 @@
     <p class="chart-cap">% = share of the 20,000 simulations in which this team lifts the trophy.</p>
     <div id="fc-champ" class="chart"></div></div>
   <div class="fc-block"><div class="fc-bar"></div>
-    <div class="tl-h">Predicted bracket — most likely team in each slot</div>
+    <div class="tl-h">Predicted bracket — most likely team in each slot
+      <span class="bk-toggle" id="bk-toggle">
+        <button type="button" data-mode="reach" class="on">Reach slot</button><button type="button" data-mode="adv">Win the tie</button>
+      </span></div>
     <p class="bracket-legend" id="bracket-legend"></p>
     <div id="fc-bracket" class="bracket-scroll"></div></div>
   <div class="fc-block"><div class="fc-bar"></div>
@@ -68,8 +74,21 @@
     </div></div>
   <div class="fc-block"><div class="fc-bar"></div>
     <div class="tl-h">Groups — probability of advancing</div>
-    <p class="chart-cap">% = chance of reaching the knockout round (top two, or as a best third).</p>
+    <p class="chart-cap">% = chance of reaching the knockout round (top two, or as a best third).
+    A <span class="tight-badge">⚖ qualification open</span> tag marks groups where two or more teams are
+    still level for a knockout place — it's about <em>who goes through</em>, not who finishes first.</p>
     <div id="fc-groups" class="groups-grid"></div></div>
+</section>
+
+<section id="drivers">
+  <h2>What's earning each team its place <span class="sub">quality vs the draw vs venue &amp; freshness</span></h2>
+  <p class="note" id="drivers-note"></p>
+  <p class="chart-cap">Each bar is the team's chance of finishing top two of its group, split into what
+  earns it: <b class="dr-k strength">squad quality</b> (how it would do in an average group),
+  <b class="dr-k draw">the draw</b> (an easy or brutal group), and <b class="dr-k tilt">venue &amp; freshness</b>
+  (the deployed altitude + fatigue tilts). A hatched bar to the right means the draw or schedule
+  works <em>against</em> the team. Pre-tournament forecast.</p>
+  <div id="drivers-board" class="chart"></div>
 </section>
 
 <section id="track">
@@ -310,6 +329,7 @@
 
 <section id="market">
   <h2>Model vs market <span class="sub">BetMGM outright odds, June 11 — margin removed with Shin’s method</span></h2>
+  <p class="market-diverge" id="market-diverge"></p>
   <div id="market-chart" class="chart"></div>
   <p class="note">The bookmaker margin is stripped with Shin's insider-trading model, which
   de-shades longshots more than favourites — after which model and market actually <em>agree</em>

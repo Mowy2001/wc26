@@ -1,0 +1,7 @@
+{
+ "beta_continuity": -0.0254,
+ "oos_delta": 0.00293,
+ "t_paired": 1.08,
+ "n": 345,
+ "verdict": "REJECTED"
+}

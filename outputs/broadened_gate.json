@@ -1,0 +1,17 @@
+{
+ "set_pool_ll": {
+  "PRIMARY": 0.9856,
+  "ROBUST": 0.9315
+ },
+ "conf_ll": {
+  "MIXED": 0.9648,
+  "UEFA": 1.016,
+  "CONMEBOL": 0.9487,
+  "CAF": 0.9907,
+  "AFC": 0.8893,
+  "CONCACAF": 0.8601
+ },
+ "altitude_robust_delta": -3e-05,
+ "altitude_robust_t": -0.02,
+ "n_robust": 166
+}

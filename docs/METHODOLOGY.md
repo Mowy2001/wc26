@@ -159,7 +159,47 @@ from the national team's home cities, not players' club cities (a possible v2); 
 training is unmodellable and ignored. Altitude tilts are centralised via
 src/wc26/tilts.py:load_city_tilt.
 
-## Football capital REMOVED from the model (2026-06-18)
+## Altitude-in-Elo: the rating-inflation correction (scripts/35, 2026-06-25)
+A DISTINCT effect from the venue tilt above, prompted by Ecuador's live collapse.
+The venue tilt is a match-time handicap; it does nothing about the fact that a
+habitual-altitude side *accumulates* Elo by winning home qualifiers in the thin air,
+which the flat 100-pt Elo home advantage cannot tell apart from genuine strength. That
+inflation then travels to a sea-level neutral tournament. Fix under test: an
+altitude-AWARE Elo home advantage, dr += gamma*(suffer_away - suffer_home) in Elo points,
+so a home win at altitude raises the expected score and earns fewer rating points.
+Two gates: (A) the canonical 6-tournament pooled OOS LL is FLAT/slightly worse (best
+gamma=0) — WC/Euro avoid altitude, so it is blind, exactly as the venue tilt was. (B) the
+power cut — CONMEBOL sides playing at sea-level-ish venues (alt<1000 m), forward folds,
+n=1226 — is cleanly U-shaped with an interior optimum at gamma=75 Elo pts/km: OOS LL
+0.8971->0.8930 (-0.0042), paired t=-1.91. The interior optimum (monotone approach on both
+sides) is the evidence it is a real effect, not monotone noise. Proportionality is good:
+at 2026-06-11 it deflates exactly the right sides and only them — Bolivia -89 (La Paz),
+Ecuador -19, Colombia -6 (Bogotá), while lowland visitors Brazil/Argentina nudge +10/+5
+(their altitude away-results cost less). Verdict: ADMITTED ON PROBATION (effect size beats
+capital/fatigue, t weaker than the venue tilt). DEPLOYED 2026-06-25 (Simone's call):
+elo.py carries ALT_GAMMA=75 and the canonical build (scripts/01) is altitude-aware, so every
+downstream consumer of elo_history.parquet inherits it and the full live chain was re-run.
+This deliberately moves the live model off the frozen 2026-06-11 baseline (baseline_eve.csv
+stays immutable, so on-site movement deltas now blend the model change with results — an
+accepted cost). Honest caveat for the Ecuador question: the correction is only ~-18
+Elo for Ecuador (Guayaquil at sea level dilutes Quito in their habitual mean), nowhere near
+enough to drop them out of the top 10 — most of Ecuador's high rating is genuine, so their
+WC collapse is, like Turkey's, mostly variance/squad rather than a fixable rating bias.
+
+## Are the Elo weights identified? No -- a flat plateau (scripts/37, 2026-06-25)
+The Elo update weights (HOME_ADV=100, the 60/50/40/30/20 K tiers, the goal-diff
+multiplier) were inherited from eloratings.net and never tuned on our own backtest. We
+tuned them xi-style: recompute the whole Elo history per setting, refit DC point-in-time
+before each of six tournaments, score pooled OOS outcome log-loss (n=345), one factor at a
+time around the deployed config (home_adv=100, global K mult=1.0, friendly K=20; altitude
+term fixed). Result: a FLAT PLATEAU, like xi -- no axis beats the default beyond noise.
+home_adv: best 40 (delta -0.0012, t=-0.69), and >=130 is mildly worse (t~+1.3). k_mult:
+totally flat (best 1.25, delta -0.0004, t=-0.19) -- it trades off against the refitted
+beta_elo exactly as predicted. friendly_k: best 30 (delta -0.0018, t=-0.75), NOT significant.
+The one significant signal is a negative control: pushing friendly K DOWN to 5-10 clearly
+HURTS (t=+2.10 / +1.78) -- friendlies carry real information and must not be discounted to
+near-zero (a common modelling shortcut our data rejects). Verdict: keep the inherited
+convention; deploy nothing. The eloratings weights sit at/near our predictive optimum.
 Full arc: capital was admitted on clubelo (Europe-only). Investigation (scripts/28-34)
 showed its predictive value came ENTIRELY from clubelo's geographic bias — the floor
 penalising non-European-league players WAS the signal. Head-to-head gate: clubelo+floor
@@ -264,6 +304,55 @@ it lives as a shadow (scripts/25), scored live alongside diaspora. (It nominally
 the 20-match live board — which is precisely why the live board never decides admission;
 the backtest does.) Lesson: "improves OOS log-loss" is necessary, not sufficient — the
 effect must also be proportionate to the evidence.
+
+## Cohesion attempt #2 — squad continuity, REJECTED (scripts/39, 2026-06-26)
+A second, independent realisation of the cohesion idea (Simone): continuity = the
+fraction of a team's tournament squad that also appeared in its most recent PREVIOUS
+tournament squad (point-in-time, from the wc2014/euro2016/wc2018/euro2020/wc2022/euro2024
+squad files). "A settled team that has played together" — e.g. France brought 18/26 of its
+WC2022 squad to Euro2024 (settled) vs Spain's 10/26 (rebuilt). Gated on the CURRENT model
+(plain Elo-DC; capital is gone) over the 6 tournaments. Verdict: REJECTED — pooled OOS
+log-loss +0.0029 WORSE (0.9962 -> 0.9992), paired t=+1.08, 4 of 6 folds worse; fitted
+b=-0.025 (settled squads if anything slightly worse, not significant). Telling: Turkey was
+the 2nd-most-settled wc2026 squad (z=1.54) and still collapsed. Two different cohesion
+proxies (club-concentration, continuity) now both fail — cohesion does not show in our
+data; only the unscrapeable Transfermarkt pairwise-minutes graph remains untested.
+
+## Broadened gate — does the model generalise beyond UEFA? YES (scripts/40, 2026-06-28)
+The admission gate was always WC+Euro (target-resemblance), but that pool is UEFA-heavy,
+so we never checked generalisation. Added a ROBUST gate of the four continental cups
+(Copa América/CONMEBOL, AFCON/CAF, Asian Cup/AFC, Gold Cup/CONCACAF; editions auto-detected,
+point-in-time, n=1213; Nations League excluded as too noisy). Findings:
+- BASE CALIBRATION, counter to the worry, is BETTER outside Europe. Pooled OOS LL ROBUST
+  0.9315 vs PRIMARY 0.9856 (lower=better; uniform 1.0986). Per confederation, gain over
+  uniform: Gold Cup +0.239, Asian Cup +0.209, Copa +0.150, World Cup +0.134, AFCON +0.108,
+  Euro +0.083. The Euro is the HARDEST tournament we predict (compressed, all-good field);
+  Gold/Asian cups the easiest (big favourite-vs-minnow Elo gaps the model nails). So the
+  confederation problem is NARROW — it is specifically about CROSS-confederation matchups
+  (UEFA-vs-AFC etc., which barely exist to learn from), NOT general non-European competence.
+  Within each confederation's own tournament the model is well calibrated.
+- xi PLATEAU HOLDS on ROBUST too (0.0010->0.9310 ... 0.0050->0.9320, a 0.001 swing) — not
+  identified anywhere; the WC+Euro null generalises.
+- ALTITUDE-IN-ELO not vetoed: on ROBUST gamma=75 vs 0 is -0.0000 (t=-0.02, n=166) — the
+  continental finals are sea-level/single-host so blind to altitude (like WC+Euro); the
+  CONMEBOL qualifiers stay the only power test, and the broad set does not contradict it.
+New convention: Elo/DC-level features should pass PRIMARY (decides) and not be contradicted
+by ROBUST (veto); squad-based blocks still can't extend (no continental-cup squad files).
+
+## CIES football academies — settled as un-gateable + collinear (2026-06-26)
+Long flagged as "fuzzy, collinear" and dropped without a gate; Simone asked to settle it.
+Investigated the data directly. CIES publishes a country talent-EXPORT index (expatriates
+trained: Brazil 1289, France 1033, Argentina 905, England 535, Spain 458, Colombia 448,
+Nigeria 385 ...), conceptually distinct from capital (development, not current club level).
+But it is NOT cleanly gateable: the public reports list only ~top 15 exporters (smaller WC
+nations absent), as a recent snapshot with no clean per-country point-in-time history. A
+self-built point-in-time proxy (squad-expatriation = share of squad at foreign clubs) is
+blocked too: clubelo gives club-country for European clubs only, and fdb_master carries no
+country — so non-European domestic players can't be classified. And the obtainable signal
+is collinear with Elo by construction (the same big nations top both export and rating), so
+even if gated it would most likely be subsumed — the original worry, now evidenced. Verdict:
+stays OUT, un-gateable from available data; documented rather than deployed. Revisit only if
+a full, historical, per-country CIES table becomes available.
 
 ## Diaspora — a declared shadow bet, never in the official model (2026-06-17)
 There is no past World Cup on US soil, so de-facto home support from US diaspora

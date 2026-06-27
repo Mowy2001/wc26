@@ -55,7 +55,8 @@ for k in range(len(played) + 1):
     t = res["teams"]
     bracket = {}
     for br in res["bracket"].itertuples(index=False):
-        bracket.setdefault(int(br.match), {})[br.slot] = {"team": br.team, "p": round(float(br.p), 4)}
+        bracket.setdefault(int(br.match), {})[br.slot] = {
+            "team": br.team, "p": round(float(br.p), 4), "adv": round(float(br.adv), 4)}
     asof_date = played.iloc[k-1].date if k > 0 else pd.Timestamp("2026-06-10")
     rg = gs[(gs["date"] >= "2026-06-11") & (gs["date"] <= asof_date)
             & (~gs["own_goal"].astype(bool)) & (gs["team"].isin(teams))].dropna(subset=["scorer"])

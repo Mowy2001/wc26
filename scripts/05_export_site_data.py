@@ -86,7 +86,8 @@ try:
     _bk = pd.read_csv("outputs/bracket.csv")
     bracket = {}
     for r in _bk.itertuples(index=False):
-        bracket.setdefault(int(r.match), {})[r.slot] = {"team": r.team, "p": float(r.p)}
+        bracket.setdefault(int(r.match), {})[r.slot] = {
+            "team": r.team, "p": float(r.p), "adv": float(getattr(r, "adv", 0.0))}
 except FileNotFoundError:
     bracket = None
 try:
@@ -106,6 +107,14 @@ try:
     bootstrap = {"B": int(len(bd)), "sd": bd.std().round(4).to_dict()}
 except FileNotFoundError:
     bootstrap = None
+try:
+    match_dists = json.load(open("outputs/match_dists.json"))
+except FileNotFoundError:
+    match_dists = None
+try:
+    team_drivers = json.load(open("outputs/team_drivers.json"))
+except FileNotFoundError:
+    team_drivers = None
 
 data = {
     "generated": str(date.today()),
@@ -145,6 +154,8 @@ data = {
                            "Lionel Messi": 1150, "Erling Haaland": 1350},
     "debutant_share": 0.173,
     "distinct_scorers": distinct_top,
+    "match_dists": match_dists,
+    "team_drivers": team_drivers,
     "teams": teams,
 }
 

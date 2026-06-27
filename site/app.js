@@ -21,16 +21,92 @@ const flag = (t) => `<span class="flag">${FLAGS[t] || "🏳️"}</span>`;
 const byChamp = [...WC26.teams].sort((a, b) => b.P_champion - a.P_champion);
 const $ = (id) => document.getElementById(id);
 
-/* ---------- freshness signal in the hero kicker ---------- */
-if ($("hero-fresh") && WC26.generated) {
-  $("hero-fresh").textContent = ` · updated ${WC26.generated} · refreshes twice daily`;
+/* ---------- per-match score-distribution heatmap (scripts/36) ---------- */
+const MD = {};
+(WC26.match_dists || []).forEach((m) => { MD[m.home + "|" + m.away] = m; });
+
+// a fixture is a "coin-flip" when no single W/D/L outcome clears 42% — i.e. the
+// model genuinely can't separate the sides. Returns the badge HTML or "".
+const coinFlipBadge = (home, away) => {
+  const m = MD[home + "|" + away];
+  if (!m) return "";
+  const top = Math.max(m.pH, m.pD, m.pA);
+  return top < 0.42 ? `<span class="cf-badge" title="This single match: pre-match the model gave no result above ${pct(top,0)} — a coin-flip">⚖ coin-flip</span>` : "";
+};
+
+function showHeat(home, away) {
+  const m = MD[home + "|" + away];
+  if (!m) return;
+  let ov = $("mh-overlay");
+  if (!ov) {
+    ov = document.createElement("div");
+    ov.id = "mh-overlay"; ov.className = "mh-overlay";
+    document.body.appendChild(ov);
+    ov.addEventListener("click", (e) => { if (e.target === ov) ov.classList.remove("show"); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") ov.classList.remove("show"); });
+  }
+  const G = m.grid, maxp = Math.max(...G.flat());
+  const lab = (i) => (i === 5 ? "5+" : "" + i);
+  // tint: home win (h>a) green, away win (h<a) pink, draw (h==a) slate; alpha by p
+  const tint = (h, a, p) => {
+    const al = (0.08 + 0.92 * (p / maxp)).toFixed(3);
+    if (h > a) return `rgba(54, 245, 160, ${al})`;   // home win — neon green
+    if (h < a) return `rgba(255, 93, 115, ${al})`;   // away win — hot
+    return `rgba(131, 152, 189, ${al})`;             // draw — slate
+  };
+  let cells = `<div class="axlabel"></div>` +
+    [0, 1, 2, 3, 4, 5].map((a) => `<div class="axlabel">${lab(a)}</div>`).join("");
+  for (let h = 0; h <= 5; h++) {
+    cells += `<div class="axlabel row">${lab(h)}</div>`;
+    for (let a = 0; a <= 5; a++) {
+      const p = G[h][a];
+      const isModal = m.top[0].h === h && m.top[0].a === a;
+      const isAct = m.actual && m.actual[0] === h && m.actual[1] === a;
+      const cls = "cell" + (isModal ? " modal" : "") + (isAct ? " actual" : "");
+      cells += `<div class="${cls}" style="background:${tint(h, a, p)}"
+        title="${h}-${a}: ${pct(p, 1)}">${p >= 0.04 ? Math.round(100 * p) : ""}</div>`;
+    }
+  }
+  const wdl = `<div class="mh-wdl">
+    <span style="width:${100 * m.pH}%;background:var(--accent)" title="${home} win ${pct(m.pH, 0)}"></span>
+    <span style="width:${100 * m.pD}%;background:var(--muted)" title="draw ${pct(m.pD, 0)}"></span>
+    <span style="width:${100 * m.pA}%;background:var(--hot)" title="${away} win ${pct(m.pA, 0)}"></span></div>`;
+  const t = m.top[0];
+  const actLine = m.actual
+    ? `Actual result <b>${m.actual[0]}–${m.actual[1]}</b> (model gave it ${pct(G[Math.min(m.actual[0],5)][Math.min(m.actual[1],5)], 1)}).`
+    : `Not played yet.`;
+  ov.innerHTML = `<div class="mh-card">
+    <span class="mh-close" onclick="document.getElementById('mh-overlay').classList.remove('show')">×</span>
+    <h4>${flag(home)} ${home} <span style="color:var(--muted)">v</span> ${away} ${flag(away)}</h4>
+    <div class="mh-sub">Group ${m.group} · ${m.date}${m.city ? " · " + m.city : ""} · pre-match forecast (xG ${m.lh}–${m.la})</div>
+    ${wdl}
+    <div style="display:flex;gap:8px"><div class="mh-axtitle vert">${home} goals →</div>
+      <div style="flex:1"><div class="mh-grid">${cells}</div>
+      <div class="mh-axtitle">${away} goals →</div></div></div>
+    <div class="mh-note">Most likely <b>${t.h}–${t.a}</b> (${pct(t.p, 0)}). W/D/L
+      <b>${pct(m.pH, 0)}</b>/<b>${pct(m.pD, 0)}</b>/<b>${pct(m.pA, 0)}</b>. ${actLine}
+      <span style="display:block;margin-top:6px;opacity:.8">Green = ${home} win, red = ${away} win, slate = draw; brighter = more likely. White ring = actual.</span></div>
+  </div>`;
+  ov.classList.add("show");
 }
 
-/* ---------- hero stats: lead with the live record (the credibility headline) ---------- */
+/* ---------- live status strip ---------- */
+if ($("live-strip") && WC26.generated) {
+  $("live-strip").insertAdjacentHTML("beforeend", ` · updated ${WC26.generated}`);
+}
+
+/* ---------- hero: giant live champion number + supporting stats ---------- */
 {
   const fav = byChamp[0];
   const bt = WC26.backtest;
   const sc = WC26.scoring;
+  if ($("hero-leader")) {
+    $("hero-leader").innerHTML = `
+      <div class="hl-lab">Champion · most likely</div>
+      <div class="hl-big tnum">${(100 * fav.P_champion).toFixed(1)}<span>%</span></div>
+      <div class="hl-team">${flag(fav.team)}${fav.team}</div>
+      ${sc && sc.n ? `<div class="hl-vs">running log-loss <b>${sc.log_loss}</b> vs ${sc.uniform} coin-toss · ${sc.n} matches scored</div>` : ""}`;
+  }
   // headline = how the frozen forecast is scoring against reality, if live
   const headline = sc && sc.n
     ? `<div class="stat headline"><div class="v">${sc.log_loss} <span class="vs">vs ${sc.uniform}</span></div>
@@ -40,8 +116,6 @@ if ($("hero-fresh") && WC26.generated) {
       <div class="k">backtest log-loss (WC2022)</div></div>`;
   $("hero-stats").innerHTML = `
     ${headline}
-    <div class="stat"><div class="v">${flag(fav.team)}${pct(fav.P_champion)}</div>
-      <div class="k">favourite: ${fav.team}</div></div>
     <div class="stat"><div class="v">${WC26.n_sims.toLocaleString("en-US")}</div>
       <div class="k">simulated tournaments</div></div>
     ${backtestStat}`;
@@ -92,22 +166,36 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     ["Semi-finals", [101, 102]],
     ["Final", [104]],
   ];
+  let bracketMode = "reach";  // "reach" = P(team fills this slot) | "adv" = P(win the tie | here)
   const slotHTML = (s) => {
     if (!s) return `<div class="bk-slot"><span class="bk-team">—</span></div>`;
-    const cls = s.p >= 0.6 ? "sure" : s.p < 0.3 ? "open" : "";
-    const title = `${s.team}: ${pct(s.p, 0)} chance of filling this slot`;
-    return `<div class="bk-slot ${cls}" title="${title}"><span class="bk-team">${flag(s.team)}${TLA(s.team)}</span><span class="bk-p">${pct(s.p, 0)}</span></div>`;
+    // "Win the tie" = CONDITIONAL: given this team reaches the slot, how often it wins
+    // its match (adv/p). That reads as a natural "chance of winning this match" — a
+    // favourite stays ~70% even in a slot it only reaches sometimes.
+    const cond = s.p > 0 ? (s.adv ?? 0) / s.p : 0;
+    const v = bracketMode === "adv" ? cond : s.p;
+    const cls = v >= 0.6 ? "sure" : v < 0.3 ? "open" : "";
+    const title = bracketMode === "adv"
+      ? `${s.team}: if it reaches this slot, it wins the tie ${pct(cond, 0)} of the time (it reaches the slot ${pct(s.p, 0)})`
+      : `${s.team}: ${pct(s.p, 0)} chance of filling this slot`;
+    return `<div class="bk-slot ${cls}" title="${title}"><span class="bk-team">${flag(s.team)}${TLA(s.team)}</span><span class="bk-p">${pct(v, 0)}</span></div>`;
   };
 
-  if ($("bracket-legend")) {
-    $("bracket-legend").innerHTML =
-      `Each box shows the <strong>single most likely team</strong> to reach that slot, and the % is
-       the <strong>chance that exact team gets there</strong> across the 20,000 simulations — not the
-       odds of winning that particular tie. So "ESP 34%" means Spain stands here in 34% of simulated
-       tournaments (and some other team in the other 66%). <span class="bk-key sure">Green ≥60%</span>
-       a near-locked slot · <span class="bk-key open">grey &lt;30%</span> a wide-open one where many
-       teams are plausible.`;
-  }
+  const setLegend = () => {
+    if (!$("bracket-legend")) return;
+    $("bracket-legend").innerHTML = bracketMode === "adv"
+      ? `Each box still names the <strong>most likely team to reach that slot</strong>, but the % now
+         answers: <strong>if that team gets here, how often does it win the tie</strong> and go through?
+         It's a clean "chance of winning this match", so a strong favourite reads ~70% even in a slot it
+         only reaches sometimes. <span class="bk-key sure">Green ≥60%</span> likely to advance ·
+         <span class="bk-key open">grey &lt;30%</span> likely out.`
+      : `Each box shows the <strong>single most likely team</strong> to reach that slot, and the % is
+         the <strong>chance that exact team gets there</strong> across the 20,000 simulations — not the
+         odds of winning that particular tie (switch to <em>Win the tie</em> for that). So "ESP 34%"
+         means Spain stands here in 34% of simulated tournaments. <span class="bk-key sure">Green ≥60%</span>
+         a near-locked slot · <span class="bk-key open">grey &lt;30%</span> a wide-open one.`;
+  };
+  setLegend();
 
   const render = (k) => {
     cur = k;
@@ -170,16 +258,35 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     const groups = {};
     Object.entries(tg).forEach(([t, g]) => (groups[g] = groups[g] || []).push(t));
     $("fc-groups").innerHTML = Object.keys(groups).sort().map((g) => {
-      const rows = groups[g].map((t) => [t, s.qualify[t] ?? 0]).sort((a, b) => b[1] - a[1]).map(([t, q]) => `
+      const ranked = groups[g].map((t) => [t, s.qualify[t] ?? 0]).sort((a, b) => b[1] - a[1]);
+      // "tight" is specifically about WHO ADVANCES (not who finishes 1st): two or more
+      // teams genuinely on the bubble for a knockout place (advance prob between 25-75%).
+      const bubble = ranked.filter(([, q]) => q > 0.25 && q < 0.75);
+      const tight = bubble.length >= 2;
+      const names = bubble.map(([t, q]) => `${t} ${pct(q, 0)}`).join(", ");
+      const badge = tight
+        ? `<span class="tight-badge" title="Still up for grabs — ${bubble.length} teams level for a knockout place: ${names}">⚖ qualification open</span>`
+        : "";
+      const rows = ranked.map(([t, q]) => `
         <div class="team-row">
           <div><div class="who">${flag(t)}${t}</div>
             <div class="qbar"><i style="width:${100 * q}%"></i></div></div>
           <div class="val"><b>${pct(q, 0)}</b>${delta(q, prev && prev.qualify[t], 0)}</div>
         </div>`).join("");
-      return `<div class="group-card"><h3>GROUP ${g}</h3>${rows}</div>`;
+      return `<div class="group-card ${tight ? "tight" : ""}"><h3>GROUP ${g}${badge}</h3>${rows}</div>`;
     }).join("");
   };
   const go = (k) => render(Math.max(0, Math.min(N, k)));
+  // bracket Reach / Win-the-tie toggle
+  if ($("bk-toggle")) {
+    $("bk-toggle").querySelectorAll("button").forEach((b) =>
+      b.addEventListener("click", () => {
+        bracketMode = b.dataset.mode;
+        $("bk-toggle").querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b));
+        setLegend();
+        render(cur);
+      }));
+  }
   sliders.forEach((sl) => sl.addEventListener("input", (e) => go(+e.target.value)));
   document.querySelectorAll(".fc-prev").forEach((b) => b.addEventListener("click", () => go(cur - 1)));
   document.querySelectorAll(".fc-next").forEach((b) => b.addEventListener("click", () => go(cur + 1)));
@@ -224,17 +331,59 @@ if ($("rounds-table")) {
       ${cols.map(([c]) => `<td class="heat" style="${heat(t[c])}">${pct(t[c])}</td>`).join("")}</tr>`).join("") + "</tbody>";
 }
 
-/* ---------- model vs market ---------- */
+/* ---------- what's earning each team its place (scripts/38) ---------- */
+if (WC26.team_drivers && $("drivers-board")) {
+  const ds = WC26.team_drivers.teams;
+  const max = Math.max(...ds.map((d) => d.total));
+  // bars are stacked: strength + max(draw,0) + max(tilt,0); negative draw/tilt
+  // (group of death / fatigue) shown as a hatched "drag" segment to the left edge.
+  const seg = (w, cls, title) => w > 0.0005
+    ? `<div class="dr-seg ${cls}" style="width:${(100 * w) / max}%" title="${title}"></div>` : "";
+  $("drivers-board").innerHTML = ds.map((d) => {
+    const dragDraw = d.draw < 0 ? -d.draw : 0, dragTilt = d.tilt < 0 ? -d.tilt : 0;
+    const drag = dragDraw + dragTilt;
+    return `<div class="dr-row">
+      <div class="who">${flag(d.team)}${d.team}</div>
+      <div class="dr-bar">
+        ${seg(d.strength, "strength", `squad quality ${pct(d.strength, 0)} (avg group)`)}
+        ${seg(Math.max(d.draw, 0), "draw", `easier-than-average group +${pct(d.draw, 0)}`)}
+        ${seg(Math.max(d.tilt, 0), "tilt", `venue (altitude/fatigue) +${pct(d.tilt, 0)}`)}
+        ${drag ? `<div class="dr-seg drag" style="width:${(100 * drag) / max}%"
+          title="${dragDraw ? "tough group −" + pct(dragDraw, 0) : ""}${dragTilt ? " venue −" + pct(dragTilt, 0) : ""}"></div>` : ""}
+      </div>
+      <div class="val"><b>${pct(d.total, 0)}</b></div>
+    </div>`;
+  }).join("");
+  if ($("drivers-note")) {
+    const byDraw = [...ds].sort((a, b) => b.draw - a.draw)[0];
+    const byTilt = [...ds].sort((a, b) => b.tilt - a.tilt)[0];
+    $("drivers-note").innerHTML =
+      `Most carried by the draw: <strong>${flag(byDraw.team)}${byDraw.team}</strong> ` +
+      `(+${pct(byDraw.draw, 0)} from an easy group on just ${pct(byDraw.strength, 0)} squad quality). ` +
+      `Most helped by venue &amp; freshness: <strong>${flag(byTilt.team)}${byTilt.team}</strong> (+${pct(byTilt.tilt, 0)}). ` +
+      `Field-average Elo ${WC26.team_drivers.field_mean_elo}.`;
+  }
+}
+
+/* ---------- model vs market (with divergence flags) ---------- */
 if ($("market-chart")) {
   const rows = Object.entries(WC26.betmgm_shin || WC26.betmgm_outright).map(([team, p]) => {
     const t = WC26.teams.find((x) => x.team === team);
     const market = WC26.betmgm_shin ? p : 1 / (1 + p / 100);
-    return { team, model: t.P_champion, market };
+    return { team, model: t.P_champion, market, gap: t.P_champion - market };
   }).sort((a, b) => b.model - a.model);
   const max = Math.max(...rows.flatMap((r) => [r.model, r.market]));
+  // flag a divergence when the model and market disagree by >= 5 percentage points
+  const BIG = 0.05;
+  const gapChip = (g) => {
+    if (Math.abs(g) < BIG) return "";
+    const dir = g > 0 ? "over" : "under"; // model higher / lower than market
+    return `<span class="gap-chip ${dir}" title="model ${g > 0 ? "above" : "below"} market by ${(100 * Math.abs(g)).toFixed(0)}pp">
+      ${g > 0 ? "▲" : "▼"}${(100 * Math.abs(g)).toFixed(0)}pp vs market</span>`;
+  };
   $("market-chart").innerHTML = rows.map((r) => `
-    <div class="pair-row">
-      <div class="who">${flag(r.team)}${r.team}</div>
+    <div class="pair-row ${Math.abs(r.gap) >= BIG ? "diverge" : ""}">
+      <div class="who">${flag(r.team)}${r.team}${gapChip(r.gap)}</div>
       <div class="pair-bars">
         <div class="pair-bar"><div class="pair-track"><div class="pair-fill model" style="width:${(100 * r.model) / max}%"></div></div>
           <div class="pair-label">model ${pct(r.model)}</div></div>
@@ -242,6 +391,13 @@ if ($("market-chart")) {
           <div class="pair-label">market ${pct(r.market)}</div></div>
       </div>
     </div>`).join("");
+  // headline the two sharpest disagreements
+  const sharp = [...rows].sort((a, b) => Math.abs(b.gap) - Math.abs(a.gap)).slice(0, 2);
+  if ($("market-diverge")) {
+    $("market-diverge").innerHTML = "Sharpest disagreements: " + sharp.map((r) =>
+      `<strong>${flag(r.team)}${r.team}</strong> ${r.gap > 0 ? "model loves" : "model cold"} ` +
+      `(${pct(r.model, 0)} vs market ${pct(r.market, 0)})`).join(" · ") + ".";
+  }
   if ($("klement-note")) $("klement-note").textContent = WC26.klement;
 }
 
@@ -419,13 +575,17 @@ if (WC26.scoring && WC26.scoring.n && $("track-head")) {
   const M = { H: "home win", D: "draw", A: "away win" };
   $("track-matches").innerHTML = [...s.matches].reverse().map((m) => {
     const good = m.p_realised >= 0.45;
-    return `<div class="bar-row">
-      <div class="who">${flag(m.home)} ${m.score} ${flag(m.away)}</div>
+    const has = MD[m.home + "|" + m.away] ? "clickable" : "";
+    const hint = has ? `<span class="mh-hint">distribution ▸</span>` : "";
+    return `<div class="bar-row ${has}" data-home="${m.home}" data-away="${m.away}">
+      <div class="who">${flag(m.home)} ${m.score} ${flag(m.away)}${coinFlipBadge(m.home, m.away)}${hint}</div>
       <div class="bar-track"><div class="bar-fill" style="width:${100 * m.p_realised}%;
         background:${good ? "linear-gradient(90deg, var(--accent2), var(--accent))" : "#8f5161"}"></div></div>
       <div class="val">${pct(m.p_realised, 0)}</div>
     </div>`;
   }).join("");
+  $("track-matches").querySelectorAll(".bar-row.clickable").forEach((row) =>
+    row.addEventListener("click", () => showHeat(row.dataset.home, row.dataset.away)));
   if (WC26.standings && $("track-standings")) {
     $("track-standings").innerHTML = Object.keys(WC26.standings).sort().map((g) => {
       const rows = WC26.standings[g].map((r, i) => `
