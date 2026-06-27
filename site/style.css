@@ -478,3 +478,10 @@ details.tech[open] summary::before { content: "\25BE "; }
 .collapse > summary::-webkit-details-marker { display: none; }
 .collapse[open] > summary { border-bottom: 1px solid var(--card-edge); }
 .collapse > .table-scroll { padding: 8px 14px 16px; }
+
+/* ---------- merged sub-headings within a section (B2 Act-2 fusion) ---------- */
+.merge-sub {
+  font-size: 1.15rem; font-weight: 800; margin: 40px 0 16px;
+  padding-top: 22px; border-top: 1px solid var(--card-edge);
+}
+.merge-sub .sub { display: block; font-size: .88rem; font-weight: 500; color: var(--muted); margin-top: 3px; }
