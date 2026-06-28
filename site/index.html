@@ -29,10 +29,10 @@
   <a href="#track">How it's doing</a>
   <a href="#forecast">Live forecast</a>
   <a href="#drivers">What earns each place</a>
+  <a href="#market">Model vs market</a>
   <span class="toc-group">Under the hood</span>
   <a href="#idea">How it works</a>
   <a href="#influence">What earned its place</a>
-  <a href="#market">Model vs market</a>
   <a href="#lab">Model lab</a>
   <a href="#method">Appendix</a>
 </nav>
@@ -102,6 +102,19 @@
   (the deployed altitude + fatigue tilts). A hatched bar to the right means the draw or schedule
   works <em>against</em> the team. Pre-tournament forecast.</p>
   <div id="drivers-board" class="chart"></div>
+</section>
+
+<section id="market">
+  <h2>Model vs market <span class="sub">our forecast against the bookies — BetMGM, June 11, margin removed with Shin’s method</span></h2>
+  <p class="market-diverge" id="market-diverge"></p>
+  <div id="market-chart" class="chart"></div>
+  <p class="note">Here's the contrarian part: where the bars disagree, someone is wrong — that's
+  the point. The model is deliberately Elo-honest, and the market knows things we've
+  <em>chosen not to feed it</em> — a discipline we explain under the hood. The bookmaker margin is
+  stripped with Shin's insider-trading model (it de-shades longshots more than favourites), so the
+  comparison is fair. After the final we score model, bookmaker and the Klement forecast
+  (<span id="klement-note"></span>) on the same log-loss scale — every prediction frozen with what
+  was known on June 11, 2026.</p>
 </section>
 
 <section id="rounds">
@@ -318,21 +331,6 @@
   <h2>The model lab <span class="sub">the same forecast, with and without each ingredient — scored live on real results</span></h2>
   <div id="lab-board" class="chart"></div>
   <p class="note" id="lab-note"></p>
-</section>
-
-<section id="market">
-  <h2>Model vs market <span class="sub">BetMGM outright odds, June 11 — margin removed with Shin’s method</span></h2>
-  <p class="market-diverge" id="market-diverge"></p>
-  <div id="market-chart" class="chart"></div>
-  <p class="note">The bookmaker margin is stripped with Shin's insider-trading model, which
-  de-shades longshots more than favourites — after which model and market actually <em>agree</em>
-  on the Netherlands and the USA; the live disagreements are Argentina and Brazil.
-  Where the bars disagree, someone is wrong — that's the point. The model is
-  deliberately Elo-honest; the market knows things we've chosen not to feed it (yet).
-  After the final we score model, bookmaker and the Klement forecast
-  (<span id="klement-note"></span>) on the same log-loss scale. Every prediction is frozen
-  with information available on June 11, 2026 — as real results come in, they enter the
-  simulator as fixed scorelines and the rest of the bracket re-randomises around them.</p>
 </section>
 
 <section id="method">
