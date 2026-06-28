@@ -159,6 +159,12 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     "Czech Republic": "CZE", "Bosnia and Herzegovina": "BIH", "Ivory Coast": "CIV",
     "DR Congo": "COD", "Cape Verde": "CPV", "New Zealand": "NZL", "Netherlands": "NED",
   }[t] || (t || "?").slice(0, 3).toUpperCase());
+  // "Uruguay 2-2 Cape Verde" -> "🇺🇾 URU 2–2 CPV 🇨🇻" (flags + 3-letter codes; compact,
+  // so the fixed-width slider label never has to truncate a long country name)
+  const shortMatch = (str) => {
+    const m = /^(.+?) (\d+)\s*[-–]\s*(\d+) (.+)$/.exec(str || "");
+    return m ? `${flag(m[1])}${TLA(m[1])} ${m[2]}–${m[3]} ${TLA(m[4])}${flag(m[4])}` : str;
+  };
   const COLS = [
     ["Round of 32", [74, 77, 73, 75, 83, 84, 81, 82, 76, 78, 79, 80, 86, 88, 85, 87]],
     ["Round of 16", [89, 90, 93, 94, 91, 92, 95, 96]],
@@ -209,7 +215,7 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     const s = snaps[k], prev = k > 0 ? snaps[k - 1] : null;
     sliders.forEach((sl) => { if (+sl.value !== k) sl.value = k; });
     const counter = k === 0 ? "before kickoff" : `match ${k} / ${N}`;
-    const detail = k === 0 ? `${s.date} · before any result` : `${s.date} · ${s.last_match}`;
+    const detail = k === 0 ? `${s.date} · before any result` : `${s.date} · ${shortMatch(s.last_match)}`;
     labs.forEach((l) => { l.innerHTML = `<b>${counter}</b><span class="fc-lab-detail">${detail}</span>`; });
     document.querySelectorAll(".fc-prev").forEach((b) => (b.disabled = k <= 0));
     document.querySelectorAll(".fc-next").forEach((b) => (b.disabled = k >= N));
