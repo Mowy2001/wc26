@@ -47,7 +47,5 @@ narrative is in `docs/METHODOLOGY.md`; this is the index.
 |---|--------|---------|
 | 35 | `backtest_altitude_elo` | altitude-aware Elo home advantage — **admitted, DEPLOYED** via `elo.py:ALT_GAMMA` + `01`. |
 
-## One-off report
-| # | Script | Verdict |
-|---|--------|---------|
-| 15 | `benchmark_report` | three-way model/market/Klement comparison (market via `benchmark.shin_probs`, used live by `05`). |
+(Note: `15_benchmark_report.py` lives in `scripts/`, not here — the live refresh
+`10_live_update.py` calls it each cycle, so it is part of the pipeline.)

@@ -21,7 +21,9 @@ working directory, not the script.
 | 07 | `ablations` | `ablations.json` — host-advantage / xi / fatigue / altitude ablations (site cards) |
 | 25 | `shadow_scores` | `shadow_scores.csv` — model-lab shadow board (diaspora, cohesion) |
 | 31 | `replay_history` | `history/replay.json` — per-match slider snapshots (incl. bracket `adv`) |
-| 10 | `live_update` | **CANONICAL live refresh**: conditions on real results (`fixed_results` + KO), re-sims, appends timeline + replay snapshot, re-exports |
+| 10 | `live_update` | **CANONICAL live refresh**: conditions on real results (`fixed_results` + KO), re-sims, appends timeline + replay snapshot; internally runs 09, 25, 15, 05 |
+| 15 | `benchmark_report` | match-level model/market scoring (Shin de-vig) — called by 10 each cycle |
+| 25 | `shadow_scores` | shadow board (diaspora, cohesion) — called by 10 each cycle |
 | 05 | `export_site_data` | `site/data.js` (also invoked by 10) |
 
 ## Live refresh (during the tournament)
