@@ -490,3 +490,16 @@ details.tech[open] summary::before { content: "\25BE "; }
   padding-top: 22px; border-top: 1px solid var(--card-edge);
 }
 .merge-sub .sub { display: block; font-size: .88rem; font-weight: 500; color: var(--muted); margin-top: 3px; }
+
+/* ---------- prominent champion card (bigger winner flag) ---------- */
+.champ-col { justify-content: center; }
+.champ-card {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  background: linear-gradient(180deg, rgba(255,209,102,.14), rgba(14,22,38,.6));
+  border: 1px solid var(--gold); border-radius: 14px; padding: 16px 18px; min-width: 116px;
+}
+.champ-flag { font-size: 2.6rem; line-height: 1; }
+.champ-flag .flag { margin: 0; }
+.champ-name { font-weight: 800; font-size: .9rem; text-align: center; }
+.champ-p { font-size: 1.7rem; font-weight: 900; color: var(--gold); font-variant-numeric: tabular-nums; line-height: 1.1; }
+.champ-cap { font-size: .64rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }

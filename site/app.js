@@ -239,10 +239,12 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
       }).join("");
       return `<div class="bk-col"><div class="bk-round">${label}</div>${boxes}</div>`;
     }).join("");
-    const champCol = `<div class="bk-col"><div class="bk-round">Champion</div>
-      <div class="bk-match champ"><div class="bk-slot sure">
-        <span class="bk-team">${flag(top[0][0])}${TLA(top[0][0])}</span>
-        <span class="bk-p">${pct(top[0][1], 0)}</span></div></div></div>`;
+    const champCol = `<div class="bk-col champ-col"><div class="bk-round">Most likely champion</div>
+      <div class="champ-card" title="${top[0][0]} lifts the trophy in ${pct(top[0][1], 1)} of simulations — the most of any team">
+        <span class="champ-flag">${flag(top[0][0])}</span>
+        <span class="champ-name">${top[0][0]}</span>
+        <span class="champ-p">${pct(top[0][1], 0)}</span>
+        <span class="champ-cap">to win it all</span></div></div>`;
     $("fc-bracket").innerHTML = board + champCol;
 
     // best thirds (8 of 12 advance) — ranked by P(advance as a best third)
@@ -602,7 +604,7 @@ if (WC26.scoring && WC26.scoring.n && $("track-head")) {
       <div class="sb-p ${good ? "win" : "miss"} tnum" title="probability the model gave to what actually happened">${pct(m.p_realised, 0)}</div>
     </div>`;
   }).join("");
-  $("track-matches").querySelectorAll(".bar-row.clickable").forEach((row) =>
+  $("track-matches").querySelectorAll(".sb-row.clickable").forEach((row) =>
     row.addEventListener("click", () => showHeat(row.dataset.home, row.dataset.away)));
   if (WC26.standings && $("track-standings")) {
     $("track-standings").innerHTML = Object.keys(WC26.standings).sort().map((g) => {
