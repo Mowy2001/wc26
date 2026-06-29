@@ -24,6 +24,14 @@ const $ = (id) => document.getElementById(id);
 /* ---------- per-match score-distribution heatmap (scripts/36) ---------- */
 const MD = {};
 (WC26.match_dists || []).forEach((m) => { MD[m.home + "|" + m.away] = m; });
+// upcoming matches (scripts/42) are heatmap-able too — fold them into the index
+((WC26.next_matches && WC26.next_matches.matches) || []).forEach((m) => {
+  MD[m.home + "|" + m.away] = {
+    home: m.home, away: m.away, group: m.ko ? "Knockout" : "Group", city: null,
+    lh: m.model.lh, la: m.model.la, pH: m.model.pH, pD: m.model.pD, pA: m.model.pA,
+    grid: m.grid, top: m.top, actual: null,
+  };
+});
 
 // a fixture is a "coin-flip" when no single W/D/L outcome clears 42% — i.e. the
 // model genuinely can't separate the sides. Returns the badge HTML or "".
@@ -88,6 +96,35 @@ function showHeat(home, away) {
       <span style="display:block;margin-top:6px;opacity:.8">Green = ${home} win, red = ${away} win, slate = draw; brighter = more likely. White ring = actual.</span></div>
   </div>`;
   ov.classList.add("show");
+}
+
+/* ---------- next matches: model vs market 1X2 (scripts/42) ---------- */
+if (WC26.next_matches && WC26.next_matches.matches && $("next-board")) {
+  const nm = WC26.next_matches.matches;
+  const x123 = (p) => {
+    const seg = (w, c, lab) => w > 0.001
+      ? `<span class="x-seg" style="width:${100 * w}%;background:${c}" title="${lab} ${pct(w, 0)}">${100 * w >= 15 ? Math.round(100 * w) : ""}</span>` : "";
+    return `<div class="x-bar">${seg(p.pH, "var(--accent)", "home win")}${seg(p.pD, "var(--muted)", "draw")}${seg(p.pA, "var(--hot)", "away win")}</div>`;
+  };
+  const fmt = (iso) => { try { return new Date(iso).toLocaleString("en-GB", { weekday: "short", hour: "2-digit", minute: "2-digit" }); } catch (_) { return ""; } };
+  $("next-board").innerHTML = nm.map((m) => {
+    const gap = Math.max(Math.abs(m.model.pH - m.market.pH), Math.abs(m.model.pA - m.market.pA), Math.abs(m.model.pD - m.market.pD));
+    const div = gap >= 0.10 ? `<span class="nm-div" title="model and market disagree by ${pct(gap, 0)}">model ≠ market</span>` : "";
+    return `<div class="nm-card clickable" data-home="${m.home}" data-away="${m.away}">
+      <div class="nm-head"><span class="nm-team">${flag(m.home)}${m.home}</span>
+        <span class="nm-vs">${m.ko ? "⚔" : "v"}</span>
+        <span class="nm-team away">${m.away}${flag(m.away)}</span></div>
+      <div class="nm-meta">${m.ko ? "Knockout" : "Group"} · ${fmt(m.commence)} ${div}<span class="mh-hint">heatmap ▸</span></div>
+      <div class="nm-line"><span class="nm-lab">Model</span>${x123(m.model)}</div>
+      <div class="nm-line"><span class="nm-lab">Market</span>${x123(m.market)}</div>
+    </div>`;
+  }).join("");
+  $("next-board").querySelectorAll(".nm-card.clickable").forEach((c) =>
+    c.addEventListener("click", () => showHeat(c.dataset.home, c.dataset.away)));
+  if ($("next-note")) $("next-note").innerHTML =
+    `<strong>${nm.length}</strong> upcoming games. Green = home/first team wins, slate = draw, red = away/second
+     (90 minutes). Market = consensus of ~${nm[0].market.n_books} bookmakers, margin removed. Knockout ties
+     then go to extra time and penalties.`;
 }
 
 /* ---------- live status strip ---------- */

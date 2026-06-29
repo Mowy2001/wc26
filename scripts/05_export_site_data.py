@@ -115,6 +115,10 @@ try:
     team_drivers = json.load(open("outputs/team_drivers.json"))
 except FileNotFoundError:
     team_drivers = None
+try:
+    next_matches = json.load(open("outputs/next_matches.json"))
+except FileNotFoundError:
+    next_matches = None
 
 data = {
     "generated": str(date.today()),
@@ -156,6 +160,7 @@ data = {
     "distinct_scorers": distinct_top,
     "match_dists": match_dists,
     "team_drivers": team_drivers,
+    "next_matches": next_matches,
     "teams": teams,
 }
 
