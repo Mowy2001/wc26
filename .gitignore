@@ -17,3 +17,6 @@ data/external/tmax_*.json
 data/external/fdb_hist/*.json
 data/external/fdb_rank/*.html
 data/external/fdb_country/*.html
+
+# API keys / secrets — never commit
+.secrets/

@@ -354,7 +354,7 @@ if (WC26.team_drivers && $("drivers-board")) {
   // bars are stacked: strength + max(draw,0) + max(tilt,0); negative draw/tilt
   // (group of death / fatigue) shown as a hatched "drag" segment to the left edge.
   const seg = (w, cls, title) => w > 0.0005
-    ? `<div class="dr-seg ${cls}" style="width:${(100 * w) / max}%" title="${title}"></div>` : "";
+    ? `<div class="dr-seg ${cls}" style="width:${(100 * w) / max}%" title="${title}">${(100 * w) / max > 8 ? Math.round(100 * w) : ""}</div>` : "";
   $("drivers-board").innerHTML = ds.map((d) => {
     const dragDraw = d.draw < 0 ? -d.draw : 0, dragTilt = d.tilt < 0 ? -d.tilt : 0;
     const drag = dragDraw + dragTilt;
@@ -549,8 +549,15 @@ if (WC26.bootstrap && WC26.ablations && WC26.ablations.no_param_uncertainty && $
 
 /* ---------- model lab (shadow scoreboard) ---------- */
 if (WC26.shadow_scores && $("lab-board")) {
-  const rows = [...WC26.shadow_scores].sort((x, y) => x.log_loss - y.log_loss);
+  // pin the PRODUCTION model first (it's what's actually deployed); the rest are
+  // what-ifs, sorted. Over so few matches the order is noise, so don't let the
+  // deployed model look "mid-table" just because of a thousandth of log-loss.
+  const all = [...WC26.shadow_scores];
+  const deployed = all.find((r) => r.variant === "Full model");
+  const rest = all.filter((r) => r !== deployed).sort((x, y) => x.log_loss - y.log_loss);
+  const rows = deployed ? [deployed, ...rest] : rest;
   const n = rows[0]?.n || 0;
+  const spread = Math.max(...all.map((r) => r.log_loss)) - Math.min(...all.map((r) => r.log_loss));
   const uni = WC26.uniform_logloss;
   const lo = Math.min(...rows.map((r) => r.log_loss), uni) - 0.01;
   const hi = Math.max(...rows.map((r) => r.log_loss), uni) + 0.01;
@@ -560,18 +567,20 @@ if (WC26.shadow_scores && $("lab-board")) {
     const shadow = r.variant.includes("shadow");
     const col = main ? "linear-gradient(90deg, var(--accent2), var(--accent))" : shadow ? "var(--gold)" : "#51618f";
     return `<div class="bar-row">
-      <div class="who">${main ? "<b>" : ""}${r.variant}${main ? "</b>" : ""}</div>
+      <div class="who">${main ? `<b>${r.variant}</b> <span class="prod-badge">▶ in production</span>` : r.variant}</div>
       <div class="bar-track"><div class="bar-fill" style="width:${w(r.log_loss)}%;background:${col}"></div></div>
       <div class="val">${r.log_loss.toFixed(3)}</div>
     </div>`;
   }).join("");
   $("lab-note").innerHTML =
-    `Shorter bar = better (lower log-loss; know-nothing baseline ${uni.toFixed(3)}). Each line is the
-     <em>same</em> model with one ingredient added or removed, graded on the ${n} matches played so far —
-     they sit within a few thousandths of each other, far too few to separate. The two gold bars are
-     shadow bets that live here and <strong>only</strong> here: diaspora (can't be backtested) and squad
-     cohesion (passes by a hair but would swing the favourite ~10pp on noise). The live board never
-     decides what goes in the model; the 345-match backtest does.`;
+    `The <strong>top row is the model actually in production</strong>; every other line is the same model
+     with one ingredient added or removed — a what-if. Shorter bar = better (lower log-loss; know-nothing
+     baseline ${uni.toFixed(3)}). Crucially, over the ${n} matches played so far the whole field is spread
+     by just <strong>${spread.toFixed(3)}</strong> log-loss — <strong>statistically tied</strong>, far too
+     few games to separate them, so the ordering here is noise (the deployed model beating "Elo only" and
+     "no altitude" is the only real signal: the tilts help). The two gold bars are shadow bets that live
+     here and <strong>only</strong> here. <strong>This live board never decides what goes in the model —
+     the 345-match backtest does.</strong>`;
 }
 
 /* ---------- footer ---------- */
