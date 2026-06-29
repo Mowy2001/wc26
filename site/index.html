@@ -95,12 +95,19 @@
 
 <section id="drivers">
   <h2>What's earning each team its place <span class="sub">quality vs the draw vs venue &amp; freshness</span></h2>
+  <p class="chart-cap" style="margin-bottom:8px"><strong>What each bar measures:</strong> a team's chance of
+  finishing <strong>top two of its group</strong> — qualifying straight to the knockouts (the numbers inside
+  the bar are percentage points that add up to that total).</p>
+  <p class="chart-cap" style="margin-bottom:8px"><strong>How we split it:</strong> we re-run the 20,000
+  tournaments three ways and read off the gaps —
+  <b class="dr-k strength">squad quality</b> is how the team would do in an <em>average</em> group (its
+  Elo-driven strength, the draw set aside);
+  <b class="dr-k draw">the draw</b> is how much its <em>actual</em> group is easier than average (a hatched
+  bar to the right = a tougher-than-average group, working against it);
+  <b class="dr-k tilt">venue &amp; freshness</b> is what the model's <em>only two earned adjustments</em> —
+  <strong>altitude</strong> and <strong>fatigue</strong> — add or take away. The three pieces sum exactly to
+  the team's real number. Pre-tournament forecast.</p>
   <p class="note" id="drivers-note"></p>
-  <p class="chart-cap">Each bar is the team's chance of finishing top two of its group, split into what
-  earns it: <b class="dr-k strength">squad quality</b> (how it would do in an average group),
-  <b class="dr-k draw">the draw</b> (an easy or brutal group), and <b class="dr-k tilt">venue &amp; freshness</b>
-  (the deployed altitude + fatigue tilts). A hatched bar to the right means the draw or schedule
-  works <em>against</em> the team. Pre-tournament forecast.</p>
   <div id="drivers-board" class="chart"></div>
 </section>
 
@@ -239,6 +246,11 @@
 
 <section id="influence">
   <h2>What earned its place <span class="sub">the trials — every variable admitted or cut, measured by re-running the tournament without it</span></h2>
+  <p class="chart-cap" style="margin-bottom:16px"><strong>In one line:</strong> the model is
+  <strong>Elo ratings → goals</strong>, plus exactly <strong>two earned adjustments — altitude and
+  fatigue</strong>. Everything else we tried was <em>cut</em>: football capital, heat/climate (tested
+  twice), a penalty-taker bonus, plus diaspora and squad cohesion (kept only as "shadow bets", never in
+  the real forecast). Each card below is one of those variables — admitted or rejected by the same rule.</p>
   <div class="cards2">
     <div class="card">
       <h3>The rating is the engine</h3>
