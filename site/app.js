@@ -18,6 +18,10 @@ const FLAGS = {
 
 const pct = (x, d = 1) => (100 * x).toFixed(d) + "%";
 const flag = (t) => `<span class="flag">${FLAGS[t] || "🏳️"}</span>`;
+const TLA3 = (t) => ({ "United States": "USA", "South Korea": "KOR", "South Africa": "RSA",
+  "Saudi Arabia": "KSA", "Czech Republic": "CZE", "Bosnia and Herzegovina": "BIH",
+  "Ivory Coast": "CIV", "DR Congo": "COD", "Cape Verde": "CPV", "New Zealand": "NZL",
+  "Netherlands": "NED" }[t] || (t || "?").slice(0, 3).toUpperCase());
 const byChamp = [...WC26.teams].sort((a, b) => b.P_champion - a.P_champion);
 const $ = (id) => document.getElementById(id);
 
@@ -176,11 +180,14 @@ if ($("live-strip") && WC26.generated) {
   const bt = WC26.backtest;
   const sc = WC26.scoring;
   if ($("hero-leader")) {
+    const chase = byChamp.slice(1, 3).map((c) => `${flag(c.team)}${TLA3(c.team)} ${pct(c.P_champion, 0)}`).join("  ·  ");
     $("hero-leader").innerHTML = `
-      <div class="hl-lab">Champion · most likely</div>
-      <div class="hl-big tnum">${(100 * fav.P_champion).toFixed(1)}<span>%</span></div>
-      <div class="hl-team">${flag(fav.team)}${fav.team}</div>
-      ${sc && sc.n ? `<div class="hl-vs">running log-loss <b>${sc.log_loss}</b> vs ${sc.uniform} coin-toss · ${sc.n} matches scored</div>` : ""}`;
+      <div class="hc-lab">Most likely champion</div>
+      <div class="hc-flag">${flag(fav.team)}</div>
+      <div class="hc-team">${fav.team}</div>
+      <div class="hc-pct tnum">${(100 * fav.P_champion).toFixed(1)}<span>%</span></div>
+      <div class="hc-chase">then ${chase}</div>
+      ${sc && sc.n ? `<div class="hc-note">running log-loss <b>${sc.log_loss}</b> vs ${sc.uniform} · ${sc.n} games scored</div>` : ""}`;
   }
   // headline = how the frozen forecast is scoring against reality, if live
   const headline = sc && sc.n

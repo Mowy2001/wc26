@@ -51,10 +51,19 @@ from wc26.tilts import load_team_tilt, load_city_tilt
 tilt = load_team_tilt()
 city_tilt = load_city_tilt()
 
+# Real FIFA third-place allocation (the bracket is fixed positions, not a draw):
+# once the groups are complete, pin each 3rd-place slot to the group FIFA assigned
+# it to. Only valid with all groups played, so apply it only then.
+import os
+THIRDS = None
+if os.path.exists("outputs/thirds_override.json") and len(fixed) >= len(gfx):
+    THIRDS = {int(k): v for k, v in json.load(open("outputs/thirds_override.json")).items() if k.isdigit()}
+    print(f"Applying real thirds allocation ({len(THIRDS)} slots)")
+
 res = simulate_tournament(groups, gfx, model, elo_now, n_sims=20000,
                           fixed_results=fixed, param_draws=draws,
                           collect_goal_samples=True, team_log_tilt=tilt,
-                          city_log_tilt=city_tilt,
+                          city_log_tilt=city_tilt, thirds_override=THIRDS,
                           fixed_ko_results=fixed_ko, collect_bracket=True)
 res["teams"].round(4).to_csv("outputs/tournament_probs_v1.csv")
 res["goal_samples"].to_parquet("outputs/goal_samples.parquet")

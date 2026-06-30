@@ -547,3 +547,22 @@ details.tech[open] summary::before { content: "\25BE "; }
 .bk-match.bk-clickable::after { content: "⊞"; position: absolute; top: 2px; right: 4px;
   font-size: .6rem; color: var(--accent2); opacity: 0; }
 .bk-match.bk-clickable:hover::after { opacity: .8; }
+
+/* ---------- redesigned hero: open-source AI + big winner flag ---------- */
+.eyebrow { font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--accent2); margin-bottom: 14px; }
+.hero-champ {
+  background: linear-gradient(180deg, rgba(54,245,160,.10), var(--card));
+  border: 1px solid var(--accent); border-radius: 20px; padding: 24px 28px; text-align: center;
+  align-self: center;
+}
+.hc-lab { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.hc-flag { font-size: 4.6rem; line-height: 1.05; margin: 8px 0 2px; }
+.hc-flag .flag { margin: 0; }
+.hc-team { font-size: 1.45rem; font-weight: 900; text-transform: uppercase; letter-spacing: -.01em; }
+.hc-pct { font-size: 3rem; font-weight: 900; color: var(--accent); line-height: 1; margin: 4px 0; font-variant-numeric: tabular-nums; }
+.hc-pct span { font-size: .45em; }
+.hc-chase { font-size: .82rem; color: var(--muted); font-weight: 700; }
+.hc-chase .flag { margin-right: 3px; }
+.hc-note { font-size: .74rem; color: var(--muted); margin-top: 12px; border-top: 1px solid var(--card-edge); padding-top: 10px; }
+.hc-note b { color: var(--accent); }

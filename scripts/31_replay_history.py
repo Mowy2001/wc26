@@ -19,6 +19,10 @@ from wc26.tilts import load_team_tilt, load_city_tilt
 from wc26.data import load_goalscorers
 from wc26.players import estimate_debutant_share, squad_weights, allocate_goals, allocate_goals_live
 
+import os
+_THIRDS = ({int(k): v for k, v in json.load(open("outputs/thirds_override.json")).items() if k.isdigit()}
+           if os.path.exists("outputs/thirds_override.json") else None)
+
 results = load_results()
 elo_hist = pd.read_parquet("outputs/elo_history.parquet")
 df = results.dropna(subset=["home_score", "away_score"]).copy()
@@ -49,8 +53,10 @@ for k in range(len(played) + 1):
     sub = played.iloc[:k]
     fixed = {(r.home_team, r.away_team): (int(r.home_score), int(r.away_score))
              for r in sub[sub.date <= GROUP_STAGE_END].itertuples(index=False)}
+    # real thirds allocation only once the group stage is complete in this snapshot
+    th_over = _THIRDS if len(fixed) >= len(gfx) else None
     res = simulate_tournament(groups, gfx, model, elo, n_sims=10000, fixed_results=fixed,
-                              team_log_tilt=tilt, city_log_tilt=city_tilt,
+                              team_log_tilt=tilt, city_log_tilt=city_tilt, thirds_override=th_over,
                               collect_goal_samples=True, collect_bracket=True)
     t = res["teams"]
     bracket = {}
