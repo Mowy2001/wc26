@@ -254,6 +254,23 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     ["Semi-finals", [101, 102]],
     ["Final", [104]],
   ];
+  // --- custom "climb to the trophy" bracket + pick-the-winner sandbox ---
+  // which two matches feed each later match (top feeder, bottom feeder)
+  const FEED = { 89: [74, 77], 90: [73, 75], 91: [76, 78], 92: [79, 80], 93: [83, 84],
+    94: [81, 82], 95: [86, 88], 96: [85, 87], 97: [89, 90], 98: [93, 94], 99: [91, 92],
+    100: [95, 96], 101: [97, 98], 102: [99, 100], 104: [101, 102] };
+  const ROUNDN = [["Round of 32", [73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88]],
+    ["Round of 16", [89, 90, 91, 92, 93, 94, 95, 96]], ["Quarter-finals", [97, 98, 99, 100]],
+    ["Semi-finals", [101, 102]], ["Final", [104]]];
+  const ELO = {}; WC26.teams.forEach((t) => { ELO[t.team] = t.elo; });
+  const eloP = (a, b) => 1 / (1 + Math.pow(10, -(((ELO[a] || 1500) - (ELO[b] || 1500)) / 400)));
+  const modalShare = (m) => {  // head-to-head share of the top slot (sums to 1 with bot)
+    const cT = m && m.top && m.top.p > 0 ? (m.top.adv || 0) / m.top.p : 0;
+    const cB = m && m.bot && m.bot.p > 0 ? (m.bot.adv || 0) / m.bot.p : 0;
+    const z = cT + cB; return z > 0 ? cT / z : 0.5;
+  };
+  const picks = {};  // matchNum -> chosen winner (sandbox); cleared by Reset
+  let sandbox = false;
   let bracketMode = "reach";  // "reach" = P(team fills this slot) | "adv" = win-the-tie share
   // "Win the tie" = the head-to-head SHARE between the two named teams: each side's
   // conditional win-if-here (adv/p) normalised so the two slots of a match sum to 100%.
@@ -278,17 +295,14 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
 
   const setLegend = () => {
     if (!$("bracket-legend")) return;
-    $("bracket-legend").innerHTML = bracketMode === "adv"
-      ? `Each box names the <strong>most likely team in each slot</strong>; the two %s are the
-         <strong>head-to-head — who wins the tie</strong> if those two meet, so they
-         <strong>add up to 100%</strong>. Two strong sides land near 50/50; a clear favourite reads high.
-         <span class="bk-key sure">Green ≥60%</span> favourite to go through ·
-         <span class="bk-key open">grey &lt;30%</span> the underdog.`
-      : `Each box shows the <strong>single most likely team</strong> to reach that slot, and the % is
-         the <strong>chance that exact team gets there</strong> across the 20,000 simulations — not the
-         odds of winning that particular tie (switch to <em>Win the tie</em> for that). So "ESP 34%"
-         means Spain stands here in 34% of simulated tournaments. <span class="bk-key sure">Green ≥60%</span>
-         a near-locked slot · <span class="bk-key open">grey &lt;30%</span> a wide-open one.`;
+    $("bracket-legend").innerHTML = sandbox
+      ? `<strong>Sandbox:</strong> tap a team to send it through — the bracket rebuilds your way, all the
+         way to the trophy. The bars become an Elo estimate for match-ups the model didn't predict.
+         Tap <em>the bar</em> for a tie's expected-goals heatmap. <em>Reset</em> returns to the model.`
+      : `The two halves <strong>climb to the trophy</strong>. Each tie is a <strong>tug-of-war</strong> —
+         the bar shows the <strong>head-to-head, who wins the tie</strong> (the two add up to 100%). The
+         winning side is green. Tap a tie for its <strong>expected-goals heatmap</strong>, or switch to
+         <em>Sandbox</em> to build your own bracket.`;
   };
   setLegend();
 
@@ -312,24 +326,38 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
         <div class="val">${pct(p)}${delta(p, prev && prev.champion[t])}</div>
       </div>`).join("");
 
-    // predicted bracket (modal occupant per slot)
-    const board = COLS.map(([label, matches]) => {
-      const boxes = matches.map((mn) => {
-        const m = (s.bracket && s.bracket[mn]) || {};
-        const [dT, dB] = tieShares(m);
-        const clk = m.top && m.bot && MD[m.top.team + "|" + m.bot.team] ? " bk-clickable" : "";
-        const da = m.top && m.bot ? ` data-home="${m.top.team}" data-away="${m.bot.team}"` : "";
-        return `<div class="bk-match${clk}"${da}>${slotHTML(m.top, dT)}${slotHTML(m.bot, dB)}</div>`;
-      }).join("");
-      return `<div class="bk-col"><div class="bk-round">${label}</div>${boxes}</div>`;
-    }).join("");
-    const champCol = `<div class="bk-col champ-col"><div class="bk-round">Most likely champion</div>
-      <div class="champ-card" title="${top[0][0]} lifts the trophy in ${pct(top[0][1], 1)} of simulations — the most of any team">
-        <span class="champ-flag">${flag(top[0][0])}</span>
-        <span class="champ-name">${top[0][0]}</span>
-        <span class="champ-p">${pct(top[0][1], 0)}</span>
-        <span class="champ-cap">to win it all</span></div></div>`;
-    $("fc-bracket").innerHTML = board + champCol;
+    // custom bracket: each tie is a head-to-head "tug of war"; the two halves climb
+    // to the trophy. Sandbox picks override the model winner and rebuild downstream.
+    const part = {}, win = {}, share = {};
+    [73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88,
+     89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 104].forEach((mn) => {
+      if (FEED[mn]) part[mn] = { top: win[FEED[mn][0]], bot: win[FEED[mn][1]] };
+      else { const b = (s.bracket && s.bracket[mn]) || {}; part[mn] = { top: b.top && b.top.team, bot: b.bot && b.bot.team }; }
+      const a = part[mn].top, b2 = part[mn].bot;
+      if (!a || !b2) { win[mn] = a || b2; share[mn] = 1; return; }
+      const modal = s.bracket && s.bracket[mn];
+      share[mn] = modal && a === modal.top.team && b2 === modal.bot.team ? modalShare(modal) : eloP(a, b2);
+      win[mn] = (picks[mn] === a || picks[mn] === b2) ? picks[mn] : (share[mn] >= 0.5 ? a : b2);
+    });
+    const champTeam = win[104];
+    const card = (mn) => {
+      const a = part[mn].top, b = part[mn].bot;
+      if (!a || !b) return `<div class="tie empty">—</div>`;
+      const pa = share[mn], w = win[mn];
+      const heat = MD[a + "|" + b] ? [a, b] : (MD[b + "|" + a] ? [b, a] : null);
+      const side = (t, p, hi) => `<div class="tie-side ${w === t ? "win" : ""}${sandbox ? " pickable" : ""}" data-pick="${t}">
+        <span class="ts-team">${flag(t)}${TLA(t)}</span><span class="ts-p">${pct(p, 0)}</span></div>`;
+      return `<div class="tie${picks[mn] ? " picked" : ""}${heat ? " has-heat" : ""}" data-m="${mn}"${heat ? ` data-home="${heat[0]}" data-away="${heat[1]}"` : ""}>
+        ${side(a, pa)}
+        <div class="tow" title="head-to-head — who wins the tie">${heat ? '<span class="tow-heat">⊞</span>' : ""}<i class="a" style="width:${100 * pa}%"></i><i class="b" style="width:${100 * (1 - pa)}%"></i></div>
+        ${side(b, 1 - pa)}</div>`;
+    };
+    const apex = `<div class="bk-apex"><div class="bk-trophy">🏆</div>
+      <div class="bk-champ">${flag(champTeam)}${champTeam}${!sandbox ? ` <b>${pct(top[0][1], 0)}</b>` : ""}</div>
+      <div class="bk-champ-lab">${sandbox ? "your champion" : "most likely champion"}</div></div>`;
+    $("fc-bracket").innerHTML = apex +
+      ROUNDN.slice().reverse().map(([lab, nums]) =>
+        `<div class="bk-round-row"><div class="bk-rlab">${lab}</div><div class="ties">${nums.map(card).join("")}</div></div>`).join("");
 
     // best thirds (8 of 12 advance) — ranked by P(advance as a best third)
     const th = Object.entries(s.best_third || {}).filter(([, p]) => p > 0.01)
@@ -377,12 +405,13 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     }).join("");
   };
   const go = (k) => render(Math.max(0, Math.min(N, k)));
-  // bracket Reach / Win-the-tie toggle
+  // bracket Model / Sandbox toggle + reset
   if ($("bk-toggle")) {
     $("bk-toggle").querySelectorAll("button").forEach((b) =>
       b.addEventListener("click", () => {
-        bracketMode = b.dataset.mode;
-        $("bk-toggle").querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b));
+        if (b.dataset.act === "reset") { for (const k in picks) delete picks[k]; render(cur); return; }
+        sandbox = b.dataset.mode === "sandbox";
+        $("bk-toggle").querySelectorAll("button[data-mode]").forEach((x) => x.classList.toggle("on", x === b));
         setLegend();
         render(cur);
       }));
@@ -399,11 +428,19 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
   }));
   render(N);
 
-  // click a knockout tie -> its expected-goals heatmap (delegated; survives re-render)
+  // bracket clicks (delegated; survive re-render): in sandbox, tapping a team
+  // sends it through; otherwise tapping a tie opens its expected-goals heatmap.
   if ($("fc-bracket")) {
     $("fc-bracket").addEventListener("click", (e) => {
-      const box = e.target.closest(".bk-match.bk-clickable");
-      if (box && box.dataset.home) showHeat(box.dataset.home, box.dataset.away);
+      const tie = e.target.closest(".tie");
+      if (!tie) return;
+      const side = e.target.closest(".tie-side");
+      if (sandbox && side && side.dataset.pick) {
+        picks[+tie.dataset.m] = side.dataset.pick;
+        render(cur);
+      } else if (tie.dataset.home) {
+        showHeat(tie.dataset.home, tie.dataset.away);
+      }
     });
   }
 
