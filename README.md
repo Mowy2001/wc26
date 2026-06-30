@@ -118,9 +118,17 @@ the draw is never hardcoded.
 
 ## Documentation
 
+- **`docs/DECISIONS.md`** — the decision ledger: every block with its verdict (admitted / probation / shadow / rejected / null) and out-of-sample number.
 - **`docs/METHODOLOGY.md`** — the full narrative: every layer, every gated block, every honest null.
 - **`docs/player_elo_design.md`** — the player-Elo design + the cross-confederation data verdict.
 - **`scripts/README.md`** / **`scripts/archive/README.md`** — the live pipeline and the experiment ledger.
-- **`CLAUDE.md`** — operating context, status, and conventions.
+- **`data/README.md`** — data provenance and attribution (core vs model-lab inputs).
+- **`CLAUDE.md`** — operating context and conventions for the AI agent that builds this.
 
 Every `src/wc26/*.py` module carries a docstring with its full mathematical model.
+
+## License
+
+Code and documentation: **MIT** (see `LICENSE`). Third-party datasets under `data/`
+keep their own licenses — match data is CC0 (martj42/international_results); full
+provenance in `data/README.md`.
