@@ -119,6 +119,10 @@ try:
     next_matches = json.load(open("outputs/next_matches.json"))
 except FileNotFoundError:
     next_matches = None
+try:
+    bracket_dists = json.load(open("outputs/bracket_dists.json"))
+except FileNotFoundError:
+    bracket_dists = None
 
 data = {
     "generated": str(date.today()),
@@ -161,6 +165,7 @@ data = {
     "match_dists": match_dists,
     "team_drivers": team_drivers,
     "next_matches": next_matches,
+    "bracket_dists": bracket_dists,
     "teams": teams,
 }
 

@@ -32,6 +32,13 @@ const MD = {};
     grid: m.grid, top: m.top, actual: null,
   };
 });
+// predicted bracket ties (scripts/43) — click a knockout tie -> its heatmap
+(WC26.bracket_dists || []).forEach((m) => {
+  MD[m.home + "|" + m.away] = {
+    home: m.home, away: m.away, group: "Knockout", city: null,
+    lh: m.lh, la: m.la, pH: m.pH, pD: m.pD, pA: m.pA, grid: m.grid, top: m.top, actual: null,
+  };
+});
 
 // a fixture is a "coin-flip" when no single W/D/L outcome clears 42% — i.e. the
 // model genuinely can't separate the sides. Returns the badge HTML or "".
@@ -303,7 +310,9 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
       const boxes = matches.map((mn) => {
         const m = (s.bracket && s.bracket[mn]) || {};
         const [dT, dB] = tieShares(m);
-        return `<div class="bk-match">${slotHTML(m.top, dT)}${slotHTML(m.bot, dB)}</div>`;
+        const clk = m.top && m.bot && MD[m.top.team + "|" + m.bot.team] ? " bk-clickable" : "";
+        const da = m.top && m.bot ? ` data-home="${m.top.team}" data-away="${m.bot.team}"` : "";
+        return `<div class="bk-match${clk}"${da}>${slotHTML(m.top, dT)}${slotHTML(m.bot, dB)}</div>`;
       }).join("");
       return `<div class="bk-col"><div class="bk-round">${label}</div>${boxes}</div>`;
     }).join("");
@@ -382,6 +391,14 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     else if (e.key === "End") { e.preventDefault(); go(N); }
   }));
   render(N);
+
+  // click a knockout tie -> its expected-goals heatmap (delegated; survives re-render)
+  if ($("fc-bracket")) {
+    $("fc-bracket").addEventListener("click", (e) => {
+      const box = e.target.closest(".bk-match.bk-clickable");
+      if (box && box.dataset.home) showHeat(box.dataset.home, box.dataset.away);
+    });
+  }
 
   // One-time demo on load: briefly replay the last few matches so the page
   // visibly *moves* (demonstrating it's live), then settle on today. Skipped

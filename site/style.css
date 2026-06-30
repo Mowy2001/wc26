@@ -539,3 +539,11 @@ details.tech[open] summary::before { content: "\25BE "; }
 .tm-track i { display: block; height: 100%; background: linear-gradient(90deg, var(--accent2), var(--accent)); border-radius: 4px; }
 .tm-val { text-align: right; font-weight: 800; font-size: .82rem; font-variant-numeric: tabular-nums; }
 .tm-val.g { color: var(--gold); }
+
+/* ---------- clickable knockout ties (heatmap) ---------- */
+.bk-match.bk-clickable { cursor: pointer; }
+.bk-match.bk-clickable:hover { border-color: var(--accent2); }
+.bk-match.bk-clickable { position: relative; }
+.bk-match.bk-clickable::after { content: "⊞"; position: absolute; top: 2px; right: 4px;
+  font-size: .6rem; color: var(--accent2); opacity: 0; }
+.bk-match.bk-clickable:hover::after { opacity: .8; }
