@@ -98,6 +98,37 @@ function showHeat(home, away) {
   ov.classList.add("show");
 }
 
+/* ---------- follow a team: its road through the tournament ---------- */
+function showTeam(name) {
+  const t = WC26.teams.find((x) => x.team === name);
+  if (!t) return;
+  let ov = $("team-overlay");
+  if (!ov) {
+    ov = document.createElement("div");
+    ov.id = "team-overlay"; ov.className = "mh-overlay";
+    document.body.appendChild(ov);
+    ov.addEventListener("click", (e) => { if (e.target === ov) ov.classList.remove("show"); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") ov.classList.remove("show"); });
+  }
+  const group = [["Win the group", t.P1], ["Finish 2nd", t.P2], ["Reach the knockouts", t.P_qualify]];
+  const road = [["Round of 32", t.P_R32], ["Round of 16", t.P_R16], ["Quarter-final", t.P_QF],
+    ["Semi-final", t.P_SF], ["Final", t.P_final], ["Champion", t.P_champion]];
+  const max = Math.max(t.P_qualify, t.P_R32, 0.01);
+  const row = (lab, p, gold) => `<div class="tm-row"><span class="tm-lab">${lab}</span>
+    <div class="tm-track"><i style="width:${(100 * p) / max}%;${gold ? "background:var(--gold)" : ""}"></i></div>
+    <span class="tm-val${gold ? " g" : ""}">${pct(p, 0)}</span></div>`;
+  ov.innerHTML = `<div class="mh-card tm-card">
+    <span class="mh-close" onclick="document.getElementById('team-overlay').classList.remove('show')">×</span>
+    <h4>${flag(name)} ${name}</h4>
+    <div class="mh-sub">Group ${t.group} · Elo ${t.elo} · its road through the tournament</div>
+    <div class="tm-h">In the group</div>${group.map(([l, p]) => row(l, p)).join("")}
+    <div class="tm-h">How far it goes</div>${road.map(([l, p]) => row(l, p, l === "Champion")).join("")}
+    <div class="mh-note">Each bar is the chance of reaching that stage across the 20,000 simulations
+      (live-conditioned on results so far). Bars shrink as the tournament narrows.</div>
+  </div>`;
+  ov.classList.add("show");
+}
+
 /* ---------- next matches: model vs market 1X2 (scripts/42) ---------- */
 if (WC26.next_matches && WC26.next_matches.matches && $("next-board")) {
   const nm = WC26.next_matches.matches;
@@ -380,8 +411,10 @@ if ($("rounds-table")) {
   $("rounds-table").innerHTML =
     `<thead><tr><th>Team</th><th>Group</th><th>Elo</th>${cols.map(([, h]) => `<th>${h}</th>`).join("")}</tr></thead>` +
     "<tbody>" + byChamp.slice(0, 16).map((t) => `
-      <tr><td>${flag(t.team)}${t.team}</td><td>${t.group}</td><td>${t.elo}</td>
+      <tr><td class="tm-click" data-team="${t.team}" title="click for ${t.team}'s road">${flag(t.team)}${t.team}</td><td>${t.group}</td><td>${t.elo}</td>
       ${cols.map(([c]) => `<td class="heat" style="${heat(t[c])}">${pct(t[c])}</td>`).join("")}</tr>`).join("") + "</tbody>";
+  $("rounds-table").querySelectorAll(".tm-click").forEach((c) =>
+    c.addEventListener("click", () => showTeam(c.dataset.team)));
 }
 
 /* ---------- what's earning each team its place (scripts/38) ---------- */
