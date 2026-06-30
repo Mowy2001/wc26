@@ -114,5 +114,13 @@ if _os.path.exists(_rp):
 
 subprocess.run([sys.executable, "scripts/25_shadow_scores.py"], check=True)
 subprocess.run([sys.executable, "scripts/15_benchmark_report.py"], check=True)
+# live market odds: append a snapshot + refresh the next-matches feed. Non-fatal —
+# needs ODDS_API_KEY (env or .secrets); skip cleanly if absent or the API is down.
+for _step in ("41_fetch_odds", "42_export_next_matches"):
+    try:
+        subprocess.run([sys.executable, f"scripts/{_step}.py"], check=True)
+    except Exception as _e:
+        print(f"  odds step {_step} skipped: {_e}")
+subprocess.run([sys.executable, "scripts/43_export_bracket_dists.py"], check=True)  # no API needed
 subprocess.run([sys.executable, "scripts/05_export_site_data.py"], check=True)
 print("Site refreshed — reload site/index.html.")

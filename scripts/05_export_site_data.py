@@ -123,6 +123,12 @@ try:
     bracket_dists = json.load(open("outputs/bracket_dists.json"))
 except FileNotFoundError:
     bracket_dists = None
+try:  # live market: latest outright snapshot + a short history for movement
+    _oh = [json.loads(l) for l in open("outputs/odds_history.jsonl") if l.strip()]
+    market_now = {"fetched": _oh[-1]["fetched"], "outright": _oh[-1]["outright"]} if _oh else None
+    market_hist = [{"t": s["fetched"], "o": s["outright"]} for s in _oh[-30:]] if _oh else None
+except FileNotFoundError:
+    market_now, market_hist = None, None
 
 data = {
     "generated": str(date.today()),
@@ -166,6 +172,8 @@ data = {
     "team_drivers": team_drivers,
     "next_matches": next_matches,
     "bracket_dists": bracket_dists,
+    "market_now": market_now,
+    "market_hist": market_hist,
     "teams": teams,
 }
 

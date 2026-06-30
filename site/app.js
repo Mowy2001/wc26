@@ -512,13 +512,24 @@ if (WC26.team_drivers && $("drivers-board")) {
   }
 }
 
-/* ---------- model vs market (with divergence flags) ---------- */
+/* ---------- model vs market — live odds, with movement since the eve ---------- */
 if ($("market-chart")) {
-  const rows = Object.entries(WC26.betmgm_shin || WC26.betmgm_outright).map(([team, p]) => {
-    const t = WC26.teams.find((x) => x.team === team);
-    const market = WC26.betmgm_shin ? p : 1 / (1 + p / 100);
-    return { team, model: t.P_champion, market, gap: t.P_champion - market };
-  }).sort((a, b) => b.model - a.model);
+  // Reference is the LIVE market (de-vigged outright, refreshed each cycle); falls
+  // back to the frozen 11-Jun BetMGM line if no live snapshot has been fetched yet.
+  const liveMkt = WC26.market_now && WC26.market_now.outright;
+  const mkt = liveMkt || WC26.betmgm_shin || {};
+  const mktEve = WC26.betmgm_shin || {};   // market on the tournament eve (11 Jun)
+  const modEve = WC26.baseline_eve || {};  // our own baseline on the eve (11 Jun)
+  const rows = WC26.teams
+    .filter((t) => mkt[t.team] != null)
+    .map((t) => ({
+      team: t.team, model: t.P_champion, market: mkt[t.team],
+      gap: t.P_champion - mkt[t.team],
+      dModel: modEve[t.team] != null ? t.P_champion - modEve[t.team].P_champion : null,
+      dMarket: mktEve[t.team] != null ? mkt[t.team] - mktEve[t.team] : null,
+    }))
+    .sort((a, b) => b.model - a.model)
+    .slice(0, 10);
   const max = Math.max(...rows.flatMap((r) => [r.model, r.market]));
   // flag a divergence when the model and market disagree by >= 5 percentage points
   const BIG = 0.05;
@@ -528,20 +539,29 @@ if ($("market-chart")) {
     return `<span class="gap-chip ${dir}" title="model ${g > 0 ? "above" : "below"} market by ${(100 * Math.abs(g)).toFixed(0)}pp">
       ${g > 0 ? "▲" : "▼"}${(100 * Math.abs(g)).toFixed(0)}pp vs market</span>`;
   };
+  // movement since the eve: how this number has drifted since 11 Jun
+  const mv = (d) => {
+    if (d == null || Math.abs(d) < 0.005) return "";
+    const up = d > 0;
+    return `<span class="mv ${up ? "up" : "dn"}" title="${up ? "up" : "down"} ${(100 * Math.abs(d)).toFixed(0)}pp since 11 Jun">${up ? "▲" : "▼"}${(100 * Math.abs(d)).toFixed(0)}</span>`;
+  };
   $("market-chart").innerHTML = rows.map((r) => `
     <div class="pair-row ${Math.abs(r.gap) >= BIG ? "diverge" : ""}">
       <div class="who">${flag(r.team)}${r.team}${gapChip(r.gap)}</div>
       <div class="pair-bars">
         <div class="pair-bar"><div class="pair-track"><div class="pair-fill model" style="width:${(100 * r.model) / max}%"></div></div>
-          <div class="pair-label">model ${pct(r.model)}</div></div>
+          <div class="pair-label">model ${pct(r.model)} ${mv(r.dModel)}</div></div>
         <div class="pair-bar"><div class="pair-track"><div class="pair-fill market" style="width:${(100 * r.market) / max}%"></div></div>
-          <div class="pair-label">market ${pct(r.market)}</div></div>
+          <div class="pair-label">market ${pct(r.market)} ${mv(r.dMarket)}</div></div>
       </div>
     </div>`).join("");
   // headline the two sharpest disagreements
   const sharp = [...rows].sort((a, b) => Math.abs(b.gap) - Math.abs(a.gap)).slice(0, 2);
   if ($("market-diverge")) {
-    $("market-diverge").innerHTML = "Sharpest disagreements: " + sharp.map((r) =>
+    const when = liveMkt
+      ? `Live market — ${new Date(WC26.market_now.fetched).toLocaleDateString(undefined, { month: "short", day: "numeric" })}, ${rows.length} contenders, bookmaker margin removed (▲▼ = move since 11 Jun). `
+      : "";
+    $("market-diverge").innerHTML = when + "Sharpest disagreements: " + sharp.map((r) =>
       `<strong>${flag(r.team)}${r.team}</strong> ${r.gap > 0 ? "model loves" : "model cold"} ` +
       `(${pct(r.model, 0)} vs market ${pct(r.market, 0)})`).join(" · ") + ".";
   }

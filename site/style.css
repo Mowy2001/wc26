@@ -426,6 +426,8 @@ details.tech[open] summary::before { content: "\25BE "; }
 .gap-chip { font-size: .68rem; font-weight: 700; padding: 1px 7px; border-radius: 5px; margin-left: 8px; white-space: nowrap; }
 .gap-chip.over { color: var(--accent); background: rgba(74, 222, 128, .13); }
 .gap-chip.under { color: #e0889a; background: rgba(143, 81, 97, .18); }
+.mv { font-size: .62rem; font-weight: 800; margin-left: 5px; letter-spacing: .02em; }
+.mv.up { color: var(--accent); } .mv.dn { color: #e0889a; }
 .cf-badge { font-size: .66rem; font-weight: 700; color: #e8c061; background: rgba(232, 192, 97, .14);
   padding: 1px 6px; border-radius: 5px; margin-left: 8px; white-space: nowrap; }
 .tight-badge { font-size: .62rem; font-weight: 700; color: #e8c061; background: rgba(232, 192, 97, .14);
