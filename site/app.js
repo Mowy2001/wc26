@@ -645,13 +645,14 @@ if (WC26.replay && WC26.replay.snapshots && WC26.standings && $("rc-groups")) {
   const grpHTML = Object.keys(st).sort().map((g) => {
     const chips = st[g].map((r) => {
       const t = r.team, p = eq(t), pred = p >= 0.5, act = qualified.has(t), ok = pred === act;
+      const close = p >= 0.4 && p <= 0.6;  // qualification we rated a coin-flip
       total++; if (ok) correct++;
-      return `<span class="rc-chip ${ok ? "ok" : "no"}" title="we said ${pred ? "through" : "out"} (${pct(p, 0)}) · actually ${act ? "qualified" : "eliminated"}">${ok ? "✓" : "✗"} ${flag(t)}${TLA3(t)} <i>${pct(p, 0)}</i></span>`;
+      return `<span class="rc-chip ${ok ? "ok" : "no"}${close ? " close" : ""}" title="we said ${pred ? "through" : "out"} (${pct(p, 0)}) · actually ${act ? "qualified" : "eliminated"}${close ? " · a coin-flip call" : ""}">${ok ? "✓" : "✗"} ${flag(t)}${TLA3(t)} <i>${pct(p, 0)}</i>${close ? " ⚖" : ""}</span>`;
     }).join("");
     return `<div class="rc-grp"><span class="rc-glab">${g}</span><span class="rc-chips">${chips}</span></div>`;
   }).join("");
   if ($("rc-groups-lead")) $("rc-groups-lead").innerHTML =
-    `Every qualification call, group by group — <b class="rc-key ok">✓ right</b> / <b class="rc-key no">✗ wrong</b>, with the chance we gave it on June 11. <strong>${correct} of ${total}</strong> called correctly.`;
+    `Every qualification call, group by group — <b class="rc-key ok">✓ right</b> / <b class="rc-key no">✗ wrong</b>, with <b class="rc-key">⚖ coin-flip</b> marking the ones we rated 40–60% (a toss-up: nailing it is lucky, missing it forgivable). Chances set on June 11 — <strong>${correct} of ${total}</strong> called correctly.`;
   $("rc-groups").innerHTML = grpHTML;
   if ($("rc-gb")) {
     const gv = (p) => (p.p != null ? p.p : p.P_golden_boot);
@@ -671,11 +672,17 @@ if (WC26.match_dists && $("track-best")) {
   const outLabel = (m) => { const [h, a] = m.actual; return h > a ? `${m.home} won` : (h < a ? `${m.away} won` : "draw"); };
   const outIdx = (m) => { const [h, a] = m.actual; return h > a ? "H" : (h < a ? "A" : "D"); };
   const predIdx = (m) => (m.pH >= m.pD && m.pH >= m.pA) ? "H" : (m.pA >= m.pD ? "A" : "D");
-  const played = WC26.match_dists.filter((m) => m.actual)
+  // group games (match_dists) + played knockout ties (bracket_dists) — the knockouts are
+  // where the real coin-flips live (Germany–Paraguay went to a shootout).
+  const pool = [...WC26.match_dists, ...((WC26.bracket_dists || []).filter((m) => m.actual))];
+  const played = pool.filter((m) => m.actual)
     .map((m) => ({ ...m, pa: probOf(m), topp: Math.max(m.pH, m.pD, m.pA) }));
+  // a "close call" = the model rated it a coin-flip pre-match (no outcome above 42%):
+  // nailing one is impressive, missing one is forgivable.
+  const cf = (m) => m.topp < 0.42 ? ` <span class="cf-badge" title="pre-match coin-flip — no result above ${pct(m.topp, 0)}">⚖ coin-flip</span>` : "";
   const row = (m) => `<div class="sb-row clickable bw-row" data-home="${m.home}" data-away="${m.away}">
     <div><span class="bw-match">${flag(m.home)}${TLA3(m.home)} ${m.actual[0]}–${m.actual[1]} ${TLA3(m.away)}${flag(m.away)}</span>
-      <span class="bw-out">${outLabel(m)}</span></div>
+      <span class="bw-out">${outLabel(m)}</span>${cf(m)}</div>
     <div class="bw-p ${m.pa >= 0.5 ? "good" : (m.pa < 0.25 ? "bad" : "")}" title="model gave this outcome ${pct(m.pa, 1)}">${pct(m.pa, 0)}</div></div>`;
   const best = played.filter((m) => m.topp <= 0.65 && predIdx(m) === outIdx(m))
     .sort((a, b) => b.pa - a.pa).slice(0, 6);

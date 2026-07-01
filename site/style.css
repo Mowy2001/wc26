@@ -506,6 +506,7 @@ details.tech[open] summary::before { content: "\25BE "; }
 .rc-chip.ok i { color: var(--accent); }
 .rc-chip.no { background: rgba(255,93,115,.12); border-color: rgba(255,93,115,.45); }
 .rc-chip.no i { color: var(--hot); }
+.rc-chip.close { border-style: dashed; }  /* qualification the model rated a coin-flip */
 .rc-grp { display: grid; grid-template-columns: 18px 1fr; gap: 8px; align-items: center; margin: 6px 0; }
 .rc-glab { font-weight: 800; color: var(--muted); font-size: .8rem; }
 .rc-key { padding: 1px 6px; border-radius: 5px; font-size: .74rem; }
