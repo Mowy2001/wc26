@@ -261,9 +261,15 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
   const FEED = { 89: [74, 77], 90: [73, 75], 91: [76, 78], 92: [79, 80], 93: [83, 84],
     94: [81, 82], 95: [86, 88], 96: [85, 87], 97: [89, 90], 98: [93, 94], 99: [91, 92],
     100: [95, 96], 101: [97, 98], 102: [99, 100], 104: [101, 102] };
-  const ROUNDN = [["Round of 32", [73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88]],
-    ["Round of 16", [89, 90, 91, 92, 93, 94, 95, 96]], ["Quarter-finals", [97, 98, 99, 100]],
-    ["Semi-finals", [101, 102]], ["Final", [104]]];
+  // order every round by the FEED tree (DFS from the final) so each tie sits directly
+  // beside the two ties that feed it — the columns then read like a classic bracket.
+  const parentOf = {}; Object.entries(FEED).forEach(([p, ch]) => ch.forEach((c) => (parentOf[c] = +p)));
+  const dfs = (n) => FEED[n] ? [...dfs(FEED[n][0]), ...dfs(FEED[n][1])] : [n];
+  const nextRound = (prev) => { const o = []; for (let i = 0; i < prev.length; i += 2) o.push(parentOf[prev[i]]); return o; };
+  const r32ord = dfs(104), r16ord = nextRound(r32ord), qford = nextRound(r16ord),
+    sford = nextRound(qford), finord = nextRound(sford);
+  const ROUNDN = [["Round of 32", r32ord], ["Round of 16", r16ord],
+    ["Quarter-finals", qford], ["Semi-finals", sford], ["Final", finord]];
   const ELO = {}; WC26.teams.forEach((t) => { ELO[t.team] = t.elo; });
   const eloP = (a, b) => 1 / (1 + Math.pow(10, -(((ELO[a] || 1500) - (ELO[b] || 1500)) / 400)));
   const modalShare = (m) => {  // head-to-head share of the top slot (sums to 1 with bot)
@@ -375,9 +381,10 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     const apex = `<div class="bk-apex"><div class="bk-trophy">🏆</div>
       <div class="bk-champ">${flag(champTeam)}${champTeam}${!sandbox ? ` <b>${pct(champShare, 0)}</b>` : ""}</div>
       <div class="bk-champ-lab">${sandbox ? "your champion" : "wins the most-likely final"}</div></div>`;
-    $("fc-bracket").innerHTML = apex +
-      ROUNDN.slice().reverse().map(([lab, nums]) =>
-        `<div class="bk-round-row"><div class="bk-rlab">${lab}</div><div class="ties">${nums.map(card).join("")}</div></div>`).join("");
+    $("fc-bracket").innerHTML =
+      ROUNDN.map(([lab, nums]) =>
+        `<div class="bk-col"><div class="bk-rlab">${lab}</div><div class="ties">${nums.map(card).join("")}</div></div>`).join("") +
+      `<div class="bk-col bk-col-trophy"><div class="bk-rlab">Champion</div>${apex}</div>`;
 
     // why the bracket champion can differ from round-by-round's most-likely champion:
     // the bracket follows the favourite through every tie (one modal path), while
