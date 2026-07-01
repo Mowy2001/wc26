@@ -526,7 +526,10 @@ details.tech[open] summary::before { content: "\25BE "; }
 .sb-p { text-align: right; font-weight: 900; font-size: 1.05rem; }
 .sb-p.win { color: var(--accent); }
 .sb-p.miss { color: var(--hot); }
-.sb-row .mh-hint { color: var(--accent2); font-size: .7rem; opacity: 0; }
+/* reserved fixed slots so the coin-flip badge / hint never shift the row alignment */
+.sb-cf { flex: 0 0 84px; display: inline-flex; justify-content: flex-end; align-items: center; }
+.sb-row .mh-hint { flex: 0 0 74px; text-align: right; white-space: nowrap;
+  color: var(--accent2); font-size: .7rem; opacity: 0; }
 .sb-row.clickable:hover .mh-hint { opacity: .9; }
 
 /* ---------- collapsible (B2: full table + appendix demoted) ---------- */

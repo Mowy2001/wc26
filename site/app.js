@@ -864,14 +864,14 @@ if (WC26.scoring && WC26.scoring.n && $("track-head")) {
   $("track-matches").innerHTML = [...s.matches].reverse().map((m) => {
     const good = m.p_realised >= 0.45;
     const has = MD[m.home + "|" + m.away] ? "clickable" : "";
-    const hint = has ? `<span class="mh-hint">distribution ▸</span>` : "";
+    const hint = `<span class="mh-hint">${has ? "distribution ▸" : ""}</span>`;
     const [hg, ag] = (m.score || "–").split(/[–-]/);
     return `<div class="sb-row ${has}" data-home="${m.home}" data-away="${m.away}">
       <div class="sb-match">
         <span class="sb-team">${flag(m.home)}${m.home}</span>
         <span class="sb-score">${hg ?? ""}<i>–</i>${ag ?? ""}</span>
         <span class="sb-team away">${m.away}${flag(m.away)}</span>
-        ${coinFlipBadge(m.home, m.away)}${hint}
+        <span class="sb-cf">${coinFlipBadge(m.home, m.away)}</span>${hint}
       </div>
       <div class="sb-p ${good ? "win" : "miss"} tnum" title="probability the model gave to what actually happened">${pct(m.p_realised, 0)}</div>
     </div>`;
