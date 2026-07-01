@@ -331,15 +331,19 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     const part = {}, win = {}, share = {};
     [73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88,
      89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 104].forEach((mn) => {
-      if (FEED[mn]) part[mn] = { top: win[FEED[mn][0]], bot: win[FEED[mn][1]] };
-      else { const b = (s.bracket && s.bracket[mn]) || {}; part[mn] = { top: b.top && b.top.team, bot: b.bot && b.bot.team }; }
+      const modal = s.bracket && s.bracket[mn];
+      // model view: fill each slot with its most-likely occupant (the marginal), so the
+      // final pits the two most-likely finalists. sandbox: propagate winners up the FEED
+      // tree so the user's picks ripple forward.
+      if (sandbox && FEED[mn]) part[mn] = { top: win[FEED[mn][0]], bot: win[FEED[mn][1]] };
+      else part[mn] = { top: modal && modal.top && modal.top.team, bot: modal && modal.bot && modal.bot.team };
       const a = part[mn].top, b2 = part[mn].bot;
       if (!a || !b2) { win[mn] = a || b2; share[mn] = 1; return; }
-      const modal = s.bracket && s.bracket[mn];
       share[mn] = modal && a === modal.top.team && b2 === modal.bot.team ? modalShare(modal) : eloP(a, b2);
       win[mn] = (picks[mn] === a || picks[mn] === b2) ? picks[mn] : (share[mn] >= 0.5 ? a : b2);
     });
     const champTeam = win[104];
+    const champShare = part[104] && part[104].top === champTeam ? share[104] : 1 - share[104];
     const card = (mn) => {
       const a = part[mn].top, b = part[mn].bot;
       if (!a || !b) return `<div class="tie empty">—</div>`;
@@ -353,11 +357,28 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
         ${side(b, 1 - pa)}</div>`;
     };
     const apex = `<div class="bk-apex"><div class="bk-trophy">🏆</div>
-      <div class="bk-champ">${flag(champTeam)}${champTeam}${!sandbox ? ` <b>${pct(top[0][1], 0)}</b>` : ""}</div>
-      <div class="bk-champ-lab">${sandbox ? "your champion" : "most likely champion"}</div></div>`;
+      <div class="bk-champ">${flag(champTeam)}${champTeam}${!sandbox ? ` <b>${pct(champShare, 0)}</b>` : ""}</div>
+      <div class="bk-champ-lab">${sandbox ? "your champion" : "wins the most-likely final"}</div></div>`;
     $("fc-bracket").innerHTML = apex +
       ROUNDN.slice().reverse().map(([lab, nums]) =>
         `<div class="bk-round-row"><div class="bk-rlab">${lab}</div><div class="ties">${nums.map(card).join("")}</div></div>`).join("");
+
+    // why the bracket champion can differ from round-by-round's most-likely champion:
+    // the bracket follows the favourite through every tie (one modal path), while
+    // round-by-round integrates ALL paths. A team can win the modal final yet be less
+    // likely to lift the cup overall because its road there is harder.
+    if ($("bracket-why")) {
+      if (sandbox) {
+        $("bracket-why").innerHTML = `Sandbox: your picks override the model — tap a team to send it through, ↺ to reset.`;
+      } else {
+        const margTeam = top[0][0], margPct = pct(top[0][1], 0);
+        let sfOpp = null;
+        for (const sf of [101, 102]) if (win[sf] === champTeam && part[sf]) sfOpp = part[sf].top === champTeam ? part[sf].bot : part[sf].top;
+        $("bracket-why").innerHTML = (champTeam === margTeam)
+          ? `Put the two most-likely finalists head-to-head and <strong>${flag(champTeam)}${champTeam}</strong> takes it (${pct(champShare, 0)}) — the same team round-by-round makes the single most-likely champion (${margPct}). The two views agree.`
+          : `The bracket fills each slot with its <strong>most-likely occupant</strong>, so the final is the two likeliest finalists — and <strong>${flag(champTeam)}${champTeam}</strong> edges it <strong>${pct(champShare, 0)}–${pct(1 - champShare, 0)}</strong>. Round by round, though, the most likely champion <em>overall</em> is <strong>${flag(margTeam)}${margTeam}</strong> (${margPct}). No contradiction: ${champTeam} is favoured in that final but has the <strong>harder road to reach it</strong>${sfOpp ? ` — past <strong>${flag(sfOpp)}${sfOpp}</strong> in the semi` : ""}, so across <em>all</em> paths ${margTeam} lifts the cup more often.`;
+      }
+    }
 
     // best thirds (8 of 12 advance) — ranked by P(advance as a best third)
     const th = Object.entries(s.best_third || {}).filter(([, p]) => p > 0.01)
@@ -571,14 +592,22 @@ if ($("market-chart")) {
 /* ---------- best calls / biggest surprises (from match_dists) ---------- */
 if (WC26.match_dists && $("track-best")) {
   // model probability assigned to the outcome that actually happened (W/D/L)
+  // pa = probability the model gave the OUTCOME (win/draw/loss) that happened — not the
+  // exact scoreline. "Best calls" = genuinely open matches (no side over 65%) the model
+  // still called right, so blow-outs of minnows don't crowd out the real calls.
   const probOf = (m) => { const [h, a] = m.actual; return h > a ? m.pH : (h < a ? m.pA : m.pD); };
   const outLabel = (m) => { const [h, a] = m.actual; return h > a ? `${m.home} won` : (h < a ? `${m.away} won` : "draw"); };
-  const played = WC26.match_dists.filter((m) => m.actual).map((m) => ({ ...m, pa: probOf(m) }));
+  const outIdx = (m) => { const [h, a] = m.actual; return h > a ? "H" : (h < a ? "A" : "D"); };
+  const predIdx = (m) => (m.pH >= m.pD && m.pH >= m.pA) ? "H" : (m.pA >= m.pD ? "A" : "D");
+  const played = WC26.match_dists.filter((m) => m.actual)
+    .map((m) => ({ ...m, pa: probOf(m), topp: Math.max(m.pH, m.pD, m.pA) }));
   const row = (m) => `<div class="sb-row clickable bw-row" data-home="${m.home}" data-away="${m.away}">
     <div><span class="bw-match">${flag(m.home)}${TLA3(m.home)} ${m.actual[0]}–${m.actual[1]} ${TLA3(m.away)}${flag(m.away)}</span>
       <span class="bw-out">${outLabel(m)}</span></div>
-    <div class="bw-p ${m.pa >= 0.5 ? "good" : (m.pa < 0.25 ? "bad" : "")}" title="model gave this result ${pct(m.pa, 1)}">${pct(m.pa, 0)}</div></div>`;
-  $("track-best").innerHTML = [...played].sort((a, b) => b.pa - a.pa).slice(0, 6).map(row).join("");
+    <div class="bw-p ${m.pa >= 0.5 ? "good" : (m.pa < 0.25 ? "bad" : "")}" title="model gave this outcome ${pct(m.pa, 1)}">${pct(m.pa, 0)}</div></div>`;
+  const best = played.filter((m) => m.topp <= 0.65 && predIdx(m) === outIdx(m))
+    .sort((a, b) => b.pa - a.pa).slice(0, 6);
+  $("track-best").innerHTML = best.map(row).join("");
   $("track-worst").innerHTML = [...played].sort((a, b) => a.pa - b.pa).slice(0, 6).map(row).join("");
   document.querySelectorAll("#track-best .bw-row, #track-worst .bw-row").forEach((c) =>
     c.addEventListener("click", () => showHeat(c.dataset.home, c.dataset.away)));
@@ -771,6 +800,7 @@ if (WC26.scoring && WC26.scoring.n && $("track-head")) {
     <div class="stat"><div class="v">${s.n}</div><div class="k">real matches scored</div></div>
     <div class="stat"><div class="v">${pct(s.fav_predicted,0)} → ${pct(s.fav_observed,0)}</div><div class="k">favourites: predicted vs won</div></div>`;
   const M = { H: "home win", D: "draw", A: "away win" };
+  if ($("track-matches")) {
   $("track-matches").innerHTML = [...s.matches].reverse().map((m) => {
     const good = m.p_realised >= 0.45;
     const has = MD[m.home + "|" + m.away] ? "clickable" : "";
@@ -788,6 +818,7 @@ if (WC26.scoring && WC26.scoring.n && $("track-head")) {
   }).join("");
   $("track-matches").querySelectorAll(".sb-row.clickable").forEach((row) =>
     row.addEventListener("click", () => showHeat(row.dataset.home, row.dataset.away)));
+  }
   if (WC26.standings && $("track-standings")) {
     $("track-standings").innerHTML = Object.keys(WC26.standings).sort().map((g) => {
       const rows = WC26.standings[g].map((r, i) => `

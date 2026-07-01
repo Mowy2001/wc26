@@ -55,10 +55,8 @@
   only worth as much as its record. Below is how the <em>frozen</em> June-11 model is scoring against
   every result since kick-off — no retro-fitting, no second guesses.</p>
   <div id="track-head" class="hero-stats"></div>
-  <div class="tl-grid" style="margin-top:18px">
-    <div><div class="tl-h">Recent matches — P(what actually happened)</div><div id="track-matches" class="chart"></div></div>
-    <div><div class="tl-h">Real group tables so far</div><div id="track-standings" class="tl-groups"></div></div>
-  </div>
+  <div style="margin-top:18px"><div class="tl-h">Real group tables so far</div>
+    <div id="track-standings" class="tl-groups"></div></div>
   <div class="tl-h" style="margin-top:22px">Best calls &amp; biggest surprises
     <span class="sub">the probability the frozen model gave to what actually happened — click any for the heatmap</span></div>
   <div class="bw-grid">
@@ -90,13 +88,11 @@
       </span></div>
     <p class="bracket-legend" id="bracket-legend"></p>
     <div id="fc-bracket" class="bracket-scroll"></div>
-    <p class="note" style="max-width:860px">Reading it: the tournament <strong>climbs</strong> from the
-    Round of 32 at the bottom to the trophy at the top; each card is a <strong>tug-of-war</strong> — the
-    bar is the head-to-head, who'd win <em>that</em> tie. The trophy badge is the <strong>most likely
-    champion across all 20,000 paths</strong>, which can differ from the winner of the single most-likely
-    final: a team can be likeliest to lift the cup by reaching the final more often, or meeting easier
-    opponents, even while it's the underdog in that one head-to-head. Both numbers are right — they answer
-    different questions.</p></div>
+    <p class="note" style="max-width:880px">Reading it: the bracket <strong>climbs</strong> from the Round
+    of 32 at the bottom to the trophy; each card is a <strong>tug-of-war</strong> — the bar is the
+    head-to-head, who'd win <em>that</em> tie. Each slot shows the team <strong>most likely to be
+    there</strong> — so the final is the two likeliest finalists.</p>
+    <p class="note" id="bracket-why" style="max-width:880px"></p></div>
   <div class="fc-block"><div class="fc-bar"></div>
     <div class="tl-h">Groups — probability of advancing</div>
     <p class="chart-cap">% = chance of reaching the knockout round (top two, or as a best third).
@@ -273,7 +269,7 @@
   fatigue</strong>. Everything else we tried was <em>cut</em>: football capital, heat/climate (tested
   twice), a penalty-taker bonus, plus diaspora and squad cohesion (kept only as "shadow bets", never in
   the real forecast). Each card below is one of those variables — admitted or rejected by the same rule.</p>
-  <div class="cards2">
+  <div class="cards4">
     <div class="card">
       <h3>The rating is the engine</h3>
       <p class="mini-intro">Everything else is a correction: the Elo gap sets the baseline
@@ -310,7 +306,7 @@
   </div>
 
   <h3 class="merge-sub" id="rejected">What we tested and discarded <span class="sub">tried, measured, left out — rejected experiments are results too</span></h3>
-  <div class="cards2">
+  <div class="cards4">
     <div class="card off">
       <h3>Heat mismatch — tried, and thrown out</h3>
       <p class="mini-intro">Does June heat punish cold-country teams? We built the
