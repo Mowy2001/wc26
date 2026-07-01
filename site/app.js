@@ -371,6 +371,16 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     });
     const champTeam = win[104];
     const champShare = part[104] && part[104].top === champTeam ? share[104] : 1 - share[104];
+    // probability the ENTIRE drawn bracket plays out exactly like this — the chain of every
+    // tie's head-to-head, including matches that don't touch the champion (they're still part
+    // of the same drawn bracket).
+    let bracketProb = 1;
+    Object.keys(part).forEach((k) => {
+      const mn = +k;
+      if (part[mn].top && part[mn].bot) bracketProb *= (win[mn] === part[mn].top ? share[mn] : 1 - share[mn]);
+    });
+    const oneIn = (n) => n >= 1e9 ? (n / 1e9).toFixed(1) + " billion" : n >= 1e6 ? (n / 1e6).toFixed(1) + " million" : n >= 1e3 ? Math.round(n / 1e3) + "k" : Math.round(n);
+    const fmtProb = (p) => p >= 0.01 ? pct(p, 1) : "1 in " + oneIn(Math.round(1 / p));
     const card = (mn) => {
       const a = part[mn].top, b = part[mn].bot;
       if (!a || !b) return `<div class="tie empty">—</div>`;
@@ -385,7 +395,8 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     };
     const apex = `<div class="bk-apex"><div class="bk-trophy">🏆</div>
       <div class="bk-champ">${flag(champTeam)}${champTeam}${!sandbox ? ` <b>${pct(champShare, 0)}</b>` : ""}</div>
-      <div class="bk-champ-lab">${sandbox ? "your champion" : "wins the most-likely final"}</div></div>`;
+      <div class="bk-champ-lab">${sandbox ? "your champion" : "wins the most-likely final"}</div>
+      <div class="bk-bprob" title="chance this entire bracket plays out exactly as drawn — every tie chained together">${sandbox ? "your" : "modal"} bracket happens: <b>${fmtProb(bracketProb)}</b></div></div>`;
     const col = (lab, nums, side) => `<div class="bk-col bk-${side}"><div class="bk-rlab">${lab}</div><div class="ties">${nums.map(card).join("")}</div></div>`;
     const leftHTML = HALF_L.map((nums, i) => col(RLAB[i], nums, "l")).join("");
     // right half rendered centre → edge, so SF sits next to the final and R32 at the far right
