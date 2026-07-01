@@ -658,14 +658,20 @@ if (WC26.replay && WC26.replay.snapshots && WC26.standings && $("rc-groups")) {
   // odds) as direct qualifiers, plus the eight teams we rated most likely to sneak in as a
   // best third. A flat >=50% is wrong — with best-third routes it calls all four in a tight
   // group, but only ~2-3 actually advance.
-  const predThrough = new Set(), bubble = new Set();
+  // What we PREDICTED for each team: 1st or 2nd of its group (ranked by eve P1, which
+  // splits the group winner from the runner-up), or one of the eight best thirds — those
+  // are the "through" calls. Everyone else: out. (A flat >=50% qualify is wrong: with
+  // best-third routes it calls all four in a tight group, but only ~2-3 advance.)
+  const p1 = (t) => (WC26.baseline_eve && WC26.baseline_eve[t] && WC26.baseline_eve[t].P1 != null) ? WC26.baseline_eve[t].P1 : eq(t);
+  const predType = {}, bubble = new Set();
   Object.keys(st).forEach((g) => {
-    const ranked = st[g].map((r) => r.team).sort((a, b) => eq(b) - eq(a));
-    if (ranked[0]) predThrough.add(ranked[0]);
-    if (ranked[1]) { predThrough.add(ranked[1]); bubble.add(ranked[1]); }  // last one in — on the bubble
-    if (ranked[2]) bubble.add(ranked[2]);                                   // first one out — on the bubble
+    const ranked = st[g].map((r) => r.team).sort((a, b) => p1(b) - p1(a));
+    if (ranked[0]) predType[ranked[0]] = "1st";
+    if (ranked[1]) { predType[ranked[1]] = "2nd"; bubble.add(ranked[1]); }  // runner-up — on the bubble
+    if (ranked[2]) bubble.add(ranked[2]);                                    // first one out — on the bubble
   });
-  Object.entries(eve.best_third || {}).sort((a, b) => b[1] - a[1]).slice(0, 8).forEach(([t]) => predThrough.add(t));
+  Object.entries(eve.best_third || {}).sort((a, b) => b[1] - a[1]).slice(0, 8).forEach(([t]) => { if (!predType[t]) predType[t] = "3rd"; });
+  const predThrough = new Set(Object.keys(predType));
   // every qualification call, group by group: right when our prediction matched reality.
   let correct = 0, total = 0;
   const grpHTML = Object.keys(st).sort().map((g) => {
@@ -673,12 +679,14 @@ if (WC26.replay && WC26.replay.snapshots && WC26.standings && $("rc-groups")) {
       const t = r.team, p = eq(t), pred = predThrough.has(t), act = qualified.has(t), ok = pred === act;
       const close = bubble.has(t);  // sat on the direct-qualification bubble (2nd/3rd by our odds)
       total++; if (ok) correct++;
-      return `<span class="rc-chip ${ok ? "ok" : "no"}${close ? " close" : ""}" title="we said ${pred ? "through" : "out"} (${pct(p, 0)}) · actually ${act ? "qualified" : "eliminated"}${close ? " · a coin-flip call" : ""}">${ok ? "✓" : "✗"} ${flag(t)}${TLA3(t)} <i>${pct(p, 0)}</i>${close ? " ⚖" : ""}</span>`;
+      const posTxt = pred ? (predType[t] === "3rd" ? "best third" : predType[t] + " in the group") : "out";
+      const posBadge = pred ? ` <b class="rc-pos">${predType[t]}</b>` : "";
+      return `<span class="rc-chip ${ok ? "ok" : "no"}${close ? " close" : ""}" title="we predicted ${posTxt} · actually ${act ? "qualified" : "eliminated"}${close ? " · bubble call" : ""}">${ok ? "✓" : "✗"} ${flag(t)}${TLA3(t)}${posBadge} <i>${pct(p, 0)}</i>${close ? " ⚖" : ""}</span>`;
     }).join("");
     return `<div class="rc-grp"><span class="rc-glab">${g}</span><span class="rc-chips">${chips}</span></div>`;
   }).join("");
   if ($("rc-groups-lead")) $("rc-groups-lead").innerHTML =
-    `Every qualification call, group by group — <b class="rc-key ok">✓ right</b> / <b class="rc-key no">✗ wrong</b>, with <b class="rc-key">⚖ coin-flip</b> marking the ones we rated 40–60% (a toss-up: nailing it is lucky, missing it forgivable). Chances set on June 11 — <strong>${correct} of ${total}</strong> called correctly.`;
+    `Every qualification call, group by group — <b class="rc-key ok">✓ right</b> / <b class="rc-key no">✗ wrong</b>. The badge is how we predicted each team through: <b class="rc-pos">1st</b>, <b class="rc-pos">2nd</b> or <b class="rc-pos">3rd</b> (best third); no badge = we predicted them out. <b class="rc-key">⚖</b> = a bubble call. Chances set on June 11 — <strong>${correct} of ${total}</strong> called correctly.`;
   $("rc-groups").innerHTML = grpHTML;
   // best/worst qualification calls: coin-flips we nailed vs the confident misses
   if ($("rc-best")) {
@@ -688,7 +696,7 @@ if (WC26.replay && WC26.replay.snapshots && WC26.standings && $("rc-groups")) {
       calls.push({ t, p: eq(t), pred: predThrough.has(t), act: qualified.has(t), close: bubble.has(t) });
     }));
     calls.forEach((c) => (c.ok = c.pred === c.act));
-    const line = (c) => `<div class="rc-cline ${c.ok ? "ok" : "no"}"><span class="rc-cteam">${c.ok ? "✓" : "✗"} ${flag(c.t)}${TLA3(c.t)}</span><span class="rc-cnote">said ${c.pred ? "through" : "out"} → ${c.act ? "qualified" : "out"} <i>${pct(c.p, 0)}</i></span></div>`;
+    const line = (c) => `<div class="rc-cline ${c.ok ? "ok" : "no"}"><span class="rc-cteam">${c.ok ? "✓" : "✗"} ${flag(c.t)}${TLA3(c.t)}</span><span class="rc-cnote">said ${c.pred ? (predType[c.t] === "3rd" ? "best third" : predType[c.t]) : "out"} → ${c.act ? "qualified" : "out"} <i>${pct(c.p, 0)}</i></span></div>`;
     const worst = calls.filter((c) => !c.ok).sort((a, b) => (b.pred ? b.p : 1 - b.p) - (a.pred ? a.p : 1 - a.p)).slice(0, 5);
     const best = calls.filter((c) => c.ok && c.close).sort((a, b) => Math.abs(0.5 - a.p) - Math.abs(0.5 - b.p)).slice(0, 5);
     $("rc-best").innerHTML = best.length ? best.map(line).join("") : `<em style="color:var(--muted)">—</em>`;

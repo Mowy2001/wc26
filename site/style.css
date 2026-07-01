@@ -512,6 +512,8 @@ details.tech[open] summary::before { content: "\25BE "; }
 .rc-key { padding: 1px 6px; border-radius: 5px; font-size: .74rem; }
 .rc-key.ok { color: var(--accent); background: rgba(74,222,128,.12); }
 .rc-key.no { color: var(--hot); background: rgba(255,93,115,.14); }
+.rc-pos { font-size: .64rem; font-weight: 800; padding: 0 4px; border-radius: 4px;
+  background: rgba(84,200,255,.16); color: var(--accent2); vertical-align: middle; }
 .rc-cline { display: flex; justify-content: space-between; align-items: center; gap: 8px;
   padding: 5px 9px; border-radius: 7px; margin: 4px 0; background: var(--card);
   border: 1px solid var(--card-edge); font-size: .8rem; }
