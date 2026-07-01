@@ -30,8 +30,8 @@
   <a href="#next">Next matches</a>
   <a href="#track">How it's doing</a>
   <a href="#forecast">Live forecast</a>
-  <a href="#drivers">What earns each place</a>
   <a href="#market">Model vs market</a>
+  <a href="#drivers">What earns each place</a>
   <span class="toc-group">Under the hood</span>
   <a href="#idea">How it works</a>
   <a href="#influence">What earned its place</a>
@@ -55,8 +55,8 @@
   only worth as much as its record. Below is how the <em>frozen</em> June-11 model is scoring against
   every result since kick-off — no retro-fitting, no second guesses.</p>
   <div id="track-head" class="hero-stats"></div>
-  <div style="margin-top:18px"><div class="tl-h">Real group tables so far</div>
-    <div id="track-standings" class="tl-groups"></div></div>
+  <div style="margin-top:18px"><div class="tl-h">Recent matches — P(what actually happened)</div>
+    <div id="track-matches" class="chart"></div></div>
   <div class="tl-h" style="margin-top:22px">Best calls &amp; biggest surprises
     <span class="sub">the probability the frozen model gave to what actually happened — click any for the heatmap</span></div>
   <div class="bw-grid">
@@ -110,6 +110,19 @@
     </div></div>
 </section>
 
+<section id="market">
+  <h2>Model vs market <span class="sub">our forecast against the bookies — live odds, margin removed with Shin’s method</span></h2>
+  <p class="market-diverge" id="market-diverge"></p>
+  <div id="market-chart" class="chart"></div>
+  <p class="note">Here's the contrarian part: where the bars disagree, someone is wrong — that's
+  the point. The model is deliberately Elo-honest, and the market knows things we've
+  <em>chosen not to feed it</em> — a discipline we explain under the hood. The bookmaker margin is
+  stripped with Shin's insider-trading model (it de-shades longshots more than favourites), so the
+  comparison is fair. After the final we score model, bookmaker and the Klement forecast
+  (<span id="klement-note"></span>) on the same log-loss scale — every prediction frozen with what
+  was known on June 11, 2026.</p>
+</section>
+
 <section id="drivers">
   <h2>What's earning each team its place <span class="sub">quality vs the draw vs venue &amp; freshness</span></h2>
   <p class="chart-cap" style="margin-bottom:8px;max-width:900px"><strong>What each bar measures:</strong> a team's chance of
@@ -127,19 +140,6 @@
   The three positive pieces sum exactly to the team's real number. Pre-tournament forecast.</p>
   <p class="note" id="drivers-note"></p>
   <div id="drivers-board" class="chart"></div>
-</section>
-
-<section id="market">
-  <h2>Model vs market <span class="sub">our forecast against the bookies — BetMGM, June 11, margin removed with Shin’s method</span></h2>
-  <p class="market-diverge" id="market-diverge"></p>
-  <div id="market-chart" class="chart"></div>
-  <p class="note">Here's the contrarian part: where the bars disagree, someone is wrong — that's
-  the point. The model is deliberately Elo-honest, and the market knows things we've
-  <em>chosen not to feed it</em> — a discipline we explain under the hood. The bookmaker margin is
-  stripped with Shin's insider-trading model (it de-shades longshots more than favourites), so the
-  comparison is fair. After the final we score model, bookmaker and the Klement forecast
-  (<span id="klement-note"></span>) on the same log-loss scale — every prediction frozen with what
-  was known on June 11, 2026.</p>
 </section>
 
 <section id="rounds">

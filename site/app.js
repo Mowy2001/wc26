@@ -339,7 +339,10 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
       else part[mn] = { top: modal && modal.top && modal.top.team, bot: modal && modal.bot && modal.bot.team };
       const a = part[mn].top, b2 = part[mn].bot;
       if (!a || !b2) { win[mn] = a || b2; share[mn] = 1; return; }
-      share[mn] = modal && a === modal.top.team && b2 === modal.bot.team ? modalShare(modal) : eloP(a, b2);
+      // the bar is "who'd win if they meet" — the actual head-to-head by rating, not the
+      // adv/p ratio (which is noisy and mixes in how hard each side's road was). So the
+      // stronger finalist takes the tie even if its path made it less likely to arrive.
+      share[mn] = eloP(a, b2);
       win[mn] = (picks[mn] === a || picks[mn] === b2) ? picks[mn] : (share[mn] >= 0.5 ? a : b2);
     });
     const champTeam = win[104];
