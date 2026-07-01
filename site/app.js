@@ -675,18 +675,21 @@ if (WC26.replay && WC26.replay.snapshots && WC26.standings && $("rc-groups")) {
   // every qualification call, group by group: right when our prediction matched reality.
   let correct = 0, total = 0;
   const grpHTML = Object.keys(st).sort().map((g) => {
-    const chips = st[g].map((r) => {
-      const t = r.team, p = eq(t), pred = predThrough.has(t), act = qualified.has(t), ok = pred === act;
-      const close = bubble.has(t);  // sat on the direct-qualification bubble (2nd/3rd by our odds)
-      total++; if (ok) correct++;
-      const posTxt = pred ? (predType[t] === "3rd" ? "best third" : predType[t] + " in the group") : "out";
-      const posBadge = pred ? ` <b class="rc-pos">${predType[t]}</b>` : "";
-      return `<span class="rc-chip ${ok ? "ok" : "no"}${close ? " close" : ""}" title="we predicted ${posTxt} · actually ${act ? "qualified" : "eliminated"}${close ? " · bubble call" : ""}">${ok ? "✓" : "✗"} ${flag(t)}${TLA3(t)}${posBadge} <i>${pct(p, 0)}</i>${close ? " ⚖" : ""}</span>`;
+    let gh = 0;
+    const rows = st[g].map((r) => {
+      const t = r.team, pred = predThrough.has(t), act = qualified.has(t), ok = pred === act;
+      total++; if (ok) { correct++; gh++; }
+      const predLabel = pred ? (predType[t] === "3rd" ? "best 3rd" : predType[t]) : "out";
+      const cf = bubble.has(t) ? ` <span class="gc-cf" title="a coin-flip call — we rated it 40–60%">⚖</span>` : "";
+      return `<div class="gc-row ${ok ? "ok" : "no"}" title="we predicted ${pred ? predLabel : "out"} · actually ${act ? "qualified" : "eliminated"}">
+        <span class="gc-res">${ok ? "✓" : "✗"}</span>
+        <span class="gc-team">${flag(t)}${TLA3(t)}</span>
+        <span class="gc-detail">said <b>${predLabel}</b>${cf} → ${act ? "through" : "out"}</span></div>`;
     }).join("");
-    return `<div class="rc-grp"><span class="rc-glab">${g}</span><span class="rc-chips">${chips}</span></div>`;
+    return `<div class="gc-card"><div class="gc-head"><span>Group ${g}</span><span class="gc-score">${gh}/4 right</span></div>${rows}</div>`;
   }).join("");
   if ($("rc-groups-lead")) $("rc-groups-lead").innerHTML =
-    `Every qualification call, group by group — <b class="rc-key ok">✓ right</b> / <b class="rc-key no">✗ wrong</b>. The badge is how we predicted each team through: <b class="rc-pos">1st</b>, <b class="rc-pos">2nd</b> or <b class="rc-pos">3rd</b> (best third); no badge = we predicted them out. <b class="rc-key">⚖</b> = a bubble call. Chances set on June 11 — <strong>${correct} of ${total}</strong> called correctly.`;
+    `One card per group, every team listed in its <em>final</em> order. For each we show what we called on June 11 — <b>1st</b>, <b>2nd</b> or <b>best 3rd</b> to go through, or <b>out</b> — and what happened. <b class="rc-key ok">✓</b> = we got it right, <b class="rc-key no">✗</b> = wrong, <b class="rc-key">⚖</b> = we'd rated it a coin-flip. <strong>${correct} of ${total}</strong> teams called correctly.`;
   $("rc-groups").innerHTML = grpHTML;
   // best/worst qualification calls: coin-flips we nailed vs the confident misses
   if ($("rc-best")) {

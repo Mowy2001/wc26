@@ -531,6 +531,21 @@ details.tech[open] summary::before { content: "\25BE "; }
 .ko-rd { font-size: .64rem; font-weight: 800; letter-spacing: .06em; color: var(--muted); text-transform: uppercase; }
 .ko-match { font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .ko-call { color: var(--muted); }
+
+/* Called it? — group scorecard as a full-width grid of per-group cards */
+#rc-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(232px, 1fr)); gap: 12px; }
+.gc-card { background: var(--card); border: 1px solid var(--card-edge); border-radius: 11px; padding: 10px 13px; }
+.gc-head { display: flex; justify-content: space-between; align-items: baseline; font-weight: 800;
+  font-size: .82rem; margin-bottom: 7px; padding-bottom: 6px; border-bottom: 1px solid var(--card-edge); }
+.gc-score { color: var(--muted); font-size: .68rem; font-weight: 700; }
+.gc-row { display: grid; grid-template-columns: 16px 66px 1fr; gap: 7px; align-items: center; padding: 3px 0; }
+.gc-res { font-weight: 900; text-align: center; }
+.gc-row.ok .gc-res { color: var(--accent); }
+.gc-row.no .gc-res { color: var(--hot); }
+.gc-team { font-weight: 700; font-size: .8rem; white-space: nowrap; }
+.gc-detail { color: var(--muted); font-size: .74rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gc-detail b { color: var(--accent2); font-weight: 700; }
+.gc-cf { color: var(--gold); }
 .rc-gbcols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .rc-gbh { font-size: .68rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted);
   font-weight: 800; margin-bottom: 6px; }
