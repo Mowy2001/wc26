@@ -208,6 +208,7 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
   const snaps = WC26.replay.snapshots;
   const tg = WC26.replay.teams_group;
   const N = snaps.length - 1;        // last index; index 0 = before kickoff
+  const GEK = (WC26.replay.group_end_k != null) ? Math.min(WC26.replay.group_end_k, N) : N;  // end of the group stage
   let cur = N;
 
   // Build a rich, synced control inside every .fc-bar:
@@ -225,7 +226,8 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     // tick notches, one per snapshot
     const ticks = bar.querySelector(".fc-ticks");
     ticks.innerHTML = snaps.map((_, i) =>
-      `<i style="left:${N ? (100 * i) / N : 0}%"></i>`).join("");
+      `<i class="${i === GEK ? "grp-end" : ""}" style="left:${N ? (100 * i) / N : 0}%"></i>`).join("") +
+      (GEK > 0 && GEK < N ? `<span class="grp-marker" style="left:${(100 * GEK) / N}%" title="group stage ends here — knockouts after this point">⚑ groups end</span>` : "");
   });
   const sliders = [...document.querySelectorAll(".fc-slider")];
   const labs = [...document.querySelectorAll(".fc-lab")];
@@ -316,15 +318,22 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     document.querySelectorAll(".fc-prev").forEach((b) => (b.disabled = k <= 0));
     document.querySelectorAll(".fc-next").forEach((b) => (b.disabled = k >= N));
 
-    // champion (top 12)
+    // champion ordering — kept for the bracket apex/legend below
     const top = Object.entries(s.champion).sort((a, b) => b[1] - a[1]).slice(0, 12);
-    const cmax = top[0][1] || 1;
-    $("fc-champ").innerHTML = top.map(([t, p]) => `
-      <div class="bar-row">
-        <div class="who">${flag(t)}${t}</div>
-        <div class="bar-track"><div class="bar-fill" style="width:${(100 * p) / cmax}%"></div></div>
-        <div class="val">${pct(p)}${delta(p, prev && prev.champion[t])}</div>
-      </div>`).join("");
+    // round by round: P(reach each stage) for EVERY team, driven by the slider. This
+    // replaces the flat champion list — same title odds in the last column, but the
+    // whole road to it, and it keeps moving through the knockouts.
+    if ($("fc-rounds") && s.rounds) {
+      const RH = ["R32", "R16", "QF", "SF", "Final", "Champ"];
+      const heatc = (p) => { const a = Math.min(0.85, p * 1.15); return `background: rgba(74, 222, 128, ${a.toFixed(3)}); color: ${a > 0.45 ? "#07101f" : "var(--text)"}`; };
+      const rr = Object.entries(s.rounds).sort((a, b) => b[1][5] - a[1][5]);
+      $("fc-rounds").innerHTML =
+        `<thead><tr><th>Team</th>${RH.map((h) => `<th>${h}</th>`).join("")}</tr></thead><tbody>` +
+        rr.map(([t, v]) => `<tr><td class="tm-click" data-team="${t}" title="click for ${t}'s road">${flag(t)}${TLA3(t)}</td>` +
+          v.map((p) => `<td class="heat" style="${heatc(p)}">${p >= 0.005 ? pct(p, 0) : ""}</td>`).join("") + `</tr>`).join("") +
+        `</tbody>`;
+      $("fc-rounds").querySelectorAll(".tm-click").forEach((c) => c.addEventListener("click", () => showTeam(c.dataset.team)));
+    }
 
     // custom bracket: each tie is a head-to-head "tug of war"; the two halves climb
     // to the trophy. Sandbox picks override the model winner and rebuild downstream.
@@ -383,8 +392,11 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
       }
     }
 
+    // groups & best thirds are group-stage facts — freeze them once the group stage is
+    // over; the bracket, round-by-round and Golden Boot keep moving through the knockouts.
+    const gk = Math.min(k, GEK), sg = snaps[gk], sgPrev = gk > 0 ? snaps[gk - 1] : null;
     // best thirds (8 of 12 advance) — ranked by P(advance as a best third)
-    const th = Object.entries(s.best_third || {}).filter(([, p]) => p > 0.01)
+    const th = Object.entries(sg.best_third || {}).filter(([, p]) => p > 0.01)
       .sort((a, b) => b[1] - a[1]).slice(0, 12);
     const tmax = th[0] ? th[0][1] : 1;
     $("fc-thirds").innerHTML = th.map(([t, p], i) => `
@@ -392,7 +404,7 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
       <div class="bar-row">
         <div class="who">${flag(t)}${t}</div>
         <div class="bar-track"><div class="bar-fill" style="width:${(100 * p) / tmax}%;${i < 8 ? "" : "opacity:.5"}"></div></div>
-        <div class="val">${pct(p, 0)}${delta(p, prev && prev.best_third && prev.best_third[t], 0)}</div>
+        <div class="val">${pct(p, 0)}${delta(p, sgPrev && sgPrev.best_third && sgPrev.best_third[t], 0)}</div>
       </div>`).join("");
 
     // golden boot
@@ -410,7 +422,7 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     const groups = {};
     Object.entries(tg).forEach(([t, g]) => (groups[g] = groups[g] || []).push(t));
     $("fc-groups").innerHTML = Object.keys(groups).sort().map((g) => {
-      const ranked = groups[g].map((t) => [t, s.qualify[t] ?? 0]).sort((a, b) => b[1] - a[1]);
+      const ranked = groups[g].map((t) => [t, sg.qualify[t] ?? 0]).sort((a, b) => b[1] - a[1]);
       // "tight" is specifically about WHO ADVANCES (not who finishes 1st): two or more
       // teams genuinely on the bubble for a knockout place (advance prob between 25-75%).
       const bubble = ranked.filter(([, q]) => q > 0.25 && q < 0.75);
@@ -423,7 +435,7 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
         <div class="team-row">
           <div><div class="who">${flag(t)}${t}</div>
             <div class="qbar"><i style="width:${100 * q}%"></i></div></div>
-          <div class="val"><b>${pct(q, 0)}</b>${delta(q, prev && prev.qualify[t], 0)}</div>
+          <div class="val"><b>${pct(q, 0)}</b>${delta(q, sgPrev && sgPrev.qualify[t], 0)}</div>
         </div>`).join("");
       return `<div class="group-card ${tight ? "tight" : ""}"><h3>GROUP ${g}${badge}</h3>${rows}</div>`;
     }).join("");

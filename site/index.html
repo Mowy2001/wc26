@@ -78,9 +78,10 @@
   to move one match at a time. <strong>▲/▼ = change since the previous match.</strong></p>
 
   <div class="fc-block"><div class="fc-bar"></div>
-    <div class="tl-h">Champion</div>
-    <p class="chart-cap">% = share of the 20,000 simulations in which this team lifts the trophy.</p>
-    <div id="fc-champ" class="chart"></div></div>
+    <div class="tl-h">Round by round — chance of reaching each stage</div>
+    <p class="chart-cap">% = share of the 20,000 simulations in which the team reaches that round; the last
+    column is the title odds. Scroll for every team — it all moves with the slider, through to the final.</p>
+    <div class="rr-scroll"><table id="fc-rounds" class="rounds-table"></table></div></div>
   <div class="fc-block"><div class="fc-bar"></div>
     <div class="tl-h">Predicted bracket — most likely team in each slot
       <span class="bk-toggle" id="bk-toggle">
@@ -142,10 +143,6 @@
   <div id="drivers-board" class="chart"></div>
 </section>
 
-<section id="rounds">
-  <h2>Round by round <span class="sub">how likely each team is to reach every stage</span></h2>
-  <div class="table-scroll"><table id="rounds-table"></table></div>
-</section>
 
 <div class="act-divider"><span class="act-num">2</span> Under the hood <span class="act-sub">how it's built — and how every variable earned its place</span></div>
 

@@ -45,6 +45,7 @@ gb_weights = {t: squad_weights(gs, squads, t, pd.Timestamp("2026-06-11"), deb, a
               for t in teams}
 
 played = wc2026_fixtures(results).dropna(subset=["home_score", "away_score"]).sort_values("date")
+shootouts = load_shootouts()
 print(f"replaying {len(played)} played matches -> {len(played)+1} snapshots")
 
 snaps = []
@@ -53,11 +54,24 @@ for k in range(len(played) + 1):
     sub = played.iloc[:k]
     fixed = {(r.home_team, r.away_team): (int(r.home_score), int(r.away_score))
              for r in sub[sub.date <= GROUP_STAGE_END].itertuples(index=False)}
+    # knockout results among the first k matches, conditioned at the pair level (same
+    # mechanism as scripts/10); shootout winners come from shootouts.csv. This is what
+    # lets the slider keep moving past the group stage, all the way to the final.
+    fixed_ko = {}
+    for r in sub[sub.date > GROUP_STAGE_END].itertuples(index=False):
+        hg, ag = int(r.home_score), int(r.away_score)
+        if hg != ag:
+            wnr = r.home_team if hg > ag else r.away_team
+        else:
+            so = shootouts[(shootouts["date"] == r.date) & (shootouts["home_team"] == r.home_team)
+                           & (shootouts["away_team"] == r.away_team)]
+            wnr = so["winner"].iloc[0] if not so.empty else r.home_team
+        fixed_ko[frozenset((r.home_team, r.away_team))] = (wnr, {r.home_team: hg, r.away_team: ag})
     # real thirds allocation only once the group stage is complete in this snapshot
     th_over = _THIRDS if len(fixed) >= len(gfx) else None
     res = simulate_tournament(groups, gfx, model, elo, n_sims=10000, fixed_results=fixed,
                               team_log_tilt=tilt, city_log_tilt=city_tilt, thirds_override=th_over,
-                              collect_goal_samples=True, collect_bracket=True)
+                              fixed_ko_results=fixed_ko, collect_goal_samples=True, collect_bracket=True)
     t = res["teams"]
     bracket = {}
     for br in res["bracket"].itertuples(index=False):
@@ -81,11 +95,16 @@ for k in range(len(played) + 1):
         "champion": {tm: round(float(t.loc[tm, "P_champion"]), 4) for tm in t.index},
         "qualify": {tm: round(float(t.loc[tm, "P_qualify"]), 4) for tm in t.index},
         "best_third": {tm: round(float(t.loc[tm, "P_best_third"]), 4) for tm in t.index},
+        # per-round reach probabilities for the slider-driven round-by-round table:
+        # [P_R32, P_R16, P_QF, P_SF, P_final, P_champion]
+        "rounds": {tm: [round(float(t.loc[tm, c]), 4) for c in
+                        ("P_R32", "P_R16", "P_QF", "P_SF", "P_final", "P_champion")] for tm in t.index},
         "golden_boot": gb_list,
         "bracket": bracket,
     })
     print(f"  k={k:2d} {last[:42]:42s} {time.time()-t0:5.0f}s")
 
-json.dump({"snapshots": snaps, "teams_group": {t: g for g, ts in groups.items() for t in ts}},
+json.dump({"snapshots": snaps, "group_end_k": int(len(gfx)),
+           "teams_group": {t: g for g, ts in groups.items() for t in ts}},
           open("outputs/history/replay.json", "w"))
 print(f"outputs/history/replay.json written ({len(snaps)} snapshots)")

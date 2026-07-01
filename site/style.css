@@ -347,6 +347,22 @@ details.tech[open] summary::before { content: "\25BE "; }
   transform: translateY(-50%); pointer-events: none; z-index: 1; }
 .fc-ticks i { position: absolute; top: 0; width: 1px; height: 100%;
   background: rgba(147, 161, 189, .45); transform: translateX(-.5px); }
+.fc-ticks i.grp-end { width: 2px; height: 180%; top: -40%; background: var(--gold); }
+.grp-marker { position: absolute; bottom: 130%; transform: translateX(-50%); white-space: nowrap;
+  font-size: .58rem; font-weight: 800; letter-spacing: .04em; color: var(--gold);
+  text-transform: uppercase; pointer-events: none; }
+
+/* round-by-round scroll table (slider-driven) */
+.rr-scroll { max-height: 460px; overflow-y: auto; overflow-x: auto;
+  border: 1px solid var(--card-edge); border-radius: 12px; }
+.rr-scroll table { width: 100%; border-collapse: collapse; }
+.rr-scroll thead th { position: sticky; top: 0; background: var(--card); z-index: 2;
+  font-size: .68rem; text-transform: uppercase; letter-spacing: .03em; color: var(--muted);
+  padding: 8px 6px; text-align: center; }
+.rr-scroll thead th:first-child { text-align: left; }
+.rr-scroll td { padding: 5px 6px; text-align: center; font-variant-numeric: tabular-nums;
+  font-size: .78rem; font-weight: 700; }
+.rr-scroll td.tm-click { text-align: left; font-weight: 600; white-space: nowrap; }
 /* prev / next match buttons */
 .fc-step { flex: 0 0 auto; width: 34px; height: 34px; border-radius: 9px;
   border: 1px solid var(--card-edge); background: var(--card); color: var(--text);
