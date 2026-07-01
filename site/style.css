@@ -655,10 +655,12 @@ details.tech[open] summary::before { content: "\25BE "; }
 .bk-col .tie { width: 108px; padding: 4px 7px; }
 .bk-col .tie-side { font-size: .73rem; }
 /* centre column: the final tie with the champion trophy under it */
-.bk-centre { justify-content: center; align-items: center; min-width: 120px; }
-.bk-centre > .ties { flex: 0 0 auto; }
+.bk-centre { justify-content: flex-start; align-items: center; min-width: 120px; }
+/* the final tie sits at the vertical centre, aligned with the two semi-finals beside it;
+   the champion trophy drops into the empty space below it. */
+.bk-centre > .ties { flex: 1; justify-content: center; }
 .bk-centre .tie { width: 120px; }
-.bk-centre .bk-apex { margin-top: 12px; }
+.bk-centre .bk-apex { margin-top: auto; padding-top: 18px; }
 .bk-apex { text-align: center; margin-bottom: 4px; }
 .bk-trophy { font-size: 2.6rem; line-height: 1; filter: drop-shadow(0 0 14px rgba(255,209,102,.5)); }
 .bk-champ { font-weight: 900; font-size: 1.1rem; margin-top: 2px; }
