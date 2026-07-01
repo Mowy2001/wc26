@@ -635,17 +635,19 @@ details.tech[open] summary::before { content: "\25BE "; }
 /* one column per round; each column spreads its ties evenly over the full height, so a
    tie lines up vertically with the midpoint of the two ties that feed it (tree-ordered
    in JS) — reading left to right, winners flow into the next column. */
-#fc-bracket.bracket-scroll { display: flex; align-items: stretch; justify-content: center;
-  gap: 9px; overflow-x: auto; overflow-y: visible; padding-bottom: 10px; }
+#fc-bracket.bracket-scroll { display: flex; align-items: stretch; justify-content: flex-start;
+  gap: 6px; width: 100%; max-width: 100%; min-width: 0;
+  overflow-x: auto; overflow-y: visible; padding-bottom: 10px; }
 .bk-col { display: flex; flex-direction: column; flex: 0 0 auto; }
 .bk-col > .bk-rlab { margin-bottom: 10px; }
 .bk-col > .ties { flex: 1; flex-direction: column; flex-wrap: nowrap;
   justify-content: space-around; gap: 6px; }
-.bk-col .tie { width: 112px; padding: 5px 7px; }
+.bk-col .tie { width: 100px; padding: 4px 6px; }
+.bk-col .tie-side { font-size: .72rem; }
 /* centre column: the final tie with the champion trophy under it */
-.bk-centre { justify-content: center; align-items: center; min-width: 132px; }
+.bk-centre { justify-content: center; align-items: center; min-width: 120px; }
 .bk-centre > .ties { flex: 0 0 auto; }
-.bk-centre .tie { width: 132px; }
+.bk-centre .tie { width: 120px; }
 .bk-centre .bk-apex { margin-top: 12px; }
 .bk-apex { text-align: center; margin-bottom: 4px; }
 .bk-trophy { font-size: 2.6rem; line-height: 1; filter: drop-shadow(0 0 14px rgba(255,209,102,.5)); }
