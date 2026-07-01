@@ -702,6 +702,27 @@ if (WC26.replay && WC26.replay.snapshots && WC26.standings && $("rc-groups")) {
   }
 }
 
+/* ---------- knockouts graded: our bracket vs reality ---------- */
+if (WC26.bracket_dists && $("rc-ko")) {
+  const roundName = (mn) => mn <= 88 ? "R32" : mn <= 96 ? "R16" : mn <= 100 ? "QF" : mn <= 102 ? "SF" : "Final";
+  const played = WC26.bracket_dists.filter((m) => m.winner).sort((a, b) => a.match - b.match);
+  if (played.length) {
+    let hits = 0;
+    const rows = played.map((m) => {
+      const fav = m.pH >= m.pA ? m.home : m.away;   // model's pre-match pick for the tie
+      const ok = fav === m.winner; if (ok) hits++;
+      const cf = Math.max(m.pH, m.pD, m.pA) < 0.42 ? `<span class="cf-badge">⚖ coin-flip</span>` : "";
+      return `<div class="ko-row ${ok ? "ok" : "no"}">
+        <span class="ko-rd">${roundName(m.match)}</span>
+        <span class="ko-match">${flag(m.home)}${TLA3(m.home)} ${m.actual[0]}–${m.actual[1]} ${TLA3(m.away)}${flag(m.away)}</span>
+        <span class="ko-call">${ok ? "✓" : "✗"} backed ${flag(fav)}${TLA3(fav)} · ${flag(m.winner)}${TLA3(m.winner)} through ${cf}</span></div>`;
+    }).join("");
+    $("rc-ko").innerHTML = `<p class="chart-cap"><strong>${hits} of ${played.length}</strong> knockout ties called right so far.</p>` + rows;
+  } else {
+    $("rc-ko").innerHTML = `<p class="chart-cap">The knockouts haven't kicked off yet — this fills in tie by tie.</p>`;
+  }
+}
+
 /* ---------- best calls / biggest surprises (from match_dists) ---------- */
 if (WC26.match_dists && $("track-best")) {
   // model probability assigned to the outcome that actually happened (W/D/L)

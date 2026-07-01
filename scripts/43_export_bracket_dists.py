@@ -14,7 +14,7 @@ import sys
 sys.path.insert(0, "src")
 import numpy as np
 import pandas as pd
-from wc26.data import load_results, wc2026_fixtures, GROUP_STAGE_END
+from wc26.data import load_results, load_shootouts, wc2026_played_ko
 from wc26.dixon_coles import DixonColes
 from wc26.elo import ratings_asof
 from wc26.tilts import load_team_tilt
@@ -41,12 +41,10 @@ model = DixonColes().fit(df[df["date"] >= "2005-01-01"], pd.Timestamp("2026-06-1
 elo = ratings_asof(elo_hist, "2026-06-11")
 fat = load_team_tilt() or {}
 
-# actual results of played knockout ties, keyed by the pair, so we can grade each tie
-# (the modal occupants of a played slot are the real teams once the groups are done).
-_ko = wc2026_fixtures(results)
-_ko = _ko[(_ko["date"] > GROUP_STAGE_END)].dropna(subset=["home_score", "away_score"])
-played_ko = {frozenset((r.home_team, r.away_team)): (r.home_team, int(r.home_score), int(r.away_score))
-             for r in _ko.itertuples(index=False)}
+# played knockout ties -> {pair: (winner, {team: 90-min goals})}, shootouts resolved,
+# so we can grade each tie (the modal occupants of a played slot are the real teams once
+# the groups are done).
+played_ko = wc2026_played_ko(results, load_shootouts())
 
 bk = pd.read_csv("outputs/bracket.csv")
 out = []
@@ -67,9 +65,10 @@ for mn, g in bk.groupby("match"):
              "pH": round(pH, 4), "pD": round(pD, 4), "pA": round(pA, 4),
              "grid": grid, "top": [{"h": i, "a": j, "p": round(p, 4)} for i, j, p in flat]}
     pk = played_ko.get(frozenset((home, away)))
-    if pk:  # real 90-minute result, oriented to this tie's home/away
-        ph, hs, as_ = pk
-        entry["actual"] = [hs, as_] if ph == home else [as_, hs]
+    if pk:  # who advanced (shootouts resolved) + the 90-minute score, oriented to this tie
+        winner, goals = pk
+        entry["actual"] = [int(goals.get(home, 0)), int(goals.get(away, 0))]
+        entry["winner"] = winner
     out.append(entry)
 
 json.dump(out, open("outputs/bracket_dists.json", "w"), indent=1)

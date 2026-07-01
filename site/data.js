@@ -85159,7 +85159,8 @@ const WC26 = {
    "actual": [
     0,
     1
-   ]
+   ],
+   "winner": "Canada"
   },
   {
    "match": 74,
@@ -85241,7 +85242,8 @@ const WC26 = {
    "actual": [
     1,
     1
-   ]
+   ],
+   "winner": "Paraguay"
   },
   {
    "match": 75,
@@ -85323,7 +85325,8 @@ const WC26 = {
    "actual": [
     1,
     1
-   ]
+   ],
+   "winner": "Morocco"
   },
   {
    "match": 76,
@@ -85405,7 +85408,8 @@ const WC26 = {
    "actual": [
     2,
     1
-   ]
+   ],
+   "winner": "Brazil"
   },
   {
    "match": 77,
