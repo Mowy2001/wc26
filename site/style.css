@@ -681,7 +681,7 @@ details.tech[open] summary::before { content: "\25BE "; }
    in JS) — reading left to right, winners flow into the next column. */
 #fc-bracket.bracket-scroll { display: flex; align-items: stretch; justify-content: flex-start;
   gap: 2px; width: 100%; max-width: 100%; min-width: 0;
-  overflow-x: auto; overflow-y: visible; padding-bottom: 10px; }
+  overflow-x: auto; overflow-y: visible; padding: 3px 3px 10px; }
 /* override the earlier (dead) .bk-col rule's min-width:116 so columns are only as wide as
    their tie — otherwise the nine columns total ~1060px and the far-right R32 is cut off. */
 .bk-col { display: flex; flex-direction: column; flex: 0 0 auto; min-width: 0;
@@ -710,7 +710,8 @@ details.tech[open] summary::before { content: "\25BE "; }
 .tie { background: var(--card); border: 1px solid var(--card-edge); border-radius: 9px; padding: 6px 9px; width: 188px; }
 .tie.has-heat { cursor: pointer; }
 .tie.has-heat:hover { border-color: var(--accent2); }
-.tie.picked { border-color: var(--violet); box-shadow: 0 0 0 1px rgba(183,148,255,.3); }
+/* inset glow (not outward) so a picked card at the container edge isn't clipped by overflow */
+.tie.picked { border-color: var(--violet); box-shadow: inset 0 0 0 1px rgba(183,148,255,.45); }
 .tie.played { border-color: rgba(74,222,128,.35); }  /* result already in — locked */
 .tie.played .tie-side:not(.win) { opacity: .5; }
 .tie.empty { opacity: .35; display: flex; align-items: center; justify-content: center; color: var(--muted); }
