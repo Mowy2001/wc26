@@ -636,14 +636,14 @@ details.tech[open] summary::before { content: "\25BE "; }
    tie lines up vertically with the midpoint of the two ties that feed it (tree-ordered
    in JS) — reading left to right, winners flow into the next column. */
 #fc-bracket.bracket-scroll { display: flex; align-items: stretch; justify-content: flex-start;
-  gap: 6px; width: 100%; max-width: 100%; min-width: 0;
+  gap: 2px; width: 100%; max-width: 100%; min-width: 0;
   overflow-x: auto; overflow-y: visible; padding-bottom: 10px; }
 .bk-col { display: flex; flex-direction: column; flex: 0 0 auto; }
 .bk-col > .bk-rlab { margin-bottom: 10px; }
 .bk-col > .ties { flex: 1; flex-direction: column; flex-wrap: nowrap;
   justify-content: space-around; gap: 6px; }
-.bk-col .tie { width: 100px; padding: 4px 6px; }
-.bk-col .tie-side { font-size: .72rem; }
+.bk-col .tie { width: 108px; padding: 4px 7px; }
+.bk-col .tie-side { font-size: .73rem; }
 /* centre column: the final tie with the champion trophy under it */
 .bk-centre { justify-content: center; align-items: center; min-width: 120px; }
 .bk-centre > .ties { flex: 0 0 auto; }
