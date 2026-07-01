@@ -36,7 +36,7 @@
   <a href="#idea">How it works</a>
   <a href="#influence">What earned its place</a>
   <a href="#lab">Model lab</a>
-  <a href="#method">Appendix</a>
+  <a href="#method">Methodology</a>
 </nav>
 
 <main class="wrap">
@@ -58,6 +58,12 @@
   <div class="tl-grid" style="margin-top:18px">
     <div><div class="tl-h">Recent matches — P(what actually happened)</div><div id="track-matches" class="chart"></div></div>
     <div><div class="tl-h">Real group tables so far</div><div id="track-standings" class="tl-groups"></div></div>
+  </div>
+  <div class="tl-h" style="margin-top:22px">Best calls &amp; biggest surprises
+    <span class="sub">the probability the frozen model gave to what actually happened — click any for the heatmap</span></div>
+  <div class="bw-grid">
+    <div><div class="bw-lab good">✓ Nailed it</div><div id="track-best" class="chart"></div></div>
+    <div><div class="bw-lab bad">✗ Didn't see it coming</div><div id="track-worst" class="chart"></div></div>
   </div>
   <p class="note">These are the probabilities the model gave each real match <em>before</em> it was
   played (beliefs frozen June 11). The score is <strong>log-loss</strong> — lower is better, and a
@@ -83,7 +89,14 @@
         <button type="button" data-mode="model" class="on">Model</button><button type="button" data-mode="sandbox">🎮 Sandbox</button><button type="button" data-act="reset" title="clear your picks">↺</button>
       </span></div>
     <p class="bracket-legend" id="bracket-legend"></p>
-    <div id="fc-bracket" class="bracket-scroll"></div></div>
+    <div id="fc-bracket" class="bracket-scroll"></div>
+    <p class="note" style="max-width:860px">Reading it: the tournament <strong>climbs</strong> from the
+    Round of 32 at the bottom to the trophy at the top; each card is a <strong>tug-of-war</strong> — the
+    bar is the head-to-head, who'd win <em>that</em> tie. The trophy badge is the <strong>most likely
+    champion across all 20,000 paths</strong>, which can differ from the winner of the single most-likely
+    final: a team can be likeliest to lift the cup by reaching the final more often, or meeting easier
+    opponents, even while it's the underdog in that one head-to-head. Both numbers are right — they answer
+    different questions.</p></div>
   <div class="fc-block"><div class="fc-bar"></div>
     <div class="tl-h">Groups — probability of advancing</div>
     <p class="chart-cap">% = chance of reaching the knockout round (top two, or as a best third).
@@ -350,62 +363,31 @@
   <h2>The model lab <span class="sub">the same forecast, with and without each ingredient — scored live on real results</span></h2>
   <div id="lab-board" class="chart"></div>
   <p class="note" id="lab-note"></p>
+  <p class="note" style="max-width:840px">Careful reading this live: over a few dozen matches nothing
+  cleanly separates these variants — one tournament is far too small to judge an ingredient. The reason
+  <strong>altitude</strong> and <strong>fatigue</strong> are <em>in</em> the model and everything else is
+  out is the six-tournament, out-of-sample backtest in <a href="#influence">what earned its place</a>:
+  there, the model <strong>with</strong> altitude clearly beats the one without. Here we're only watching
+  the shadow bets play out in real time.</p>
 </section>
 
 <section id="method">
-  <h2>Appendix — the full machinery <span class="sub">for the rigorous reader: every formula and choice, in detail</span></h2>
-
-  <details>
-    <summary>Layer 1 — Elo ratings, rebuilt from scratch</summary>
-    <p>We replicate the World Football Elo formula (importance-weighted K factor: World Cup 60,
-    continental finals 50, qualifiers 40, friendlies 20; goal-margin multiplier; +100 home
-    advantage) over all 49,000 matches. Computing it ourselves, instead of scraping the
-    published table, is what makes <em>point-in-time</em> queries possible: any team's rating
-    on any date, with no information from the future. Validation: Spain #1 at 2216 on
-    tournament eve, top-15 consistent with the reference rankings.</p>
-  </details>
-
-  <details>
-    <summary>Layer 2 — Dixon-Coles goal model on Elo covariates</summary>
-    <p>Each side's goals are Poisson with log-rates driven by the Elo gap, a home-advantage
-    term, and the classic Dixon-Coles low-score correction (0-0 and 1-1 are more common than
-    independence implies). No free per-team parameters — international teams play ~10 matches
-    a year, free parameters would overfit instantly. Old matches decay exponentially
-    (half-life ≈ 8.5 months, tuned out-of-sample). Backtest on World Cup 2022:
-    log-loss <strong>1.060</strong> vs 1.099 uniform; favourites priced at 54% won 56%.</p>
-  </details>
-
-  <details>
-    <summary>Layer 3 — Tournament Monte Carlo</summary>
-    <p>Each of the 20,000 simulations samples all 72 group scorelines from the model's score
-    matrices, applies the full FIFA tiebreaker ladder (points, goal difference, goals,
-    head-to-head; fair play is unobservable pre-match so surviving ties break at random —
-    equivalent to drawing lots in expectation), ranks the eight best thirds, fills the
-    official 32-team bracket (third-place slots assigned by constraint matching against the
-    published schedule), and plays to the final. Knockout draws go to extra time (Poisson at
-    one-third intensity), then to a shootout model fitted on the 677 historical shootouts:
-    P(win) = sigmoid(0.31·host + 0.68·Δelo/400). Hosts keep home advantage wherever they
-    genuinely play at home — knockout rounds included.</p>
-  </details>
-
-  <details>
-    <summary>Luck, and why we never grade single predictions</summary>
-    <p>The Poisson sampling <em>is</em> football's variance: a one-in-five upset happens in
-    one of five simulations, and that's the point. The model is evaluated exclusively on
-    log-loss and calibration over many matches — never on whether a single pick came true.
-    Three sources of uncertainty are treated separately: aleatoric (the sampling),
-    epistemic-in-data (prefer expected goals where available), epistemic-in-parameters
-    (bootstrap, on the roadmap).</p>
-  </details>
-
-  <details>
-    <summary>Point-in-time discipline</summary>
-    <p>No rating, parameter or hyperparameter ever sees data later than the prediction date.
-    Hyperparameters are tuned on <em>past</em> tournaments only; ratings freeze on the eve of
-    the opening match. This is also why the time-decay tuning result (the flat curve above) is
-    trustworthy: it was measured strictly out-of-sample, on 345 matches across six
-    tournaments the model had never seen.</p>
-  </details>
+  <h2>Under the hood <span class="sub">the short version — the full write-up lives in the open repo</span></h2>
+  <p class="note" style="max-width:840px">Three layers, no black box: a from-scratch
+  <strong>Elo</strong> rebuilt over 49,000 matches (so every rating is <em>point-in-time</em> — no
+  information from the future); an <strong>Elo-driven Dixon-Coles</strong> goal model (Poisson log-rates
+  from the Elo gap + home advantage + the low-score correction, with no per-team free parameters to
+  overfit); and a <strong>20,000-run Monte Carlo</strong> that samples every scoreline, applies the full
+  FIFA tiebreakers, fills the official bracket and plays to a shootout model fitted on 677 historical
+  shootouts. Backtest (World Cup 2022, strictly point-in-time): log-loss <strong>1.060</strong> vs 1.099
+  uniform; favourites priced at 54% won 56%.</p>
+  <p class="note" style="max-width:840px">Nothing is hidden — every formula, every gated variable and
+  every honest null result is written up in full:</p>
+  <div class="doc-links">
+    <a class="doc-link" href="https://github.com/Mowy2001/wc26/blob/main/docs/METHODOLOGY.md" target="_blank" rel="noopener">📐 Methodology<span>every layer &amp; choice, in detail</span></a>
+    <a class="doc-link" href="https://github.com/Mowy2001/wc26/blob/main/docs/DECISIONS.md" target="_blank" rel="noopener">⚖️ Decision ledger<span>what earned its place, and what didn't</span></a>
+    <a class="doc-link" href="https://github.com/Mowy2001/wc26" target="_blank" rel="noopener">💻 Source code<span>the whole pipeline, reproducible</span></a>
+  </div>
 </section>
 
 </main>

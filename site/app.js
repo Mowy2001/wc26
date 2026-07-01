@@ -568,6 +568,22 @@ if ($("market-chart")) {
   if ($("klement-note")) $("klement-note").textContent = WC26.klement;
 }
 
+/* ---------- best calls / biggest surprises (from match_dists) ---------- */
+if (WC26.match_dists && $("track-best")) {
+  // model probability assigned to the outcome that actually happened (W/D/L)
+  const probOf = (m) => { const [h, a] = m.actual; return h > a ? m.pH : (h < a ? m.pA : m.pD); };
+  const outLabel = (m) => { const [h, a] = m.actual; return h > a ? `${m.home} won` : (h < a ? `${m.away} won` : "draw"); };
+  const played = WC26.match_dists.filter((m) => m.actual).map((m) => ({ ...m, pa: probOf(m) }));
+  const row = (m) => `<div class="sb-row clickable bw-row" data-home="${m.home}" data-away="${m.away}">
+    <div><span class="bw-match">${flag(m.home)}${TLA3(m.home)} ${m.actual[0]}–${m.actual[1]} ${TLA3(m.away)}${flag(m.away)}</span>
+      <span class="bw-out">${outLabel(m)}</span></div>
+    <div class="bw-p ${m.pa >= 0.5 ? "good" : (m.pa < 0.25 ? "bad" : "")}" title="model gave this result ${pct(m.pa, 1)}">${pct(m.pa, 0)}</div></div>`;
+  $("track-best").innerHTML = [...played].sort((a, b) => b.pa - a.pa).slice(0, 6).map(row).join("");
+  $("track-worst").innerHTML = [...played].sort((a, b) => a.pa - b.pa).slice(0, 6).map(row).join("");
+  document.querySelectorAll("#track-best .bw-row, #track-worst .bw-row").forEach((c) =>
+    c.addEventListener("click", () => showHeat(c.dataset.home, c.dataset.away)));
+}
+
 /* ---------- ablations: host advantage ---------- */
 if (WC26.ablations && $("host-ablation")) {
   const noHost = WC26.ablations.no_host_advantage.hosts;

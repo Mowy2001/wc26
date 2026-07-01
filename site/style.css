@@ -452,6 +452,24 @@ details.tech[open] summary::before { content: "\25BE "; }
 .dr-row .val { text-align: right; font-variant-numeric: tabular-nums; }
 .dr-row .who { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
+/* best calls / biggest surprises */
+.bw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 6px; }
+@media (max-width: 760px) { .bw-grid { grid-template-columns: 1fr; } }
+.bw-lab { font-size: .8rem; font-weight: 800; letter-spacing: .02em; margin: 4px 0 6px; }
+.bw-lab.good { color: var(--accent); } .bw-lab.bad { color: var(--hot); }
+.bw-match { font-weight: 700; font-variant-numeric: tabular-nums; }
+.bw-out { color: var(--muted); font-size: .74rem; margin-left: 8px; }
+.bw-p { text-align: right; font-weight: 800; font-variant-numeric: tabular-nums; }
+.bw-p.good { color: var(--accent); } .bw-p.bad { color: var(--hot); }
+
+/* under-the-hood doc links */
+.doc-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 14px; }
+.doc-link { display: flex; flex-direction: column; gap: 3px; padding: 14px 16px; text-decoration: none;
+  background: var(--card); border: 1px solid var(--card-edge); border-radius: 12px;
+  color: var(--text); font-weight: 800; transition: border-color .15s, transform .15s; }
+.doc-link:hover { border-color: var(--accent2); transform: translateY(-2px); }
+.doc-link span { color: var(--muted); font-weight: 500; font-size: .78rem; }
+
 /* ---------- live record: broadcast scoreboard rows (Direction B / B2) ---------- */
 .sb-row {
   display: grid; grid-template-columns: 1fr 64px; align-items: center; gap: 12px;
