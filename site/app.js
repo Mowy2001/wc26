@@ -639,18 +639,20 @@ if (WC26.replay && WC26.replay.snapshots && WC26.standings && $("rc-groups")) {
   const bestThirds = new Set(thirdsRows.slice(0, 8).map((r) => r.team));
   const qualified = new Set([...directQual, ...bestThirds]);
   const eq = (t) => (eve.qualify && eve.qualify[t] != null) ? eve.qualify[t] : 0;
-  const allTeams = Object.keys(eve.qualify || {});
-  let hits = 0; qualified.forEach((t) => { if (eq(t) >= 0.5) hits++; });
-  const surprises = [...qualified].filter((t) => eq(t) < 0.35).sort((a, b) => eq(a) - eq(b)).slice(0, 5);
-  const misses = allTeams.filter((t) => eq(t) > 0.65 && !qualified.has(t)).sort((a, b) => eq(b) - eq(a)).slice(0, 5);
-  const predThirds = Object.entries(eve.best_third || {}).sort((a, b) => b[1] - a[1]).slice(0, 8).map((x) => x[0]);
-  const thirdsHit = [...bestThirds].filter((t) => predThirds.includes(t)).length;
-  const chip = (t) => `<span class="rc-chip">${flag(t)}${TLA3(t)} <i>${pct(eq(t), 0)}</i></span>`;
+  // every qualification call, group by group: right when our >=50% prediction matched
+  // reality (predicted through & through, or predicted out & out).
+  let correct = 0, total = 0;
+  const grpHTML = Object.keys(st).sort().map((g) => {
+    const chips = st[g].map((r) => {
+      const t = r.team, p = eq(t), pred = p >= 0.5, act = qualified.has(t), ok = pred === act;
+      total++; if (ok) correct++;
+      return `<span class="rc-chip ${ok ? "ok" : "no"}" title="we said ${pred ? "through" : "out"} (${pct(p, 0)}) · actually ${act ? "qualified" : "eliminated"}">${ok ? "✓" : "✗"} ${flag(t)}${TLA3(t)} <i>${pct(p, 0)}</i></span>`;
+    }).join("");
+    return `<div class="rc-grp"><span class="rc-glab">${g}</span><span class="rc-chips">${chips}</span></div>`;
+  }).join("");
   if ($("rc-groups-lead")) $("rc-groups-lead").innerHTML =
-    `Of the <strong>32</strong> teams that reached the knockouts, the eve forecast had <strong>${hits}</strong> as favourites (≥50%) and called <strong>${thirdsHit} of 8</strong> best thirds.`;
-  $("rc-groups").innerHTML =
-    `<div class="rc-line"><span class="rc-lab up">⚡ Long shots that got through</span><span class="rc-chips">${surprises.length ? surprises.map(chip).join("") : "<em>none — favourites held</em>"}</span></div>` +
-    `<div class="rc-line"><span class="rc-lab dn">✗ Favourites that fell</span><span class="rc-chips">${misses.length ? misses.map(chip).join("") : "<em>none</em>"}</span></div>`;
+    `Every qualification call, group by group — <b class="rc-key ok">✓ right</b> / <b class="rc-key no">✗ wrong</b>, with the chance we gave it on June 11. <strong>${correct} of ${total}</strong> called correctly.`;
+  $("rc-groups").innerHTML = grpHTML;
   if ($("rc-gb")) {
     const gv = (p) => (p.p != null ? p.p : p.P_golden_boot);
     const eg = (eve.golden_boot || []).slice(0, 5), ng = (WC26.golden_boot || []).slice(0, 5);

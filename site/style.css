@@ -502,6 +502,15 @@ details.tech[open] summary::before { content: "\25BE "; }
 .rc-chip { background: var(--card); border: 1px solid var(--card-edge); border-radius: 7px;
   padding: 3px 8px; font-size: .78rem; font-weight: 700; }
 .rc-chip i { color: var(--muted); font-style: normal; font-weight: 600; }
+.rc-chip.ok { background: rgba(74,222,128,.10); border-color: rgba(74,222,128,.38); }
+.rc-chip.ok i { color: var(--accent); }
+.rc-chip.no { background: rgba(255,93,115,.12); border-color: rgba(255,93,115,.45); }
+.rc-chip.no i { color: var(--hot); }
+.rc-grp { display: grid; grid-template-columns: 18px 1fr; gap: 8px; align-items: center; margin: 6px 0; }
+.rc-glab { font-weight: 800; color: var(--muted); font-size: .8rem; }
+.rc-key { padding: 1px 6px; border-radius: 5px; font-size: .74rem; }
+.rc-key.ok { color: var(--accent); background: rgba(74,222,128,.12); }
+.rc-key.no { color: var(--hot); background: rgba(255,93,115,.14); }
 .rc-gbcols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .rc-gbh { font-size: .68rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted);
   font-weight: 800; margin-bottom: 6px; }
