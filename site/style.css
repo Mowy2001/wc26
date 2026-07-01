@@ -218,6 +218,11 @@ footer a { color: var(--accent2); }
 
 /* ---------- v2: data-first additions ---------- */
 .cards4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr)); gap: 16px; }
+/* two-up cards (roomy enough for embedded charts); collapses to one on mobile */
+.cards-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.cards-2col > .card { min-width: 0; }
+.cards-2col .xi-bars, .cards-2col .xi-axis { overflow: hidden; }
+@media (max-width: 640px) { .cards-2col { grid-template-columns: 1fr; } }
 .card.off { border-style: dashed; border-color: #3a4a78; background: rgba(22, 33, 63, .45); }
 .card a { color: var(--accent2); }
 
