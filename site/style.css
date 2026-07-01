@@ -486,6 +486,24 @@ details.tech[open] summary::before { content: "\25BE "; }
 .doc-link:hover { border-color: var(--accent2); transform: translateY(-2px); }
 .doc-link span { color: var(--muted); font-weight: 500; font-size: .78rem; }
 
+/* reality check ("Called it?") */
+.rc-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; }
+@media (max-width: 760px) { .rc-grid { grid-template-columns: 1fr; } }
+.rc-line { margin: 10px 0; }
+.rc-lab { display: block; font-size: .72rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: .03em; margin-bottom: 5px; color: var(--muted); }
+.rc-lab.up { color: var(--accent); } .rc-lab.dn { color: var(--hot); }
+.rc-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.rc-chip { background: var(--card); border: 1px solid var(--card-edge); border-radius: 7px;
+  padding: 3px 8px; font-size: .78rem; font-weight: 700; }
+.rc-chip i { color: var(--muted); font-style: normal; font-weight: 600; }
+.rc-gbcols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.rc-gbh { font-size: .68rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted);
+  font-weight: 800; margin-bottom: 6px; }
+.rc-gbrow { display: flex; justify-content: space-between; align-items: center; padding: 4px 0;
+  font-size: .82rem; border-bottom: 1px solid var(--card-edge); }
+.rc-gbrow b { font-variant-numeric: tabular-nums; }
+
 /* ---------- live record: broadcast scoreboard rows (Direction B / B2) ---------- */
 .sb-row {
   display: grid; grid-template-columns: 1fr 64px; align-items: center; gap: 12px;

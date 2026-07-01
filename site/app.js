@@ -614,6 +614,41 @@ function renderMarket(champMap) {
 }
 renderMarket(null);
 
+/* ---------- reality check: the frozen June-11 forecast vs what happened ---------- */
+if (WC26.replay && WC26.replay.snapshots && WC26.standings && $("rc-groups")) {
+  const eve = WC26.replay.snapshots[0];
+  const st = WC26.standings;
+  const directQual = new Set(); const thirdsRows = [];
+  Object.keys(st).forEach((g) => {
+    const r = st[g];
+    if (r[0]) directQual.add(r[0].team);
+    if (r[1]) directQual.add(r[1].team);
+    if (r[2]) thirdsRows.push(r[2]);
+  });
+  thirdsRows.sort((a, b) => (b.Pts - a.Pts) || (b.GD - a.GD));
+  const bestThirds = new Set(thirdsRows.slice(0, 8).map((r) => r.team));
+  const qualified = new Set([...directQual, ...bestThirds]);
+  const eq = (t) => (eve.qualify && eve.qualify[t] != null) ? eve.qualify[t] : 0;
+  const allTeams = Object.keys(eve.qualify || {});
+  let hits = 0; qualified.forEach((t) => { if (eq(t) >= 0.5) hits++; });
+  const surprises = [...qualified].filter((t) => eq(t) < 0.35).sort((a, b) => eq(a) - eq(b)).slice(0, 5);
+  const misses = allTeams.filter((t) => eq(t) > 0.65 && !qualified.has(t)).sort((a, b) => eq(b) - eq(a)).slice(0, 5);
+  const predThirds = Object.entries(eve.best_third || {}).sort((a, b) => b[1] - a[1]).slice(0, 8).map((x) => x[0]);
+  const thirdsHit = [...bestThirds].filter((t) => predThirds.includes(t)).length;
+  const chip = (t) => `<span class="rc-chip">${flag(t)}${TLA3(t)} <i>${pct(eq(t), 0)}</i></span>`;
+  if ($("rc-groups-lead")) $("rc-groups-lead").innerHTML =
+    `Of the <strong>32</strong> teams that reached the knockouts, the eve forecast had <strong>${hits}</strong> as favourites (≥50%) and called <strong>${thirdsHit} of 8</strong> best thirds.`;
+  $("rc-groups").innerHTML =
+    `<div class="rc-line"><span class="rc-lab up">⚡ Long shots that got through</span><span class="rc-chips">${surprises.length ? surprises.map(chip).join("") : "<em>none — favourites held</em>"}</span></div>` +
+    `<div class="rc-line"><span class="rc-lab dn">✗ Favourites that fell</span><span class="rc-chips">${misses.length ? misses.map(chip).join("") : "<em>none</em>"}</span></div>`;
+  if ($("rc-gb")) {
+    const gv = (p) => (p.p != null ? p.p : p.P_golden_boot);
+    const eg = (eve.golden_boot || []).slice(0, 5), ng = (WC26.golden_boot || []).slice(0, 5);
+    const col = (list) => list.map((p, i) => `<div class="rc-gbrow"><span>${i + 1}. ${flag(p.team)}${p.player}</span><b>${pct(gv(p), 0)}</b></div>`).join("");
+    $("rc-gb").innerHTML = `<div class="rc-gbcols"><div><div class="rc-gbh">Eve pick (Jun 11)</div>${col(eg)}</div><div><div class="rc-gbh">The race now</div>${col(ng)}</div></div>`;
+  }
+}
+
 /* ---------- best calls / biggest surprises (from match_dists) ---------- */
 if (WC26.match_dists && $("track-best")) {
   // model probability assigned to the outcome that actually happened (W/D/L)
