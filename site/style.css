@@ -217,7 +217,7 @@ footer a { color: var(--accent2); }
 }
 
 /* ---------- v2: data-first additions ---------- */
-.cards4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.cards4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr)); gap: 16px; }
 .card.off { border-style: dashed; border-color: #3a4a78; background: rgba(22, 33, 63, .45); }
 .card a { color: var(--accent2); }
 
@@ -439,6 +439,8 @@ details.tech[open] summary::before { content: "\25BE "; }
 .dr-k.strength { color: #07111f; background: var(--accent); }
 .dr-k.draw { color: #07111f; background: #7dd3fc; }
 .dr-k.tilt { color: #07111f; background: #e8c061; }
+.dr-k.drag { color: var(--text); border: 1px solid #8f5161;
+  background: repeating-linear-gradient(45deg, rgba(143,81,97,.55), rgba(143,81,97,.55) 3px, transparent 3px, transparent 6px); }
 .dr-row { display: grid; grid-template-columns: 160px 1fr 48px; align-items: center; gap: 10px; margin: 3px 0; }
 .dr-bar { display: flex; height: 16px; border-radius: 4px; overflow: hidden; background: rgba(255,255,255,.04); }
 .dr-seg { height: 100%; display: flex; align-items: center; justify-content: center;

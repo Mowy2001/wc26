@@ -97,7 +97,7 @@ function showHeat(home, away) {
   ov.innerHTML = `<div class="mh-card">
     <span class="mh-close" onclick="document.getElementById('mh-overlay').classList.remove('show')">×</span>
     <h4>${flag(home)} ${home} <span style="color:var(--muted)">v</span> ${away} ${flag(away)}</h4>
-    <div class="mh-sub">Group ${m.group} · ${m.date}${m.city ? " · " + m.city : ""} · pre-match forecast (xG ${m.lh}–${m.la})</div>
+    <div class="mh-sub">${[m.group && m.group !== "Knockout" ? "Group " + m.group : "Knockout", m.date, m.city].filter(Boolean).join(" · ")} · pre-match forecast (xG ${m.lh}–${m.la})</div>
     ${wdl}
     <div style="display:flex;gap:8px"><div class="mh-axtitle vert">${home} goals →</div>
       <div style="flex:1"><div class="mh-grid">${cells}</div>
@@ -148,7 +148,7 @@ if (WC26.next_matches && WC26.next_matches.matches && $("next-board")) {
       ? `<span class="x-seg" style="width:${100 * w}%;background:${c}" title="${lab} ${pct(w, 0)}">${100 * w >= 15 ? Math.round(100 * w) : ""}</span>` : "";
     return `<div class="x-bar">${seg(p.pH, "var(--accent)", "home win")}${seg(p.pD, "var(--muted)", "draw")}${seg(p.pA, "var(--hot)", "away win")}</div>`;
   };
-  const fmt = (iso) => { try { return new Date(iso).toLocaleString("en-GB", { weekday: "short", hour: "2-digit", minute: "2-digit" }); } catch (_) { return ""; } };
+  const fmt = (iso) => { try { return new Date(iso).toLocaleString("en-GB", { weekday: "short", hour: "2-digit", minute: "2-digit", timeZone: "Europe/Paris" }) + " CET"; } catch (_) { return ""; } };
   $("next-board").innerHTML = nm.map((m) => {
     const gap = Math.max(Math.abs(m.model.pH - m.market.pH), Math.abs(m.model.pA - m.market.pA), Math.abs(m.model.pD - m.market.pD));
     const div = gap >= 0.10 ? `<span class="nm-div" title="model and market disagree by ${pct(gap, 0)}">model ≠ market</span>` : "";
@@ -573,7 +573,10 @@ if (WC26.ablations && $("host-ablation")) {
   const noHost = WC26.ablations.no_host_advantage.hosts;
   $("host-ablation").innerHTML =
     ["United States", "Mexico", "Canada"].map((team) => {
-      const real = WC26.teams.find((t) => t.team === team).P1;
+      // frozen at the June-11 eve (like the counterfactual) — this is a pre-tournament
+      // statement about home advantage, not a live figure that drifts to 100%.
+      const real = (WC26.baseline_eve && WC26.baseline_eve[team] && WC26.baseline_eve[team].P1 != null)
+        ? WC26.baseline_eve[team].P1 : WC26.teams.find((t) => t.team === team).P1;
       const cf = noHost[team].P1;
       return `<div class="ab-row">
         <div class="who">${flag(team)}${team} — win the group</div>
@@ -611,8 +614,11 @@ if (WC26.xi_tuning && $("xi-chart")) {
 /* ---------- usa case ---------- */
 if ($("usa-case")) {
   const usa = WC26.teams.find((t) => t.team === "United States");
+  // frozen at the June-11 eve — a pre-tournament statement, not a live number.
+  const usaEveP1 = (WC26.baseline_eve && WC26.baseline_eve["United States"]
+    && WC26.baseline_eve["United States"].P1 != null) ? WC26.baseline_eve["United States"].P1 : usa.P1;
   const rows = [
-    ["Model (Elo + home)", usa.P1, "linear-gradient(90deg, var(--accent2), var(--accent))"],
+    ["Model (Elo + home)", usaEveP1, "linear-gradient(90deg, var(--accent2), var(--accent))"],
     ["Market (Kalshi)", WC26.kalshi_usa_group, "var(--gold)"],
   ];
   const cfP1 = WC26.ablations ? WC26.ablations.no_host_advantage.hosts["United States"].P1 : null;

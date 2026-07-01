@@ -27,6 +27,7 @@
 
 <nav class="toc wrap">
   <span class="toc-group">The race</span>
+  <a href="#next">Next matches</a>
   <a href="#track">How it's doing</a>
   <a href="#forecast">Live forecast</a>
   <a href="#drivers">What earns each place</a>
@@ -84,6 +85,12 @@
     <p class="bracket-legend" id="bracket-legend"></p>
     <div id="fc-bracket" class="bracket-scroll"></div></div>
   <div class="fc-block"><div class="fc-bar"></div>
+    <div class="tl-h">Groups — probability of advancing</div>
+    <p class="chart-cap">% = chance of reaching the knockout round (top two, or as a best third).
+    A <span class="tight-badge">⚖ qualification open</span> tag marks groups where two or more teams are
+    still level for a knockout place — it's about <em>who goes through</em>, not who finishes first.</p>
+    <div id="fc-groups" class="groups-grid"></div></div>
+  <div class="fc-block"><div class="fc-bar"></div>
     <div class="fc-grid">
       <div><div class="tl-h">Best thirds — 8 of 12 advance</div>
         <p class="chart-cap">% = chance of finishing among the eight best third-placed teams that go through.</p>
@@ -92,28 +99,23 @@
         <p class="chart-cap">% = chance of being the tournament's top scorer.</p>
         <div id="fc-gb" class="chart"></div></div>
     </div></div>
-  <div class="fc-block"><div class="fc-bar"></div>
-    <div class="tl-h">Groups — probability of advancing</div>
-    <p class="chart-cap">% = chance of reaching the knockout round (top two, or as a best third).
-    A <span class="tight-badge">⚖ qualification open</span> tag marks groups where two or more teams are
-    still level for a knockout place — it's about <em>who goes through</em>, not who finishes first.</p>
-    <div id="fc-groups" class="groups-grid"></div></div>
 </section>
 
 <section id="drivers">
   <h2>What's earning each team its place <span class="sub">quality vs the draw vs venue &amp; freshness</span></h2>
-  <p class="chart-cap" style="margin-bottom:8px"><strong>What each bar measures:</strong> a team's chance of
+  <p class="chart-cap" style="margin-bottom:8px;max-width:900px"><strong>What each bar measures:</strong> a team's chance of
   finishing <strong>top two of its group</strong> — qualifying straight to the knockouts (the numbers inside
   the bar are percentage points that add up to that total).</p>
-  <p class="chart-cap" style="margin-bottom:8px"><strong>How we split it:</strong> we re-run the 20,000
+  <p class="chart-cap" style="margin-bottom:8px;max-width:900px"><strong>How we split it:</strong> we re-run the 20,000
   tournaments three ways and read off the gaps —
   <b class="dr-k strength">squad quality</b> is how the team would do in an <em>average</em> group (its
   Elo-driven strength, the draw set aside);
-  <b class="dr-k draw">the draw</b> is how much its <em>actual</em> group is easier than average (a hatched
-  bar to the right = a tougher-than-average group, working against it);
+  <b class="dr-k draw">the draw</b> is how much its <em>actual</em> group is easier than average;
   <b class="dr-k tilt">venue &amp; freshness</b> is what the model's <em>only two earned adjustments</em> —
-  <strong>altitude</strong> and <strong>fatigue</strong> — add or take away. The three pieces sum exactly to
-  the team's real number. Pre-tournament forecast.</p>
+  <strong>altitude</strong> and <strong>fatigue</strong> — add or take away.
+  A <b class="dr-k drag">drag</b> (the hatched piece on the right) is anything working <em>against</em> the
+  team — a tougher-than-average group or tired legs — so it's drawn past the total, not added to it.
+  The three positive pieces sum exactly to the team's real number. Pre-tournament forecast.</p>
   <p class="note" id="drivers-note"></p>
   <div id="drivers-board" class="chart"></div>
 </section>

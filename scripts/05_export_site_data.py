@@ -93,7 +93,8 @@ except FileNotFoundError:
 try:
     _b = pd.read_csv("outputs/history/baseline_eve.csv", index_col=0)
     baseline = {t: {"P_champion": round(float(r.P_champion), 4),
-                    "P_qualify": round(float(r.P_qualify), 4)} for t, r in _b.iterrows()}
+                    "P_qualify": round(float(r.P_qualify), 4),
+                    "P1": round(float(r.P1), 4)} for t, r in _b.iterrows()}
 except FileNotFoundError:
     baseline = None
 try:
