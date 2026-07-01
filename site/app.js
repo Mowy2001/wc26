@@ -265,6 +265,9 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
   const FEED = { 89: [74, 77], 90: [73, 75], 91: [76, 78], 92: [79, 80], 93: [83, 84],
     94: [81, 82], 95: [86, 88], 96: [85, 87], 97: [89, 90], 98: [93, 94], 99: [91, 92],
     100: [95, 96], 101: [97, 98], 102: [99, 100], 104: [101, 102] };
+  // real results already in: matchNum -> the team that actually went through. Played ties
+  // are fixed to reality in the bracket (and can't be re-picked in the sandbox).
+  const KOW = {}; (WC26.bracket_dists || []).forEach((m) => { if (m.winner) KOW[m.match] = m.winner; });
   // order every round by the FEED tree (DFS from the final) so each tie sits directly
   // beside the two ties that feed it — the columns then read like a classic bracket.
   const parentOf = {}; Object.entries(FEED).forEach(([p, ch]) => ch.forEach((c) => (parentOf[c] = +p)));
@@ -363,11 +366,17 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
       else part[mn] = { top: modal && modal.top && modal.top.team, bot: modal && modal.bot && modal.bot.team };
       const a = part[mn].top, b2 = part[mn].bot;
       if (!a || !b2) { win[mn] = a || b2; share[mn] = 1; return; }
-      // the bar is "who'd win if they meet" — the actual head-to-head by rating, not the
-      // adv/p ratio (which is noisy and mixes in how hard each side's road was). So the
-      // stronger finalist takes the tie even if its path made it less likely to arrive.
-      share[mn] = eloP(a, b2);
-      win[mn] = (picks[mn] === a || picks[mn] === b2) ? picks[mn] : (share[mn] >= 0.5 ? a : b2);
+      if (KOW[mn] && (KOW[mn] === a || KOW[mn] === b2)) {
+        // this tie has been played — pin it to the real result (100%), no re-picking.
+        win[mn] = KOW[mn];
+        share[mn] = (KOW[mn] === a) ? 1 : 0;
+      } else {
+        // the bar is "who'd win if they meet" — the actual head-to-head by rating, not the
+        // adv/p ratio (which is noisy and mixes in how hard each side's road was). So the
+        // stronger finalist takes the tie even if its path made it less likely to arrive.
+        share[mn] = eloP(a, b2);
+        win[mn] = (picks[mn] === a || picks[mn] === b2) ? picks[mn] : (share[mn] >= 0.5 ? a : b2);
+      }
     });
     const champTeam = win[104];
     const champShare = part[104] && part[104].top === champTeam ? share[104] : 1 - share[104];
@@ -384,11 +393,12 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     const card = (mn) => {
       const a = part[mn].top, b = part[mn].bot;
       if (!a || !b) return `<div class="tie empty">—</div>`;
-      const pa = share[mn], w = win[mn];
+      const pa = share[mn], w = win[mn], played = KOW[mn] != null;
       const heat = MD[a + "|" + b] ? [a, b] : (MD[b + "|" + a] ? [b, a] : null);
-      const side = (t, p, hi) => `<div class="tie-side ${w === t ? "win" : ""}${sandbox ? " pickable" : ""}" data-pick="${t}">
-        <span class="ts-team">${flag(t)}${TLA(t)}</span><span class="ts-p">${pct(p, 0)}</span></div>`;
-      return `<div class="tie${picks[mn] ? " picked" : ""}${heat ? " has-heat" : ""}" data-m="${mn}"${heat ? ` data-home="${heat[0]}" data-away="${heat[1]}"` : ""}>
+      // played ties are locked to the real result; only future ties are pickable in sandbox
+      const side = (t, p, hi) => `<div class="tie-side ${w === t ? "win" : ""}${sandbox && !played ? " pickable" : ""}" data-pick="${t}">
+        <span class="ts-team">${flag(t)}${TLA(t)}</span><span class="ts-p">${played ? (w === t ? "✓" : "") : pct(p, 0)}</span></div>`;
+      return `<div class="tie${picks[mn] ? " picked" : ""}${played ? " played" : ""}${heat ? " has-heat" : ""}" data-m="${mn}"${heat ? ` data-home="${heat[0]}" data-away="${heat[1]}"` : ""}>
         ${side(a, pa)}
         <div class="tow" title="head-to-head — who wins the tie">${heat ? '<span class="tow-heat">⊞</span>' : ""}<i class="a" style="width:${100 * pa}%"></i><i class="b" style="width:${100 * (1 - pa)}%"></i></div>
         ${side(b, 1 - pa)}</div>`;
@@ -503,7 +513,7 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
       const tie = e.target.closest(".tie");
       if (!tie) return;
       const side = e.target.closest(".tie-side");
-      if (sandbox && side && side.dataset.pick) {
+      if (sandbox && side && side.dataset.pick && !tie.classList.contains("played")) {
         picks[+tie.dataset.m] = side.dataset.pick;
         render(cur);
       } else if (tie.dataset.home) {

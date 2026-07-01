@@ -711,6 +711,8 @@ details.tech[open] summary::before { content: "\25BE "; }
 .tie.has-heat { cursor: pointer; }
 .tie.has-heat:hover { border-color: var(--accent2); }
 .tie.picked { border-color: var(--violet); box-shadow: 0 0 0 1px rgba(183,148,255,.3); }
+.tie.played { border-color: rgba(74,222,128,.35); }  /* result already in — locked */
+.tie.played .tie-side:not(.win) { opacity: .5; }
 .tie.empty { opacity: .35; display: flex; align-items: center; justify-content: center; color: var(--muted); }
 .tie-side { display: flex; justify-content: space-between; align-items: center; font-size: .78rem; font-weight: 700; color: var(--muted); padding: 1px 3px; border-radius: 5px; }
 .tie-side.win { color: var(--text); font-weight: 800; }
