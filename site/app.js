@@ -266,10 +266,11 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
   const parentOf = {}; Object.entries(FEED).forEach(([p, ch]) => ch.forEach((c) => (parentOf[c] = +p)));
   const dfs = (n) => FEED[n] ? [...dfs(FEED[n][0]), ...dfs(FEED[n][1])] : [n];
   const nextRound = (prev) => { const o = []; for (let i = 0; i < prev.length; i += 2) o.push(parentOf[prev[i]]); return o; };
-  const r32ord = dfs(104), r16ord = nextRound(r32ord), qford = nextRound(r16ord),
-    sford = nextRound(qford), finord = nextRound(sford);
-  const ROUNDN = [["Round of 32", r32ord], ["Round of 16", r16ord],
-    ["Quarter-finals", qford], ["Semi-finals", sford], ["Final", finord]];
+  // split the tree into two halves that mirror around the final (classic TV bracket):
+  // the left half feeds semi-final 101, the right half feeds 102; they meet in the centre.
+  const half = (root) => { const a = dfs(root), b = nextRound(a), c = nextRound(b), d = nextRound(c); return [a, b, c, d]; };
+  const HALF_L = half(101), HALF_R = half(102);
+  const RLAB = ["R32", "R16", "QF", "SF"];
   const ELO = {}; WC26.teams.forEach((t) => { ELO[t.team] = t.elo; });
   const eloP = (a, b) => 1 / (1 + Math.pow(10, -(((ELO[a] || 1500) - (ELO[b] || 1500)) / 400)));
   const modalShare = (m) => {  // head-to-head share of the top slot (sums to 1 with bot)
@@ -381,10 +382,12 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     const apex = `<div class="bk-apex"><div class="bk-trophy">🏆</div>
       <div class="bk-champ">${flag(champTeam)}${champTeam}${!sandbox ? ` <b>${pct(champShare, 0)}</b>` : ""}</div>
       <div class="bk-champ-lab">${sandbox ? "your champion" : "wins the most-likely final"}</div></div>`;
-    $("fc-bracket").innerHTML =
-      ROUNDN.map(([lab, nums]) =>
-        `<div class="bk-col"><div class="bk-rlab">${lab}</div><div class="ties">${nums.map(card).join("")}</div></div>`).join("") +
-      `<div class="bk-col bk-col-trophy"><div class="bk-rlab">Champion</div>${apex}</div>`;
+    const col = (lab, nums, side) => `<div class="bk-col bk-${side}"><div class="bk-rlab">${lab}</div><div class="ties">${nums.map(card).join("")}</div></div>`;
+    const leftHTML = HALF_L.map((nums, i) => col(RLAB[i], nums, "l")).join("");
+    // right half rendered centre → edge, so SF sits next to the final and R32 at the far right
+    const rightHTML = HALF_R.slice().reverse().map((nums, i) => col(RLAB[RLAB.length - 1 - i], nums, "r")).join("");
+    const centre = `<div class="bk-col bk-centre"><div class="bk-rlab">Final</div><div class="ties">${card(104)}</div>${apex}</div>`;
+    $("fc-bracket").innerHTML = leftHTML + centre + rightHTML;
 
     // why the bracket champion can differ from round-by-round's most-likely champion:
     // the bracket follows the favourite through every tie (one modal path), while
