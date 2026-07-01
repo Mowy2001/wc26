@@ -338,9 +338,13 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     // custom bracket: each tie is a head-to-head "tug of war"; the two halves climb
     // to the trophy. Sandbox picks override the model winner and rebuild downstream.
     const part = {}, win = {}, share = {};
+    // Sandbox always plays from the SETTLED bracket (latest snapshot): once the groups
+    // are done the Round of 32 is 32 distinct teams, so picks can't put one team into two
+    // ties of the next round. Model view uses the snapshot at the slider position.
+    const bsrc = sandbox ? snaps[N] : s;
     [73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88,
      89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 104].forEach((mn) => {
-      const modal = s.bracket && s.bracket[mn];
+      const modal = bsrc.bracket && bsrc.bracket[mn];
       // model view: fill each slot with its most-likely occupant (the marginal), so the
       // final pits the two most-likely finalists. sandbox: propagate winners up the FEED
       // tree so the user's picks ripple forward.
@@ -439,6 +443,9 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
         </div>`).join("");
       return `<div class="group-card ${tight ? "tight" : ""}"><h3>GROUP ${g}${badge}</h3>${rows}</div>`;
     }).join("");
+    // the model-vs-market comparison rides the same clock: our title-odds journey
+    // (at this match) against the live market line.
+    if (typeof renderMarket === "function") renderMarket(s.champion);
   };
   const go = (k) => render(Math.max(0, Math.min(N, k)));
   // bracket Model / Sandbox toggle + reset
@@ -549,21 +556,23 @@ if (WC26.team_drivers && $("drivers-board")) {
 }
 
 /* ---------- model vs market — live odds, with movement since the eve ---------- */
-if ($("market-chart")) {
-  // Reference is the LIVE market (de-vigged outright, refreshed each cycle); falls
-  // back to the frozen 11-Jun BetMGM line if no live snapshot has been fetched yet.
+// Slider-driven: the model side is P(champion) at the current slider snapshot; the
+// market side is the LIVE de-vigged outright (or the frozen 11-Jun BetMGM line as a
+// fallback). champMap = {team: P_champion} for the chosen snapshot, null = current.
+function renderMarket(champMap) {
+  if (!$("market-chart")) return;
   const liveMkt = WC26.market_now && WC26.market_now.outright;
   const mkt = liveMkt || WC26.betmgm_shin || {};
   const mktEve = WC26.betmgm_shin || {};   // market on the tournament eve (11 Jun)
   const modEve = WC26.baseline_eve || {};  // our own baseline on the eve (11 Jun)
+  const modelP = (t) => (champMap && champMap[t.team] != null) ? champMap[t.team] : t.P_champion;
   const rows = WC26.teams
     .filter((t) => mkt[t.team] != null)
-    .map((t) => ({
-      team: t.team, model: t.P_champion, market: mkt[t.team],
-      gap: t.P_champion - mkt[t.team],
-      dModel: modEve[t.team] != null ? t.P_champion - modEve[t.team].P_champion : null,
+    .map((t) => { const m = modelP(t); return {
+      team: t.team, model: m, market: mkt[t.team], gap: m - mkt[t.team],
+      dModel: modEve[t.team] != null ? m - modEve[t.team].P_champion : null,
       dMarket: mktEve[t.team] != null ? mkt[t.team] - mktEve[t.team] : null,
-    }))
+    }; })
     .sort((a, b) => b.model - a.model)
     .slice(0, 10);
   const max = Math.max(...rows.flatMap((r) => [r.model, r.market]));
@@ -603,6 +612,7 @@ if ($("market-chart")) {
   }
   if ($("klement-note")) $("klement-note").textContent = WC26.klement;
 }
+renderMarket(null);
 
 /* ---------- best calls / biggest surprises (from match_dists) ---------- */
 if (WC26.match_dists && $("track-best")) {
