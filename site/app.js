@@ -151,7 +151,11 @@ if (WC26.next_matches && WC26.next_matches.matches && $("next-board")) {
   const fmt = (iso) => { try { return new Date(iso).toLocaleString("en-GB", { weekday: "short", hour: "2-digit", minute: "2-digit", timeZone: "Europe/Paris" }) + " CET"; } catch (_) { return ""; } };
   $("next-board").innerHTML = nm.map((m) => {
     const gap = Math.max(Math.abs(m.model.pH - m.market.pH), Math.abs(m.model.pA - m.market.pA), Math.abs(m.model.pD - m.market.pD));
-    const div = gap >= 0.10 ? `<span class="nm-div" title="model and market disagree by ${pct(gap, 0)}">model ≠ market</span>` : "";
+    // flag disagreement on size OR on which side is favoured (opposite favourites can be a
+    // small numeric gap yet a real disagreement — e.g. model backs the away side, market the home).
+    const favOf = (p) => (p.pH >= p.pD && p.pH >= p.pA) ? "H" : (p.pA >= p.pD ? "A" : "D");
+    const flip = favOf(m.model) !== favOf(m.market);
+    const div = (gap >= 0.10 || flip) ? `<span class="nm-div" title="${flip ? "model and market back opposite sides" : "model and market disagree by " + pct(gap, 0)}">model ≠ market</span>` : "";
     return `<div class="nm-card clickable" data-home="${m.home}" data-away="${m.away}">
       <div class="nm-head"><span class="nm-team">${flag(m.home)}${m.home}</span>
         <span class="nm-vs">${m.ko ? "⚔" : "v"}</span>
@@ -639,13 +643,24 @@ if (WC26.replay && WC26.replay.snapshots && WC26.standings && $("rc-groups")) {
   const bestThirds = new Set(thirdsRows.slice(0, 8).map((r) => r.team));
   const qualified = new Set([...directQual, ...bestThirds]);
   const eq = (t) => (eve.qualify && eve.qualify[t] != null) ? eve.qualify[t] : 0;
-  // every qualification call, group by group: right when our >=50% prediction matched
-  // reality (predicted through & through, or predicted out & out).
+  // What we PREDICTED would go through: the two strongest of each group (by our eve qualify
+  // odds) as direct qualifiers, plus the eight teams we rated most likely to sneak in as a
+  // best third. A flat >=50% is wrong — with best-third routes it calls all four in a tight
+  // group, but only ~2-3 actually advance.
+  const predThrough = new Set(), bubble = new Set();
+  Object.keys(st).forEach((g) => {
+    const ranked = st[g].map((r) => r.team).sort((a, b) => eq(b) - eq(a));
+    if (ranked[0]) predThrough.add(ranked[0]);
+    if (ranked[1]) { predThrough.add(ranked[1]); bubble.add(ranked[1]); }  // last one in — on the bubble
+    if (ranked[2]) bubble.add(ranked[2]);                                   // first one out — on the bubble
+  });
+  Object.entries(eve.best_third || {}).sort((a, b) => b[1] - a[1]).slice(0, 8).forEach(([t]) => predThrough.add(t));
+  // every qualification call, group by group: right when our prediction matched reality.
   let correct = 0, total = 0;
   const grpHTML = Object.keys(st).sort().map((g) => {
     const chips = st[g].map((r) => {
-      const t = r.team, p = eq(t), pred = p >= 0.5, act = qualified.has(t), ok = pred === act;
-      const close = p >= 0.4 && p <= 0.6;  // qualification we rated a coin-flip
+      const t = r.team, p = eq(t), pred = predThrough.has(t), act = qualified.has(t), ok = pred === act;
+      const close = bubble.has(t);  // sat on the direct-qualification bubble (2nd/3rd by our odds)
       total++; if (ok) correct++;
       return `<span class="rc-chip ${ok ? "ok" : "no"}${close ? " close" : ""}" title="we said ${pred ? "through" : "out"} (${pct(p, 0)}) · actually ${act ? "qualified" : "eliminated"}${close ? " · a coin-flip call" : ""}">${ok ? "✓" : "✗"} ${flag(t)}${TLA3(t)} <i>${pct(p, 0)}</i>${close ? " ⚖" : ""}</span>`;
     }).join("");
@@ -654,6 +669,20 @@ if (WC26.replay && WC26.replay.snapshots && WC26.standings && $("rc-groups")) {
   if ($("rc-groups-lead")) $("rc-groups-lead").innerHTML =
     `Every qualification call, group by group — <b class="rc-key ok">✓ right</b> / <b class="rc-key no">✗ wrong</b>, with <b class="rc-key">⚖ coin-flip</b> marking the ones we rated 40–60% (a toss-up: nailing it is lucky, missing it forgivable). Chances set on June 11 — <strong>${correct} of ${total}</strong> called correctly.`;
   $("rc-groups").innerHTML = grpHTML;
+  // best/worst qualification calls: coin-flips we nailed vs the confident misses
+  if ($("rc-best")) {
+    const calls = [];
+    Object.keys(st).forEach((g) => st[g].forEach((r) => {
+      const t = r.team;
+      calls.push({ t, p: eq(t), pred: predThrough.has(t), act: qualified.has(t), close: bubble.has(t) });
+    }));
+    calls.forEach((c) => (c.ok = c.pred === c.act));
+    const line = (c) => `<div class="rc-cline ${c.ok ? "ok" : "no"}"><span class="rc-cteam">${c.ok ? "✓" : "✗"} ${flag(c.t)}${TLA3(c.t)}</span><span class="rc-cnote">said ${c.pred ? "through" : "out"} → ${c.act ? "qualified" : "out"} <i>${pct(c.p, 0)}</i></span></div>`;
+    const worst = calls.filter((c) => !c.ok).sort((a, b) => (b.pred ? b.p : 1 - b.p) - (a.pred ? a.p : 1 - a.p)).slice(0, 5);
+    const best = calls.filter((c) => c.ok && c.close).sort((a, b) => Math.abs(0.5 - a.p) - Math.abs(0.5 - b.p)).slice(0, 5);
+    $("rc-best").innerHTML = best.length ? best.map(line).join("") : `<em style="color:var(--muted)">—</em>`;
+    $("rc-worst").innerHTML = worst.length ? worst.map(line).join("") : `<em style="color:var(--muted)">none</em>`;
+  }
   if ($("rc-gb")) {
     const gv = (p) => (p.p != null ? p.p : p.P_golden_boot);
     const eg = (eve.golden_boot || []).slice(0, 5), ng = (WC26.golden_boot || []).slice(0, 5);

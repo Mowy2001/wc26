@@ -512,6 +512,14 @@ details.tech[open] summary::before { content: "\25BE "; }
 .rc-key { padding: 1px 6px; border-radius: 5px; font-size: .74rem; }
 .rc-key.ok { color: var(--accent); background: rgba(74,222,128,.12); }
 .rc-key.no { color: var(--hot); background: rgba(255,93,115,.14); }
+.rc-cline { display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  padding: 5px 9px; border-radius: 7px; margin: 4px 0; background: var(--card);
+  border: 1px solid var(--card-edge); font-size: .8rem; }
+.rc-cline.ok { border-color: rgba(74,222,128,.35); }
+.rc-cline.no { border-color: rgba(255,93,115,.42); }
+.rc-cteam { font-weight: 800; white-space: nowrap; }
+.rc-cnote { color: var(--muted); font-size: .72rem; text-align: right; white-space: nowrap; }
+.rc-cnote i { font-style: normal; font-weight: 700; color: var(--text); }
 .rc-gbcols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .rc-gbh { font-size: .68rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted);
   font-weight: 800; margin-bottom: 6px; }
@@ -655,12 +663,11 @@ details.tech[open] summary::before { content: "\25BE "; }
 .bk-col .tie { width: 108px; padding: 4px 7px; }
 .bk-col .tie-side { font-size: .73rem; }
 /* centre column: the final tie with the champion trophy under it */
-.bk-centre { justify-content: flex-start; align-items: center; min-width: 120px; }
-/* the final tie sits at the vertical centre, aligned with the two semi-finals beside it;
-   the champion trophy drops into the empty space below it. */
-.bk-centre > .ties { flex: 1; justify-content: center; }
-.bk-centre .tie { width: 120px; }
-.bk-centre .bk-apex { margin-top: auto; padding-top: 18px; }
+/* final tie + champion trophy kept together and centred, level with the two semis */
+.bk-centre { justify-content: center; align-items: center; min-width: 116px; }
+.bk-centre > .ties { flex: 0 0 auto; }
+.bk-centre .tie { width: 116px; }
+.bk-centre .bk-apex { margin-top: 10px; }
 .bk-apex { text-align: center; margin-bottom: 4px; }
 .bk-trophy { font-size: 2.6rem; line-height: 1; filter: drop-shadow(0 0 14px rgba(255,209,102,.5)); }
 .bk-champ { font-weight: 900; font-size: 1.1rem; margin-top: 2px; }
