@@ -156,6 +156,11 @@ if (WC26.next_matches && WC26.next_matches.matches && $("next-board")) {
     const favOf = (p) => (p.pH >= p.pD && p.pH >= p.pA) ? "H" : (p.pA >= p.pD ? "A" : "D");
     const flip = favOf(m.model) !== favOf(m.market);
     const div = (gap >= 0.10 || flip) ? `<span class="nm-div" title="${flip ? "model and market back opposite sides" : "model and market disagree by " + pct(gap, 0)}">model ≠ market</span>` : "";
+    // for knockout ties, resolve the draw (extra time + penalties) in proportion to each
+    // side's 90-minute win chance, so we can show who actually goes through.
+    const p = m.model, adH = p.pH + p.pD * (p.pH / (p.pH + p.pA || 1)), adA = 1 - adH;
+    const advLine = m.ko ? `<div class="nm-adv" title="chance of going through (90 min + extra time + penalties)">
+        Goes through: <b>${flag(m.home)}${TLA3(m.home)} ${pct(adH, 0)}</b> · <b>${pct(adA, 0)} ${TLA3(m.away)}${flag(m.away)}</b></div>` : "";
     return `<div class="nm-card clickable" data-home="${m.home}" data-away="${m.away}">
       <div class="nm-head"><span class="nm-team">${flag(m.home)}${m.home}</span>
         <span class="nm-vs">${m.ko ? "⚔" : "v"}</span>
@@ -163,6 +168,7 @@ if (WC26.next_matches && WC26.next_matches.matches && $("next-board")) {
       <div class="nm-meta">${m.ko ? "Knockout" : "Group"} · ${fmt(m.commence)} ${div}<span class="mh-hint">heatmap ▸</span></div>
       <div class="nm-line"><span class="nm-lab">Model</span>${x123(m.model)}</div>
       <div class="nm-line"><span class="nm-lab">Market</span>${x123(m.market)}</div>
+      ${advLine}
     </div>`;
   }).join("");
   $("next-board").querySelectorAll(".nm-card.clickable").forEach((c) =>
@@ -343,8 +349,9 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
       const rr = Object.entries(s.rounds).sort((a, b) => b[1][5] - a[1][5]);
       $("fc-rounds").innerHTML =
         `<thead><tr><th>Team</th>${RH.map((h) => `<th>${h}</th>`).join("")}</tr></thead><tbody>` +
-        rr.map(([t, v]) => `<tr><td class="tm-click" data-team="${t}" title="click for ${t}'s road">${flag(t)}${TLA3(t)}</td>` +
-          v.map((p) => `<td class="heat" style="${heatc(p)}">${p >= 0.005 ? pct(p, 0) : ""}</td>`).join("") + `</tr>`).join("") +
+        rr.map(([t, v]) => { const pr = prev && prev.rounds ? prev.rounds[t] : null;
+          return `<tr><td class="tm-click" data-team="${t}" title="click for ${t}'s road">${flag(t)}${TLA3(t)}</td>` +
+          v.map((p, i) => `<td class="heat" style="${heatc(p)}">${p >= 0.005 ? pct(p, 0) : ""}${(i === 5 && pr) ? delta(p, pr[5], 0) : ""}</td>`).join("") + `</tr>`; }).join("") +
         `</tbody>`;
       $("fc-rounds").querySelectorAll(".tm-click").forEach((c) => c.addEventListener("click", () => showTeam(c.dataset.team)));
     }
@@ -356,6 +363,11 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     // are done the Round of 32 is 32 distinct teams, so picks can't put one team into two
     // ties of the next round. Model view uses the snapshot at the slider position.
     const bsrc = sandbox ? snaps[N] : s;
+    // only pin knockout ties that had been played by THIS slider position, so scrubbing
+    // back doesn't show ✓ ticks for results that hadn't happened yet (sandbox shows all).
+    const koPlayedN = sandbox ? Object.keys(KOW).length : Math.max(0, k - GEK);
+    const KOWk = {};
+    Object.keys(KOW).map(Number).sort((x, y) => x - y).slice(0, koPlayedN).forEach((mn) => { KOWk[mn] = KOW[mn]; });
     [73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88,
      89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 104].forEach((mn) => {
       const modal = bsrc.bracket && bsrc.bracket[mn];
@@ -366,10 +378,10 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
       else part[mn] = { top: modal && modal.top && modal.top.team, bot: modal && modal.bot && modal.bot.team };
       const a = part[mn].top, b2 = part[mn].bot;
       if (!a || !b2) { win[mn] = a || b2; share[mn] = 1; return; }
-      if (KOW[mn] && (KOW[mn] === a || KOW[mn] === b2)) {
-        // this tie has been played, pin it to the real result (100%), no re-picking.
-        win[mn] = KOW[mn];
-        share[mn] = (KOW[mn] === a) ? 1 : 0;
+      if (KOWk[mn] && (KOWk[mn] === a || KOWk[mn] === b2)) {
+        // this tie has been played by now, pin it to the real result (100%), no re-picking.
+        win[mn] = KOWk[mn];
+        share[mn] = (KOWk[mn] === a) ? 1 : 0;
       } else {
         // the bar is "who'd win if they meet", the actual head-to-head by rating, not the
         // adv/p ratio (which is noisy and mixes in how hard each side's road was). So the
@@ -393,7 +405,7 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     const card = (mn) => {
       const a = part[mn].top, b = part[mn].bot;
       if (!a || !b) return `<div class="tie empty">-</div>`;
-      const pa = share[mn], w = win[mn], played = KOW[mn] != null;
+      const pa = share[mn], w = win[mn], played = KOWk[mn] != null;
       const heat = MD[a + "|" + b] ? [a, b] : (MD[b + "|" + a] ? [b, a] : null);
       // played ties are locked to the real result; only future ties are pickable in sandbox
       const side = (t, p, hi) => `<div class="tie-side ${w === t ? "win" : ""}${sandbox && !played ? " pickable" : ""}" data-pick="${t}">
