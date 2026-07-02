@@ -90,6 +90,19 @@ function showHeat(home, away) {
     <span style="width:${100 * m.pH}%;background:var(--accent)" title="${home} win ${pct(m.pH, 0)}"></span>
     <span style="width:${100 * m.pD}%;background:var(--muted)" title="draw ${pct(m.pD, 0)}"></span>
     <span style="width:${100 * m.pA}%;background:var(--hot)" title="${away} win ${pct(m.pA, 0)}"></span></div>`;
+  // knockout: the draw can't stand — spell out how extra time + penalties split it and
+  // who ends up going through the tie (same maths as the hatched slice on the fixture bar).
+  const isKO = m.group === "Knockout";
+  const dH = m.pD * (m.pH / (m.pH + m.pA || 1)), dA = m.pD - dH, adH = m.pH + dH;
+  const advBox = isKO ? `<div class="mh-adv">
+      <div class="mh-adv-t">Who goes through <span>(90 min + extra time + penalties)</span></div>
+      <div class="mh-adv-row"><span>${flag(home)} ${home}</span>
+        <b>${pct(adH, 0)}</b>
+        <span class="mh-adv-x">${pct(m.pH, 0)} in 90′ + ${pct(dH, 0)} of the draw</span></div>
+      <div class="mh-adv-row"><span>${flag(away)} ${away}</span>
+        <b>${pct(1 - adH, 0)}</b>
+        <span class="mh-adv-x">${pct(m.pA, 0)} in 90′ + ${pct(dA, 0)} of the draw</span></div>
+    </div>` : "";
   const t = m.top[0];
   const actLine = m.actual
     ? `Actual result <b>${m.actual[0]}–${m.actual[1]}</b> (model gave it ${pct(G[Math.min(m.actual[0],5)][Math.min(m.actual[1],5)], 1)}).`
@@ -99,6 +112,7 @@ function showHeat(home, away) {
     <h4>${flag(home)} ${home} <span style="color:var(--muted)">v</span> ${away} ${flag(away)}</h4>
     <div class="mh-sub">${[m.group && m.group !== "Knockout" ? "Group " + m.group : "Knockout", m.date, m.city].filter(Boolean).join(" · ")} · pre-match forecast (xG ${m.lh}–${m.la})</div>
     ${wdl}
+    ${advBox}
     <div style="display:flex;gap:8px"><div class="mh-axtitle vert">${home} goals →</div>
       <div style="flex:1"><div class="mh-grid">${cells}</div>
       <div class="mh-axtitle">${away} goals →</div></div></div>
@@ -159,10 +173,13 @@ if (WC26.next_matches && WC26.next_matches.matches && $("next-board")) {
     const zeb = (tint) => `repeating-linear-gradient(45deg,${tint} 0 3px,var(--muted) 3px 6px)`;
     const hatch = (w, tint, lab) => w > 0.0005
       ? `<span class="x-seg x-zeb" style="width:${100 * w}%;background:${zeb(tint)}" title="${lab}"></span>` : "";
-    return `<div class="x-bar">${seg(p.pH, "var(--accent)", "home win")}` +
-      `${hatch(dH, "var(--accent)", "draw resolved to home")}${hatch(dA, "var(--hot)", "draw resolved to away")}` +
+    const tH = `draw ${pct(p.pD, 0)} split by extra time + penalties · ${pct(dH, 0)} to home → goes through ${pct(adH, 0)}`;
+    const tA = `draw ${pct(p.pD, 0)} split by extra time + penalties · ${pct(dA, 0)} to away → goes through ${pct(1 - adH, 0)}`;
+    return `<div class="x-bar" title="goes through the tie: home ${pct(adH, 0)} · away ${pct(1 - adH, 0)}">` +
+      `${seg(p.pH, "var(--accent)", "home win")}` +
+      `${hatch(dH, "var(--accent)", tH)}${hatch(dA, "var(--hot)", tA)}` +
       `${seg(p.pA, "var(--hot)", "away win")}` +
-      `<span class="x-thru" style="left:${100 * adH}%" title="goes through: ${pct(adH, 0)} / ${pct(1 - adH, 0)}"></span></div>`;
+      `<span class="x-thru" style="left:${100 * adH}%"></span></div>`;
   };
   const fmt = (iso) => { try { return new Date(iso).toLocaleString("en-GB", { weekday: "short", hour: "2-digit", minute: "2-digit", timeZone: "Europe/Paris" }) + " CET"; } catch (_) { return ""; } };
   $("next-board").innerHTML = nm.map((m) => {

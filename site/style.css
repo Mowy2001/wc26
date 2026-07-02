@@ -419,6 +419,14 @@ details.tech[open] summary::before { content: "\25BE "; }
 .mh-close:hover { color: var(--text); }
 .mh-wdl { display: flex; height: 10px; border-radius: 5px; overflow: hidden; margin: 4px 0 14px; }
 .mh-wdl span { display: block; }
+.mh-adv { margin: -4px 0 14px; padding: 10px 12px; border: 1px solid var(--card-edge); border-radius: 9px; background: var(--bar-bg); }
+.mh-adv-t { font-size: .68rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-bottom: 7px; }
+.mh-adv-t span { text-transform: none; letter-spacing: 0; opacity: .8; }
+.mh-adv-row { display: flex; align-items: baseline; gap: 8px; font-size: .82rem; padding: 2px 0; }
+.mh-adv-row > span:first-child { flex: 0 0 120px; }
+.mh-adv-row b { color: var(--accent); font-variant-numeric: tabular-nums; font-size: .95rem; }
+.mh-adv-row:last-child b { color: var(--hot); }
+.mh-adv-x { margin-left: auto; color: var(--muted); font-size: .72rem; }
 .mh-grid { display: grid; grid-template-columns: auto repeat(6, 1fr); gap: 3px; align-items: center; }
 .mh-grid .cell {
   aspect-ratio: 1; border-radius: 4px; display: flex; align-items: center; justify-content: center;
