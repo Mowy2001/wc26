@@ -682,6 +682,9 @@ details.tech[open] summary::before { content: "\25BE "; }
 #fc-bracket.bracket-scroll { display: flex; align-items: stretch; justify-content: flex-start;
   gap: 2px; width: 100%; max-width: 100%; min-width: 0;
   overflow-x: auto; overflow-y: visible; padding: 4px 7px 10px; }
+/* on desktop the whole bracket fits, so don't clip at all — no shaved edge borders.
+   only narrow screens keep the horizontal scroll. */
+@media (min-width: 900px) { #fc-bracket.bracket-scroll { overflow-x: visible; } }
 /* override the earlier (dead) .bk-col rule's min-width:116 so columns are only as wide as
    their tie — otherwise the nine columns total ~1060px and the far-right R32 is cut off. */
 .bk-col { display: flex; flex-direction: column; flex: 0 0 auto; min-width: 0;
