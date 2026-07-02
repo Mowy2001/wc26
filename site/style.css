@@ -539,6 +539,7 @@ details.tech[open] summary::before { content: "\25BE "; }
 .ko-rd { font-size: .64rem; font-weight: 800; letter-spacing: .06em; color: var(--muted); text-transform: uppercase; }
 .ko-match { font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .ko-call { color: var(--muted); }
+.ko-prob { color: var(--accent2); font-variant-numeric: tabular-nums; }
 
 /* Called it? — group scorecard as a full-width grid of per-group cards */
 #rc-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(232px, 1fr)); gap: 12px; }
@@ -546,12 +547,13 @@ details.tech[open] summary::before { content: "\25BE "; }
 .gc-head { display: flex; justify-content: space-between; align-items: baseline; font-weight: 800;
   font-size: .82rem; margin-bottom: 7px; padding-bottom: 6px; border-bottom: 1px solid var(--card-edge); }
 .gc-score { color: var(--muted); font-size: .68rem; font-weight: 700; }
-.gc-row { display: grid; grid-template-columns: 16px 66px 1fr; gap: 7px; align-items: center; padding: 3px 0; }
-.gc-res { font-weight: 900; text-align: center; }
+.gc-row { display: grid; grid-template-columns: 16px 58px 1fr; gap: 7px; align-items: start; padding: 3px 0; }
+.gc-res { font-weight: 900; text-align: center; line-height: 1.35; }
 .gc-row.ok .gc-res { color: var(--accent); }
 .gc-row.no .gc-res { color: var(--hot); }
-.gc-team { font-weight: 700; font-size: .8rem; white-space: nowrap; }
-.gc-detail { color: var(--muted); font-size: .74rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gc-team { font-weight: 700; font-size: .8rem; white-space: nowrap; line-height: 1.35; }
+/* wrap the call rather than clip it — some read "said best 3rd ⚖ → through" and were cut off */
+.gc-detail { color: var(--muted); font-size: .74rem; line-height: 1.35; }
 .gc-detail b { color: var(--accent2); font-weight: 700; }
 .gc-cf { color: var(--gold); }
 
@@ -592,6 +594,8 @@ details.tech[open] summary::before { content: "\25BE "; }
 /* reserved fixed slots so the coin-flip badge / hint never shift the row alignment */
 .sb-cf { flex: 0 0 84px; display: inline-flex; justify-content: flex-end; align-items: center; }
 .sb-adv { font-size: .68rem; color: var(--accent); font-weight: 700; white-space: nowrap; margin-left: 6px; }
+.sb-adv.ok { color: var(--accent); }
+.sb-adv.no { color: var(--hot); }
 .sb-row .mh-hint { flex: 0 0 74px; text-align: right; white-space: nowrap;
   color: var(--accent2); font-size: .7rem; opacity: 0; }
 .sb-row.clickable:hover .mh-hint { opacity: .9; }

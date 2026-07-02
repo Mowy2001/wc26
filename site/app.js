@@ -759,10 +759,14 @@ if (WC26.bracket_dists && $("rc-ko")) {
       const fav = m.pH >= m.pA ? m.home : m.away;   // model's pre-match pick for the tie
       const ok = fav === m.winner; if (ok) hits++;
       const cf = Math.max(m.pH, m.pD, m.pA) < 0.42 ? `<span class="cf-badge">⚖ coin-flip</span>` : "";
+      // advancement probability: the draw resolves (ET + pens) in proportion to each side's
+      // 90-min win chance, so we quote how likely the model thought the pick would go through.
+      const adH = m.pH + m.pD * (m.pH / (m.pH + m.pA || 1));
+      const favThru = fav === m.home ? adH : 1 - adH;
       return `<div class="ko-row ${ok ? "ok" : "no"}">
         <span class="ko-rd">${roundName(m.match)}</span>
         <span class="ko-match">${flag(m.home)}${TLA3(m.home)} ${m.actual[0]}–${m.actual[1]} ${TLA3(m.away)}${flag(m.away)}</span>
-        <span class="ko-call">${ok ? "✓" : "✗"} backed ${flag(fav)}${TLA3(fav)} · ${flag(m.winner)}${TLA3(m.winner)} through ${cf}</span></div>`;
+        <span class="ko-call">${ok ? "✓" : "✗"} backed ${flag(fav)}${TLA3(fav)} <b class="ko-prob" title="model's chance the pick went through the tie">${pct(favThru, 0)}</b> · ${flag(m.winner)}${TLA3(m.winner)} through ${cf}</span></div>`;
     }).join("");
     $("rc-ko").innerHTML = `<p class="chart-cap"><strong>${hits} of ${played.length}</strong> knockout ties called right so far.</p>` + rows;
   } else {
@@ -993,16 +997,19 @@ if (WC26.scoring && WC26.scoring.n && $("track-head")) {
       .sort((a, b) => b.match - a.match)
       .map((m) => { const [h, a] = m.actual; return {
         home: m.home, away: m.away, score: `${h}-${a}`,
-        pa: h > a ? m.pH : (h < a ? m.pA : m.pD), winner: m.winner }; });
+        pa: h > a ? m.pH : (h < a ? m.pA : m.pD),
+        winner: m.winner, pred: m.pH >= m.pA ? m.home : m.away }; });  // model's pick to go through
     const grpN = [...s.matches].reverse().map((m) => ({
-      home: m.home, away: m.away, score: m.score, pa: m.p_realised, winner: null }));
+      home: m.home, away: m.away, score: m.score, pa: m.p_realised, winner: null, pred: null }));
     const last5 = [...koN, ...grpN].slice(0, 5);
     $("track-matches").innerHTML = last5.map((m) => {
       const good = m.pa >= 0.45;
       const has = MD[m.home + "|" + m.away] ? "clickable" : "";
       const hint = `<span class="mh-hint">${has ? "distribution ▸" : ""}</span>`;
       const [hg, ag] = (m.score || "-").split(/[–-]/);
-      const adv = m.winner ? `<span class="sb-adv" title="went through">${flag(m.winner)} through</span>` : "";
+      const advOk = m.winner && m.pred === m.winner;
+      const adv = m.winner ? `<span class="sb-adv ${advOk ? "ok" : "no"}" title="model's pick to advance vs who actually went through">
+        ${advOk ? "✓" : "✗"} said ${flag(m.pred)}${TLA3(m.pred)} · ${flag(m.winner)}${TLA3(m.winner)} through</span>` : "";
       return `<div class="sb-row ${has}" data-home="${m.home}" data-away="${m.away}">
         <div class="sb-match">
           <span class="sb-team">${flag(m.home)}${m.home}</span>
