@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WC26 — Probabilistic World Cup 2026</title>
+<title>WC26, Probabilistic World Cup 2026</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,8 +16,7 @@
         <div class="eyebrow">Open-source · built with AI · public data only</div>
         <h1>Who wins the<br><em>2026 World Cup?</em></h1>
         <p class="lede">An open-source forecast, built with AI from public data: all 104 matches simulated
-        20,000 times, frozen before kickoff and scored against reality every game. No insider info, no
-        betting odds fed in — just the maths, in the open.</p>
+        20,000 times, updated after every match and scored against reality every game.</p>
         <div class="hero-stats" id="hero-stats"></div>
       </div>
       <div class="hero-champ" id="hero-leader"></div>
@@ -44,89 +43,89 @@
 <main class="wrap">
 
 <section id="next" style="margin-top:34px">
-  <h2>Next matches <span class="sub">our model vs the betting market — click a game for the score heatmap</span></h2>
+  <h2>Next matches <span class="sub">our model vs the betting market, click a game for the score heatmap</span></h2>
   <p class="note" id="next-note" style="margin-top:-6px;margin-bottom:14px"></p>
   <div id="next-board" class="nm-grid"></div>
 </section>
 
-<div class="act-divider"><span class="act-num">1</span> Tonight's race <span class="act-sub">the live record first — then the forecast, match by match</span></div>
+<div class="act-divider"><span class="act-num">1</span> Tonight's race</div>
 
 <section id="track">
   <h2>How it's doing <span class="sub">the forecast frozen on June 11, graded against real results</span></h2>
   <p class="note" style="margin-top:-4px;margin-bottom:14px">This is the heart of it: a forecast is
   only worth as much as its record. Below is how the <em>frozen</em> June-11 model is scoring against
-  every result since kick-off — no retro-fitting, no second guesses.</p>
+  every result since kick-off, no retro-fitting, no second guesses.</p>
   <div id="track-head" class="hero-stats"></div>
-  <div style="margin-top:18px"><div class="tl-h">Recent matches — P(what actually happened)</div>
+  <div style="margin-top:18px"><div class="tl-h">Recent matches, P(what actually happened)</div>
     <div id="track-matches" class="chart"></div></div>
   <div class="tl-h" style="margin-top:22px">Best calls &amp; biggest surprises
-    <span class="sub">the probability the frozen model gave to what actually happened — click any for the heatmap</span></div>
+    <span class="sub">the probability the frozen model gave to what actually happened, click any for the heatmap</span></div>
   <div class="bw-grid">
     <div><div class="bw-lab good">✓ Nailed it</div><div id="track-best" class="chart"></div></div>
     <div><div class="bw-lab bad">✗ Didn't see it coming</div><div id="track-worst" class="chart"></div></div>
   </div>
   <p class="note">These are the probabilities the model gave each real match <em>before</em> it was
-  played (beliefs frozen June 11). The score is <strong>log-loss</strong> — lower is better, and a
+  played (beliefs frozen June 11). The score is <strong>log-loss</strong>, lower is better, and a
   know-nothing coin-three scores 1.099; coming in under that line means the model beats pure
   guessing. Calibration shows how often its favourites actually won.</p>
 </section>
 
 <section id="reality-ko">
-  <h2>Called it? — the knockouts <span class="sub">each tie graded as the bracket plays out</span></h2>
+  <h2>Called it? The knockouts <span class="sub">each tie graded as the bracket plays out</span></h2>
   <div id="rc-ko"></div>
   <p class="note">Our pre-match favourite for each knockout tie against who actually went through
   (shootouts included). ⚖ marks the ties the model rated a coin-flip. Fills in tie by tie.</p>
 </section>
 
 <section id="reality">
-  <h2>Called it? — the groups <span class="sub">the frozen June-11 forecast against what actually happened</span></h2>
-  <div class="tl-h">Group stage — who reached the knockouts</div>
+  <h2>Called it? The groups <span class="sub">the frozen June-11 forecast against what actually happened</span></h2>
+  <div class="tl-h">Group stage, who reached the knockouts</div>
   <p class="chart-cap" id="rc-groups-lead"></p>
   <div id="rc-groups"></div>
   <div class="bw-grid" style="margin-top:22px">
     <div><div class="bw-lab good">✓ Nailed the coin-flips</div><div id="rc-best"></div></div>
     <div><div class="bw-lab bad">✗ Biggest misses</div><div id="rc-worst"></div></div>
   </div>
-  <div class="tl-h" style="margin-top:24px">Golden Boot — our eve pick vs the race now</div>
+  <div class="tl-h" style="margin-top:24px">Golden Boot, our eve pick vs the race now</div>
   <div id="rc-gb"></div>
-  <p class="note">Predictions were frozen on June 11 — nothing here is fitted after the fact.
+  <p class="note">Predictions were frozen on June 11, nothing here is fitted after the fact.
   ✓ = a call we got right, ✗ = wrong, ⚖ = a team we'd rated a coin-flip to go through.</p>
 </section>
 
 <section id="forecast">
-  <h2>The forecast <span class="sub">one tournament-clock — bracket, groups, thirds, title and Golden Boot all move together as results land</span></h2>
+  <h2>The forecast</h2>
   <p class="note" style="margin-top:-4px;margin-bottom:14px">Every frame is a full re-simulation
   conditioned on the results up to that point (beliefs frozen at June 11). Step to the
   end for today's live picture, or back to watch one result ripple through everything. The control
-  repeats above each view so you never have to scroll back up — use the ◀ ▶ buttons or arrow keys
+  repeats above each view so you never have to scroll back up, use the ◀ ▶ buttons or arrow keys
   to move one match at a time. <strong>▲/▼ = change since the previous match.</strong></p>
 
   <div class="fc-block"><div class="fc-bar"></div>
-    <div class="tl-h">Round by round — chance of reaching each stage</div>
+    <div class="tl-h">Round by round, chance of reaching each stage</div>
     <p class="chart-cap">% = share of the 20,000 simulations in which the team reaches that round; the last
-    column is the title odds. Scroll for every team — it all moves with the slider, through to the final.</p>
+    column is the title odds. Scroll for every team, it all moves with the slider, through to the final.</p>
     <div class="rr-scroll"><table id="fc-rounds" class="rounds-table"></table></div></div>
   <div class="fc-block"><div class="fc-bar"></div>
-    <div class="tl-h">Predicted bracket — most likely team in each slot
+    <div class="tl-h">Predicted bracket, most likely team in each slot
       <span class="bk-toggle" id="bk-toggle">
         <button type="button" data-mode="model" class="on">Model</button><button type="button" data-mode="sandbox">🎮 Sandbox</button><button type="button" data-act="reset" title="clear your picks">↺</button>
       </span></div>
     <p class="bracket-legend" id="bracket-legend"></p>
     <div id="fc-bracket" class="bracket-scroll"></div>
     <p class="note" style="max-width:880px">Reading it: the bracket <strong>climbs</strong> from the Round
-    of 32 at the bottom to the trophy; each card is a <strong>tug-of-war</strong> — the bar is the
+    of 32 at the bottom to the trophy; each card is a <strong>tug-of-war</strong>, the bar is the
     head-to-head, who'd win <em>that</em> tie. Each slot shows the team <strong>most likely to be
-    there</strong> — so the final is the two likeliest finalists.</p>
+    there</strong>, so the final is the two likeliest finalists.</p>
     <p class="note" id="bracket-why" style="max-width:880px"></p></div>
   <div class="fc-block"><div class="fc-bar"></div>
-    <div class="tl-h">Groups — probability of advancing</div>
+    <div class="tl-h">Groups, probability of advancing</div>
     <p class="chart-cap">% = chance of reaching the knockout round (top two, or as a best third).
     A <span class="tight-badge">⚖ qualification open</span> tag marks groups where two or more teams are
-    still level for a knockout place — it's about <em>who goes through</em>, not who finishes first.</p>
+    still level for a knockout place, it's about <em>who goes through</em>, not who finishes first.</p>
     <div id="fc-groups" class="groups-grid"></div></div>
   <div class="fc-block"><div class="fc-bar"></div>
     <div class="fc-grid">
-      <div><div class="tl-h">Best thirds — 8 of 12 advance</div>
+      <div><div class="tl-h">Best thirds, 8 of 12 advance</div>
         <p class="chart-cap">% = chance of finishing among the eight best third-placed teams that go through.</p>
         <div id="fc-thirds" class="chart"></div></div>
       <div><div class="tl-h">Golden Boot</div>
@@ -136,42 +135,42 @@
 </section>
 
 <section id="market">
-  <h2>Model vs market <span class="sub">our forecast against the bookies — live odds, margin removed with Shin’s method</span></h2>
+  <h2>Model vs market <span class="sub">our forecast against the bookies, live odds, margin removed with Shin’s method</span></h2>
   <p class="market-diverge" id="market-diverge"></p>
   <p class="chart-cap" style="max-width:820px">Drag to watch <strong>our</strong> title odds move
   match by match (the ▲▼ is the change since June 11); the market line is the latest live price.</p>
   <div class="fc-bar"></div>
   <div id="market-chart" class="chart"></div>
-  <p class="note">Here's the contrarian part: where the bars disagree, someone is wrong — that's
+  <p class="note">Here's the contrarian part: where the bars disagree, someone is wrong, that's
   the point. The model is deliberately Elo-honest, and the market knows things we've
-  <em>chosen not to feed it</em> — a discipline we explain under the hood. The bookmaker margin is
+  <em>chosen not to feed it</em>, a discipline we explain under the hood. The bookmaker margin is
   stripped with Shin's insider-trading model (it de-shades longshots more than favourites), so the
   comparison is fair. After the final we score model, bookmaker and the Klement forecast
-  (<span id="klement-note"></span>) on the same log-loss scale — every prediction frozen with what
+  (<span id="klement-note"></span>) on the same log-loss scale, every prediction frozen with what
   was known on June 11, 2026.</p>
 </section>
 
 <section id="drivers">
   <h2>What's earning each team its place <span class="sub">quality vs the draw vs venue &amp; freshness</span></h2>
   <p class="chart-cap" style="margin-bottom:8px;max-width:900px"><strong>What each bar measures:</strong> a team's chance of
-  finishing <strong>top two of its group</strong> — qualifying straight to the knockouts (the numbers inside
+  finishing <strong>top two of its group</strong>, qualifying straight to the knockouts (the numbers inside
   the bar are percentage points that add up to that total).</p>
   <p class="chart-cap" style="margin-bottom:8px;max-width:900px"><strong>How we split it:</strong> we re-run the 20,000
-  tournaments three ways and read off the gaps —
+  tournaments three ways and read off the gaps -
   <b class="dr-k strength">squad quality</b> is how the team would do in an <em>average</em> group (its
   Elo-driven strength, the draw set aside);
   <b class="dr-k draw">the draw</b> is how much its <em>actual</em> group is easier than average;
-  <b class="dr-k tilt">venue &amp; freshness</b> is what the model's <em>only two earned adjustments</em> —
-  <strong>altitude</strong> and <strong>fatigue</strong> — add or take away.
+  <b class="dr-k tilt">venue &amp; freshness</b> is what the model's <em>only two earned adjustments</em> -
+  <strong>altitude</strong> and <strong>fatigue</strong>, add or take away.
   A <b class="dr-k drag">drag</b> (the hatched piece on the right) is anything working <em>against</em> the
-  team — a tougher-than-average group or tired legs — so it's drawn past the total, not added to it.
+  team, a tougher-than-average group or tired legs, so it's drawn past the total, not added to it.
   The three positive pieces sum exactly to the team's real number. Pre-tournament forecast.</p>
   <p class="note" id="drivers-note"></p>
   <div id="drivers-board" class="chart"></div>
 </section>
 
 
-<div class="act-divider"><span class="act-num">2</span> Under the hood <span class="act-sub">how it's built — and how every variable earned its place</span></div>
+<div class="act-divider"><span class="act-num">2</span> Under the hood <span class="act-sub">how it's built, and how every variable earned its place</span></div>
 
 <section id="idea">
   <h2>How it works <span class="sub">grade → expected goals → 20,000 simulated tournaments. No maths required.</span></h2>
@@ -181,42 +180,42 @@
       <h3>Every team gets a grade</h3>
       <p>We replay all 49,000 international matches since 1872 and keep a running
       grade for every nation: beat someone strong, it rises; lose, it falls. Spain
-      sits top of the class today. This grade does most of the work — everything
+      sits top of the class today. This grade does most of the work, everything
       else is a small correction.</p>
     </div>
     <div class="card">
       <div class="card-step">2</div>
       <h3>Grades become expected goals</h3>
-      <p>One formula — the same for everyone — turns the <em>gap</em> between two
+      <p>One formula, the same for everyone, turns the <em>gap</em> between two
       grades into expected goals: Spain 2.1, Uruguay 0.8. Playing at home helps a
       lot. Two earned tilts nudge it a little: squads with heavy club legs score
       slightly less, and teams used to thin air do better up at altitude.</p>
     </div>
     <div class="card">
       <div class="card-step">3</div>
-      <h3>Then we roll loaded dice — 20,000 times</h3>
+      <h3>Then we roll loaded dice, 20,000 times</h3>
       <p>"2.1 expected goals" isn't a prediction of 2-1: it's the weight on a die.
-      Sometimes four go in, sometimes none — upsets happen here exactly as often
+      Sometimes four go in, sometimes none, upsets happen here exactly as often
       as in real football. We roll dice for all 104 matches, apply FIFA's rules,
       and that's <em>one</em> possible World Cup. We play 20,000 of them and count.
       "Spain 25%" just means: Spain lifted the trophy in 5,000 of them.</p>
     </div>
   </div>
-  <p class="note">A 25% favourite is not a prediction that they win — it means that if this
+  <p class="note">A 25% favourite is not a prediction that they win, it means that if this
   same tournament were played 20,000 times, they would lift the trophy in a quarter of them and
   fall short in the other three quarters. And one house rule keeps it honest: any new ingredient
   must prove it would have predicted <em>past</em> World Cups better, or it stays out. Most
-  candidates don't make the cut. The rejects are documented below — they're the reason you can
+  candidates don't make the cut. The rejects are documented below, they're the reason you can
   trust what's left in.</p>
 
-  <h3 class="merge-sub" id="data">The data diet <span class="sub">three public files — and a list of things we refuse to know</span></h3>
+  <h3 class="merge-sub" id="data">The data diet <span class="sub">three public files, and a list of things we refuse to know</span></h3>
   <div class="cards4">
     <div class="card">
       <h3>📜 49,000 matches, 1872→today</h3>
       <p>Every official international ever played (<a href="https://github.com/martj42/international_results">martj42</a>, CC0):
       date, teams, score, competition, venue, <strong>including the full 2026 schedule</strong>.
       This single file builds the team ratings, fits the goal model, and even defines the
-      tournament structure — the 12 groups are reconstructed from the fixture graph, never
+      tournament structure, the 12 groups are reconstructed from the fixture graph, never
       typed in by hand.</p>
     </div>
     <div class="card">
@@ -224,29 +223,29 @@
       <p>Scorer, minute, penalty flag for every goal since 1916. Powers the player
       layer: each team's simulated goals are split among its recent scorers
       (time-decayed shares), producing the Golden Boot distribution below. A measured
-      17.3% of WC goals go to debutant scorers — that mass is reserved for "new faces".</p>
+      17.3% of WC goals go to debutant scorers, that mass is reserved for "new faces".</p>
     </div>
     <div class="card">
       <h3>🥅 677 shootouts</h3>
       <p>Every international penalty shootout in history. Small file, precise job: it tells
-      us shootouts are <em>almost</em> — but not exactly — a coin flip. The better-rated
+      us shootouts are <em>almost</em>, but not exactly, a coin flip. The better-rated
       team wins slightly more often, the de-facto home side too. Both effects are in the
       simulator.</p>
     </div>
     <div class="card">
       <h3>🏟️ 1,248 club careers</h3>
       <p>The official squad lists (Wikipedia) joined to club-season minutes (FBref, via
-      the Wayback Machine — the site itself blocks robots). How many minutes are in each
+      the Wayback Machine, the site itself blocks robots). How many minutes are in each
       player's legs? Feeds the <strong>fatigue tilt</strong> and the Golden Boot squad
       filter. Known bias, declared: minutes coverage is Europe/Big-5 only.</p>
     </div>
     <div class="card off">
       <h3>🚫 Deliberately excluded</h3>
       <p>Squad market values, injuries, FIFA rankings, pundit priors, betting odds.
-      Not because they're worthless — because nothing enters this model until it
+      Not because they're worthless, because nothing enters this model until it
       <strong>proves itself in a backtest</strong>. Everything we set out to test now has a
       verdict: heat failed, altitude earned its place, diaspora and cohesion ended up as
-      shadow bets (see the model lab) — never silently in, never quietly dropped.</p>
+      shadow bets (see the model lab), never silently in, never quietly dropped.</p>
     </div>
   </div>
   <div class="lineage">
@@ -287,24 +286,24 @@
 </section>
 
 <section id="influence">
-  <h2>What earned its place <span class="sub">the trials — every variable admitted or cut, measured by re-running the tournament without it</span></h2>
+  <h2>What earned its place <span class="sub">the trials, every variable admitted or cut, measured by re-running the tournament without it</span></h2>
   <p class="chart-cap" style="margin-bottom:16px"><strong>In one line:</strong> the model is
-  <strong>Elo ratings → goals</strong>, plus exactly <strong>two earned adjustments — altitude and
+  <strong>Elo ratings → goals</strong>, plus exactly <strong>two earned adjustments, altitude and
   fatigue</strong>. Everything else we tried was <em>cut</em>: football capital, heat/climate (tested
   twice), a penalty-taker bonus, plus diaspora and squad cohesion (kept only as "shadow bets", never in
-  the real forecast). Each card below is one of those variables — admitted or rejected by the same rule.</p>
+  the real forecast). Each card below is one of those variables, admitted or rejected by the same rule.</p>
   <div class="cards-2col">
     <div class="card">
       <h3>The rating is the engine</h3>
       <p class="mini-intro">Everything else is a correction: the Elo gap sets the baseline
       for every scoreline. That's why the model and the market split on the USA:</p>
       <div id="usa-case"></div>
-      <p class="mini-note">By Elo the USA is the <em>weakest</em> team in group D — home
+      <p class="mini-note">By Elo the USA is the <em>weakest</em> team in group D, home
       advantage alone lifts it from last to second. The market prices squad value and host
       momentum; those signals only enter here if a future data block earns its backtest.</p>
     </div>
     <div class="card">
-      <h3>Playing at home — worth double</h3>
+      <h3>Playing at home, worth double</h3>
       <p class="mini-intro">The schedule says who hosts. Switch that column off and replay
       all 20,000 tournaments on neutral ground:</p>
       <div id="host-ablation"></div>
@@ -313,7 +312,7 @@
       influential non-rating input in the model.</p>
     </div>
     <div class="card">
-      <h3>Thin air — the strongest signal we found</h3>
+      <h3>Thin air, the strongest signal we found</h3>
       <p class="mini-intro">World Cups dodge altitude, so we tried it where it bites:
       South American qualifying, where La Paz sits at 3,782 m. A team is at home in the
       air it trains in:</p>
@@ -321,7 +320,7 @@
       <p class="mini-note" id="altitude-note"></p>
     </div>
     <div class="card">
-      <h3>Tired legs — admitted, thin file</h3>
+      <h3>Tired legs, admitted, thin file</h3>
       <p class="mini-intro">Squad-mean club-season minutes, the load in the legs once
       club quality is set aside:</p>
       <div id="fatigue-card"></div>
@@ -329,41 +328,41 @@
     </div>
   </div>
 
-  <h3 class="merge-sub" id="rejected">What we tested and discarded <span class="sub">tried, measured, left out — rejected experiments are results too</span></h3>
+  <h3 class="merge-sub" id="rejected">What we tested and discarded <span class="sub">tried, measured, left out, rejected experiments are results too</span></h3>
   <div class="cards-2col">
     <div class="card off">
-      <h3>Heat mismatch — tried, and thrown out</h3>
+      <h3>Heat mismatch, tried, and thrown out</h3>
       <p class="mini-intro">Does June heat punish cold-country teams? We built the
       feature (venue vs home climatology, strictly point-in-time) and put it through the gate:</p>
       <div id="climate-card"></div>
-      <p class="mini-note">The gate said no, twice — crude passport proxy, then each player's
+      <p class="mini-note">The gate said no, twice, crude passport proxy, then each player's
       club-country climate. The culprit is the data: the one hot World Cup in the test era (Qatar
       2022) was air-conditioned, inverting the signal, and nothing else is hot enough to show.
       Coefficient stays at zero.</p>
     </div>
     <div class="card off">
-      <h3>How long is memory? — no effect</h3>
+      <h3>How long is memory? No effect</h3>
       <p class="mini-intro">Old matches are down-weighted exponentially. We tuned the decay on
       six past tournaments (<span id="xi-n"></span> matches) and found... a plateau:</p>
       <div id="xi-chart"></div>
       <p class="mini-note" id="xi-note"></p>
     </div>
     <div class="card off">
-      <h3>Parameter doubt — pinned by 17k matches</h3>
+      <h3>Parameter doubt, pinned by 17k matches</h3>
       <p class="mini-intro">The goal model has five parameters. We refit them
       <span id="boot-b"></span> times on resampled history and gave each simulated tournament
       its own draw:</p>
       <div id="boot-card"></div>
-      <p class="mini-note">It moves title odds by <strong id="boot-delta"></strong> on average —
+      <p class="mini-note">It moves title odds by <strong id="boot-delta"></strong> on average -
       Monte Carlo noise. The doubt lives in <em>which data enters</em>, not in the fit.</p>
     </div>
     <div class="card off">
       <h3>Also off the pitch</h3>
-      <p class="mini-note" style="margin-top:0"><strong>Penalty-taker bonus</strong> — rejected: it
+      <p class="mini-note" style="margin-top:0"><strong>Penalty-taker bonus</strong>, rejected: it
       double-counts penalties already inside each scorer's history. <strong>Football capital</strong>
-      (where players' clubs rank) — its predictive power turned out to be a Europe-only geographic
+      (where players' clubs rank), its predictive power turned out to be a Europe-only geographic
       bias, so it was removed even though that cost a sliver of accuracy. <strong>Diaspora</strong>
-      and <strong>squad cohesion</strong> can't (or barely) be backtested — they live as shadow
+      and <strong>squad cohesion</strong> can't (or barely) be backtested, they live as shadow
       bets in the model lab, never in the official forecast.</p>
     </div>
   </div>
@@ -371,20 +370,20 @@
   <h3 class="merge-sub" id="rule">The rule that decides it all</h3>
   <p class="note" style="max-width:780px;font-size:.96rem">One referee governs the whole model:
   <strong>nothing enters unless it would have predicted past tournaments better.</strong> Every
-  candidate is tested point-in-time — using only what was known before each match — on six past
+  candidate is tested point-in-time, using only what was known before each match, on six past
   World Cups and Euros, and kept only if it lowers out-of-sample log-loss. No data later than the
   prediction date; no tuning on the tournament being predicted; nothing kept because it "feels
   right". It's why the list of what's <em>in</em> is short, why the rejects above are on the page
-  at all — and why, when a fair version of football capital stopped helping, it came out. The
+  at all, and why, when a fair version of football capital stopped helping, it came out. The
   discipline is the product.</p>
 </section>
 
 <section id="lab">
-  <h2>The model lab <span class="sub">the same forecast, with and without each ingredient — scored live on real results</span></h2>
+  <h2>The model lab <span class="sub">the same forecast, with and without each ingredient, scored live on real results</span></h2>
   <div id="lab-board" class="chart"></div>
   <p class="note" id="lab-note"></p>
   <p class="note" style="max-width:840px">Careful reading this live: over a few dozen matches nothing
-  cleanly separates these variants — one tournament is far too small to judge an ingredient. The reason
+  cleanly separates these variants, one tournament is far too small to judge an ingredient. The reason
   <strong>altitude</strong> and <strong>fatigue</strong> are <em>in</em> the model and everything else is
   out is the six-tournament, out-of-sample backtest in <a href="#influence">what earned its place</a>:
   there, the model <strong>with</strong> altitude clearly beats the one without. Here we're only watching
@@ -392,16 +391,16 @@
 </section>
 
 <section id="method">
-  <h2>Under the hood <span class="sub">the short version — the full write-up lives in the open repo</span></h2>
+  <h2>Under the hood <span class="sub">the short version, the full write-up lives in the open repo</span></h2>
   <p class="note" style="max-width:840px">Three layers, no black box: a from-scratch
-  <strong>Elo</strong> rebuilt over 49,000 matches (so every rating is <em>point-in-time</em> — no
+  <strong>Elo</strong> rebuilt over 49,000 matches (so every rating is <em>point-in-time</em>, no
   information from the future); an <strong>Elo-driven Dixon-Coles</strong> goal model (Poisson log-rates
   from the Elo gap + home advantage + the low-score correction, with no per-team free parameters to
   overfit); and a <strong>20,000-run Monte Carlo</strong> that samples every scoreline, applies the full
   FIFA tiebreakers, fills the official bracket and plays to a shootout model fitted on 677 historical
   shootouts. Backtest (World Cup 2022, strictly point-in-time): log-loss <strong>1.060</strong> vs 1.099
   uniform; favourites priced at 54% won 56%.</p>
-  <p class="note" style="max-width:840px">Nothing is hidden — every formula, every gated variable and
+  <p class="note" style="max-width:840px">Nothing is hidden, every formula, every gated variable and
   every honest null result is written up in full:</p>
   <div class="doc-links">
     <a class="doc-link" href="https://github.com/Mowy2001/wc26/blob/main/docs/METHODOLOGY.md" target="_blank" rel="noopener">📐 Methodology<span>every layer &amp; choice, in detail</span></a>

@@ -28,7 +28,7 @@ const $ = (id) => document.getElementById(id);
 /* ---------- per-match score-distribution heatmap (scripts/36) ---------- */
 const MD = {};
 (WC26.match_dists || []).forEach((m) => { MD[m.home + "|" + m.away] = m; });
-// upcoming matches (scripts/42) are heatmap-able too — fold them into the index
+// upcoming matches (scripts/42) are heatmap-able too, fold them into the index
 ((WC26.next_matches && WC26.next_matches.matches) || []).forEach((m) => {
   MD[m.home + "|" + m.away] = {
     home: m.home, away: m.away, group: m.ko ? "Knockout" : "Group", city: null,
@@ -36,7 +36,7 @@ const MD = {};
     grid: m.grid, top: m.top, actual: null,
   };
 });
-// predicted bracket ties (scripts/43) — click a knockout tie -> its heatmap
+// predicted bracket ties (scripts/43), click a knockout tie -> its heatmap
 (WC26.bracket_dists || []).forEach((m) => {
   MD[m.home + "|" + m.away] = {
     home: m.home, away: m.away, group: "Knockout", city: null,
@@ -44,13 +44,13 @@ const MD = {};
   };
 });
 
-// a fixture is a "coin-flip" when no single W/D/L outcome clears 42% — i.e. the
+// a fixture is a "coin-flip" when no single W/D/L outcome clears 42%, i.e. the
 // model genuinely can't separate the sides. Returns the badge HTML or "".
 const coinFlipBadge = (home, away) => {
   const m = MD[home + "|" + away];
   if (!m) return "";
   const top = Math.max(m.pH, m.pD, m.pA);
-  return top < 0.42 ? `<span class="cf-badge" title="This single match: pre-match the model gave no result above ${pct(top,0)} — a coin-flip">⚖ coin-flip</span>` : "";
+  return top < 0.42 ? `<span class="cf-badge" title="This single match: pre-match the model gave no result above ${pct(top,0)}, a coin-flip">⚖ coin-flip</span>` : "";
 };
 
 function showHeat(home, away) {
@@ -69,9 +69,9 @@ function showHeat(home, away) {
   // tint: home win (h>a) green, away win (h<a) pink, draw (h==a) slate; alpha by p
   const tint = (h, a, p) => {
     const al = (0.08 + 0.92 * (p / maxp)).toFixed(3);
-    if (h > a) return `rgba(54, 245, 160, ${al})`;   // home win — neon green
-    if (h < a) return `rgba(255, 93, 115, ${al})`;   // away win — hot
-    return `rgba(131, 152, 189, ${al})`;             // draw — slate
+    if (h > a) return `rgba(54, 245, 160, ${al})`;   // home win, neon green
+    if (h < a) return `rgba(255, 93, 115, ${al})`;   // away win, hot
+    return `rgba(131, 152, 189, ${al})`;             // draw, slate
   };
   let cells = `<div class="axlabel"></div>` +
     [0, 1, 2, 3, 4, 5].map((a) => `<div class="axlabel">${lab(a)}</div>`).join("");
@@ -152,7 +152,7 @@ if (WC26.next_matches && WC26.next_matches.matches && $("next-board")) {
   $("next-board").innerHTML = nm.map((m) => {
     const gap = Math.max(Math.abs(m.model.pH - m.market.pH), Math.abs(m.model.pA - m.market.pA), Math.abs(m.model.pD - m.market.pD));
     // flag disagreement on size OR on which side is favoured (opposite favourites can be a
-    // small numeric gap yet a real disagreement — e.g. model backs the away side, market the home).
+    // small numeric gap yet a real disagreement, e.g. model backs the away side, market the home).
     const favOf = (p) => (p.pH >= p.pD && p.pH >= p.pA) ? "H" : (p.pA >= p.pD ? "A" : "D");
     const flip = favOf(m.model) !== favOf(m.market);
     const div = (gap >= 0.10 || flip) ? `<span class="nm-div" title="${flip ? "model and market back opposite sides" : "model and market disagree by " + pct(gap, 0)}">model ≠ market</span>` : "";
@@ -168,7 +168,7 @@ if (WC26.next_matches && WC26.next_matches.matches && $("next-board")) {
   $("next-board").querySelectorAll(".nm-card.clickable").forEach((c) =>
     c.addEventListener("click", () => showHeat(c.dataset.home, c.dataset.away)));
   if ($("next-note")) $("next-note").innerHTML =
-    `<strong>${nm.length}</strong> upcoming games. Green = home/first team wins, slate = draw, red = away/second
+    `<strong>${nm.length}</strong> upcoming games. Green = home team wins, slate = draw, red = away
      (90 minutes). Market = consensus of ~${nm[0].market.n_books} bookmakers, margin removed. Knockout ties
      then go to extra time and penalties.`;
 }
@@ -196,7 +196,7 @@ if ($("live-strip") && WC26.generated) {
   // headline = how the frozen forecast is scoring against reality, if live
   const headline = sc && sc.n
     ? `<div class="stat headline"><div class="v">${sc.log_loss} <span class="vs">vs ${sc.uniform}</span></div>
-        <div class="k">live score vs guessing — log-loss, lower is better (${sc.n} matches)</div></div>`
+        <div class="k">live score vs guessing, log-loss, lower is better (${sc.n} matches)</div></div>`
     : "";
   const backtestStat = `<div class="stat"><div class="v">${bt.log_loss_model} <span class="vs">vs ${bt.log_loss_uniform}</span></div>
       <div class="k">backtest log-loss (WC2022)</div></div>`;
@@ -231,7 +231,7 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     const ticks = bar.querySelector(".fc-ticks");
     ticks.innerHTML = snaps.map((_, i) =>
       `<i class="${i === GEK ? "grp-end" : ""}" style="left:${N ? (100 * i) / N : 0}%"></i>`).join("") +
-      (GEK > 0 && GEK < N ? `<span class="grp-marker" style="left:${(100 * GEK) / N}%" title="group stage ends here — knockouts after this point">⚑ groups end</span>` : "");
+      (GEK > 0 && GEK < N ? `<span class="grp-marker" style="left:${(100 * GEK) / N}%" title="group stage ends here, knockouts after this point">⚑ groups end</span>` : "");
   });
   const sliders = [...document.querySelectorAll(".fc-slider")];
   const labs = [...document.querySelectorAll(".fc-lab")];
@@ -269,7 +269,7 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
   // are fixed to reality in the bracket (and can't be re-picked in the sandbox).
   const KOW = {}; (WC26.bracket_dists || []).forEach((m) => { if (m.winner) KOW[m.match] = m.winner; });
   // order every round by the FEED tree (DFS from the final) so each tie sits directly
-  // beside the two ties that feed it — the columns then read like a classic bracket.
+  // beside the two ties that feed it, the columns then read like a classic bracket.
   const parentOf = {}; Object.entries(FEED).forEach(([p, ch]) => ch.forEach((c) => (parentOf[c] = +p)));
   const dfs = (n) => FEED[n] ? [...dfs(FEED[n][0]), ...dfs(FEED[n][1])] : [n];
   const nextRound = (prev) => { const o = []; for (let i = 0; i < prev.length; i += 2) o.push(parentOf[prev[i]]); return o; };
@@ -290,9 +290,9 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
   let bracketMode = "reach";  // "reach" = P(team fills this slot) | "adv" = win-the-tie share
   // "Win the tie" = the head-to-head SHARE between the two named teams: each side's
   // conditional win-if-here (adv/p) normalised so the two slots of a match sum to 100%.
-  // Reads as "who wins this match" — two strong finalists land ~50/50, a favourite high.
+  // Reads as "who wins this match", two strong finalists land ~50/50, a favourite high.
   const slotHTML = (s, disp) => {
-    if (!s) return `<div class="bk-slot"><span class="bk-team">—</span></div>`;
+    if (!s) return `<div class="bk-slot"><span class="bk-team">-</span></div>`;
     const v = bracketMode === "adv" ? (disp ?? 0) : s.p;
     const cls = v >= 0.6 ? "sure" : v < 0.3 ? "open" : "";
     const title = bracketMode === "adv"
@@ -312,10 +312,10 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
   const setLegend = () => {
     if (!$("bracket-legend")) return;
     $("bracket-legend").innerHTML = sandbox
-      ? `<strong>Sandbox:</strong> tap a team to send it through — the bracket rebuilds your way, all the
+      ? `<strong>Sandbox:</strong> tap a team to send it through, the bracket rebuilds your way, all the
          way to the trophy. The bars become an Elo estimate for match-ups the model didn't predict.
          Tap <em>the bar</em> for a tie's expected-goals heatmap. <em>Reset</em> returns to the model.`
-      : `The two halves <strong>climb to the trophy</strong>. Each tie is a <strong>tug-of-war</strong> —
+      : `The two halves <strong>climb to the trophy</strong>. Each tie is a <strong>tug-of-war</strong> -
          the bar shows the <strong>head-to-head, who wins the tie</strong> (the two add up to 100%). The
          winning side is green. Tap a tie for its <strong>expected-goals heatmap</strong>, or switch to
          <em>Sandbox</em> to build your own bracket.`;
@@ -332,10 +332,10 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     document.querySelectorAll(".fc-prev").forEach((b) => (b.disabled = k <= 0));
     document.querySelectorAll(".fc-next").forEach((b) => (b.disabled = k >= N));
 
-    // champion ordering — kept for the bracket apex/legend below
+    // champion ordering, kept for the bracket apex/legend below
     const top = Object.entries(s.champion).sort((a, b) => b[1] - a[1]).slice(0, 12);
     // round by round: P(reach each stage) for EVERY team, driven by the slider. This
-    // replaces the flat champion list — same title odds in the last column, but the
+    // replaces the flat champion list, same title odds in the last column, but the
     // whole road to it, and it keeps moving through the knockouts.
     if ($("fc-rounds") && s.rounds) {
       const RH = ["R32", "R16", "QF", "SF", "Final", "Champ"];
@@ -367,11 +367,11 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
       const a = part[mn].top, b2 = part[mn].bot;
       if (!a || !b2) { win[mn] = a || b2; share[mn] = 1; return; }
       if (KOW[mn] && (KOW[mn] === a || KOW[mn] === b2)) {
-        // this tie has been played — pin it to the real result (100%), no re-picking.
+        // this tie has been played, pin it to the real result (100%), no re-picking.
         win[mn] = KOW[mn];
         share[mn] = (KOW[mn] === a) ? 1 : 0;
       } else {
-        // the bar is "who'd win if they meet" — the actual head-to-head by rating, not the
+        // the bar is "who'd win if they meet", the actual head-to-head by rating, not the
         // adv/p ratio (which is noisy and mixes in how hard each side's road was). So the
         // stronger finalist takes the tie even if its path made it less likely to arrive.
         share[mn] = eloP(a, b2);
@@ -380,7 +380,7 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     });
     const champTeam = win[104];
     const champShare = part[104] && part[104].top === champTeam ? share[104] : 1 - share[104];
-    // probability the ENTIRE drawn bracket plays out exactly like this — the chain of every
+    // probability the ENTIRE drawn bracket plays out exactly like this, the chain of every
     // tie's head-to-head, including matches that don't touch the champion (they're still part
     // of the same drawn bracket).
     let bracketProb = 1;
@@ -392,7 +392,7 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     const fmtProb = (p) => p >= 0.01 ? pct(p, 1) : "1 in " + oneIn(Math.round(1 / p));
     const card = (mn) => {
       const a = part[mn].top, b = part[mn].bot;
-      if (!a || !b) return `<div class="tie empty">—</div>`;
+      if (!a || !b) return `<div class="tie empty">-</div>`;
       const pa = share[mn], w = win[mn], played = KOW[mn] != null;
       const heat = MD[a + "|" + b] ? [a, b] : (MD[b + "|" + a] ? [b, a] : null);
       // played ties are locked to the real result; only future ties are pickable in sandbox
@@ -400,13 +400,13 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
         <span class="ts-team">${flag(t)}${TLA(t)}</span><span class="ts-p">${played ? (w === t ? "✓" : "") : pct(p, 0)}</span></div>`;
       return `<div class="tie${picks[mn] ? " picked" : ""}${played ? " played" : ""}${heat ? " has-heat" : ""}" data-m="${mn}"${heat ? ` data-home="${heat[0]}" data-away="${heat[1]}"` : ""}>
         ${side(a, pa)}
-        <div class="tow" title="head-to-head — who wins the tie">${heat ? '<span class="tow-heat">⊞</span>' : ""}<i class="a" style="width:${100 * pa}%"></i><i class="b" style="width:${100 * (1 - pa)}%"></i></div>
+        <div class="tow" title="head-to-head, who wins the tie">${heat ? '<span class="tow-heat">⊞</span>' : ""}<i class="a" style="width:${100 * pa}%"></i><i class="b" style="width:${100 * (1 - pa)}%"></i></div>
         ${side(b, 1 - pa)}</div>`;
     };
     const apex = `<div class="bk-apex"><div class="bk-trophy">🏆</div>
       <div class="bk-champ">${flag(champTeam)}${champTeam}${!sandbox ? ` <b>${pct(champShare, 0)}</b>` : ""}</div>
       <div class="bk-champ-lab">${sandbox ? "your champion" : "wins the most-likely final"}</div>
-      <div class="bk-bprob" title="chance this entire bracket plays out exactly as drawn — every tie chained together">${sandbox ? "your" : "modal"} bracket happens: <b>${fmtProb(bracketProb)}</b></div></div>`;
+      <div class="bk-bprob" title="chance this entire bracket plays out exactly as drawn, every tie chained together">${sandbox ? "your" : "modal"} bracket happens: <b>${fmtProb(bracketProb)}</b></div></div>`;
     const col = (lab, nums, side) => `<div class="bk-col bk-${side}"><div class="bk-rlab">${lab}</div><div class="ties">${nums.map(card).join("")}</div></div>`;
     const leftHTML = HALF_L.map((nums, i) => col(RLAB[i], nums, "l")).join("");
     // right half rendered centre → edge, so SF sits next to the final and R32 at the far right
@@ -420,26 +420,26 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     // likely to lift the cup overall because its road there is harder.
     if ($("bracket-why")) {
       if (sandbox) {
-        $("bracket-why").innerHTML = `Sandbox: your picks override the model — tap a team to send it through, ↺ to reset.`;
+        $("bracket-why").innerHTML = `Sandbox: your picks override the model, tap a team to send it through, ↺ to reset.`;
       } else {
         const margTeam = top[0][0], margPct = pct(top[0][1], 0);
         let sfOpp = null;
         for (const sf of [101, 102]) if (win[sf] === champTeam && part[sf]) sfOpp = part[sf].top === champTeam ? part[sf].bot : part[sf].top;
         $("bracket-why").innerHTML = (champTeam === margTeam)
-          ? `Put the two most-likely finalists head-to-head and <strong>${flag(champTeam)}${champTeam}</strong> takes it (${pct(champShare, 0)}) — the same team round-by-round makes the single most-likely champion (${margPct}). The two views agree.`
-          : `The bracket fills each slot with its <strong>most-likely occupant</strong>, so the final is the two likeliest finalists — and <strong>${flag(champTeam)}${champTeam}</strong> edges it <strong>${pct(champShare, 0)}–${pct(1 - champShare, 0)}</strong>. Round by round, though, the most likely champion <em>overall</em> is <strong>${flag(margTeam)}${margTeam}</strong> (${margPct}). No contradiction: ${champTeam} is favoured in that final but has the <strong>harder road to reach it</strong>${sfOpp ? ` — past <strong>${flag(sfOpp)}${sfOpp}</strong> in the semi` : ""}, so across <em>all</em> paths ${margTeam} lifts the cup more often.`;
+          ? `Put the two most-likely finalists head-to-head and <strong>${flag(champTeam)}${champTeam}</strong> takes it (${pct(champShare, 0)}), the same team round-by-round makes the single most-likely champion (${margPct}). The two views agree.`
+          : `The bracket fills each slot with its <strong>most-likely occupant</strong>, so the final is the two likeliest finalists, and <strong>${flag(champTeam)}${champTeam}</strong> edges it <strong>${pct(champShare, 0)}–${pct(1 - champShare, 0)}</strong>. Round by round, though, the most likely champion <em>overall</em> is <strong>${flag(margTeam)}${margTeam}</strong> (${margPct}). No contradiction: ${champTeam} is favoured in that final but has the <strong>harder road to reach it</strong>${sfOpp ? `, past <strong>${flag(sfOpp)}${sfOpp}</strong> in the semi` : ""}, so across <em>all</em> paths ${margTeam} lifts the cup more often.`;
       }
     }
 
-    // groups & best thirds are group-stage facts — freeze them once the group stage is
+    // groups & best thirds are group-stage facts, freeze them once the group stage is
     // over; the bracket, round-by-round and Golden Boot keep moving through the knockouts.
     const gk = Math.min(k, GEK), sg = snaps[gk], sgPrev = gk > 0 ? snaps[gk - 1] : null;
-    // best thirds (8 of 12 advance) — ranked by P(advance as a best third)
+    // best thirds (8 of 12 advance), ranked by P(advance as a best third)
     const th = Object.entries(sg.best_third || {}).filter(([, p]) => p > 0.01)
       .sort((a, b) => b[1] - a[1]).slice(0, 12);
     const tmax = th[0] ? th[0][1] : 1;
     $("fc-thirds").innerHTML = th.map(([t, p], i) => `
-      ${i === 8 ? '<div class="cutoff">— 8 advance —</div>' : ""}
+      ${i === 8 ? '<div class="cutoff">- 8 advance -</div>' : ""}
       <div class="bar-row">
         <div class="who">${flag(t)}${t}</div>
         <div class="bar-track"><div class="bar-fill" style="width:${(100 * p) / tmax}%;${i < 8 ? "" : "opacity:.5"}"></div></div>
@@ -457,7 +457,7 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
         <div class="val">${pct(p.p)}${delta(p.p, prev && pgb[p.player])}</div>
       </div>`).join("");
 
-    // groups — probability of advancing
+    // groups, probability of advancing
     const groups = {};
     Object.entries(tg).forEach(([t, g]) => (groups[g] = groups[g] || []).push(t));
     $("fc-groups").innerHTML = Object.keys(groups).sort().map((g) => {
@@ -468,7 +468,7 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
       const tight = bubble.length >= 2;
       const names = bubble.map(([t, q]) => `${t} ${pct(q, 0)}`).join(", ");
       const badge = tight
-        ? `<span class="tight-badge" title="Still up for grabs — ${bubble.length} teams level for a knockout place: ${names}">⚖ qualification open</span>`
+        ? `<span class="tight-badge" title="Still up for grabs, ${bubble.length} teams level for a knockout place: ${names}">⚖ qualification open</span>`
         : "";
       const rows = ranked.map(([t, q]) => `
         <div class="team-row">
@@ -590,7 +590,7 @@ if (WC26.team_drivers && $("drivers-board")) {
   }
 }
 
-/* ---------- model vs market — live odds, with movement since the eve ---------- */
+/* ---------- model vs market, live odds, with movement since the eve ---------- */
 // Slider-driven: the model side is P(champion) at the current slider snapshot; the
 // market side is the LIVE de-vigged outright (or the frozen 11-Jun BetMGM line as a
 // fallback). champMap = {team: P_champion} for the chosen snapshot, null = current.
@@ -639,7 +639,7 @@ function renderMarket(champMap) {
   const sharp = [...rows].sort((a, b) => Math.abs(b.gap) - Math.abs(a.gap)).slice(0, 2);
   if ($("market-diverge")) {
     const when = liveMkt
-      ? `Live market — ${new Date(WC26.market_now.fetched).toLocaleDateString(undefined, { month: "short", day: "numeric" })}, ${rows.length} contenders, bookmaker margin removed (▲▼ = move since 11 Jun). `
+      ? `Live market, ${new Date(WC26.market_now.fetched).toLocaleDateString(undefined, { month: "short", day: "numeric" })}, ${rows.length} contenders, bookmaker margin removed (▲▼ = move since 11 Jun). `
       : "";
     $("market-diverge").innerHTML = when + "Sharpest disagreements: " + sharp.map((r) =>
       `<strong>${flag(r.team)}${r.team}</strong> ${r.gap > 0 ? "model loves" : "model cold"} ` +
@@ -666,10 +666,10 @@ if (WC26.replay && WC26.replay.snapshots && WC26.standings && $("rc-groups")) {
   const eq = (t) => (eve.qualify && eve.qualify[t] != null) ? eve.qualify[t] : 0;
   // What we PREDICTED would go through: the two strongest of each group (by our eve qualify
   // odds) as direct qualifiers, plus the eight teams we rated most likely to sneak in as a
-  // best third. A flat >=50% is wrong — with best-third routes it calls all four in a tight
+  // best third. A flat >=50% is wrong, with best-third routes it calls all four in a tight
   // group, but only ~2-3 actually advance.
   // What we PREDICTED for each team: 1st or 2nd of its group (ranked by eve P1, which
-  // splits the group winner from the runner-up), or one of the eight best thirds — those
+  // splits the group winner from the runner-up), or one of the eight best thirds, those
   // are the "through" calls. Everyone else: out. (A flat >=50% qualify is wrong: with
   // best-third routes it calls all four in a tight group, but only ~2-3 advance.)
   const p1 = (t) => (WC26.baseline_eve && WC26.baseline_eve[t] && WC26.baseline_eve[t].P1 != null) ? WC26.baseline_eve[t].P1 : eq(t);
@@ -677,8 +677,8 @@ if (WC26.replay && WC26.replay.snapshots && WC26.standings && $("rc-groups")) {
   Object.keys(st).forEach((g) => {
     const ranked = st[g].map((r) => r.team).sort((a, b) => p1(b) - p1(a));
     if (ranked[0]) predType[ranked[0]] = "1st";
-    if (ranked[1]) { predType[ranked[1]] = "2nd"; bubble.add(ranked[1]); }  // runner-up — on the bubble
-    if (ranked[2]) bubble.add(ranked[2]);                                    // first one out — on the bubble
+    if (ranked[1]) { predType[ranked[1]] = "2nd"; bubble.add(ranked[1]); }  // runner-up, on the bubble
+    if (ranked[2]) bubble.add(ranked[2]);                                    // first one out, on the bubble
   });
   Object.entries(eve.best_third || {}).sort((a, b) => b[1] - a[1]).slice(0, 8).forEach(([t]) => { if (!predType[t]) predType[t] = "3rd"; });
   const predThrough = new Set(Object.keys(predType));
@@ -690,7 +690,7 @@ if (WC26.replay && WC26.replay.snapshots && WC26.standings && $("rc-groups")) {
       const t = r.team, pred = predThrough.has(t), act = qualified.has(t), ok = pred === act;
       total++; if (ok) { correct++; gh++; }
       const predLabel = pred ? (predType[t] === "3rd" ? "best 3rd" : predType[t]) : "out";
-      const cf = bubble.has(t) ? ` <span class="gc-cf" title="a coin-flip call — we rated it 40–60%">⚖</span>` : "";
+      const cf = bubble.has(t) ? ` <span class="gc-cf" title="a coin-flip call, we rated it 40–60%">⚖</span>` : "";
       return `<div class="gc-row ${ok ? "ok" : "no"}" title="we predicted ${pred ? predLabel : "out"} · actually ${act ? "qualified" : "eliminated"}">
         <span class="gc-res">${ok ? "✓" : "✗"}</span>
         <span class="gc-team">${flag(t)}${TLA3(t)}</span>
@@ -699,7 +699,7 @@ if (WC26.replay && WC26.replay.snapshots && WC26.standings && $("rc-groups")) {
     return `<div class="gc-card"><div class="gc-head"><span>Group ${g}</span><span class="gc-score">${gh}/4 right</span></div>${rows}</div>`;
   }).join("");
   if ($("rc-groups-lead")) $("rc-groups-lead").innerHTML =
-    `One card per group, every team listed in its <em>final</em> order. For each we show what we called on June 11 — <b>1st</b>, <b>2nd</b> or <b>best 3rd</b> to go through, or <b>out</b> — and what happened. <b class="rc-key ok">✓</b> = we got it right, <b class="rc-key no">✗</b> = wrong, <b class="rc-key">⚖</b> = we'd rated it a coin-flip. <strong>${correct} of ${total}</strong> teams called correctly.`;
+    `One card per group, every team listed in its <em>final</em> order. For each we show what we called on June 11, <b>1st</b>, <b>2nd</b> or <b>best 3rd</b> to go through, or <b>out</b>, and what happened. <b class="rc-key ok">✓</b> = we got it right, <b class="rc-key no">✗</b> = wrong, <b class="rc-key">⚖</b> = we'd rated it a coin-flip. <strong>${correct} of ${total}</strong> teams called correctly.`;
   $("rc-groups").innerHTML = grpHTML;
   // best/worst qualification calls: coin-flips we nailed vs the confident misses
   if ($("rc-best")) {
@@ -712,7 +712,7 @@ if (WC26.replay && WC26.replay.snapshots && WC26.standings && $("rc-groups")) {
     const line = (c) => `<div class="rc-cline ${c.ok ? "ok" : "no"}"><span class="rc-cteam">${c.ok ? "✓" : "✗"} ${flag(c.t)}${TLA3(c.t)}</span><span class="rc-cnote">said ${c.pred ? (predType[c.t] === "3rd" ? "best third" : predType[c.t]) : "out"} → ${c.act ? "qualified" : "out"} <i>${pct(c.p, 0)}</i></span></div>`;
     const worst = calls.filter((c) => !c.ok).sort((a, b) => (b.pred ? b.p : 1 - b.p) - (a.pred ? a.p : 1 - a.p)).slice(0, 5);
     const best = calls.filter((c) => c.ok && c.close).sort((a, b) => Math.abs(0.5 - a.p) - Math.abs(0.5 - b.p)).slice(0, 5);
-    $("rc-best").innerHTML = best.length ? best.map(line).join("") : `<em style="color:var(--muted)">—</em>`;
+    $("rc-best").innerHTML = best.length ? best.map(line).join("") : `<em style="color:var(--muted)">-</em>`;
     $("rc-worst").innerHTML = worst.length ? worst.map(line).join("") : `<em style="color:var(--muted)">none</em>`;
   }
   if ($("rc-gb")) {
@@ -740,28 +740,28 @@ if (WC26.bracket_dists && $("rc-ko")) {
     }).join("");
     $("rc-ko").innerHTML = `<p class="chart-cap"><strong>${hits} of ${played.length}</strong> knockout ties called right so far.</p>` + rows;
   } else {
-    $("rc-ko").innerHTML = `<p class="chart-cap">The knockouts haven't kicked off yet — this fills in tie by tie.</p>`;
+    $("rc-ko").innerHTML = `<p class="chart-cap">The knockouts haven't kicked off yet, this fills in tie by tie.</p>`;
   }
 }
 
 /* ---------- best calls / biggest surprises (from match_dists) ---------- */
 if (WC26.match_dists && $("track-best")) {
   // model probability assigned to the outcome that actually happened (W/D/L)
-  // pa = probability the model gave the OUTCOME (win/draw/loss) that happened — not the
+  // pa = probability the model gave the OUTCOME (win/draw/loss) that happened, not the
   // exact scoreline. "Best calls" = genuinely open matches (no side over 65%) the model
   // still called right, so blow-outs of minnows don't crowd out the real calls.
   const probOf = (m) => { const [h, a] = m.actual; return h > a ? m.pH : (h < a ? m.pA : m.pD); };
   const outLabel = (m) => { const [h, a] = m.actual; return h > a ? `${m.home} won` : (h < a ? `${m.away} won` : "draw"); };
   const outIdx = (m) => { const [h, a] = m.actual; return h > a ? "H" : (h < a ? "A" : "D"); };
   const predIdx = (m) => (m.pH >= m.pD && m.pH >= m.pA) ? "H" : (m.pA >= m.pD ? "A" : "D");
-  // group games (match_dists) + played knockout ties (bracket_dists) — the knockouts are
+  // group games (match_dists) + played knockout ties (bracket_dists), the knockouts are
   // where the real coin-flips live (Germany–Paraguay went to a shootout).
   const pool = [...WC26.match_dists, ...((WC26.bracket_dists || []).filter((m) => m.actual))];
   const played = pool.filter((m) => m.actual)
     .map((m) => ({ ...m, pa: probOf(m), topp: Math.max(m.pH, m.pD, m.pA) }));
   // a "close call" = the model rated it a coin-flip pre-match (no outcome above 42%):
   // nailing one is impressive, missing one is forgivable.
-  const cf = (m) => m.topp < 0.42 ? ` <span class="cf-badge" title="pre-match coin-flip — no result above ${pct(m.topp, 0)}">⚖ coin-flip</span>` : "";
+  const cf = (m) => m.topp < 0.42 ? ` <span class="cf-badge" title="pre-match coin-flip, no result above ${pct(m.topp, 0)}">⚖ coin-flip</span>` : "";
   const row = (m) => `<div class="sb-row clickable bw-row" data-home="${m.home}" data-away="${m.away}">
     <div><span class="bw-match">${flag(m.home)}${TLA3(m.home)} ${m.actual[0]}–${m.actual[1]} ${TLA3(m.away)}${flag(m.away)}</span>
       <span class="bw-out">${outLabel(m)}</span>${cf(m)}</div>
@@ -779,13 +779,13 @@ if (WC26.ablations && $("host-ablation")) {
   const noHost = WC26.ablations.no_host_advantage.hosts;
   $("host-ablation").innerHTML =
     ["United States", "Mexico", "Canada"].map((team) => {
-      // frozen at the June-11 eve (like the counterfactual) — this is a pre-tournament
+      // frozen at the June-11 eve (like the counterfactual), this is a pre-tournament
       // statement about home advantage, not a live figure that drifts to 100%.
       const real = (WC26.baseline_eve && WC26.baseline_eve[team] && WC26.baseline_eve[team].P1 != null)
         ? WC26.baseline_eve[team].P1 : WC26.teams.find((t) => t.team === team).P1;
       const cf = noHost[team].P1;
       return `<div class="ab-row">
-        <div class="who">${flag(team)}${team} — win the group</div>
+        <div class="who">${flag(team)}${team}, win the group</div>
         <div class="ab-pair"><div class="ab-track"><div class="ab-fill real" style="width:${100 * real}%"></div></div>
           <div class="ab-label">with home ${pct(real, 0)}</div></div>
         <div class="ab-pair"><div class="ab-track"><div class="ab-fill counter" style="width:${100 * cf}%"></div></div>
@@ -813,14 +813,14 @@ if (WC26.xi_tuning && $("xi-chart")) {
   $("xi-note").innerHTML =
     `Pooled log-loss spans <strong>${min}–${max}</strong> across a 10× range of decay
      (paired t=${WC26.xi_tuning.paired_t_extremes} between the extremes: statistically nothing).
-     We pin it at the plateau centre and move on — a data choice that, measurably,
+     We pin it at the plateau centre and move on, a data choice that, measurably,
      <strong>does not matter</strong>.`;
 }
 
 /* ---------- usa case ---------- */
 if ($("usa-case")) {
   const usa = WC26.teams.find((t) => t.team === "United States");
-  // frozen at the June-11 eve — a pre-tournament statement, not a live number.
+  // frozen at the June-11 eve, a pre-tournament statement, not a live number.
   const usaEveP1 = (WC26.baseline_eve && WC26.baseline_eve["United States"]
     && WC26.baseline_eve["United States"].P1 != null) ? WC26.baseline_eve["United States"].P1 : usa.P1;
   const rows = [
@@ -834,7 +834,7 @@ if ($("usa-case")) {
       <span class="src">${src}</span>
       <div class="usa-track"><i style="width:${100 * p / 0.6}%; background:${bg}"></i></div>
       <span class="num">${pct(p, 0)}</span></div>`).join("") +
-    `</div><p class="mini-note" style="margin-top:8px">🇺🇸 USA win group D — three views of the same question.</p>`;
+    `</div><p class="mini-note" style="margin-top:8px">🇺🇸 USA win group D, three views of the same question.</p>`;
 }
 
 /* ---------- altitude card ---------- */
@@ -883,7 +883,7 @@ if (WC26.fatigue && WC26.ablations && WC26.ablations.no_fatigue && $("fatigue-ca
       <span class="num">${x.d > 0 ? "+" : ""}${(100 * x.d).toFixed(1)}pp</span></div>`).join("");
   $("fatigue-note").innerHTML =
     `More minutes in the legs, fewer goals on the pitch. The sign is stable but the file is thin
-     (two World Cups): admitted <strong>on probation</strong>. France pays the most — the heaviest
+     (two World Cups): admitted <strong>on probation</strong>. France pays the most, the heaviest
      squad in the tournament.`;
 }
 
@@ -930,19 +930,19 @@ if (WC26.shadow_scores && $("lab-board")) {
     const shadow = r.variant.includes("shadow");
     const col = main ? "linear-gradient(90deg, var(--accent2), var(--accent))" : shadow ? "var(--gold)" : "#51618f";
     return `<div class="bar-row">
-      <div class="who">${main ? `<b>${r.variant}</b> <span class="prod-badge">▶ in production</span>` : r.variant}</div>
+      <div class="who">${main ? `<b>${r.variant}</b> <span class="prod-badge">▶ in prod</span>` : r.variant}</div>
       <div class="bar-track"><div class="bar-fill" style="width:${w(r.log_loss)}%;background:${col}"></div></div>
       <div class="val">${r.log_loss.toFixed(3)}</div>
     </div>`;
   }).join("");
   $("lab-note").innerHTML =
     `The <strong>top row is the model actually in production</strong>; every other line is the same model
-     with one ingredient added or removed — a what-if. Shorter bar = better (lower log-loss; know-nothing
+     with one ingredient added or removed, a what-if. Shorter bar = better (lower log-loss; know-nothing
      baseline ${uni.toFixed(3)}). Crucially, over the ${n} matches played so far the whole field is spread
-     by just <strong>${spread.toFixed(3)}</strong> log-loss — <strong>statistically tied</strong>, far too
+     by just <strong>${spread.toFixed(3)}</strong> log-loss, <strong>statistically tied</strong>, far too
      few games to separate them, so the ordering here is noise (the deployed model beating "Elo only" and
      "no altitude" is the only real signal: the tilts help). The two gold bars are shadow bets that live
-     here and <strong>only</strong> here. <strong>This live board never decides what goes in the model —
+     here and <strong>only</strong> here. <strong>This live board never decides what goes in the model -
      the 345-match backtest does.</strong>`;
 }
 
