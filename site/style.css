@@ -681,7 +681,7 @@ details.tech[open] summary::before { content: "\25BE "; }
    in JS) — reading left to right, winners flow into the next column. */
 #fc-bracket.bracket-scroll { display: flex; align-items: stretch; justify-content: flex-start;
   gap: 2px; width: 100%; max-width: 100%; min-width: 0;
-  overflow-x: auto; overflow-y: visible; padding: 3px 3px 10px; }
+  overflow-x: auto; overflow-y: visible; padding: 4px 7px 10px; }
 /* override the earlier (dead) .bk-col rule's min-width:116 so columns are only as wide as
    their tie — otherwise the nine columns total ~1060px and the far-right R32 is cut off. */
 .bk-col { display: flex; flex-direction: column; flex: 0 0 auto; min-width: 0;
@@ -689,13 +689,12 @@ details.tech[open] summary::before { content: "\25BE "; }
 .bk-col > .bk-rlab { margin-bottom: 10px; }
 .bk-col > .ties { flex: 1; flex-direction: column; flex-wrap: nowrap;
   justify-content: space-around; gap: 6px; }
-.bk-col .tie { width: 100px; padding: 4px 6px; }
-.bk-col .tie-side { font-size: .73rem; }
-/* centre column: the final tie with the champion trophy under it */
-/* final tie + champion trophy kept together and centred, level with the two semis */
-.bk-centre { justify-content: center; align-items: center; min-width: 112px; }
+.bk-col .tie { width: 96px; padding: 4px 6px; }
+.bk-col .tie-side { font-size: .72rem; }
+/* centre column: the final tie with the champion trophy under it, level with the semis */
+.bk-centre { justify-content: center; align-items: center; min-width: 108px; }
 .bk-centre > .ties { flex: 0 0 auto; }
-.bk-centre .tie { width: 112px; }
+.bk-centre .tie { width: 108px; }
 .bk-centre .bk-apex { margin-top: 10px; }
 .bk-apex { text-align: center; margin-bottom: 4px; }
 .bk-trophy { font-size: 2.6rem; line-height: 1; filter: drop-shadow(0 0 14px rgba(255,209,102,.5)); }
