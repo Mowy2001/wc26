@@ -609,7 +609,7 @@ function renderMarket(champMap) {
       dMarket: mktEve[t.team] != null ? mkt[t.team] - mktEve[t.team] : null,
     }; })
     .sort((a, b) => b.model - a.model)
-    .slice(0, 10);
+    .slice(0, 20);
   const max = Math.max(...rows.flatMap((r) => [r.model, r.market]));
   // flag a divergence when the model and market disagree by >= 5 percentage points
   const BIG = 0.05;
@@ -701,20 +701,6 @@ if (WC26.replay && WC26.replay.snapshots && WC26.standings && $("rc-groups")) {
   if ($("rc-groups-lead")) $("rc-groups-lead").innerHTML =
     `One card per group, every team listed in its <em>final</em> order. For each we show what we called on June 11, <b>1st</b>, <b>2nd</b> or <b>best 3rd</b> to go through, or <b>out</b>, and what happened. <b class="rc-key ok">✓</b> = we got it right, <b class="rc-key no">✗</b> = wrong, <b class="rc-key">⚖</b> = we'd rated it a coin-flip. <strong>${correct} of ${total}</strong> teams called correctly.`;
   $("rc-groups").innerHTML = grpHTML;
-  // best/worst qualification calls: coin-flips we nailed vs the confident misses
-  if ($("rc-best")) {
-    const calls = [];
-    Object.keys(st).forEach((g) => st[g].forEach((r) => {
-      const t = r.team;
-      calls.push({ t, p: eq(t), pred: predThrough.has(t), act: qualified.has(t), close: bubble.has(t) });
-    }));
-    calls.forEach((c) => (c.ok = c.pred === c.act));
-    const line = (c) => `<div class="rc-cline ${c.ok ? "ok" : "no"}"><span class="rc-cteam">${c.ok ? "✓" : "✗"} ${flag(c.t)}${TLA3(c.t)}</span><span class="rc-cnote">said ${c.pred ? (predType[c.t] === "3rd" ? "best third" : predType[c.t]) : "out"} → ${c.act ? "qualified" : "out"} <i>${pct(c.p, 0)}</i></span></div>`;
-    const worst = calls.filter((c) => !c.ok).sort((a, b) => (b.pred ? b.p : 1 - b.p) - (a.pred ? a.p : 1 - a.p)).slice(0, 5);
-    const best = calls.filter((c) => c.ok && c.close).sort((a, b) => Math.abs(0.5 - a.p) - Math.abs(0.5 - b.p)).slice(0, 5);
-    $("rc-best").innerHTML = best.length ? best.map(line).join("") : `<em style="color:var(--muted)">-</em>`;
-    $("rc-worst").innerHTML = worst.length ? worst.map(line).join("") : `<em style="color:var(--muted)">none</em>`;
-  }
   if ($("rc-gb")) {
     const gv = (p) => (p.p != null ? p.p : p.P_golden_boot);
     const eg = (eve.golden_boot || []).slice(0, 5), ng = (WC26.golden_boot || []).slice(0, 5);
@@ -754,10 +740,9 @@ if (WC26.match_dists && $("track-best")) {
   const outLabel = (m) => { const [h, a] = m.actual; return h > a ? `${m.home} won` : (h < a ? `${m.away} won` : "draw"); };
   const outIdx = (m) => { const [h, a] = m.actual; return h > a ? "H" : (h < a ? "A" : "D"); };
   const predIdx = (m) => (m.pH >= m.pD && m.pH >= m.pA) ? "H" : (m.pA >= m.pD ? "A" : "D");
-  // group games (match_dists) + played knockout ties (bracket_dists), the knockouts are
-  // where the real coin-flips live (Germany–Paraguay went to a shootout).
-  const pool = [...WC26.match_dists, ...((WC26.bracket_dists || []).filter((m) => m.actual))];
-  const played = pool.filter((m) => m.actual)
+  // group games only (this panel sits under the group scorecard); knockout ties are
+  // graded separately in "Called it? The knockouts".
+  const played = (WC26.match_dists || []).filter((m) => m.actual)
     .map((m) => ({ ...m, pa: probOf(m), topp: Math.max(m.pH, m.pD, m.pA) }));
   // a "close call" = the model rated it a coin-flip pre-match (no outcome above 42%):
   // nailing one is impressive, missing one is forgivable.
@@ -962,23 +947,34 @@ if (WC26.scoring && WC26.scoring.n && $("track-head")) {
     <div class="stat"><div class="v">${pct(s.fav_predicted,0)} → ${pct(s.fav_observed,0)}</div><div class="k">favourites: predicted vs won</div></div>`;
   const M = { H: "home win", D: "draw", A: "away win" };
   if ($("track-matches")) {
-  $("track-matches").innerHTML = [...s.matches].reverse().map((m) => {
-    const good = m.p_realised >= 0.45;
-    const has = MD[m.home + "|" + m.away] ? "clickable" : "";
-    const hint = `<span class="mh-hint">${has ? "distribution ▸" : ""}</span>`;
-    const [hg, ag] = (m.score || "–").split(/[–-]/);
-    return `<div class="sb-row ${has}" data-home="${m.home}" data-away="${m.away}">
-      <div class="sb-match">
-        <span class="sb-team">${flag(m.home)}${m.home}</span>
-        <span class="sb-score">${hg ?? ""}<i>–</i>${ag ?? ""}</span>
-        <span class="sb-team away">${m.away}${flag(m.away)}</span>
-        <span class="sb-cf">${coinFlipBadge(m.home, m.away)}</span>${hint}
-      </div>
-      <div class="sb-p ${good ? "win" : "miss"} tnum" title="probability the model gave to what actually happened">${pct(m.p_realised, 0)}</div>
-    </div>`;
-  }).join("");
-  $("track-matches").querySelectorAll(".sb-row.clickable").forEach((row) =>
-    row.addEventListener("click", () => showHeat(row.dataset.home, row.dataset.away)));
+    // last 5 played matches, most recent first: knockouts (bracket_dists) are the newest,
+    // then the latest group games.
+    const koN = (WC26.bracket_dists || []).filter((m) => m.winner)
+      .sort((a, b) => b.match - a.match)
+      .map((m) => { const [h, a] = m.actual; return {
+        home: m.home, away: m.away, score: `${h}-${a}`,
+        pa: h > a ? m.pH : (h < a ? m.pA : m.pD), winner: m.winner }; });
+    const grpN = [...s.matches].reverse().map((m) => ({
+      home: m.home, away: m.away, score: m.score, pa: m.p_realised, winner: null }));
+    const last5 = [...koN, ...grpN].slice(0, 5);
+    $("track-matches").innerHTML = last5.map((m) => {
+      const good = m.pa >= 0.45;
+      const has = MD[m.home + "|" + m.away] ? "clickable" : "";
+      const hint = `<span class="mh-hint">${has ? "distribution ▸" : ""}</span>`;
+      const [hg, ag] = (m.score || "-").split(/[–-]/);
+      const adv = m.winner ? `<span class="sb-adv" title="went through">${flag(m.winner)} through</span>` : "";
+      return `<div class="sb-row ${has}" data-home="${m.home}" data-away="${m.away}">
+        <div class="sb-match">
+          <span class="sb-team">${flag(m.home)}${m.home}</span>
+          <span class="sb-score">${hg ?? ""}<i>–</i>${ag ?? ""}</span>
+          <span class="sb-team away">${m.away}${flag(m.away)}</span>
+          <span class="sb-cf">${coinFlipBadge(m.home, m.away)}</span>${adv}${hint}
+        </div>
+        <div class="sb-p ${good ? "win" : "miss"} tnum" title="probability the model gave to what actually happened">${pct(m.pa, 0)}</div>
+      </div>`;
+    }).join("");
+    $("track-matches").querySelectorAll(".sb-row.clickable").forEach((row) =>
+      row.addEventListener("click", () => showHeat(row.dataset.home, row.dataset.away)));
   }
   if (WC26.standings && $("track-standings")) {
     $("track-standings").innerHTML = Object.keys(WC26.standings).sort().map((g) => {

@@ -51,23 +51,13 @@
 <div class="act-divider"><span class="act-num">1</span> Tonight's race</div>
 
 <section id="track">
-  <h2>How it's doing <span class="sub">the forecast frozen on June 11, graded against real results</span></h2>
-  <p class="note" style="margin-top:-4px;margin-bottom:14px">This is the heart of it: a forecast is
-  only worth as much as its record. Below is how the <em>frozen</em> June-11 model is scoring against
-  every result since kick-off, no retro-fitting, no second guesses.</p>
+  <h2>How it's doing <span class="sub">the model's live record against every result</span></h2>
   <div id="track-head" class="hero-stats"></div>
-  <div style="margin-top:18px"><div class="tl-h">Recent matches, P(what actually happened)</div>
+  <div style="margin-top:18px"><div class="tl-h">Last matches</div>
     <div id="track-matches" class="chart"></div></div>
-  <div class="tl-h" style="margin-top:22px">Best calls &amp; biggest surprises
-    <span class="sub">the probability the frozen model gave to what actually happened, click any for the heatmap</span></div>
-  <div class="bw-grid">
-    <div><div class="bw-lab good">✓ Nailed it</div><div id="track-best" class="chart"></div></div>
-    <div><div class="bw-lab bad">✗ Didn't see it coming</div><div id="track-worst" class="chart"></div></div>
-  </div>
-  <p class="note">These are the probabilities the model gave each real match <em>before</em> it was
-  played (beliefs frozen June 11). The score is <strong>log-loss</strong>, lower is better, and a
-  know-nothing coin-three scores 1.099; coming in under that line means the model beats pure
-  guessing. Calibration shows how often its favourites actually won.</p>
+  <p class="note">Each match shows the probability the model gave to what actually happened, set before
+  kickoff. The overall score is <strong>log-loss</strong> (lower is better); a know-nothing coin-three
+  scores 1.099, so under that line means the model beats guessing.</p>
 </section>
 
 <section id="reality-ko">
@@ -78,24 +68,26 @@
 </section>
 
 <section id="reality">
-  <h2>Called it? The groups <span class="sub">the frozen June-11 forecast against what actually happened</span></h2>
+  <h2>Called it? The groups <span class="sub">our June-11 forecast against what actually happened</span></h2>
   <div class="tl-h">Group stage, who reached the knockouts</div>
   <p class="chart-cap" id="rc-groups-lead"></p>
   <div id="rc-groups"></div>
-  <div class="bw-grid" style="margin-top:22px">
-    <div><div class="bw-lab good">✓ Nailed the coin-flips</div><div id="rc-best"></div></div>
-    <div><div class="bw-lab bad">✗ Biggest misses</div><div id="rc-worst"></div></div>
+  <div class="tl-h" style="margin-top:24px">Best calls &amp; biggest surprises
+    <span class="sub">group matches: the chance the model gave to what happened, click for the heatmap</span></div>
+  <div class="bw-grid">
+    <div><div class="bw-lab good">✓ Nailed it</div><div id="track-best" class="chart"></div></div>
+    <div><div class="bw-lab bad">✗ Didn't see it coming</div><div id="track-worst" class="chart"></div></div>
   </div>
   <div class="tl-h" style="margin-top:24px">Golden Boot, our eve pick vs the race now</div>
   <div id="rc-gb"></div>
-  <p class="note">Predictions were frozen on June 11, nothing here is fitted after the fact.
+  <p class="note">Predictions were set on June 11, nothing here is fitted after the fact.
   ✓ = a call we got right, ✗ = wrong, ⚖ = a team we'd rated a coin-flip to go through.</p>
 </section>
 
 <section id="forecast">
   <h2>The forecast</h2>
   <p class="note" style="margin-top:-4px;margin-bottom:14px">Every frame is a full re-simulation
-  conditioned on the results up to that point (beliefs frozen at June 11). Step to the
+  conditioned on the results up to that point (ratings and parameters set on June 11). Step to the
   end for today's live picture, or back to watch one result ripple through everything. The control
   repeats above each view so you never have to scroll back up, use the ◀ ▶ buttons or arrow keys
   to move one match at a time. <strong>▲/▼ = change since the previous match.</strong></p>
@@ -105,6 +97,15 @@
     <p class="chart-cap">% = share of the 20,000 simulations in which the team reaches that round; the last
     column is the title odds. Scroll for every team, it all moves with the slider, through to the final.</p>
     <div class="rr-scroll"><table id="fc-rounds" class="rounds-table"></table></div></div>
+  <div class="fc-block" id="market"><div class="fc-bar"></div>
+    <div class="tl-h">Model vs market <span class="sub">our title odds against the bookies, live, margin removed with Shin's method</span></div>
+    <p class="market-diverge" id="market-diverge"></p>
+    <p class="chart-cap" style="max-width:820px">Drag to watch our title odds move match by match (▲▼ = change since June 11); the market line is the latest live price. Scroll for more teams.</p>
+    <div id="market-chart" class="chart market-scroll"></div>
+    <p class="note">Where the bars disagree, someone is wrong, that's the point. The model is deliberately
+    Elo-honest, and the market knows things we've <em>chosen not to feed it</em>. The bookmaker margin is
+    stripped with Shin's insider-trading model, so the comparison is fair. After the final we score model,
+    bookmaker and the Klement forecast (<span id="klement-note"></span>) on the same log-loss scale.</p></div>
   <div class="fc-block"><div class="fc-bar"></div>
     <div class="tl-h">Predicted bracket, most likely team in each slot
       <span class="bk-toggle" id="bk-toggle">
@@ -132,22 +133,6 @@
         <p class="chart-cap">% = chance of being the tournament's top scorer.</p>
         <div id="fc-gb" class="chart"></div></div>
     </div></div>
-</section>
-
-<section id="market">
-  <h2>Model vs market <span class="sub">our forecast against the bookies, live odds, margin removed with Shin’s method</span></h2>
-  <p class="market-diverge" id="market-diverge"></p>
-  <p class="chart-cap" style="max-width:820px">Drag to watch <strong>our</strong> title odds move
-  match by match (the ▲▼ is the change since June 11); the market line is the latest live price.</p>
-  <div class="fc-bar"></div>
-  <div id="market-chart" class="chart"></div>
-  <p class="note">Here's the contrarian part: where the bars disagree, someone is wrong, that's
-  the point. The model is deliberately Elo-honest, and the market knows things we've
-  <em>chosen not to feed it</em>, a discipline we explain under the hood. The bookmaker margin is
-  stripped with Shin's insider-trading model (it de-shades longshots more than favourites), so the
-  comparison is fair. After the final we score model, bookmaker and the Klement forecast
-  (<span id="klement-note"></span>) on the same log-loss scale, every prediction frozen with what
-  was known on June 11, 2026.</p>
 </section>
 
 <section id="drivers">

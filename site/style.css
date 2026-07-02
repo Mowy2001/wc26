@@ -546,6 +546,10 @@ details.tech[open] summary::before { content: "\25BE "; }
 .gc-detail { color: var(--muted); font-size: .74rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .gc-detail b { color: var(--accent2); font-weight: 700; }
 .gc-cf { color: var(--gold); }
+
+/* scrollable lists: model-vs-market (more teams) and drivers (all teams) */
+.market-scroll { max-height: 440px; overflow-y: auto; padding-right: 4px; }
+#drivers-board { max-height: 500px; overflow-y: auto; padding-right: 4px; }
 .rc-gbcols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .rc-gbh { font-size: .68rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted);
   font-weight: 800; margin-bottom: 6px; }
@@ -577,6 +581,7 @@ details.tech[open] summary::before { content: "\25BE "; }
 .sb-p.miss { color: var(--hot); }
 /* reserved fixed slots so the coin-flip badge / hint never shift the row alignment */
 .sb-cf { flex: 0 0 84px; display: inline-flex; justify-content: flex-end; align-items: center; }
+.sb-adv { font-size: .68rem; color: var(--accent); font-weight: 700; white-space: nowrap; margin-left: 6px; }
 .sb-row .mh-hint { flex: 0 0 74px; text-align: right; white-space: nowrap;
   color: var(--accent2); font-size: .7rem; opacity: 0; }
 .sb-row.clickable:hover .mh-hint { opacity: .9; }
