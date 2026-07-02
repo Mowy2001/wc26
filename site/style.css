@@ -550,11 +550,8 @@ details.tech[open] summary::before { content: "\25BE "; }
 /* scrollable lists: model-vs-market (more teams) and drivers (all teams) */
 .market-scroll { max-height: 440px; overflow-y: auto; padding-right: 4px; }
 #drivers-board { max-height: 500px; overflow-y: auto; padding-right: 4px; }
-.nm-adv { margin-top: 7px; padding-top: 6px; border-top: 1px solid var(--card-edge); font-size: .74rem; color: var(--muted); display: flex; flex-direction: column; gap: 3px; }
+.nm-adv { margin-top: 7px; padding-top: 6px; border-top: 1px solid var(--card-edge); font-size: .74rem; color: var(--muted); }
 .nm-adv b { color: var(--accent); font-variant-numeric: tabular-nums; }
-.nm-adv-row { display: flex; align-items: baseline; gap: 6px; }
-.nm-adv-lab { flex: 0 0 96px; font-size: .64rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
-.nm-adv-row:last-child b { color: var(--hot); }
 .rc-gbcols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .rc-gbh { font-size: .68rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted);
   font-weight: 800; margin-bottom: 6px; }
@@ -642,8 +639,11 @@ details.tech[open] summary::before { content: "\25BE "; }
 .nm-card.clickable:hover .mh-hint { opacity: .9; }
 .nm-line { display: grid; grid-template-columns: 52px 1fr; align-items: center; gap: 9px; margin: 4px 0; }
 .nm-lab { font-size: .68rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
-.x-bar { display: flex; height: 18px; border-radius: 5px; overflow: hidden; background: var(--bar-bg); }
+.x-bar { position: relative; display: flex; height: 18px; border-radius: 5px; overflow: hidden; background: var(--bar-bg); }
 .x-seg { display: flex; align-items: center; justify-content: center; font-size: .64rem; font-weight: 800; color: #06120c; min-width: 0; }
+.x-zeb { opacity: .92; }
+/* thin marker at the "goes through" boundary of a knockout bar */
+.x-thru { position: absolute; top: -1px; bottom: -1px; width: 2px; margin-left: -1px; background: #f4f7ff; box-shadow: 0 0 0 1px rgba(6,18,12,.55); pointer-events: none; }
 
 /* ---------- follow-a-team dossier ---------- */
 .tm-click { cursor: pointer; }

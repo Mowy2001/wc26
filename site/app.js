@@ -143,10 +143,26 @@ function showTeam(name) {
 /* ---------- next matches: model vs market 1X2 (scripts/42) ---------- */
 if (WC26.next_matches && WC26.next_matches.matches && $("next-board")) {
   const nm = WC26.next_matches.matches;
-  const x123 = (p) => {
+  // For a knockout tie the draw doesn't stand: extra time + penalties split it in
+  // proportion to each side's 90-minute win chance. We keep the same 1X2 bar but hatch
+  // (zebra) the draw slice — its home-tinted / away-tinted halves so the colour change
+  // lands exactly at each side's chance of going through the tie.
+  const x123 = (p, ko) => {
     const seg = (w, c, lab) => w > 0.001
       ? `<span class="x-seg" style="width:${100 * w}%;background:${c}" title="${lab} ${pct(w, 0)}">${100 * w >= 15 ? Math.round(100 * w) : ""}</span>` : "";
-    return `<div class="x-bar">${seg(p.pH, "var(--accent)", "home win")}${seg(p.pD, "var(--muted)", "draw")}${seg(p.pA, "var(--hot)", "away win")}</div>`;
+    if (!ko) {
+      return `<div class="x-bar">${seg(p.pH, "var(--accent)", "home win")}${seg(p.pD, "var(--muted)", "draw")}${seg(p.pA, "var(--hot)", "away win")}</div>`;
+    }
+    const hShare = p.pH / (p.pH + p.pA || 1);
+    const dH = p.pD * hShare, dA = p.pD - dH;
+    const adH = p.pH + dH;
+    const zeb = (tint) => `repeating-linear-gradient(45deg,${tint} 0 3px,var(--muted) 3px 6px)`;
+    const hatch = (w, tint, lab) => w > 0.0005
+      ? `<span class="x-seg x-zeb" style="width:${100 * w}%;background:${zeb(tint)}" title="${lab}"></span>` : "";
+    return `<div class="x-bar">${seg(p.pH, "var(--accent)", "home win")}` +
+      `${hatch(dH, "var(--accent)", "draw resolved to home")}${hatch(dA, "var(--hot)", "draw resolved to away")}` +
+      `${seg(p.pA, "var(--hot)", "away win")}` +
+      `<span class="x-thru" style="left:${100 * adH}%" title="goes through: ${pct(adH, 0)} / ${pct(1 - adH, 0)}"></span></div>`;
   };
   const fmt = (iso) => { try { return new Date(iso).toLocaleString("en-GB", { weekday: "short", hour: "2-digit", minute: "2-digit", timeZone: "Europe/Paris" }) + " CET"; } catch (_) { return ""; } };
   $("next-board").innerHTML = nm.map((m) => {
@@ -156,30 +172,22 @@ if (WC26.next_matches && WC26.next_matches.matches && $("next-board")) {
     const favOf = (p) => (p.pH >= p.pD && p.pH >= p.pA) ? "H" : (p.pA >= p.pD ? "A" : "D");
     const flip = favOf(m.model) !== favOf(m.market);
     const div = (gap >= 0.10 || flip) ? `<span class="nm-div" title="${flip ? "model and market back opposite sides" : "model and market disagree by " + pct(gap, 0)}">model ≠ market</span>` : "";
-    // for knockout ties, resolve the draw (extra time + penalties) in proportion to each
-    // side's 90-minute win chance, so we can show who actually goes through — for both the
-    // model and the market, kept distinct.
-    const adv = (p) => { const h = p.pH + p.pD * (p.pH / (p.pH + p.pA || 1)); return [h, 1 - h]; };
-    const [mH, mA] = adv(m.model), [kH, kA] = adv(m.market);
-    const advLine = m.ko ? `<div class="nm-adv" title="chance of going through (90 min + extra time + penalties)">
-        <span class="nm-adv-row"><span class="nm-adv-lab">Model through</span><b>${flag(m.home)}${TLA3(m.home)} ${pct(mH, 0)}</b> · <b>${pct(mA, 0)} ${TLA3(m.away)}${flag(m.away)}</b></span>
-        <span class="nm-adv-row"><span class="nm-adv-lab">Market through</span><b>${flag(m.home)}${TLA3(m.home)} ${pct(kH, 0)}</b> · <b>${pct(kA, 0)} ${TLA3(m.away)}${flag(m.away)}</b></span></div>` : "";
     return `<div class="nm-card clickable" data-home="${m.home}" data-away="${m.away}">
       <div class="nm-head"><span class="nm-team">${flag(m.home)}${m.home}</span>
         <span class="nm-vs">${m.ko ? "⚔" : "v"}</span>
         <span class="nm-team away">${m.away}${flag(m.away)}</span></div>
       <div class="nm-meta">${m.ko ? "Knockout" : "Group"} · ${fmt(m.commence)} ${div}<span class="mh-hint">heatmap ▸</span></div>
-      <div class="nm-line"><span class="nm-lab">Model</span>${x123(m.model)}</div>
-      <div class="nm-line"><span class="nm-lab">Market</span>${x123(m.market)}</div>
-      ${advLine}
+      <div class="nm-line"><span class="nm-lab">Model</span>${x123(m.model, m.ko)}</div>
+      <div class="nm-line"><span class="nm-lab">Market</span>${x123(m.market, m.ko)}</div>
     </div>`;
   }).join("");
   $("next-board").querySelectorAll(".nm-card.clickable").forEach((c) =>
     c.addEventListener("click", () => showHeat(c.dataset.home, c.dataset.away)));
   if ($("next-note")) $("next-note").innerHTML =
     `<strong>${nm.length}</strong> upcoming games. Green = home team wins, slate = draw, red = away
-     (90 minutes). Market = consensus of ~${nm[0].market.n_books} bookmakers, margin removed. Knockout ties
-     then go to extra time and penalties.`;
+     (90 minutes). Market = consensus of ~${nm[0].market.n_books} bookmakers, margin removed. In a knockout
+     the draw slice is hatched and split by who survives extra time and penalties, so the colour change
+     marks each side's chance of going through.`;
 }
 
 /* ---------- live status strip ---------- */
