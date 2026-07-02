@@ -773,10 +773,10 @@ if (WC26.bracket_dists && $("rc-ko")) {
       const adH = m.pH + m.pD * (m.pH / (m.pH + m.pA || 1));
       const favThru = fav === m.home ? adH : 1 - adH;
       return `<div class="ko-row ${ok ? "ok" : "no"}">
-        <b class="ko-prob" title="model's chance the backed side went through the tie">${pct(favThru, 0)}</b>
         <span class="ko-rd">${roundName(m.match)}</span>
         <span class="ko-match">${flag(m.home)}${TLA3(m.home)} ${m.actual[0]}–${m.actual[1]} ${TLA3(m.away)}${flag(m.away)}</span>
-        <span class="ko-call">${ok ? "✓" : "✗"} backed ${flag(fav)}${TLA3(fav)} · ${flag(m.winner)}${TLA3(m.winner)} through ${cf}</span></div>`;
+        <span class="ko-call">${ok ? "✓" : "✗"} backed ${flag(fav)}${TLA3(fav)} · ${flag(m.winner)}${TLA3(m.winner)} through ${cf}</span>
+        <b class="ko-prob" title="model's chance the backed side went through the tie">${pct(favThru, 0)}</b></div>`;
     }).join("");
     $("rc-ko").innerHTML = `<p class="chart-cap"><strong>${hits} of ${played.length}</strong> knockout ties called right so far.</p>` + rows;
   } else {

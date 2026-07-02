@@ -531,18 +531,18 @@ details.tech[open] summary::before { content: "\25BE "; }
 .rc-cteam { font-weight: 800; white-space: nowrap; }
 .rc-cnote { color: var(--muted); font-size: .72rem; text-align: right; white-space: nowrap; }
 .rc-cnote i { font-style: normal; font-weight: 700; color: var(--text); }
-.ko-row { display: grid; grid-template-columns: 50px 44px 190px 1fr; gap: 12px; align-items: center;
+.ko-row { display: grid; grid-template-columns: 44px 190px 1fr auto; gap: 12px; align-items: center;
   padding: 8px 12px; margin: 6px 0; background: var(--card); border: 1px solid var(--card-edge);
   border-radius: 10px; font-size: .84rem; }
-@media (max-width: 640px) { .ko-row { grid-template-columns: 50px 1fr; }
-  .ko-row .ko-rd, .ko-row .ko-match, .ko-row .ko-call { grid-column: 2; }
-  .ko-row .ko-prob { grid-column: 1; grid-row: 1 / 4; align-self: center; } }
+@media (max-width: 640px) { .ko-row { grid-template-columns: 1fr auto; }
+  .ko-row .ko-rd, .ko-row .ko-match, .ko-row .ko-call { grid-column: 1; }
+  .ko-row .ko-prob { grid-column: 2; grid-row: 1 / 4; align-self: center; } }
 .ko-row.ok { border-left: 3px solid var(--accent); }
 .ko-row.no { border-left: 3px solid var(--hot); }
 .ko-rd { font-size: .64rem; font-weight: 800; letter-spacing: .06em; color: var(--muted); text-transform: uppercase; }
 .ko-match { font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .ko-call { color: var(--muted); }
-.ko-prob { font-variant-numeric: tabular-nums; font-weight: 800; font-size: 1rem; text-align: left; }
+.ko-prob { font-variant-numeric: tabular-nums; font-weight: 800; font-size: 1rem; text-align: right; }
 .ko-row.ok .ko-prob { color: var(--accent); }
 .ko-row.no .ko-prob { color: var(--hot); }
 
