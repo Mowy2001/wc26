@@ -219,6 +219,12 @@ footer a { color: var(--accent2); }
 
 /* ---------- v2: data-first additions ---------- */
 .cards4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr)); gap: 16px; }
+/* data diet: 3 cards on top, 2 wider cards below that together fill the same width */
+.cards32 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+.cards32 > .card:nth-child(-n+3) { grid-column: span 2; }
+.cards32 > .card:nth-child(n+4) { grid-column: span 3; }
+@media (max-width: 860px) { .cards32 { grid-template-columns: 1fr; }
+  .cards32 > .card { grid-column: auto; } }
 /* two-up cards (roomy enough for embedded charts); collapses to one on mobile */
 .cards-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .cards-2col > .card { min-width: 0; }
