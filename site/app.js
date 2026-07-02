@@ -729,12 +729,15 @@ if (WC26.replay && WC26.replay.snapshots && WC26.standings && $("rc-groups")) {
     const rows = st[g].map((r) => {
       const t = r.team, pred = predThrough.has(t), act = qualified.has(t), ok = pred === act;
       total++; if (ok) { correct++; gh++; }
-      const predLabel = pred ? (predType[t] === "3rd" ? "best 3rd" : predType[t]) : "out";
+      // full wording for the tooltip, short for the (fixed-width) card so nothing clips:
+      // "best 3rd" was the only label too long, and "through" -> "in" keeps a tidy in/out pair.
+      const predFull = pred ? (predType[t] === "3rd" ? "best 3rd" : predType[t]) : "out";
+      const predShort = pred ? (predType[t] === "3rd" ? "3rd" : predType[t]) : "out";
       const cf = bubble.has(t) ? ` <span class="gc-cf" title="a coin-flip call, we rated it 40–60%">⚖</span>` : "";
-      return `<div class="gc-row ${ok ? "ok" : "no"}" title="we predicted ${pred ? predLabel : "out"} · actually ${act ? "qualified" : "eliminated"}">
+      return `<div class="gc-row ${ok ? "ok" : "no"}" title="we predicted ${predFull} · actually ${act ? "qualified" : "eliminated"}">
         <span class="gc-res">${ok ? "✓" : "✗"}</span>
         <span class="gc-team">${flag(t)}${TLA3(t)}</span>
-        <span class="gc-detail">said <b>${predLabel}</b>${cf} → ${act ? "through" : "out"}</span></div>`;
+        <span class="gc-detail">said <b>${predShort}</b>${cf} → ${act ? "in" : "out"}</span></div>`;
     }).join("");
     return `<div class="gc-card"><div class="gc-head"><span>Group ${g}</span><span class="gc-score">${gh}/4 right</span></div>${rows}</div>`;
   }).join("");
@@ -764,9 +767,10 @@ if (WC26.bracket_dists && $("rc-ko")) {
       const adH = m.pH + m.pD * (m.pH / (m.pH + m.pA || 1));
       const favThru = fav === m.home ? adH : 1 - adH;
       return `<div class="ko-row ${ok ? "ok" : "no"}">
+        <b class="ko-prob" title="model's chance the backed side went through the tie">${pct(favThru, 0)}</b>
         <span class="ko-rd">${roundName(m.match)}</span>
         <span class="ko-match">${flag(m.home)}${TLA3(m.home)} ${m.actual[0]}–${m.actual[1]} ${TLA3(m.away)}${flag(m.away)}</span>
-        <span class="ko-call">${ok ? "✓" : "✗"} backed ${flag(fav)}${TLA3(fav)} <b class="ko-prob" title="model's chance the pick went through the tie">${pct(favThru, 0)}</b> · ${flag(m.winner)}${TLA3(m.winner)} through ${cf}</span></div>`;
+        <span class="ko-call">${ok ? "✓" : "✗"} backed ${flag(fav)}${TLA3(fav)} · ${flag(m.winner)}${TLA3(m.winner)} through ${cf}</span></div>`;
     }).join("");
     $("rc-ko").innerHTML = `<p class="chart-cap"><strong>${hits} of ${played.length}</strong> knockout ties called right so far.</p>` + rows;
   } else {
