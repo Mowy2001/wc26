@@ -101,6 +101,8 @@ _snap = {"k": _k, "date": str(pd.Timestamp.utcnow().date()),
          "champion": {tm: round(float(_t.loc[tm, "P_champion"]), 4) for tm in _t.index},
          "qualify": {tm: round(float(_t.loc[tm, "P_qualify"]), 4) for tm in _t.index},
          "best_third": {tm: round(float(_t.loc[tm, "P_best_third"]), 4) for tm in _t.index},
+         "rounds": {tm: [round(float(_t.loc[tm, c]), 4) for c in
+                         ("P_R32", "P_R16", "P_QF", "P_SF", "P_final", "P_champion")] for tm in _t.index},
          "golden_boot": [{"player": r.player, "team": r.team, "p": round(float(r.P_golden_boot), 4)}
                          for r in _gb.itertuples(index=False)],
          "bracket": _bracket}
