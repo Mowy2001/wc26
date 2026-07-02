@@ -157,10 +157,13 @@ if (WC26.next_matches && WC26.next_matches.matches && $("next-board")) {
     const flip = favOf(m.model) !== favOf(m.market);
     const div = (gap >= 0.10 || flip) ? `<span class="nm-div" title="${flip ? "model and market back opposite sides" : "model and market disagree by " + pct(gap, 0)}">model ≠ market</span>` : "";
     // for knockout ties, resolve the draw (extra time + penalties) in proportion to each
-    // side's 90-minute win chance, so we can show who actually goes through.
-    const p = m.model, adH = p.pH + p.pD * (p.pH / (p.pH + p.pA || 1)), adA = 1 - adH;
+    // side's 90-minute win chance, so we can show who actually goes through — for both the
+    // model and the market, kept distinct.
+    const adv = (p) => { const h = p.pH + p.pD * (p.pH / (p.pH + p.pA || 1)); return [h, 1 - h]; };
+    const [mH, mA] = adv(m.model), [kH, kA] = adv(m.market);
     const advLine = m.ko ? `<div class="nm-adv" title="chance of going through (90 min + extra time + penalties)">
-        Goes through: <b>${flag(m.home)}${TLA3(m.home)} ${pct(adH, 0)}</b> · <b>${pct(adA, 0)} ${TLA3(m.away)}${flag(m.away)}</b></div>` : "";
+        <span class="nm-adv-row"><span class="nm-adv-lab">Model through</span><b>${flag(m.home)}${TLA3(m.home)} ${pct(mH, 0)}</b> · <b>${pct(mA, 0)} ${TLA3(m.away)}${flag(m.away)}</b></span>
+        <span class="nm-adv-row"><span class="nm-adv-lab">Market through</span><b>${flag(m.home)}${TLA3(m.home)} ${pct(kH, 0)}</b> · <b>${pct(kA, 0)} ${TLA3(m.away)}${flag(m.away)}</b></span></div>` : "";
     return `<div class="nm-card clickable" data-home="${m.home}" data-away="${m.away}">
       <div class="nm-head"><span class="nm-team">${flag(m.home)}${m.home}</span>
         <span class="nm-vs">${m.ko ? "⚔" : "v"}</span>
