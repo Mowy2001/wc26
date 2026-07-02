@@ -17,6 +17,9 @@
         <h1>Who wins the<br><em>2026 World Cup?</em></h1>
         <p class="lede">An open-source forecast, built with AI from public data: all 104 matches simulated
         20,000 times, updated after every match and scored against reality every game.</p>
+        <p class="lede-sub">Under the hood: a proprietary Elo rating for every nation feeds a Dixon-Coles
+        goal model, and the whole tournament is replayed 20,000 times. The ratings are frozen on the eve of
+        the tournament (11 June) — after that only results move, never the model's read on a team.</p>
         <div class="hero-stats" id="hero-stats"></div>
       </div>
       <div class="hero-champ" id="hero-leader"></div>
@@ -68,7 +71,7 @@
 </section>
 
 <section id="reality">
-  <h2>Called it? The groups <span class="sub">our June-11 forecast against what actually happened</span></h2>
+  <h2>Called it? The groups <span class="sub">our pre-tournament forecast against what actually happened</span></h2>
   <div class="tl-h">Group stage, who reached the knockouts</div>
   <p class="chart-cap" id="rc-groups-lead"></p>
   <div id="rc-groups"></div>
@@ -80,14 +83,14 @@
   </div>
   <div class="tl-h" style="margin-top:24px">Golden Boot, our eve pick vs the race now</div>
   <div id="rc-gb"></div>
-  <p class="note">Predictions were set on June 11, nothing here is fitted after the fact.
+  <p class="note">Predictions were locked before kickoff, nothing here is fitted after the fact.
   ✓ = a call we got right, ✗ = wrong, ⚖ = a team we'd rated a coin-flip to go through.</p>
 </section>
 
 <section id="forecast">
   <h2>The forecast</h2>
   <p class="note" style="margin-top:-4px;margin-bottom:14px">Every frame is a full re-simulation
-  conditioned on the results up to that point (ratings and parameters set on June 11). Step to the
+  conditioned on the results up to that point (ratings and parameters set before kickoff). Step to the
   end for today's live picture, or back to watch one result ripple through everything. The control
   repeats above each view so you never have to scroll back up, use the ◀ ▶ buttons or arrow keys
   to move one match at a time. <strong>▲/▼ = change since the previous match.</strong></p>
@@ -98,14 +101,10 @@
     column is the title odds. Scroll for every team, it all moves with the slider, through to the final.</p>
     <div class="rr-scroll"><table id="fc-rounds" class="rounds-table"></table></div></div>
   <div class="fc-block" id="market"><div class="fc-bar"></div>
-    <div class="tl-h">Model vs market <span class="sub">our title odds against the bookies, live, margin removed with Shin's method</span></div>
+    <div class="tl-h">Model vs market <span class="sub">our title odds against the bookies, live, with their built-in margin stripped out</span></div>
     <p class="market-diverge" id="market-diverge"></p>
-    <p class="chart-cap" style="max-width:820px">Drag to watch our title odds move match by match (▲▼ = change since June 11); the market line is the latest live price. Scroll for more teams.</p>
-    <div id="market-chart" class="chart market-scroll"></div>
-    <p class="note">Where the bars disagree, someone is wrong, that's the point. The model is deliberately
-    Elo-honest, and the market knows things we've <em>chosen not to feed it</em>. The bookmaker margin is
-    stripped with Shin's insider-trading model, so the comparison is fair. After the final we score model,
-    bookmaker and the Klement forecast (<span id="klement-note"></span>) on the same log-loss scale.</p></div>
+    <p class="chart-cap" style="max-width:820px">Drag to watch our title odds move match by match (▲▼ = change since the tournament started); the market line is the latest live price. The bookmakers' odds always add up to more than 100% (their built-in profit margin) — we strip that out so the two bars are a fair like-for-like. Scroll for more teams.</p>
+    <div id="market-chart" class="chart market-scroll"></div></div>
   <div class="fc-block"><div class="fc-bar"></div>
     <div class="tl-h">Predicted bracket, most likely team in each slot
       <span class="bk-toggle" id="bk-toggle">
@@ -113,16 +112,12 @@
       </span></div>
     <p class="bracket-legend" id="bracket-legend"></p>
     <div id="fc-bracket" class="bracket-scroll"></div>
-    <p class="note" style="max-width:880px">Reading it: the bracket <strong>climbs</strong> from the Round
-    of 32 at the bottom to the trophy; each card is a <strong>tug-of-war</strong>, the bar is the
-    head-to-head, who'd win <em>that</em> tie. Each slot shows the team <strong>most likely to be
-    there</strong>, so the final is the two likeliest finalists.</p>
     <p class="note" id="bracket-why" style="max-width:880px"></p></div>
   <div class="fc-block"><div class="fc-bar"></div>
     <div class="tl-h">Groups, probability of advancing</div>
     <p class="chart-cap">% = chance of reaching the knockout round (top two, or as a best third).
     A <span class="tight-badge">⚖ qualification open</span> tag marks groups where two or more teams are
-    still level for a knockout place, it's about <em>who goes through</em>, not who finishes first.</p>
+    still level for a knockout place.</p>
     <div id="fc-groups" class="groups-grid"></div></div>
   <div class="fc-block"><div class="fc-bar"></div>
     <div class="fc-grid">

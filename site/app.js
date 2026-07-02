@@ -202,7 +202,8 @@ if (WC26.next_matches && WC26.next_matches.matches && $("next-board")) {
     c.addEventListener("click", () => showHeat(c.dataset.home, c.dataset.away)));
   if ($("next-note")) $("next-note").innerHTML =
     `<strong>${nm.length}</strong> upcoming games. Green = home team wins, slate = draw, red = away
-     (90 minutes). Market = consensus of ~${nm[0].market.n_books} bookmakers, margin removed. In a knockout
+     (90 minutes). Market = consensus of ~${nm[0].market.n_books} bookmakers, with their built-in profit
+     margin taken out so it reads as a fair probability. In a knockout
      the draw slice is hatched and split by who survives extra time and penalties, so the colour change
      marks each side's chance of going through.`;
 }
@@ -396,13 +397,18 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     const koPlayedN = sandbox ? Object.keys(KOW).length : Math.max(0, k - GEK);
     const KOWk = {};
     Object.keys(KOW).map(Number).sort((x, y) => x - y).slice(0, koPlayedN).forEach((mn) => { KOWk[mn] = KOW[mn]; });
+    // a slot is "in play" once the user has picked somewhere in the ties that feed it; until
+    // then even the sandbox shows the model's most-likely occupant, so an untouched sandbox
+    // mirrors the model bracket exactly (every tie keeps its precomputed heatmap and stays
+    // clickable). Only picks ripple a divergent pairing forward.
+    const touched = (n) => picks[n] != null || (FEED[n] && (touched(FEED[n][0]) || touched(FEED[n][1])));
     [73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88,
      89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 104].forEach((mn) => {
       const modal = bsrc.bracket && bsrc.bracket[mn];
       // model view: fill each slot with its most-likely occupant (the marginal), so the
-      // final pits the two most-likely finalists. sandbox: propagate winners up the FEED
-      // tree so the user's picks ripple forward.
-      if (sandbox && FEED[mn]) part[mn] = { top: win[FEED[mn][0]], bot: win[FEED[mn][1]] };
+      // final pits the two most-likely finalists. sandbox: once a feeding tie is picked,
+      // propagate winners up the FEED tree so the user's picks ripple forward.
+      if (sandbox && FEED[mn] && touched(mn)) part[mn] = { top: win[FEED[mn][0]], bot: win[FEED[mn][1]] };
       else part[mn] = { top: modal && modal.top && modal.top.team, bot: modal && modal.bot && modal.bot.team };
       const a = part[mn].top, b2 = part[mn].bot;
       if (!a || !b2) { win[mn] = a || b2; share[mn] = 1; return; }
@@ -663,7 +669,7 @@ function renderMarket(champMap) {
   const mv = (d) => {
     if (d == null || Math.abs(d) < 0.005) return "";
     const up = d > 0;
-    return `<span class="mv ${up ? "up" : "dn"}" title="${up ? "up" : "down"} ${(100 * Math.abs(d)).toFixed(0)}pp since 11 Jun">${up ? "▲" : "▼"}${(100 * Math.abs(d)).toFixed(0)}</span>`;
+    return `<span class="mv ${up ? "up" : "dn"}" title="${up ? "up" : "down"} ${(100 * Math.abs(d)).toFixed(0)}pp since the tournament started">${up ? "▲" : "▼"}${(100 * Math.abs(d)).toFixed(0)}</span>`;
   };
   $("market-chart").innerHTML = rows.map((r) => `
     <div class="pair-row ${Math.abs(r.gap) >= BIG ? "diverge" : ""}">
@@ -679,7 +685,7 @@ function renderMarket(champMap) {
   const sharp = [...rows].sort((a, b) => Math.abs(b.gap) - Math.abs(a.gap)).slice(0, 2);
   if ($("market-diverge")) {
     const when = liveMkt
-      ? `Live market, ${new Date(WC26.market_now.fetched).toLocaleDateString(undefined, { month: "short", day: "numeric" })}, ${rows.length} contenders, bookmaker margin removed (▲▼ = move since 11 Jun). `
+      ? `Live market, ${new Date(WC26.market_now.fetched).toLocaleDateString(undefined, { month: "short", day: "numeric" })}, ${rows.length} contenders, the bookmakers' built-in margin taken out (▲▼ = move since the tournament started). `
       : "";
     $("market-diverge").innerHTML = when + "Sharpest disagreements: " + sharp.map((r) =>
       `<strong>${flag(r.team)}${r.team}</strong> ${r.gap > 0 ? "model loves" : "model cold"} ` +
@@ -742,13 +748,13 @@ if (WC26.replay && WC26.replay.snapshots && WC26.standings && $("rc-groups")) {
     return `<div class="gc-card"><div class="gc-head"><span>Group ${g}</span><span class="gc-score">${gh}/4 right</span></div>${rows}</div>`;
   }).join("");
   if ($("rc-groups-lead")) $("rc-groups-lead").innerHTML =
-    `One card per group, every team listed in its <em>final</em> order. For each we show what we called on June 11, <b>1st</b>, <b>2nd</b> or <b>best 3rd</b> to go through, or <b>out</b>, and what happened. <b class="rc-key ok">✓</b> = we got it right, <b class="rc-key no">✗</b> = wrong, <b class="rc-key">⚖</b> = we'd rated it a coin-flip. <strong>${correct} of ${total}</strong> teams called correctly.`;
+    `One card per group, every team listed in its <em>final</em> order. For each we show what we called before kickoff, <b>1st</b>, <b>2nd</b> or <b>best 3rd</b> to go through, or <b>out</b>, and what happened. <b class="rc-key ok">✓</b> = we got it right, <b class="rc-key no">✗</b> = wrong, <b class="rc-key">⚖</b> = we'd rated it a coin-flip. <strong>${correct} of ${total}</strong> teams called correctly.`;
   $("rc-groups").innerHTML = grpHTML;
   if ($("rc-gb")) {
     const gv = (p) => (p.p != null ? p.p : p.P_golden_boot);
     const eg = (eve.golden_boot || []).slice(0, 5), ng = (WC26.golden_boot || []).slice(0, 5);
     const col = (list) => list.map((p, i) => `<div class="rc-gbrow"><span>${i + 1}. ${flag(p.team)}${p.player}</span><b>${pct(gv(p), 0)}</b></div>`).join("");
-    $("rc-gb").innerHTML = `<div class="rc-gbcols"><div><div class="rc-gbh">Eve pick (Jun 11)</div>${col(eg)}</div><div><div class="rc-gbh">The race now</div>${col(ng)}</div></div>`;
+    $("rc-gb").innerHTML = `<div class="rc-gbcols"><div><div class="rc-gbh">Pre-tournament pick</div>${col(eg)}</div><div><div class="rc-gbh">The race now</div>${col(ng)}</div></div>`;
   }
 }
 

@@ -56,6 +56,7 @@ body {
 }
 .hero h1 em { color: var(--accent); font-style: normal; }
 .lede { color: var(--muted); max-width: 560px; margin-top: 18px; font-size: 1.04rem; }
+.lede-sub { color: var(--muted); max-width: 560px; margin-top: 10px; font-size: .9rem; opacity: .82; }
 /* the giant live champion number */
 .hero-leader {
   background: linear-gradient(180deg, var(--card), #0a1120);
@@ -541,7 +542,9 @@ details.tech[open] summary::before { content: "\25BE "; }
 .ko-rd { font-size: .64rem; font-weight: 800; letter-spacing: .06em; color: var(--muted); text-transform: uppercase; }
 .ko-match { font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .ko-call { color: var(--muted); }
-.ko-prob { color: var(--accent2); font-variant-numeric: tabular-nums; font-weight: 800; font-size: 1rem; text-align: left; }
+.ko-prob { font-variant-numeric: tabular-nums; font-weight: 800; font-size: 1rem; text-align: left; }
+.ko-row.ok .ko-prob { color: var(--accent); }
+.ko-row.no .ko-prob { color: var(--hot); }
 
 /* Called it? — group scorecard as a full-width grid of per-group cards */
 #rc-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(232px, 1fr)); gap: 12px; }
