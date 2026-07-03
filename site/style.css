@@ -574,7 +574,7 @@ details.tech[open] summary::before { content: "\25BE "; }
 #drivers-board { max-height: 500px; overflow-y: auto; padding-right: 4px; }
 .nm-adv { margin-top: 7px; padding-top: 6px; border-top: 1px solid var(--card-edge); font-size: .74rem; color: var(--muted); }
 .nm-adv b { color: var(--accent); font-variant-numeric: tabular-nums; }
-.rc-gbcols { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.rc-gbcols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .rc-gbh { font-size: .68rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted);
   font-weight: 800; margin-bottom: 6px; }
 .rc-gbrow { display: flex; justify-content: space-between; align-items: center; padding: 4px 0;
@@ -788,3 +788,5 @@ details.tech[open] summary::before { content: "\25BE "; }
 .ko-row .mh-hint { color: var(--accent2); font-size: .68rem; opacity: 0; margin-left: 6px; font-weight: 500; }
 .ko-row.clickable:hover .mh-hint { opacity: 1; }
 
+
+.gb-mkt { font-style: normal; color: var(--gold); font-size: .7rem; font-weight: 700; margin-left: 6px; white-space: nowrap; }

@@ -761,13 +761,11 @@ if (WC26.replay && WC26.replay.snapshots && WC26.standings && $("rc-groups")) {
   if ($("rc-gb")) {
     const gv = (p) => (p.p != null ? p.p : p.P_golden_boot);
     const eg = (eve.golden_boot || []).slice(0, 5), ng = (WC26.golden_boot || []).slice(0, 5);
-    const col = (list) => list.map((p, i) => `<div class="rc-gbrow"><span>${i + 1}. ${flag(p.team)}${p.player}</span><b>${pct(gv(p), 0)}</b></div>`).join("");
-    // the market's four quoted names, recorded before kickoff (American odds -> implied
-    // probability, margin not removable on a 4-name quote) — the only outside GB forecast.
-    const mk = Object.entries(WC26.golden_boot_market || {}).map(([pl, o], i) =>
-      `<div class="rc-gbrow"><span>${i + 1}. ${pl}</span><b>${pct(100 / (o + 100), 0)}</b></div>`).join("");
-    const mkCol = mk ? `<div><div class="rc-gbh">The market's picks (pre-tournament)</div>${mk}</div>` : "";
-    $("rc-gb").innerHTML = `<div class="rc-gbcols"><div><div class="rc-gbh">Our pre-tournament pick</div>${col(eg)}</div>${mkCol}<div><div class="rc-gbh">The race now</div>${col(ng)}</div></div>`;
+    // small gold tag with the market's pre-tournament quote (implied probability), only
+    // on the eve column and only for the four names the market actually priced.
+    const mq = {}; Object.entries(WC26.golden_boot_market || {}).forEach(([pl, o]) => { mq[pl] = 100 / (o + 100); });
+    const col = (list, withMkt) => list.map((p, i) => `<div class="rc-gbrow"><span>${i + 1}. ${flag(p.team)}${p.player}${withMkt && mq[p.player] != null ? ` <i class="gb-mkt" title="the bookmakers' pre-tournament quote, implied probability">market ${pct(mq[p.player], 0)}</i>` : ""}</span><b>${pct(gv(p), 0)}</b></div>`).join("");
+    $("rc-gb").innerHTML = `<div class="rc-gbcols"><div><div class="rc-gbh">Pre-tournament pick</div>${col(eg, true)}</div><div><div class="rc-gbh">The race now</div>${col(ng, false)}</div></div>`;
   }
 }
 
@@ -803,7 +801,7 @@ if (WC26.bracket_dists && $("rc-ko")) {
         ${mkt}
         <b class="ko-prob" title="model's chance the backed side went through the tie">${pct(favThru, 0)}</b></div>`;
     }).join("");
-    const mktLine = mktN ? ` The market called <strong>${mktHits} of ${mktN}</strong> (archived odds begin at the Round of 32).` : "";
+    const mktLine = mktN ? ` The market called <strong>${mktHits} of ${mktN}</strong>${mktN < played.length ? " (no archived odds for the rest)" : ""}.` : "";
     $("rc-ko").innerHTML = `<p class="chart-cap"><strong>${hits} of ${played.length}</strong> knockout ties called right so far.${mktLine}</p>` + rows;
     $("rc-ko").querySelectorAll(".ko-row.clickable").forEach((r) =>
       r.addEventListener("click", () => showHeat(r.dataset.home, r.dataset.away)));

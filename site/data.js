@@ -93766,7 +93766,13 @@ const WC26 = {
     0,
     1
    ],
-   "winner": "Canada"
+   "winner": "Canada",
+   "market": {
+    "pH": 0.2003,
+    "pD": 0.2798,
+    "pA": 0.5199,
+    "n_books": 1
+   }
   },
   {
    "match": 74,

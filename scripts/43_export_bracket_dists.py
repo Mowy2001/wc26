@@ -55,6 +55,16 @@ NAME = {"USA": "United States", "Korea Republic": "South Korea", "IR Iran": "Ira
         "Czechia": "Czech Republic", "Türkiye": "Turkey"}
 canon = lambda t: NAME.get(t, t.replace(" & ", " and "))
 market_pre = {}
+# The one played tie that predates the archive (RSA-CAN, 2026-06-28): bet365 closing
+# line via Sofascore (event 12813000, "Full time" current values at kickoff:
+# 15/4, 12/5, 83/100), retrieved 2026-07-03 and de-vigged proportionally like the
+# archive. Single book, declared as such.
+_inv = [1 / (1 + 15 / 4), 1 / (1 + 12 / 5), 1 / (1 + 83 / 100)]  # fractional -> decimal -> inverse
+_s = sum(_inv)
+market_pre[frozenset(("South Africa", "Canada"))] = {
+    "fetched": "2026-06-28T00:00:00Z", "home": "South Africa",
+    "pH": round(_inv[0] / _s, 4), "pD": round(_inv[1] / _s, 4), "pA": round(_inv[2] / _s, 4),
+    "n_books": 1}
 if os.path.exists("outputs/odds_history.jsonl"):
     for line in open("outputs/odds_history.jsonl"):
         snap = json.loads(line)
