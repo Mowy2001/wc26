@@ -18,7 +18,6 @@
 </header>
 
 <nav class="toc wrap">
-  <a href="#idea">How it works</a>
   <a href="#gate">How a variable gets in</a>
   <a href="#drivers">What earned each place</a>
   <a href="#influence">The trials</a>
@@ -28,113 +27,7 @@
 
 <main class="wrap">
 
-<section id="idea">
-  <h2>How it works <span class="sub">grade → expected goals → 20,000 simulated tournaments. No maths required.</span></h2>
-  <div class="cards3">
-    <div class="card">
-      <div class="card-step">1</div>
-      <h3>Every team gets a grade</h3>
-      <p>We replay all 49,000 international matches since 1872 and keep a running
-      grade for every nation: beat someone strong, it rises; lose, it falls. Spain
-      sits top of the class today. This grade does most of the work, everything
-      else is a small correction.</p>
-    </div>
-    <div class="card">
-      <div class="card-step">2</div>
-      <h3>Grades become expected goals</h3>
-      <p>One formula, the same for everyone, turns the <em>gap</em> between two
-      grades into expected goals: Spain 2.1, Uruguay 0.8. Playing at home helps a
-      lot. Two earned tilts nudge it a little: squads with heavy club legs score
-      slightly less, and teams used to thin air do better up at altitude.</p>
-    </div>
-    <div class="card">
-      <div class="card-step">3</div>
-      <h3>Then we roll loaded dice, 20,000 times</h3>
-      <p>"2.1 expected goals" isn't a prediction of 2-1: it's how heavily the dice are loaded.
-      Sometimes four go in, sometimes none, upsets happen here exactly as often
-      as in real football. We roll dice for all 104 matches, apply FIFA's rules,
-      and that's <em>one</em> possible World Cup. We play 20,000 of them and count.
-      "Spain 25%" just means: Spain lifted the trophy in 5,000 of them.</p>
-    </div>
-  </div>
-  <h3 class="merge-sub" id="data">The data diet <span class="sub">four public files, and a list of things we refuse to know</span></h3>
-  <div class="cards32">
-    <div class="card">
-      <h3>📜 49,000 matches, 1872→today</h3>
-      <p>Every official international ever played (<a href="https://github.com/martj42/international_results">martj42</a>, CC0):
-      date, teams, score, competition, venue, <strong>including the full 2026 schedule</strong>.
-      This single file builds the team ratings, fits the goal model, and even defines the
-      tournament structure, the 12 groups are reconstructed from the fixture graph, never
-      typed in by hand.</p>
-    </div>
-    <div class="card">
-      <h3>⚽ 47,000 goals</h3>
-      <p>Scorer, minute, penalty flag for every goal since 1916. Powers the player
-      layer: each team's simulated goals are split among its recent scorers
-      (time-decayed shares), producing the Golden Boot distribution below. A measured
-      17.3% of WC goals go to debutant scorers, that mass is reserved for "new faces".</p>
-    </div>
-    <div class="card">
-      <h3>🥅 677 shootouts</h3>
-      <p>Every international penalty shootout in history. Small file, precise job: it tells
-      us shootouts are <em>almost</em>, but not exactly, a coin flip. The better-rated
-      team wins slightly more often, the de-facto home side too. Both effects are in the
-      simulator.</p>
-    </div>
-    <div class="card">
-      <h3>🏟️ 1,248 club careers</h3>
-      <p>The official squad lists (Wikipedia) joined to club-season minutes (FBref, via
-      the Wayback Machine, the site itself blocks robots). How many minutes are in each
-      player's legs? Feeds the <strong>fatigue tilt</strong> and the Golden Boot squad
-      filter. Known bias, declared: minutes coverage is Europe/Big-5 only.</p>
-    </div>
-    <div class="card off">
-      <h3>🚫 Deliberately excluded</h3>
-      <p>Squad market values, injuries, FIFA rankings, pundit priors, betting odds.
-      Not because they're worthless, because nothing enters this model until it
-      <strong>proves itself in a backtest</strong>. The FIFA ranking, for one, is
-      <strong>+0.07 log-loss worse</strong> than our Elo across World Cups 1994–2022,
-      barely better than a coin-guess. Everything we set out to test now has a verdict:
-      heat failed, altitude earned its place, diaspora and cohesion ended up as shadow
-      bets (see the model lab), never silently in, never quietly dropped.</p>
-    </div>
-  </div>
-  <div class="lineage">
-    <div class="flow">
-      <span class="node file">results.csv</span><span class="arr">→</span>
-      <span class="node">point-in-time Elo</span><span class="arr">→</span>
-      <span class="node">Dixon-Coles goal rates</span><span class="arr">→</span>
-      <span class="node">20,000 tournaments</span><span class="arr">→</span>
-      <span class="node out">every team probability</span>
-    </div>
-    <div class="flow">
-      <span class="node file">goalscorers.csv</span><span class="arr">→</span>
-      <span class="node">decayed scorer shares</span><span class="arr">→</span>
-      <span class="node">goal allocation per simulation</span><span class="arr">→</span>
-      <span class="node out">Golden Boot odds</span>
-    </div>
-    <div class="flow">
-      <span class="node file">squads (wiki)</span><span class="arr">+</span>
-      <span class="node file">fbref minutes</span><span class="arr">→</span>
-      <span class="node">fatigue z-score</span><span class="arr">→</span>
-      <span class="node">tilt on goal rates (β=−0.028)</span>
-    </div>
-    <div class="flow">
-      <span class="node file">venue altitude</span><span class="arr">+</span>
-      <span class="node file">home altitude</span><span class="arr">→</span>
-      <span class="node">acclimatisation gap</span><span class="arr">→</span>
-      <span class="node">tilt at Mexico City / Zapopan (β=0.13/km)</span>
-    </div>
-    <div class="flow">
-      <span class="node file">shootouts.csv</span><span class="arr">→</span>
-      <span class="node">shootout logit (677 obs)</span><span class="arr">→</span>
-      <span class="node out">knockout ties</span>
-    </div>
-  </div>
-  <p class="note">From the match file the model derives exactly three things per fixture:
-  each team's <em>point-in-time Elo rating</em>, <em>who is at home</em>, and <em>when it
-  was played</em> (older matches count less). That's the entire information diet.</p>
-</section>
+
 
 <section id="gate">
   <h2>How a variable gets in <span class="sub">the admission machinery the rest of this page assumes</span></h2>

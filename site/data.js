@@ -623,6 +623,11 @@ const WC26 = {
    "log_loss": 0.879
   },
   {
+   "variant": "everything on (all shadows in)",
+   "n": 85,
+   "log_loss": 0.8823
+  },
+  {
    "variant": "Full model",
    "n": 85,
    "log_loss": 0.8827

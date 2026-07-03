@@ -2,6 +2,7 @@ variant,n,log_loss
 no fatigue,85,0.8709
 + capital (shadow),85,0.8776
 Elo only,85,0.879
+everything on (all shadows in),85,0.8823
 Full model,85,0.8827
 + diaspora (shadow),85,0.8836
 + cohesion (shadow),85,0.8875

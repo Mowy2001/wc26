@@ -57,6 +57,9 @@ VARIANTS = {
     "+ capital (shadow)": (_merge(combined, cap_only), alt),
     "+ cohesion (shadow)": (_merge(combined, coh_only), alt),
     "+ diaspora (shadow)": (combined, alt_dia),
+    # the kitchen sink: deployed tilts + every shadow bet at once — the "what if we
+    # had admitted everything" counterfactual.
+    "everything on (all shadows in)": (_merge(combined, cap_only, coh_only), alt_dia),
 }
 
 played = wc2026_fixtures(results).dropna(subset=["home_score", "away_score"]).sort_values("date")
