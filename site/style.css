@@ -761,3 +761,12 @@ details.tech[open] summary::before { content: "\25BE "; }
 .tow .b { background: linear-gradient(90deg, #5b6b8f, #8f5161); }
 .tow-heat { position: absolute; right: 3px; top: -2px; font-size: .58rem; color: #fff; z-index: 2; opacity: .55; }
 .bk-toggle button[data-act] { font-size: .9rem; }
+
+/* ---- under-the-hood subpage + the link card that replaces act 2's tail ---- */
+.hero-sub { padding: 34px 0 30px; }
+.hero-sub h1 { font-size: clamp(1.9rem, 4.5vw, 2.8rem); }
+.back-link { color: var(--accent2); text-decoration: none; font-weight: 700; }
+.back-link:hover { color: var(--accent); }
+.hood-link-row { margin: 26px 0 8px; }
+.hood-link { max-width: 560px; font-size: 1.02rem; }
+.hood-link span { margin-top: 2px; }

@@ -38,9 +38,9 @@
   <a href="#drivers">What earns each place</a>
   <span class="toc-group">Under the hood</span>
   <a href="#idea">How it works</a>
-  <a href="#influence">What earned its place</a>
-  <a href="#lab">Model lab</a>
-  <a href="#method">Methodology</a>
+  <a href="under-the-hood.html#influence">What earned its place</a>
+  <a href="under-the-hood.html#lab">Model lab</a>
+  <a href="under-the-hood.html#method">Methodology</a>
 </nav>
 
 <main class="wrap">
@@ -260,126 +260,10 @@
   was played</em> (older matches count less). That's the entire information diet.</p>
 </section>
 
-<section id="influence">
-  <h2>What earned its place <span class="sub">the trials, every variable admitted or cut, measured by re-running the tournament without it</span></h2>
-  <p class="chart-cap" style="margin-bottom:16px"><strong>In one line:</strong> the model is
-  <strong>Elo ratings → goals</strong>, plus exactly <strong>two earned adjustments, altitude and
-  fatigue</strong>. Everything else we tried was <em>cut</em>: football capital, heat/climate (tested
-  twice), a penalty-taker bonus, plus diaspora and squad cohesion (kept only as "shadow bets", never in
-  the real forecast). Each card below is one of those variables, admitted or rejected by the same rule.</p>
-  <div class="cards-2col">
-    <div class="card">
-      <h3>The rating is the engine</h3>
-      <p class="mini-intro">Everything else is a correction: the Elo gap sets the baseline
-      for every scoreline. That's why the model and the market split on the USA:</p>
-      <div id="usa-case"></div>
-      <p class="mini-note">By Elo the USA is the <em>weakest</em> team in group D, home
-      advantage alone lifts it from last to second. The market prices squad value and host
-      momentum; those signals only enter here if a future data block earns its backtest.</p>
-    </div>
-    <div class="card">
-      <h3>Playing at home, worth double</h3>
-      <p class="mini-intro">The schedule says who hosts. Switch that column off and replay
-      all 20,000 tournaments on neutral ground:</p>
-      <div id="host-ablation"></div>
-      <p class="mini-note">Home advantage nearly <strong>doubles</strong> the USA's group-win
-      chances and is worth <strong>8×</strong> on its title odds. It's the single most
-      influential non-rating input in the model.</p>
-    </div>
-    <div class="card">
-      <h3>Thin air, the strongest signal we found</h3>
-      <p class="mini-intro">World Cups dodge altitude, so we tried it where it bites:
-      South American qualifying, where La Paz sits at 3,782 m. A team is at home in the
-      air it trains in:</p>
-      <div id="altitude-card"></div>
-      <p class="mini-note" id="altitude-note"></p>
-    </div>
-    <div class="card">
-      <h3>Tired legs, admitted, thin file</h3>
-      <p class="mini-intro">Squad-mean club-season minutes, the load in the legs once
-      club quality is set aside:</p>
-      <div id="fatigue-card"></div>
-      <p class="mini-note" id="fatigue-note"></p>
-    </div>
-  </div>
-
-  <h3 class="merge-sub" id="rejected">What we tested and discarded <span class="sub">tried, measured, left out, rejected experiments are results too</span></h3>
-  <div class="cards-2col">
-    <div class="card off">
-      <h3>Heat mismatch, tried, and thrown out</h3>
-      <p class="mini-intro">Does June heat punish cold-country teams? We built the
-      feature (venue vs home climatology, strictly point-in-time) and put it through the gate:</p>
-      <div id="climate-card"></div>
-      <p class="mini-note">The gate said no, twice, crude passport proxy, then each player's
-      club-country climate. The culprit is the data: the one hot World Cup in the test era (Qatar
-      2022) was air-conditioned, inverting the signal, and nothing else is hot enough to show.
-      Coefficient stays at zero.</p>
-    </div>
-    <div class="card off">
-      <h3>How long is memory? No effect</h3>
-      <p class="mini-intro">Old matches are down-weighted exponentially. We tuned the decay on
-      six past tournaments (<span id="xi-n"></span> matches) and found... a plateau:</p>
-      <div id="xi-chart"></div>
-      <p class="mini-note" id="xi-note"></p>
-    </div>
-    <div class="card off">
-      <h3>Parameter doubt, pinned by 17k matches</h3>
-      <p class="mini-intro">The goal model has five parameters. We refit them
-      <span id="boot-b"></span> times on resampled history and gave each simulated tournament
-      its own draw:</p>
-      <div id="boot-card"></div>
-      <p class="mini-note">It moves title odds by <strong id="boot-delta"></strong> on average -
-      Monte Carlo noise. The doubt lives in <em>which data enters</em>, not in the fit.</p>
-    </div>
-    <div class="card off">
-      <h3>Also off the pitch</h3>
-      <p class="mini-note" style="margin-top:0"><strong>Penalty-taker bonus</strong>, rejected: it
-      double-counts penalties already inside each scorer's history. <strong>Football capital</strong>
-      (where players' clubs rank), its predictive power turned out to be a Europe-only geographic
-      bias, so it was removed even though that cost a sliver of accuracy. <strong>Diaspora</strong>
-      and <strong>squad cohesion</strong> can't (or barely) be backtested, they live as shadow
-      bets in the model lab, never in the official forecast.</p>
-    </div>
-  </div>
-
-  <h3 class="merge-sub" id="rule">The rule that decides it all</h3>
-  <p class="note" style="max-width:780px;font-size:.96rem">One referee governs the whole model:
-  <strong>nothing enters unless it would have predicted past tournaments better.</strong> Every
-  candidate is tested point-in-time, using only what was known before each match, on six past
-  World Cups and Euros, and kept only if it lowers out-of-sample log-loss. No data later than the
-  prediction date; no tuning on the tournament being predicted; nothing kept because it "feels
-  right". It's why the list of what's <em>in</em> is short, why the rejects above are on the page
-  at all, and why, when a fair version of football capital stopped helping, it came out. The
-  discipline is the product.</p>
-</section>
-
-<section id="lab">
-  <h2>The model lab <span class="sub">the same forecast, with and without each ingredient, scored live on real results</span></h2>
-  <div id="lab-board" class="chart"></div>
-  <p class="note" id="lab-note"></p>
-  <p class="note" style="max-width:840px">Careful reading this live: over a few dozen matches nothing
-  cleanly separates these variants, one tournament is far too small to judge an ingredient. The reason
-  <strong>altitude</strong> and <strong>fatigue</strong> are <em>in</em> the model and everything else is
-  out is the six-tournament, out-of-sample backtest in <a href="#influence">what earned its place</a>:
-  there, the model <strong>with</strong> altitude clearly beats the one without. Here we're only watching
-  the shadow bets play out in real time.</p>
-</section>
-
-<section id="method">
-  <h2>The match report <span class="sub">for readers who want the formulas, not the metaphors</span></h2>
-  <p class="note" style="max-width:840px">Two properties the cards above can't show. Every rating is
-  <strong>point-in-time</strong>: a prediction for any date uses only matches played before it, so the
-  backtests can't cheat. And the goal model has <strong>no per-team free parameters</strong>, five numbers
-  shared by all 48 teams, which is why it can't overfit a single nation's story. Pre-registered backtest
-  on World Cup 2022: log-loss <strong>1.060</strong> vs 1.099 for a know-nothing guess; favourites priced
-  at 54% won 56%. Every formula, every gated variable and every honest null result is written up in
-  full:</p>
-  <div class="doc-links">
-    <a class="doc-link" href="https://github.com/Mowy2001/wc26/blob/main/docs/METHODOLOGY.md" target="_blank" rel="noopener">📐 Methodology<span>every layer &amp; choice, in detail</span></a>
-    <a class="doc-link" href="https://github.com/Mowy2001/wc26/blob/main/docs/DECISIONS.md" target="_blank" rel="noopener">⚖️ Decision ledger<span>what earned its place, and what didn't</span></a>
-    <a class="doc-link" href="https://github.com/Mowy2001/wc26" target="_blank" rel="noopener">💻 Source code<span>the whole pipeline, reproducible</span></a>
-  </div>
-</section>
+<div class="hood-link-row">
+  <a class="doc-link hood-link" href="under-the-hood.html">⚙️ Under the hood, the full story
+    <span>every variable's trial (admitted or cut), the live model lab, and the methodology</span></a>
+</div>
 
 </main>
 

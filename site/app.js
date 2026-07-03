@@ -235,7 +235,7 @@ if ($("live-strip") && WC26.generated) {
     : "";
   const backtestStat = `<div class="stat"><div class="v">${bt.log_loss_model} <span class="vs">vs ${bt.log_loss_uniform}</span></div>
       <div class="k">backtest log-loss (WC2022)</div></div>`;
-  $("hero-stats").innerHTML = `
+  if ($("hero-stats")) $("hero-stats").innerHTML = `
     ${headline}
     <div class="stat"><div class="v">${WC26.n_sims.toLocaleString("en-US")}</div>
       <div class="k">simulated tournaments</div></div>
