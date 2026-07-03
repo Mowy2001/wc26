@@ -20,3 +20,6 @@ data/external/fdb_country/*.html
 
 # API keys / secrets — never commit
 .secrets/
+
+# personal assistant notes (machine-local)
+CLAUDE.local.md
