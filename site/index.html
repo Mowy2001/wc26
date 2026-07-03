@@ -31,8 +31,8 @@
   <span class="toc-group">The race</span>
   <a href="#next">Next matches</a>
   <a href="#track">How it's doing</a>
-  <a href="#reality-ko">Knockouts</a>
-  <a href="#reality">Groups called</a>
+  <a href="#reality-ko">Knockouts called</a>
+  <a href="#reality-groups">Groups called</a>
   <a href="#forecast">Live forecast</a>
   <a href="#market">Model vs market</a>
   <a href="under-the-hood.html#drivers">What earned each place</a>
@@ -62,25 +62,25 @@
   scores 1.099, so under that line means the model beats guessing.</p>
 </section>
 
-<section id="reality-ko">
-  <h2>Called it? The knockouts <span class="sub">each tie graded as the bracket plays out</span></h2>
+<section id="reality">
+  <h2>Called it? <span class="sub">every prediction graded in public, the hits and the misses side by side</span></h2>
+
+  <div class="tl-h" id="reality-ko">The knockouts <span class="tlh-sub">each tie graded as the bracket plays out, click for the heatmap</span></div>
   <div id="rc-ko"></div>
   <p class="note">Our pre-match favourite for each knockout tie against who actually went through
-  (shootouts included). ⚖ marks the ties the model rated a coin-flip. Fills in tie by tie.</p>
-</section>
+  (shootouts included), next to what the betting market had picked pre-match. ⚖ marks the ties the
+  model rated a coin-flip. Fills in tie by tie.</p>
 
-<section id="reality">
-  <h2>Called it? The groups <span class="sub">our pre-tournament forecast against what actually happened</span></h2>
-  <div class="tl-h">Group stage, who reached the knockouts</div>
+  <div class="tl-h" style="margin-top:28px" id="reality-groups">The groups <span class="tlh-sub">the pre-tournament calls: who reached the knockouts</span></div>
   <p class="chart-cap" id="rc-groups-lead"></p>
   <div id="rc-groups"></div>
   <div class="tl-h" style="margin-top:24px">Best calls &amp; biggest surprises
-    <span class="sub">group matches: the chance the model gave to what happened, click for the heatmap</span></div>
+    <span class="tlh-sub">group matches: the chance the model gave to what happened, click for the heatmap</span></div>
   <div class="bw-grid">
     <div><div class="bw-lab good">✓ Nailed it</div><div id="track-best" class="chart"></div></div>
     <div><div class="bw-lab bad">✗ Didn't see it coming</div><div id="track-worst" class="chart"></div></div>
   </div>
-  <div class="tl-h" style="margin-top:24px">Golden Boot, our eve pick vs the race now</div>
+  <div class="tl-h" style="margin-top:24px">Golden Boot <span class="tlh-sub">our pre-tournament pick vs the race now</span></div>
   <div id="rc-gb"></div>
   <p class="note">Predictions were locked before kickoff, nothing here is fitted after the fact.
   ✓ = a call we got right, ✗ = wrong, ⚖ = a team we'd rated a coin-flip to go through.</p>
@@ -89,7 +89,7 @@
 
 
 <section id="forecast">
-  <h2>The forecast</h2>
+  <h2>The live forecast</h2>
   <p class="note" style="margin-top:-4px;margin-bottom:14px">Every frame is a full re-simulation
   conditioned on the results up to that point (ratings and parameters set before kickoff). Step to the
   end for today's live picture, or back to watch one result ripple through everything. The control

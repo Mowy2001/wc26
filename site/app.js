@@ -156,7 +156,14 @@ function showTeam(name) {
 
 /* ---------- next matches: model vs market 1X2 (scripts/42) ---------- */
 if (WC26.next_matches && WC26.next_matches.matches && $("next-board")) {
-  const nm = WC26.next_matches.matches;
+  // "next" means next: drop games that have kicked off (the feed is only refreshed
+  // every few hours, so between refreshes played games would otherwise linger) and
+  // anything already graded with a real result.
+  const playedPair = new Set();
+  (WC26.bracket_dists || []).forEach((m) => { if (m.winner) { playedPair.add(m.home + "|" + m.away); playedPair.add(m.away + "|" + m.home); } });
+  (WC26.match_dists || []).forEach((m) => { if (m.actual) { playedPair.add(m.home + "|" + m.away); playedPair.add(m.away + "|" + m.home); } });
+  const nm = WC26.next_matches.matches.filter((m) =>
+    !playedPair.has(m.home + "|" + m.away) && new Date(m.commence).getTime() > Date.now());
   // For a knockout tie the draw doesn't stand: extra time + penalties split it in
   // proportion to each side's 90-minute win chance. We keep the same 1X2 bar but hatch
   // (zebra) the draw slice — its home-tinted / away-tinted halves so the colour change
@@ -200,12 +207,13 @@ if (WC26.next_matches && WC26.next_matches.matches && $("next-board")) {
   }).join("");
   $("next-board").querySelectorAll(".nm-card.clickable").forEach((c) =>
     c.addEventListener("click", () => showHeat(c.dataset.home, c.dataset.away)));
-  if ($("next-note")) $("next-note").innerHTML =
-    `<strong>${nm.length}</strong> upcoming games. Green = home team wins, slate = draw, red = away
+  if ($("next-note")) $("next-note").innerHTML = nm.length
+    ? `<strong>${nm.length}</strong> upcoming games. Green = home team wins, slate = draw, red = away
      (90 minutes). Market = consensus of ~${nm[0].market.n_books} bookmakers, with their built-in profit
      margin taken out so it reads as a fair probability. In a knockout
      the draw slice is hatched and split by who survives extra time and penalties, so the colour change
-     marks each side's chance of going through.`;
+     marks each side's chance of going through.`
+    : `No upcoming fixtures with odds yet, the next refresh fills this in.`;
 }
 
 /* ---------- live status strip ---------- */
@@ -763,7 +771,7 @@ if (WC26.bracket_dists && $("rc-ko")) {
   const roundName = (mn) => mn <= 88 ? "R32" : mn <= 96 ? "R16" : mn <= 100 ? "QF" : mn <= 102 ? "SF" : "Final";
   const played = WC26.bracket_dists.filter((m) => m.winner).sort((a, b) => a.match - b.match);
   if (played.length) {
-    let hits = 0;
+    let hits = 0, mktHits = 0, mktN = 0;
     const rows = played.map((m) => {
       const fav = m.pH >= m.pA ? m.home : m.away;   // model's pre-match pick for the tie
       const ok = fav === m.winner; if (ok) hits++;
@@ -772,13 +780,26 @@ if (WC26.bracket_dists && $("rc-ko")) {
       // 90-min win chance, so we quote how likely the model thought the pick would go through.
       const adH = m.pH + m.pD * (m.pH / (m.pH + m.pA || 1));
       const favThru = fav === m.home ? adH : 1 - adH;
-      return `<div class="ko-row ${ok ? "ok" : "no"}">
+      // what the MARKET had said (archived odds, last pre-kickoff fetch, margin removed)
+      let mkt = "";
+      if (m.market) {
+        const k = m.market, kFav = k.pH >= k.pA ? m.home : m.away;
+        const kAdH = k.pH + k.pD * (k.pH / (k.pH + k.pA || 1));
+        const kThru = kFav === m.home ? kAdH : 1 - kAdH;
+        const kOk = kFav === m.winner; mktN++; if (kOk) mktHits++;
+        mkt = `<span class="ko-mkt ${kOk ? "ok" : "no"}" title="the bookmakers' pre-match pick to go through (margin removed)">market ${kOk ? "✓" : "✗"} ${flag(kFav)}${TLA3(kFav)} ${pct(kThru, 0)}</span>`;
+      }
+      const heat = MD[m.home + "|" + m.away] ? " clickable" : "";
+      return `<div class="ko-row ${ok ? "ok" : "no"}${heat}" data-home="${m.home}" data-away="${m.away}">
         <span class="ko-rd">${roundName(m.match)}</span>
-        <span class="ko-match">${flag(m.home)}${TLA3(m.home)} ${m.actual[0]}–${m.actual[1]} ${TLA3(m.away)}${flag(m.away)}</span>
-        <span class="ko-call">${ok ? "✓" : "✗"} backed ${flag(fav)}${TLA3(fav)} · ${flag(m.winner)}${TLA3(m.winner)} through ${cf}</span>
+        <span class="ko-match">${flag(m.home)}${TLA3(m.home)} ${m.actual[0]}–${m.actual[1]} ${TLA3(m.away)}${flag(m.away)}${heat ? ' <span class="mh-hint">heatmap ▸</span>' : ""}</span>
+        <span class="ko-call">${ok ? "✓" : "✗"} backed ${flag(fav)}${TLA3(fav)} · ${flag(m.winner)}${TLA3(m.winner)} through ${cf} ${mkt}</span>
         <b class="ko-prob" title="model's chance the backed side went through the tie">${pct(favThru, 0)}</b></div>`;
     }).join("");
-    $("rc-ko").innerHTML = `<p class="chart-cap"><strong>${hits} of ${played.length}</strong> knockout ties called right so far.</p>` + rows;
+    const mktLine = mktN ? ` The market called <strong>${mktHits} of ${mktN}</strong> (archived odds begin at the Round of 32).` : "";
+    $("rc-ko").innerHTML = `<p class="chart-cap"><strong>${hits} of ${played.length}</strong> knockout ties called right so far.${mktLine}</p>` + rows;
+    $("rc-ko").querySelectorAll(".ko-row.clickable").forEach((r) =>
+      r.addEventListener("click", () => showHeat(r.dataset.home, r.dataset.away)));
   } else {
     $("rc-ko").innerHTML = `<p class="chart-cap">The knockouts haven't kicked off yet, this fills in tie by tie.</p>`;
   }

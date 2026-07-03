@@ -46,6 +46,27 @@ fat = load_team_tilt() or {}
 # the groups are done).
 played_ko = wc2026_played_ko(results, load_shootouts())
 
+# pre-match market 1X2 per pair, from the archived odds snapshots (scripts/41): the
+# LAST fetch strictly before kickoff, so grading the market only uses what it said
+# pre-match. Coverage starts 2026-06-29 (when the archive began) — earlier ties
+# simply carry no market line.
+import os
+NAME = {"USA": "United States", "Korea Republic": "South Korea", "IR Iran": "Iran",
+        "Czechia": "Czech Republic", "Türkiye": "Turkey"}
+canon = lambda t: NAME.get(t, t.replace(" & ", " and "))
+market_pre = {}
+if os.path.exists("outputs/odds_history.jsonl"):
+    for line in open("outputs/odds_history.jsonl"):
+        snap = json.loads(line)
+        for m in snap.get("matches", {}).values():
+            pair = frozenset((canon(m["home"]), canon(m["away"])))
+            if m.get("commence") and snap["fetched"] < m["commence"]:
+                prev = market_pre.get(pair)
+                if prev is None or snap["fetched"] > prev["fetched"]:
+                    market_pre[pair] = {"fetched": snap["fetched"], "home": canon(m["home"]),
+                                        "pH": m["pH"], "pD": m["pD"], "pA": m["pA"],
+                                        "n_books": m.get("n_books")}
+
 bk = pd.read_csv("outputs/bracket.csv")
 out = []
 for mn, g in bk.groupby("match"):
@@ -69,6 +90,11 @@ for mn, g in bk.groupby("match"):
         winner, goals = pk
         entry["actual"] = [int(goals.get(home, 0)), int(goals.get(away, 0))]
         entry["winner"] = winner
+    mkt = market_pre.get(frozenset((home, away)))
+    if mkt:  # oriented to this tie's home/away
+        flip = mkt["home"] != home
+        entry["market"] = {"pH": mkt["pA"] if flip else mkt["pH"], "pD": mkt["pD"],
+                           "pA": mkt["pH"] if flip else mkt["pA"], "n_books": mkt["n_books"]}
     out.append(entry)
 
 json.dump(out, open("outputs/bracket_dists.json", "w"), indent=1)
