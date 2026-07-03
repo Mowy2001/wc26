@@ -6,8 +6,15 @@ odds, qualification, modal bracket) for the site's time slider — independent o
 the irregular 4-hourly live snapshots. Uses the deployed tilts; point estimate
 (no bootstrap) at 10k sims for speed — the bootstrap effect is ~0.07pp, far
 below what the slider shows.
+
+--incremental: keep outputs/history/replay.json and compute ONLY the missing ks.
+This is what scripts/10 calls each cycle, so the slider gets one tick per match
+even when several matches land between refreshes; without the flag the whole
+history is rebuilt from scratch.
 """
 import json, sys, time
+
+INCREMENTAL = "--incremental" in sys.argv
 sys.path.insert(0, "src")
 import pandas as pd
 from wc26.data import (load_results, load_shootouts, wc2026_fixtures,
@@ -46,11 +53,20 @@ gb_weights = {t: squad_weights(gs, squads, t, pd.Timestamp("2026-06-11"), deb, a
 
 played = wc2026_fixtures(results).dropna(subset=["home_score", "away_score"]).sort_values("date")
 shootouts = load_shootouts()
-print(f"replaying {len(played)} played matches -> {len(played)+1} snapshots")
+
+RP = "outputs/history/replay.json"
+kept, todo = [], list(range(len(played) + 1))
+if INCREMENTAL and os.path.exists(RP):
+    kept = json.load(open(RP))["snapshots"]
+    have = {s["k"] for s in kept}
+    todo = [k for k in todo if k not in have]
+    print(f"incremental: {len(kept)} snapshots kept, {len(todo)} missing -> {todo}")
+else:
+    print(f"replaying {len(played)} played matches -> {len(played)+1} snapshots")
 
 snaps = []
 t0 = time.time()
-for k in range(len(played) + 1):
+for k in todo:
     sub = played.iloc[:k]
     fixed = {(r.home_team, r.away_team): (int(r.home_score), int(r.away_score))
              for r in sub[sub.date <= GROUP_STAGE_END].itertuples(index=False)}
@@ -104,7 +120,8 @@ for k in range(len(played) + 1):
     })
     print(f"  k={k:2d} {last[:42]:42s} {time.time()-t0:5.0f}s")
 
+snaps = sorted(kept + snaps, key=lambda s: s["k"])
 json.dump({"snapshots": snaps, "group_end_k": int(len(gfx)),
            "teams_group": {t: g for g, ts in groups.items() for t in ts}},
-          open("outputs/history/replay.json", "w"))
-print(f"outputs/history/replay.json written ({len(snaps)} snapshots)")
+          open(RP, "w"))
+print(f"{RP} written ({len(snaps)} snapshots)")

@@ -1,6 +1,10 @@
 """Step 7: ablation studies — how much does each data choice move the forecast?
 
-Four counterfactual tournament runs (same 20k sims, same seed as the headline):
+Counterfactual tournament runs (same 20k sims, same seed as the headline):
+  - baseline             : the CURRENT deployed model, eve information set. The
+                           like-for-like comparator for every ablation below —
+                           baseline_eve.csv predates the altitude deployment, so
+                           comparing an ablation against it mixes model versions.
   - no_host_advantage    : every match on neutral ground (groups + knockout);
                            keeps bootstrap draws like the headline run
   - xi_short_memory      : xi = 0.005  (half-life ~4.6 months), point estimate
@@ -43,6 +47,7 @@ from wc26.tilts import load_team_tilt, load_city_tilt
 tilt = load_team_tilt()  # fatigue (capital removed 2026-06-18)
 city_tilt = load_city_tilt()  # altitude
 scenarios = {
+    "baseline": dict(model=base_model, host_advantage=True, param_draws=draws, team_log_tilt=tilt, city_log_tilt=city_tilt),
     "no_host_advantage": dict(model=base_model, host_advantage=False, param_draws=draws, team_log_tilt=tilt, city_log_tilt=city_tilt),
     "xi_short_memory": dict(model=DixonColes(xi=0.005).fit(train, FIT), host_advantage=True, param_draws=None, team_log_tilt=tilt, city_log_tilt=city_tilt),
     "xi_long_memory": dict(model=DixonColes(xi=0.0005).fit(train, FIT), host_advantage=True, param_draws=None, team_log_tilt=tilt, city_log_tilt=city_tilt),

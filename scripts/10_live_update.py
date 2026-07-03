@@ -85,34 +85,11 @@ print(f"Timeline snapshot appended ({len(fixed)}+{len(fixed_ko)} played).")
 
 subprocess.run([sys.executable, "scripts/09_player_layer.py"], check=True)
 
-# Extend the match-by-match slider history: append/replace this snapshot by k
-# (k = matches played). Keeps outputs/history/replay.json current without a
-# full per-match replay each cycle.
-import json as _json, os as _os
-_t = res["teams"]; _k = len(fixed) + len(fixed_ko)
-_gb = pd.read_csv("outputs/golden_boot.csv").head(12)
-# bracket: modal occupant + probability per knockout slot (same shape as scripts/31)
-_bracket = {}
-for _br in res["bracket"].itertuples(index=False):
-    _bracket.setdefault(int(_br.match), {})[_br.slot] = {
-        "team": _br.team, "p": round(float(_br.p), 4), "adv": round(float(_br.adv), 4)}
-_snap = {"k": _k, "date": str(pd.Timestamp.utcnow().date()),
-         "last_match": f"{_k} matches played",
-         "champion": {tm: round(float(_t.loc[tm, "P_champion"]), 4) for tm in _t.index},
-         "qualify": {tm: round(float(_t.loc[tm, "P_qualify"]), 4) for tm in _t.index},
-         "best_third": {tm: round(float(_t.loc[tm, "P_best_third"]), 4) for tm in _t.index},
-         "rounds": {tm: [round(float(_t.loc[tm, c]), 4) for c in
-                         ("P_R32", "P_R16", "P_QF", "P_SF", "P_final", "P_champion")] for tm in _t.index},
-         "golden_boot": [{"player": r.player, "team": r.team, "p": round(float(r.P_golden_boot), 4)}
-                         for r in _gb.itertuples(index=False)],
-         "bracket": _bracket}
-_rp = "outputs/history/replay.json"
-if _os.path.exists(_rp):
-    _data = _json.load(open(_rp))
-    _data["snapshots"] = [x for x in _data["snapshots"] if x["k"] != _k] + [_snap]
-    _data["snapshots"].sort(key=lambda x: x["k"])
-    _json.dump(_data, open(_rp, "w"))
-    print(f"replay snapshot appended (k={_k}, {len(_data['snapshots'])} total)")
+# Extend the match-by-match slider history: one snapshot PER PLAYED MATCH.
+# scripts/31 --incremental computes every k missing from replay.json, so even if
+# several matches landed since the last refresh the slider gets one tick per
+# match, never a single aggregated jump.
+subprocess.run([sys.executable, "scripts/31_replay_history.py", "--incremental"], check=True)
 
 subprocess.run([sys.executable, "scripts/25_shadow_scores.py"], check=True)
 subprocess.run([sys.executable, "scripts/15_benchmark_report.py"], check=True)

@@ -816,12 +816,16 @@ if (WC26.match_dists && $("track-best")) {
 /* ---------- ablations: host advantage ---------- */
 if (WC26.ablations && $("host-ablation")) {
   const noHost = WC26.ablations.no_host_advantage.hosts;
+  // "with home" must come from the SAME model as the counterfactual (the ablations
+  // baseline): baseline_eve.csv predates the altitude deployment, and comparing across
+  // model versions once showed Mexico HIGHER in the neutral world (altitude boost in
+  // one number, not the other). Both sides eve-information, both current-model.
+  const withHome = WC26.ablations.baseline && WC26.ablations.baseline.hosts;
   $("host-ablation").innerHTML =
     ["United States", "Mexico", "Canada"].map((team) => {
-      // frozen at the June-11 eve (like the counterfactual), this is a pre-tournament
-      // statement about home advantage, not a live figure that drifts to 100%.
-      const real = (WC26.baseline_eve && WC26.baseline_eve[team] && WC26.baseline_eve[team].P1 != null)
-        ? WC26.baseline_eve[team].P1 : WC26.teams.find((t) => t.team === team).P1;
+      const real = withHome ? withHome[team].P1
+        : (WC26.baseline_eve && WC26.baseline_eve[team] && WC26.baseline_eve[team].P1 != null)
+          ? WC26.baseline_eve[team].P1 : WC26.teams.find((t) => t.team === team).P1;
       const cf = noHost[team].P1;
       return `<div class="ab-row">
         <div class="who">${flag(team)}${team}, win the group</div>
@@ -859,9 +863,12 @@ if (WC26.xi_tuning && $("xi-chart")) {
 /* ---------- usa case ---------- */
 if ($("usa-case")) {
   const usa = WC26.teams.find((t) => t.team === "United States");
-  // frozen at the June-11 eve, a pre-tournament statement, not a live number.
-  const usaEveP1 = (WC26.baseline_eve && WC26.baseline_eve["United States"]
-    && WC26.baseline_eve["United States"].P1 != null) ? WC26.baseline_eve["United States"].P1 : usa.P1;
+  // eve information set, current model (ablations baseline) so it matches the
+  // neutral-world counterfactual; falls back to the recorded eve baseline.
+  const abBase = WC26.ablations && WC26.ablations.baseline && WC26.ablations.baseline.hosts;
+  const usaEveP1 = abBase ? abBase["United States"].P1
+    : (WC26.baseline_eve && WC26.baseline_eve["United States"]
+      && WC26.baseline_eve["United States"].P1 != null) ? WC26.baseline_eve["United States"].P1 : usa.P1;
   const rows = [
     ["Model (Elo + home)", usaEveP1, "linear-gradient(90deg, var(--accent2), var(--accent))"],
     ["Market (Kalshi)", WC26.kalshi_usa_group, "var(--gold)"],
@@ -959,38 +966,34 @@ if (WC26.bootstrap && WC26.ablations && WC26.ablations.no_param_uncertainty && $
 
 /* ---------- model lab (shadow scoreboard) ---------- */
 if (WC26.shadow_scores && $("lab-board")) {
-  // pin the PRODUCTION model first (it's what's actually deployed); the rest are
-  // what-ifs, sorted. Over so few matches the order is noise, so don't let the
-  // deployed model look "mid-table" just because of a thousandth of log-loss.
-  const all = [...WC26.shadow_scores];
-  const deployed = all.find((r) => r.variant === "Full model");
-  const rest = all.filter((r) => r !== deployed).sort((x, y) => x.log_loss - y.log_loss);
-  const rows = deployed ? [deployed, ...rest] : rest;
+  // honest league table: sorted best-first by live log-loss, the deployed model sits
+  // wherever it currently ranks (the ▶ badge marks it). Bars measure the EDGE over the
+  // know-nothing baseline, so longer bar = better, consistent with lower number = better.
+  const rows = [...WC26.shadow_scores].sort((x, y) => x.log_loss - y.log_loss);
   const n = rows[0]?.n || 0;
-  const spread = Math.max(...all.map((r) => r.log_loss)) - Math.min(...all.map((r) => r.log_loss));
+  const spread = rows[rows.length - 1].log_loss - rows[0].log_loss;
   const uni = WC26.uniform_logloss;
-  const lo = Math.min(...rows.map((r) => r.log_loss), uni) - 0.01;
-  const hi = Math.max(...rows.map((r) => r.log_loss), uni) + 0.01;
-  const w = (v) => (100 * (hi - v)) / (hi - lo);
-  $("lab-board").innerHTML = rows.map((r) => {
+  const best = rows[0].log_loss;
+  const w = (v) => (100 * (uni - v)) / (uni - best);
+  const label = (v) => v === "Elo only" ? "Elo only (all tilts off)" : v;
+  $("lab-board").innerHTML = rows.map((r, i) => {
     const main = r.variant === "Full model";
     const shadow = r.variant.includes("shadow");
     const col = main ? "linear-gradient(90deg, var(--accent2), var(--accent))" : shadow ? "var(--gold)" : "#51618f";
     return `<div class="bar-row">
-      <div class="who">${main ? `<b>${r.variant}</b> <span class="prod-badge">▶ in prod</span>` : r.variant}</div>
+      <div class="who">${i + 1}. ${main ? `<b>${label(r.variant)}</b> <span class="prod-badge">▶ in prod</span>` : label(r.variant)}</div>
       <div class="bar-track"><div class="bar-fill" style="width:${w(r.log_loss)}%;background:${col}"></div></div>
       <div class="val">${r.log_loss.toFixed(3)}</div>
     </div>`;
   }).join("");
   $("lab-note").innerHTML =
-    `The <strong>top row is the model actually in production</strong>; every other line is the same model
-     with one ingredient added or removed, a what-if. Shorter bar = better (lower log-loss; know-nothing
-     baseline ${uni.toFixed(3)}). Crucially, over the ${n} matches played so far the whole field is spread
-     by just <strong>${spread.toFixed(3)}</strong> log-loss, <strong>statistically tied</strong>, far too
-     few games to separate them, so the ordering here is noise (the deployed model beating "Elo only" and
-     "no altitude" is the only real signal: the tilts help). The two gold bars are shadow bets that live
-     here and <strong>only</strong> here. <strong>This live board never decides what goes in the model -
-     the 345-match backtest does.</strong>`;
+    `A live league table: every line is the same engine with one ingredient added or removed, ranked
+     best-first by log-loss on the ${n} matches played (lower number = better; the bar shows the edge over
+     the know-nothing baseline at ${uni.toFixed(3)}, so longer bar = better). The ▶ badge marks the model
+     actually in production, wherever it ranks today. The gold bars are shadow bets that live here and
+     <strong>only</strong> here. Caveat before reading too much: the whole field is spread by just
+     <strong>${spread.toFixed(3)}</strong> log-loss, statistically tied over so few games.
+     <strong>This live board never decides what goes in the model, the 345-match backtest does.</strong>`;
 }
 
 /* ---------- footer ---------- */
