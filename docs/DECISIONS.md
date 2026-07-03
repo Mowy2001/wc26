@@ -57,6 +57,14 @@ Tags: **ADMITTED** (deployed) · **PROBATION** (deployed, near-null) · **SHADOW
   (t = +2.09). Heat closed even with the correct proxy.
 - **Penalty-taker bonus** — **REJECTED**: double-counts penalties already in the
   goal shares (+0.0054 OOS).
+- **Official FIFA ranking** (as the strength input, in place of our Elo) —
+  **REJECTED**. Same DC model, same point-in-time training rows, only the rating
+  swapped; tested on every World Cup 1994-2022. Our Elo wins all eight: pooled 493
+  matches, **0.9745 vs 1.0485** (uniform 1.0986), paired t = 4.18, p ~ 3.5e-5. The
+  fitted coefficient holds at ~0.75-0.82 for Elo but decays for FIFA from ~0.5 to
+  ~0.14 — the goal model learns the ranking barely tracks match margins. This is
+  why FIFA rankings sit on the *deliberately-excluded* list, not just as taste.
+  `scripts/archive/44_fifa_vs_elo.py`, `data/external/fifa_ranking.csv`.
 - **Cohesion** — **EXCLUDED ×2**. Club-concentration proxy passes OOS by a hair but
   swings Spain −9.6pp on a non-significant feature (t = −0.60) → fails
   proportionality. Squad-continuity proxy (retained from the previous tournament)

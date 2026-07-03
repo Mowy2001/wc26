@@ -14,6 +14,7 @@ narrative is in `docs/METHODOLOGY.md`; this is the index.
 | 06 | `tune_xi` | Time-decay ξ — **flat plateau**, not identified; chosen at centre (`xi_tuning.csv`). |
 | 37 | `gridsearch_elo_weights` | K-factors / home-adv — **flat plateau**, kept eloratings convention. |
 | 40 | `broadened_gate` | Cross-confederation robustness gate — model **generalises** (better outside UEFA). |
+| 44 | `fifa_vs_elo` | Official FIFA ranking as the strength input — **REJECTED**, our Elo wins every WC 1994-2022 (0.9745 vs 1.0485, p~3.5e-5). `data/external/fifa_ranking.csv`. |
 
 ## Capital — REMOVED from the model
 | # | Script | Verdict |
