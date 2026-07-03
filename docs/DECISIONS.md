@@ -15,6 +15,16 @@ The gate has two panels:
 Tags: **ADMITTED** (deployed) · **PROBATION** (deployed, near-null) · **SHADOW**
 (in the model lab only, never official) · **REJECTED** · **NULL** (honest non-result).
 
+**Gate v2 (lesson recorded 2026-07-03, applies to all FUTURE admissions).** The
+2026 live data is teaching us that the probation tier was a mistake: the gate's
+strong admit (altitude, t = −2.42) is holding up live, its marginal admit (fatigue,
+OOS −0.0012) is underperforming — exactly the pattern you'd expect if weak passes
+are noise. For future cycles the admission bar rises: **no variable is deployed
+below |t| ≈ 2 on the PRIMARY panel, regardless of the OOS sign; marginal passes go
+to SHADOW, not probation.** The 2026 deployed model is NOT retro-edited under this
+rule (the forecast is frozen and being graded); fatigue's fate follows its own
+pre-registered rule below.
+
 ---
 
 ## The engine — validated

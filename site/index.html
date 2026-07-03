@@ -35,7 +35,7 @@
   <a href="#reality">Groups called</a>
   <a href="#forecast">Live forecast</a>
   <a href="#market">Model vs market</a>
-  <a href="#drivers">What earns each place</a>
+  <a href="under-the-hood.html#drivers">What earned each place</a>
   <span class="toc-group">Under the hood</span>
   <a href="#idea">How it works</a>
   <a href="under-the-hood.html#influence">What earned its place</a>
@@ -45,13 +45,13 @@
 
 <main class="wrap">
 
-<section id="next" style="margin-top:34px">
+<div class="act-divider"><span class="act-num">1</span> Tonight's race</div>
+
+<section id="next">
   <h2>Next matches <span class="sub">our model vs the betting market, click a game for the score heatmap</span></h2>
   <p class="note" id="next-note" style="margin-top:-6px;margin-bottom:14px"></p>
   <div id="next-board" class="nm-grid"></div>
 </section>
-
-<div class="act-divider"><span class="act-num">1</span> Tonight's race</div>
 
 <section id="track">
   <h2>How it's doing <span class="sub">the model's live record against every result</span></h2>
@@ -70,22 +70,7 @@
   (shootouts included). ⚖ marks the ties the model rated a coin-flip. Fills in tie by tie.</p>
 </section>
 
-<section id="reality">
-  <h2>Called it? The groups <span class="sub">our pre-tournament forecast against what actually happened</span></h2>
-  <div class="tl-h">Group stage, who reached the knockouts</div>
-  <p class="chart-cap" id="rc-groups-lead"></p>
-  <div id="rc-groups"></div>
-  <div class="tl-h" style="margin-top:24px">Best calls &amp; biggest surprises
-    <span class="sub">group matches: the chance the model gave to what happened, click for the heatmap</span></div>
-  <div class="bw-grid">
-    <div><div class="bw-lab good">✓ Nailed it</div><div id="track-best" class="chart"></div></div>
-    <div><div class="bw-lab bad">✗ Didn't see it coming</div><div id="track-worst" class="chart"></div></div>
-  </div>
-  <div class="tl-h" style="margin-top:24px">Golden Boot, our eve pick vs the race now</div>
-  <div id="rc-gb"></div>
-  <p class="note">Predictions were locked before kickoff, nothing here is fitted after the fact.
-  ✓ = a call we got right, ✗ = wrong, ⚖ = a team we'd rated a coin-flip to go through.</p>
-</section>
+
 
 <section id="forecast">
   <h2>The forecast</h2>
@@ -130,24 +115,24 @@
     </div></div>
 </section>
 
-<section id="drivers">
-  <h2>What's earning each team its place <span class="sub">quality vs the draw vs venue &amp; freshness</span></h2>
-  <p class="chart-cap" style="margin-bottom:8px;max-width:900px"><strong>What each bar measures:</strong> a team's chance of
-  finishing <strong>top two of its group</strong>, qualifying straight to the knockouts (the numbers inside
-  the bar are percentage points that add up to that total).</p>
-  <p class="chart-cap" style="margin-bottom:8px;max-width:900px"><strong>How we split it:</strong> we re-run the 20,000
-  tournaments three ways and read off the gaps -
-  <b class="dr-k strength">squad quality</b> is how the team would do in an <em>average</em> group (its
-  Elo-driven strength, the draw set aside);
-  <b class="dr-k draw">the draw</b> is how much its <em>actual</em> group is easier than average;
-  <b class="dr-k tilt">venue &amp; freshness</b> is what the model's <em>only two earned adjustments</em> -
-  <strong>altitude</strong> and <strong>fatigue</strong>, add or take away.
-  A <b class="dr-k drag">drag</b> (the hatched piece on the right) is anything working <em>against</em> the
-  team, a tougher-than-average group or tired legs, so it's drawn past the total, not added to it.
-  The three positive pieces sum exactly to the team's real number. Pre-tournament forecast.</p>
-  <p class="note" id="drivers-note"></p>
-  <div id="drivers-board" class="chart"></div>
+<section id="reality">
+  <h2>Called it? The groups <span class="sub">our pre-tournament forecast against what actually happened</span></h2>
+  <div class="tl-h">Group stage, who reached the knockouts</div>
+  <p class="chart-cap" id="rc-groups-lead"></p>
+  <div id="rc-groups"></div>
+  <div class="tl-h" style="margin-top:24px">Best calls &amp; biggest surprises
+    <span class="sub">group matches: the chance the model gave to what happened, click for the heatmap</span></div>
+  <div class="bw-grid">
+    <div><div class="bw-lab good">✓ Nailed it</div><div id="track-best" class="chart"></div></div>
+    <div><div class="bw-lab bad">✗ Didn't see it coming</div><div id="track-worst" class="chart"></div></div>
+  </div>
+  <div class="tl-h" style="margin-top:24px">Golden Boot, our eve pick vs the race now</div>
+  <div id="rc-gb"></div>
+  <p class="note">Predictions were locked before kickoff, nothing here is fitted after the fact.
+  ✓ = a call we got right, ✗ = wrong, ⚖ = a team we'd rated a coin-flip to go through.</p>
 </section>
+
+
 
 
 <div class="act-divider"><span class="act-num">2</span> Under the hood <span class="act-sub">how it's built, and how every variable earned its place</span></div>

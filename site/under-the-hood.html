@@ -19,12 +19,66 @@
 
 <nav class="toc wrap">
   <a href="index.html#idea">How it works</a>
-  <a href="#influence">What earned its place</a>
+  <a href="#gate">How a variable gets in</a>
+  <a href="#drivers">What earned each place</a>
+  <a href="#influence">The trials</a>
   <a href="#lab">Model lab</a>
   <a href="#method">Methodology</a>
 </nav>
 
 <main class="wrap">
+
+<section id="gate">
+  <h2>How a variable gets in <span class="sub">the admission machinery the rest of this page assumes</span></h2>
+  <div class="cards3">
+    <div class="card">
+      <div class="card-step">1</div>
+      <h3>The time-machine test</h3>
+      <p>Every candidate faces the same trial: go back to six past tournaments (World Cups and
+      Euros), rebuild the forecast using <strong>only what was known before each one</strong>, and ask,
+      would this variable have predicted them better? If out-of-sample log-loss doesn't drop, it stays
+      out. No data later than the prediction date, no tuning on the tournament being predicted, nothing
+      kept because it "feels right".</p>
+    </div>
+    <div class="card">
+      <div class="card-step">2</div>
+      <h3>The away leg</h3>
+      <p>Passing at home isn't enough. A second panel, Copa América, AFCON, Asian and Gold Cups, can't
+      admit anything (no squad files exist there) but it can <strong>veto</strong>: if a variable only works
+      in Europe, it's a bias, not a signal. This veto is not theoretical, it caught <em>football
+      capital</em>, whose "predictive power" turned out to be Europe-only coverage, and got it removed.</p>
+    </div>
+    <div class="card">
+      <div class="card-step">3</div>
+      <h3>The verdict</h3>
+      <p>Four outcomes. <strong>Admitted</strong>: in the official forecast (altitude).
+      <strong>Probation</strong>: admitted on thin evidence, first in line for demotion (fatigue).
+      <strong>Shadow</strong>: kept out of the forecast but scored live in the lab below, so the data
+      keeps judging it in public (capital, cohesion, diaspora). <strong>Rejected</strong>: measured,
+      failed, documented (heat, penalty bonus, the FIFA ranking).</p>
+    </div>
+  </div>
+</section>
+
+<section id="drivers">
+  <h2>What earned each team its odds <span class="sub">the pre-tournament decomposition: quality vs the draw vs venue &amp; freshness</span></h2>
+  <p class="chart-cap" style="max-width:900px">A snapshot of the model's <strong>eve-of-tournament</strong> reasoning, kept as it was: with the group stage decided you can read it as a scorecard of <em>why</em> it rated each team the way it did.</p>
+  <p class="chart-cap" style="margin-bottom:8px;max-width:900px"><strong>What each bar measures:</strong> a team's pre-tournament chance of
+  finishing <strong>top two of its group</strong>, qualifying straight to the knockouts (the numbers inside
+  the bar are percentage points that add up to that total).</p>
+  <p class="chart-cap" style="margin-bottom:8px;max-width:900px"><strong>How we split it:</strong> we re-run the 20,000
+  tournaments three ways and read off the gaps -
+  <b class="dr-k strength">squad quality</b> is how the team would do in an <em>average</em> group (its
+  Elo-driven strength, the draw set aside);
+  <b class="dr-k draw">the draw</b> is how much its <em>actual</em> group is easier than average;
+  <b class="dr-k tilt">venue &amp; freshness</b> is what the model's <em>only two earned adjustments</em> -
+  <strong>altitude</strong> and <strong>fatigue</strong>, add or take away.
+  A <b class="dr-k drag">drag</b> (the hatched piece on the right) is anything working <em>against</em> the
+  team, a tougher-than-average group or tired legs, so it's drawn past the total, not added to it.
+  The three positive pieces sum exactly to the team's real number. Pre-tournament forecast.</p>
+  <p class="note" id="drivers-note"></p>
+  <div id="drivers-board" class="chart"></div>
+</section>
 
 <section id="influence">
   <h2>What earned its place <span class="sub">the trials, every variable admitted or cut, measured by re-running the tournament without it</span></h2>
@@ -108,16 +162,7 @@
     </div>
   </div>
 
-  <h3 class="merge-sub" id="rule">The rule that decides it all</h3>
-  <p class="note" style="max-width:780px;font-size:.96rem">One referee governs the whole model:
-  <strong>nothing enters unless it would have predicted past tournaments better.</strong> Every
-  candidate is tested point-in-time, using only what was known before each match, on six past
-  World Cups and Euros, and kept only if it lowers out-of-sample log-loss. No data later than the
-  prediction date; no tuning on the tournament being predicted; nothing kept because it "feels
-  right". It's why the list of what's <em>in</em> is short, why the rejects above are on the page
-  at all, and why, when a fair version of football capital stopped helping, it came out. The
-  discipline is the product.</p>
-</section>
+  </section>
 
 <section id="lab">
   <h2>The model lab <span class="sub">the same forecast, with and without each ingredient, scored live on real results</span></h2>
