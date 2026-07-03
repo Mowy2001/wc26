@@ -1,5 +1,7 @@
 # WC26 — Probabilistic World Cup 2026 Forecasting
 
+**Live site: <https://mowy2001.github.io/wc26/>** — the forecast, graded in public.
+
 An end-to-end, **point-in-time** probabilistic model for the 2026 FIFA World Cup:
 group tables, knockout bracket, champion odds, and the Golden Boot — refreshed
 live as real results come in, and graded against them.
