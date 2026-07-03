@@ -762,53 +762,13 @@ if (WC26.replay && WC26.replay.snapshots && WC26.standings && $("rc-groups")) {
     const gv = (p) => (p.p != null ? p.p : p.P_golden_boot);
     const eg = (eve.golden_boot || []).slice(0, 5), ng = (WC26.golden_boot || []).slice(0, 5);
     const col = (list) => list.map((p, i) => `<div class="rc-gbrow"><span>${i + 1}. ${flag(p.team)}${p.player}</span><b>${pct(gv(p), 0)}</b></div>`).join("");
-    $("rc-gb").innerHTML = `<div class="rc-gbcols"><div><div class="rc-gbh">Pre-tournament pick</div>${col(eg)}</div><div><div class="rc-gbh">The race now</div>${col(ng)}</div></div>`;
+    // the market's four quoted names, recorded before kickoff (American odds -> implied
+    // probability, margin not removable on a 4-name quote) — the only outside GB forecast.
+    const mk = Object.entries(WC26.golden_boot_market || {}).map(([pl, o], i) =>
+      `<div class="rc-gbrow"><span>${i + 1}. ${pl}</span><b>${pct(100 / (o + 100), 0)}</b></div>`).join("");
+    const mkCol = mk ? `<div><div class="rc-gbh">The market's picks (pre-tournament)</div>${mk}</div>` : "";
+    $("rc-gb").innerHTML = `<div class="rc-gbcols"><div><div class="rc-gbh">Our pre-tournament pick</div>${col(eg)}</div>${mkCol}<div><div class="rc-gbh">The race now</div>${col(ng)}</div></div>`;
   }
-}
-
-/* ---------- the rivals' June-11 calls, graded live ---------- */
-// the ONLY outside forecasts recorded before kickoff (benchmarks, never inputs):
-// BetMGM's outright board, Kalshi's USA-group price, Klement's bracket, and the
-// Golden Boot market. Grading uses the conditioned sim: eliminated => P_champion 0.
-if ($("rc-eve-market") && WC26.betmgm_shin && WC26.replay && WC26.replay.snapshots) {
-  const eveCh = WC26.replay.snapshots[0].champion || {};
-  const curP = {}; WC26.teams.forEach((t) => { curP[t.team] = t.P_champion; });
-  const roundName = (mn) => mn <= 88 ? "R32" : mn <= 96 ? "R16" : mn <= 100 ? "QF" : mn <= 102 ? "SF" : "Final";
-  // which round a team was knocked out in (from the graded bracket), null if still alive
-  const exitRound = (t) => {
-    const l = (WC26.bracket_dists || []).find((m) => m.winner && m.winner !== t && (m.home === t || m.away === t));
-    return l ? roundName(l.match) : null;
-  };
-  const chip = (okState, txt) => `<span class="rv-chip ${okState}">${txt}</span>`;
-  const status = (t) => curP[t] > 0 ? chip("ok", "alive") : chip("no", `out ${exitRound(t) ? "in " + exitRound(t) : ""}`);
-  // 1. bookmaker outright board
-  const book = Object.entries(WC26.betmgm_shin).sort((a, b) => b[1] - a[1]).map(([t, p]) =>
-    `<div class="rv-row"><span>${flag(t)}${TLA3(t)}</span><b>${pct(p, 0)}</b><i>ours ${pct(eveCh[t] || 0, 0)}</i>${status(t)}</div>`).join("");
-  // 2. Kalshi's USA call, decided by the real group D table
-  const gD = WC26.standings && WC26.standings.D, dDone = gD && gD.every((r) => r.P >= 3);
-  const usaWon = dDone && gD[0].team === "United States";
-  const kalshi = `<div class="rv-row"><span>🇺🇸 USA win group D</span><b>${pct(WC26.kalshi_usa_group, 0)}</b><i>ours ${pct((WC26.baseline_eve && WC26.baseline_eve["United States"] && WC26.baseline_eve["United States"].P1) || 0, 0)}</i>${dDone ? chip(usaWon ? "ok" : "no", usaWon ? "✓ USA won it" : "✗ " + gD[0].team + " won it") : chip("", "open")}</div>
-    <p class="rv-note">${usaWon ? "A point to the market: it had the hosts twice as likely as we did, and they delivered." : ""}</p>`;
-  // 3. Klement's three concrete calls
-  const kl = [["Netherlands", "champions"], ["Portugal", "reaches the final"], ["England", "out in the semis"], ["Spain", "out in the semis"]]
-    .map(([t, call]) => {
-      const er = exitRound(t), alive = curP[t] > 0;
-      let st;
-      if (call === "out in the semis") st = alive ? chip("", "open") : (er === "SF" ? chip("ok", "✓ exactly") : chip("no", `✗ out in ${er}`));
-      else st = alive ? chip("", "open") : chip("no", `✗ out in ${er}`);
-      return `<div class="rv-row"><span>${flag(t)}${TLA3(t)} ${call}</span>${st}</div>`;
-    }).join("");
-  // 4. the Golden Boot market's four quoted names vs the race now
-  const imp = (o) => 100 / (o + 100);
-  const gbNow = {}; (WC26.golden_boot || []).forEach((p) => { gbNow[p.player] = p.P_golden_boot; });
-  const gb = Object.entries(WC26.golden_boot_market || {}).map(([pl, o]) =>
-    `<div class="rv-row"><span>${pl}</span><b>${pct(imp(o), 0)}</b><i>model now ${gbNow[pl] != null ? pct(gbNow[pl], 0) : "<1%"}</i></div>`).join("");
-  $("rc-eve-market").innerHTML = `
-    <div class="gc-card"><div class="gc-head"><span>Bookmaker title board</span><span class="gc-score">BetMGM, margin removed</span></div>${book}</div>
-    <div class="gc-card"><div class="gc-head"><span>Klement's bracket</span><span class="gc-score">rival forecast</span></div>${kl}
-      <p class="rv-note">Graded when the bracket reaches each call; "open" just means not decided yet.</p></div>
-    <div class="gc-card"><div class="gc-head"><span>Kalshi</span><span class="gc-score">prediction market</span></div>${kalshi}</div>
-    <div class="gc-card"><div class="gc-head"><span>Golden Boot market</span><span class="gc-score">their four quoted names</span></div>${gb}</div>`;
 }
 
 /* ---------- knockouts graded: our bracket vs reality ---------- */
