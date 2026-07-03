@@ -14,7 +14,7 @@ de-vigged with Shin vs Klement).
 import json, os, sys
 sys.path.insert(0, "src")
 import numpy as np, pandas as pd
-from wc26.data import load_results, wc2026_group_fixtures, reconstruct_groups
+from wc26.data import load_results, wc2026_fixtures, wc2026_group_fixtures, reconstruct_groups
 from wc26.elo import ratings_asof
 from wc26.dixon_coles import DixonColes
 from wc26.benchmark import shin_probs, implied_raw, log_score
@@ -55,6 +55,9 @@ json.dump(standings, open("outputs/history/standings.json", "w"))
 print(f"\nReal standings written ({len(played)} group matches played).")
 
 # ---- live match-level scoring (frozen beliefs, DEPLOYED tilts) ----
+# ALL played matches, group + knockout (same convention as scripts/25: the 1X2 is
+# scored on the recorded final score) — the site headline says "every result".
+played = wc2026_fixtures(results).dropna(subset=["home_score", "away_score"])
 if played.empty:
     json.dump({"n": 0}, open("outputs/history/scoring.json", "w"))
     print("No matches played yet.")

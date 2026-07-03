@@ -34,6 +34,14 @@ Tags: **ADMITTED** (deployed) · **PROBATION** (deployed, near-null) · **SHADOW
 
 - **Fatigue** — squad-mean club minutes. b ≈ −0.028, stable across folds, OOS
   −0.0012 → **ADMITTED** (probation). France pays the most (−2.4pp).
+  - *Pre-registered probation rule (2026-07-03, mid-tournament, before the outcome
+    is known):* the model stays frozen through the final; fatigue's fate is decided
+    in the after-final report (backlog 9) on the pooled evidence — the six-tournament
+    gate (−0.0012) **plus** the full live-2026 shadow score. As of 82 live matches
+    "no fatigue" leads the full model (0.8789 vs 0.8895); if the live deficit holds
+    through the final and wipes out the gate margin on pooled log-loss, fatigue is
+    **demoted to shadow** for future tournaments. Rule stated now so the verdict
+    can't be post-hoc.
 - **Altitude venue tilt** — habitual-altitude acclimatisation, tested on CONMEBOL
   qualifiers where altitude varies. OOS −0.0225, t = −2.42 (the strongest single
   block), b = 0.134/km → **ADMITTED**. Applied at Mexico City / Zapopan; Mexico

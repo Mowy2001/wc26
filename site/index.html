@@ -103,7 +103,7 @@
   <div class="fc-block" id="market"><div class="fc-bar"></div>
     <div class="tl-h">Model vs market <span class="sub">our title odds against the bookies, live, with their built-in margin stripped out</span></div>
     <p class="market-diverge" id="market-diverge"></p>
-    <p class="chart-cap" style="max-width:820px">Drag to watch our title odds move match by match (▲▼ = change since the tournament started); the market line is the latest live price. The bookmakers' odds always add up to more than 100% (their built-in profit margin) — we strip that out so the two bars are a fair like-for-like. Scroll for more teams.</p>
+    <p class="chart-cap" style="max-width:820px">Drag to watch our title odds move match by match (▲▼ = change since the tournament started); the market line is the latest live price. The bookmakers' odds always add up to more than 100% (their built-in profit margin); we strip that out so the two bars are a fair like-for-like. Scroll for more teams.</p>
     <div id="market-chart" class="chart market-scroll"></div></div>
   <div class="fc-block"><div class="fc-bar"></div>
     <div class="tl-h">Predicted bracket, most likely team in each slot
@@ -181,7 +181,7 @@
       "Spain 25%" just means: Spain lifted the trophy in 5,000 of them.</p>
     </div>
   </div>
-  <h3 class="merge-sub" id="data">The data diet <span class="sub">three public files, and a list of things we refuse to know</span></h3>
+  <h3 class="merge-sub" id="data">The data diet <span class="sub">four public files, and a list of things we refuse to know</span></h3>
   <div class="cards32">
     <div class="card">
       <h3>📜 49,000 matches, 1872→today</h3>
@@ -217,7 +217,7 @@
       <p>Squad market values, injuries, FIFA rankings, pundit priors, betting odds.
       Not because they're worthless, because nothing enters this model until it
       <strong>proves itself in a backtest</strong>. The FIFA ranking, for one, is
-      <strong>+0.07 log-loss worse</strong> than our Elo across World Cups 1994–2022 —
+      <strong>+0.07 log-loss worse</strong> than our Elo across World Cups 1994–2022,
       barely better than a coin-guess. Everything we set out to test now has a verdict:
       heat failed, altitude earned its place, diaspora and cohesion ended up as shadow
       bets (see the model lab), never silently in, never quietly dropped.</p>
@@ -366,17 +366,14 @@
 </section>
 
 <section id="method">
-  <h2>Under the hood <span class="sub">the short version, the full write-up lives in the open repo</span></h2>
-  <p class="note" style="max-width:840px">Three layers, no black box: a from-scratch
-  <strong>Elo</strong> rebuilt over 49,000 matches (so every rating is <em>point-in-time</em>, no
-  information from the future); an <strong>Elo-driven Dixon-Coles</strong> goal model (Poisson log-rates
-  from the Elo gap + home advantage + the low-score correction, with no per-team free parameters to
-  overfit); and a <strong>20,000-run Monte Carlo</strong> that samples every scoreline, applies the full
-  FIFA tiebreakers, fills the official bracket and plays to a shootout model fitted on 677 historical
-  shootouts. Backtest (World Cup 2022, strictly point-in-time): log-loss <strong>1.060</strong> vs 1.099
-  uniform; favourites priced at 54% won 56%.</p>
-  <p class="note" style="max-width:840px">Nothing is hidden, every formula, every gated variable and
-  every honest null result is written up in full:</p>
+  <h2>The match report <span class="sub">for readers who want the formulas, not the metaphors</span></h2>
+  <p class="note" style="max-width:840px">Two properties the cards above can't show. Every rating is
+  <strong>point-in-time</strong>: a prediction for any date uses only matches played before it, so the
+  backtests can't cheat. And the goal model has <strong>no per-team free parameters</strong>, five numbers
+  shared by all 48 teams, which is why it can't overfit a single nation's story. Pre-registered backtest
+  on World Cup 2022: log-loss <strong>1.060</strong> vs 1.099 for a know-nothing guess; favourites priced
+  at 54% won 56%. Every formula, every gated variable and every honest null result is written up in
+  full:</p>
   <div class="doc-links">
     <a class="doc-link" href="https://github.com/Mowy2001/wc26/blob/main/docs/METHODOLOGY.md" target="_blank" rel="noopener">📐 Methodology<span>every layer &amp; choice, in detail</span></a>
     <a class="doc-link" href="https://github.com/Mowy2001/wc26/blob/main/docs/DECISIONS.md" target="_blank" rel="noopener">⚖️ Decision ledger<span>what earned its place, and what didn't</span></a>

@@ -868,12 +868,20 @@ if ($("usa-case")) {
   ];
   const cfP1 = WC26.ablations ? WC26.ablations.no_host_advantage.hosts["United States"].P1 : null;
   if (cfP1 !== null) rows.push(["Model, neutral world", cfP1, "#51618f"]);
+  // grade the call once the group is decided: who actually won group D
+  const gD = WC26.standings && WC26.standings.D;
+  const dDone = gD && gD.every((r) => r.P >= 3);
+  const verdict = dDone
+    ? (gD[0].team === "United States"
+      ? ` The group is decided: <strong>the USA won it</strong>. A point to the market, on the page like everything else.`
+      : ` The group is decided: <strong>${gD[0].team} won it</strong>, the USA finished ${["1st","2nd","3rd","4th"][gD.findIndex((r) => r.team === "United States")]}.`)
+    : "";
   $("usa-case").innerHTML = `<div class="usa-rows">` +
     rows.map(([src, p, bg]) => `<div class="usa-row">
       <span class="src">${src}</span>
       <div class="usa-track"><i style="width:${100 * p / 0.6}%; background:${bg}"></i></div>
       <span class="num">${pct(p, 0)}</span></div>`).join("") +
-    `</div><p class="mini-note" style="margin-top:8px">🇺🇸 USA win group D, three views of the same question.</p>`;
+    `</div><p class="mini-note" style="margin-top:8px">🇺🇸 USA win group D, three views of the same question.${verdict}</p>`;
 }
 
 /* ---------- altitude card ---------- */
@@ -1009,8 +1017,12 @@ if (WC26.scoring && WC26.scoring.n && $("track-head")) {
         home: m.home, away: m.away, score: `${h}-${a}`,
         pa: h > a ? m.pH : (h < a ? m.pA : m.pD),
         winner: m.winner, pred: m.pH >= m.pA ? m.home : m.away }; });  // model's pick to go through
-    const grpN = [...s.matches].reverse().map((m) => ({
-      home: m.home, away: m.away, score: m.score, pa: m.p_realised, winner: null, pred: null }));
+    // s.matches now spans group + KO; KO ties already come from bracket_dists above
+    // (with the model's pick + who went through), so drop them here to avoid doubles.
+    const koPairs = new Set(koN.map((m) => m.home + "|" + m.away).concat(koN.map((m) => m.away + "|" + m.home)));
+    const grpN = [...s.matches].reverse()
+      .filter((m) => !koPairs.has(m.home + "|" + m.away))
+      .map((m) => ({ home: m.home, away: m.away, score: m.score, pa: m.p_realised, winner: null, pred: null }));
     const last5 = [...koN, ...grpN].slice(0, 5);
     $("track-matches").innerHTML = last5.map((m) => {
       const good = m.pa >= 0.45;
