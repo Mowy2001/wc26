@@ -255,7 +255,9 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
   const snaps = WC26.replay.snapshots;
   const tg = WC26.replay.teams_group;
   const N = snaps.length - 1;        // last index; index 0 = before kickoff
-  const GEK = (WC26.replay.group_end_k != null) ? Math.min(WC26.replay.group_end_k, N) : N;  // end of the group stage
+  // end of the group stage; the 72-match structure is fixed, so if a refresh ever drops
+  // group_end_k the marker stays put instead of drifting to the end of the slider.
+  const GEK = Math.min((WC26.replay.group_end_k != null) ? WC26.replay.group_end_k : 72, N);
   let cur = N;
 
   // Build a rich, synced control inside every .fc-bar:
