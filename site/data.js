@@ -99002,7 +99002,7 @@ const WC26 = {
   }
  ],
  "market_now": {
-  "fetched": "2026-07-04T13:14:42Z",
+  "fetched": "2026-07-04T13:15:43Z",
   "outright": {
    "France": 0.3128,
    "Argentina": 0.1688,
@@ -99088,6 +99088,27 @@ const WC26 = {
   },
   {
    "t": "2026-07-04T13:14:42Z",
+   "o": {
+    "France": 0.3128,
+    "Argentina": 0.1688,
+    "Spain": 0.1295,
+    "England": 0.08,
+    "Brazil": 0.0707,
+    "Portugal": 0.0645,
+    "Colombia": 0.0328,
+    "Mexico": 0.0312,
+    "Morocco": 0.0275,
+    "United States": 0.0259,
+    "Norway": 0.0207,
+    "Belgium": 0.0166,
+    "Switzerland": 0.011,
+    "Canada": 0.0032,
+    "Egypt": 0.0027,
+    "Paraguay": 0.0021
+   }
+  },
+  {
+   "t": "2026-07-04T13:15:43Z",
    "o": {
     "France": 0.3128,
     "Argentina": 0.1688,

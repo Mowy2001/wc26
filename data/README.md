@@ -29,6 +29,7 @@ out-of-sample gate (that transparency is the point — see `docs/DECISIONS.md`).
 | `external/squads_{euro,wc}20xx.csv` | past-tournament squads to **gate** the player / capital / cohesion blocks | — |
 | `external/tmax_*.json` (120 files) | climate / heat block (per country & host city max-temperature series) | REJECTED ×2 |
 | `external/fifa_ranking.csv` | official FIFA ranking as the strength input (vs our Elo) | REJECTED (+0.07 log-loss worse, WC 1994-2022); `scripts/archive/44` |
+| `external/kalshi_groupqual.csv` | Kalshi pre-tournament P(qualify) per team (public candlesticks) | benchmark: market beat us 0.426 vs 0.529; `scripts/archive/45` |
 
 > Why keep ~28 MB of rejected-experiment data? Because "we tested it and it didn't
 > earn its place" is only credible if the test is reproducible. See the gating

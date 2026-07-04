@@ -15,6 +15,7 @@ narrative is in `docs/METHODOLOGY.md`; this is the index.
 | 37 | `gridsearch_elo_weights` | K-factors / home-adv — **flat plateau**, kept eloratings convention. |
 | 40 | `broadened_gate` | Cross-confederation robustness gate — model **generalises** (better outside UEFA). |
 | 44 | `fifa_vs_elo` | Official FIFA ranking as the strength input — **REJECTED**, our Elo wins every WC 1994-2022 (0.9745 vs 1.0485, p~3.5e-5). `data/external/fifa_ranking.csv`. |
+| 45 | `kalshi_groupqual` | Pre-tournament group-qualification calls vs Kalshi — **market wins** (0.529 vs 0.426, t=2.83, 48 calls). `data/external/kalshi_groupqual.csv`. |
 
 ## Capital — REMOVED from the model
 | # | Script | Verdict |

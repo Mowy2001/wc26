@@ -758,7 +758,10 @@ if (WC26.replay && WC26.replay.snapshots && WC26.standings && $("rc-groups")) {
     return `<div class="gc-card"><div class="gc-head"><span>Group ${g}</span><span class="gc-score">${gh}/4 right</span></div>${rows}</div>`;
   }).join("");
   if ($("rc-groups-lead")) $("rc-groups-lead").innerHTML =
-    `One card per group, every team listed in its <em>final</em> order. For each we show what we called before kickoff, <b>1st</b>, <b>2nd</b> or <b>best 3rd</b> to go through, or <b>out</b>, and what happened. <b class="rc-key ok">✓</b> = we got it right, <b class="rc-key no">✗</b> = wrong, <b class="rc-key">⚖</b> = we'd rated it a coin-flip. <strong>${correct} of ${total}</strong> teams called correctly.`;
+    `One card per group, every team listed in its <em>final</em> order. For each we show what we called before kickoff, <b>1st</b>, <b>2nd</b> or <b>best 3rd</b> to go through, or <b>out</b>, and what happened. <b class="rc-key ok">✓</b> = we got it right, <b class="rc-key no">✗</b> = wrong, <b class="rc-key">⚖</b> = we'd rated it a coin-flip. <strong>${correct} of ${total}</strong> teams called correctly.
+    On the same 48 pre-tournament calls the <strong>prediction market beat us</strong>: Kalshi's
+    pre-kickoff prices scored 0.426 log-loss to our 0.529, it knew squad news we deliberately
+    exclude. On the page like everything else.`;
   $("rc-groups").innerHTML = grpHTML;
   if ($("rc-gb")) {
     const gv = (p) => (p.p != null ? p.p : p.P_golden_boot);

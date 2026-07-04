@@ -94,6 +94,18 @@ pre-registered rule below.
   with no per-country history; self-built proxy blocked; signal collinear with Elo
   anyway. Stays out, evidenced.
 
+## Graded against the market (recorded results, not gates)
+
+- **Group qualification, model vs Kalshi (2026-07-04, groups decided)** — the one
+  per-team "reaches the knockouts" market with a verifiable pre-tournament price
+  (KXWCGROUPQUAL, public candlesticks; closes sum to 32.0 = the advancing teams).
+  Over all 48 calls: **log-loss 0.5286 (model) vs 0.4261 (Kalshi)**, Brier 0.183 vs
+  0.140, paired t = 2.83, model closer on 16/48. The market wins this panel — it
+  prices squad news and form we deliberately exclude (Panama 72%/32% → out; Ghana
+  16%/47% → through). Consistent with the design bet: our claim is mechanistic
+  transparency, not an information edge. `scripts/archive/45_kalshi_groupqual.py`,
+  `data/external/kalshi_groupqual.csv`.
+
 ## Honest non-results
 
 - **Time-decay ξ** — tuned on predictive log-loss; the curve is **flat** (pooled LL
