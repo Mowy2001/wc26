@@ -32,6 +32,10 @@ docstring with the mathematical model, every design choice goes in docs/METHODOL
    cheaper cohesion proxies already failed (see DECISIONS).
 9. **Report:** three-way comparison (model vs BetMGM 11/06 vs Klement) + live
    calibration, after the final.
+10. **Elite-exposure gate (2030 candidate):** live-2026 diagnostic (scripts/archive/46)
+   shows teams with few trailing-4y matches vs 1800+ opponents underperform the model
+   (r=+0.29 with live residual; Turkey/Uzbekistan/Jordan archetype). Gate an
+   exposure-based rating shrinkage on WC 1994-2022, same protocol as archive/44.
 
 ## Repo layout (reorganised 2026-06-28)
 - `scripts/` = the LIVE PIPELINE only (~17 scripts that reproduce the forecast + site):

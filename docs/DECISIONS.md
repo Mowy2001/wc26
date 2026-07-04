@@ -116,6 +116,18 @@ pre-registered rule below.
   control: friendlies set too low clearly hurt (t = +2.1) → they carry signal,
   don't zero them.
 
+## Live-2026 diagnostics (recorded, not acted on)
+
+- **Elo-provenance outliers (2026-07-04, 88 matches)** — teams whose rating was
+  built with little **elite exposure** (few trailing-4y matches vs 1800+ opponents)
+  underperform the frozen model live: r = +0.29 (t = 2.09) between exposure and
+  points-vs-expectation; bottom quartile −0.11 pts/match vs +0.20 top quartile. The
+  "fast climb + low exposure" profile names the flops (Turkey, Uzbekistan, Jordan;
+  mean resid −0.32) with honest counterexamples (DR Congo, Morocco). One
+  tournament — suggestive, not a verdict. Actionable as a **gateable 2030
+  candidate** (exposure-based shrinkage, backlog 10); needs only results.csv.
+  `scripts/archive/46_elo_provenance.py`.
+
 ## The data wall we did not cross
 
 - **Cross-confederation player-Elo** — the principled fix for the confederation bias
