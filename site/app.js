@@ -738,30 +738,42 @@ if (WC26.replay && WC26.replay.snapshots && WC26.standings && $("rc-groups")) {
   });
   Object.entries(eve.best_third || {}).sort((a, b) => b[1] - a[1]).slice(0, 8).forEach(([t]) => { if (!predType[t]) predType[t] = "3rd"; });
   const predThrough = new Set(Object.keys(predType));
+  // the market's own call set: Kalshi pre-kickoff prices, top 32 by price (see gc-mkt note)
+  const KQ = WC26.kalshi_qualify || null;
+  const mktThrough = KQ ? new Set(Object.entries(KQ).sort((x, y) => y[1] - x[1]).slice(0, 32).map(([t]) => t)) : null;
   // every qualification call, group by group: right when our prediction matched reality.
-  let correct = 0, total = 0;
+  let correct = 0, total = 0, mktCorrect = 0;
   const grpHTML = Object.keys(st).sort().map((g) => {
     let gh = 0;
     const rows = st[g].map((r) => {
       const t = r.team, pred = predThrough.has(t), act = qualified.has(t), ok = pred === act;
       total++; if (ok) { correct++; gh++; }
+      if (mktThrough && (mktThrough.has(t) === act)) mktCorrect++;
       // full wording for the tooltip, short for the (fixed-width) card so nothing clips:
       // "best 3rd" was the only label too long, and "through" -> "in" keeps a tidy in/out pair.
       const predFull = pred ? (predType[t] === "3rd" ? "best 3rd" : predType[t]) : "out";
       const predShort = pred ? (predType[t] === "3rd" ? "3rd" : predType[t]) : "out";
       const cf = bubble.has(t) ? ` <span class="gc-cf" title="a coin-flip call, we rated it 40–60%">⚖</span>` : "";
+      // the market's verdict in gold: Kalshi's pre-kickoff prices, top-32 by price =
+      // "through" (exactly 32 advance; a flat 50% would call 33 in).
+      let mk = "";
+      if (mktThrough) {
+        const said = mktThrough.has(t), mok = said === act;
+        mk = `<span class="gc-mkt ${mok ? "ok" : "no"}" title="market (Kalshi pre-kickoff ${pct(KQ[t] || 0, 0)}): said ${said ? "through" : "out"} · ${mok ? "right" : "wrong"}">${mok ? "✓" : "✗"}</span>`;
+      }
       return `<div class="gc-row ${ok ? "ok" : "no"}" title="we predicted ${predFull} · actually ${act ? "qualified" : "eliminated"}">
         <span class="gc-res">${ok ? "✓" : "✗"}</span>
         <span class="gc-team">${flag(t)}${TLA3(t)}</span>
-        <span class="gc-detail">said <b>${predShort}</b>${cf} → ${act ? "in" : "out"}</span></div>`;
+        <span class="gc-detail">said <b>${predShort}</b>${cf} → ${act ? "in" : "out"}</span>${mk}</div>`;
     }).join("");
     return `<div class="gc-card"><div class="gc-head"><span>Group ${g}</span><span class="gc-score">${gh}/4 right</span></div>${rows}</div>`;
   }).join("");
   if ($("rc-groups-lead")) $("rc-groups-lead").innerHTML =
     `One card per group, every team listed in its <em>final</em> order. For each we show what we called before kickoff, <b>1st</b>, <b>2nd</b> or <b>best 3rd</b> to go through, or <b>out</b>, and what happened. <b class="rc-key ok">✓</b> = we got it right, <b class="rc-key no">✗</b> = wrong, <b class="rc-key">⚖</b> = we'd rated it a coin-flip. <strong>${correct} of ${total}</strong> teams called correctly.
-    On the same 48 pre-tournament calls the <strong>prediction market beat us</strong>: Kalshi's
-    pre-kickoff prices scored 0.426 log-loss to our 0.529, it knew squad news we deliberately
-    exclude. On the page like everything else.`;
+    The <span class="gc-mkt-key">gold ✓/✗</span> is the same grade for the <strong>prediction
+    market</strong> (Kalshi's pre-kickoff prices, top 32 = through): <strong>${mktCorrect} of ${total}</strong>
+    right, and on probabilities it beat us, 0.426 log-loss to our 0.529, it knew squad news we
+    deliberately exclude. On the page like everything else.`;
   $("rc-groups").innerHTML = grpHTML;
   if ($("rc-gb")) {
     const gv = (p) => (p.p != null ? p.p : p.P_golden_boot);

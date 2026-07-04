@@ -816,3 +816,9 @@ details.tech[open] summary::before { content: "\25BE "; }
   .stat .v { font-size: 1.25rem; }
   .stat.headline .v { font-size: 1.4rem; }
 }
+
+/* gold market verdict on the group scorecards */
+.gc-row { grid-template-columns: 16px 66px 1fr 16px; }
+.gc-mkt { font-weight: 900; text-align: center; color: var(--gold); opacity: .9; }
+.gc-mkt.no { opacity: .55; }
+.gc-mkt-key { color: var(--gold); font-weight: 800; }
