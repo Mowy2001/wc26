@@ -923,7 +923,7 @@ if ($("usa-case")) {
   const dDone = gD && gD.every((r) => r.P >= 3);
   const verdict = dDone
     ? (gD[0].team === "United States"
-      ? ` The group is decided: <strong>the USA won it</strong>. A point to the market, on the page like everything else.`
+      ? ` The group is decided: <strong>the USA won it</strong>.`
       : ` The group is decided: <strong>${gD[0].team} won it</strong>, the USA finished ${["1st","2nd","3rd","4th"][gD.findIndex((r) => r.team === "United States")]}.`)
     : "";
   $("usa-case").innerHTML = `<div class="usa-rows">` +
