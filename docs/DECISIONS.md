@@ -134,9 +134,10 @@ pre-registered rule below.
   (Turkey, Ecuador). **BLOCKED** in open data: the only global club-strength source
   is the already-rejected capital; the best open club dataset is domestic-only with
   disconnected league pools. Confederations barely play each other at *any* level —
-  the bridge doesn't exist to learn from. We keep the design spec
-  (`docs/player_elo_design.md`) and surface the bias as a diagnostic instead of
-  faking a fix. Market-anchoring was **rejected on principle** (benchmarks are not
+  the bridge doesn't exist to learn from. The design spec (a staged
+  club-Elo → player-Elo ladder, each rung independently gated) lives in the git
+  history (`docs/player_elo_design.md`, retired 2026-07-05); the bias is surfaced
+  as a diagnostic instead of faking a fix. Market-anchoring was **rejected on principle** (benchmarks are not
   inputs).
 
 ---

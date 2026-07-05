@@ -122,7 +122,6 @@ the draw is never hardcoded.
 
 - **`docs/DECISIONS.md`** — the decision ledger: every block with its verdict (admitted / probation / shadow / rejected / null) and out-of-sample number.
 - **`docs/METHODOLOGY.md`** — the full narrative: every layer, every gated block, every honest null.
-- **`docs/player_elo_design.md`** — the player-Elo design + the cross-confederation data verdict.
 - **`scripts/README.md`** / **`scripts/archive/README.md`** — the live pipeline and the experiment ledger.
 - **`data/README.md`** — data provenance and attribution (core vs model-lab inputs).
 - **`CLAUDE.md`** — operating context and conventions for the AI agent that builds this.

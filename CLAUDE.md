@@ -58,7 +58,8 @@ docstring with the mathematical model, every design choice goes in docs/METHODOL
   (1) circular (can't be scored against what you copied), (2) un-auditable oracle vs our
   transparent mechanisms, (3) un-gateable (no archived historical odds). Market divergence
   is a diagnostic only. Ingredients must be mechanistic, gateable, and independent of the
-  benchmarks. See docs/player_elo_design.md §6.
+  benchmarks. (Full rationale in docs/DECISIONS.md; the retired player-Elo design
+  note lives in git history.)
 - COMM RULE (Simone, 2026-06-16): football metaphors only in site copy (trials/scouting,
   earning a place in the squad) — not weather-forecast / courtroom analogies.
 - SECRETS: the Odds API key lives in `.secrets/odds_api_key` (gitignored) — NEVER commit
