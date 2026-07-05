@@ -99,7 +99,10 @@ body {
   padding-top: 18px; padding-bottom: 6px;
   position: sticky; top: 0; z-index: 10;
   background: linear-gradient(var(--bg) 75%, transparent);
+  transition: transform .25s ease, opacity .2s ease;
 }
+/* scrolling down on mobile: slide the pills away (app.js toggles the class) */
+.toc.toc-hide { transform: translateY(-110%); opacity: 0; pointer-events: none; }
 .toc a {
   color: var(--muted); text-decoration: none; font-size: .88rem; font-weight: 600;
   padding: 7px 14px; border: 1px solid var(--card-edge); border-radius: 999px;
@@ -259,6 +262,10 @@ footer a { color: var(--accent2); }
 
 /* usa case mini-table */
 .usa-rows { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+/* one-line key above ablation-mover bars (altitude / fatigue cards) */
+.usa-key { font-size: .76rem; color: var(--muted); margin: 8px 0 6px; }
+.usa-key .k-up { color: var(--accent); font-weight: 700; }
+.usa-key .k-dn { color: var(--hot); font-weight: 700; }
 .usa-row { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; font-size: .85rem; align-items: center; }
 .usa-row .src { color: var(--muted); }
 .usa-row .num { font-weight: 800; font-variant-numeric: tabular-nums; }
@@ -794,11 +801,21 @@ details.tech[open] summary::before { content: "\25BE "; }
 
 /* ---------- mobile (≤560px): stop wide rows from stretching the page ---------- */
 @media (max-width: 560px) {
-  /* last matches: let the verdict chips wrap under the teams instead of forcing width */
-  .sb-match { flex-wrap: wrap; row-gap: 2px; }
-  .sb-adv { white-space: normal; }
+  /* last matches: fixed grid (home | score | away) so names never overlap;
+     the verdict / coin-flip chips get their own full-width rows below */
+  .sb-match { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: 3px 8px; align-items: center; font-size: .92rem; }
+  /* block display so text-overflow actually ellipsizes (flex items just clip) */
+  .sb-team, .sb-team.away { display: block; flex: none; min-width: 0; }
+  .sb-team.away { text-align: right; }
+  .sb-score { padding: 2px 6px; font-size: .95rem; }
+  .sb-cf { flex: none; grid-column: 1 / -1; justify-content: flex-start; }
+  .sb-cf:empty { display: none; }
+  .sb-adv { grid-column: 1 / -1; margin-left: 0; white-space: normal; }
   .sb-row .mh-hint { display: none; }         /* hover hint is meaningless on touch */
   .sb-row { grid-template-columns: 1fr 48px; padding: 9px 10px; }
+  /* fc sliders: keep only the flag of the groups-end marker (the label overlaps) */
+  .grp-marker em { display: none; }
   /* graded knockout ties already stack (640px rule); tighten the chips */
   .ko-call { white-space: normal; }
   /* golden boot compare: one column, the market tag stays readable */

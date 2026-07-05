@@ -276,7 +276,7 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     const ticks = bar.querySelector(".fc-ticks");
     ticks.innerHTML = snaps.map((_, i) =>
       `<i class="${i === GEK ? "grp-end" : ""}" style="left:${N ? (100 * i) / N : 0}%"></i>`).join("") +
-      (GEK > 0 && GEK < N ? `<span class="grp-marker" style="left:${(100 * GEK) / N}%" title="group stage ends here, knockouts after this point">⚑ groups end</span>` : "");
+      (GEK > 0 && GEK < N ? `<span class="grp-marker" style="left:${(100 * GEK) / N}%" title="group stage ends here, knockouts after this point">⚑<em> groups end</em></span>` : "");
   });
   const sliders = [...document.querySelectorAll(".fc-slider")];
   const labs = [...document.querySelectorAll(".fc-lab")];
@@ -937,9 +937,13 @@ if ($("usa-case")) {
 /* ---------- altitude card ---------- */
 if (WC26.altitude && WC26.ablations && WC26.ablations.no_altitude && $("altitude-card")) {
   const m = WC26.altitude;
+  // Same-run eve comparison (baseline vs no_altitude from the same ablation
+  // batch): the live conditioned forecast would drift against the snapshot
+  // (eliminated teams showing phantom deltas).
+  const B = (WC26.ablations.baseline || {}).P_champion || null;
   const na = WC26.ablations.no_altitude.P_champion;
   const movers = WC26.teams
-    .map((t) => ({ team: t.team, d: t.P_champion - (na[t.team] || 0) }))
+    .map((t) => ({ team: t.team, d: (B ? (B[t.team] || 0) : t.P_champion) - (na[t.team] || 0) }))
     .filter((x) => Math.abs(x.d) >= 0.001)
     .sort((a, b) => Math.abs(b.d) - Math.abs(a.d)).slice(0, 5).sort((a, b) => b.d - a.d);
   $("altitude-card").innerHTML =
@@ -948,24 +952,30 @@ if (WC26.altitude && WC26.ablations && WC26.ablations.no_altitude && $("altitude
       <span>paired t <b>${m.t_paired}</b></span>
       <span>β <b>${m.beta_altitude_per_km}</b>/km</span>
       <span>tested on <b>${m.n}</b> CONMEBOL qualifiers</span>
-    </div></details>` +
+    </div></details>
+    <p class="usa-key">Pre-tournament title odds, <b>with</b> the altitude tilt minus <b>without</b> it:
+    <span class="k-up">green gains</span>, <span class="k-dn">red pays</span>.</p>` +
     movers.map((x) => `<div class="usa-row">
       <span class="src">${flag(x.team)}${x.team} title odds</span>
       <div class="usa-track"><i style="width:${100 * Math.min(1, Math.abs(x.d) / 0.012)}%;
         background:${x.d > 0 ? "linear-gradient(90deg, var(--accent2), var(--accent))" : "#8f5161"}"></i></div>
       <span class="num">${x.d > 0 ? "+" : ""}${(100 * x.d).toFixed(1)}pp</span></div>`).join("");
   $("altitude-note").innerHTML =
-    `Our most decisive trial (t=${m.t_paired}). Mexico plays at 2,240 m, the air its players live in;
-     lowland opponents arrive gasping. The model hands Mexico a real edge in its thin air and dings
-     sea-level sides drawn to Mexico City and Zapopan.`;
+    `Our most decisive trial (t=${m.t_paired}). Only two 2026 venues sit high — Mexico City (2,240 m)
+     and Zapopan — so the tilt bites there and nowhere else: <strong>Mexico gains</strong> (that thin
+     air is what its squad trains in), sea-level sides whose road runs through those venues
+     <strong>pay</strong> (England's likely knockout path did), and everyone else shifts a little
+     as rivals strengthen or weaken around them.`;
 }
 
 /* ---------- fatigue card ---------- */
 if (WC26.fatigue && WC26.ablations && WC26.ablations.no_fatigue && $("fatigue-card")) {
   const m = WC26.fatigue.meta;
+  // Same-run eve comparison, like the altitude card (see comment there).
+  const Bf = (WC26.ablations.baseline || {}).P_champion || null;
   const nf = WC26.ablations.no_fatigue.P_champion;
   const movers = WC26.teams
-    .map((t) => ({ team: t.team, d: t.P_champion - (nf[t.team] || 0), z: WC26.fatigue.z[t.team] }))
+    .map((t) => ({ team: t.team, d: (Bf ? (Bf[t.team] || 0) : t.P_champion) - (nf[t.team] || 0), z: WC26.fatigue.z[t.team] }))
     .sort((a, b) => Math.abs(b.d) - Math.abs(a.d)).slice(0, 4).sort((a, b) => b.d - a.d);
   $("fatigue-card").innerHTML =
     `<details class="tech"><summary>the numbers, for the curious</summary><div class="boot-sd">
@@ -1100,3 +1110,16 @@ if (WC26.scoring && WC26.scoring.n && $("track-head")) {
     }).join("");
   }
 }
+
+/* ---------- mobile nav: hide the sticky pills while scrolling down ---------- */
+(() => {
+  const toc = document.querySelector(".toc");
+  if (!toc) return;
+  let lastY = window.scrollY;
+  window.addEventListener("scroll", () => {
+    const y = window.scrollY;
+    if (window.innerWidth <= 760) toc.classList.toggle("toc-hide", y > lastY && y > 140);
+    else toc.classList.remove("toc-hide");
+    lastY = y;
+  }, { passive: true });
+})();
