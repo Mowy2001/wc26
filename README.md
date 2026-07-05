@@ -114,7 +114,9 @@ the draw is never hardcoded.
 ## Results so far
 
 - WC2022 backtest (point-in-time): log-loss **1.060 vs 1.099** uniform, well calibrated.
-- Live (group stage): running log-loss **~0.99 vs 1.099** uniform.
+- Live 2026 (all played matches, groups + knockouts): running log-loss
+  **0.87 vs 1.099** uniform after 88 matches — updated automatically on the
+  [live site](https://mowy2001.github.io/wc26/).
 - External benchmarks frozen on 2026-06-11 (BetMGM, Klement) for a fair three-way
   comparison after the final — scored, never used as inputs.
 
