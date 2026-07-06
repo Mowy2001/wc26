@@ -803,26 +803,27 @@ if (WC26.bracket_dists && $("rc-ko")) {
       const fav = m.pH >= m.pA ? m.home : m.away;   // model's pre-match pick for the tie
       const ok = fav === m.winner; if (ok) hits++;
       const cf = Math.max(m.pH, m.pD, m.pA) < 0.42 ? `<span class="cf-badge">⚖ coin-flip</span>` : "";
-      // advancement probability: the draw resolves (ET + pens) in proportion to each side's
-      // 90-min win chance, so we quote how likely the model thought the pick would go through.
+      // probability of what actually happened: the draw resolves (ET + pens) in
+      // proportion to each side's 90-min win chance; we quote the model's pre-match
+      // chance that the REAL advancer went through (right call -> above 50, wrong -> below).
       const adH = m.pH + m.pD * (m.pH / (m.pH + m.pA || 1));
-      const favThru = fav === m.home ? adH : 1 - adH;
+      const winThru = m.winner === m.home ? adH : 1 - adH;
       // what the MARKET had said (archived odds, last pre-kickoff fetch, margin removed);
       // rendered as its own right-hand column, next to the model's probability.
       let mkt = `<span class="ko-mkt na" title="no archived pre-match odds, the archive begins 29 June">market n/a</span>`;
       if (m.market) {
         const k = m.market, kFav = k.pH >= k.pA ? m.home : m.away;
         const kAdH = k.pH + k.pD * (k.pH / (k.pH + k.pA || 1));
-        const kThru = kFav === m.home ? kAdH : 1 - kAdH;
+        const kWinThru = m.winner === m.home ? kAdH : 1 - kAdH;
         const kOk = kFav === m.winner; mktN++; if (kOk) mktHits++;
-        mkt = `<span class="ko-mkt ${kOk ? "ok" : "no"}" title="the bookmakers' pre-match pick to go through (margin removed)">market ${kOk ? "✓" : "✗"} ${flag(kFav)}${TLA3(kFav)} ${pct(kThru, 0)}</span>`;
+        mkt = `<span class="ko-mkt ${kOk ? "ok" : "no"}" title="the bookmakers' pre-match chance of the side that actually went through (margin removed); ✓ = their pick advanced">market ${kOk ? "✓" : "✗"} ${pct(kWinThru, 0)}</span>`;
       }
       const heat = MD[m.home + "|" + m.away] ? " clickable" : "";
       return phase + `<div class="ko-row ${ok ? "ok" : "no"}${heat}" data-home="${m.home}" data-away="${m.away}">
         <span class="ko-match">${flag(m.home)}${TLA3(m.home)} ${m.actual[0]}–${m.actual[1]} ${TLA3(m.away)}${flag(m.away)}${heat ? ' <span class="mh-hint">heatmap ▸</span>' : ""}</span>
         <span class="ko-call">${ok ? "✓" : "✗"} backed ${flag(fav)}${TLA3(fav)} · ${flag(m.winner)}${TLA3(m.winner)} through ${cf}</span>
         ${mkt}
-        <b class="ko-prob" title="model's chance the backed side went through the tie">${pct(favThru, 0)}</b></div>`;
+        <b class="ko-prob" title="model's pre-match chance of the side that actually went through (above 50% = called it)">${pct(winThru, 0)}</b></div>`;
     }).join("");
     const mktLine = mktN ? ` The market called <strong>${mktHits} of ${mktN}</strong>${mktN < played.length ? " (no archived odds for the rest)" : ""}.` : "";
     $("rc-ko").innerHTML = `<p class="chart-cap"><strong>${hits} of ${played.length}</strong> knockout ties called right so far.${mktLine}</p>` + rows;
