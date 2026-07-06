@@ -36,11 +36,13 @@ const MD = {};
     grid: m.grid, top: m.top, actual: null,
   };
 });
-// predicted bracket ties (scripts/43), click a knockout tie -> its heatmap
+// predicted bracket ties (scripts/43), click a knockout tie -> its heatmap;
+// played ties carry their real 90' score and who advanced (shootouts resolved)
 (WC26.bracket_dists || []).forEach((m) => {
   MD[m.home + "|" + m.away] = {
     home: m.home, away: m.away, group: "Knockout", city: null,
-    lh: m.lh, la: m.la, pH: m.pH, pD: m.pD, pA: m.pA, grid: m.grid, top: m.top, actual: null,
+    lh: m.lh, la: m.la, pH: m.pH, pD: m.pD, pA: m.pA, grid: m.grid, top: m.top,
+    actual: m.actual || null, winner: m.winner || null,
   };
 });
 
@@ -106,6 +108,7 @@ function showHeat(home, away) {
   const t = m.top[0];
   const actLine = m.actual
     ? `Actual result <b>${m.actual[0]}–${m.actual[1]}</b> (model gave it ${pct(G[Math.min(m.actual[0],5)][Math.min(m.actual[1],5)], 1)}).`
+      + (isKO && m.winner ? ` ${flag(m.winner)}<b>${m.winner}</b> went through.` : "")
     : `Not played yet.`;
   ov.innerHTML = `<div class="mh-card">
     <span class="mh-close" onclick="document.getElementById('mh-overlay').classList.remove('show')">×</span>
