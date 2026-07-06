@@ -791,11 +791,15 @@ if (WC26.replay && WC26.replay.snapshots && WC26.standings && $("rc-groups")) {
 
 /* ---------- knockouts graded: our bracket vs reality ---------- */
 if (WC26.bracket_dists && $("rc-ko")) {
-  const roundName = (mn) => mn <= 88 ? "R32" : mn <= 96 ? "R16" : mn <= 100 ? "QF" : mn <= 102 ? "SF" : "Final";
-  const played = WC26.bracket_dists.filter((m) => m.winner).sort((a, b) => a.match - b.match);
+  const roundName = (mn) => mn <= 88 ? "Round of 32" : mn <= 96 ? "Round of 16" : mn <= 100 ? "Quarter-finals" : mn <= 102 ? "Semi-finals" : "Final";
+  // newest phase first, and newest tie first within it
+  const played = WC26.bracket_dists.filter((m) => m.winner).sort((a, b) => b.match - a.match);
   if (played.length) {
-    let hits = 0, mktHits = 0, mktN = 0;
+    let hits = 0, mktHits = 0, mktN = 0, lastRound = null;
     const rows = played.map((m) => {
+      const rd = roundName(m.match);
+      const phase = rd !== lastRound ? `<div class="ko-phase">${rd}</div>` : "";
+      lastRound = rd;
       const fav = m.pH >= m.pA ? m.home : m.away;   // model's pre-match pick for the tie
       const ok = fav === m.winner; if (ok) hits++;
       const cf = Math.max(m.pH, m.pD, m.pA) < 0.42 ? `<span class="cf-badge">⚖ coin-flip</span>` : "";
@@ -814,8 +818,7 @@ if (WC26.bracket_dists && $("rc-ko")) {
         mkt = `<span class="ko-mkt ${kOk ? "ok" : "no"}" title="the bookmakers' pre-match pick to go through (margin removed)">market ${kOk ? "✓" : "✗"} ${flag(kFav)}${TLA3(kFav)} ${pct(kThru, 0)}</span>`;
       }
       const heat = MD[m.home + "|" + m.away] ? " clickable" : "";
-      return `<div class="ko-row ${ok ? "ok" : "no"}${heat}" data-home="${m.home}" data-away="${m.away}">
-        <span class="ko-rd">${roundName(m.match)}</span>
+      return phase + `<div class="ko-row ${ok ? "ok" : "no"}${heat}" data-home="${m.home}" data-away="${m.away}">
         <span class="ko-match">${flag(m.home)}${TLA3(m.home)} ${m.actual[0]}–${m.actual[1]} ${TLA3(m.away)}${flag(m.away)}${heat ? ' <span class="mh-hint">heatmap ▸</span>' : ""}</span>
         <span class="ko-call">${ok ? "✓" : "✗"} backed ${flag(fav)}${TLA3(fav)} · ${flag(m.winner)}${TLA3(m.winner)} through ${cf}</span>
         ${mkt}
