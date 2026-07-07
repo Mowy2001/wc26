@@ -159,14 +159,13 @@ function showTeam(name) {
 
 /* ---------- next matches: model vs market 1X2 (scripts/42) ---------- */
 if (WC26.next_matches && WC26.next_matches.matches && $("next-board")) {
-  // "next" means next: drop games that have kicked off (the feed is only refreshed
-  // every few hours, so between refreshes played games would otherwise linger) and
-  // anything already graded with a real result.
+  // a match leaves this board only when its RESULT has been ingested (the data
+  // refresh lands the morning after); a game that has merely kicked off stays
+  // up, flagged "awaiting result", so it never vanishes into a gap.
   const playedPair = new Set();
   (WC26.bracket_dists || []).forEach((m) => { if (m.winner) { playedPair.add(m.home + "|" + m.away); playedPair.add(m.away + "|" + m.home); } });
   (WC26.match_dists || []).forEach((m) => { if (m.actual) { playedPair.add(m.home + "|" + m.away); playedPair.add(m.away + "|" + m.home); } });
-  const nm = WC26.next_matches.matches.filter((m) =>
-    !playedPair.has(m.home + "|" + m.away) && new Date(m.commence).getTime() > Date.now());
+  const nm = WC26.next_matches.matches.filter((m) => !playedPair.has(m.home + "|" + m.away));
   // For a knockout tie the draw doesn't stand: extra time + penalties split it in
   // proportion to each side's 90-minute win chance. We keep the same 1X2 bar but hatch
   // (zebra) the draw slice — its home-tinted / away-tinted halves so the colour change
@@ -203,7 +202,9 @@ if (WC26.next_matches && WC26.next_matches.matches && $("next-board")) {
       <div class="nm-head"><span class="nm-team">${flag(m.home)}${m.home}</span>
         <span class="nm-vs">${m.ko ? "⚔" : "v"}</span>
         <span class="nm-team away">${m.away}${flag(m.away)}</span></div>
-      <div class="nm-meta">${m.ko ? "Knockout" : "Group"} · ${fmt(m.commence)} ${div}<span class="mh-hint">heatmap ▸</span></div>
+      <div class="nm-meta">${m.ko ? "Knockout" : "Group"} · ${fmt(m.commence)}
+        ${new Date(m.commence).getTime() < Date.now() ? `<span class="nm-wait" title="kicked off; the score lands with the next morning's data refresh">⏳ awaiting result</span>` : ""}
+        ${div}<span class="mh-hint">heatmap ▸</span></div>
       <div class="nm-line"><span class="nm-lab">Model</span>${x123(m.model, m.ko)}</div>
       <div class="nm-line"><span class="nm-lab">Market</span>${x123(m.market, m.ko)}</div>
     </div>`;
