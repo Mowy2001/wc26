@@ -402,12 +402,12 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     // custom bracket: each tie is a head-to-head "tug of war"; the two halves climb
     // to the trophy. Sandbox picks override the model winner and rebuild downstream.
     const part = {}, win = {}, share = {};
-    // Sandbox follows the slider too, but never before the groups are settled
-    // (snaps[GEK] onward the Round of 32 is 32 distinct real teams, so picks can't
-    // put one team into two ties). Scrubbing back in time unpins the knockout
-    // results that hadn't happened yet, so those teams leave the later rounds and
-    // the ties become re-pickable what-ifs from that point on.
-    const bsrc = sandbox ? snaps[Math.max(k, GEK)] : s;
+    // Sandbox follows the slider like the model view. The snapshot bracket is a
+    // CONSISTENT tree (32 distinct predicted qualifiers even mid-groups, built
+    // pipeline-side), so picks are safe at any point in time: scrubbing back
+    // unpins results that hadn't happened yet and those ties become re-pickable
+    // what-ifs from that moment on.
+    const bsrc = s;
     // only pin knockout ties that had been played by THIS slider position, so scrubbing
     // back doesn't show ✓ ticks (or locked teams) for results that hadn't happened yet.
     const koPlayedN = Math.max(0, k - GEK);

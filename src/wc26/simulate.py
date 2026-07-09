@@ -464,15 +464,51 @@ def simulate_tournament(
     if collect_goal_samples:
         res["goal_samples"] = pd.DataFrame(goal_samples, columns=teams)
     if collect_bracket:
+        # A CONSISTENT modal bracket, not 63 independent per-slot argmaxes: taking
+        # each slot's marginal favourite separately can seat the same team in two
+        # R32 slots while the groups are still open (it may be the likeliest group
+        # winner AND the likeliest best-third elsewhere). Instead: (1) fill the 32
+        # R32 slots greedily in confidence order, skipping teams already seated,
+        # so the wall always shows 32 distinct predicted qualifiers; (2) derive
+        # every later round by sending each tie's likelier winner (per slot_win)
+        # down the official tree. Once the groups are decided the slot counters
+        # are degenerate and this reduces exactly to the old per-slot argmax.
+        # Optimal 32-slot assignment (Hungarian) rather than greedy: greedy can
+        # strand a slot whose whole support is already seated elsewhere. A perfect
+        # matching always exists inside the support (each single simulation IS one),
+        # so forbidding zero-support pairs is safe.
+        from scipy.optimize import linear_sum_assignment
+        slots = [(mn, s) for mn, _, _, _ in R32_MATCHES for s in ("top", "bot")]
+        ctrs = [(slot_top if s == "top" else slot_bot).get(mn, Counter()) for mn, s in slots]
+        cand = sorted(set().union(*[set(c) for c in ctrs]))
+        cidx = {t: j for j, t in enumerate(cand)}
+        support = np.full((len(slots), len(cand)), -1e9)
+        for i, c in enumerate(ctrs):
+            for t, n in c.items():
+                support[i, cidx[t]] = n
+        ri, cj = linear_sum_assignment(-support)
+        occ: dict[tuple, str] = {slots[i]: cand[j] for i, j in zip(ri, cj)}
+        win_of: dict[int, str] = {}
+        for mn, _, _, _ in R32_MATCHES:
+            a, b = occ[(mn, "top")], occ[(mn, "bot")]
+            w = slot_win.get(mn, Counter())
+            win_of[mn] = a if w.get(a, 0) >= w.get(b, 0) else b
+        for matches in (R16_MATCHES, QF_MATCHES, SF_MATCHES, [FINAL_MATCH]):
+            for mn, fa, fb, _ in matches:
+                a, b = win_of[fa], win_of[fb]
+                occ[(mn, "top")], occ[(mn, "bot")] = a, b
+                w = slot_win.get(mn, Counter())
+                win_of[mn] = a if w.get(a, 0) >= w.get(b, 0) else b
         rows = []
         for mn in sorted(set(slot_top) | set(slot_bot)):
             won = slot_win.get(mn, Counter())
-            for slot, ctr in (("top", slot_top.get(mn, Counter())), ("bot", slot_bot.get(mn, Counter()))):
-                team, cnt = (ctr.most_common(1)[0] if ctr else ("?", 0))
-                # adv = P(this exact team WINS this tie) = reaches the next round.
+            for slot in ("top", "bot"):
+                ctr = (slot_top if slot == "top" else slot_bot).get(mn, Counter())
+                team = occ.get((mn, slot), "?")
+                # p = P(this team fills this slot); adv = P(it also WINS this tie).
                 # Unconditional (comparable to reach p); adv <= p always.
                 rows.append({"match": mn, "slot": slot, "team": team,
-                             "p": round(cnt / n_sims, 4),
+                             "p": round(ctr.get(team, 0) / n_sims, 4),
                              "adv": round(won.get(team, 0) / n_sims, 4)})
         res["bracket"] = pd.DataFrame(rows)
     return res
