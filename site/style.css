@@ -273,6 +273,14 @@ footer a { color: var(--accent2); }
 
 /* usa case mini-table */
 .usa-rows { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+/* Golden Boot spotlight: full-width rows, bigger type, goals sub-line */
+.gb-big .bar-row { grid-template-columns: 300px 1fr auto; padding: 7px 0; }
+.gb-big .who { font-size: 1.02rem; font-weight: 700; }
+.gb-goals { display: block; font-size: .74rem; color: var(--muted); font-weight: 600; margin-top: 1px; }
+.gb-goals b { color: var(--accent); font-variant-numeric: tabular-nums; }
+@media (max-width: 560px) { .gb-big .bar-row { grid-template-columns: 150px 1fr auto; }
+  .gb-big .who { font-size: .92rem; } .gb-goals { white-space: normal; } }
+
 /* one-line key above ablation-mover bars (altitude / fatigue cards) */
 .usa-key { font-size: .76rem; color: var(--muted); margin: 8px 0 6px; }
 .usa-key .k-up { color: var(--accent); font-weight: 700; }

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WC26, Probabilistic World Cup 2026</title>
-<link rel="stylesheet" href="style.css?v=202607092236">
+<link rel="stylesheet" href="style.css?v=202607092300">
 </head>
 <body>
 
@@ -115,20 +115,21 @@
     <div id="fc-bracket" class="bracket-scroll"></div>
     <p class="note" id="bracket-why" style="max-width:880px"></p></div>
   <div class="fc-block"><div class="fc-bar"></div>
+    <div class="tl-h">Golden Boot <span class="tlh-sub">who finishes top scorer</span></div>
+    <p class="chart-cap">% = share of the 20,000 simulations in which the player ends the tournament as
+    its top scorer. Under each name: goals <strong>already scored</strong> and the model's
+    <strong>expected final tally</strong> (real goals + the simulated remaining matches).</p>
+    <div id="fc-gb" class="chart gb-big"></div></div>
+  <div class="fc-block"><div class="fc-bar"></div>
     <div class="tl-h">Groups, probability of advancing</div>
     <p class="chart-cap">% = chance of reaching the knockout round (top two, or as a best third).
     A <span class="tight-badge">⚖ qualification open</span> tag marks groups where two or more teams are
     still level for a knockout place.</p>
     <div id="fc-groups" class="groups-grid"></div></div>
   <div class="fc-block"><div class="fc-bar"></div>
-    <div class="fc-grid">
-      <div><div class="tl-h">Best thirds, 8 of 12 advance</div>
-        <p class="chart-cap">% = chance of finishing among the eight best third-placed teams that go through.</p>
-        <div id="fc-thirds" class="chart"></div></div>
-      <div><div class="tl-h">Golden Boot</div>
-        <p class="chart-cap">% = chance of being the tournament's top scorer.</p>
-        <div id="fc-gb" class="chart"></div></div>
-    </div></div>
+    <div class="tl-h">Best thirds, 8 of 12 advance</div>
+    <p class="chart-cap">% = chance of finishing among the eight best third-placed teams that go through.</p>
+    <div id="fc-thirds" class="chart"></div></div>
 </section>
 
 
@@ -271,7 +272,7 @@
   </div>
 </footer>
 
-<script src="data.js?v=202607092236"></script>
-<script src="app.js?v=202607092236"></script>
+<script src="data.js?v=202607092300"></script>
+<script src="app.js?v=202607092300"></script>
 </body>
 </html>

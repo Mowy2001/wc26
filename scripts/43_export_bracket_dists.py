@@ -50,7 +50,7 @@ VENUE = {mn: v for mn, _, _, v in
 # score grid client-side for any pairing (sandbox picks the bracket export
 # can't precompute). Neutral-venue KO convention, fatigue tilt included via
 # the team tilt map, exactly like the grids below.
-json.dump({k: round(float(v), 6) for k, v in model.params_.items()
+json.dump({k: round(float(v), 10) for k, v in model.params_.items()
            if isinstance(v, float)}, open("outputs/dc_params.json", "w"))
 
 # played knockout ties -> {pair: (winner, {team: 90-min goals})}, shootouts resolved,

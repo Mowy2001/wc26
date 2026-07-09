@@ -52,16 +52,27 @@ const MD = {};
    tilt in, Dixon-Coles low-score correction. Computed once per pair, cached
    into the MD index so downstream code can't tell it from a precomputed one. */
 const DCP = WC26.dc_params || null;
+const KOV = WC26.ko_venues || {};
+const CTILT = WC26.city_tilt || {};
 const TELO = {}; (WC26.teams || []).forEach((t) => { TELO[t.team] = t.elo; });
 const FTILT = {};
 if (WC26.fatigue && WC26.fatigue.meta && WC26.fatigue.z) {
   Object.entries(WC26.fatigue.z).forEach(([t, z]) => { FTILT[t] = WC26.fatigue.meta.beta_fatigue * z; });
 }
-function dcDist(home, away) {
+function dcDist(home, away, mn) {
   if (!DCP || TELO[home] == null || TELO[away] == null) return null;
-  const lin = DCP.beta_elo * (TELO[home] - TELO[away]) / 400;
-  const d = (FTILT[home] || 0) - (FTILT[away] || 0);
-  const lh = Math.exp(DCP.beta0 + lin + d), la = Math.exp(DCP.beta0 - lin - d);
+  // venue-aware like the Monte Carlo: at match `mn` the host nation (if playing)
+  // takes a true home side, and the altitude city tilt applies at high venues.
+  const kv = mn != null ? KOV[mn] : null;
+  const ven = kv ? kv.v : "", city = kv ? kv.c : null;
+  const h = away === ven ? away : home, aw = h === home ? away : home;
+  const isHome = h === ven ? 1 : 0;
+  const lin = DCP.beta_elo * (TELO[h] - TELO[aw]) / 400;
+  const d = (FTILT[h] || 0) - (FTILT[aw] || 0)
+    + (city ? (CTILT[h + "|" + city] || 0) - (CTILT[aw + "|" + city] || 0) : 0);
+  let lh = Math.exp(DCP.beta0 + DCP.beta_home * isHome + lin + d);
+  let la = Math.exp(DCP.beta0 + DCP.beta_away * isHome - lin - d);
+  if (h !== home) { const sw = lh; lh = la; la = sw; }  // reorient to (home, away)
   const pois = (lam) => { const o = [Math.exp(-lam)]; for (let i = 1; i <= 10; i++) o.push(o[i - 1] * lam / i); return o; };
   const ph = pois(lh), pa = pois(la);
   const M = ph.map((p) => pa.map((q) => p * q));
@@ -82,15 +93,15 @@ function dcDist(home, away) {
     lh: Math.round(100 * lh) / 100, la: Math.round(100 * la) / 100,
     pH, pD, pA, grid, top: flat.slice(0, 3), actual: null };
 }
-const getDist = (a, b) => MD[a + "|" + b] || MD[b + "|" + a] || (MD[a + "|" + b] = dcDist(a, b));
-// P(a goes through a knockout tie vs b): 90' win + the proportional draw split.
-const h2h = (a, b) => {
-  let m = MD[a + "|" + b], flip = false;
-  if (!m && MD[b + "|" + a]) { m = MD[b + "|" + a]; flip = true; }
-  if (!m) m = getDist(a, b);
+const getDist = (a, b, mn) => MD[a + "|" + b] || MD[b + "|" + a] || (MD[a + "|" + b] = dcDist(a, b, mn));
+// P(a goes through tie `mn` vs b): 90' win + the proportional draw split,
+// venue-aware and DETERMINISTIC — the identical formula the pipeline uses to
+// propagate winners, so the quoted favourite is always the team that advances,
+// and the number never wobbles from one slider position to the next.
+const tieShare = (a, b, mn) => {
+  const m = dcDist(a, b, mn);
   if (!m) return null;
-  const pH = flip ? m.pA : m.pH, pA = flip ? m.pH : m.pA;
-  return pH + m.pD * (pH / (pH + pA || 1));
+  return m.pH + m.pD * (m.pH / (m.pH + m.pA || 1));
 };
 
 // a fixture is a "coin-flip" when no single W/D/L outcome clears 42%, i.e. the
@@ -481,13 +492,11 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
         win[mn] = KOWk[mn];
         share[mn] = (KOWk[mn] === a) ? 1 : 0;
       } else {
-        // the bar is "who goes through if they meet". For the model's own pairings
-        // use the simulation's numbers (adv/p per slot) — venue-aware: hosts play at
-        // home and the altitude tilt bites at Mexico City, which a neutral head-to-head
-        // would misstate (it flipped MEX-ENG). For sandbox-invented pairings, the
-        // client-side goal model (neutral convention); pure Elo as a last resort.
-        const hh = fromModal && modal && modal.top && modal.top.p > 0 && modal.bot && modal.bot.p > 0
-          ? modalShare(modal) : h2h(a, b2);
+        // the bar is "who goes through if they meet": the venue-aware goal model,
+        // computed client-side with the same formula the pipeline uses to propagate
+        // winners — deterministic (no Monte Carlo wobble across slider positions)
+        // and consistent by construction with the next round's occupant.
+        const hh = tieShare(a, b2, mn);
         share[mn] = hh != null ? hh : eloP(a, b2);
         win[mn] = (picks[mn] === a || picks[mn] === b2) ? picks[mn] : (share[mn] >= 0.5 ? a : b2);
       }
@@ -508,7 +517,7 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
       const a = part[mn].top, b = part[mn].bot;
       if (!a || !b) return `<div class="tie empty">-</div>`;
       const pa = share[mn], w = win[mn], played = KOWk[mn] != null;
-      const heat = MD[a + "|" + b] ? [a, b] : (MD[b + "|" + a] ? [b, a] : (getDist(a, b) ? [a, b] : null));
+      const heat = MD[a + "|" + b] ? [a, b] : (MD[b + "|" + a] ? [b, a] : (getDist(a, b, mn) ? [a, b] : null));
       // played ties are locked to the real result; only future ties are pickable in sandbox
       const side = (t, p, hi) => `<div class="tie-side ${w === t ? "win" : ""}${sandbox && !played ? " pickable" : ""}" data-pick="${t}">
         <span class="ts-team">${flag(t)}${TLA(t)}</span><span class="ts-p">${played ? (w === t ? "✓" : "") : pct(p, 0)}</span></div>`;
@@ -547,7 +556,9 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
 
     // groups & best thirds are group-stage facts, freeze them once the group stage is
     // over; the bracket, round-by-round and Golden Boot keep moving through the knockouts.
-    const gk = Math.min(k, GEK), sg = snaps[gk], sgPrev = gk > 0 ? snaps[gk - 1] : null;
+    // groups freeze at GEK; past it, drop the ▲▼ badges too — they'd forever
+    // replay the last matchday's moves (DR Congo's ▲ stuck on screen for weeks).
+    const gk = Math.min(k, GEK), sg = snaps[gk], sgPrev = (gk > 0 && k <= GEK) ? snaps[gk - 1] : null;
     // best thirds (8 of 12 advance), ranked by P(advance as a best third)
     const th = Object.entries(sg.best_third || {}).filter(([, p]) => p > 0.01)
       .sort((a, b) => b[1] - a[1]).slice(0, 12);
@@ -568,7 +579,7 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     const gmax = gb[0] ? gb[0].p : 1;
     $("fc-gb").innerHTML = gb.slice(0, 10).map((p) => `
       <div class="bar-row">
-        <div class="who">${flag(p.team)}${p.player}</div>
+        <div class="who">${flag(p.team)}${p.player}${p.e != null ? `<span class="gb-goals"><b>${p.g ?? 0}</b> scored · <b>${p.e.toFixed(1)}</b> expected at the end</span>` : ""}</div>
         <div class="bar-track"><div class="bar-fill" style="width:${(100 * p.p) / gmax}%"></div></div>
         <div class="val">${pct(p.p)}${delta(p.p, prev && pgb[p.player])}</div>
       </div>`).join("");

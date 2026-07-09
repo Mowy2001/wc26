@@ -101,7 +101,9 @@ for k in todo:
         gb = allocate_goals_live(res["goal_samples"], gb_weights, real_by_team)["players"].head(12)
     else:
         gb = allocate_goals(res["goal_samples"], gb_weights)["players"].head(12)
-    gb_list = [{"player": r.player, "team": r.team, "p": round(float(r.P_golden_boot), 4)}
+    gb_list = [{"player": r.player, "team": r.team, "p": round(float(r.P_golden_boot), 4),
+                "e": round(float(r.E_goals), 2),
+                "g": int(real_by_team.get(r.team, {}).get(r.player, 0))}
                for r in gb.itertuples(index=False)]
     last = "(eve)" if k == 0 else f"{played.iloc[k-1].home_team} {int(played.iloc[k-1].home_score)}-{int(played.iloc[k-1].away_score)} {played.iloc[k-1].away_team}"
     snaps.append({

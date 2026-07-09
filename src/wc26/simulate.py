@@ -488,17 +488,33 @@ def simulate_tournament(
                 support[i, cidx[t]] = n
         ri, cj = linear_sum_assignment(-support)
         occ: dict[tuple, str] = {slots[i]: cand[j] for i, j in zip(ri, cj)}
+        # Tie winners propagate DETERMINISTICALLY: real result if the pair has
+        # been played, otherwise the venue-aware goal-model head-to-head (90' +
+        # the proportional extra-time/penalties split) — the exact number the
+        # site quotes on the tie bar, so the displayed favourite always is the
+        # team that advances. Monte Carlo win counts are NOT used here: their
+        # sampling noise could contradict the quoted probability.
+        venue_by_match = {m_[0]: m_[3] for m_ in
+                          [*R32_MATCHES, *R16_MATCHES, *QF_MATCHES, *SF_MATCHES, FINAL_MATCH]}
+        def _tie_winner(a: str, b: str, mn: int) -> str:
+            if fixed_ko_results:
+                rec = fixed_ko_results.get(frozenset((a, b)))
+                if rec is not None:
+                    return rec[0]
+            ven = venue_by_match.get(mn, "") if host_advantage else ""
+            h, aw = (b, a) if b == ven else (a, b)
+            lh, la = model.predict_lambdas(elo[h], elo[aw], neutral=(h != ven))
+            lh, la = _tilted(lh, la, h, aw, team_log_tilt, KO_CITY.get(mn), city_log_tilt)
+            pH, pD, pA = model.outcome_probs(lh, la)
+            adv_h = pH + pD * (pH / ((pH + pA) or 1.0))
+            return h if adv_h >= 0.5 else aw
         win_of: dict[int, str] = {}
         for mn, _, _, _ in R32_MATCHES:
-            a, b = occ[(mn, "top")], occ[(mn, "bot")]
-            w = slot_win.get(mn, Counter())
-            win_of[mn] = a if w.get(a, 0) >= w.get(b, 0) else b
+            win_of[mn] = _tie_winner(occ[(mn, "top")], occ[(mn, "bot")], mn)
         for matches in (R16_MATCHES, QF_MATCHES, SF_MATCHES, [FINAL_MATCH]):
             for mn, fa, fb, _ in matches:
-                a, b = win_of[fa], win_of[fb]
-                occ[(mn, "top")], occ[(mn, "bot")] = a, b
-                w = slot_win.get(mn, Counter())
-                win_of[mn] = a if w.get(a, 0) >= w.get(b, 0) else b
+                occ[(mn, "top")], occ[(mn, "bot")] = win_of[fa], win_of[fb]
+                win_of[mn] = _tie_winner(occ[(mn, "top")], occ[(mn, "bot")], mn)
         rows = []
         for mn in sorted(set(slot_top) | set(slot_bot)):
             won = slot_win.get(mn, Counter())

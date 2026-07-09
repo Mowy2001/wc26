@@ -128,6 +128,18 @@ try:  # goal-model point estimate -> client-side score grids for any pairing
     dc_params = json.load(open("outputs/dc_params.json"))
 except FileNotFoundError:
     dc_params = None
+# knockout venue map + altitude city tilt, so the client-side goal model can
+# price host-at-home ties exactly like the Monte Carlo (venue-aware).
+from wc26.simulate import (FINAL_MATCH, KO_CITY, QF_MATCHES, R16_MATCHES,
+                           R32_MATCHES, SF_MATCHES)
+ko_venues = {int(mn): {"v": v, "c": KO_CITY.get(mn)} for mn, _, _, v in
+             [*R32_MATCHES, *R16_MATCHES, *QF_MATCHES, *SF_MATCHES, FINAL_MATCH]}
+try:
+    _at = pd.read_csv("outputs/altitude_tilt.csv")
+    city_tilt = {f"{r.team}|{r.city}": round(float(r.log_tilt), 4)
+                 for r in _at.itertuples(index=False) if abs(float(r.log_tilt)) > 1e-6}
+except FileNotFoundError:
+    city_tilt = None
 try:  # live market: latest outright snapshot + a short history for movement
     _oh = [json.loads(l) for l in open("outputs/odds_history.jsonl") if l.strip()]
     market_now = {"fetched": _oh[-1]["fetched"], "outright": _oh[-1]["outright"]} if _oh else None
@@ -175,6 +187,8 @@ data = {
     "distinct_scorers": distinct_top,
     "match_dists": match_dists,
     "dc_params": dc_params,
+    "ko_venues": ko_venues,
+    "city_tilt": city_tilt,
     "team_drivers": team_drivers,
     "next_matches": next_matches,
     "bracket_dists": bracket_dists,
