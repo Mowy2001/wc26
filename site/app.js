@@ -375,6 +375,17 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
   // real results already in: matchNum -> the team that actually went through. Played ties
   // are fixed to reality in the bracket (and can't be re-picked in the sandbox).
   const KOW = {}; (WC26.bracket_dists || []).forEach((m) => { if (m.winner) KOW[m.match] = m.winner; });
+  // the CHRONOLOGICAL order the knockout ties were actually played in, read off the
+  // replay's own per-match labels: match numbers are NOT chronological (m76 was played
+  // before m74), so pinning "first koPlayedN by number" ticked the wrong ties mid-round.
+  const PAIR2MN = {}; (WC26.bracket_dists || []).forEach((m) => {
+    PAIR2MN[m.home + "|" + m.away] = m.match; PAIR2MN[m.away + "|" + m.home] = m.match; });
+  const KO_ORDER = [];
+  for (let i = GEK + 1; i < snaps.length; i++) {
+    const mm = (snaps[i].last_match || "").match(/^(.+?) \d+-\d+ (.+)$/);
+    const mn = mm && PAIR2MN[mm[1] + "|" + mm[2]];
+    if (mn != null) KO_ORDER.push(mn);
+  }
   // order every round by the FEED tree (DFS from the final) so each tie sits directly
   // beside the two ties that feed it, the columns then read like a classic bracket.
   const parentOf = {}; Object.entries(FEED).forEach(([p, ch]) => ch.forEach((c) => (parentOf[c] = +p)));
@@ -470,7 +481,8 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     // back doesn't show ✓ ticks (or locked teams) for results that hadn't happened yet.
     const koPlayedN = Math.max(0, k - GEK);
     const KOWk = {};
-    Object.keys(KOW).map(Number).sort((x, y) => x - y).slice(0, koPlayedN).forEach((mn) => { KOWk[mn] = KOW[mn]; });
+    (KO_ORDER.length ? KO_ORDER : Object.keys(KOW).map(Number).sort((x, y) => x - y))
+      .slice(0, koPlayedN).forEach((mn) => { if (KOW[mn]) KOWk[mn] = KOW[mn]; });
     // a slot is "in play" once the user has picked somewhere in the ties that feed it; until
     // then even the sandbox shows the model's most-likely occupant, so an untouched sandbox
     // mirrors the model bracket exactly (every tie keeps its precomputed heatmap and stays
