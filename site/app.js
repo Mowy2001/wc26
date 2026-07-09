@@ -254,8 +254,13 @@ if (WC26.next_matches && WC26.next_matches.matches && $("next-board")) {
     // flag disagreement on size OR on which side is favoured (opposite favourites can be a
     // small numeric gap yet a real disagreement, e.g. model backs the away side, market the home).
     const favOf = (p) => (p.pH >= p.pD && p.pH >= p.pA) ? "H" : (p.pA >= p.pD ? "A" : "D");
-    const flip = favOf(m.model) !== favOf(m.market);
-    const div = (gap >= 0.10 || flip) ? `<span class="nm-div" title="${flip ? "model and market back opposite sides" : "model and market disagree by " + pct(gap, 0)}">model ≠ market</span>` : "";
+    // in a knockout what matters is WHO GOES THROUGH, so the flag fires only when
+    // model and market back different advancers (a big 1X2 gap on the same side —
+    // e.g. FRA-MOR 45% vs 60%, both France — is a nuance, not a disagreement).
+    const advH = (p) => p.pH + p.pD * (p.pH / (p.pH + p.pA || 1));
+    const flip = m.ko ? (advH(m.model) >= 0.5) !== (advH(m.market) >= 0.5)
+                      : (favOf(m.model) !== favOf(m.market) || gap >= 0.10);
+    const div = flip ? `<span class="nm-div" title="${m.ko ? "model and market back different sides to go through" : "model and market disagree on this match"}">model ≠ market</span>` : "";
     return `<div class="nm-card clickable" data-home="${m.home}" data-away="${m.away}">
       <div class="nm-head"><span class="nm-team">${flag(m.home)}${m.home}</span>
         <span class="nm-vs">${m.ko ? "⚔" : "v"}</span>
