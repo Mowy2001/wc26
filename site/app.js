@@ -471,7 +471,8 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
       // model view: fill each slot with its most-likely occupant (the marginal), so the
       // final pits the two most-likely finalists. sandbox: once a feeding tie is picked,
       // propagate winners up the FEED tree so the user's picks ripple forward.
-      if (sandbox && FEED[mn] && touched(mn)) part[mn] = { top: win[FEED[mn][0]], bot: win[FEED[mn][1]] };
+      const fromModal = !(sandbox && FEED[mn] && touched(mn));
+      if (!fromModal) part[mn] = { top: win[FEED[mn][0]], bot: win[FEED[mn][1]] };
       else part[mn] = { top: modal && modal.top && modal.top.team, bot: modal && modal.bot && modal.bot.team };
       const a = part[mn].top, b2 = part[mn].bot;
       if (!a || !b2) { win[mn] = a || b2; share[mn] = 1; return; }
@@ -480,11 +481,13 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
         win[mn] = KOWk[mn];
         share[mn] = (KOWk[mn] === a) ? 1 : 0;
       } else {
-        // the bar is "who goes through if they meet": the goal model's own head-to-head
-        // (90' + the proportional extra-time/penalties split), computed client-side for
-        // any pairing; pure-Elo only as a last-resort fallback. Not the adv/p ratio,
-        // which is noisy and mixes in how hard each side's road was.
-        const hh = h2h(a, b2);
+        // the bar is "who goes through if they meet". For the model's own pairings
+        // use the simulation's numbers (adv/p per slot) — venue-aware: hosts play at
+        // home and the altitude tilt bites at Mexico City, which a neutral head-to-head
+        // would misstate (it flipped MEX-ENG). For sandbox-invented pairings, the
+        // client-side goal model (neutral convention); pure Elo as a last resort.
+        const hh = fromModal && modal && modal.top && modal.top.p > 0 && modal.bot && modal.bot.p > 0
+          ? modalShare(modal) : h2h(a, b2);
         share[mn] = hh != null ? hh : eloP(a, b2);
         win[mn] = (picks[mn] === a || picks[mn] === b2) ? picks[mn] : (share[mn] >= 0.5 ? a : b2);
       }
@@ -574,7 +577,12 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     const groups = {};
     Object.entries(tg).forEach(([t, g]) => (groups[g] = groups[g] || []).push(t));
     $("fc-groups").innerHTML = Object.keys(groups).sort().map((g) => {
-      const ranked = groups[g].map((t) => [t, sg.qualify[t] ?? 0]).sort((a, b) => b[1] - a[1]);
+      // order by advance probability; ties (e.g. everyone decided at 100%/0%)
+      // break on the group's real final standing, so the winner tops the card.
+      const stdIdx = {};
+      ((WC26.standings || {})[g] || []).forEach((r, i) => { stdIdx[r.team] = i; });
+      const ranked = groups[g].map((t) => [t, sg.qualify[t] ?? 0])
+        .sort((a, b) => (b[1] - a[1]) || ((stdIdx[a[0]] ?? 9) - (stdIdx[b[0]] ?? 9)));
       // "tight" is specifically about WHO ADVANCES (not who finishes 1st): two or more
       // teams genuinely on the bubble for a knockout place (advance prob between 25-75%).
       const bubble = ranked.filter(([, q]) => q > 0.25 && q < 0.75);

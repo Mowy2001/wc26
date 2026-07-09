@@ -17,7 +17,9 @@ import pandas as pd
 from wc26.data import load_results, load_shootouts, wc2026_played_ko
 from wc26.dixon_coles import DixonColes
 from wc26.elo import ratings_asof
-from wc26.tilts import load_team_tilt
+from wc26.simulate import (FINAL_MATCH, KO_CITY, QF_MATCHES, R16_MATCHES,
+                           R32_MATCHES, SF_MATCHES)
+from wc26.tilts import load_city_tilt, load_team_tilt
 
 CLIP = 5
 
@@ -40,6 +42,9 @@ df = df.merge(e[key + ["dup", "elo_home_pre", "elo_away_pre"]], on=key + ["dup"]
 model = DixonColes().fit(df[df["date"] >= "2005-01-01"], pd.Timestamp("2026-06-11"))
 elo = ratings_asof(elo_hist, "2026-06-11")
 fat = load_team_tilt() or {}
+ct = load_city_tilt() or {}
+VENUE = {mn: v for mn, _, _, v in
+         [*R32_MATCHES, *R16_MATCHES, *QF_MATCHES, *SF_MATCHES, FINAL_MATCH]}
 
 # The fitted goal-model parameters, exported so the site can compute the SAME
 # score grid client-side for any pairing (sandbox picks the bracket export
@@ -91,9 +96,17 @@ for mn, g in bk.groupby("match"):
     home, away = slots.get("top"), slots.get("bot")
     if not home or not away or home not in elo or away not in elo or home == "?" or away == "?":
         continue
-    lh, la = model.predict_lambdas(elo[home], elo[away], neutral=True)
-    d = float(fat.get(home, 0.0) - fat.get(away, 0.0))
+    # same venue convention as the Monte Carlo (_ko_match_sim): the host nation,
+    # if playing, takes a true home side; the altitude city tilt applies at the
+    # high venues. λs are then re-oriented to this tie's top/bot for display.
+    ven, city = VENUE.get(int(mn), ""), KO_CITY.get(int(mn))
+    h, aw = (away, home) if away == ven else (home, away)
+    lh, la = model.predict_lambdas(elo[h], elo[aw], neutral=(h != ven))
+    d = float(fat.get(h, 0.0) - fat.get(aw, 0.0)
+              + (ct.get((h, city), 0.0) - ct.get((aw, city), 0.0) if city else 0.0))
     lh, la = lh * np.exp(d), la * np.exp(-d)
+    if h != home:
+        lh, la = la, lh
     grid = clip_matrix(model.score_matrix(lh, la))
     pH, pD, pA = model.outcome_probs(lh, la)
     flat = sorted(((i, j, grid[i][j]) for i in range(CLIP + 1) for j in range(CLIP + 1)),

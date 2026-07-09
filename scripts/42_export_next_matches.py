@@ -17,10 +17,10 @@ from pathlib import Path
 sys.path.insert(0, "src")
 import numpy as np
 import pandas as pd
-from wc26.data import load_results, reconstruct_groups, wc2026_group_fixtures
+from wc26.data import load_results, reconstruct_groups, wc2026_fixtures, wc2026_group_fixtures
 from wc26.dixon_coles import DixonColes
 from wc26.elo import ratings_asof
-from wc26.tilts import load_team_tilt
+from wc26.tilts import load_city_tilt, load_team_tilt
 
 NAME = {"USA": "United States", "Korea Republic": "South Korea", "IR Iran": "Iran",
         "Czechia": "Czech Republic", "Türkiye": "Turkey"}
@@ -40,7 +40,15 @@ df = df.merge(e[key + ["dup", "elo_home_pre", "elo_away_pre"]], on=key + ["dup"]
 model = DixonColes().fit(df[df["date"] >= "2005-01-01"], pd.Timestamp("2026-06-11"))
 elo = ratings_asof(elo_hist, "2026-06-11")
 fat = load_team_tilt() or {}
+ct = load_city_tilt() or {}
 team_group = {t: g for g, ts in reconstruct_groups(wc2026_group_fixtures(results)).items() for t in ts}
+# real venue per fixture (schedule): hosts take a true home side, and the
+# altitude tilt bites at the high venues (Mexico City / Zapopan) — a neutral
+# simplification here would misquote the deployed model (it undersold Mexico
+# for the R16 tie at 2,240 m).
+VEN = {}
+for r in wc2026_fixtures(results).itertuples(index=False):
+    VEN[(r.home_team, r.away_team)] = (r.city, bool(r.neutral))
 
 CLIP = 5
 
@@ -61,9 +69,17 @@ for k, mk in latest["matches"].items():
     home, away = canon(mk["home"]), canon(mk["away"])
     if home not in elo or away not in elo:
         continue
-    # model 1X2 at neutral venue + fatigue tilt (altitude is ~0 at the sea-level KO venues)
-    lh, la = model.predict_lambdas(elo[home], elo[away], neutral=True)
-    d = float(fat.get(home, 0.0) - fat.get(away, 0.0))
+    # model 1X2 with the deployed tilts at the REAL venue (schedule): home side
+    # for hosts, fatigue for both, altitude city tilt where it applies.
+    if (home, away) in VEN:
+        city, neutral = VEN[(home, away)]
+    elif (away, home) in VEN:
+        (city, neutral), (home, away) = VEN[(away, home)], (away, home)
+    else:
+        city, neutral = None, True
+    lh, la = model.predict_lambdas(elo[home], elo[away], neutral=bool(neutral))
+    d = float(fat.get(home, 0.0) - fat.get(away, 0.0)
+              + (ct.get((home, city), 0.0) - ct.get((away, city), 0.0) if city else 0.0))
     lh, la = lh * np.exp(d), la * np.exp(-d)
     pH, pD, pA = model.outcome_probs(lh, la)
     ko = team_group.get(home) != team_group.get(away)  # different groups -> knockout tie
