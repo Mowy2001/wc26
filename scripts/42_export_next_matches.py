@@ -64,13 +64,14 @@ def clip_matrix(M):
 snaps = [json.loads(l) for l in Path("outputs/odds_history.jsonl").read_text().splitlines() if l.strip()]
 latest = snaps[-1]
 
-out = []
-for k, mk in latest["matches"].items():
+
+def build_entry(mk):
+    """One next-match entry: model 1X2 with the deployed tilts at the REAL venue
+    (schedule): home side for hosts, fatigue for both, altitude city tilt where
+    it applies. Returns None for teams outside our rating table."""
     home, away = canon(mk["home"]), canon(mk["away"])
     if home not in elo or away not in elo:
-        continue
-    # model 1X2 with the deployed tilts at the REAL venue (schedule): home side
-    # for hosts, fatigue for both, altitude city tilt where it applies.
+        return None
     if (home, away) in VEN:
         city, neutral = VEN[(home, away)]
     elif (away, home) in VEN:
@@ -87,14 +88,42 @@ for k, mk in latest["matches"].items():
     grid = clip_matrix(M)
     flat = sorted(((i, j, grid[i][j]) for i in range(CLIP + 1) for j in range(CLIP + 1)),
                   key=lambda x: -x[2])[:3]
-    out.append({
+    return {
         "home": home, "away": away, "commence": mk["commence"], "ko": bool(ko),
         "model": {"pH": round(pH, 4), "pD": round(pD, 4), "pA": round(pA, 4),
                   "lh": round(float(lh), 2), "la": round(float(la), 2)},
         "market": {"pH": round(mk["pH"], 4), "pD": round(mk["pD"], 4), "pA": round(mk["pA"], 4),
                    "n_books": mk["n_books"]},
         "grid": grid, "top": [{"h": i, "a": j, "p": round(p, 4)} for i, j, p in flat],
-    })
+    }
+
+
+out = [e for mk in latest["matches"].values() if (e := build_entry(mk))]
+
+# AWAITING-RESULT carry-forward: bookmakers drop a game from the feed at kickoff,
+# but its result only lands with the next morning's data refresh — without this,
+# the tie would vanish into a gap (France-Morocco, 2026-07-09). Rebuild any pair
+# that kicked off in the last 3 days, has no ingested result, and is missing from
+# the live feed, using its LAST PRE-KICKOFF archive snapshot for the market line.
+seen = {frozenset((m["home"], m["away"])) for m in out}
+played_pairs = set()
+fx26 = load_results()
+fx26 = fx26[(fx26["tournament"] == "FIFA World Cup") & (fx26["date"] >= "2026-06-11")]
+for r in fx26.dropna(subset=["home_score"]).itertuples(index=False):
+    played_pairs.add(frozenset((r.home_team, r.away_team)))
+now = pd.Timestamp.now(tz="UTC")
+for snap in reversed(snaps[:-1]):
+    for mk in snap["matches"].values():
+        pair = frozenset((canon(mk["home"]), canon(mk["away"])))
+        if pair in seen or pair in played_pairs or not mk.get("commence"):
+            continue
+        c = pd.Timestamp(mk["commence"])
+        if not (now - pd.Timedelta(days=3) < c < now) or snap["fetched"] >= mk["commence"]:
+            continue
+        e = build_entry(mk)
+        if e:
+            out.append(e)
+            seen.add(pair)
 
 out.sort(key=lambda m: m["commence"])
 json.dump({"as_of": latest["fetched"], "matches": out},
