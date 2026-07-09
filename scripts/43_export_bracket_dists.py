@@ -41,6 +41,13 @@ model = DixonColes().fit(df[df["date"] >= "2005-01-01"], pd.Timestamp("2026-06-1
 elo = ratings_asof(elo_hist, "2026-06-11")
 fat = load_team_tilt() or {}
 
+# The fitted goal-model parameters, exported so the site can compute the SAME
+# score grid client-side for any pairing (sandbox picks the bracket export
+# can't precompute). Neutral-venue KO convention, fatigue tilt included via
+# the team tilt map, exactly like the grids below.
+json.dump({k: round(float(v), 6) for k, v in model.params_.items()
+           if isinstance(v, float)}, open("outputs/dc_params.json", "w"))
+
 # played knockout ties -> {pair: (winner, {team: 90-min goals})}, shootouts resolved,
 # so we can grade each tie (the modal occupants of a played slot are the real teams once
 # the groups are done).

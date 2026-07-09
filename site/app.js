@@ -46,6 +46,53 @@ const MD = {};
   };
 });
 
+/* ---------- client-side goal model (exported DC point estimate) ----------
+   Lets the site build the SAME score grid for ANY pairing — sandbox picks
+   included — with the maths of scripts/43: neutral knockout venue, fatigue
+   tilt in, Dixon-Coles low-score correction. Computed once per pair, cached
+   into the MD index so downstream code can't tell it from a precomputed one. */
+const DCP = WC26.dc_params || null;
+const TELO = {}; (WC26.teams || []).forEach((t) => { TELO[t.team] = t.elo; });
+const FTILT = {};
+if (WC26.fatigue && WC26.fatigue.meta && WC26.fatigue.z) {
+  Object.entries(WC26.fatigue.z).forEach(([t, z]) => { FTILT[t] = WC26.fatigue.meta.beta_fatigue * z; });
+}
+function dcDist(home, away) {
+  if (!DCP || TELO[home] == null || TELO[away] == null) return null;
+  const lin = DCP.beta_elo * (TELO[home] - TELO[away]) / 400;
+  const d = (FTILT[home] || 0) - (FTILT[away] || 0);
+  const lh = Math.exp(DCP.beta0 + lin + d), la = Math.exp(DCP.beta0 - lin - d);
+  const pois = (lam) => { const o = [Math.exp(-lam)]; for (let i = 1; i <= 10; i++) o.push(o[i - 1] * lam / i); return o; };
+  const ph = pois(lh), pa = pois(la);
+  const M = ph.map((p) => pa.map((q) => p * q));
+  M[0][0] *= 1 - lh * la * DCP.rho; M[0][1] *= 1 + lh * DCP.rho;
+  M[1][0] *= 1 + la * DCP.rho; M[1][1] *= 1 - DCP.rho;
+  let S = 0; M.forEach((r) => r.forEach((v) => { S += v; }));
+  let pH = 0, pD = 0, pA = 0;
+  const grid = Array.from({ length: 6 }, () => Array(6).fill(0));
+  for (let i = 0; i <= 10; i++) for (let j = 0; j <= 10; j++) {
+    const v = M[i][j] / S;
+    if (i > j) pH += v; else if (i < j) pA += v; else pD += v;
+    grid[Math.min(i, 5)][Math.min(j, 5)] += v;
+  }
+  const flat = [];
+  for (let i = 0; i < 6; i++) for (let j = 0; j < 6; j++) flat.push({ h: i, a: j, p: grid[i][j] });
+  flat.sort((x, y) => y.p - x.p);
+  return { home, away, group: "Knockout", city: null,
+    lh: Math.round(100 * lh) / 100, la: Math.round(100 * la) / 100,
+    pH, pD, pA, grid, top: flat.slice(0, 3), actual: null };
+}
+const getDist = (a, b) => MD[a + "|" + b] || MD[b + "|" + a] || (MD[a + "|" + b] = dcDist(a, b));
+// P(a goes through a knockout tie vs b): 90' win + the proportional draw split.
+const h2h = (a, b) => {
+  let m = MD[a + "|" + b], flip = false;
+  if (!m && MD[b + "|" + a]) { m = MD[b + "|" + a]; flip = true; }
+  if (!m) m = getDist(a, b);
+  if (!m) return null;
+  const pH = flip ? m.pA : m.pH, pA = flip ? m.pH : m.pA;
+  return pH + m.pD * (pH / (pH + pA || 1));
+};
+
 // a fixture is a "coin-flip" when no single W/D/L outcome clears 42%, i.e. the
 // model genuinely can't separate the sides. Returns the badge HTML or "".
 const coinFlipBadge = (home, away) => {
@@ -362,8 +409,8 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     if (!$("bracket-legend")) return;
     $("bracket-legend").innerHTML = sandbox
       ? `<strong>Sandbox:</strong> tap a team to send it through, the bracket rebuilds your way, all the
-         way to the trophy. The bars become an Elo estimate for match-ups the model didn't predict.
-         Tap <em>the bar</em> for a tie's expected-goals heatmap. <em>Reset</em> returns to the model.`
+         way to the trophy. Every match-up, even one only you predicted, is priced by the same goal
+         model. Tap <em>the bar</em> for a tie's expected-goals heatmap. <em>Reset</em> returns to the model.`
       : `The two halves <strong>climb to the trophy</strong>. Each tie is a <strong>tug-of-war</strong> -
          the bar shows the <strong>head-to-head, who wins the tie</strong> (the two add up to 100%). The
          winning side is green. Tap a tie for its <strong>expected-goals heatmap</strong>, or switch to
@@ -433,10 +480,12 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
         win[mn] = KOWk[mn];
         share[mn] = (KOWk[mn] === a) ? 1 : 0;
       } else {
-        // the bar is "who'd win if they meet", the actual head-to-head by rating, not the
-        // adv/p ratio (which is noisy and mixes in how hard each side's road was). So the
-        // stronger finalist takes the tie even if its path made it less likely to arrive.
-        share[mn] = eloP(a, b2);
+        // the bar is "who goes through if they meet": the goal model's own head-to-head
+        // (90' + the proportional extra-time/penalties split), computed client-side for
+        // any pairing; pure-Elo only as a last-resort fallback. Not the adv/p ratio,
+        // which is noisy and mixes in how hard each side's road was.
+        const hh = h2h(a, b2);
+        share[mn] = hh != null ? hh : eloP(a, b2);
         win[mn] = (picks[mn] === a || picks[mn] === b2) ? picks[mn] : (share[mn] >= 0.5 ? a : b2);
       }
     });
@@ -456,7 +505,7 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
       const a = part[mn].top, b = part[mn].bot;
       if (!a || !b) return `<div class="tie empty">-</div>`;
       const pa = share[mn], w = win[mn], played = KOWk[mn] != null;
-      const heat = MD[a + "|" + b] ? [a, b] : (MD[b + "|" + a] ? [b, a] : null);
+      const heat = MD[a + "|" + b] ? [a, b] : (MD[b + "|" + a] ? [b, a] : (getDist(a, b) ? [a, b] : null));
       // played ties are locked to the real result; only future ties are pickable in sandbox
       const side = (t, p, hi) => `<div class="tie-side ${w === t ? "win" : ""}${sandbox && !played ? " pickable" : ""}" data-pick="${t}">
         <span class="ts-team">${flag(t)}${TLA(t)}</span><span class="ts-p">${played ? (w === t ? "✓" : "") : pct(p, 0)}</span></div>`;
@@ -508,8 +557,10 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
         <div class="val">${pct(p, 0)}${delta(p, sgPrev && sgPrev.best_third && sgPrev.best_third[t], 0)}</div>
       </div>`).join("");
 
-    // golden boot
-    const gb = s.golden_boot || [];
+    // golden boot; drop the dead tail (eliminated / out-scored players whose
+    // conditioned chance has collapsed to ~zero) so late-tournament lists don't
+    // fill up with 0.0% rows. Harmless early on: nobody starts below 0.1%.
+    const gb = (s.golden_boot || []).filter((x) => x.p >= 0.001);
     const pgb = {}; (prev && prev.golden_boot || []).forEach((x) => (pgb[x.player] = x.p));
     const gmax = gb[0] ? gb[0].p : 1;
     $("fc-gb").innerHTML = gb.slice(0, 10).map((p) => `
@@ -783,7 +834,8 @@ if (WC26.replay && WC26.replay.snapshots && WC26.standings && $("rc-groups")) {
   $("rc-groups").innerHTML = grpHTML;
   if ($("rc-gb")) {
     const gv = (p) => (p.p != null ? p.p : p.P_golden_boot);
-    const eg = (eve.golden_boot || []).slice(0, 5), ng = (WC26.golden_boot || []).slice(0, 5);
+    const eg = (eve.golden_boot || []).slice(0, 5),
+      ng = (WC26.golden_boot || []).filter((p) => (p.p != null ? p.p : p.P_golden_boot) >= 0.001).slice(0, 5);
     // small gold tag with the market's pre-tournament quote (implied probability), only
     // on the eve column and only for the four names the market actually priced.
     const mq = {}; Object.entries(WC26.golden_boot_market || {}).forEach(([pl, o]) => { mq[pl] = 100 / (o + 100); });
