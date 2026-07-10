@@ -1,38 +1,38 @@
 player,team,E_goals,P_golden_boot
-Lionel Messi,Argentina,8.7342,0.4504
-Kylian Mbappé,France,8.1247,0.2398
-Erling Haaland,Norway,8.1328,0.2292
-Harry Kane,England,6.9535,0.0781
-Mikel Oyarzabal,Spain,4.903,0.0022
-Lautaro Martínez,Argentina,2.2741,0.0002
-Romelu Lukaku,Belgium,3.4872,0.0
+Lionel Messi,Argentina,8.7292,0.3724
+Kylian Mbappé,France,8.7694,0.3682
+Erling Haaland,Norway,8.134,0.1904
+Harry Kane,England,6.9506,0.0667
+Mikel Oyarzabal,Spain,4.8818,0.0024
+Lautaro Martínez,Argentina,2.2676,0.0001
+Yoel Bárcenas,Panama,0.0,0.0
 Antonio Sanabria,Paraguay,0.0,0.0
 Diego Gómez,Paraguay,0.0,0.0
 Gabriel Ávalos,Paraguay,0.0,0.0
 Gustavo Gómez,Paraguay,0.0,0.0
 Julio Enciso,Paraguay,1.0,0.0
-Matías Galarza,Paraguay,1.0,0.0
 Júnior Alonso,Paraguay,0.0,0.0
-Miguel Almirón,Paraguay,0.0,0.0
+Matías Galarza,Paraguay,1.0,0.0
+Tomás Rodríguez,Panama,0.0,0.0
 Omar Alderete,Paraguay,0.0,0.0
 Ramón Sosa,Paraguay,0.0,0.0
 Maurício,Paraguay,1.0,0.0
-Bernardo Silva,Portugal,0.0689,0.0
-Bruno Fernandes,Portugal,0.1442,0.0
-Cristiano Ronaldo,Portugal,3.1342,0.0
-Diogo Dalot,Portugal,0.0244,0.0
-Yoel Bárcenas,Panama,0.0,0.0
-Adil Boulbina,Algeria,0.0,0.0
-Tomás Rodríguez,Panama,0.0,0.0
-Francisco Trincão,Portugal,0.0284,0.0
-Thelo Aasgaard,Norway,1.187,0.0
+Bernardo Silva,Portugal,0.0674,0.0
+Bruno Fernandes,Portugal,0.1446,0.0
+Cristiano Ronaldo,Portugal,3.1356,0.0
+Diogo Dalot,Portugal,0.0249,0.0
+Francisco Conceição,Portugal,0.0412,0.0
+Miguel Almirón,Paraguay,0.0,0.0
+Martin Ødegaard,Norway,0.0661,0.0
+Sander Berge,Norway,0.0069,0.0
+Thelo Aasgaard,Norway,1.182,0.0
 Leo Østigård,Norway,1.0,0.0
 Marcus Holmgren Pedersen,Norway,1.0,0.0
 Alberto Quintero,Panama,0.0,0.0
 Andrés Andrade,Panama,0.0,0.0
 Aníbal Godoy,Panama,0.0,0.0
 Carlos Harvey,Panama,0.0,0.0
-Cecilio Waterman,Panama,0.0,0.0
+José Luis Rodríguez,Panama,0.0,0.0
 Cristian Martínez,Panama,0.0,0.0
 César Blackman,Panama,0.0,0.0
 César Yanis,Panama,0.0,0.0
@@ -40,22 +40,21 @@ Eric Davis,Panama,0.0,0.0
 Fidel Escobar,Panama,0.0,0.0
 Ismael Díaz,Panama,0.0,0.0
 José Fajardo,Panama,0.0,0.0
-José Luis Rodríguez,Panama,0.0,0.0
+Francisco Trincão,Portugal,0.026,0.0
 Michael Amir Murillo,Panama,0.0,0.0
-Francisco Conceição,Portugal,0.0404,0.0
-Gonçalo Inácio,Portugal,0.0162,0.0
-Gonçalo Guedes,Portugal,0.0134,0.0
-Musab Al-Juwayr,Saudi Arabia,0.0,0.0
-Mohammed Muntari,Qatar,0.0188,0.0
-Pedro Miguel,Qatar,0.0139,0.0
-Yusuf Abdurisag,Qatar,0.033,0.0
+Cecilio Waterman,Panama,0.0,0.0
+Karim Boudiaf,Qatar,0.0035,0.0
+Lucas Mendes,Qatar,0.023,0.0
+Mohammed Muntari,Qatar,0.0192,0.0
+Pedro Miguel,Qatar,0.0148,0.0
+Yusuf Abdurisag,Qatar,0.0338,0.0
 Abdullah Al-Hamdan,Saudi Arabia,0.0,0.0
 Ali Lajami,Saudi Arabia,0.0,0.0
 Firas Al-Buraikan,Saudi Arabia,0.0,0.0
 Hassan Kadesh,Saudi Arabia,0.0,0.0
-Mohamed Kanno,Saudi Arabia,0.0,0.0
+Gonçalo Guedes,Portugal,0.0121,0.0
+Musab Al-Juwayr,Saudi Arabia,0.0,0.0
 Saleh Al-Shehri,Saudi Arabia,0.0,0.0
-Martin Ødegaard,Norway,0.0673,0.0
 Salem Al-Dawsari,Saudi Arabia,0.0,0.0
 Abdulelah Al-Amri,Saudi Arabia,1.0,0.0
 Andy Robertson,Scotland,0.0,0.0
@@ -64,59 +63,59 @@ Ben Gannon-Doak,Scotland,0.0,0.0
 Che Adams,Scotland,0.0,0.0
 Ché Adams,Scotland,0.0,0.0
 Grant Hanley,Scotland,0.0,0.0
-Lucas Mendes,Qatar,0.0205,0.0
-Karim Boudiaf,Qatar,0.0046,0.0
-Jassem Gaber,Qatar,0.0144,0.0
-Homam Ahmed,Qatar,0.0078,0.0
-Gonçalo Ramos,Portugal,1.0714,0.0
-João Cancelo,Portugal,0.0577,0.0
-João Félix,Portugal,0.0838,0.0
-João Neves,Portugal,1.0435,0.0
-Matheus Nunes,Portugal,0.0067,0.0
-Nuno Mendes,Portugal,1.0134,0.0
-Pedro Neto,Portugal,0.0105,0.0
-Rafael Leão,Portugal,1.0324,0.0
-Renato Veiga,Portugal,0.0172,0.0
-Rúben Dias,Portugal,0.008,0.0
-Rúben Neves,Portugal,0.0159,0.0
-Abdulaziz Hatem,Qatar,0.023,0.0
-Ahmed Alaaeldin,Qatar,0.0271,0.0
-Akram Afif,Qatar,0.2428,0.0
-Almoez Ali,Qatar,0.3336,0.0
-Boualem Khoukhi,Qatar,0.0242,0.0
-Hassan Al-Haydos,Qatar,1.0609,0.0
-Sander Berge,Norway,0.0074,0.0
-Kristian Thorstvedt,Norway,0.0342,0.0
-Kristoffer Ajer,Norway,0.0332,0.0
+Mohamed Kanno,Saudi Arabia,0.0,0.0
+Kristoffer Ajer,Norway,0.0308,0.0
+Gonçalo Inácio,Portugal,0.0162,0.0
+Gonçalo Ramos,Portugal,1.071,0.0
+João Cancelo,Portugal,0.0602,0.0
+João Félix,Portugal,0.0807,0.0
+João Neves,Portugal,1.0472,0.0
+Matheus Nunes,Portugal,0.0062,0.0
+Nuno Mendes,Portugal,1.0117,0.0
+Pedro Neto,Portugal,0.0117,0.0
+Jassem Gaber,Qatar,0.0135,0.0
+Renato Veiga,Portugal,0.0162,0.0
+Rúben Dias,Portugal,0.0076,0.0
+Rúben Neves,Portugal,0.0156,0.0
+Abdulaziz Hatem,Qatar,0.0225,0.0
+Ahmed Alaaeldin,Qatar,0.0258,0.0
+Akram Afif,Qatar,0.2482,0.0
+Almoez Ali,Qatar,0.3334,0.0
+Boualem Khoukhi,Qatar,0.0244,0.0
+Hassan Al-Haydos,Qatar,1.0596,0.0
+Homam Ahmed,Qatar,0.007,0.0
+Rafael Leão,Portugal,1.0329,0.0
+Raúl Jiménez,Mexico,3.0,0.0
 Roberto Alvarado,Mexico,0.0,0.0
+Santiago Giménez,Mexico,0.0,0.0
 Julián Quiñones,Mexico,4.0,0.0
 Mateo Chávez,Mexico,1.0,0.0
 Álvaro Fidalgo,Mexico,1.0,0.0
-Achraf Hakimi,Morocco,1.1322,0.0
-Ayoub El Kaabi,Morocco,0.3648,0.0
-Azzedine Ounahi,Morocco,2.19,0.0
-Bilal El Khannouss,Morocco,0.0536,0.0
-Brahim Díaz,Morocco,0.3916,0.0
-Chadi Riad,Morocco,0.0425,0.0
-Ismael Saibari,Morocco,3.2367,0.0
-Soufiane Rahimi,Morocco,2.043,0.0
+Achraf Hakimi,Morocco,1.0,0.0
+Ayoub El Kaabi,Morocco,0.0,0.0
+Azzedine Ounahi,Morocco,2.0,0.0
+Jørgen Strand Larsen,Norway,0.0616,0.0
+Brahim Díaz,Morocco,0.0,0.0
+Chadi Riad,Morocco,0.0,0.0
+Ismael Saibari,Morocco,3.0,0.0
+Soufiane Rahimi,Morocco,2.0,0.0
 Gessime Yassine,Morocco,1.0,0.0
 Issa Diop,Morocco,1.0,0.0
-Brian Brobbey,Netherlands,3.01,0.0
-Cody Gakpo,Netherlands,3.1776,0.0
-Denzel Dumfries,Netherlands,0.0882,0.0
-Donyell Malen,Netherlands,0.0956,0.0
-Santiago Giménez,Mexico,0.0,0.0
-Raúl Jiménez,Mexico,3.0,0.0
-John McGinn,Scotland,1.0,0.0
-Orbelín Pineda,Mexico,0.0,0.0
+Brian Brobbey,Netherlands,3.0121,0.0
+Cody Gakpo,Netherlands,3.1738,0.0
+Denzel Dumfries,Netherlands,0.0878,0.0
+Donyell Malen,Netherlands,0.0972,0.0
+Bilal El Khannouss,Morocco,0.0,0.0
+Takehiro Tomiyasu,Japan,0.0,0.0
+Yukinari Sugawara,Japan,0.0,0.0
+Yuto Nagatomo,Japan,0.0,0.0
 Kaishū Sano,Japan,1.0,0.0
 Abdallah Nasib,Jordan,0.0,0.0
 Ali Olwan,Jordan,1.0,0.0
 Ibrahim Sadeh,Jordan,0.0,0.0
 Mahmoud Al-Mardi,Jordan,0.0,0.0
 Mohammad Abu Zrayq,Jordan,0.0,0.0
-Musa Al-Taamari,Jordan,1.0,0.0
+Orbelín Pineda,Mexico,0.0,0.0
 Nizar Al-Rashdan,Jordan,1.0,0.0
 Noor Al-Rawabdeh,Jordan,0.0,0.0
 Saed Al-Rosan,Jordan,0.0,0.0
@@ -127,10 +126,9 @@ Edson Álvarez,Mexico,0.0,0.0
 Jorge Sánchez,Mexico,0.0,0.0
 Luis Chávez,Mexico,0.0,0.0
 Luis Romo,Mexico,1.0,0.0
-Frenkie de Jong,Netherlands,0.0082,0.0
-Guus Til,Netherlands,0.0047,0.0
-Marten de Roon,Netherlands,0.0049,0.0
-Mats Wieffer,Netherlands,0.0094,0.0
+Musa Al-Taamari,Jordan,1.0,0.0
+Jesse Randall,New Zealand,0.0,0.0
+Joe Bell,New Zealand,0.0,0.0
 Kosta Barbarouses,New Zealand,0.0,0.0
 Liberato Cacace,New Zealand,0.0,0.0
 Marko Stamenić,New Zealand,0.0,0.0
@@ -138,29 +136,30 @@ Matthew Garbett,New Zealand,0.0,0.0
 Michael Boxall,New Zealand,0.0,0.0
 Ryan Thomas,New Zealand,0.0,0.0
 Sarpreet Singh,New Zealand,0.0,0.0
-Tim Payne,New Zealand,0.0,0.0
+Frenkie de Jong,Netherlands,0.0074,0.0
 Tommy Smith,New Zealand,0.0,0.0
 Tyler Bindon,New Zealand,0.0,0.0
-Alexander Sørloth,Norway,0.3993,0.0
-Antonio Nusa,Norway,1.1636,0.0
-David Møller Wolfe,Norway,0.0336,0.0
-Fredrik Aursnes,Norway,0.0208,0.0
-Jens Petter Hauge,Norway,0.0294,0.0
-Julian Ryerson,Norway,0.033,0.0
-Jørgen Strand Larsen,Norway,0.0648,0.0
-Joe Bell,New Zealand,0.0,0.0
-Jesse Randall,New Zealand,0.0,0.0
-Francis de Vries,New Zealand,0.0,0.0
-Virgil van Dijk,Netherlands,1.0303,0.0
+Alexander Sørloth,Norway,0.392,0.0
+Antonio Nusa,Norway,1.1702,0.0
+David Møller Wolfe,Norway,0.0334,0.0
+Fredrik Aursnes,Norway,0.0213,0.0
+Jens Petter Hauge,Norway,0.0303,0.0
+Julian Ryerson,Norway,0.0339,0.0
+Jack Hendry,Scotland,0.0,0.0
+Kristian Thorstvedt,Norway,0.0342,0.0
+Tim Payne,New Zealand,0.0,0.0
+Guus Til,Netherlands,0.0048,0.0
+Marten de Roon,Netherlands,0.005,0.0
+Mats Wieffer,Netherlands,0.0072,0.0
 Memphis Depay,Netherlands,0.1972,0.0
-Micky van de Ven,Netherlands,0.0132,0.0
-Nathan Aké,Netherlands,0.0142,0.0
-Noa Lang,Netherlands,0.024,0.0
-Quinten Timber,Netherlands,0.0134,0.0
-Teun Koopmeiners,Netherlands,0.0242,0.0
-Tijjani Reijnders,Netherlands,0.0596,0.0
-Wout Weghorst,Netherlands,0.0529,0.0
-Finn Surman,New Zealand,1.0,0.0
+Micky van de Ven,Netherlands,0.0142,0.0
+Nathan Aké,Netherlands,0.0151,0.0
+Noa Lang,Netherlands,0.0228,0.0
+Quinten Timber,Netherlands,0.0138,0.0
+Teun Koopmeiners,Netherlands,0.025,0.0
+Francis de Vries,New Zealand,0.0,0.0
+Virgil van Dijk,Netherlands,1.0316,0.0
+Wout Weghorst,Netherlands,0.0533,0.0
 Crysencio Summerville,Netherlands,2.0,0.0
 Jan Paul van Hecke,Netherlands,1.0,0.0
 Ben Old,New Zealand,0.0,0.0
@@ -168,18 +167,18 @@ Ben Waine,New Zealand,0.0,0.0
 Callum McCowatt,New Zealand,0.0,0.0
 Chris Wood,New Zealand,0.0,0.0
 Elijah Just,New Zealand,3.0,0.0
-Jack Hendry,Scotland,0.0,0.0
-Kieran Tierney,Scotland,0.0,0.0
-John Souttar,Scotland,0.0,0.0
+Finn Surman,New Zealand,1.0,0.0
+Tijjani Reijnders,Netherlands,0.0603,0.0
 Omar Rekik,Tunisia,1.0,0.0
+Abdülkerim Bardakcı,Turkey,0.0,0.0
 Arda Güler,Turkey,1.0,0.0
 Barış Alper Yılmaz,Turkey,1.0,0.0
 Deniz Gül,Turkey,0.0,0.0
-Ferdi Kadıoğlu,Turkey,0.0,0.0
+Zineddine Belaïd,Algeria,0.0,0.0
 Hakan Çalhanoğlu,Turkey,0.0,0.0
 Kaan Ayhan,Turkey,1.0,0.0
 Kenan Yıldız,Turkey,0.0,0.0
-Kerem Aktürkoğlu,Turkey,0.0,0.0
+John McGinn,Scotland,1.0,0.0
 Merih Demiral,Turkey,0.0,0.0
 Mert Müldür,Turkey,0.0,0.0
 Orkun Kökçü,Turkey,0.0,0.0
@@ -189,18 +188,17 @@ Yunus Akgün,Turkey,0.0,0.0
 Zeki Çelik,Turkey,0.0,0.0
 Çağlar Söyüncü,Turkey,0.0,0.0
 İrfan Can Kahveci,Turkey,0.0,0.0
-Abdülkerim Bardakcı,Turkey,0.0,0.0
+Kerem Aktürkoğlu,Turkey,0.0,0.0
+Manuel Akanji,Switzerland,0.0652,0.0
+Michel Aebischer,Switzerland,0.0194,0.0
+Nico Elvedi,Switzerland,0.0345,0.0
+Noah Okafor,Switzerland,0.0236,0.0
+Remo Freuler,Switzerland,0.0774,0.0
+Ricardo Rodríguez,Switzerland,0.0165,0.0
+Ruben Vargas,Switzerland,2.0819,0.0
+Rubén Vargas,Switzerland,2.027,0.0
+Silvan Widmer,Switzerland,0.0411,0.0
 Montassar Talbi,Tunisia,0.0,0.0
-Antonee Robinson,United States,0.0651,0.0
-Ismaël Gharbi,Tunisia,0.0,0.0
-Nico Elvedi,Switzerland,0.0316,0.0
-Noah Okafor,Switzerland,0.0217,0.0
-Remo Freuler,Switzerland,0.0869,0.0
-Ricardo Rodríguez,Switzerland,0.0156,0.0
-Ruben Vargas,Switzerland,2.0834,0.0
-Rubén Vargas,Switzerland,2.0326,0.0
-Silvan Widmer,Switzerland,0.0426,0.0
-Zeki Amdouni,Switzerland,0.154,0.0
 Ali Abdi,Tunisia,0.0,0.0
 Anis Ben Slimane,Tunisia,0.0,0.0
 Dylan Bronn,Tunisia,0.0,0.0
@@ -210,17 +208,18 @@ Ellyes Skhiri,Tunisia,0.0,0.0
 Firas Chaouat,Tunisia,0.0,0.0
 Hannibal Mejbri,Tunisia,0.0,0.0
 Hazem Mastouri,Tunisia,1.0,0.0
-İsmail Yüksek,Turkey,0.0,0.0
-Brenden Aaronson,United States,0.1427,0.0
-Kenny McLean,Scotland,0.0,0.0
+Ismaël Gharbi,Tunisia,0.0,0.0
+Zeki Amdouni,Switzerland,0.1536,0.0
+Giorgian de Arrascaeta,Uruguay,0.0,0.0
 José María Giménez,Uruguay,0.0,0.0
+Manuel Ugarte,Uruguay,0.0,0.0
 Mathías Olivera,Uruguay,0.0,0.0
 Matías Viña,Uruguay,0.0,0.0
 Maximiliano Araújo,Uruguay,2.0,0.0
 Nicolás de la Cruz,Uruguay,0.0,0.0
 Rodrigo Aguirre,Uruguay,0.0,0.0
 Rodrigo Bentancur,Uruguay,0.0,0.0
-Ronald Araújo,Uruguay,0.0,0.0
+İsmail Yüksek,Turkey,0.0,0.0
 Abbosbek Fayzullaev,Uzbekistan,1.0,0.0
 Eldor Shomurodov,Uzbekistan,1.0,0.0
 Igor Sergeev,Uzbekistan,0.0,0.0
@@ -231,38 +230,38 @@ Odiljon Hamrobekov,Uzbekistan,0.0,0.0
 Oston Urunov,Uzbekistan,0.0,0.0
 Otabek Shukurov,Uzbekistan,0.0,0.0
 Rustam Ashurmatov,Uzbekistan,0.0,0.0
-Manuel Ugarte,Uruguay,0.0,0.0
-Giorgian de Arrascaeta,Uruguay,0.0,0.0
-Chris Richards,United States,0.1746,0.0
+Ronald Araújo,Uruguay,0.0,0.0
+Antonee Robinson,United States,0.065,0.0
+Brenden Aaronson,United States,0.1506,0.0
+Chris Richards,United States,0.1723,0.0
+Christian Pulisic,United States,0.3856,0.0
+Folarin Balogun,United States,3.1387,0.0
+Haji Wright,United States,0.125,0.0
+Malik Tillman,United States,2.2654,0.0
+Miles Robinson,United States,0.058,0.0
+Ricardo Pepi,United States,0.0922,0.0
 Federico Viñas,Uruguay,0.0,0.0
-Christian Pulisic,United States,0.3891,0.0
-Folarin Balogun,United States,3.131,0.0
-Haji Wright,United States,0.1286,0.0
-Malik Tillman,United States,2.2652,0.0
-Miles Robinson,United States,0.0586,0.0
-Ricardo Pepi,United States,0.0935,0.0
-Sergiño Dest,United States,0.0289,0.0
-Timothy Weah,United States,0.0747,0.0
-Weston McKennie,United States,0.0982,0.0
+Timothy Weah,United States,0.0728,0.0
+Weston McKennie,United States,0.0998,0.0
 Giovanni Reyna,United States,1.0,0.0
 Alex Freeman,United States,1.0,0.0
 Auston Trusty,United States,1.0,0.0
 Sebastian Berhalter,United States,1.0,0.0
 Agustín Canobbio,Uruguay,1.0,0.0
-Darwin Núñez,Uruguay,0.0,0.0
+Rafik Belghali,Algeria,1.0,0.0
 Facundo Pellistri,Uruguay,0.0,0.0
 Federico Valverde,Uruguay,0.0,0.0
-Michel Aebischer,Switzerland,0.0205,0.0
-Manuel Akanji,Switzerland,0.0622,0.0
-Johan Manzambi,Switzerland,3.0573,0.0
+Alexis Mac Allister,Argentina,0.237,0.0
+Nicolas Jackson,Senegal,0.0,0.0
 Pape Gueye,Senegal,2.0,0.0
+Pape Matar Sarr,Senegal,0.0,0.0
 Sadio Mané,Senegal,0.0,0.0
 Habib Diarra,Senegal,2.0,0.0
 Evidence Makgopa,South Africa,0.0,0.0
 Iqraam Rayners,South Africa,0.0,0.0
 Jayden Adams,South Africa,0.0,0.0
 Khuliso Mudau,South Africa,0.0,0.0
-Lyle Foster,South Africa,0.0,0.0
+Johan Manzambi,Switzerland,3.0593,0.0
 Oswin Appollis,South Africa,0.0,0.0
 Teboho Mokoena,South Africa,1.0,0.0
 Thalente Mbatha,South Africa,0.0,0.0
@@ -273,17 +272,17 @@ Bae Jun-ho,South Korea,0.0,0.0
 Cho Gue-sung,South Korea,0.0,0.0
 Hwang Hee-chan,South Korea,0.0,0.0
 Hwang In-beom,South Korea,1.0,0.0
-Pape Matar Sarr,Senegal,0.0,0.0
-Nicolas Jackson,Senegal,0.0,0.0
-Granit Xhaka,Switzerland,1.0762,0.0
-Lamine Camara,Senegal,0.0,0.0
-Yukinari Sugawara,Japan,0.0,0.0
+Lyle Foster,South Africa,0.0,0.0
+Takefusa Kubo,Japan,0.0,0.0
+John Souttar,Scotland,0.0,0.0
+Kenny McLean,Scotland,0.0,0.0
+Kieran Tierney,Scotland,0.0,0.0
 Lawrence Shankland,Scotland,0.0,0.0
 Lewis Ferguson,Scotland,0.0,0.0
 Lyndon Dykes,Scotland,0.0,0.0
 Nathan Patterson,Scotland,0.0,0.0
 Ryan Christie,Scotland,0.0,0.0
-Scott McKenna,Scotland,0.0,0.0
+Lamine Camara,Senegal,0.0,0.0
 Scott McTominay,Scotland,0.0,0.0
 Abdoulaye Seck,Senegal,0.0,0.0
 Bamba Dieng,Senegal,0.0,0.0
@@ -294,58 +293,59 @@ Iliman Ndiaye,Senegal,1.0,0.0
 Ismaïla Sarr,Senegal,4.0,0.0
 Kalidou Koulibaly,Senegal,0.0,0.0
 Krépin Diatta,Senegal,0.0,0.0
-Kim Jin-gyu,South Korea,0.0,0.0
-Kim Min-jae,South Korea,0.0,0.0
-Lee Dong-gyeong,South Korea,0.0,0.0
-Lee Jae-sung,South Korea,0.0,0.0
-Yéremy Pino,Spain,0.0745,0.0
-Álex Baena,Spain,1.0984,0.0
+Scott McKenna,Scotland,0.0,0.0
+Víctor Muñoz,Spain,0.0,0.0
+Yeremy Pino,Spain,0.0912,0.0
+Yéremy Pino,Spain,0.0698,0.0
+Álex Baena,Spain,1.0924,0.0
 Pedro Porro,Spain,1.0,0.0
 Alexander Isak,Sweden,1.0,0.0
 Anthony Elanga,Sweden,2.0,0.0
 Benjamin Nygren,Sweden,0.0,0.0
 Gustaf Lagerbielke,Sweden,0.0,0.0
-Ken Sema,Sweden,0.0,0.0
+Kim Jin-gyu,South Korea,0.0,0.0
 Mattias Svanberg,Sweden,1.0,0.0
 Victor Lindelöf,Sweden,0.0,0.0
 Viktor Gyökeres,Sweden,1.0,0.0
 Yasin Ayari,Sweden,2.0,0.0
-Breel Embolo,Switzerland,2.2449,0.0
-Cedric Itten,Switzerland,0.0419,0.0
-Christian Fassnacht,Switzerland,0.0098,0.0
-Dan Ndoye,Switzerland,1.0788,0.0
-Denis Zakaria,Switzerland,0.0136,0.0
-Yeremy Pino,Spain,0.0962,0.0
-Víctor Muñoz,Spain,0.0,0.0
-Rodri,Spain,0.0699,0.0
-Fabián Ruiz,Spain,0.225,0.0
+Breel Embolo,Switzerland,2.2464,0.0
+Cedric Itten,Switzerland,0.0417,0.0
+Christian Fassnacht,Switzerland,0.0124,0.0
+Dan Ndoye,Switzerland,1.0764,0.0
+Denis Zakaria,Switzerland,0.0126,0.0
+Granit Xhaka,Switzerland,1.0796,0.0
+Ken Sema,Sweden,0.0,0.0
+Kim Min-jae,South Korea,0.0,0.0
+Lee Dong-gyeong,South Korea,0.0,0.0
+Lee Jae-sung,South Korea,0.0,0.0
 Lee Kang-in,South Korea,0.0,0.0
 Oh Hyeon-gyu,South Korea,1.0,0.0
 Paik Seung-ho,South Korea,0.0,0.0
 Park Jin-seob,South Korea,0.0,0.0
 Son Heung-min,South Korea,0.0,0.0
-Aymeric Laporte,Spain,0.0624,0.0
-Dani Olmo,Spain,0.3872,0.0
-Ferran Torres,Spain,0.697,0.0
-Pedri,Spain,0.2118,0.0
-Gavi,Spain,0.1446,0.0
-Lamine Yamal,Spain,1.3354,0.0
-Marc Cucurella,Spain,0.0704,0.0
-Martin Zubimendi,Spain,0.1325,0.0
-Martín Zubimendi,Spain,0.0677,0.0
-Mikel Merino,Spain,1.6576,0.0
-Nico Williams,Spain,0.2748,0.0
-Yuto Nagatomo,Japan,0.0,0.0
-Shūto Machino,Japan,0.0,0.0
-Takehiro Tomiyasu,Japan,0.0,0.0
-Richie Laryea,Canada,0.007,0.0
+Aymeric Laporte,Spain,0.0615,0.0
+Rodri,Spain,0.0674,0.0
+Fabián Ruiz,Spain,0.2158,0.0
+Ferran Torres,Spain,0.6853,0.0
+Gavi,Spain,0.1414,0.0
+Lamine Yamal,Spain,1.3262,0.0
+Marc Cucurella,Spain,0.0738,0.0
+Martin Zubimendi,Spain,0.1272,0.0
+Martín Zubimendi,Spain,0.0607,0.0
+Mikel Merino,Spain,1.6353,0.0
+Nico Williams,Spain,0.2702,0.0
+Pedri,Spain,0.1951,0.0
+Dani Olmo,Spain,0.3837,0.0
+Promise David,Canada,1.0252,0.0
+Richie Laryea,Canada,0.0071,0.0
+Stephen Eustáquio,Canada,1.0255,0.0
 Tajon Buchanan,Canada,0.1178,0.0
 Tani Oluwaseyi,Canada,0.0264,0.0
 Dailon Livramento,Cape Verde,0.0,0.0
 Diney,Cape Verde,0.0,0.0
 Garry Rodrigues,Cape Verde,0.0,0.0
 Jamiro Monteiro,Cape Verde,0.0,0.0
-Jovane Cabral,Cape Verde,0.0,0.0
+Ritsu Dōan,Japan,0.0,0.0
 Kevin Pina,Cape Verde,1.0,0.0
 Ryan Mendes,Cape Verde,0.0,0.0
 Sidny Lopes Cabral,Cape Verde,1.0,0.0
@@ -355,21 +355,20 @@ Willy Semedo,Cape Verde,0.0,0.0
 Yannick Semedo,Cape Verde,0.0,0.0
 Hélio Varela,Cape Verde,1.0,0.0
 Deroy Duarte,Cape Verde,1.0,0.0
-Andrés Gómez,Colombia,0.0,0.0
-Stephen Eustáquio,Canada,1.0255,0.0
-Promise David,Canada,1.0252,0.0
-Davinson Sánchez,Colombia,0.0,0.0
-Niko Sigur,Canada,0.0232,0.0
+Jovane Cabral,Cape Verde,0.0,0.0
+Casemiro,Brazil,1.0,0.0
+Gabriel Magalhães,Brazil,0.0,0.0
+Gabriel Martinelli,Brazil,1.0,0.0
 Lucas Paquetá,Brazil,0.0,0.0
 Luiz Henrique,Brazil,0.0,0.0
 Marquinhos,Brazil,0.0,0.0
 Matheus Cunha,Brazil,3.0,0.0
 Neymar,Brazil,1.0,0.0
 Raphinha,Brazil,0.0,0.0
-Vinícius Júnior,Brazil,4.0,0.0
+Niko Sigur,Canada,0.0232,0.0
 Alistair Johnston,Canada,0.0076,0.0
-Alphonso Davies,Canada,0.0658,0.0
-Cyle Larin,Canada,2.1505,0.0
+Alphonso Davies,Canada,0.0659,0.0
+Cyle Larin,Canada,2.1504,0.0
 Ismaël Koné,Canada,0.0207,0.0
 Jacob Shaffelburg,Canada,0.0516,0.0
 Jayden Nelson,Canada,0.015,0.0
@@ -377,16 +376,17 @@ Jonathan David,Canada,3.2005,0.0
 Jonathan Osorio,Canada,0.0204,0.0
 Liam Millar,Canada,0.0149,0.0
 Nathan Saliba,Canada,1.0518,0.0
-Daniel Muñoz,Colombia,2.0,0.0
-James Rodríguez,Colombia,0.0,0.0
-Takefusa Kubo,Japan,0.0,0.0
+Vinícius Júnior,Brazil,4.0,0.0
+Mario Pašalić,Croatia,0.0,0.0
+Martin Baturina,Croatia,1.0,0.0
 Martin Erlić,Croatia,0.0,0.0
+Mateo Kovačić,Croatia,0.0,0.0
 Nikola Vlašić,Croatia,1.0,0.0
 Petar Musa,Croatia,1.0,0.0
 Petar Sučić,Croatia,1.0,0.0
 Toni Fruk,Croatia,0.0,0.0
 Ar'jany Martha,Curaçao,0.0,0.0
-Brandley Kuwas,Curaçao,0.0,0.0
+Andrés Gómez,Colombia,0.0,0.0
 Gervane Kastaneer,Curaçao,0.0,0.0
 Jearl Margaritha,Curaçao,0.0,0.0
 Jeremy Antonisse,Curaçao,0.0,0.0
@@ -397,17 +397,17 @@ Kevin Felida,Curaçao,0.0,0.0
 Leandro Bacuna,Curaçao,0.0,0.0
 Livano Comenencia,Curaçao,1.0,0.0
 Roshon van Eijma,Curaçao,0.0,0.0
-Sontje Hansen,Curaçao,0.0,0.0
-Mateo Kovačić,Croatia,0.0,0.0
-Martin Baturina,Croatia,1.0,0.0
+Brandley Kuwas,Curaçao,0.0,0.0
+Daniel Muñoz,Colombia,2.0,0.0
+Davinson Sánchez,Colombia,0.0,0.0
+James Rodríguez,Colombia,0.0,0.0
 Jefferson Lerma,Colombia,0.0,0.0
-Mario Pašalić,Croatia,0.0,0.0
 Jhon Córdoba,Colombia,0.0,0.0
 Juan Fernando Quintero,Colombia,0.0,0.0
 Luis Díaz,Colombia,1.0,0.0
 Luis Suárez,Colombia,0.0,0.0
 Richard Ríos,Colombia,0.0,0.0
-Yerry Mina,Colombia,0.0,0.0
+Luka Sučić,Croatia,0.0,0.0
 Jaminton Campaz,Colombia,1.0,0.0
 Jhon Arias,Colombia,1.0,0.0
 Andrej Kramarić,Croatia,0.0,0.0
@@ -418,35 +418,7 @@ Ivan Perišić,Croatia,1.0,0.0
 Joško Gvardiol,Croatia,0.0,0.0
 Kristijan Jakić,Croatia,0.0,0.0
 Luka Modrić,Croatia,0.0,0.0
-Luka Sučić,Croatia,0.0,0.0
-Gabriel Martinelli,Brazil,1.0,0.0
-Gabriel Magalhães,Brazil,0.0,0.0
-Casemiro,Brazil,1.0,0.0
-Julián Álvarez,Argentina,0.4298,0.0
-Lisandro Martínez,Argentina,1.0852,0.0
-Nahuel Molina,Argentina,0.0546,0.0
-Nicolás González,Argentina,0.2633,0.0
-Nicolás Otamendi,Argentina,0.111,0.0
-Nicolás Tagliafico,Argentina,0.0446,0.0
-Rodrigo De Paul,Argentina,0.0673,0.0
-Thiago Almada,Argentina,0.3088,0.0
-Ajdin Hrustic,Australia,0.0922,0.0
-Awer Mabil,Australia,0.0468,0.0
-Aziz Behich,Australia,0.0272,0.0
-Connor Metcalfe,Australia,1.0483,0.0
-Harry Souttar,Australia,0.168,0.0
-Jackson Irvine,Australia,0.1884,0.0
-Jordan Bos,Australia,0.0331,0.0
-Mathew Leckie,Australia,0.0544,0.0
-Nestory Irankunda,Australia,1.0352,0.0
-Nishan Velupillay,Australia,0.1333,0.0
-Leandro Paredes,Argentina,0.0276,0.0
-Julián Alvarez,Argentina,0.3973,0.0
-Bruno Guimarães,Brazil,0.0,0.0
-Giuliano Simeone,Argentina,0.0999,0.0
-Aïssa Mandi,Algeria,0.0,0.0
-Farès Chaïbi,Algeria,0.0,0.0
-Houssem Aouar,Algeria,0.0,0.0
+Yerry Mina,Colombia,0.0,0.0
 Ibrahim Maza,Algeria,0.0,0.0
 Jaouen Hadjam,Algeria,0.0,0.0
 Mohamed Amoura,Algeria,0.0,0.0
@@ -454,25 +426,51 @@ Nabil Bentaleb,Algeria,0.0,0.0
 Ramiz Zerrouki,Algeria,0.0,0.0
 Ramy Bensebaini,Algeria,0.0,0.0
 Riyad Mahrez,Algeria,2.0,0.0
-Zineddine Belaïd,Algeria,0.0,0.0
-Nadhir Benbouali,Algeria,1.0,0.0
-Rafik Belghali,Algeria,1.0,0.0
-Alexis Mac Allister,Argentina,0.2378,0.0
+Rodrigo De Paul,Argentina,0.0676,0.0
+Thiago Almada,Argentina,0.3064,0.0
+Bruno Guimarães,Brazil,0.0,0.0
+Awer Mabil,Australia,0.0468,0.0
+Aziz Behich,Australia,0.0273,0.0
+Connor Metcalfe,Australia,1.0482,0.0
+Harry Souttar,Australia,0.1682,0.0
 Cristian Romero,Argentina,1.035,0.0
-Enzo Fernández,Argentina,1.2256,0.0
-Giovani Lo Celso,Argentina,1.0186,0.0
-Alessandro Schöpf,Austria,0.0056,0.0
-David Alaba,Austria,0.0088,0.0
-Dejan Ljubičić,Austria,0.0078,0.0
-Konrad Laimer,Austria,0.0975,0.0
+Jordan Bos,Australia,0.0331,0.0
+Mathew Leckie,Australia,0.0544,0.0
+Nestory Irankunda,Australia,1.0352,0.0
+Nishan Velupillay,Australia,0.133,0.0
+Ajdin Hrustic,Australia,0.0922,0.0
+Giovani Lo Celso,Argentina,1.0183,0.0
+Giuliano Simeone,Argentina,0.1,0.0
+Julián Alvarez,Argentina,0.3949,0.0
+Julián Álvarez,Argentina,0.4276,0.0
+Leandro Paredes,Argentina,0.0269,0.0
+Lisandro Martínez,Argentina,1.0852,0.0
+Nahuel Molina,Argentina,0.0544,0.0
+Nicolás González,Argentina,0.2619,0.0
+Nicolás Otamendi,Argentina,0.1092,0.0
+Houssem Aouar,Algeria,0.0,0.0
+Ferdi Kadıoğlu,Turkey,0.0,0.0
+Jérémy Doku,Belgium,0.1853,0.0
+Darwin Núñez,Uruguay,0.0,0.0
+Sergiño Dest,United States,0.0283,0.0
+Jackson Irvine,Australia,0.1882,0.0
+Sherzod Nasrullaev,Uzbekistan,0.0,0.0
+Adil Boulbina,Algeria,0.0,0.0
+Amine Gouiri,Algeria,1.0,0.0
+Aïssa Mandi,Algeria,0.0,0.0
+Farès Chaïbi,Algeria,0.0,0.0
+Nicolás Tagliafico,Argentina,0.0444,0.0
+Maxim De Cuyper,Belgium,0.121,0.0
+Nicolas Raskin,Belgium,0.0326,0.0
+Romelu Lukaku,Belgium,3.4862,0.0
 Thomas Meunier,Belgium,0.0649,0.0
-Timothy Castagne,Belgium,0.0111,0.0
-Youri Tielemans,Belgium,2.1936,0.0
+Timothy Castagne,Belgium,0.0109,0.0
+Youri Tielemans,Belgium,2.1924,0.0
 Amar Dedić,Bosnia and Herzegovina,0.0248,0.0
 Armin Gigović,Bosnia and Herzegovina,0.0403,0.0
 Benjamin Tahirović,Bosnia and Herzegovina,0.0482,0.0
-Edin Džeko,Bosnia and Herzegovina,0.2097,0.0
-Ermedin Demirović,Bosnia and Herzegovina,0.1352,0.0
+Alessandro Schöpf,Austria,0.0056,0.0
+Ermedin Demirović,Bosnia and Herzegovina,0.135,0.0
 Esmir Bajraktarević,Bosnia and Herzegovina,0.05,0.0
 Haris Tabaković,Bosnia and Herzegovina,0.1277,0.0
 Kerim Alajbegović,Bosnia and Herzegovina,1.0458,0.0
@@ -482,37 +480,38 @@ Samed Baždar,Bosnia and Herzegovina,0.048,0.0
 Ermin Mahmić,Bosnia and Herzegovina,2.0,0.0
 Jovo Lukić,Bosnia and Herzegovina,1.0,0.0
 Alex Sandro,Brazil,0.0,0.0
-Nicolas Raskin,Belgium,0.0328,0.0
-Maxim De Cuyper,Belgium,0.1218,0.0
-Leandro Trossard,Belgium,2.1267,0.0
-Xaver Schlager,Austria,0.0118,0.0
+Edin Džeko,Bosnia and Herzegovina,0.2098,0.0
+David Alaba,Austria,0.0088,0.0
+Dejan Ljubičić,Austria,0.0078,0.0
+Konrad Laimer,Austria,0.0976,0.0
 Marcel Sabitzer,Austria,1.161,0.0
 Marko Arnautović,Austria,2.168,0.0
 Michael Gregoritsch,Austria,0.1768,0.0
-Philipp Lienhart,Austria,0.0444,0.0
-Romano Schmid,Austria,1.0562,0.0
+Philipp Lienhart,Austria,0.0445,0.0
+Romano Schmid,Austria,1.0563,0.0
 Saša Kalajdžić,Austria,1.0278,0.0
-Stefan Posch,Austria,0.0672,0.0
-Alexis Saelemaekers,Belgium,1.047,0.0
-Kevin De Bruyne,Belgium,1.238,0.0
+Leandro Trossard,Belgium,2.1264,0.0
+Xaver Schlager,Austria,0.0118,0.0
+Alexis Saelemaekers,Belgium,1.0468,0.0
 Arthur Theate,Belgium,0.0334,0.0
-Axel Witsel,Belgium,0.0194,0.0
-Brandon Mechele,Belgium,0.0254,0.0
-Charles De Ketelaere,Belgium,2.099,0.0
-Dodi Lukebakio,Belgium,0.0378,0.0
-Hans Vanaken,Belgium,1.0712,0.0
-Jérémy Doku,Belgium,0.1866,0.0
-Tahith Chong,Curaçao,0.0,0.0
-Tyrese Noslin,Curaçao,0.0,0.0
-Adam Hložek,Czech Republic,0.0,0.0
-Danley Jean Jacques,Haiti,0.1212,0.0
-Duke Lacroix,Haiti,0.0238,0.0
-Frantzdy Pierrot,Haiti,0.222,0.0
-Jean-Kévin Duverne,Haiti,0.0329,0.0
+Axel Witsel,Belgium,0.0195,0.0
+Brandon Mechele,Belgium,0.0251,0.0
+Charles De Ketelaere,Belgium,2.0986,0.0
+Dodi Lukebakio,Belgium,0.0376,0.0
+Hans Vanaken,Belgium,1.0709,0.0
+Nadhir Benbouali,Algeria,1.0,0.0
+Kevin De Bruyne,Belgium,1.2363,0.0
+Stefan Posch,Austria,0.0672,0.0
+Derrick Luckassen,Ghana,1.0,0.0
+Danley Jean Jacques,Haiti,0.12,0.0
+Duckens Nazon,Haiti,0.3086,0.0
+Duke Lacroix,Haiti,0.0248,0.0
+Frantzdy Pierrot,Haiti,0.2255,0.0
+Jean-Kévin Duverne,Haiti,0.0344,0.0
 Ricardo Adé,Haiti,0.0166,0.0
-Ruben Providence,Haiti,0.0993,0.0
+Ruben Providence,Haiti,0.0968,0.0
 Wilson Isidor,Haiti,1.0,0.0
-Alireza Jahanbakhsh,Iran,0.0,0.0
+Sontje Hansen,Curaçao,0.0,0.0
 Amirhossein Hosseinzadeh,Iran,0.0,0.0
 Ehsan Hajsafi,Iran,0.0,0.0
 Hossein Kanaanizadegan,Iran,0.0,0.0
@@ -522,18 +521,17 @@ Mehdi Torabi,Iran,0.0,0.0
 Milad Mohammadi,Iran,0.0,0.0
 Mohammad Mohebi,Iran,1.0,0.0
 Ramin Rezaeian,Iran,2.0,0.0
-Rouzbeh Cheshmi,Iran,0.0,0.0
-Duckens Nazon,Haiti,0.3098,0.0
-Derrick Luckassen,Ghana,1.0,0.0
+Alireza Jahanbakhsh,Iran,0.0,0.0
+Deniz Undav,Germany,3.0,0.0
 Felix Nmecha,Germany,1.0,0.0
-Caleb Yirenkyi,Ghana,1.0,0.0
+Florian Wirtz,Germany,0.0,0.0
 Jamal Musiala,Germany,1.0,0.0
 Jamie Leweling,Germany,0.0,0.0
 Joshua Kimmich,Germany,0.0,0.0
 Kai Havertz,Germany,3.0,0.0
 Leon Goretzka,Germany,0.0,0.0
 Leroy Sané,Germany,1.0,0.0
-Nadiem Amiri,Germany,0.0,0.0
+Caleb Yirenkyi,Ghana,1.0,0.0
 Nick Woltemade,Germany,0.0,0.0
 Nico Schlotterbeck,Germany,1.0,0.0
 Nathaniel Brown,Germany,1.0,0.0
@@ -544,17 +542,17 @@ Iñaki Williams,Ghana,0.0,0.0
 Jordan Ayew,Ghana,0.0,0.0
 Kamaldeen Sulemana,Ghana,0.0,0.0
 Thomas Partey,Ghana,0.0,0.0
-Saeid Ezatolahi,Iran,0.0,0.0
-Saleh Hardani,Iran,0.0,0.0
-Saman Ghoddos,Iran,0.0,0.0
-Shojae Khalilzadeh,Iran,0.0,0.0
+Nadiem Amiri,Germany,0.0,0.0
+Guéla Doué,Ivory Coast,0.0,0.0
+Ibrahim Sangaré,Ivory Coast,0.0,0.0
+Jean Michaël Seri,Ivory Coast,0.0,0.0
 Nicolas Pépé,Ivory Coast,2.0,0.0
 Oumar Diakité,Ivory Coast,0.0,0.0
 Seko Fofana,Ivory Coast,0.0,0.0
 Simon Adingra,Ivory Coast,0.0,0.0
 Yan Diomande,Ivory Coast,0.0,0.0
 Ao Tanaka,Japan,0.0,0.0
-Ayase Ueda,Japan,2.0,0.0
+Rouzbeh Cheshmi,Iran,0.0,0.0
 Daichi Kamada,Japan,2.0,0.0
 Daizen Maeda,Japan,1.0,0.0
 Junya Ito,Japan,1.0,0.0
@@ -563,21 +561,22 @@ Keito Nakamura,Japan,1.0,0.0
 Ko Itakura,Japan,0.0,0.0
 Koki Ogawa,Japan,0.0,0.0
 Kōki Ogawa,Japan,0.0,0.0
-Ritsu Dōan,Japan,0.0,0.0
-Amine Gouiri,Algeria,1.0,0.0
-Jean Michaël Seri,Ivory Coast,0.0,0.0
-Ibrahim Sangaré,Ivory Coast,0.0,0.0
-Guéla Doué,Ivory Coast,0.0,0.0
-Mohanad Ali,Iraq,0.0,0.0
+Enzo Fernández,Argentina,1.227,0.0
+Shūto Machino,Japan,0.0,0.0
+Ayase Ueda,Japan,2.0,0.0
+Saeid Ezatolahi,Iran,0.0,0.0
+Saleh Hardani,Iran,0.0,0.0
+Saman Ghoddos,Iran,0.0,0.0
+Shojae Khalilzadeh,Iran,0.0,0.0
 Akam Hashim,Iraq,0.0,0.0
 Ali Al-Hamadi,Iraq,0.0,0.0
 Ali Jasim,Iraq,0.0,0.0
 Amir Al-Ammari,Iraq,0.0,0.0
 Aymen Hussein,Iraq,1.0,0.0
-Hussein Ali,Iraq,0.0,0.0
-Ibrahim Bayesh,Iraq,0.0,0.0
-Rebin Sulaka,Iraq,0.0,0.0
 Franck Kessié,Ivory Coast,1.0,0.0
+Ibrahim Bayesh,Iraq,0.0,0.0
+Mohanad Ali,Iraq,0.0,0.0
+Rebin Sulaka,Iraq,0.0,0.0
 Youssef Amyn,Iraq,0.0,0.0
 Zaid Tahseen,Iraq,0.0,0.0
 Zidane Iqbal,Iraq,0.0,0.0
@@ -585,16 +584,17 @@ Amad Diallo,Ivory Coast,2.0,0.0
 Bazoumana Touré,Ivory Coast,0.0,0.0
 Emmanuel Agbadou,Ivory Coast,0.0,0.0
 Evann Guessand,Ivory Coast,0.0,0.0
-Florian Wirtz,Germany,0.0,0.0
-Deniz Undav,Germany,3.0,0.0
-David Douděra,Czech Republic,0.0,0.0
+Hussein Ali,Iraq,0.0,0.0
+Charles Pickel,DR Congo,0.0,0.0
+Cédric Bakambu,DR Congo,0.0,0.0
 Fiston Mayele,DR Congo,1.0,0.0
+Gaël Kakuta,DR Congo,0.0,0.0
 Meschak Elia,DR Congo,0.0,0.0
 Nathanaël Mbuku,DR Congo,0.0,0.0
 Theo Bongonda,DR Congo,0.0,0.0
 Théo Bongonda,DR Congo,0.0,0.0
 Yoane Wissa,DR Congo,3.0,0.0
-Brian Cipenga,DR Congo,1.0,0.0
+David Raum,Germany,0.0,0.0
 Alan Minda,Ecuador,0.0,0.0
 Enner Valencia,Ecuador,0.0,0.0
 Félix Torres,Ecuador,0.0,0.0
@@ -605,17 +605,17 @@ Kevin Rodríguez,Ecuador,0.0,0.0
 Moisés Caicedo,Ecuador,0.0,0.0
 Pervis Estupiñán,Ecuador,0.0,0.0
 Piero Hincapié,Ecuador,0.0,0.0
-Nilson Angulo,Ecuador,1.0,0.0
-Gaël Kakuta,DR Congo,0.0,0.0
-Cédric Bakambu,DR Congo,0.0,0.0
-David Raum,Germany,0.0,0.0
-Charles Pickel,DR Congo,0.0,0.0
+Brian Cipenga,DR Congo,1.0,0.0
+Tahith Chong,Curaçao,0.0,0.0
+Tyrese Noslin,Curaçao,0.0,0.0
+Adam Hložek,Czech Republic,0.0,0.0
+David Douděra,Czech Republic,0.0,0.0
 Jan Kuchta,Czech Republic,0.0,0.0
 Ladislav Krejčí,Czech Republic,1.0,0.0
 Lukáš Provod,Czech Republic,0.0,0.0
 Lukáš Červ,Czech Republic,0.0,0.0
 Patrik Schick,Czech Republic,0.0,0.0
-Pavel Šulc,Czech Republic,0.0,0.0
+Chancel Mbemba,DR Congo,0.0,0.0
 Robin Hranáč,Czech Republic,0.0,0.0
 Tomáš Chorý,Czech Republic,0.0,0.0
 Tomáš Holeš,Czech Republic,0.0,0.0
@@ -626,46 +626,46 @@ Michal Sadílek,Czech Republic,1.0,0.0
 Arthur Masuaku,DR Congo,0.0,0.0
 Axel Tuanzebe,DR Congo,0.0,0.0
 Cedric Bakambu,DR Congo,0.0,0.0
-Chancel Mbemba,DR Congo,0.0,0.0
-Ibrahim Adel,Egypt,0.0,0.0
-Marwan Attia,Egypt,0.0,0.0
-Mohamed Abdelmonem,Egypt,0.0,0.0
-Mohamed Salah,Egypt,1.0,0.0
-Adrien Rabiot,France,0.2082,0.0
-Aurélien Tchouaméni,France,0.0536,0.0
-Bradley Barcola,France,2.1364,0.0
-Dayot Upamecano,France,0.0411,0.0
-Jean-Philippe Mateta,France,0.111,0.0
-Maghnes Akliouche,France,0.0555,0.0
-Marcus Thuram,France,0.0656,0.0
-Michael Olise,France,0.2046,0.0
-N'Golo Kanté,France,0.0076,0.0
-Ousmane Dembélé,France,4.1328,0.0
-Rayan Cherki,France,0.0521,0.0
-Théo Hernandez,France,0.0414,0.0
-Warren Zaïre-Emery,France,0.0303,0.0
+Pavel Šulc,Czech Republic,0.0,0.0
+Noni Madueke,England,0.0474,0.0
+Ollie Watkins,England,0.0785,0.0
+Reece James,England,0.04,0.0
+Adrien Rabiot,France,0.1422,0.0
+Aurélien Tchouaméni,France,0.0384,0.0
+Bradley Barcola,France,2.0936,0.0
+Dayot Upamecano,France,0.028,0.0
+Jean-Philippe Mateta,France,0.0738,0.0
+Maghnes Akliouche,France,0.037,0.0
+Nilson Angulo,Ecuador,1.0,0.0
+Michael Olise,France,0.142,0.0
+N'Golo Kanté,France,0.0048,0.0
+Ousmane Dembélé,France,5.0912,0.0
+Rayan Cherki,France,0.0354,0.0
+Théo Hernandez,France,0.0283,0.0
+Warren Zaïre-Emery,France,0.0205,0.0
 Désiré Doué,France,1.0,0.0
 Aleksandar Pavlović,Germany,0.0,0.0
 Antonio Rüdiger,Germany,0.0,0.0
 Assan Ouédraogo,Germany,0.0,0.0
-Reece James,England,0.0406,0.0
-Ollie Watkins,England,0.0784,0.0
-Noni Madueke,England,0.0479,0.0
-Anthony Gordon,England,0.087,0.0
+Marcus Thuram,France,0.0438,0.0
+Ibrahim Adel,Egypt,0.0,0.0
+Marwan Attia,Egypt,0.0,0.0
+Mohamed Abdelmonem,Egypt,0.0,0.0
+Mohamed Salah,Egypt,1.0,0.0
 Omar Marmoush,Egypt,0.0,0.0
 Ramy Rabia,Egypt,0.0,0.0
 Trézéguet,Egypt,1.0,0.0
 Yasser Ibrahim,Egypt,1.0,0.0
 Emam Ashour,Egypt,2.0,0.0
-Mostafa Ziko,Egypt,2.0,0.0
+Marcus Rashford,England,1.2224,0.0
 Mahmoud Saber,Egypt,1.0,0.0
-Bukayo Saka,England,0.2907,0.0
-Marcus Rashford,England,1.2237,0.0
-Declan Rice,England,0.168,0.0
-Eberechi Eze,England,0.1362,0.0
-Ezri Konsa,England,0.0472,0.0
-John Stones,England,0.0236,0.0
-Jordan Henderson,England,0.0275,0.0
-Jude Bellingham,England,4.1218,0.0
-Marc Guéhi,England,0.0467,0.0
-Sherzod Nasrullaev,Uzbekistan,0.0,0.0
+Anthony Gordon,England,0.0846,0.0
+Bukayo Saka,England,0.2885,0.0
+Declan Rice,England,0.1686,0.0
+Eberechi Eze,England,0.1359,0.0
+Ezri Konsa,England,0.0474,0.0
+John Stones,England,0.0234,0.0
+Jordan Henderson,England,0.0273,0.0
+Jude Bellingham,England,4.1213,0.0
+Marc Guéhi,England,0.0461,0.0
+Mostafa Ziko,Egypt,2.0,0.0
