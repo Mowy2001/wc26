@@ -689,7 +689,8 @@ details.tech[open] summary::before { content: "\25BE "; }
 .nm-team.away { justify-content: flex-end; }
 .nm-vs { color: var(--muted); font-weight: 700; flex: 0 0 auto; }
 .nm-meta { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin: 6px 0 10px; display: flex; align-items: center; gap: 8px; }
-.nm-div { color: var(--gold); font-weight: 800; background: rgba(255,209,102,.13); padding: 1px 7px; border-radius: 5px; }
+/* right-aligned chip cluster: the first auto margin pushes every later chip right */
+.nm-div { color: var(--gold); font-weight: 800; background: rgba(255,209,102,.13); padding: 1px 7px; border-radius: 5px; margin-left: auto; white-space: nowrap; flex-shrink: 0; }
 .nm-wait { color: var(--accent2); font-weight: 700; background: rgba(56,189,248,.12); padding: 1px 7px; border-radius: 5px; margin-left: auto; }
 .nm-venue { text-transform: none; letter-spacing: 0; white-space: nowrap; }
 .nm-venue .flag { margin-right: 3px; }
