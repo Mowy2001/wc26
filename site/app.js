@@ -31,7 +31,7 @@ const MD = {};
 // upcoming matches (scripts/42) are heatmap-able too, fold them into the index
 ((WC26.next_matches && WC26.next_matches.matches) || []).forEach((m) => {
   MD[m.home + "|" + m.away] = {
-    home: m.home, away: m.away, group: m.ko ? "Knockout" : "Group", city: null,
+    home: m.home, away: m.away, group: m.ko ? "Knockout" : "Group", city: m.city || null,
     lh: m.model.lh, la: m.model.la, pH: m.model.pH, pD: m.model.pD, pA: m.model.pA,
     grid: m.grid, top: m.top, actual: null,
   };
@@ -39,12 +39,20 @@ const MD = {};
 // predicted bracket ties (scripts/43), click a knockout tie -> its heatmap;
 // played ties carry their real 90' score and who advanced (shootouts resolved)
 (WC26.bracket_dists || []).forEach((m) => {
+  const kv = (WC26.ko_venues || {})[m.match];
   MD[m.home + "|" + m.away] = {
-    home: m.home, away: m.away, group: "Knockout", city: null,
+    home: m.home, away: m.away, group: "Knockout", city: (kv && kv.c) || null,
     lh: m.lh, la: m.la, pH: m.pH, pD: m.pD, pA: m.pA, grid: m.grid, top: m.top,
     actual: m.actual || null, winner: m.winner || null,
   };
 });
+// venue label: host-country flag + city + elevation (only stated when it bites)
+const venueTag = (city) => {
+  if (!city) return "";
+  const cm = (WC26.city_meta || {})[city];
+  if (!cm) return city;
+  return `${flag(cm.country)}${city}${cm.alt >= 100 ? ` · ${cm.alt.toLocaleString("en")} m` : ""}`;
+};
 
 /* ---------- client-side goal model (exported DC point estimate) ----------
    Lets the site build the SAME score grid for ANY pairing — sandbox picks
@@ -89,7 +97,7 @@ function dcDist(home, away, mn) {
   const flat = [];
   for (let i = 0; i < 6; i++) for (let j = 0; j < 6; j++) flat.push({ h: i, a: j, p: grid[i][j] });
   flat.sort((x, y) => y.p - x.p);
-  return { home, away, group: "Knockout", city: null,
+  return { home, away, group: "Knockout", city: city || null,
     lh: Math.round(100 * lh) / 100, la: Math.round(100 * la) / 100,
     pH, pD, pA, grid, top: flat.slice(0, 3), actual: null };
 }
@@ -171,7 +179,7 @@ function showHeat(home, away) {
   ov.innerHTML = `<div class="mh-card">
     <span class="mh-close" onclick="document.getElementById('mh-overlay').classList.remove('show')">×</span>
     <h4>${flag(home)} ${home} <span style="color:var(--muted)">v</span> ${away} ${flag(away)}</h4>
-    <div class="mh-sub">${[m.group && m.group !== "Knockout" ? "Group " + m.group : "Knockout", m.date, m.city].filter(Boolean).join(" · ")} · pre-match forecast (xG ${m.lh}–${m.la})</div>
+    <div class="mh-sub">${[m.group && m.group !== "Knockout" ? "Group " + m.group : "Knockout", m.date, venueTag(m.city)].filter(Boolean).join(" · ")} · pre-match forecast (xG ${m.lh}–${m.la})</div>
     ${wdl}
     ${advBox}
     <div style="display:flex;gap:8px"><div class="mh-axtitle vert">${home} goals →</div>
@@ -265,9 +273,9 @@ if (WC26.next_matches && WC26.next_matches.matches && $("next-board")) {
       <div class="nm-head"><span class="nm-team">${flag(m.home)}${m.home}</span>
         <span class="nm-vs">${m.ko ? "⚔" : "v"}</span>
         <span class="nm-team away">${m.away}${flag(m.away)}</span></div>
-      <div class="nm-meta">${m.ko ? "Knockout" : "Group"} · ${fmt(m.commence)}
-        ${new Date(m.commence).getTime() < Date.now() ? `<span class="nm-wait" title="kicked off; the score lands with the next morning's data refresh">⏳ awaiting result</span>` : ""}
-        ${div}<span class="mh-hint">heatmap ▸</span></div>
+      <div class="nm-meta">${m.ko ? "Knockout" : "Group"} · ${fmt(m.commence)}${m.city ? ` · <span class="nm-venue">${venueTag(m.city)}</span>` : ""}
+        ${div}<span class="mh-hint">heatmap ▸</span>
+        ${new Date(m.commence).getTime() < Date.now() ? `<span class="nm-wait" title="kicked off; the score lands with the next morning's data refresh">⏳ awaiting result</span>` : ""}</div>
       <div class="nm-line"><span class="nm-lab">Model</span>${x123(m.model, m.ko)}</div>
       <div class="nm-line"><span class="nm-lab">Market</span>${x123(m.market, m.ko)}</div>
     </div>`;

@@ -90,6 +90,7 @@ def build_entry(mk):
                   key=lambda x: -x[2])[:3]
     return {
         "home": home, "away": away, "commence": mk["commence"], "ko": bool(ko),
+        "city": city,
         "model": {"pH": round(pH, 4), "pD": round(pD, 4), "pA": round(pA, 4),
                   "lh": round(float(lh), 2), "la": round(float(la), 2)},
         "market": {"pH": round(mk["pH"], 4), "pD": round(mk["pD"], 4), "pA": round(mk["pA"], 4),

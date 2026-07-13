@@ -690,7 +690,9 @@ details.tech[open] summary::before { content: "\25BE "; }
 .nm-vs { color: var(--muted); font-weight: 700; flex: 0 0 auto; }
 .nm-meta { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin: 6px 0 10px; display: flex; align-items: center; gap: 8px; }
 .nm-div { color: var(--gold); font-weight: 800; background: rgba(255,209,102,.13); padding: 1px 7px; border-radius: 5px; }
-.nm-wait { color: var(--accent2); font-weight: 700; background: rgba(56,189,248,.12); padding: 1px 7px; border-radius: 5px; }
+.nm-wait { color: var(--accent2); font-weight: 700; background: rgba(56,189,248,.12); padding: 1px 7px; border-radius: 5px; margin-left: auto; }
+.nm-venue { text-transform: none; letter-spacing: 0; white-space: nowrap; }
+.nm-venue .flag { margin-right: 3px; }
 .nm-card .mh-hint { color: var(--accent2); font-size: .68rem; margin-left: auto; opacity: 0; }
 .nm-card.clickable:hover .mh-hint { opacity: .9; }
 .nm-line { display: grid; grid-template-columns: 52px 1fr; align-items: center; gap: 9px; margin: 4px 0; }

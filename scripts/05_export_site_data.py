@@ -140,6 +140,17 @@ try:
                  for r in _at.itertuples(index=False) if abs(float(r.log_tilt)) > 1e-6}
 except FileNotFoundError:
     city_tilt = None
+# venue metadata (country + altitude) for every 2026 host city, so the site can
+# label each fixture's venue with the host-nation flag and its elevation.
+try:
+    _alt = json.load(open("data/external/altitude.json"))
+    _fx = pd.read_csv("data/raw/results.csv")
+    _fx = _fx[(_fx["tournament"] == "FIFA World Cup") & (_fx["date"] >= "2026-06-11")]
+    city_meta = {c: {"country": g["country"].iloc[0],
+                     "alt": int(_alt.get(c) or 0)}
+                 for c, g in _fx.dropna(subset=["city"]).groupby("city")}
+except (FileNotFoundError, KeyError):
+    city_meta = None
 try:  # live market: latest outright snapshot + a short history for movement
     _oh = [json.loads(l) for l in open("outputs/odds_history.jsonl") if l.strip()]
     market_now = {"fetched": _oh[-1]["fetched"], "outright": _oh[-1]["outright"]} if _oh else None
@@ -189,6 +200,7 @@ data = {
     "dc_params": dc_params,
     "ko_venues": ko_venues,
     "city_tilt": city_tilt,
+    "city_meta": city_meta,
     "team_drivers": team_drivers,
     "next_matches": next_matches,
     "bracket_dists": bracket_dists,
