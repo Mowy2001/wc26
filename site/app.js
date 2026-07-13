@@ -273,7 +273,7 @@ if (WC26.next_matches && WC26.next_matches.matches && $("next-board")) {
       <div class="nm-head"><span class="nm-team">${flag(m.home)}${m.home}</span>
         <span class="nm-vs">${m.ko ? "⚔" : "v"}</span>
         <span class="nm-team away">${m.away}${flag(m.away)}</span></div>
-      <div class="nm-meta">${m.ko ? "Knockout" : "Group"} · ${fmt(m.commence)}${m.city ? ` · <span class="nm-venue">${venueTag(m.city)}</span>` : ""}
+      <div class="nm-meta"><span class="nm-when">${m.ko ? "Knockout" : "Group"} · ${fmt(m.commence)}</span>${m.city ? `<span class="nm-venue">${venueTag(m.city)}</span>` : ""}
         ${div}<span class="mh-hint">heatmap ▸</span>
         ${new Date(m.commence).getTime() < Date.now() ? `<span class="nm-wait" title="kicked off; the score lands with the next morning's data refresh">⏳ awaiting result</span>` : ""}</div>
       <div class="nm-line"><span class="nm-lab">Model</span>${x123(m.model, m.ko)}</div>
