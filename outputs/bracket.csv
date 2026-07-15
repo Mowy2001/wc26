@@ -55,9 +55,9 @@ match,slot,team,p,adv
 99,bot,England,1.0,1.0
 100,top,Argentina,1.0,1.0
 100,bot,Switzerland,1.0,0.0
-101,top,France,1.0,0.3619
-101,bot,Spain,1.0,0.6381
-102,top,England,1.0,0.3437
-102,bot,Argentina,1.0,0.6563
-104,top,Spain,0.6381,0.3602
-104,bot,Argentina,0.6563,0.3505
+101,top,France,1.0,0.0
+101,bot,Spain,1.0,1.0
+102,top,England,1.0,0.3421
+102,bot,Argentina,1.0,0.6579
+104,top,Spain,1.0,0.5675
+104,bot,Argentina,0.6579,0.3159
