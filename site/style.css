@@ -685,6 +685,12 @@ details.tech[open] summary::before { content: "\25BE "; }
 .nm-card { background: var(--card); border: 1px solid var(--card-edge); border-radius: 12px; padding: 13px 15px; }
 .nm-card.clickable { cursor: pointer; transition: border-color .15s, background .15s; }
 .nm-card.clickable:hover { border-color: var(--accent2); background: #101a2e; }
+/* the final gets the gold treatment */
+.nm-card.nm-final { border-color: var(--gold); background: linear-gradient(160deg, rgba(255,209,102,.10), var(--card) 55%);
+  box-shadow: 0 0 22px rgba(255,209,102,.10); }
+.nm-card.nm-final .nm-when { color: var(--gold); font-weight: 800; }
+.nm-card.nm-final .nm-team { font-size: 1.06em; }
+.nm-card.nm-final.clickable:hover { border-color: var(--gold); background: linear-gradient(160deg, rgba(255,209,102,.16), #101a2e 55%); }
 .nm-head { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 1rem; }
 .nm-team { display: inline-flex; align-items: center; gap: 6px; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .nm-team.away { justify-content: flex-end; }

@@ -269,11 +269,12 @@ if (WC26.next_matches && WC26.next_matches.matches && $("next-board")) {
     const flip = m.ko ? (advH(m.model) >= 0.5) !== (advH(m.market) >= 0.5)
                       : (favOf(m.model) !== favOf(m.market) || gap >= 0.10);
     const div = flip ? `<span class="nm-div" title="${m.ko ? "model and market back different sides to go through" : "model and market disagree on this match"}">model ≠ market</span>` : "";
-    return `<div class="nm-card clickable" data-home="${m.home}" data-away="${m.away}">
+    const stageLab = m.stage === "final" ? "🏆 The final" : m.stage === "third" ? "Third place" : (m.ko ? "Knockout" : "Group");
+    return `<div class="nm-card clickable${m.stage === "final" ? " nm-final" : ""}" data-home="${m.home}" data-away="${m.away}">
       <div class="nm-head"><span class="nm-team">${flag(m.home)}${m.home}</span>
         <span class="nm-vs">${m.ko ? "⚔" : "v"}</span>
         <span class="nm-team away">${m.away}${flag(m.away)}</span></div>
-      <div class="nm-meta"><span class="nm-when">${m.ko ? "Knockout" : "Group"} · ${fmt(m.commence)}</span>${m.city ? `<span class="nm-venue">${venueTag(m.city)}</span>` : ""}
+      <div class="nm-meta"><span class="nm-when">${stageLab} · ${fmt(m.commence)}</span>${m.city ? `<span class="nm-venue">${venueTag(m.city)}</span>` : ""}
         ${div}<span class="mh-hint">heatmap ▸</span>
         ${new Date(m.commence).getTime() < Date.now() ? `<span class="nm-wait" title="kicked off; the score lands with the next morning's data refresh">⏳ awaiting result</span>` : ""}</div>
       <div class="nm-line"><span class="nm-lab">Model</span>${x123(m.model, m.ko)}</div>
@@ -302,7 +303,10 @@ if ($("live-strip") && WC26.generated) {
   const bt = WC26.backtest;
   const sc = WC26.scoring;
   if ($("hero-leader")) {
-    const chase = byChamp.slice(1, 3).map((c) => `${flag(c.team)}${TLA3(c.team)} ${pct(c.P_champion, 0)}`).join("  ·  ");
+    // only teams still alive chase the leader (an eliminated side at 0% is noise;
+    // by the final there is exactly one challenger left)
+    const chase = byChamp.slice(1, 3).filter((c) => c.P_champion >= 0.001)
+      .map((c) => `${flag(c.team)}${TLA3(c.team)} ${pct(c.P_champion, 0)}`).join("  ·  ");
     $("hero-leader").innerHTML = `
       <div class="hc-lab">Most likely champion</div>
       <div class="hc-flag">${flag(fav.team)}</div>

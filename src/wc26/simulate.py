@@ -5,7 +5,8 @@ build group tables with FIFA tiebreakers, rank third-placed teams across
 groups, mark the 24 + 8 qualifiers.
 
 Knockout: official R32 bracket (matches 73-104; the third-place play-off,
-match 103, is irrelevant to every reported probability and is skipped).
+match 103, is irrelevant to every team probability but IS played for its
+goals, which count toward the Golden Boot).
 Third-place slots are filled by a deterministic perfect matching between the
 8 qualified thirds and the slot constraints published in the schedule
 (3rd A/B/C/D/F etc.). FIFA's regulations fix one assignment per combination
@@ -214,7 +215,8 @@ KO_CITY = {73: "Inglewood", 74: "Foxborough", 75: "Guadalupe", 76: "Houston",
            89: "Philadelphia", 90: "Houston", 91: "East Rutherford", 92: "Mexico City",
            93: "Arlington", 94: "Seattle", 95: "Atlanta", 96: "Vancouver",
            97: "Foxborough", 98: "Inglewood", 99: "Miami Gardens", 100: "Kansas City",
-           101: "Arlington", 102: "Atlanta", 104: "East Rutherford"}
+           101: "Arlington", 102: "Atlanta", 103: "Miami Gardens",
+           104: "East Rutherford"}
 
 # Shootout model, fitted on the 677 shootouts in shootouts.csv merged with
 # point-in-time Elo: P(A wins) = sigmoid(B_HOME*host_A + B_ELO*(eloA-eloB)/400).
@@ -444,7 +446,18 @@ def simulate_tournament(
                 goals[kh] += khg
                 goals[ka] += kag
         round_counts[winners[FINAL_MATCH[0]]][5] += 1
+        # Third-place play-off (match 103): irrelevant to every TEAM probability
+        # (it stays out of round_counts and the bracket) but its goals are real
+        # Golden Boot goals — both semi-final losers play one more match, which
+        # matters exactly when the scorer race is tight (Mbappé/Kane 2026).
         if collect_goal_samples:
+            tp = [winners[fa] if winners[mn] == winners[fb] else winners[fb]
+                  for mn, fa, fb, _ in SF_MATCHES]
+            _, kh3, ka3, khg3, kag3 = _ko_match(
+                tp[0], tp[1], "United States" if host_advantage else "", m, elo, rng,
+                ko_cache, team_log_tilt, KO_CITY.get(103), city_log_tilt, fixed_ko_results)
+            goals[kh3] += khg3
+            goals[ka3] += kag3
             for t, g in goals.items():
                 goal_samples[si, team_idx[t]] = g
 

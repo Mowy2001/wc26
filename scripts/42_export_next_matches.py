@@ -47,8 +47,20 @@ team_group = {t: g for g, ts in reconstruct_groups(wc2026_group_fixtures(results
 # simplification here would misquote the deployed model (it undersold Mexico
 # for the R16 tie at 2,240 m).
 VEN = {}
-for r in wc2026_fixtures(results).itertuples(index=False):
+STAGE = {}
+_fx26 = wc2026_fixtures(results)
+for r in _fx26.itertuples(index=False):
     VEN[(r.home_team, r.away_team)] = (r.city, bool(r.neutral))
+# label the final and the third-place play-off by their ABSOLUTE schedule dates
+# (the fixture list carries the full calendar, teams TBD until the semis): the
+# final is the last date of the schedule, the play-off the day before. Named
+# rows only appear on those dates once the semi-finals are decided.
+_dates = sorted(_fx26["date"].unique())
+_named = _fx26.dropna(subset=["home_team"])
+for r in _named[_named["date"] == _dates[-1]].itertuples(index=False):
+    STAGE[frozenset((r.home_team, r.away_team))] = "final"
+for r in _named[_named["date"] == _dates[-2]].itertuples(index=False):
+    STAGE[frozenset((r.home_team, r.away_team))] = "third"
 
 CLIP = 5
 
@@ -90,7 +102,7 @@ def build_entry(mk):
                   key=lambda x: -x[2])[:3]
     return {
         "home": home, "away": away, "commence": mk["commence"], "ko": bool(ko),
-        "city": city,
+        "city": city, "stage": STAGE.get(frozenset((home, away))),
         "model": {"pH": round(pH, 4), "pD": round(pD, 4), "pA": round(pA, 4),
                   "lh": round(float(lh), 2), "la": round(float(la), 2)},
         "market": {"pH": round(mk["pH"], 4), "pD": round(mk["pD"], 4), "pA": round(mk["pA"], 4),

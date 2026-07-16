@@ -97,8 +97,16 @@ for k in todo:
     rg = gs[(gs["date"] >= "2026-06-11") & (gs["date"] <= asof_date)
             & (~gs["own_goal"].astype(bool)) & (gs["team"].isin(teams))].dropna(subset=["scorer"])
     real_by_team = {t: g["scorer"].value_counts().to_dict() for t, g in rg.groupby("team")}
+    # real TEAM totals as of this snapshot (own goals count for the team,
+    # never for a scorer — without this an unattributed goal stays
+    # re-distributable forever; see allocate_goals_live docstring)
+    real_team_goals = {tm: 0 for tm in teams}
+    for r in sub.itertuples(index=False):
+        for tm, gg in ((r.home_team, r.home_score), (r.away_team, r.away_score)):
+            if tm in real_team_goals:
+                real_team_goals[tm] += int(gg)
     if real_by_team:
-        gb = allocate_goals_live(res["goal_samples"], gb_weights, real_by_team)["players"].head(12)
+        gb = allocate_goals_live(res["goal_samples"], gb_weights, real_by_team, real_team_goals)["players"].head(12)
     else:
         gb = allocate_goals(res["goal_samples"], gb_weights)["players"].head(12)
     gb_list = [{"player": r.player, "team": r.team, "p": round(float(r.P_golden_boot), 4),

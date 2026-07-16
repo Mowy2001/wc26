@@ -274,7 +274,7 @@ def allocate_goals(
     return {"players": players_tbl, "distinct": distinct_tbl.to_frame()}
 
 
-def allocate_goals_live(goal_samples, weights, real_by_team, seed=26):
+def allocate_goals_live(goal_samples, weights, real_by_team, real_team_goals=None, seed=26):
     """Live Golden Boot: real goals already scored + simulated remaining.
 
     real_by_team: {team: {player_display: goals_scored_so_far}} from the live
@@ -286,6 +286,13 @@ def allocate_goals_live(goal_samples, weights, real_by_team, seed=26):
     with no projected future (no track record -> the model doesn't extrapolate).
     Consistent with frozen beliefs: we condition on what happened, we don't
     re-estimate form.
+
+    real_team_goals: {team: total REAL team goals} from the results table — the
+    correct baseline for the remaining-goals subtraction. The scorer-credited
+    sum undercounts it whenever a team goal carries no scorer credit (an
+    opponent's own goal), leaving a phantom goal to re-distribute in every
+    simulation even for an eliminated team (Haaland kept a 5% Golden Boot
+    chance after Norway's exit that way). Falls back to the credited sum.
     """
     rng = np.random.default_rng(seed)
     n = len(goal_samples)
@@ -304,7 +311,7 @@ def allocate_goals_live(goal_samples, weights, real_by_team, seed=26):
         probs = probs / probs.sum() if probs.sum() else probs
         real = {k: v for k, v in (real_by_team.get(team) or {}).items()}
         real_norm = {_norm_name(k): v for k, v in real.items()}
-        team_real = sum(real.values())
+        team_real = max(sum(real.values()), (real_team_goals or {}).get(team, 0))
         G = goal_samples[team].to_numpy()
         rem = np.clip(G - team_real, 0, None)
         counts = np.zeros((n, len(probs)), dtype=np.int16)

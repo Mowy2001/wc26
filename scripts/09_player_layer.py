@@ -32,10 +32,18 @@ wc = gs[(gs["date"] >= "2026-06-11") & (gs["date"] <= "2026-07-19")
         & (~gs["own_goal"].astype(bool)) & (gs["team"].isin(teams))].dropna(subset=["scorer"])
 real_by_team = {t: g["scorer"].value_counts().to_dict() for t, g in wc.groupby("team")}
 n_real = int(wc.shape[0])
+# real TEAM totals from results (baseline for remaining-goals; catches own goals)
+from wc26.data import load_results, wc2026_fixtures
+_pl = wc2026_fixtures(load_results()).dropna(subset=["home_score"])
+real_team_goals = {tm: 0 for tm in teams}
+for r in _pl.itertuples(index=False):
+    for tm, gg in ((r.home_team, r.home_score), (r.away_team, r.away_score)):
+        if tm in real_team_goals:
+            real_team_goals[tm] += int(gg)
 
 t0 = time.time()
 if n_real:
-    players = allocate_goals_live(goal_samples, weights, real_by_team)["players"]
+    players = allocate_goals_live(goal_samples, weights, real_by_team, real_team_goals)["players"]
     print(f"LIVE Golden Boot: {n_real} real goals credited so far")
 else:
     players = allocate_goals(goal_samples, weights)["players"]
