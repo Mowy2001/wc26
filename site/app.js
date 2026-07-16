@@ -475,7 +475,13 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     if ($("fc-rounds") && s.rounds) {
       const RH = ["R32", "R16", "QF", "SF", "Final", "Champ"];
       const heatc = (p) => { const a = Math.min(0.85, p * 1.15); return `background: rgba(74, 222, 128, ${a.toFixed(3)}); color: ${a > 0.45 ? "#07101f" : "var(--text)"}`; };
-      const rr = Object.entries(s.rounds).sort((a, b) => b[1][5] - a[1][5]);
+      // deepest run first: compare champion odds, then final, SF, QF, R16, R32 —
+      // sorting on the title column alone collapses once eliminations set most
+      // teams to 0 and the tail ordering turns arbitrary. Alphabetical tie-break.
+      const rr = Object.entries(s.rounds).sort((a, b) => {
+        for (let i = 5; i >= 0; i--) { const d = b[1][i] - a[1][i]; if (Math.abs(d) > 1e-9) return d; }
+        return a[0] < b[0] ? -1 : 1;
+      });
       $("fc-rounds").innerHTML =
         `<thead><tr><th>Team</th>${RH.map((h) => `<th>${h}</th>`).join("")}</tr></thead><tbody>` +
         rr.map(([t, v]) => { const pr = prev && prev.rounds ? prev.rounds[t] : null;
