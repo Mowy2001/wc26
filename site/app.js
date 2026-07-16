@@ -641,7 +641,7 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     }).join("");
     // the model-vs-market comparison rides the same clock: our title-odds journey
     // (at this match) against the live market line.
-    if (typeof renderMarket === "function") renderMarket(s.champion);
+    if (typeof renderMarket === "function") renderMarket(s.champion, k >= N ? null : s.date);
   };
   const go = (k) => render(Math.max(0, Math.min(N, k)));
   // bracket Model / Sandbox toggle + reset
@@ -755,23 +755,32 @@ if (WC26.team_drivers && $("drivers-board")) {
 // Slider-driven: the model side is P(champion) at the current slider snapshot; the
 // market side is the LIVE de-vigged outright (or the frozen 11-Jun BetMGM line as a
 // fallback). champMap = {team: P_champion} for the chosen snapshot, null = current.
-function renderMarket(champMap) {
+function renderMarket(champMap, asofDate) {
   if (!$("market-chart")) return;
-  const liveMkt = WC26.market_now && WC26.market_now.outright;
-  const mkt = liveMkt || WC26.betmgm_shin || {};
+  // The market line follows the slider too: use the odds snapshot closest to
+  // (not after) the slider's date, so scrubbing back shows the teams that were
+  // STILL ALIVE then, with the prices of that day — bookmakers delist eliminated
+  // nations, so filtering on today's board would erase history.
+  const liveMkt = (WC26.market_now && WC26.market_now.outright) || WC26.betmgm_shin || {};
+  let mkt = liveMkt;
+  if (asofDate && WC26.market_hist && WC26.market_hist.length) {
+    const upto = WC26.market_hist.filter((h) => h.t.slice(0, 10) <= asofDate);
+    mkt = upto.length ? upto[upto.length - 1].o : (WC26.betmgm_shin || {});
+  }
   const mktEve = WC26.betmgm_shin || {};   // market on the tournament eve (11 Jun)
   const modEve = WC26.baseline_eve || {};  // our own baseline on the eve (11 Jun)
   const modelP = (t) => (champMap && champMap[t.team] != null) ? champMap[t.team] : t.P_champion;
   const rows = WC26.teams
-    .filter((t) => mkt[t.team] != null)
+    .filter((t) => modelP(t) >= 0.001 || (mkt[t.team] || 0) >= 0.001)
     .map((t) => { const m = modelP(t); return {
-      team: t.team, model: m, market: mkt[t.team], gap: m - mkt[t.team],
+      team: t.team, model: m, market: mkt[t.team] != null ? mkt[t.team] : null,
+      gap: mkt[t.team] != null ? m - mkt[t.team] : 0,
       dModel: modEve[t.team] != null ? m - modEve[t.team].P_champion : null,
-      dMarket: mktEve[t.team] != null ? mkt[t.team] - mktEve[t.team] : null,
+      dMarket: mktEve[t.team] != null && mkt[t.team] != null ? mkt[t.team] - mktEve[t.team] : null,
     }; })
     .sort((a, b) => b.model - a.model)
     .slice(0, 20);
-  const max = Math.max(...rows.flatMap((r) => [r.model, r.market]));
+  const max = Math.max(...rows.flatMap((r) => [r.model, r.market || 0]));
   // flag a divergence when the model and market disagree by >= 5 percentage points
   const BIG = 0.05;
   const gapChip = (g) => {
@@ -792,8 +801,8 @@ function renderMarket(champMap) {
       <div class="pair-bars">
         <div class="pair-bar"><div class="pair-track"><div class="pair-fill model" style="width:${(100 * r.model) / max}%"></div></div>
           <div class="pair-label">model ${pct(r.model)} ${mv(r.dModel)}</div></div>
-        <div class="pair-bar"><div class="pair-track"><div class="pair-fill market" style="width:${(100 * r.market) / max}%"></div></div>
-          <div class="pair-label">market ${pct(r.market)} ${mv(r.dMarket)}</div></div>
+        <div class="pair-bar"><div class="pair-track"><div class="pair-fill market" style="width:${(100 * (r.market || 0)) / max}%"></div></div>
+          <div class="pair-label">${r.market != null ? `market ${pct(r.market)} ${mv(r.dMarket)}` : `<span title="no archived market quote for this date">market —</span>`}</div></div>
       </div>
     </div>`).join("");
   // headline the two sharpest disagreements
