@@ -14,6 +14,7 @@ below keep their own licenses.
 | `external/squads_wc2026.csv` | 2026 squads (player layer) | Wikipedia squad pages |
 | `external/altitude.json` | venue + habitual-altitude metres (altitude venue tilt **and** altitude-in-Elo correction) | public elevation data |
 | `external/geocode.json` | venue coordinates | public geocoding |
+| `external/schedule_2026.csv` | per-match kickoff time (UTC), for the exact chronological order of the site's replay slider and per-match Golden Boot crediting | published 2026 fixture list (fixturedownload.com) |
 
 ## Model lab — feeds **archived / rejected / shadow** experiments only
 

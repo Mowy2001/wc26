@@ -1,0 +1,105 @@
+match,kickoff,home,away
+1,2026-06-11T19:00:00Z,Mexico,South Africa
+2,2026-06-12T02:00:00Z,South Korea,Czech Republic
+3,2026-06-12T19:00:00Z,Canada,Bosnia and Herzegovina
+4,2026-06-13T01:00:00Z,United States,Paraguay
+8,2026-06-13T19:00:00Z,Qatar,Switzerland
+7,2026-06-13T22:00:00Z,Brazil,Morocco
+5,2026-06-14T01:00:00Z,Haiti,Scotland
+6,2026-06-14T04:00:00Z,Australia,Turkey
+10,2026-06-14T17:00:00Z,Germany,Curaçao
+11,2026-06-14T20:00:00Z,Netherlands,Japan
+9,2026-06-14T23:00:00Z,Ivory Coast,Ecuador
+12,2026-06-15T02:00:00Z,Sweden,Tunisia
+14,2026-06-15T16:00:00Z,Spain,Cape Verde
+16,2026-06-15T19:00:00Z,Belgium,Egypt
+13,2026-06-15T22:00:00Z,Saudi Arabia,Uruguay
+15,2026-06-16T01:00:00Z,Iran,New Zealand
+17,2026-06-16T19:00:00Z,France,Senegal
+18,2026-06-16T22:00:00Z,Iraq,Norway
+19,2026-06-17T01:00:00Z,Argentina,Algeria
+20,2026-06-17T04:00:00Z,Austria,Jordan
+23,2026-06-17T17:00:00Z,Portugal,DR Congo
+22,2026-06-17T20:00:00Z,England,Croatia
+21,2026-06-17T23:00:00Z,Ghana,Panama
+24,2026-06-18T02:00:00Z,Uzbekistan,Colombia
+25,2026-06-18T16:00:00Z,Czech Republic,South Africa
+26,2026-06-18T19:00:00Z,Switzerland,Bosnia and Herzegovina
+27,2026-06-18T22:00:00Z,Canada,Qatar
+28,2026-06-19T01:00:00Z,Mexico,South Korea
+32,2026-06-19T19:00:00Z,United States,Australia
+30,2026-06-19T22:00:00Z,Scotland,Morocco
+29,2026-06-20T00:30:00Z,Brazil,Haiti
+31,2026-06-20T03:00:00Z,Turkey,Paraguay
+35,2026-06-20T17:00:00Z,Netherlands,Sweden
+33,2026-06-20T20:00:00Z,Germany,Ivory Coast
+34,2026-06-21T00:00:00Z,Ecuador,Curaçao
+36,2026-06-21T04:00:00Z,Tunisia,Japan
+38,2026-06-21T16:00:00Z,Spain,Saudi Arabia
+39,2026-06-21T19:00:00Z,Belgium,Iran
+37,2026-06-21T22:00:00Z,Uruguay,Cape Verde
+40,2026-06-22T01:00:00Z,New Zealand,Egypt
+43,2026-06-22T17:00:00Z,Argentina,Austria
+42,2026-06-22T21:00:00Z,France,Iraq
+41,2026-06-23T00:00:00Z,Norway,Senegal
+44,2026-06-23T03:00:00Z,Jordan,Algeria
+47,2026-06-23T17:00:00Z,Portugal,Uzbekistan
+45,2026-06-23T20:00:00Z,England,Ghana
+46,2026-06-23T23:00:00Z,Panama,Croatia
+48,2026-06-24T02:00:00Z,Colombia,DR Congo
+51,2026-06-24T19:00:00Z,Switzerland,Canada
+52,2026-06-24T19:00:00Z,Bosnia and Herzegovina,Qatar
+49,2026-06-24T22:00:00Z,Scotland,Brazil
+50,2026-06-24T22:00:00Z,Morocco,Haiti
+53,2026-06-25T01:00:00Z,Czech Republic,Mexico
+54,2026-06-25T01:00:00Z,South Africa,South Korea
+55,2026-06-25T20:00:00Z,Curaçao,Ivory Coast
+56,2026-06-25T20:00:00Z,Ecuador,Germany
+57,2026-06-25T23:00:00Z,Japan,Sweden
+58,2026-06-25T23:00:00Z,Tunisia,Netherlands
+59,2026-06-26T02:00:00Z,Turkey,United States
+60,2026-06-26T02:00:00Z,Paraguay,Australia
+61,2026-06-26T19:00:00Z,Norway,France
+62,2026-06-26T19:00:00Z,Senegal,Iraq
+65,2026-06-27T00:00:00Z,Cape Verde,Saudi Arabia
+66,2026-06-27T00:00:00Z,Uruguay,Spain
+63,2026-06-27T03:00:00Z,Egypt,Iran
+64,2026-06-27T03:00:00Z,New Zealand,Belgium
+67,2026-06-27T21:00:00Z,Panama,England
+68,2026-06-27T21:00:00Z,Croatia,Ghana
+71,2026-06-27T23:30:00Z,Colombia,Portugal
+72,2026-06-27T23:30:00Z,DR Congo,Uzbekistan
+69,2026-06-28T02:00:00Z,Algeria,Austria
+70,2026-06-28T02:00:00Z,Jordan,Argentina
+73,2026-06-28T19:00:00Z,South Africa,Canada
+76,2026-06-29T17:00:00Z,Brazil,Japan
+74,2026-06-29T20:30:00Z,Germany,Paraguay
+75,2026-06-30T01:00:00Z,Netherlands,Morocco
+78,2026-06-30T17:00:00Z,Ivory Coast,Norway
+77,2026-06-30T21:00:00Z,France,Sweden
+79,2026-07-01T02:00:00Z,Mexico,Ecuador
+80,2026-07-01T16:00:00Z,England,DR Congo
+82,2026-07-01T20:00:00Z,Belgium,Senegal
+81,2026-07-02T00:00:00Z,United States,Bosnia and Herzegovina
+84,2026-07-02T19:00:00Z,Spain,Austria
+83,2026-07-02T23:00:00Z,Portugal,Croatia
+85,2026-07-03T03:00:00Z,Switzerland,Algeria
+88,2026-07-03T18:00:00Z,Australia,Egypt
+86,2026-07-03T22:00:00Z,Argentina,Cape Verde
+87,2026-07-04T01:30:00Z,Colombia,Ghana
+90,2026-07-04T17:00:00Z,Canada,Morocco
+89,2026-07-04T21:00:00Z,Paraguay,France
+91,2026-07-05T20:00:00Z,Brazil,Norway
+92,2026-07-06T01:00:00Z,Mexico,England
+93,2026-07-06T19:00:00Z,Portugal,Spain
+94,2026-07-07T00:00:00Z,United States,Belgium
+95,2026-07-07T16:00:00Z,Argentina,Egypt
+96,2026-07-07T20:00:00Z,Switzerland,Colombia
+97,2026-07-09T20:00:00Z,France,Morocco
+98,2026-07-10T19:00:00Z,Spain,Belgium
+99,2026-07-11T21:00:00Z,Norway,England
+100,2026-07-12T01:00:00Z,Argentina,Switzerland
+101,2026-07-14T19:00:00Z,France,Spain
+102,2026-07-15T19:00:00Z,England,Argentina
+103,2026-07-18T21:00:00Z,France,England
+104,2026-07-19T19:00:00Z,Spain,Argentina

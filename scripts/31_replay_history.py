@@ -51,7 +51,18 @@ teams = [t for g in groups.values() for t in g]
 gb_weights = {t: squad_weights(gs, squads, t, pd.Timestamp("2026-06-11"), deb, age_alpha=0.1, drop_to_bucket=False)
               for t in teams}
 
-played = wc2026_fixtures(results).dropna(subset=["home_score", "away_score"]).sort_values("date")
+played = wc2026_fixtures(results).dropna(subset=["home_score", "away_score"]).copy()
+# Exact chronological order from the published schedule (data/external/schedule_2026.csv,
+# kickoff UTC). The results table carries only the date, so same-day matches would
+# otherwise fall in source-file order; kickoff times put every match on the slider in
+# true sequence. Matches sharing a kickoff (the simultaneous final group round) keep a
+# stable order and are credited per match, so a scorer only moves on his own tie's tick.
+_sched = pd.read_csv("data/external/schedule_2026.csv")
+_kick = {frozenset((r.home, r.away)): r.kickoff for r in _sched.itertuples(index=False)}
+played["kickoff"] = [pd.Timestamp(_kick.get(frozenset((r.home_team, r.away_team))))
+                     for r in played.itertuples(index=False)]
+assert played["kickoff"].notna().all(), "schedule_2026.csv is missing a played match"
+played = played.sort_values(["kickoff", "date"], kind="stable").reset_index(drop=True)
 shootouts = load_shootouts()
 
 RP = "outputs/history/replay.json"
@@ -93,9 +104,13 @@ for k in todo:
     for br in res["bracket"].itertuples(index=False):
         bracket.setdefault(int(br.match), {})[br.slot] = {
             "team": br.team, "p": round(float(br.p), 4), "adv": round(float(br.adv), 4)}
-    asof_date = played.iloc[k-1].date if k > 0 else pd.Timestamp("2026-06-10")
-    rg = gs[(gs["date"] >= "2026-06-11") & (gs["date"] <= asof_date)
-            & (~gs["own_goal"].astype(bool)) & (gs["team"].isin(teams))].dropna(subset=["scorer"])
+    # goals credited PER MATCH (only the k matches played by this tick, in kickoff
+    # order), not per calendar day: with several matches a day, a date filter dumped
+    # every scorer onto the day's FIRST tick, so a player appeared to score right
+    # after a match that was not his. Join the goalscorer rows to exactly the played
+    # fixtures instead.
+    rg = gs.merge(sub[["date", "home_team", "away_team"]], on=["date", "home_team", "away_team"], how="inner")
+    rg = rg[(~rg["own_goal"].astype(bool)) & (rg["team"].isin(teams))].dropna(subset=["scorer"])
     real_by_team = {t: g["scorer"].value_counts().to_dict() for t, g in rg.groupby("team")}
     # real TEAM totals as of this snapshot (own goals count for the team,
     # never for a scorer — without this an unattributed goal stays
