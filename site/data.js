@@ -113269,6 +113269,21 @@ const WC26 = {
    ]
   }
  ],
+ "outcome": {
+  "final": {
+   "home": "Spain",
+   "away": "Argentina",
+   "hg": 1,
+   "ag": 0
+  },
+  "third": {
+   "home": "France",
+   "away": "England",
+   "hg": 4,
+   "ag": 6
+  },
+  "champion": "Spain"
+ },
  "dc_params": {
   "beta0": 0.2513911537,
   "beta_home": 0.0931992788,

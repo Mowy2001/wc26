@@ -224,7 +224,46 @@ function showTeam(name) {
 }
 
 /* ---------- next matches: model vs market 1X2 (scripts/42) ---------- */
-if (WC26.next_matches && WC26.next_matches.matches && $("next-board")) {
+/* ---------- retrospective: "how it ended" replaces "next matches" ---------- */
+// once the final is played the whole site switches to its retrospective state
+const OVER = !!WC26.outcome;
+if (OVER && $("next-board")) {
+  const o = WC26.outcome;
+  // final Golden Boot from the last replay snapshot (it carries real goals `g`,
+  // which the top-level golden_boot export does not)
+  const _sn = (WC26.replay && WC26.replay.snapshots) || [];
+  const gb = (_sn.length ? (_sn[_sn.length - 1].golden_boot || []).filter((x) => x.p > 0)[0]
+    : (WC26.golden_boot || [])[0]) || null;
+  const res = (r, won) => {
+    const hw = r.hg > r.ag, aw = r.ag > r.hg;
+    return `<span class="he-team ${won === r.home ? "w" : ""}">${flag(r.home)}${r.home}</span>
+      <span class="he-score">${r.hg}<i>–</i>${r.ag}</span>
+      <span class="he-team away ${won === r.away ? "w" : ""}">${r.away}${flag(r.away)}</span>`;
+  };
+  const finalHint = MD[o.final.home + "|" + o.final.away] || MD[o.final.away + "|" + o.final.home] ? "clickable" : "";
+  $("next-board").className = "he-grid";
+  $("next-board").innerHTML = `
+    <div class="he-card he-final ${finalHint}" data-home="${o.final.home}" data-away="${o.final.away}">
+      <div class="he-lab">🏆 The final</div>
+      <div class="he-row">${res(o.final, o.champion)}</div>
+      <div class="he-note"><b>${o.champion}</b> are world champions — our eve top-two both reached the final${finalHint ? ' · <span class="mh-hint">heatmap ▸</span>' : ""}</div>
+    </div>
+    <div class="he-card">
+      <div class="he-lab">🥉 Third place</div>
+      <div class="he-row">${res(o.third, o.third.hg > o.third.ag ? o.third.home : o.third.away)}</div>
+    </div>
+    ${gb ? `<div class="he-card">
+      <div class="he-lab">👟 Golden Boot</div>
+      <div class="he-gb">${flag(gb.team)}<b>${gb.player}</b> · ${gb.g ?? "-"} goals</div>
+      <div class="he-note">our pre-tournament pick, and the market's</div>
+    </div>` : ""}`;
+  const finalCard = $("next-board").querySelector(".he-card.clickable");
+  if (finalCard) finalCard.addEventListener("click", () => showHeat(o.final.home, o.final.away));
+  const h = document.querySelector("#next h2");
+  if (h) h.innerHTML = `How it ended <span class="sub">the 2026 World Cup, and how the frozen forecast called it</span>`;
+  if ($("next-note")) $("next-note").innerHTML = "";
+}
+if (!OVER && WC26.next_matches && WC26.next_matches.matches && $("next-board")) {
   // a match leaves this board only when its RESULT has been ingested (the data
   // refresh lands the morning after); a game that has merely kicked off stays
   // up, flagged "awaiting result", so it never vanishes into a gap.
@@ -293,27 +332,47 @@ if (WC26.next_matches && WC26.next_matches.matches && $("next-board")) {
 }
 
 /* ---------- live status strip ---------- */
+// where the eventual champion sat in our FROZEN eve forecast (the payoff line)
+const eveRank = (team) => {
+  const be = WC26.baseline_eve || {};
+  const ord = Object.entries(be).sort((a, b) => b[1].P_champion - a[1].P_champion);
+  const i = ord.findIndex(([t]) => t === team);
+  return i < 0 ? null : { rank: i + 1, p: ord[i][1].P_champion };
+};
+
 if ($("live-strip") && WC26.generated) {
-  $("live-strip").insertAdjacentHTML("beforeend", ` · updated ${WC26.generated}`);
+  $("live-strip").insertAdjacentHTML("beforeend",
+    OVER ? ` · tournament complete` : ` · updated ${WC26.generated}`);
 }
 
-/* ---------- hero: giant live champion number + supporting stats ---------- */
+/* ---------- hero: champion (retrospective when over, live otherwise) ---------- */
 {
   const fav = byChamp[0];
   const bt = WC26.backtest;
   const sc = WC26.scoring;
   if ($("hero-leader")) {
-    // only teams still alive chase the leader (an eliminated side at 0% is noise;
-    // by the final there is exactly one challenger left)
-    const chase = byChamp.slice(1, 3).filter((c) => c.P_champion >= 0.001)
-      .map((c) => `${flag(c.team)}${TLA3(c.team)} ${pct(c.P_champion, 0)}`).join("  ·  ");
-    $("hero-leader").innerHTML = `
-      <div class="hc-lab">Most likely champion</div>
-      <div class="hc-flag">${flag(fav.team)}</div>
-      <div class="hc-team">${fav.team}</div>
-      <div class="hc-pct tnum">${(100 * fav.P_champion).toFixed(1)}<span>%</span></div>
-      <div class="hc-chase">then ${chase}</div>
-      ${sc && sc.n ? `<div class="hc-note">running log-loss <b>${sc.log_loss}</b> vs ${sc.uniform} · ${sc.n} games scored</div>` : ""}`;
+    if (OVER) {
+      const champ = WC26.outcome.champion;
+      const er = eveRank(champ);
+      const ordinal = (r) => r === 1 ? "top" : r === 2 ? "2nd" : r === 3 ? "3rd" : r + "th";
+      $("hero-leader").classList.add("hc-won");
+      $("hero-leader").innerHTML = `
+        <div class="hc-lab">🏆 2026 World Champions</div>
+        <div class="hc-flag">${flag(champ)}</div>
+        <div class="hc-team">${champ}</div>
+        ${er ? `<div class="hc-called">our <b>${ordinal(er.rank)} pick</b> on 11 June, at ${pct(er.p, 0)} — and they won it</div>` : ""}
+        ${sc && sc.n ? `<div class="hc-note">final scoreline of the frozen forecast: log-loss <b>${sc.log_loss}</b> vs ${sc.uniform} across all ${sc.n} matches</div>` : ""}`;
+    } else {
+      const chase = byChamp.slice(1, 3).filter((c) => c.P_champion >= 0.001)
+        .map((c) => `${flag(c.team)}${TLA3(c.team)} ${pct(c.P_champion, 0)}`).join("  ·  ");
+      $("hero-leader").innerHTML = `
+        <div class="hc-lab">Most likely champion</div>
+        <div class="hc-flag">${flag(fav.team)}</div>
+        <div class="hc-team">${fav.team}</div>
+        <div class="hc-pct tnum">${(100 * fav.P_champion).toFixed(1)}<span>%</span></div>
+        ${chase ? `<div class="hc-chase">then ${chase}</div>` : ""}
+        ${sc && sc.n ? `<div class="hc-note">running log-loss <b>${sc.log_loss}</b> vs ${sc.uniform} · ${sc.n} games scored</div>` : ""}`;
+    }
   }
   // headline = how the frozen forecast is scoring against reality, if live
   const headline = sc && sc.n

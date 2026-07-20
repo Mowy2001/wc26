@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WC26, Probabilistic World Cup 2026</title>
-<link rel="stylesheet" href="style.css?v=202607201307">
+<link rel="stylesheet" href="style.css?v=202607201322">
 </head>
 <body>
 
@@ -14,12 +14,13 @@
     <div class="hero-grid">
       <div>
         <div class="eyebrow">Open-source · built with AI · public data only</div>
-        <h1>Who wins the<br><em>2026 World Cup?</em></h1>
+        <h1>Who won the<br><em>2026 World Cup?</em></h1>
         <p class="lede">An open-source forecast, built with AI from public data: all 104 matches simulated
-        20,000 times, updated after every match and scored against reality every game.</p>
+        20,000 times and scored against reality, every game, start to finish. The tournament is over —
+        this is the complete record.</p>
         <p class="lede-sub">Under the hood: a proprietary Elo rating for every nation feeds a Dixon-Coles
-        goal model, with two earned adjustments for altitude and fatigue. The ratings are frozen on the eve
-        of the tournament (11 June).</p>
+        goal model, with two earned adjustments for altitude and fatigue. The ratings were frozen on the eve
+        of the tournament (11 June) and never touched again.</p>
         <div class="hero-stats" id="hero-stats"></div>
       </div>
       <div class="hero-champ" id="hero-leader"></div>
@@ -28,12 +29,12 @@
 </header>
 
 <nav class="toc wrap">
-  <span class="toc-group">The race</span>
-  <a href="#next">Next matches</a>
+  <span class="toc-group">The tournament</span>
+  <a href="#next">How it ended</a>
   <a href="#track">How it's doing</a>
   <a href="#reality-ko">Knockouts called</a>
   <a href="#reality-groups">Groups called</a>
-  <a href="#forecast">Live forecast</a>
+  <a href="#forecast">The forecast</a>
   <a href="#market">Model vs market</a>
   <span class="toc-group">Under the hood</span>
   <a href="#idea">How it works</a>
@@ -43,7 +44,7 @@
 
 <main class="wrap">
 
-<div class="act-divider"><span class="act-num">1</span> Tonight's race</div>
+<div class="act-divider"><span class="act-num">1</span> How it ended</div>
 
 <section id="next">
   <h2>Next matches <span class="sub">our model vs the betting market, click a game for the score heatmap</span></h2>
@@ -89,10 +90,10 @@
 
 
 <section id="forecast">
-  <h2>The live forecast</h2>
+  <h2>The forecast, match by match</h2>
   <p class="note" style="margin-top:-4px;margin-bottom:14px">Every frame is a full re-simulation
-  conditioned on the results up to that point (ratings and parameters set before kickoff). Step to the
-  end for today's live picture, or back to watch one result ripple through everything. The control
+  conditioned on the results up to that point (ratings and parameters set before kickoff). Slide to the
+  end for the final picture, or back to watch one result ripple through everything. The control
   repeats above each view so you never have to scroll back up, use the ◀ ▶ buttons or arrow keys
   to move one match at a time. <strong>▲/▼ = change since the previous match.</strong></p>
 
@@ -272,7 +273,7 @@
   </div>
 </footer>
 
-<script src="data.js?v=202607201307"></script>
-<script src="app.js?v=202607201307"></script>
+<script src="data.js?v=202607201322"></script>
+<script src="app.js?v=202607201322"></script>
 </body>
 </html>

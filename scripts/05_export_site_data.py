@@ -108,6 +108,23 @@ try:
     bootstrap = {"B": int(len(bd)), "sd": bd.std().round(4).to_dict()}
 except FileNotFoundError:
     bootstrap = None
+# Tournament outcome, only once the whole thing is played (all 104): powers the
+# site's retrospective "how it ended" state. Final = last fixture, third-place =
+# the one before it (the schedule always closes final, then play-off the day prior).
+try:
+    _rr = pd.read_csv("data/raw/results.csv")
+    _wcp = (_rr[(_rr.tournament == "FIFA World Cup") & (_rr.date >= "2026-06-11")]
+            .dropna(subset=["home_score"]).sort_values("date"))
+    if len(_wcp) >= 104:
+        _fin, _thd = _wcp.iloc[-1], _wcp.iloc[-2]
+        _mkres = lambda r: {"home": r.home_team, "away": r.away_team,
+                            "hg": int(r.home_score), "ag": int(r.away_score)}
+        outcome = {"final": _mkres(_fin), "third": _mkres(_thd),
+                   "champion": _fin.home_team if _fin.home_score > _fin.away_score else _fin.away_team}
+    else:
+        outcome = None
+except FileNotFoundError:
+    outcome = None
 try:
     match_dists = json.load(open("outputs/match_dists.json"))
 except FileNotFoundError:
@@ -197,6 +214,7 @@ data = {
     "debutant_share": 0.173,
     "distinct_scorers": distinct_top,
     "match_dists": match_dists,
+    "outcome": outcome,
     "dc_params": dc_params,
     "ko_venues": ko_venues,
     "city_tilt": city_tilt,
