@@ -28,9 +28,9 @@ played = gfx.dropna(subset=["home_score", "away_score"])
 fixed = {(r.home_team, r.away_team): (int(r.home_score), int(r.away_score))
          for r in played.itertuples(index=False)}
 fixed_ko = wc2026_played_ko(results, load_shootouts())
-print(f"Played: {len(fixed)}/{len(gfx)} group matches, {len(fixed_ko)}/31 knockout ties")
+print(f"Played: {len(fixed)}/{len(gfx)} group matches, {len(fixed_ko)}/32 knockout matches")
 if not fixed and not fixed_ko:
-    print("Nothing played yet — the eve-of-tournament forecast stands.")
+    print("Nothing played yet; the eve-of-tournament forecast stands.")
 
 elo_hist = pd.read_parquet("outputs/elo_history.parquet")
 df = results.dropna(subset=["home_score", "away_score"]).copy()

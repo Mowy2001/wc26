@@ -55,8 +55,8 @@ const venueTag = (city) => {
 };
 
 /* ---------- client-side goal model (exported DC point estimate) ----------
-   Lets the site build the SAME score grid for ANY pairing — sandbox picks
-   included — with the maths of scripts/43: neutral knockout venue, fatigue
+   Lets the site build the SAME score grid for ANY pairing; sandbox picks
+   included; with the maths of scripts/43: neutral knockout venue, fatigue
    tilt in, Dixon-Coles low-score correction. Computed once per pair, cached
    into the MD index so downstream code can't tell it from a precomputed one. */
 const DCP = WC26.dc_params || null;
@@ -103,7 +103,7 @@ function dcDist(home, away, mn) {
 }
 const getDist = (a, b, mn) => MD[a + "|" + b] || MD[b + "|" + a] || (MD[a + "|" + b] = dcDist(a, b, mn));
 // P(a goes through tie `mn` vs b): 90' win + the proportional draw split,
-// venue-aware and DETERMINISTIC — the identical formula the pipeline uses to
+// venue-aware and DETERMINISTIC; the identical formula the pipeline uses to
 // propagate winners, so the quoted favourite is always the team that advances,
 // and the number never wobbles from one slider position to the next.
 const tieShare = (a, b, mn) => {
@@ -158,7 +158,7 @@ function showHeat(home, away) {
     <span style="width:${100 * m.pH}%;background:var(--accent)" title="${home} win ${pct(m.pH, 0)}"></span>
     <span style="width:${100 * m.pD}%;background:var(--muted)" title="draw ${pct(m.pD, 0)}"></span>
     <span style="width:${100 * m.pA}%;background:var(--hot)" title="${away} win ${pct(m.pA, 0)}"></span></div>`;
-  // knockout: the draw can't stand — spell out how extra time + penalties split it and
+  // knockout: the draw can't stand; spell out how extra time + penalties split it and
   // who ends up going through the tie (same maths as the hatched slice on the fixture bar).
   const isKO = m.group === "Knockout";
   const dH = m.pD * (m.pH / (m.pH + m.pA || 1)), dA = m.pD - dH, adH = m.pH + dH;
@@ -246,11 +246,7 @@ if (OVER && $("next-board")) {
     <div class="he-card he-final ${finalHint}" data-home="${o.final.home}" data-away="${o.final.away}">
       <div class="he-lab">🏆 The final</div>
       <div class="he-row">${res(o.final, o.champion)}</div>
-      <div class="he-note"><b>${o.champion}</b> are world champions — our eve top-two both reached the final${finalHint ? ' · <span class="mh-hint">heatmap ▸</span>' : ""}</div>
-    </div>
-    <div class="he-card">
-      <div class="he-lab">🥉 Third place</div>
-      <div class="he-row">${res(o.third, o.third.hg > o.third.ag ? o.third.home : o.third.away)}</div>
+      <div class="he-note"><b>${o.champion}</b> are world champions; our eve top-two both reached the final${finalHint ? ' · <span class="mh-hint">heatmap ▸</span>' : ""}</div>
     </div>
     ${gb ? `<div class="he-card">
       <div class="he-lab">👟 Golden Boot</div>
@@ -273,7 +269,7 @@ if (!OVER && WC26.next_matches && WC26.next_matches.matches && $("next-board")) 
   const nm = WC26.next_matches.matches.filter((m) => !playedPair.has(m.home + "|" + m.away));
   // For a knockout tie the draw doesn't stand: extra time + penalties split it in
   // proportion to each side's 90-minute win chance. We keep the same 1X2 bar but hatch
-  // (zebra) the draw slice — its home-tinted / away-tinted halves so the colour change
+  // (zebra) the draw slice; its home-tinted / away-tinted halves so the colour change
   // lands exactly at each side's chance of going through the tie.
   const x123 = (p, ko) => {
     const seg = (w, c, lab) => w > 0.001
@@ -302,8 +298,8 @@ if (!OVER && WC26.next_matches && WC26.next_matches.matches && $("next-board")) 
     // small numeric gap yet a real disagreement, e.g. model backs the away side, market the home).
     const favOf = (p) => (p.pH >= p.pD && p.pH >= p.pA) ? "H" : (p.pA >= p.pD ? "A" : "D");
     // in a knockout what matters is WHO GOES THROUGH, so the flag fires only when
-    // model and market back different advancers (a big 1X2 gap on the same side —
-    // e.g. FRA-MOR 45% vs 60%, both France — is a nuance, not a disagreement).
+    // model and market back different advancers (a big 1X2 gap on the same side ;
+    // e.g. FRA-MOR 45% vs 60%, both France; is a nuance, not a disagreement).
     const advH = (p) => p.pH + p.pD * (p.pH / (p.pH + p.pA || 1));
     const flip = m.ko ? (advH(m.model) >= 0.5) !== (advH(m.market) >= 0.5)
                       : (favOf(m.model) !== favOf(m.market) || gap >= 0.10);
@@ -360,7 +356,7 @@ if ($("live-strip") && WC26.generated) {
         <div class="hc-lab">🏆 2026 World Champions</div>
         <div class="hc-flag">${flag(champ)}</div>
         <div class="hc-team">${champ}</div>
-        ${er ? `<div class="hc-called">our <b>${ordinal(er.rank)} pick</b> on 11 June, at ${pct(er.p, 0)} — and they won it</div>` : ""}
+        ${er ? `<div class="hc-called">our <b>${ordinal(er.rank)} pick</b> to lift the trophy, at ${pct(er.p, 0)} on 11 June</div>` : ""}
         ${sc && sc.n ? `<div class="hc-note">final scoreline of the frozen forecast: log-loss <b>${sc.log_loss}</b> vs ${sc.uniform} across all ${sc.n} matches</div>` : ""}`;
     } else {
       const chase = byChamp.slice(1, 3).filter((c) => c.P_champion >= 0.001)
@@ -534,7 +530,7 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     if ($("fc-rounds") && s.rounds) {
       const RH = ["R32", "R16", "QF", "SF", "Final", "Champ"];
       const heatc = (p) => { const a = Math.min(0.85, p * 1.15); return `background: rgba(74, 222, 128, ${a.toFixed(3)}); color: ${a > 0.45 ? "#07101f" : "var(--text)"}`; };
-      // deepest run first: compare champion odds, then final, SF, QF, R16, R32 —
+      // deepest run first: compare champion odds, then final, SF, QF, R16, R32 ;
       // sorting on the title column alone collapses once eliminations set most
       // teams to 0 and the tail ordering turns arbitrary. Alphabetical tie-break.
       const rr = Object.entries(s.rounds).sort((a, b) => {
@@ -588,7 +584,7 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
       } else {
         // the bar is "who goes through if they meet": the venue-aware goal model,
         // computed client-side with the same formula the pipeline uses to propagate
-        // winners — deterministic (no Monte Carlo wobble across slider positions)
+        // winners; deterministic (no Monte Carlo wobble across slider positions)
         // and consistent by construction with the next round's occupant.
         const hh = tieShare(a, b2, mn);
         share[mn] = hh != null ? hh : eloP(a, b2);
@@ -650,7 +646,7 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
 
     // groups & best thirds are group-stage facts, freeze them once the group stage is
     // over; the bracket, round-by-round and Golden Boot keep moving through the knockouts.
-    // groups freeze at GEK; past it, drop the ▲▼ badges too — they'd forever
+    // groups freeze at GEK; past it, drop the ▲▼ badges too; they'd forever
     // replay the last matchday's moves (DR Congo's ▲ stuck on screen for weeks).
     const gk = Math.min(k, GEK), sg = snaps[gk], sgPrev = (gk > 0 && k <= GEK) ? snaps[gk - 1] : null;
     // best thirds (8 of 12 advance), ranked by P(advance as a best third)
@@ -824,7 +820,7 @@ function renderMarket(champMap, asofDate) {
   if (!$("market-chart")) return;
   // The market line follows the slider too: use the odds snapshot closest to
   // (not after) the slider's date, so scrubbing back shows the teams that were
-  // STILL ALIVE then, with the prices of that day — bookmakers delist eliminated
+  // STILL ALIVE then, with the prices of that day; bookmakers delist eliminated
   // nations, so filtering on today's board would erase history.
   const liveMkt = (WC26.market_now && WC26.market_now.outright) || WC26.betmgm_shin || {};
   let mkt = liveMkt;
@@ -867,7 +863,7 @@ function renderMarket(champMap, asofDate) {
         <div class="pair-bar"><div class="pair-track"><div class="pair-fill model" style="width:${(100 * r.model) / max}%"></div></div>
           <div class="pair-label">model ${pct(r.model)} ${mv(r.dModel)}</div></div>
         <div class="pair-bar"><div class="pair-track"><div class="pair-fill market" style="width:${(100 * (r.market || 0)) / max}%"></div></div>
-          <div class="pair-label">${r.market != null ? `market ${pct(r.market)} ${mv(r.dMarket)}` : `<span title="no archived market quote for this date">market —</span>`}</div></div>
+          <div class="pair-label">${r.market != null ? `market ${pct(r.market)} ${mv(r.dMarket)}` : `<span title="no archived market quote for this date">market n/a</span>`}</div></div>
       </div>
     </div>`).join("");
   // headline the two sharpest disagreements
@@ -968,7 +964,7 @@ if (WC26.replay && WC26.replay.snapshots && WC26.standings && $("rc-groups")) {
 
 /* ---------- knockouts graded: our bracket vs reality ---------- */
 if (WC26.bracket_dists && $("rc-ko")) {
-  const roundName = (mn) => mn <= 88 ? "Round of 32" : mn <= 96 ? "Round of 16" : mn <= 100 ? "Quarter-finals" : mn <= 102 ? "Semi-finals" : "Final";
+  const roundName = (mn) => mn === 104 ? "Final" : mn === 103 ? "Third place" : mn <= 88 ? "Round of 32" : mn <= 96 ? "Round of 16" : mn <= 100 ? "Quarter-finals" : "Semi-finals";
   // newest phase first, and newest tie first within it
   const played = WC26.bracket_dists.filter((m) => m.winner).sort((a, b) => b.match - a.match);
   if (played.length) {
@@ -1145,8 +1141,8 @@ if (WC26.altitude && WC26.ablations && WC26.ablations.no_altitude && $("altitude
         background:${x.d > 0 ? "linear-gradient(90deg, var(--accent2), var(--accent))" : "#8f5161"}"></i></div>
       <span class="num">${x.d > 0 ? "+" : ""}${(100 * x.d).toFixed(1)}pp</span></div>`).join("");
   $("altitude-note").innerHTML =
-    `Our most decisive trial (t=${m.t_paired}). Only two 2026 venues sit high — Mexico City (2,240 m)
-     and Zapopan — so the tilt bites there and nowhere else: <strong>Mexico gains</strong> (that thin
+    `Our most decisive trial (t=${m.t_paired}). Only two 2026 venues sit high (Mexico City at 2,240 m,
+     and Zapopan), so the tilt bites there and nowhere else: <strong>Mexico gains</strong> (that thin
      air is what its squad trains in), sea-level sides whose road runs through those venues
      <strong>pay</strong> (England's likely knockout path did), and everyone else shifts a little
      as rivals strengthen or weaken around them.`;
@@ -1253,10 +1249,15 @@ if (WC26.scoring && WC26.scoring.n && $("track-head")) {
     // then the latest group games.
     const koN = (WC26.bracket_dists || []).filter((m) => m.winner)
       .sort((a, b) => b.match - a.match)
-      .map((m) => { const [h, a] = m.actual; return {
-        home: m.home, away: m.away, score: `${h}-${a}`,
-        pa: h > a ? m.pH : (h < a ? m.pA : m.pD),
-        winner: m.winner, pred: m.pH >= m.pA ? m.home : m.away }; });  // model's pick to go through
+      .map((m) => { const [h, a] = m.actual;
+        // for a knockout, the meaningful number is the chance the model gave the
+        // side that ACTUALLY went through (90' win + the proportional draw split),
+        // not the bare 90' outcome (which sold the tight final short at 37%).
+        const advH = m.pH + m.pD * (m.pH / (m.pH + m.pA || 1));
+        return {
+          home: m.home, away: m.away, score: `${h}-${a}`,
+          pa: m.winner === m.home ? advH : 1 - advH,
+          winner: m.winner, pred: m.pH >= m.pA ? m.home : m.away }; });  // model's pick to go through
     // s.matches now spans group + KO; KO ties already come from bracket_dists above
     // (with the model's pick + who went through), so drop them here to avoid doubles.
     const koPairs = new Set(koN.map((m) => m.home + "|" + m.away).concat(koN.map((m) => m.away + "|" + m.home)));

@@ -14,7 +14,7 @@ import sys
 sys.path.insert(0, "src")
 import numpy as np
 import pandas as pd
-from wc26.data import load_results, load_shootouts, wc2026_played_ko
+from wc26.data import load_results, load_shootouts, wc2026_fixtures, wc2026_played_ko
 from wc26.dixon_coles import DixonColes
 from wc26.elo import ratings_asof
 from wc26.simulate import (FINAL_MATCH, KO_CITY, QF_MATCHES, R16_MATCHES,
@@ -126,6 +126,42 @@ for mn, g in bk.groupby("match"):
         entry["market"] = {"pH": mkt["pA"] if flip else mkt["pH"], "pD": mkt["pD"],
                            "pA": mkt["pH"] if flip else mkt["pA"], "n_books": mkt["n_books"]}
     out.append(entry)
+
+# Third-place play-off (match 103): not part of the bracket tree, so it is not in
+# bracket.csv, but it IS a graded knockout match. Add it from the schedule (the
+# second-to-last WC fixture) so it shows up in "Called it" and "Last matches".
+_wc = wc2026_fixtures(results).dropna(subset=["home_score"]).sort_values("date")
+if len(_wc) >= 104:
+    tp = _wc.iloc[-2]
+    home, away = tp.home_team, tp.away_team
+    if home in elo and away in elo:
+        ven, city = VENUE.get(103, ""), KO_CITY.get(103)
+        h, aw = (away, home) if away == ven else (home, away)
+        lh, la = model.predict_lambdas(elo[h], elo[aw], neutral=(h != ven))
+        d = float(fat.get(h, 0.0) - fat.get(aw, 0.0)
+                  + (ct.get((h, city), 0.0) - ct.get((aw, city), 0.0) if city else 0.0))
+        lh, la = lh * np.exp(d), la * np.exp(-d)
+        if h != home:
+            lh, la = la, lh
+        grid = clip_matrix(model.score_matrix(lh, la))
+        pH, pD, pA = model.outcome_probs(lh, la)
+        flat = sorted(((i, j, grid[i][j]) for i in range(CLIP + 1) for j in range(CLIP + 1)),
+                      key=lambda x: -x[2])[:3]
+        e103 = {"match": 103, "home": home, "away": away, "ko": True,
+                "lh": round(float(lh), 2), "la": round(float(la), 2),
+                "pH": round(pH, 4), "pD": round(pD, 4), "pA": round(pA, 4),
+                "grid": grid, "top": [{"h": i, "a": j, "p": round(p, 4)} for i, j, p in flat]}
+        pk = played_ko.get(frozenset((home, away)))
+        if pk:
+            winner, goals = pk
+            e103["actual"] = [int(goals.get(home, 0)), int(goals.get(away, 0))]
+            e103["winner"] = winner
+        mkt = market_pre.get(frozenset((home, away)))
+        if mkt:
+            flip = mkt["home"] != home
+            e103["market"] = {"pH": mkt["pA"] if flip else mkt["pH"], "pD": mkt["pD"],
+                              "pA": mkt["pH"] if flip else mkt["pA"], "n_books": mkt["n_books"]}
+        out.append(e103)
 
 json.dump(out, open("outputs/bracket_dists.json", "w"), indent=1)
 print(f"outputs/bracket_dists.json: {len(out)} bracket-tie heatmaps")

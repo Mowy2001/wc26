@@ -1,5 +1,5 @@
 :root {
-  /* Direction B — "The Living Forecast": dark broadcast / stadium night */
+  /* Direction B; "The Living Forecast": dark broadcast / stadium night */
   --bg: #070b14;
   --bg2: #0c1322;
   --card: #0e1626;
@@ -96,7 +96,7 @@ body {
 .stat .v .flag { font-size: 1.3rem; margin-right: 6px; }
 .stat .v .vs { color: var(--muted); font-size: .95rem; font-weight: 600; }
 .stat .k { font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
-/* the live-record headline stat — visually first and emphasised */
+/* the live-record headline stat; visually first and emphasised */
 .stat.headline {
   background: linear-gradient(135deg, rgba(56,189,248,.16), rgba(74,222,128,.14));
   border-color: var(--accent);
@@ -411,7 +411,7 @@ details.tech[open] summary::before { content: "\25BE "; }
 .fc-step:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
 .fc-step:disabled { opacity: .35; cursor: default; }
 /* fixed-width label so the slider track length never changes between matches
-   (the detail text — "Canada 6-0 Qatar" etc. — varies; clamp it, don't let it
+   (the detail text; "Canada 6-0 Qatar" etc.; varies; clamp it, don't let it
    resize the track) */
 .fc-bar .fc-lab { display: flex; flex-direction: column; align-items: flex-end;
   font-size: .82rem; color: var(--accent2); font-weight: 700; white-space: nowrap;
@@ -585,7 +585,7 @@ details.tech[open] summary::before { content: "\25BE "; }
 .ko-row.ok .ko-prob { color: var(--accent); }
 .ko-row.no .ko-prob { color: var(--hot); }
 
-/* Called it? — group scorecard as a full-width grid of per-group cards */
+/* Called it?; group scorecard as a full-width grid of per-group cards */
 #rc-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(232px, 1fr)); gap: 12px; }
 .gc-card { background: var(--card); border: 1px solid var(--card-edge); border-radius: 11px; padding: 10px 13px; }
 .gc-head { display: flex; justify-content: space-between; align-items: baseline; font-weight: 800;
@@ -780,15 +780,15 @@ details.tech[open] summary::before { content: "\25BE "; }
 /* ---------- classic left-to-right bracket + sandbox (v3) ---------- */
 /* one column per round; each column spreads its ties evenly over the full height, so a
    tie lines up vertically with the midpoint of the two ties that feed it (tree-ordered
-   in JS) — reading left to right, winners flow into the next column. */
+   in JS); reading left to right, winners flow into the next column. */
 #fc-bracket.bracket-scroll { display: flex; align-items: stretch; justify-content: flex-start;
   gap: 2px; width: 100%; max-width: 100%; min-width: 0;
   overflow-x: auto; overflow-y: visible; padding: 4px 7px 10px; }
-/* on desktop the whole bracket fits, so don't clip at all — no shaved edge borders.
+/* on desktop the whole bracket fits, so don't clip at all; no shaved edge borders.
    only narrow screens keep the horizontal scroll. */
 @media (min-width: 900px) { #fc-bracket.bracket-scroll { overflow-x: visible; } }
 /* override the earlier (dead) .bk-col rule's min-width:116 so columns are only as wide as
-   their tie — otherwise the nine columns total ~1060px and the far-right R32 is cut off. */
+   their tie; otherwise the nine columns total ~1060px and the far-right R32 is cut off. */
 .bk-col { display: flex; flex-direction: column; flex: 0 0 auto; min-width: 0;
   justify-content: flex-start; }
 .bk-col > .bk-rlab { margin-bottom: 10px; }
@@ -816,7 +816,7 @@ details.tech[open] summary::before { content: "\25BE "; }
 .tie.has-heat:hover { border-color: var(--accent2); }
 /* inset glow (not outward) so a picked card at the container edge isn't clipped by overflow */
 .tie.picked { border-color: var(--violet); box-shadow: inset 0 0 0 1px rgba(183,148,255,.45); }
-.tie.played { border-color: rgba(74,222,128,.35); }  /* result already in — locked */
+.tie.played { border-color: rgba(74,222,128,.35); }  /* result already in; locked */
 .tie.played .tie-side:not(.win) { opacity: .5; }
 .tie.empty { opacity: .35; display: flex; align-items: center; justify-content: center; color: var(--muted); }
 .tie-side { display: flex; justify-content: space-between; align-items: center; font-size: .78rem; font-weight: 700; color: var(--muted); padding: 1px 3px; border-radius: 5px; }
