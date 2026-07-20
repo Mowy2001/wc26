@@ -356,7 +356,7 @@ if ($("live-strip") && WC26.generated) {
         <div class="hc-lab">🏆 2026 World Champions</div>
         <div class="hc-flag">${flag(champ)}</div>
         <div class="hc-team">${champ}</div>
-        ${er ? `<div class="hc-called">our <b>${ordinal(er.rank)} pick</b> to lift the trophy, at ${pct(er.p, 0)} on 11 June</div>` : ""}
+        ${er ? `<div class="hc-called">our <b>${ordinal(er.rank)} pick</b> to lift the trophy,<br>at ${pct(er.p, 0)} on 11 June</div>` : ""}
         ${sc && sc.n ? `<div class="hc-note">final scoreline of the frozen forecast: log-loss <b>${sc.log_loss}</b> vs ${sc.uniform} across all ${sc.n} matches</div>` : ""}`;
     } else {
       const chase = byChamp.slice(1, 3).filter((c) => c.P_champion >= 0.001)
@@ -540,7 +540,8 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
       $("fc-rounds").innerHTML =
         `<thead><tr><th>Team</th>${RH.map((h) => `<th>${h}</th>`).join("")}</tr></thead><tbody>` +
         rr.map(([t, v]) => { const pr = prev && prev.rounds ? prev.rounds[t] : null;
-          return `<tr><td class="tm-click" data-team="${t}" title="click for ${t}'s road">${flag(t)}${TLA3(t)}</td>` +
+          const isChamp = OVER && k >= N && WC26.outcome && t === WC26.outcome.champion;
+          return `<tr class="${isChamp ? "rr-champ" : ""}"><td class="tm-click" data-team="${t}" title="click for ${t}'s road">${isChamp ? "🏆 " : ""}${flag(t)}${TLA3(t)}</td>` +
           v.map((p, i) => `<td class="heat" style="${heatc(p)}">${p >= 0.005 ? pct(p, 0) : ""}${(i === 5 && pr) ? delta(p, pr[5], 0) : ""}</td>`).join("") + `</tr>`; }).join("") +
         `</tbody>`;
       $("fc-rounds").querySelectorAll(".tm-click").forEach((c) => c.addEventListener("click", () => showTeam(c.dataset.team)));
@@ -616,10 +617,13 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
         <div class="tow" title="head-to-head, who wins the tie">${heat ? '<span class="tow-heat">⊞</span>' : ""}<i class="a" style="width:${100 * pa}%"></i><i class="b" style="width:${100 * (1 - pa)}%"></i></div>
         ${side(b, 1 - pa)}</div>`;
     };
-    const apex = `<div class="bk-apex"><div class="bk-trophy">🏆</div>
-      <div class="bk-champ">${flag(champTeam)}${champTeam}${!sandbox ? ` <b>${pct(champShare, 0)}</b>` : ""}</div>
-      <div class="bk-champ-lab">${sandbox ? "your champion" : "wins the most-likely final"}</div>
-      <div class="bk-bprob" title="chance this entire bracket plays out exactly as drawn, every tie chained together">${sandbox ? "your" : "modal"} bracket happens: <b>${fmtProb(bracketProb)}</b></div></div>`;
+    // at the final tick of a completed tournament the bracket is the real one:
+    // crown the actual champion instead of quoting a "most-likely" share.
+    const crowned = OVER && k >= N && !sandbox;
+    const apex = `<div class="bk-apex${crowned ? " bk-crowned" : ""}"><div class="bk-trophy">🏆</div>
+      <div class="bk-champ">${flag(champTeam)}${champTeam}${!sandbox && !crowned ? ` <b>${pct(champShare, 0)}</b>` : ""}</div>
+      <div class="bk-champ-lab">${sandbox ? "your champion" : crowned ? "world champions" : "wins the most-likely final"}</div>
+      ${crowned ? "" : `<div class="bk-bprob" title="chance this entire bracket plays out exactly as drawn, every tie chained together">${sandbox ? "your" : "modal"} bracket happens: <b>${fmtProb(bracketProb)}</b></div>`}</div>`;
     const col = (lab, nums, side) => `<div class="bk-col bk-${side}"><div class="bk-rlab">${lab}</div><div class="ties">${nums.map(card).join("")}</div></div>`;
     const leftHTML = HALF_L.map((nums, i) => col(RLAB[i], nums, "l")).join("");
     // right half rendered centre → edge, so SF sits next to the final and R32 at the far right
@@ -667,9 +671,10 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     const gb = (s.golden_boot || []).filter((x) => x.p >= 0.001);
     const pgb = {}; (prev && prev.golden_boot || []).forEach((x) => (pgb[x.player] = x.p));
     const gmax = gb[0] ? gb[0].p : 1;
-    $("fc-gb").innerHTML = gb.slice(0, 10).map((p) => `
-      <div class="bar-row">
-        <div class="who">${flag(p.team)}${p.player}${p.e != null ? `<span class="gb-goals"><b>${p.g ?? 0}</b> scored · <b>${p.e.toFixed(1)}</b> expected at the end</span>` : ""}</div>
+    const gbDecided = OVER && k >= N;   // final tick: the top scorer is settled
+    $("fc-gb").innerHTML = gb.slice(0, 10).map((p, idx) => `
+      <div class="bar-row${gbDecided && idx === 0 ? " gb-winner" : ""}">
+        <div class="who">${gbDecided && idx === 0 ? "🏆 " : ""}${flag(p.team)}${p.player}${p.e != null ? `<span class="gb-goals"><b>${p.g ?? 0}</b> scored · <b>${p.e.toFixed(1)}</b> expected at the end</span>` : ""}</div>
         <div class="bar-track"><div class="bar-fill" style="width:${(100 * p.p) / gmax}%"></div></div>
         <div class="val">${pct(p.p)}${delta(p.p, prev && pgb[p.player])}</div>
       </div>`).join("");
