@@ -674,7 +674,7 @@ if (WC26.replay && WC26.replay.snapshots && document.querySelector(".fc-bar")) {
     const gbDecided = OVER && k >= N;   // final tick: the top scorer is settled
     $("fc-gb").innerHTML = gb.slice(0, 10).map((p, idx) => `
       <div class="bar-row${gbDecided && idx === 0 ? " gb-winner" : ""}">
-        <div class="who">${gbDecided && idx === 0 ? "🏆 " : ""}${flag(p.team)}${p.player}${p.e != null ? `<span class="gb-goals"><b>${p.g ?? 0}</b> scored · <b>${p.e.toFixed(1)}</b> expected at the end</span>` : ""}</div>
+        <div class="who">${gbDecided && idx === 0 ? "🏆 " : ""}${flag(p.team)}${p.player}${p.e != null ? `<span class="gb-goals">${gbDecided ? `<b>${p.g ?? 0}</b> goals` : `<b>${p.g ?? 0}</b> scored · <b>${p.e.toFixed(1)}</b> expected at the end`}</span>` : ""}</div>
         <div class="bar-track"><div class="bar-fill" style="width:${(100 * p.p) / gmax}%"></div></div>
         <div class="val">${pct(p.p)}${delta(p.p, prev && pgb[p.player])}</div>
       </div>`).join("");
